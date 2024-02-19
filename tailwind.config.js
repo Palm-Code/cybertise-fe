@@ -18,7 +18,16 @@ module.exports = {
       },
     },
     extend: {
+      minWidth: {
+        25: "6.25rem",
+      },
+      spacing: {
+        19: "4.75rem",
+        2.5: "0.625rem",
+      },
       colors: {
+        light: "#3572AF",
+        dark: "#1B1E2A",
         brand: {
           neutral: "#18181B",
           red: "#DD524C",
@@ -33,6 +42,8 @@ module.exports = {
         background: {
           page: "#1F1F1F",
           main: "#000000",
+          "main-light": "#FAFAFA",
+          "main-dark": "#0D0D0D",
         },
         neutral: {
           0: "#FFFFFF",

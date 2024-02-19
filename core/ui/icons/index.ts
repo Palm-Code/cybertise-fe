@@ -1,0 +1,3 @@
+export { default } from "./moon/Moon.icon";
+export { default as MoonBackground } from "./moon/MoonBackground.icon";
+export { default as Cloud } from "./sun/Cloud.icon";
