@@ -96,9 +96,6 @@ module.exports = {
           normal: "#4BA2E3",
           lighter: "#6FB5E9",
           light: "#93C7EE",
-          lighter: {
-            20: "#93C7EE",
-          },
         },
         blue: {
           dark: "#2F4D8F",
