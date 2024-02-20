@@ -28,14 +28,9 @@ const buttonVariants = cva(
         "tertiary-mediator":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal active:text-violet-dark",
       },
-      fullWidth: {
-        true: "w-full",
-        false: "w-fit",
-      },
     },
     defaultVariants: {
       variant: "primary-hacker",
-      fullWidth: false,
     },
   }
 );
@@ -49,16 +44,23 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants>,
     ButtonIconProps {
   asChild?: boolean;
+  fullWidth?: boolean;
   childern?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, childern, asChild = false, ...props }, ref) => {
+  (
+    { className, variant, childern, asChild = false, fullWidth, ...props },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, className }))}
+        className={cn(
+          buttonVariants({ variant, className }),
+          fullWidth ? "w-full" : "w-fit"
+        )}
         ref={ref}
         {...props}
       />

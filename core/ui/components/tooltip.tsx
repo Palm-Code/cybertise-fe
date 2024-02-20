@@ -1,0 +1,25 @@
+import {
+  BaseTooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./tooltip-base";
+
+interface I_TooltipProps {
+  children: React.ReactNode;
+  content: string;
+}
+
+const Tooltip = ({ children, content }: I_TooltipProps) => {
+  return (
+    <TooltipProvider>
+      <BaseTooltip>
+        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipContent>
+          <p>{content}</p>
+        </TooltipContent>
+      </BaseTooltip>
+    </TooltipProvider>
+  );
+};
+export default Tooltip;

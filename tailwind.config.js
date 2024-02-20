@@ -18,6 +18,16 @@ module.exports = {
       },
     },
     extend: {
+      fontSize: {
+        "6xl": "56px",
+        "4xl": "40px",
+        "3xl": "32px",
+      },
+      lineHeight: {
+        120: "120%",
+        140: "140%",
+        150: "150%",
+      },
       minWidth: {
         25: "6.25rem",
       },

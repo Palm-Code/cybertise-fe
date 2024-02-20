@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-background-main-light dark:bg-background-main-dark"
+          "bg-background-main-light dark:bg-background-page"
         )}
       >
         <ThemeProvider
