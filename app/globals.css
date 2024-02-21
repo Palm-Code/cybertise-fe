@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  input:autofill,
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -12,7 +13,54 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    background-color: transparent;
-    transition: background-color 5000s ease-in-out 0s;
+    background: transparent;
+  }
+
+  ._flexbox__col__center {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  ._flexbox__row__center {
+    @apply flex flex-row items-center justify-center;
+  }
+
+  ._flexbox__row__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__col__between {
+    @apply flex flex-col items-center justify-between;
+  }
+
+  ._flexbox__col__start {
+    @apply flex flex-col items-start justify-center;
+  }
+
+  ._flexbox__row__start {
+    @apply flex flex-row items-start justify-center;
+  }
+
+  ._flexbox__col__end {
+    @apply flex flex-col items-end justify-center;
+  }
+
+  ._flexbox__row__end {
+    @apply flex flex-row items-end justify-center;
+  }
+
+  ._flexbox__row__center__start {
+    @apply flex flex-row items-center justify-start;
+  }
+
+  ._flexbox__row__center__end {
+    @apply flex flex-row items-center justify-end;
+  }
+
+  ._flexbox__row__center__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__row__center__around {
+    @apply flex flex-row items-center justify-around;
   }
 }

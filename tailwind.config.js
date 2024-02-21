@@ -74,6 +74,7 @@ module.exports = {
           normal: "#DD524C",
           lighter: "#E47570",
           light: "#EB9794",
+          error: "#E60202",
         },
         yellow: {
           dark: "#8C6123",

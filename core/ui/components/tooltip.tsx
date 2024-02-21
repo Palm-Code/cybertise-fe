@@ -3,7 +3,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./tooltip-base";
+} from "./base-tooltip";
 
 interface I_TooltipProps {
   children: React.ReactNode;
