@@ -97,7 +97,7 @@ const SignInComponent = () => {
           </Button>
           <Typography variant="p" affects="normal" align="center">
             Didn&apos;t have account yet?{" "}
-            <Link href={"/auth/register"} className="ml-2 font-semibold">
+            <Link href={"/auth/signup"} className="ml-2 font-semibold">
               Sign Up
             </Link>
           </Typography>

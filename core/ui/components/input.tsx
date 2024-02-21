@@ -72,7 +72,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div>
             <input
               className={cn(
-                "absolute -top-1 my-auto h-6 w-full bg-transparent text-base text-gray-900",
+                "absolute -top-2 my-auto h-6 w-full bg-transparent text-base text-gray-900",
                 "peer appearance-none placeholder:text-neutral-40 focus:outline-none focus:ring-0 dark:text-white",
                 prefixIcon && "pl-4"
               )}
@@ -89,10 +89,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               htmlFor={props.name}
               className={cn(
                 "absolute transform text-base text-neutral-30 duration-300",
-                "-top-[14px] left-4 start-0 -z-10 origin-[0] -translate-y-2.5 scale-75 peer-focus:start-0",
+                "-top-[14px] left-4 start-0 -z-10 origin-[0] -translate-y-3 scale-75 peer-focus:start-0",
                 "peer-focus:text-neutral-30 peer-focus:dark:text-neutral-30",
-                "peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100",
-                "peer-focus:-translate-y-2.5 peer-focus:scale-75",
+                "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
+                "peer-focus:-translate-y-3 peer-focus:scale-75",
                 "rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4",
                 prefixIcon && "start-4 peer-focus:start-4"
               )}

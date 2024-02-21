@@ -12,7 +12,7 @@ const buttonVariants = cva(
         "primary-hacker":
           "border bg-lime-normal text-brand-neutral hover:bg-lime-darker active:bg-lime-dark border-lime-normal hover:border-lime-darker focus:border-lime-darker active:border-lime-dark disabled:bg-neutral-20 disabled:border-neutral-20",
         "secondary-hacker":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-lime-lighter-20/20 focus:bg-lime-lighter-20/20 active:bg-lime-lighter-20/20 border-lime-normal hover:border-lime-normal active:border-lime-lighter-20/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:bg-lime-lighter/20 focus:bg-lime-lighter/20 active:bg-lime-lighter/20 border-lime-normal hover:border-lime-normal active:border-lime-lighter-20/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-hacker":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-lime-normal focus:text-lime-normal active:text-lime-dark",
         "primary-company":
