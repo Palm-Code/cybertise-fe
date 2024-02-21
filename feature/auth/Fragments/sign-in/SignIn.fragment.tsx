@@ -1,4 +1,4 @@
-import { SignIn } from "../../component";
+import { SignIn } from "../../components";
 
 const SignInFragment = () => {
   return <SignIn />;

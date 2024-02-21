@@ -1,4 +1,4 @@
-import { SignUpType } from "../../component";
+import { SignUpType } from "../../components";
 
 const SignupTypeFragment = () => {
   return <SignUpType />;
