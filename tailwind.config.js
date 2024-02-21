@@ -18,7 +18,26 @@ module.exports = {
       },
     },
     extend: {
+      fontSize: {
+        "6xl": "56px",
+        "4xl": "40px",
+        "3xl": "32px",
+      },
+      lineHeight: {
+        120: "120%",
+        140: "140%",
+        150: "150%",
+      },
+      minWidth: {
+        25: "6.25rem",
+      },
+      spacing: {
+        19: "4.75rem",
+        2.5: "0.625rem",
+      },
       colors: {
+        light: "#3572AF",
+        dark: "#1B1E2A",
         brand: {
           neutral: "#18181B",
           red: "#DD524C",
@@ -33,6 +52,8 @@ module.exports = {
         background: {
           page: "#1F1F1F",
           main: "#000000",
+          "main-light": "#FAFAFA",
+          "main-dark": "#0D0D0D",
         },
         neutral: {
           0: "#FFFFFF",
@@ -53,6 +74,7 @@ module.exports = {
           normal: "#DD524C",
           lighter: "#E47570",
           light: "#EB9794",
+          error: "#E60202",
         },
         yellow: {
           dark: "#8C6123",
@@ -85,9 +107,6 @@ module.exports = {
           normal: "#4BA2E3",
           lighter: "#6FB5E9",
           light: "#93C7EE",
-          lighter: {
-            20: "#93C7EE",
-          },
         },
         blue: {
           dark: "#2F4D8F",
