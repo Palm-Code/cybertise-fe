@@ -3,14 +3,17 @@ import Typography from "@/core/ui/components/typography";
 import { Locker } from "@/core/ui/icons";
 import React from "react";
 
-interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
+  noPadding?: boolean;
+}
 
 const SuccessState = (props: I_SuccesStateProps) => {
   return (
     <div
       className={cn(
-        "w-full max-w-[553px] rounded-lg bg-background-main-dark px-10 py-20",
+        "w-full max-w-[553px] rounded-lg bg-background-main-dark",
         "_flexbox__col__center gap-28",
+        props.noPadding ? "p-0" : "px-10 py-20",
         props.className
       )}
       {...props}

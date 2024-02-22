@@ -43,7 +43,7 @@ const SignUpHacker = () => {
         key: "hacker-step-two",
       },
       {
-        element: <SuccessState className="p-0" />,
+        element: <SuccessState noPadding />,
         key: "hacker-step-three",
       },
     ]);

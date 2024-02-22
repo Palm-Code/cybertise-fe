@@ -26,32 +26,31 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    username: watch("username"),
-    country: watch("country"),
+    corporate_name: watch("corporate_name"),
+    corporate_website: watch("corporate_website"),
   });
 
   return (
     <StepWrapper
       currentSteps={1}
-      totalSteps={2}
+      totalSteps={3}
       title="Company Sign Up"
       subtitle="Company Details"
     >
       <div className="_flexbox__col__center w-full gap-7">
         <Input
           type="text"
-          label="Username"
-          onClearInput={() => resetField("username")}
-          {...register("username")}
-          isError={!!errors.username}
+          label="Corporate Name"
+          onClearInput={() => resetField("corporate_name")}
+          {...register("corporate_name")}
+          isError={!!errors.corporate_name}
         />
-        <SelectDropdown
-          label="Country"
-          value={watch("country")}
-          withIcon
-          withSearch
-          options={countryOptions}
-          onValueChange={(v) => setValue("country", v)}
+        <Input
+          type="text"
+          label="Corporate Website"
+          onClearInput={() => resetField("corporate_website")}
+          {...register("corporate_website")}
+          isError={!!errors.corporate_website}
         />
       </div>
       <Button
