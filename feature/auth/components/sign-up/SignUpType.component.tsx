@@ -21,7 +21,7 @@ const SignUpType = () => {
   return (
     <div
       className={cn(
-        "_flexbox__col__center w-full max-w-[676px] gap-14 rounded-lg p-20 shadow-type dark:bg-background-main-dark"
+        "_flexbox__col__center w-full max-w-[676px] gap-14 rounded-lg p-20 dark:bg-background-main-dark"
       )}
     >
       <div className="_flexbox__col__center w-ful gap-12">

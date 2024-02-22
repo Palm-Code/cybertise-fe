@@ -11,6 +11,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Progress } from "@/core/ui/components/progress";
+import SuccessState from "../../success-state/SuccesState.component";
 
 export const signupFormSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }),
@@ -31,7 +32,7 @@ const SignUpHacker = () => {
       password: "",
     },
   });
-  const { step, next, goTo, back, isFirstStep, currentStepIndex, steps } =
+  const { step, next, back, isFirstStep, currentStepIndex, steps, isLastStep } =
     useMultistepForm([
       {
         element: <HackerStepOne onClickNext={() => next()} />,
@@ -41,15 +42,21 @@ const SignUpHacker = () => {
         element: <HackerStepTwo onClickNext={() => next()} />,
         key: "hacker-step-two",
       },
+      {
+        element: <SuccessState className="p-0" />,
+        key: "hacker-step-three",
+      },
     ]);
 
   return (
     <FormProvider {...method}>
       <SignupBoxWrapper>
-        <Progress
-          value={((currentStepIndex + 1) * 100) / steps.length}
-          className="absolute left-0 top-0 rounded-none rounded-t-lg"
-        />
+        {!isLastStep && (
+          <Progress
+            value={((currentStepIndex + 1) * 100) / (steps.length - 1)}
+            className="absolute left-0 top-0 rounded-none rounded-t-lg"
+          />
+        )}
         <div className="_flexbox__col__start w-full gap-12">
           <div className="_flexbox__col__start w-full gap-8 transition-all duration-75">
             {isFirstStep ? (
@@ -63,7 +70,7 @@ const SignUpHacker = () => {
                 <X width={24} height={24} />
                 Cancel Sign Up
               </Link>
-            ) : (
+            ) : isLastStep ? null : (
               <button
                 className={cn(
                   typographyVariants({ variant: "p", affects: "normal" }),

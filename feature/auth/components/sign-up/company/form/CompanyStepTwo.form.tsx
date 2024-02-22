@@ -2,7 +2,7 @@
 import Button from "@/core/ui/components/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { FormSchema } from "../SignUpHacker.component";
+import { FormSchema } from "../SignUpCompany.component";
 import { Input } from "@/core/ui/components/input";
 import PasswordInput from "@/core/ui/components/password-input";
 import { useState } from "react";
@@ -10,17 +10,8 @@ import { passwordValidation } from "@/core/constants";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
-import Checkbox from "@/core/ui/components/checkbox";
-import Typography from "@/core/ui/components/typography";
-import Link from "next/link";
 
-interface I_HackerStepTwoProps {
-  onClickNext: () => void;
-}
-
-const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
+const CompanyStepTwo = () => {
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
@@ -36,12 +27,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   } = useFormContext<FormSchema>();
 
   const submitForm = () => {
-    setIsSubmit(true);
-    setTimeout(() => {
-      alert(JSON.stringify(watch(), null, 2));
-      setIsSubmit(false);
-      onClickNext();
-    }, 2000);
+    alert(JSON.stringify(watch(), null, 2));
   };
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +67,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
     <StepWrapper
       currentSteps={2}
       totalSteps={2}
-      title="Hacker Sign Up"
+      title="Company Sign Up"
       subtitle="Account Setup"
     >
       <Input
@@ -103,27 +89,10 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
         isConfirmation={!!confirmPassworText.content}
         check={confirmPassworText.checked}
       />
-      <div className="_flexbox__row__center__start w-full gap-3">
-        <Checkbox
-          checked={isPolicyChecked}
-          onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
-        />
-        <Typography variant="p" affects="normal">
-          I have read and accepted the all sites{" "}
-          <Link href={"/privacy-policy"} className="underline">
-            Policies
-          </Link>
-        </Typography>
-      </div>
-      <Button
-        fullWidth
-        onClick={submitForm}
-        disabled={validateIsFormFilled || isSubmit || !isPolicyChecked}
-        isLoading={isSubmit}
-      >
+      <Button fullWidth onClick={submitForm} disabled={validateIsFormFilled}>
         Register Account
       </Button>
     </StepWrapper>
   );
 };
-export default HackerStepTwo;
+export default CompanyStepTwo;
