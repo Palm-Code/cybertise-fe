@@ -3,3 +3,8 @@ export type OptionsType = {
   value: string;
   label: string;
 };
+
+export type PasswordValidationItemsType = {
+  content: string;
+  checked: boolean;
+};

@@ -84,10 +84,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
             <input
               className={cn(
-                "absolute -top-2 my-auto h-6 w-full bg-transparent text-base text-gray-900",
+                "absolute -top-2 my-auto h-6 w-full bg-transparent text-gray-900",
                 "peer appearance-none placeholder:text-neutral-40 focus:outline-none focus:ring-0 dark:text-white",
                 prefixIcon && "pl-4",
-                iconValue && "pl-5"
+                iconValue && "pl-5",
+                props.type === "password"
+                  ? "text-3xl font-bold"
+                  : "text-base font-normal"
               )}
               placeholder={isFocused ? placeholderText : " "}
               onChange={onChangeValue}

@@ -31,25 +31,27 @@ const SignUpHacker = () => {
       password: "",
     },
   });
-  const { step, next, goTo, back, isFirstStep } = useMultistepForm([
-    {
-      element: <HackerStepOne onClickNext={() => next()} />,
-      key: "hacker-step-one",
-    },
-    {
-      element: <HackerStepTwo onClickNext={() => next()} />,
-      key: "hacker-step-two",
-    },
-  ]);
+  const { step, next, goTo, back, isFirstStep, currentStepIndex, steps } =
+    useMultistepForm([
+      {
+        element: <HackerStepOne onClickNext={() => next()} />,
+        key: "hacker-step-one",
+      },
+      {
+        element: <HackerStepTwo onClickNext={() => next()} />,
+        key: "hacker-step-two",
+      },
+    ]);
+
   return (
     <FormProvider {...method}>
       <SignupBoxWrapper>
         <Progress
-          value={50}
+          value={((currentStepIndex + 1) * 100) / steps.length}
           className="absolute left-0 top-0 rounded-none rounded-t-lg"
         />
         <div className="_flexbox__col__start w-full gap-12">
-          <div className="_flexbox__col__start w-full gap-8">
+          <div className="_flexbox__col__start w-full gap-8 transition-all duration-75">
             {isFirstStep ? (
               <Link
                 href="/auth/signup"

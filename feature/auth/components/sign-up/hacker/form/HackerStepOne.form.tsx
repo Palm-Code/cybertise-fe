@@ -2,11 +2,12 @@
 import Button from "@/core/ui/components/button";
 import { Input } from "@/core/ui/components/input";
 import { StepWrapper } from "@/core/ui/layout";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { FormSchema, signupFormSchema } from "../SignUpHacker.component";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SelectDropdown from "@/core/ui/components/select-dropdown";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
+import { isObjectEmpty } from "@/utils/form-fill-validation";
 
 interface I_HackerStepOneProps {
   onClickNext: () => void;
@@ -19,19 +20,21 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
     watch,
     setValue,
     resetField,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(signupFormSchema),
-  });
+  } = useFormContext<FormSchema>();
 
   const onClickValidate = () => {
-    alert(JSON.stringify(watch(), null, 2));
     onClickNext();
   };
+
+  const validateIsFormFilled = isObjectEmpty({
+    username: watch("username"),
+    country: watch("country"),
+  });
 
   return (
     <StepWrapper
       currentSteps={1}
-      totalSteps={5}
+      totalSteps={2}
       title="Hacker Sign Up"
       subtitle="Hacker Details"
     >
@@ -52,7 +55,11 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
           onValueChange={(v) => setValue("country", v)}
         />
       </div>
-      <Button fullWidth onClick={onClickValidate}>
+      <Button
+        fullWidth
+        onClick={onClickValidate}
+        disabled={validateIsFormFilled}
+      >
         Next to Step 2
       </Button>
     </StepWrapper>

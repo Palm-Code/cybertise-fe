@@ -95,7 +95,7 @@ module.exports = {
           light: "#D6FF66",
           "dark-green": "#4D6900",
         },
-        emeral: {
+        emerald: {
           dark: "#336D50",
           darker: "#44926A",
           normal: "#55B685",
