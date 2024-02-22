@@ -16,6 +16,10 @@
     background: transparent;
   }
 
+  body {
+    @apply transition-colors duration-200;
+  }
+
   ._flexbox__col__center {
     @apply flex flex-col items-center justify-center;
   }

@@ -4,6 +4,7 @@ import { cn } from "@/core/lib/utils";
 import { Eye, EyeOff, Info, X } from "lucide-react";
 import Tooltip from "./tooltip";
 import { useClickAway } from "@uidotdev/usehooks";
+import Image from "next/image";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,6 +16,7 @@ export interface InputProps
   label?: string;
   isError?: boolean;
   placeholderText?: string;
+  iconValue?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -31,6 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isError = false,
       placeholderText,
       defaultValue,
+      iconValue,
       ...props
     },
     ref
@@ -70,11 +73,21 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={inputRef}
         >
           <div>
+            {iconValue && (
+              <Image
+                src={iconValue}
+                alt={label || " "}
+                width={24}
+                height={16}
+                className="relative -top-[2px]"
+              />
+            )}
             <input
               className={cn(
                 "absolute -top-2 my-auto h-6 w-full bg-transparent text-base text-gray-900",
                 "peer appearance-none placeholder:text-neutral-40 focus:outline-none focus:ring-0 dark:text-white",
-                prefixIcon && "pl-4"
+                prefixIcon && "pl-4",
+                iconValue && "pl-5"
               )}
               placeholder={isFocused ? placeholderText : " "}
               onChange={onChangeValue}

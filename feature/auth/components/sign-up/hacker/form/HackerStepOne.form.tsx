@@ -5,7 +5,8 @@ import { StepWrapper } from "@/core/ui/layout";
 import { useForm } from "react-hook-form";
 import { FormSchema, signupFormSchema } from "../SignUpHacker.component";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dropdown } from "@/core/ui/components/dropdown";
+import SelectDropdown from "@/core/ui/components/select-dropdown";
+import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 
 interface I_HackerStepOneProps {
   onClickNext: () => void;
@@ -16,13 +17,15 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
     register,
     formState: { errors },
     watch,
+    setValue,
     resetField,
   } = useForm<FormSchema>({
     resolver: zodResolver(signupFormSchema),
   });
 
   const onClickValidate = () => {
-    alert(watch("username"));
+    alert(JSON.stringify(watch(), null, 2));
+    onClickNext();
   };
 
   return (
@@ -40,7 +43,14 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
           {...register("username")}
           isError={!!errors.username}
         />
-        <Dropdown />
+        <SelectDropdown
+          label="Country"
+          value={watch("country")}
+          withIcon
+          withSearch
+          options={countryOptions}
+          onValueChange={(v) => setValue("country", v)}
+        />
       </div>
       <Button fullWidth onClick={onClickValidate}>
         Next to Step 2
