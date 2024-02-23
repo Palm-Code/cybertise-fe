@@ -32,10 +32,10 @@ const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
   return (
-    <div className="_flexbox__col__between h-screen w-fit bg-background-main-light pb-16 dark:bg-background-main-dark">
+    <div className="_flexbox__col__between h-screen w-fit max-w-[272px] bg-background-main-light pb-16 dark:bg-background-main-dark">
       <div className="_flexbox__col__start w-full gap-8">
         <div className="px-12 py-3">
-          <Logo className="h-[86px] w-[182px]" />
+          <Logo className="h-[68px] w-[182px]" />
         </div>
         <div className="_flexbox__col__center w-full gap-4 pr-5">
           {menu.map((item, index) => (

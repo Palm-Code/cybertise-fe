@@ -6,7 +6,7 @@ import { buttonVariants } from "../../components/button/base-button";
 
 interface I_EmptyStateProps {
   variant: "company" | "hacker" | "mediator";
-  type: "program" | "ticket";
+  type: "program" | "ticket" | "under-construction";
   buttonText?: string;
   href?: string;
 }
@@ -58,7 +58,22 @@ const EmptyState = ({
           </>
         );
       default:
-        return null;
+        return (
+          <>
+            <>
+              <EmptyFolder className={iconColors[variant]} />
+              <Typography variant="p" affects="extralarge" weight="bold">
+                Under Construction
+              </Typography>
+              <Link
+                className={buttonVariants({ variant: `primary-${variant}` })}
+                href={href}
+              >
+                Back
+              </Link>
+            </>
+          </>
+        );
     }
   };
 
