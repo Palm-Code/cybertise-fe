@@ -28,6 +28,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     formState: { errors },
     watch,
     setValue,
+    resetField,
   } = useFormContext<FormSchema>();
 
   const submitForm = () => {
@@ -78,6 +79,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
       <Input
         type="email"
         label="Email"
+        onClearInput={() => resetField("email")}
         {...register("email")}
         isError={!!errors.email}
       />

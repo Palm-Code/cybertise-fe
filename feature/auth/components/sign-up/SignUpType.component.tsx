@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import SignUpHacker from "./hacker/SignUpHacker.component";
 import SignUpCompany from "./company/SignUpCompany.component";
+import { Building2 } from "lucide-react";
 
 const SignUpType = () => {
   const searchParams = useSearchParams();
@@ -21,7 +22,8 @@ const SignUpType = () => {
   return (
     <div
       className={cn(
-        "_flexbox__col__center w-full max-w-[676px] gap-14 rounded-lg p-20 dark:bg-background-main-dark"
+        "_flexbox__col__center w-full max-w-[676px] gap-14 rounded-lg",
+        "bg-background-main-light p-20 dark:bg-background-main-dark"
       )}
     >
       <div className="_flexbox__col__center w-ful gap-12">
@@ -49,12 +51,12 @@ const SignUpType = () => {
           <Link
             href="/auth/signup?type=company"
             className={cn(
-              "bg-main-dark _flexbox__col__center shadow-company",
+              "_flexbox__col__center bg-background-main-light shadow-company dark:bg-background-main-dark",
               "transition-color group aspect-[244/236] w-full cursor-pointer",
               "gap-6 rounded-lg duration-100 hover:bg-sky-light/20 active:bg-sky-lighter"
             )}
           >
-            <Company />
+            <Building2 />
             <Typography variant="h6" weight="bold">
               Company
             </Typography>

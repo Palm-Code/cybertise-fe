@@ -57,7 +57,8 @@ const SelectDropdown = ({
             type="text"
             placeholder="Search..."
             className={cn(
-              "sticky top-0 z-10 flex w-full items-center justify-center rounded-md bg-neutral-80 px-4 py-[18px] outline-none"
+              "sticky top-0 z-10 bg-neutral-light-80 dark:bg-neutral-dark-80",
+              "flex w-full items-center justify-center rounded-md px-4 py-[18px] outline-none"
             )}
             onChange={onChangeSearch}
           />

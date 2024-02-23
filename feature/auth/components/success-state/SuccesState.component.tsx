@@ -11,7 +11,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
   return (
     <div
       className={cn(
-        "w-full max-w-[553px] rounded-lg bg-background-main-dark",
+        "w-full max-w-[553px] rounded-lg bg-background-main-light dark:bg-background-main-dark",
         "_flexbox__col__center gap-28",
         props.noPadding ? "p-0" : "px-10 py-20",
         props.className
@@ -23,7 +23,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
         <Typography variant="h4" weight="bold">
           Authenticate Your Account
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography variant="p" affects="normal" align="center">
           Protecting your account is our top priority. Please confirm your
           activity by clicking the magic sent to your email:
         </Typography>

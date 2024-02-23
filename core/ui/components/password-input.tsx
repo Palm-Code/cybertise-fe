@@ -42,7 +42,7 @@ const PasswordInput = (props: I_PasswordInputProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-90 px-5 py-[17px]"
+              className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90"
             >
               {props.options?.length! &&
                 props.options.map((item, index) => (

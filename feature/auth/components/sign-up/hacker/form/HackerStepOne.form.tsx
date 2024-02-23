@@ -60,7 +60,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
         onClick={onClickValidate}
         disabled={validateIsFormFilled}
       >
-        Next to Step 2
+        Next
       </Button>
     </StepWrapper>
   );

@@ -11,6 +11,7 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SuccessState from "../success-state/SuccesState.component";
+import { isObjectEmpty } from "@/utils/form-fill-validation";
 
 const formShcema = z.object({
   email: z.string().email().min(1, { message: "Email is required" }),
@@ -27,6 +28,7 @@ const SignInComponent = () => {
     handleSubmit,
     formState: { errors },
     register,
+    watch,
     resetField,
   } = useForm<FormSchema>({
     resolver: zodResolver(formShcema),
@@ -45,13 +47,18 @@ const SignInComponent = () => {
     }, 1000);
   };
 
+  const validateIsFormFilled = isObjectEmpty({
+    email: watch("email"),
+    password: watch("password"),
+  });
+
   const FormState = () => {
     return (
       <form
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
         className={cn(
-          "w-full max-w-[467px] rounded-lg bg-background-main-dark px-10 py-20",
+          "w-full max-w-[467px] rounded-lg bg-background-main-light px-10 py-20 dark:bg-background-main-dark",
           "_flexbox__col__center gap-12"
         )}
       >
@@ -72,7 +79,7 @@ const SignInComponent = () => {
             placeholderText="Enter your email"
             onClearInput={() => resetField("email")}
             {...register("email")}
-            isError={!!errors}
+            // isError={!!errors}
           />
           <div className="w-full space-y-1">
             <Input
@@ -81,7 +88,7 @@ const SignInComponent = () => {
               placeholderText="Enter your password"
               onClickRevealPassword={() => setRevealPassword(!revealPassword)}
               {...register("password")}
-              isError={!!errors}
+              // isError={!!errors}
             />
             <Link
               href={"/auth/forgot-password"}
@@ -92,7 +99,12 @@ const SignInComponent = () => {
           </div>
         </div>
         <div className="w-full space-y-1">
-          <Button type="submit" fullWidth isLoading={isLoadingSubmit}>
+          <Button
+            type="submit"
+            fullWidth
+            isLoading={isLoadingSubmit}
+            disabled={validateIsFormFilled}
+          >
             Sign In
           </Button>
           <Typography variant="p" affects="normal" align="center">

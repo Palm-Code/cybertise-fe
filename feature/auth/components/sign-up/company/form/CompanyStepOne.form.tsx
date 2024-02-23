@@ -58,7 +58,7 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
         onClick={onClickValidate}
         disabled={validateIsFormFilled}
       >
-        Next to Step 2
+        Next
       </Button>
     </StepWrapper>
   );

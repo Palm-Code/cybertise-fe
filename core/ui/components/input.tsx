@@ -42,11 +42,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const [isFocused, setIsFocused] = React.useState(false);
+    const [hasValue, setHasValue] = React.useState(false);
     const inputRef = useClickAway<HTMLDivElement>(() => {
       setIsFocused(false);
     });
 
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setHasValue(!!e.target.value);
       onChange?.(e);
     };
 
@@ -58,16 +60,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setIsFocused(false);
     };
 
-    const onClickReveal = () => {
-      handleFocus();
-      onClickRevealPassword?.();
-    };
+    const onClickReveal = React.useMemo(() => {
+      return () => {
+        setHasValue(true);
+        onClickRevealPassword?.();
+      };
+    }, [onClickRevealPassword]);
 
     return (
       <div className="_flexbox__col__start w-full gap-1">
         <div
           className={cn(
-            "relative z-10 flex h-16 w-full items-center justify-center rounded-md bg-neutral-90 px-4",
+            "relative z-10 flex h-16 w-full items-center justify-center rounded-md bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",
             isError && "border border-red-normal"
           )}
         >
@@ -83,17 +87,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   alt={label || " "}
                   width={24}
                   height={16}
-                  className="relative -top-[2px]"
+                  className="mt-1.5"
                 />
               )}
               <input
                 className={cn(
-                  "absolute -top-2 my-auto h-6 w-full bg-transparent text-gray-900",
-                  "peer appearance-none placeholder:text-neutral-40 focus:outline-none focus:ring-0 dark:text-white",
+                  "absolute my-auto h-6 w-full bg-transparent text-neutral-light-0",
+                  "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+                  "focus:outline-none focus:ring-0 dark:text-white",
                   prefixIcon && "pl-4",
-                  iconValue && "pl-5",
-                  props.type === "password"
-                    ? "text-3xl font-bold"
+                  iconValue ? "top-0 pl-5" : "-top-1.5 pl-0",
+                  props.type === "password" && hasValue
+                    ? "text-3xl font-bold placeholder:text-base placeholder:font-normal"
                     : "text-base font-normal"
                 )}
                 placeholder={isFocused ? placeholderText : " "}
@@ -108,13 +113,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <label
                 htmlFor={props.name}
                 className={cn(
-                  "absolute transform text-base text-neutral-30 duration-300",
-                  "-top-[14px] left-4 start-0 -z-10 origin-[0] -translate-y-3 scale-75 peer-focus:start-0",
-                  "peer-focus:text-neutral-30 peer-focus:dark:text-neutral-30",
+                  "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
+                  "-top-[14px] left-4 start-0 -z-10 origin-[0] scale-75 peer-focus:start-0",
+                  "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
                   "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
-                  "peer-focus:-translate-y-3 peer-focus:scale-75",
+                  "peer-focus:scale-75",
                   "rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4",
-                  prefixIcon && "start-4 peer-focus:start-4"
+                  prefixIcon && "start-4 peer-focus:start-4",
+                  iconValue
+                    ? "-translate-y-1 peer-focus:-translate-y-1"
+                    : "-translate-y-3 peer-focus:-translate-y-3"
                 )}
               >
                 {label}
@@ -131,8 +139,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               />
             ))) ||
             null}
-          {onClearInput && !onClickRevealPassword && (
-            <X className="h-6 w-6 cursor-pointer" onClick={onClearInput} />
+          {onClearInput && !onClickRevealPassword && hasValue && (
+            <X
+              className="h-6 w-6 cursor-pointer"
+              onClick={() => {
+                setHasValue(false);
+                onClearInput();
+              }}
+            />
           )}
           {withTooltip && (
             <Tooltip content="This is a tooltip">

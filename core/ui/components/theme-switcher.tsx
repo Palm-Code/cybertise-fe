@@ -8,10 +8,14 @@ import { useTheme } from "next-themes";
 import SunBackground from "../icons/sun/SunBackground.icon";
 import { Cloud, MoonBackground } from "../icons";
 
-const ThemeSwitcher = () => {
+interface I_ThemeSwitcherProps {
+  className?: string;
+}
+
+const ThemeSwitcher = ({ className }: I_ThemeSwitcherProps) => {
   const { resolvedTheme, setTheme } = useTheme();
   const [switchTheme, setSwitchTheme] = useState<boolean>(
-    resolvedTheme === "light" ? false : true
+    resolvedTheme === "light" ? true : false
   );
 
   const [mounted, setMounted] = useState(false);
@@ -19,11 +23,9 @@ const ThemeSwitcher = () => {
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    setSwitchTheme(resolvedTheme === "light" ? true : false);
-  }, []);
-
-  useEffect(() => {
-    switchTheme ? setTheme("light") : setTheme("dark");
+    setTimeout(() => {
+      setTheme(switchTheme ? "light" : "dark");
+    }, 500);
   }, [switchTheme]);
 
   if (!mounted) {
@@ -33,26 +35,28 @@ const ThemeSwitcher = () => {
   return (
     <div
       className={cn(
-        "relative w-19 h-8 flex items-center justify-between rounded-full transition-all duration-300 cursor-pointer overflow-hidden"
+        "relative flex h-8 w-19 cursor-pointer items-center justify-between",
+        "overflow-hidden rounded-full transition-all duration-300",
+        className
       )}
       onClick={() => setSwitchTheme(!switchTheme)}
     >
       <div
         className={cn(
-          "absolute w-19 h-8 flex flex-col transition-all duration-300",
+          "absolute flex h-8 w-19 flex-col transition-all duration-300",
 
           switchTheme ? "bg-light" : "bg-dark"
         )}
       >
         <SunBackground
           className={cn(
-            "absolute inset-0 transition-all duration-200 fill-transparent",
+            "absolute inset-0 fill-transparent transition-all duration-200",
             switchTheme ? "opacity-100" : "opacity-0"
           )}
         />
         <MoonBackground
           className={cn(
-            "absolute inset-0 transition-all duration-200 fill-transparent",
+            "absolute inset-0 fill-transparent transition-all duration-200",
             switchTheme ? "opacity-0" : "opacity-100"
           )}
         />

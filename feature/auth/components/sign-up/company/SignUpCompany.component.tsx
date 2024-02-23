@@ -84,7 +84,9 @@ const SignUpCompany = () => {
                 href="/auth/signup"
                 className={cn(
                   typographyVariants({ variant: "p", affects: "normal" }),
-                  "inline-flex cursor-pointer gap-2 !text-neutral-40 hover:!text-white"
+                  "inline-flex cursor-pointer gap-2",
+                  "!text-neutral-light-40 hover:!text-brand-neutral",
+                  "dark:text-neutral-dark-40 dark:hover:!text-white"
                 )}
               >
                 <X width={24} height={24} />
@@ -94,7 +96,7 @@ const SignUpCompany = () => {
               <button
                 className={cn(
                   typographyVariants({ variant: "p", affects: "normal" }),
-                  "inline-flex cursor-pointer gap-2 !text-neutral-40 hover:!text-white"
+                  "!text-neutral-40 inline-flex cursor-pointer gap-2 hover:!text-white"
                 )}
                 onClick={() => back()}
               >
