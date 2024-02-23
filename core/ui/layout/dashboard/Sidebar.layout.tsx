@@ -1,5 +1,5 @@
 "use client";
-import { Bug, Building2, LayoutDashboard, Text } from "lucide-react";
+import { Bug, Building2, LayoutDashboard, Settings, Text } from "lucide-react";
 import Typography from "../../components/typography/typography";
 import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
@@ -32,7 +32,7 @@ const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
   return (
-    <div className="_flexbox__col__between h-screen w-fit bg-background-main-light dark:bg-background-main-dark">
+    <div className="_flexbox__col__between h-screen w-fit bg-background-main-light pb-16 dark:bg-background-main-dark">
       <div className="_flexbox__col__start w-full gap-8">
         <div className="px-12 py-3">
           <Logo className="h-[86px] w-[182px]" />
@@ -58,6 +58,22 @@ const Sidebar = ({ type }: SidebarProps) => {
             </Link>
           ))}
         </div>
+      </div>
+      <div className="_flexbox__col__center w-full gap-4 pr-5">
+        <Link
+          href="/settings"
+          className={cn(
+            "_flexbox__row__center__start h-16 w-full gap-4 rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+            "border-l-2 border-transparent",
+            `hover:${borderColor[type as keyof typeof borderColor]}`,
+            "bg-transparent font-normal"
+          )}
+        >
+          <Settings className="h-6 w-6" />
+          <Typography variant="p" affects="normal">
+            Settings
+          </Typography>
+        </Link>
       </div>
     </div>
   );

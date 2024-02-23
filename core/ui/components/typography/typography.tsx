@@ -17,6 +17,7 @@ export const typographyVariants = cva(
       },
       affects: {
         default: "",
+        extralarge: "text-2xl",
         large: "text-xl",
         normal: "text-base",
         small: "text-sm",

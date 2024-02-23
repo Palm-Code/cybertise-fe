@@ -1,9 +1,12 @@
 export { default as Button } from "./button/button";
 export { default as Avatar } from "./avatar/avatar";
-export { default as PasswordInput } from "./input/password-input";
 export * as Input from "./input/input";
+export { default as PasswordInput } from "./input/password-input";
+export { default as SearchInput } from "./input/search-input";
 export { default as Checkbox } from "./checkbox/checkbox";
-export { default as Dropdown } from "./dropdown/select-dropdown";
+export { default as SelectDropdown } from "./dropdown/select-dropdown";
+export { default as FilterDropdown } from "./dropdown/filter-dropdown";
+export { default as FilterViewDropdown } from "./dropdown/filter-view-dropdown";
 export { default as Tooltip } from "./tooltip/tooltip";
 export { default as ThemeSwitcher } from "./theme/theme-switcher";
 export { default as ValidationCheck } from "./validation-check/validation-check";

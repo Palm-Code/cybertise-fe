@@ -110,23 +110,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 {...props}
                 ref={ref}
               />
-              <label
-                htmlFor={props.name}
-                className={cn(
-                  "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
-                  "-top-[14px] left-4 start-0 -z-10 origin-[0] scale-75 peer-focus:start-0",
-                  "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
-                  "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
-                  "peer-focus:scale-75",
-                  "rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4",
-                  prefixIcon && "start-4 peer-focus:start-4",
-                  iconValue
-                    ? "-translate-y-1 peer-focus:-translate-y-1"
-                    : "-translate-y-3 peer-focus:-translate-y-3"
-                )}
-              >
-                {label}
-              </label>
+              {!!label && (
+                <label
+                  htmlFor={props.name}
+                  className={cn(
+                    "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
+                    "-top-[14px] left-4 start-0 -z-10 origin-[0] scale-75 peer-focus:start-0",
+                    "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
+                    "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
+                    "peer-focus:scale-75",
+                    "rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4",
+                    prefixIcon && "start-4 peer-focus:start-4",
+                    iconValue
+                      ? "-translate-y-1 peer-focus:-translate-y-1"
+                      : "-translate-y-3 peer-focus:-translate-y-3"
+                  )}
+                >
+                  {label}
+                </label>
+              )}
             </div>
           </div>
           {(onClickRevealPassword &&

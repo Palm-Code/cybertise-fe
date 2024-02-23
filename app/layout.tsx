@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/core/ui/components/theme/theme-provider";
 import { cn } from "@/core/lib/utils";
 import Sidebar from "@/core/ui/layout/dashboard/Sidebar.layout";
-import { menuItems } from "@/core/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -6,3 +6,5 @@ export { default as Hacker } from "./hacker/Hacker.icon";
 export { default as Company } from "./company/Company.icon";
 export { default as Logo } from "./logo/Logo.icon";
 export { default as VrpManagement } from "./vrp-management/VrpManagement.icon";
+export { default as EmptyFolder } from "./empty-folder/EmptyFolder.icon";
+export { default as Leaf } from "./leaf/Leaf.icon";
