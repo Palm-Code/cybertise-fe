@@ -10,7 +10,7 @@ const Sun = (props: I_Icons) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_1165_147977)">
+      <g cilipPath="url(#clip0_1165_147977)">
         <g filter="url(#filter0_ii_1165_147977)">
           <circle cx="12.3636" cy="12.3636" r="12.3636" fill="#F7C024" />
         </g>

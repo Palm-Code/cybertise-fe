@@ -31,6 +31,9 @@ module.exports = {
       minWidth: {
         25: "6.25rem",
       },
+      maxWidth: {
+        "2xl": "676px",
+      },
       spacing: {
         19: "4.75rem",
         2.5: "0.625rem",
@@ -42,31 +45,67 @@ module.exports = {
           neutral: "#18181B",
           red: "#DD524C",
           yellow: "#E9A23B",
-          hacker: "#BAFF00",
+          hacker: "#E2FF92",
           emerald: "#55B685",
           companie: "#4BA2E3",
           blue: "#4E80EE",
           mediator: "#845EEE",
           default: "#FFFFFF",
         },
+        semantic: {
+          dark: {
+            critical: "#E60202",
+            high: "#FF5151",
+            medium: "#F5891D",
+            low: "#F0F00A",
+            info: "#ABD9FF",
+          },
+          light: {
+            critical: "#CC0000",
+            high: "#FF0000",
+            medium: "#F5891D",
+            low: "#FFFF00",
+            info: "#ABD9FF",
+          },
+        },
         background: {
-          page: "#1F1F1F",
-          main: "#000000",
-          "main-light": "#FAFAFA",
-          "main-dark": "#0D0D0D",
+          page: {
+            dark: "#1F1F1F",
+            light: "#F5F5F5",
+          },
+          main: {
+            light: "#FAFAFA",
+            dark: "#0D0D0D",
+          },
+          progress: "#D9D9D9",
         },
         neutral: {
-          0: "#FFFFFF",
-          10: "#F8F8F8",
-          20: "#E6E6E6",
-          30: "#CCCCCC",
-          40: "#B3B3B3",
-          50: "#999999",
-          60: "#808080",
-          70: "#666666",
-          80: "#4D4D4D",
-          90: "#232323",
-          100: "#1A1A1A",
+          dark: {
+            0: "#FFFFFF",
+            10: "#F8F8F8",
+            20: "#E6E6E6",
+            30: "#CCCCCC",
+            40: "#B3B3B3",
+            50: "#999999",
+            60: "#808080",
+            70: "#666666",
+            80: "#4D4D4D",
+            90: "#232323",
+            100: "#1A1A1A",
+          },
+          light: {
+            0: "#1A1A1A",
+            10: "#232323",
+            20: "#323232",
+            30: "#4F4E4E",
+            40: "#6A6A6A",
+            50: "#999999",
+            60: "#B3B3B3",
+            70: "#CCCCCC",
+            80: "#E6E6E6",
+            90: "#F2F2F2",
+            100: "#FFFFFF",
+          },
         },
         red: {
           dark: "#85312E",
@@ -89,12 +128,9 @@ module.exports = {
           normal: "#BAFF00",
           lighter: "#C8FF33",
           light: "#D6FF66",
-          lighter: {
-            20: "#BAFF00",
-          },
           "dark-green": "#4D6900",
         },
-        emeral: {
+        emerald: {
           dark: "#336D50",
           darker: "#44926A",
           normal: "#55B685",
@@ -136,6 +172,15 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        type: "-10px 10px 15px 0px rgba(75, 162, 227, 0.20), 5px -4px 15px 0px rgba(200, 255, 51, 0.15)",
+        hacker: "0px 0px 15px 0px rgba(122, 168, 0, 0.20)",
+        company: "0px 0px 15px 0px rgba(75, 162, 227, 0.20)",
+      },
+      backgroundImage: {
+        progress:
+          "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
       },
     },
   },

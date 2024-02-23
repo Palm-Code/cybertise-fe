@@ -10,7 +10,7 @@ const Moon = (props: I_Icons) => {
       fill="none"
       {...props}
     >
-      <g clip-path="url(#clip0_1167_92978)">
+      <g cilipPath="url(#clip0_1167_92978)">
         <g filter="url(#filter0_ii_1167_92978)">
           <circle cx="13.2445" cy="12.731" r="12.3636" fill="#F7C024" />
         </g>

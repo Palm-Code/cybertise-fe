@@ -12,8 +12,13 @@
   textarea:-webkit-autofill:focus,
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    background: transparent;
+  select:-webkit-autofill:focus,
+  input:-internal-autofill-selected {
+    background: transparent !important;
+  }
+
+  body {
+    @apply transition-colors duration-200;
   }
 
   ._flexbox__col__center {
