@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import Typography from "@/core/ui/components/typography";
+import Typography from "@/core/ui/components/typography/typography";
 import { Locker } from "@/core/ui/icons";
 import React from "react";
 

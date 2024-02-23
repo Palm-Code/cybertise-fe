@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import Typography from "@/core/ui/components/typography";
+import Typography from "@/core/ui/components/typography/typography";
 import { Company, Hacker } from "@/core/ui/icons";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

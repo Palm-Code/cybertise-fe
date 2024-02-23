@@ -68,4 +68,188 @@
   ._flexbox__row__center__around {
     @apply flex flex-row items-center justify-around;
   }
+
+  ._flexbox__row__center__evenly {
+    @apply flex flex-row items-center justify-evenly;
+  }
+
+  ._flexbox__col__center__start {
+    @apply flex flex-col items-center justify-start;
+  }
+
+  ._flexbox__col__center__end {
+    @apply flex flex-col items-center justify-end;
+  }
+
+  ._flexbox__col__center__between {
+    @apply flex flex-col items-center justify-between;
+  }
+
+  ._flexbox__col__center__around {
+    @apply flex flex-col items-center justify-around;
+  }
+
+  ._flexbox__col__center__evenly {
+    @apply flex flex-col items-center justify-evenly;
+  }
+
+  ._flexbox__col__start__start {
+    @apply flex flex-col items-start justify-start;
+  }
+
+  ._flexbox__col__start__end {
+    @apply flex flex-col items-start justify-end;
+  }
+
+  ._flexbox__col__start__between {
+    @apply flex flex-col items-start justify-between;
+  }
+
+  ._flexbox__col__start__around {
+    @apply flex flex-col items-start justify-around;
+  }
+
+  ._flexbox__col__start__evenly {
+    @apply flex flex-col items-start justify-evenly;
+  }
+
+  ._flexbox__col__end__start {
+    @apply flex flex-col items-end justify-start;
+  }
+
+  ._flexbox__col__end__end {
+    @apply flex flex-col items-end justify-end;
+  }
+
+  ._flexbox__col__end__between {
+    @apply flex flex-col items-end justify-between;
+  }
+
+  ._flexbox__col__end__around {
+    @apply flex flex-col items-end justify-around;
+  }
+
+  ._flexbox__col__end__evenly {
+    @apply flex flex-col items-end justify-evenly;
+  }
+
+  ._flexbox__row__start__start {
+    @apply flex flex-row items-start justify-start;
+  }
+
+  ._flexbox__row__start__end {
+    @apply flex flex-row items-start justify-end;
+  }
+
+  ._flexbox__row__start__between {
+    @apply flex flex-row items-start justify-between;
+  }
+
+  ._flexbox__row__start__around {
+    @apply flex flex-row items-start justify-around;
+  }
+
+  ._flexbox__row__start__evenly {
+    @apply flex flex-row items-start justify-evenly;
+  }
+
+  ._flexbox__row__end__start {
+    @apply flex flex-row items-end justify-start;
+  }
+
+  ._flexbox__row__end__end {
+    @apply flex flex-row items-end justify-end;
+  }
+
+  ._flexbox__row__end__between {
+    @apply flex flex-row items-end justify-between;
+  }
+
+  ._flexbox__row__end__around {
+    @apply flex flex-row items-end justify-around;
+  }
+
+  ._flexbox__row__end__evenly {
+    @apply flex flex-row items-end justify-evenly;
+  }
+
+  ._flexbox__row__center__start__start {
+    @apply flex flex-row items-center justify-start;
+  }
+
+  ._flexbox__row__center__start__end {
+    @apply flex flex-row items-center justify-end;
+  }
+
+  ._flexbox__row__center__start__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__row__center__start__around {
+    @apply flex flex-row items-center justify-around;
+  }
+
+  ._flexbox__row__center__start__evenly {
+    @apply flex flex-row items-center justify-evenly;
+  }
+
+  ._flexbox__row__center__end__start {
+    @apply flex flex-row items-center justify-start;
+  }
+
+  ._flexbox__row__center__end__end {
+    @apply flex flex-row items-center justify-end;
+  }
+
+  ._flexbox__row__center__end__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__row__center__end__around {
+    @apply flex flex-row items-center justify-around;
+  }
+
+  ._flexbox__row__center__end__evenly {
+    @apply flex flex-row items-center justify-evenly;
+  }
+
+  ._flexbox__row__center__between__start {
+    @apply flex flex-row items-center justify-start;
+  }
+
+  ._flexbox__row__center__between__end {
+    @apply flex flex-row items-center justify-end;
+  }
+
+  ._flexbox__row__center__between__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__row__center__between__around {
+    @apply flex flex-row items-center justify-around;
+  }
+
+  ._flexbox__row__center__between__evenly {
+    @apply flex flex-row items-center justify-evenly;
+  }
+
+  ._flexbox__row__center__around__start {
+    @apply flex flex-row items-center justify-start;
+  }
+
+  ._flexbox__row__center__around__end {
+    @apply flex flex-row items-center justify-end;
+  }
+
+  ._flexbox__row__center__around__between {
+    @apply flex flex-row items-center justify-between;
+  }
+
+  ._flexbox__row__center__around__around {
+    @apply flex flex-row items-center justify-around;
+  }
+
+  ._flexbox__row__center__around__evenly {
+    @apply flex flex-row items-center justify-evenly;
+  }
 }

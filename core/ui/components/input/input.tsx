@@ -2,10 +2,10 @@
 import * as React from "react";
 import { cn } from "@/core/lib/utils";
 import { Eye, EyeOff, Info, X } from "lucide-react";
-import Tooltip from "./tooltip";
+import Tooltip from "../tooltip/tooltip";
 import { useClickAway } from "@uidotdev/usehooks";
 import Image from "next/image";
-import Typography from "./typography";
+import Typography from "../typography/typography";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

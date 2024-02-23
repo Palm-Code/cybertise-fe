@@ -1,10 +1,5 @@
-import ThemeSwitcher from "@/core/ui/components/theme-switcher";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-12 p-24">
-      <ThemeSwitcher />
-      <h1>UNDER CONSTRUCTION</h1>
-    </main>
-  );
+  return redirect("/dashboard");
 }

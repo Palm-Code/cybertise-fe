@@ -1,8 +1,13 @@
 "use client";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "./select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "../select/select";
 import Image from "next/image";
 import { OptionsType } from "@/types/auth/sign-up";
-import { Input, InputProps } from "./input";
+import { Input, InputProps } from "../input/input";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { useDebounce } from "@uidotdev/usehooks";

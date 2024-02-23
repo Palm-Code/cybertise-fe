@@ -1,5 +1,5 @@
 import { Dot } from "lucide-react";
-import Typography from "../../components/typography";
+import Typography from "../../components/typography/typography";
 import { cn } from "@/core/lib/utils";
 
 interface I_StepWrapperProps {

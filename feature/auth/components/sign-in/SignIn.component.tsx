@@ -1,10 +1,10 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import Button from "@/core/ui/components/button";
-import { Input } from "@/core/ui/components/input";
+import Button from "@/core/ui/components/button/button";
+import { Input } from "@/core/ui/components/input/input";
 import Typography, {
   typographyVariants,
-} from "@/core/ui/components/typography";
+} from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useState } from "react";
 import { z } from "zod";

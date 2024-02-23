@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Moon from "../icons/moon/Moon.icon";
+import Moon from "../../icons/moon/Moon.icon";
 import { cn } from "@/core/lib/utils";
-import Sun from "../icons/sun/Sun.icon";
+import Sun from "../../icons/sun/Sun.icon";
 import { useTheme } from "next-themes";
-import SunBackground from "../icons/sun/SunBackground.icon";
-import { Cloud, MoonBackground } from "../icons";
+import SunBackground from "../../icons/sun/SunBackground.icon";
+import { Cloud, MoonBackground } from "../../icons";
 
 interface I_ThemeSwitcherProps {
   className?: string;

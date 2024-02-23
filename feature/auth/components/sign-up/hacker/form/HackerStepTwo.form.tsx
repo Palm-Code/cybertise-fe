@@ -1,17 +1,17 @@
 "use client";
-import Button from "@/core/ui/components/button";
+import Button from "@/core/ui/components/button/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { FormSchema } from "../SignUpHacker.component";
-import { Input } from "@/core/ui/components/input";
-import PasswordInput from "@/core/ui/components/password-input";
+import { Input } from "@/core/ui/components/input/input";
+import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
 import { passwordValidation } from "@/core/constants";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
-import Checkbox from "@/core/ui/components/checkbox";
-import Typography from "@/core/ui/components/typography";
+import Checkbox from "@/core/ui/components/checkbox/checkbox";
+import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 
 interface I_HackerStepTwoProps {

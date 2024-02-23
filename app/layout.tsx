@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/core/ui/components/theme-provider";
+import { ThemeProvider } from "@/core/ui/components/theme/theme-provider";
 import { cn } from "@/core/lib/utils";
+import Sidebar from "@/core/ui/layout/dashboard/Sidebar.layout";
+import { menuItems } from "@/core/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +31,10 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          {children}
+          <div className="_flexbox__row__start min-h-screen w-full">
+            <Sidebar type={"hacker"} />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
