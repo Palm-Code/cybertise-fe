@@ -1,4 +1,4 @@
-import { Header } from "@/core/ui/layout";
+// import { Header } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 export default function DashboardPage() {

@@ -1,9 +1,9 @@
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
+// import { Loader2 } from "lucide-react";
+// import { Suspense } from "react";
 
 export default function Dashboardlayout({
   children,
-  hacker,
+  // hacker,
 }: {
   children: React.ReactNode;
   hacker: React.ReactNode;
