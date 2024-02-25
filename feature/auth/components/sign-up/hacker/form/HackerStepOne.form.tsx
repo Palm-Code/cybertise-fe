@@ -57,6 +57,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
       </div>
       <Button
         fullWidth
+        variant="primary-hacker"
         onClick={onClickValidate}
         disabled={validateIsFormFilled}
       >

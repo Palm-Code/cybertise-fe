@@ -96,7 +96,12 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
         isConfirmation={!!confirmPassworText.content}
         check={confirmPassworText.checked}
       />
-      <Button fullWidth onClick={submitForm} disabled={validateIsFormFilled}>
+      <Button
+        fullWidth
+        variant="primary-hacker"
+        onClick={submitForm}
+        disabled={validateIsFormFilled}
+      >
         Register Account
       </Button>
     </StepWrapper>

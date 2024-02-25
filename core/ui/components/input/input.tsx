@@ -132,6 +132,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
           </div>
           {(onClickRevealPassword &&
+            hasValue &&
             (props.type === "password" ? (
               <Eye className="h-6 w-6 cursor-pointer" onClick={onClickReveal} />
             ) : (

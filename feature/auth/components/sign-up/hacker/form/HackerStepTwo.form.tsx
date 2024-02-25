@@ -117,6 +117,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
       </div>
       <Button
         fullWidth
+        variant="primary-hacker"
         onClick={submitForm}
         disabled={validateIsFormFilled || isSubmit || !isPolicyChecked}
         isLoading={isSubmit}

@@ -57,6 +57,7 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
         fullWidth
         onClick={onClickValidate}
         disabled={validateIsFormFilled}
+        variant="primary-hacker"
       >
         Next
       </Button>

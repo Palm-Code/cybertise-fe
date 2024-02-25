@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const TicketCard = () => {
   return (
-    <Card href={"/ticket/123123123"}>
+    <Card href={"/reports/123123123"}>
       <Indicator variant="warning" className="absolute -right-4 -top-4" />
       <div className="_flexbox__row__start w-full gap-9">
         <Image
