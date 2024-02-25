@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Pagination,
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
@@ -10,7 +11,7 @@ import { TicketView } from "../../container";
 
 const Dashboard = () => {
   return (
-    <div className="_flexbox__col__center h-full w-full gap-10">
+    <div className="_flexbox__col__start h-full w-full gap-10">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
         <Typography variant="h4" weight="bold" className="mr-auto">
           Open Ticket
@@ -47,6 +48,7 @@ const Dashboard = () => {
         </div>
       </div>
       <TicketView />
+      <Pagination variant="hacker" />
     </div>
   );
 };

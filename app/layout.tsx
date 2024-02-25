@@ -30,7 +30,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <div className="_flexbox__row__start min-h-screen w-full">
+          <div className="grid h-fit w-full grid-cols-[auto_1fr]">
             <Sidebar type={"hacker"} />
             {children}
           </div>

@@ -11,3 +11,7 @@ export { default as Tooltip } from "./tooltip/tooltip";
 export { default as ThemeSwitcher } from "./theme/theme-switcher";
 export { default as ValidationCheck } from "./validation-check/validation-check";
 export { default as Typography } from "./typography/typography";
+export { default as Card } from "./card/card";
+export * from "./badge/badge";
+export { default as Indicator } from "./indicator/indicator";
+export { default as Pagination } from "./pagination/pagination";

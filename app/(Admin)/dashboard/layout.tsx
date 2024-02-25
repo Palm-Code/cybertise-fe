@@ -1,3 +1,4 @@
+import { EmptState } from "@/core/ui/layout";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
@@ -12,7 +13,7 @@ export default function Dashboardlayout({
 }) {
   return (
     <>
-      <div className="_flexbox__col__start h-screen w-full">
+      <div className="_flexbox__col__start h-full w-full">
         {children}
         <Suspense
           fallback={
@@ -23,7 +24,9 @@ export default function Dashboardlayout({
             />
           }
         >
-          <div className="h-full w-full p-12 pb-28 pl-14">{hacker}</div>
+          <div className="h-[calc(100%-86px)] w-full p-12 pb-28 pl-14">
+            {hacker}
+          </div>
         </Suspense>
       </div>
     </>

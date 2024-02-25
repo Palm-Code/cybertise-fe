@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/core/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full text-base transition-colors py-3 px-6 gap-2.5 disabled:cursor-not-allowed disabled:text-neutral-50",
+  "inline-flex cursor-pointer items-center justify-center whitespace-nowrap transition-colors gap-2.5 disabled:cursor-not-allowed disabled:text-neutral-50",
   {
     variants: {
       variant: {
@@ -27,10 +27,29 @@ const buttonVariants = cva(
           "border bg-transparent text-brand-neutral dark:text-white hover:bg-violet-lighter/20 focus:bg-violet-lighter/20 active:bg-violet-lighter/20 border-violet-normal hover:border-violet-normal active:border-violet-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-mediator":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal focus:text-violet-normal active:text-violet-dark",
+        default:
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-brand-neutral focus:text-brand-neutral active:text-brand-neutral",
+        "outline-hacker":
+          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-lime-normal hover:text-neutral-light-0",
+        "outline-company":
+          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-sky-normal dark:text-white text-neutral-light-0 hover:text-white",
+        "outline-mediator":
+          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-violet-normal dark:text-white text-neutral-light-0 hover:text-white",
+      },
+      size: {
+        default: "h-9 px-4 py-2 text-sm",
+        lg: "py-3 px-6 text-base",
+        icon: "h-9 w-9",
+      },
+      radius: {
+        default: "rounded-full",
+        none: "rounded-lg",
       },
     },
     defaultVariants: {
-      variant: "primary-hacker",
+      radius: "default",
+      size: "lg",
+      variant: "default",
     },
   }
 );
