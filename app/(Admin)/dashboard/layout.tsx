@@ -1,4 +1,3 @@
-import { EmptState } from "@/core/ui/layout";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
