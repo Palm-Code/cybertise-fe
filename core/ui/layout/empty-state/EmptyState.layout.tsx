@@ -78,7 +78,7 @@ const EmptyState = ({
   };
 
   return (
-    <div className="_flexbox__col__center h-full w-full gap-12">
+    <div className="_flexbox__col__center my-32 h-full w-full gap-12">
       {iconsType()}
     </div>
   );

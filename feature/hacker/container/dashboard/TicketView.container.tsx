@@ -1,3 +1,4 @@
+import { Pagination } from "@/core/ui/components";
 import { TicketCard } from "@/core/ui/container";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
@@ -13,6 +14,7 @@ const TicketView = () => {
         buttonText="See VRP Launchpad"
         href="/programs"
       /> */}
+      <Pagination variant="hacker" />
     </div>
   );
 };

@@ -47,7 +47,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {session ? (
-            <div className="grid h-fit w-full grid-cols-[auto_1fr]">
+            <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
               {renderSidebar()}
               {children}
             </div>

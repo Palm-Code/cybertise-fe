@@ -5,49 +5,44 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../select/select";
-import { useState } from "react";
-import { useDebounce } from "@uidotdev/usehooks";
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
-import { ArrowUpDown } from "lucide-react";
-import { iconColor } from "./filter-view-dropdown";
 
-interface I_FilterDropdownProps {
+interface I_BaseDropdownProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value: string;
-  variant?: "hacker" | "company" | "mediator";
+  label?: string;
 }
 
-const FilterDropdown = ({
+const BaseDropdown = ({
   onValueChange,
   options,
   value,
-  variant = "hacker",
+  label = "Sort By",
   ...props
-}: I_FilterDropdownProps) => {
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchTerm = useDebounce(searchValue, 300);
-
+}: I_BaseDropdownProps) => {
   const inputValueLabel = options.find(
     (option) => option.value === value
   )?.label;
 
-  const optionsFilter = options.filter((option) =>
-    option.label.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-  );
-
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
-        <ArrowUpDown className={iconColor[variant]} />
+      <SelectTrigger className="!w-fit !justify-start gap-1.5 text-nowrap !bg-transparent !p-0">
+        <Typography
+          variant="p"
+          affects="small"
+          className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
+        >
+          {label}
+        </Typography>
         <Typography variant="p" affects="small">
-          {inputValueLabel || "Sort By"}
+          {inputValueLabel || "All type"}
         </Typography>
       </SelectTrigger>
       <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
-        {optionsFilter.length! ? (
-          optionsFilter.map((option) => (
+        {options.length! ? (
+          options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>
@@ -61,4 +56,4 @@ const FilterDropdown = ({
     </Select>
   );
 };
-export default FilterDropdown;
+export default BaseDropdown;

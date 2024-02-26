@@ -3,15 +3,19 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
-  Pagination,
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
-import { TicketView } from "../../container";
+import { TableView, TicketView } from "../../container";
+import { tableColumns, tableTicketData } from "../../constants/dashboard";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useState } from "react";
+import MultiFilterDropdown from "@/core/ui/components/dropdown/multi-filter-drowpdown";
 
 const Dashboard = () => {
+  const [view, setView] = useState<"table" | "card">("card");
   return (
-    <div className="_flexbox__col__start h-full w-full gap-10">
+    <div className="_flexbox__col__start__start min-h-full w-full gap-10">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
         <Typography variant="h4" weight="bold" className="mr-auto">
           Open Ticket
@@ -23,32 +27,33 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="grid w-full grid-cols-2 place-items-center content-between">
-        <div className="mr-auto grid grid-flow-col place-items-center gap-4">
-          <Typography
-            variant="p"
-            affects="small"
-            className=" text-neutral-light-30 dark:text-neutral-dark-30"
-          >
-            Sort by
-          </Typography>
+      <div className="flex w-full items-center justify-between">
+        <MultiFilterDropdown variant="hacker" />
+        <div className="inline-flex gap-4">
           <FilterDropdown
-            value="latest"
+            variant="hacker"
+            value="Sort By"
             options={filterItems}
             onValueChange={() => {}}
           />
-        </div>
-        <div className="ml-auto w-fit">
           <FilterViewDropdown
             type="hacker"
-            value="card"
+            value={view}
             options={filterView}
-            onValueChange={() => {}}
+            onValueChange={(v) => setView(v)}
           />
         </div>
       </div>
-      <TicketView />
-      <Pagination variant="hacker" />
+      {view === "table" ? (
+        <TableView columns={tableColumns} data={tableTicketData} />
+      ) : (
+        <TicketView />
+      )}
+      {/* <EmptyState
+        variant="hacker"
+        type="ticket"
+        buttonText="See VRP Launchpad"
+      /> */}
     </div>
   );
 };

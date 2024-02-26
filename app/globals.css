@@ -18,7 +18,7 @@
   }
 
   body {
-    @apply transition-colors duration-200;
+    @apply overflow-hidden transition-colors duration-200;
   }
 
   ._flexbox__col__center {

@@ -15,3 +15,4 @@ export { default as Card } from "./card/card";
 export * from "./badge/badge";
 export { default as Indicator } from "./indicator/indicator";
 export { default as Pagination } from "./pagination/pagination";
+export * from "./table/table";

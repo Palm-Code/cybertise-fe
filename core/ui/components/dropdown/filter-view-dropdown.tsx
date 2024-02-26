@@ -13,13 +13,13 @@ import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 
 interface I_FilterViewDropdownProps extends InputProps {
-  onValueChange: (value: string) => void;
+  onValueChange: (value: "card" | "table") => void;
   options: SortFilterType[];
   value: "card" | "table";
   type: "hacker" | "company" | "mediator";
 }
 
-const iconColor: { [key in Role]: string } = {
+export const iconColor: { [key in Role]: string } = {
   hacker: "text-lime-normal",
   company: "text-sky-normal",
   mediator: "text-violet-normal",
@@ -52,7 +52,7 @@ const FilterViewDropdown = ({
     <Select onValueChange={onValueChange}>
       <SelectTrigger className="gap-2.5 !bg-white p-3 dark:!bg-neutral-dark-100">
         {icons(type, value)}
-        <Typography variant="p" affects="normal">
+        <Typography variant="p" affects="normal" className="text-nowrap">
           {inputValueLabel}
         </Typography>
       </SelectTrigger>

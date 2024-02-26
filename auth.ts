@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "./core/lib/config";
 import { UserType } from "./types/auth/sign-up";
-import { FormSchema } from "./feature/auth/components/sign-in/SignIn.component";
+import { FormLoginSchema } from "./types/auth/sign-in";
 
-const secretKey = "secret";
+const secretKey = SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
@@ -24,7 +24,7 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function login(formData: FormSchema) {
+export async function login(formData: FormLoginSchema) {
   // Verify credentials && get the user
   const user = {
     email: formData.email,
@@ -34,7 +34,7 @@ export async function login(formData: FormSchema) {
   };
 
   // Create the session
-  const expires = new Date(Date.now() + 3600 * 1000);
+  const expires = new Date(Date.now() + 36000 * 1000);
   const session = await encrypt({ user, expires });
   cookies().set("session", session, { expires, httpOnly: true });
 }
@@ -56,7 +56,7 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 3600 * 1000);
+  parsed.expires = new Date(Date.now() + 36000 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",
