@@ -8,6 +8,14 @@ const TicketView = () => {
       <TicketCard />
       <TicketCard />
       <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
+      <TicketCard />
       {/* <EmptyState
         variant="hacker"
         type="ticket"
