@@ -129,6 +129,7 @@ module.exports = {
           lighter: "#C8FF33",
           light: "#D6FF66",
           "dark-green": "#4D6900",
+          badge: "#A3DF02",
         },
         emerald: {
           dark: "#336D50",

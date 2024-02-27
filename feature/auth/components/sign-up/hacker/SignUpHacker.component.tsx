@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { typographyVariants } from "@/core/ui/components/typography";
+import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { SignupBoxWrapper } from "@/core/ui/layout";
 import { MoveLeft, X } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import { useMultistepForm } from "@/utils/multi-step-form";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Progress } from "@/core/ui/components/progress";
+import { Progress } from "@/core/ui/components/progress/progress";
 import SuccessState from "../../success-state/SuccesState.component";
 
 export const signupFormSchema = z.object({

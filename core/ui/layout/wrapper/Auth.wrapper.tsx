@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import ThemeSwitcher from "../../components/theme-switcher";
+import ThemeSwitcher from "../../components/theme/theme-switcher";
 import Logo from "../../icons/logo/Logo.icon";
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {

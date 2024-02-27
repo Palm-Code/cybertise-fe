@@ -1,11 +1,11 @@
 "use client";
-import Button from "@/core/ui/components/button";
-import { Input } from "@/core/ui/components/input";
+import Button from "@/core/ui/components/button/button";
+import { Input } from "@/core/ui/components/input/input";
 import { StepWrapper } from "@/core/ui/layout";
 import { useForm, useFormContext } from "react-hook-form";
 import { FormSchema, signupFormSchema } from "../SignUpHacker.component";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SelectDropdown from "@/core/ui/components/select-dropdown";
+import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 
@@ -57,6 +57,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
       </div>
       <Button
         fullWidth
+        variant="primary-hacker"
         onClick={onClickValidate}
         disabled={validateIsFormFilled}
       >

@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import Typography from "@/core/ui/components/typography";
+import Typography from "@/core/ui/components/typography/typography";
 import { Company, Hacker } from "@/core/ui/icons";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -26,7 +26,7 @@ const SignUpType = () => {
         "bg-background-main-light p-20 dark:bg-background-main-dark"
       )}
     >
-      <div className="_flexbox__col__center w-ful gap-12">
+      <div className="_flexbox__col__center w-full gap-12">
         <Typography variant="h4" weight="bold" align="center">
           Please Choose What Type of Account That You Want to Create
         </Typography>
