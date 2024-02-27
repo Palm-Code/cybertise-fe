@@ -23,4 +23,9 @@ export const filterView: OptionsType[] = [
     value: "table",
     icon: "/icons/card.svg",
   },
+  {
+    label: "Grid View",
+    value: "grid",
+    icon: "/icons/card.svg",
+  },
 ];

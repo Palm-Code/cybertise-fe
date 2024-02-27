@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/core/lib/utils";
 import { Eye, EyeOff, Info, X } from "lucide-react";
 import Tooltip from "../tooltip/tooltip";
-import { useClickAway } from "@uidotdev/usehooks";
+import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import Typography from "../typography/typography";
 
@@ -43,7 +43,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [isFocused, setIsFocused] = React.useState(false);
     const [hasValue, setHasValue] = React.useState(false);
-    const inputRef = useClickAway<HTMLDivElement>(() => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    useOnClickOutside(inputRef, () => {
       setIsFocused(false);
     });
 

@@ -10,7 +10,7 @@ import { OptionsType } from "@/types/auth/sign-up";
 import { Input, InputProps } from "../input/input";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
-import { useDebounce } from "@uidotdev/usehooks";
+import { useDebounceValue } from "usehooks-ts";
 
 interface I_SelectDropdownProps extends InputProps {
   onValueChange: (value: string) => void;
@@ -30,7 +30,7 @@ const SelectDropdown = ({
   ...props
 }: I_SelectDropdownProps) => {
   const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchTerm = useDebounce(searchValue, 300);
+  const [debounceValue] = useDebounceValue(searchValue, 500);
   const iconValue = options.find((option) => option.value === value)?.icon;
 
   const inputValueLabel = options.find(
@@ -42,7 +42,7 @@ const SelectDropdown = ({
   };
 
   const optionsFilter = options.filter((option) =>
-    option.label.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+    option.label.toLowerCase().includes(debounceValue.toLowerCase())
   );
 
   return (

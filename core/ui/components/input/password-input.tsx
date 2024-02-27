@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Input, InputProps } from "./input";
-import { useClickAway } from "@uidotdev/usehooks";
 import { AnimatePresence, motion } from "framer-motion";
 import Typography from "../typography/typography";
 import ValidationCheck from "../validation-check/validation-check";
 import { passwordValidation } from "@/core/constants";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { cn } from "@/core/lib/utils";
+import { useOnClickOutside } from "usehooks-ts";
 
 interface I_PasswordInputProps extends InputProps {
   check?: boolean;
@@ -20,7 +20,9 @@ interface I_PasswordInputProps extends InputProps {
 const PasswordInput = (props: I_PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useClickAway<HTMLInputElement>(() => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useOnClickOutside(inputRef, () => {
     setIsFocused(false);
   });
 

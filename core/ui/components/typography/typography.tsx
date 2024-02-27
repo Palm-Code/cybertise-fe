@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 export const typographyVariants = cva(
-  "text-xl text-neutral-90 dark:text-white whitespace-pre transition-colors duration-100",
+  "text-xl text-neutral-90 dark:text-white transition-colors duration-100",
   {
     variants: {
       variant: {
@@ -37,11 +37,19 @@ export const typographyVariants = cva(
         center: "text-center",
         right: "text-end",
       },
+      transform: {
+        uppercase: "uppercase",
+        lowercase: "lowercase",
+        capitalize: "capitalize",
+        normal: "normal-case",
+      },
     },
     defaultVariants: {
       variant: "h1",
       affects: "default",
       weight: "normal",
+      align: "left",
+      transform: "normal",
     },
   }
 );

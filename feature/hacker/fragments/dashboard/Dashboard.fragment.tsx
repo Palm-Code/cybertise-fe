@@ -1,6 +1,14 @@
-import { Dashboard } from "../../components";
+import dynamic from "next/dynamic";
+import { tableTicketData } from "../../constants/dashboard";
+
+const Dashboard = dynamic(
+  () => import("@/feature/hacker/components/dashboard/Dashboard.component"),
+  {
+    ssr: false,
+  }
+);
 
 const DashboardFragment = () => {
-  return <Dashboard />;
+  return <Dashboard data={tableTicketData} />;
 };
 export default DashboardFragment;

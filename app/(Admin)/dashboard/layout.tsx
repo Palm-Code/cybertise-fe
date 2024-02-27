@@ -12,7 +12,10 @@ export default function Dashboardlayout({
 }) {
   return (
     <>
-      <div className="_flexbox__col__start__start h-full w-full">
+      <div
+        className="_flexbox__col__start__start h-full w-full"
+        suppressHydrationWarning
+      >
         {children}
         <Suspense
           fallback={

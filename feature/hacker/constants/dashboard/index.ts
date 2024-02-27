@@ -36,7 +36,8 @@ export const tableColumns: I_TableColumns[] = [
 
 export const tableTicketData: I_TableTicketData[] = [
   {
-    company_name: "Example Corp",
+    ticket_number: "EX-001",
+    title: "Example Corp",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-26",
     domain: "public",
@@ -44,10 +45,12 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "SQL Injection",
     rewards: 1000,
     status: "Open",
-    update: "2024-02-26T08:30:00", // Assuming the update time is 08:30:00 for example
+    update: "2024-02-26T08:30:00",
+    is_new_notification: true,
   },
   {
-    company_name: "Private Co.",
+    ticket_number: "PC-001",
+    title: "Private Co.",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-25",
     domain: "private",
@@ -55,10 +58,12 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "Cross-site Scripting (XSS)",
     rewards: 2500,
     status: "Closed",
-    update: "2024-02-25T15:45:00", // Assuming the update time is 15:45:00 for example
+    update: "2024-02-25T15:45:00",
+    is_new_notification: true,
   },
   {
-    company_name: "Test Ltd.",
+    ticket_number: "TL-001",
+    title: "Test Ltd.",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-24",
     domain: "public",
@@ -66,10 +71,12 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "Broken Authentication",
     rewards: 500,
     status: "Open",
-    update: "2024-02-24T10:20:00", // Assuming the update time is 10:20:00 for example
+    update: "2024-02-24T10:20:00",
+    is_new_notification: false,
   },
   {
-    company_name: "Example Corp",
+    ticket_number: "EX-002",
+    title: "Example Corp",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-26",
     domain: "public",
@@ -77,10 +84,12 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "SQL Injection",
     rewards: 1000,
     status: "Open",
-    update: "2024-02-26T08:30:00", // Assuming the update time is 08:30:00 for example
+    update: "2024-02-26T08:30:00",
+    is_new_notification: false,
   },
   {
-    company_name: "Private Co.",
+    ticket_number: "PC-002",
+    title: "Private Co.",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-25",
     domain: "private",
@@ -88,10 +97,12 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "Cross-site Scripting (XSS)",
     rewards: 2500,
     status: "Closed",
-    update: "2024-02-25T15:45:00", // Assuming the update time is 15:45:00 for example
+    update: "2024-02-25T15:45:00",
+    is_new_notification: false,
   },
   {
-    company_name: "Test Ltd.",
+    ticket_number: "TL-002",
+    title: "Test Ltd.",
     logo: "/images/company-logo/coinbase.png",
     date_reported: "2024-02-24",
     domain: "public",
@@ -99,42 +110,9 @@ export const tableTicketData: I_TableTicketData[] = [
     vulnerability_type: "Broken Authentication",
     rewards: 500,
     status: "Open",
-    update: "2024-02-24T10:20:00", // Assuming the update time is 10:20:00 for example
+    update: "2024-02-26T20:20:00",
+    is_new_notification: false,
   },
-  {
-    company_name: "Example Corp",
-    logo: "/images/company-logo/coinbase.png",
-    date_reported: "2024-02-26",
-    domain: "public",
-    risk_level: "medium",
-    vulnerability_type: "SQL Injection",
-    rewards: 1000,
-    status: "Open",
-    update: "2024-02-26T08:30:00", // Assuming the update time is 08:30:00 for example
-  },
-  {
-    company_name: "Private Co.",
-    logo: "/images/company-logo/coinbase.png",
-    date_reported: "2024-02-25",
-    domain: "private",
-    risk_level: "high",
-    vulnerability_type: "Cross-site Scripting (XSS)",
-    rewards: 2500,
-    status: "Closed",
-    update: "2024-02-25T15:45:00", // Assuming the update time is 15:45:00 for example
-  },
-  {
-    company_name: "Test Ltd.",
-    logo: "/images/company-logo/coinbase.png",
-    date_reported: "2024-02-24",
-    domain: "public",
-    risk_level: "low",
-    vulnerability_type: "Broken Authentication",
-    rewards: 500,
-    status: "Open",
-    update: "2024-02-26T20:20:00", // Assuming the update time is 10:20:00 for example
-  },
-  // Add more entries here...
 ];
 
 export const filterItems: MultiFilterType = {

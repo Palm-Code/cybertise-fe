@@ -1,6 +1,7 @@
 import { cn } from "@/core/lib/utils";
 import Typography, { TypographyProps } from "../typography/typography";
 import Link, { LinkProps } from "next/link";
+import Indicator from "../indicator/indicator";
 
 type I_TableProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
@@ -8,12 +9,14 @@ type I_TableProps = React.HTMLAttributes<HTMLDivElement> & {
   align?: TypographyProps["align"];
   isClickable?: boolean;
   href?: string;
+  hasNotification?: boolean;
 };
 
 export const BaseTable = ({
   children,
   className,
   isClickable = false,
+  hasNotification = false,
   ...props
 }: I_TableProps) => {
   return (
@@ -101,6 +104,7 @@ export const TableBodyRow = ({
   children,
   className,
   isClickable = false,
+  hasNotification = false,
   ...props
 }: I_TableProps) => {
   if (isClickable) {
@@ -108,10 +112,13 @@ export const TableBodyRow = ({
       <Link
         href={props.href ?? "#"}
         className={cn(
-          "w-full rounded-2xl bg-background-main-light px-9 py-6 hover:bg-opacity-50 dark:bg-background-main-dark",
+          "relative w-full rounded-2xl bg-background-main-light px-9 py-6 hover:bg-opacity-50 dark:bg-background-main-dark",
           className
         )}
       >
+        {hasNotification && (
+          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+        )}
         {children}
       </Link>
     );

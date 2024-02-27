@@ -9,7 +9,8 @@ export interface I_TableColumns {
 }
 
 export interface I_TableTicketData {
-  company_name: string;
+  ticket_number: string;
+  title: string;
   logo: string;
   date_reported: string;
   domain: "public" | "private";
@@ -18,4 +19,5 @@ export interface I_TableTicketData {
   rewards: number;
   status: string;
   update: string;
+  is_new_notification: boolean;
 }

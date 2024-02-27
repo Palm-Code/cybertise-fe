@@ -11,7 +11,7 @@ export const currencyFormatters = {
     });
     return result;
   },
-  NumberToDollar(value: number) {
+  NumberToUSD(value: number) {
     const result = value.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",

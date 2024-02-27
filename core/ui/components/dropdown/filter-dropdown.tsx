@@ -5,8 +5,6 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../select/select";
-import { useState } from "react";
-import { useDebounce } from "@uidotdev/usehooks";
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { ArrowUpDown } from "lucide-react";
@@ -26,16 +24,9 @@ const FilterDropdown = ({
   variant = "hacker",
   ...props
 }: I_FilterDropdownProps) => {
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearchTerm = useDebounce(searchValue, 300);
-
   const inputValueLabel = options.find(
     (option) => option.value === value
   )?.label;
-
-  const optionsFilter = options.filter((option) =>
-    option.label.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-  );
 
   return (
     <Select onValueChange={onValueChange}>
@@ -46,8 +37,8 @@ const FilterDropdown = ({
         </Typography>
       </SelectTrigger>
       <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
-        {optionsFilter.length! ? (
-          optionsFilter.map((option) => (
+        {options.length! ? (
+          options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>

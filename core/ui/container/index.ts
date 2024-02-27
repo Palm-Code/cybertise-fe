@@ -1,1 +1,1 @@
-export { default as TicketCard } from "./card/TicketCard.component";
+export { default as TicketCardList } from "./card/TicketCard.component";

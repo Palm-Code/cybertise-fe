@@ -1,5 +1,11 @@
 "use client";
-import { Bug, Building2, LayoutDashboard, Settings, Text } from "lucide-react";
+import {
+  Bug,
+  Building2,
+  LayoutDashboard,
+  Settings,
+  TextSearch,
+} from "lucide-react";
 import Typography from "../../components/typography/typography";
 import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
@@ -15,7 +21,7 @@ interface SidebarProps {
 
 const iconsObject: { [key: string]: React.ReactNode } = {
   dashboard: <LayoutDashboard className="h-6 w-6" />,
-  programs: <Text className="h-6 w-6" />,
+  programs: <TextSearch className="h-6 w-6" />,
   reports: <Bug className="h-6 w-6" />,
   companies: <Building2 className="h-6 w-6" />,
   "vrp launchpad": <Bug className="h-6 w-6" />,

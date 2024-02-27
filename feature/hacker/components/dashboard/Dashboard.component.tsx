@@ -7,13 +7,22 @@ import {
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
 import { TableView, TicketView } from "../../container";
-import { tableColumns, tableTicketData } from "../../constants/dashboard";
+import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { useState } from "react";
 import MultiFilterDropdown from "@/core/ui/components/dropdown/multi-filter-drowpdown";
+import { useReadLocalStorage } from "usehooks-ts";
+import GridView from "../../container/dashboard/GridView.container";
+import { I_TableTicketData } from "@/interfaces";
 
-const Dashboard = () => {
-  const [view, setView] = useState<"table" | "card">("card");
+const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
+  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+
+  const viewsContainer = {
+    table: <TableView columns={tableColumns} data={data} />,
+    card: <TicketView data={data} />,
+    grid: <GridView data={data} />,
+  };
+
   return (
     <div className="_flexbox__col__start__start min-h-full w-full gap-10">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
@@ -36,24 +45,18 @@ const Dashboard = () => {
             options={filterItems}
             onValueChange={() => {}}
           />
-          <FilterViewDropdown
-            type="hacker"
-            value={view}
-            options={filterView}
-            onValueChange={(v) => setView(v)}
-          />
+          <FilterViewDropdown type="hacker" options={filterView} />
         </div>
       </div>
-      {view === "table" ? (
-        <TableView columns={tableColumns} data={tableTicketData} />
+      {data.length! ? (
+        viewsContainer[view]
       ) : (
-        <TicketView />
+        <EmptyState
+          variant="hacker"
+          type="ticket"
+          buttonText="See VRP Launchpad"
+        />
       )}
-      {/* <EmptyState
-        variant="hacker"
-        type="ticket"
-        buttonText="See VRP Launchpad"
-      /> */}
     </div>
   );
 };

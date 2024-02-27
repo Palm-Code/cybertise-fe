@@ -3,6 +3,7 @@ import {
   Badge,
   BaseTable,
   Indicator,
+  Pagination,
   TableBody,
   TableBodyRow,
   TableData,
@@ -23,85 +24,89 @@ interface I_TableProps {
 
 export default function Table({ data, columns }: I_TableProps) {
   return (
-    <BaseTable>
-      <TableHeader>
-        <TableRow>
-          {columns.map((column, index) => (
-            <TableHead className={column.width} key={`table-head-${index}`}>
-              {column.title}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((item, index) => (
-          <TableBodyRow
-            key={`table-row-${index}`}
-            isClickable
-            href={`/reports/${item.company_name}`}
-          >
-            <TableRow>
-              <TableData
-                className={cn(columns[0].width, `text-${columns[0].align}`)}
-              >
-                <div className="_flexbox__col__start__start gap-4">
-                  <div className="_flexbox__row__center__start gap-1">
-                    <Image
-                      src={item.logo}
-                      alt={`${item.company_name} logo`}
-                      width={24}
-                      height={24}
+    <>
+      <BaseTable>
+        <TableHeader>
+          <TableRow>
+            {columns.map((column, index) => (
+              <TableHead className={column.width} key={`table-head-${index}`}>
+                {column.title}
+              </TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((item, index) => (
+            <TableBodyRow
+              key={`table-row-${index}`}
+              isClickable
+              href={`/reports/${item.ticket_number}`}
+              hasNotification={item.is_new_notification}
+            >
+              <TableRow>
+                <TableData
+                  className={cn(columns[0].width, `text-${columns[0].align}`)}
+                >
+                  <div className="_flexbox__col__start__start gap-4">
+                    <div className="_flexbox__row__center__start gap-1">
+                      <Image
+                        src={item.logo}
+                        alt={`${item.title} logo`}
+                        width={24}
+                        height={24}
+                      />
+                      <Typography variant="p" affects="small" weight="semibold">
+                        #{item.ticket_number} - {item.title}
+                      </Typography>
+                    </div>
+                    <div className="_flexbox__row__center__start gap-4">
+                      <Badge variant="default">{item.domain}</Badge>
+                      <Typography variant="p" affects="small" weight="normal">
+                        {item.date_reported}
+                      </Typography>
+                    </div>
+                  </div>
+                </TableData>
+                <TableData
+                  className={cn(columns[1].width, `text-${columns[1].align}`)}
+                >
+                  <Badge variant={item.risk_level} className="w-19">
+                    {item.risk_level}
+                  </Badge>
+                </TableData>
+                <TableData
+                  className={cn(columns[2].width, `text-${columns[2].align}`)}
+                >
+                  {item.vulnerability_type}
+                </TableData>
+                <TableData
+                  className={cn(columns[3].width, `text-${columns[3].align}`)}
+                >
+                  {item.rewards
+                    ? currencyFormatters.NumberToUSD(item.rewards)
+                    : currencyFormatters.NumberToUSD(item.rewards)}
+                </TableData>
+                <TableData
+                  className={cn(columns[4].width, `text-${columns[4].align}`)}
+                >
+                  <div className="_flexbox__row__center__start gap-3">
+                    <Indicator
+                      variant={item.status === "Open" ? "warning" : "clear"}
                     />
-                    <Typography variant="p" affects="small" weight="semibold">
-                      {item.company_name}
-                    </Typography>
+                    {item.status}
                   </div>
-                  <div className="_flexbox__row__center__start gap-4">
-                    <Badge variant="default">{item.domain}</Badge>
-                    <Typography variant="p" affects="small" weight="normal">
-                      {item.date_reported}
-                    </Typography>
-                  </div>
-                </div>
-              </TableData>
-              <TableData
-                className={cn(columns[1].width, `text-${columns[1].align}`)}
-              >
-                <Badge variant={item.risk_level} className="w-19">
-                  {item.risk_level}
-                </Badge>
-              </TableData>
-              <TableData
-                className={cn(columns[2].width, `text-${columns[2].align}`)}
-              >
-                {item.vulnerability_type}
-              </TableData>
-              <TableData
-                className={cn(columns[3].width, `text-${columns[3].align}`)}
-              >
-                {item.rewards
-                  ? currencyFormatters.NumberToDollar(item.rewards)
-                  : currencyFormatters.NumberToDollar(item.rewards)}
-              </TableData>
-              <TableData
-                className={cn(columns[4].width, `text-${columns[4].align}`)}
-              >
-                <div className="_flexbox__row__center__start gap-3">
-                  <Indicator
-                    variant={item.status === "Open" ? "warning" : "clear"}
-                  />
-                  {item.status}
-                </div>
-              </TableData>
-              <TableData
-                className={cn(columns[5].width, `text-${columns[5].align}`)}
-              >
-                {item.update ? formatDateToAgo(item.update) : "-"}
-              </TableData>
-            </TableRow>
-          </TableBodyRow>
-        ))}
-      </TableBody>
-    </BaseTable>
+                </TableData>
+                <TableData
+                  className={cn(columns[5].width, `text-${columns[5].align}`)}
+                >
+                  {item.update ? formatDateToAgo(item.update) : "-"}
+                </TableData>
+              </TableRow>
+            </TableBodyRow>
+          ))}
+        </TableBody>
+      </BaseTable>
+      <Pagination variant="hacker" />
+    </>
   );
 }
