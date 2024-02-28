@@ -6,7 +6,6 @@ import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
 export default function Dashboardlayout({
-  children,
   hacker,
 }: {
   children: React.ReactNode;
