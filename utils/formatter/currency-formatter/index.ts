@@ -19,6 +19,14 @@ export const currencyFormatters = {
     });
     return result;
   },
+  NumberToEUR(value: number) {
+    const result = value.toLocaleString("de-DE", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    });
+    return result;
+  },
   NumberToIDRAbbreviation(value: number) {
     const billion = 1000000000;
     const million = 1000000;

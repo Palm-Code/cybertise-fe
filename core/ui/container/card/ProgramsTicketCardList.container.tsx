@@ -53,8 +53,8 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
               weight="bold"
               className="text-nowrap"
             >
-              {currencyFormatters.NumberToUSD(props.min_bounty ?? 0)} -{" "}
-              {currencyFormatters.NumberToUSD(props.max_bounty ?? 0)}
+              {currencyFormatters.NumberToEUR(props.min_bounty ?? 0)} -{" "}
+              {currencyFormatters.NumberToEUR(props.max_bounty ?? 0)}
             </Typography>
           </div>
           <div className="_flexbox__row__center__between w-full">

@@ -100,7 +100,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 Rewards
               </Typography>
               <Typography variant="p" affects="small" weight="semibold">
-                {currencyFormatters.NumberToUSD(props.rewards ?? 0)}
+                {currencyFormatters.NumberToEUR(props.rewards ?? 0)}
               </Typography>
             </div>
             {!isGridCard && (

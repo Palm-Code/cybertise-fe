@@ -82,8 +82,8 @@ export default function Table({ data, columns }: I_TableProps) {
                     affects="normal"
                     className="text-nowrap"
                   >
-                    {currencyFormatters.NumberToUSD(item.min_bounty ?? 0)} -{" "}
-                    {currencyFormatters.NumberToUSD(item.max_bounty ?? 0)}
+                    {currencyFormatters.NumberToEUR(item.min_bounty ?? 0)} -{" "}
+                    {currencyFormatters.NumberToEUR(item.max_bounty ?? 0)}
                   </Typography>
                 </TableData>
                 <TableData

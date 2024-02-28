@@ -85,8 +85,8 @@ export default function Table({ data, columns }: I_TableProps) {
                   className={cn(columns[3].width, `text-${columns[3].align}`)}
                 >
                   {item.rewards
-                    ? currencyFormatters.NumberToUSD(item.rewards)
-                    : currencyFormatters.NumberToUSD(item.rewards)}
+                    ? currencyFormatters.NumberToEUR(item.rewards)
+                    : currencyFormatters.NumberToEUR(item.rewards)}
                 </TableData>
                 <TableData
                   className={cn(columns[4].width, `text-${columns[4].align}`)}

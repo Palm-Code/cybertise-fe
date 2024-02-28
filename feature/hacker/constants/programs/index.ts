@@ -1,4 +1,5 @@
 import { I_TableColumns } from "@/interfaces";
+import { SortFilterType } from "@/types/admin/dashboard";
 import { ProgramCardType } from "@/types/admin/programs";
 
 export const programsCardData: ProgramCardType[] = [
@@ -200,5 +201,35 @@ export const tableColumns: I_TableColumns[] = [
     title: "",
     align: "right",
     width: "w-2/12 ml-auto",
+  },
+];
+
+export const programDetailTabItems: SortFilterType[] = [
+  {
+    label: "Rules & Policy",
+    value: "rules",
+  },
+  {
+    label: "Scope",
+    value: "scope",
+  },
+  {
+    label: "Updates",
+    value: "update",
+  },
+  {
+    label: "Thanks",
+    value: "thanks",
+  },
+];
+
+export const programDetailTabMultipleItems: SortFilterType[] = [
+  {
+    label: "Vulnerability Program",
+    value: "vulnerability",
+  },
+  {
+    label: "Thanks",
+    value: "thanks",
   },
 ];

@@ -1,6 +1,7 @@
 // import { Loader2 } from "lucide-react";
 // import { Suspense } from "react";
 
+import { Header } from "@/core/ui/layout";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
@@ -16,7 +17,7 @@ export default function Dashboardlayout({
   return (
     <>
       <div className="_flexbox__col__start__start h-full w-full">
-        {children}
+        <Header />
         <Suspense
           fallback={
             <Loader2

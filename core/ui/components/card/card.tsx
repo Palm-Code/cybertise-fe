@@ -34,7 +34,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "relative z-20 w-full rounded-lg bg-background-main-light p-9 hover:shadow-xl dark:bg-background-main-dark",
+        "relative z-20 w-full rounded-lg bg-background-main-light p-9 dark:bg-background-main-dark",
         className
       )}
     >
