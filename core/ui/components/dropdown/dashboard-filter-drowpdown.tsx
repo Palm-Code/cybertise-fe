@@ -1,16 +1,14 @@
 import { Filter } from "lucide-react";
 import { iconColor } from "./filter-view-dropdown";
-import { Separator } from "../separator";
 import BaseDropdown from "./base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
+import Separator from "../separator/separator";
 
-interface IMultiFilterDropdownProps {
+interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
 }
 
-const MultiFilterDropdown = ({
-  variant = "hacker",
-}: IMultiFilterDropdownProps) => {
+const DashboardFilter = ({ variant = "hacker" }: IDashboardFilterProps) => {
   return (
     <div className="_flexbox__row__center__start gap-2.5 rounded-lg bg-neutral-light-100 px-3 dark:bg-neutral-dark-100">
       <Filter className={iconColor[variant]} />
@@ -36,4 +34,4 @@ const MultiFilterDropdown = ({
     </div>
   );
 };
-export default MultiFilterDropdown;
+export default DashboardFilter;

@@ -11,7 +11,7 @@ interface I_TicketCardProps extends I_TableTicketData {
 
 const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
   return (
-    <Card href={`/reports/${props.ticket_number}`}>
+    <Card href={`/reports/${props.ticket_number}`} isClickable>
       {props.is_new_notification && (
         <Indicator variant="warning" className="absolute -right-4 -top-4" />
       )}

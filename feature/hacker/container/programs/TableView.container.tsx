@@ -13,14 +13,16 @@ import {
   TableRow,
   Typography,
 } from "@/core/ui/components";
+import { buttonVariants } from "@/core/ui/components/button/base-button";
 import { I_TableColumns, I_TableTicketData } from "@/interfaces";
+import { ProgramCardType } from "@/types/admin/programs";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import Image from "next/image";
+import Link from "next/link";
 
 interface I_TableProps {
   columns: I_TableColumns[];
-  data: I_TableTicketData[];
+  data: ProgramCardType[];
 }
 
 export default function Table({ data, columns }: I_TableProps) {
@@ -38,12 +40,7 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableBodyRow
-              key={`table-row-${index}`}
-              isClickable
-              href={`/reports/${item.ticket_number}`}
-              hasNotification={item.is_new_notification}
-            >
+            <TableBodyRow key={`table-row-${index}`}>
               <TableRow>
                 <TableData
                   className={cn(columns[0].width, `text-${columns[0].align}`)}
@@ -52,55 +49,53 @@ export default function Table({ data, columns }: I_TableProps) {
                     <div className="_flexbox__row__center__start gap-1">
                       <Image
                         src={item.logo}
-                        alt={`${item.title} logo`}
+                        alt={`${item.company_name} logo`}
                         width={24}
                         height={24}
                       />
                       <Typography variant="p" affects="small" weight="semibold">
-                        #{item.ticket_number} - {item.title}
+                        {item.company_name}
                       </Typography>
                     </div>
                     <div className="_flexbox__row__center__start gap-4">
                       <Badge variant="default">{item.domain}</Badge>
-                      <Typography variant="p" affects="small" weight="normal">
-                        {item.date_reported}
-                      </Typography>
                     </div>
                   </div>
                 </TableData>
                 <TableData
                   className={cn(columns[1].width, `text-${columns[1].align}`)}
                 >
-                  <Badge variant={item.risk_level} className="w-19">
-                    {item.risk_level}
-                  </Badge>
+                  <div className="_flexbox__row__center__start flex-wrap gap-3">
+                    {item.asset_type.map((type, index) => (
+                      <Badge key={`badge-${index}`} variant="default">
+                        {type}
+                      </Badge>
+                    ))}
+                  </div>
                 </TableData>
                 <TableData
                   className={cn(columns[2].width, `text-${columns[2].align}`)}
                 >
-                  {item.vulnerability_type}
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                    className="text-nowrap"
+                  >
+                    {currencyFormatters.NumberToUSD(item.min_bounty ?? 0)} -{" "}
+                    {currencyFormatters.NumberToUSD(item.max_bounty ?? 0)}
+                  </Typography>
                 </TableData>
                 <TableData
                   className={cn(columns[3].width, `text-${columns[3].align}`)}
                 >
-                  {item.rewards
-                    ? currencyFormatters.NumberToUSD(item.rewards)
-                    : currencyFormatters.NumberToUSD(item.rewards)}
-                </TableData>
-                <TableData
-                  className={cn(columns[4].width, `text-${columns[4].align}`)}
-                >
-                  <div className="_flexbox__row__center__start gap-3">
-                    <Indicator
-                      variant={item.status === "Open" ? "warning" : "clear"}
-                    />
-                    {item.status}
-                  </div>
-                </TableData>
-                <TableData
-                  className={cn(columns[5].width, `text-${columns[5].align}`)}
-                >
-                  {item.update ? formatDateToAgo(item.update) : "-"}
+                  <Link
+                    href={`/programs/${item.company_name}`}
+                    className={cn(
+                      buttonVariants({ variant: "primary-hacker" })
+                    )}
+                  >
+                    See Details
+                  </Link>
                 </TableData>
               </TableRow>
             </TableBodyRow>

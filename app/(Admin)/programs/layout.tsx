@@ -1,9 +1,12 @@
 // import { Loader2 } from "lucide-react";
 // import { Suspense } from "react";
 
+import { Loader2 } from "lucide-react";
+import { Suspense } from "react";
+
 export default function Dashboardlayout({
   children,
-  // hacker,
+  hacker,
 }: {
   children: React.ReactNode;
   hacker: React.ReactNode;
@@ -12,9 +15,9 @@ export default function Dashboardlayout({
 }) {
   return (
     <>
-      <div className="_flexbox__col__start h-screen w-full">
+      <div className="_flexbox__col__start__start h-full w-full">
         {children}
-        {/* <Suspense
+        <Suspense
           fallback={
             <Loader2
               width={64}
@@ -23,8 +26,10 @@ export default function Dashboardlayout({
             />
           }
         >
-          <div className="h-full w-full p-12 pb-28 pl-14">{hacker}</div>
-        </Suspense> */}
+          <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto p-12 pb-28 pl-14 pr-12">
+            {hacker}
+          </div>
+        </Suspense>
       </div>
     </>
   );

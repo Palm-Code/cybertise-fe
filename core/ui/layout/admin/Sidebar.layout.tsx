@@ -38,7 +38,12 @@ const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
   return (
-    <div className="_flexbox__col__between relative h-full max-h-screen w-[272px] bg-background-main-light pb-16 dark:bg-background-main-dark">
+    <div
+      className={cn(
+        "_flexbox__col__between relative h-full max-h-screen",
+        "w-[272px] bg-background-main-light pb-16 dark:bg-background-main-dark"
+      )}
+    >
       <div className="_flexbox__col__start w-full gap-8">
         <div className="px-12 py-3">
           <Logo className="h-[68px] w-[182px]" />
@@ -49,7 +54,8 @@ const Sidebar = ({ type }: SidebarProps) => {
               key={`navbar-item-${index}`}
               href={item.path}
               className={cn(
-                "_flexbox__row__center__start h-16 w-full gap-4 rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+                "_flexbox__row__center__start h-16 w-full gap-4",
+                "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
                 "border-l-2 border-transparent",
                 `hover:${borderColor[type as keyof typeof borderColor]}`,
                 pathname.includes(item.path)
@@ -69,7 +75,8 @@ const Sidebar = ({ type }: SidebarProps) => {
         <Link
           href="/settings"
           className={cn(
-            "_flexbox__row__center__start h-16 w-full gap-4 rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+            "_flexbox__row__center__start h-16 w-full gap-4",
+            "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
             "border-l-2 border-transparent",
             `hover:${borderColor[type as keyof typeof borderColor]}`,
             "bg-transparent font-normal"
