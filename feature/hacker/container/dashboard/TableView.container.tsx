@@ -13,6 +13,7 @@ import {
   TableRow,
   Typography,
 } from "@/core/ui/components";
+import { AnimationWrapper } from "@/core/ui/layout";
 import { I_TableColumns, I_TableTicketData } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
@@ -25,7 +26,7 @@ interface I_TableProps {
 
 export default function Table({ data, columns }: I_TableProps) {
   return (
-    <>
+    <AnimationWrapper>
       <BaseTable>
         <TableHeader>
           <TableRow>
@@ -108,6 +109,6 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableBody>
       </BaseTable>
       <Pagination variant="hacker" />
-    </>
+    </AnimationWrapper>
   );
 }

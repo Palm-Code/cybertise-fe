@@ -4,8 +4,9 @@ export type ProgramCardType = {
   domain: "public" | "private";
   min_bounty: number;
   max_bounty: number;
-  asset_type: Array<
-    "URL" | "Hardware/Iot" | "Android:PlayStore" | "iOS:AppStore"
-  >;
+  asset_type: {
+    label: string;
+    value: "url" | "iot" | "android" | "ios";
+  }[];
   currency: "USD" | "EUR" | "GBP";
 };

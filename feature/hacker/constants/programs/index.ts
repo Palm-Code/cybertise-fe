@@ -8,7 +8,24 @@ export const programsCardData: ProgramCardType[] = [
     domain: "public",
     min_bounty: 100,
     max_bounty: 500,
-    asset_type: ["URL", "Hardware/Iot", "Android:PlayStore", "iOS:AppStore"],
+    asset_type: [
+      {
+        label: "URL",
+        value: "url",
+      },
+      {
+        label: "Hardware/Iot",
+        value: "iot",
+      },
+      {
+        label: "Android: PlayStore",
+        value: "android",
+      },
+      {
+        label: "iOS: AppStore",
+        value: "ios",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -17,7 +34,20 @@ export const programsCardData: ProgramCardType[] = [
     domain: "private",
     min_bounty: 200,
     max_bounty: 1000,
-    asset_type: ["URL", "Android:PlayStore"],
+    asset_type: [
+      {
+        label: "Hardware/Iot",
+        value: "iot",
+      },
+      {
+        label: "URL",
+        value: "url",
+      },
+      {
+        label: "Android: PlayStore",
+        value: "android",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -26,7 +56,16 @@ export const programsCardData: ProgramCardType[] = [
     domain: "public",
     min_bounty: 50,
     max_bounty: 300,
-    asset_type: ["URL", "iOS:AppStore"],
+    asset_type: [
+      {
+        label: "URL",
+        value: "url",
+      },
+      {
+        label: "iOS: AppStore",
+        value: "ios",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -35,7 +74,12 @@ export const programsCardData: ProgramCardType[] = [
     domain: "private",
     min_bounty: 150,
     max_bounty: 800,
-    asset_type: ["Hardware/Iot"],
+    asset_type: [
+      {
+        label: "Hardware/Iot",
+        value: "iot",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -44,7 +88,16 @@ export const programsCardData: ProgramCardType[] = [
     domain: "public",
     min_bounty: 80,
     max_bounty: 400,
-    asset_type: ["URL", "Hardware/Iot"],
+    asset_type: [
+      {
+        label: "URL",
+        value: "url",
+      },
+      {
+        label: "Hardware/Iot",
+        value: "iot",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -53,7 +106,12 @@ export const programsCardData: ProgramCardType[] = [
     domain: "private",
     min_bounty: 120,
     max_bounty: 600,
-    asset_type: ["Android:PlayStore"],
+    asset_type: [
+      {
+        label: "Android: PlayStore",
+        value: "android",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -62,7 +120,12 @@ export const programsCardData: ProgramCardType[] = [
     domain: "public",
     min_bounty: 70,
     max_bounty: 350,
-    asset_type: ["URL"],
+    asset_type: [
+      {
+        label: "URL",
+        value: "url",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -71,7 +134,16 @@ export const programsCardData: ProgramCardType[] = [
     domain: "private",
     min_bounty: 180,
     max_bounty: 900,
-    asset_type: ["URL", "iOS:AppStore"],
+    asset_type: [
+      {
+        label: "URL",
+        value: "url",
+      },
+      {
+        label: "iOS: AppStore",
+        value: "ios",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -80,7 +152,16 @@ export const programsCardData: ProgramCardType[] = [
     domain: "public",
     min_bounty: 60,
     max_bounty: 250,
-    asset_type: ["Hardware/Iot", "Android:PlayStore"],
+    asset_type: [
+      {
+        label: "Hardware/Iot",
+        value: "iot",
+      },
+      {
+        label: "Android: PlayStore",
+        value: "android",
+      },
+    ],
     currency: "USD",
   },
   {
@@ -89,7 +170,12 @@ export const programsCardData: ProgramCardType[] = [
     domain: "private",
     min_bounty: 250,
     max_bounty: 1200,
-    asset_type: ["iOS:AppStore"],
+    asset_type: [
+      {
+        label: "iOS: AppStore",
+        value: "ios",
+      },
+    ],
     currency: "USD",
   },
 ];

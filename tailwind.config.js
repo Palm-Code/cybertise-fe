@@ -159,6 +159,22 @@ module.exports = {
           lighter: "#9D7EF1",
           light: "#B59EF5",
         },
+        asset: {
+          background: {
+            domain: "#95B3F5",
+            cidr: "#F2C789",
+            android: "#99D3B6",
+            ios: "#B59EF5",
+            iot: "#99D3B6",
+          },
+          text: {
+            domain: "#4E80EE",
+            cidr: "#E9A23B",
+            android: "#55B685",
+            ios: "#4BA2E3",
+            iot: "#55B685",
+          },
+        },
       },
       keyframes: {
         "accordion-down": {

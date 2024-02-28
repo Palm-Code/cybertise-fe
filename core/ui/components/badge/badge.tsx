@@ -8,6 +8,10 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
+        ios: "text-asset-text-ios bg-asset-background-ios/10 px-2.5 py-1",
+        iot: "text-asset-text-iot bg-asset-background-iot/10 px-2.5 py-1",
+        android:
+          "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:
           "bg-neutral-light-70 dark:bg-neutral-dark-70 text-neutral-light-0 dark:text-white px-2.5 py-1",
         hacker:
@@ -23,6 +27,7 @@ const badgeVariants = cva(
           "text-white bg-semantic-light-medium dark:bg-semantic-dark-medium px-2.5 py-1",
         low: "text-neutral-light-0 dark:text-neutral-dark-80 bg-semantic-light-low dark:bg-semantic-dark-low px-2.5 py-1",
         info: "text-white bg-semantic-light-info dark:bg-semantic-dark-info px-2.5 py-1",
+        url: "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
       },
     },
     defaultVariants: {

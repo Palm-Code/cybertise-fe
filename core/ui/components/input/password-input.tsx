@@ -4,7 +4,6 @@ import { Input, InputProps } from "./input";
 import { AnimatePresence, motion } from "framer-motion";
 import Typography from "../typography/typography";
 import ValidationCheck from "../validation-check/validation-check";
-import { passwordValidation } from "@/core/constants";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { cn } from "@/core/lib/utils";
 import { useOnClickOutside } from "usehooks-ts";

@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import { Badge, Button, Card, Indicator, Typography } from "../../components";
-import { I_TableTicketData } from "@/interfaces";
+import { Badge, Card, Typography } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
 import { ProgramCardType } from "@/types/admin/programs";
 import Link from "next/link";
@@ -71,8 +69,8 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
               <div className={cn("flex flex-wrap items-center gap-4")}>
                 {props.asset_type
                   ?.map((item, idx) => (
-                    <Badge key={`asset_types-${idx}`} variant="default">
-                      {item}
+                    <Badge key={`asset_types-${idx}`} variant={item.value}>
+                      {item.label}
                     </Badge>
                   ))
                   .slice(0, 3)}

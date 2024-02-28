@@ -3,7 +3,6 @@ import { cn } from "@/core/lib/utils";
 import {
   Badge,
   BaseTable,
-  Indicator,
   Pagination,
   TableBody,
   TableBodyRow,
@@ -19,6 +18,8 @@ import { ProgramCardType } from "@/types/admin/programs";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { AnimationWrapper } from "@/core/ui/layout";
 
 interface I_TableProps {
   columns: I_TableColumns[];
@@ -27,7 +28,7 @@ interface I_TableProps {
 
 export default function Table({ data, columns }: I_TableProps) {
   return (
-    <>
+    <AnimationWrapper>
       <BaseTable>
         <TableHeader>
           <TableRow>
@@ -67,8 +68,8 @@ export default function Table({ data, columns }: I_TableProps) {
                 >
                   <div className="_flexbox__row__center__start flex-wrap gap-3">
                     {item.asset_type.map((type, index) => (
-                      <Badge key={`badge-${index}`} variant="default">
-                        {type}
+                      <Badge key={`badge-${index}`} variant={type.value}>
+                        {type.label}
                       </Badge>
                     ))}
                   </div>
@@ -103,6 +104,6 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableBody>
       </BaseTable>
       <Pagination variant="hacker" />
-    </>
+    </AnimationWrapper>
   );
 }
