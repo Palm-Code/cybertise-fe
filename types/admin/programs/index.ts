@@ -10,3 +10,15 @@ export type ProgramCardType = {
   }[];
   currency: "USD" | "EUR" | "GBP";
 };
+
+export type ProgramDetailScope = {
+  asset_name: string;
+  asset_type: "url" | "iot" | "android" | "ios";
+  update: string;
+};
+
+export type UpdateType = {
+  title: string;
+  created_at: string;
+  content: string;
+};

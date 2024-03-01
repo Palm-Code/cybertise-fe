@@ -1,7 +1,7 @@
 "use client";
 import { Card, Typography } from "@/core/ui/components";
 import { AnimationWrapper } from "@/core/ui/layout";
-import RnPCard from "@/feature/hacker/components/programs/details/_card/RnPCard";
+import RnPCard from "@/feature/hacker/components/programs/details/_tab/_content/RnP";
 import VRPCard from "@/feature/hacker/components/programs/details/_card/VrpCard";
 import Tab from "@/feature/hacker/components/programs/details/_tab/Tab";
 import {

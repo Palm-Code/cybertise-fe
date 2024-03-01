@@ -1,7 +1,7 @@
 import { Card, Typography } from "@/core/ui/components";
 import { AnimationWrapper } from "@/core/ui/layout";
 
-const RnPCard = () => {
+const RnP = () => {
   return (
     <AnimationWrapper>
       <Card className="px-8 py-12">
@@ -36,4 +36,4 @@ const RnPCard = () => {
     </AnimationWrapper>
   );
 };
-export default RnPCard;
+export default RnP;

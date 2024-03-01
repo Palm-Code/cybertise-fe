@@ -25,7 +25,7 @@ type FormSchema = z.infer<typeof formShcema>;
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
   const { push } = useRouter();
-  const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>("2fa");
+  const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>(null);
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
   const {

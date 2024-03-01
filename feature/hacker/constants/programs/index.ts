@@ -1,6 +1,10 @@
 import { I_TableColumns } from "@/interfaces";
 import { SortFilterType } from "@/types/admin/dashboard";
-import { ProgramCardType } from "@/types/admin/programs";
+import {
+  ProgramCardType,
+  ProgramDetailScope,
+  UpdateType,
+} from "@/types/admin/programs";
 
 export const programsCardData: ProgramCardType[] = [
   {
@@ -203,6 +207,23 @@ export const tableColumns: I_TableColumns[] = [
     width: "w-2/12 ml-auto",
   },
 ];
+export const scopeTableColumns: I_TableColumns[] = [
+  {
+    title: "Asset Name",
+    align: "left",
+    width: "w-4/12",
+  },
+  {
+    title: "Type",
+    align: "left",
+    width: "w-4/12",
+  },
+  {
+    title: "Update",
+    align: "left",
+    width: "w-4/12",
+  },
+];
 
 export const programDetailTabItems: SortFilterType[] = [
   {
@@ -215,7 +236,7 @@ export const programDetailTabItems: SortFilterType[] = [
   },
   {
     label: "Updates",
-    value: "update",
+    value: "updates",
   },
   {
     label: "Thanks",
@@ -231,5 +252,73 @@ export const programDetailTabMultipleItems: SortFilterType[] = [
   {
     label: "Thanks",
     value: "thanks",
+  },
+];
+
+export const programDetailScope: ProgramDetailScope[] = [
+  {
+    asset_name: "https://example1.com",
+    asset_type: "url",
+    update: "2024-02-28T12:00:00.000Z",
+  },
+  {
+    asset_name: "https://example2.com",
+    asset_type: "iot",
+    update: "2024-02-27T09:30:00.000Z",
+  },
+  {
+    asset_name: "https://example3.com",
+    asset_type: "android",
+    update: "2024-02-26T15:45:00.000Z",
+  },
+  {
+    asset_name: "https://example4.com",
+    asset_type: "ios",
+    update: "2024-02-25T18:20:00.000Z",
+  },
+  {
+    asset_name: "https://example5.com",
+    asset_type: "url",
+    update: "2024-02-28T12:00:00.000Z",
+  },
+  {
+    asset_name: "https://example6.com",
+    asset_type: "iot",
+    update: "2024-02-27T09:30:00.000Z",
+  },
+  {
+    asset_name: "https://example7.com",
+    asset_type: "android",
+    update: "2024-02-26T15:45:00.000Z",
+  },
+  {
+    asset_name: "https://example8.com",
+    asset_type: "ios",
+    update: "2024-02-25T18:20:00.000Z",
+  },
+  {
+    asset_name: "https://example9.com",
+    asset_type: "url",
+    update: "2024-02-28T12:00:00.000Z",
+  },
+  {
+    asset_name: "https://example10.com",
+    asset_type: "iot",
+    update: "2024-02-27T09:30:00.000Z",
+  },
+];
+
+export const updates: UpdateType[] = [
+  {
+    title: "New Campaign!",
+    created_at: "2024-02-24T12:00:00.000Z",
+    content:
+      "<p>We are pleased to inform you that we have launched our next campaign for 3 weeks! We will be glad to see your new reports, this time we included 2 products in the campaign: <strong>Coinbase vulnerabilities</strong>.</p><br><p>We look forward to your impactful reports!</p>",
+  },
+  {
+    title: "New Opportunities!",
+    created_at: "2024-02-22T12:00:00.000Z",
+    content: `<p>Hello dear hackers!</p> <br><p>We would like to inform you that we have recently had releases in the "Krisha" product, we would like to draw your attention to new sections:</p><br><ul><li><a href="https://krisha.kz/prodazha/doma-dachi/">https://krisha.kz/prodazha/doma-dachi/</a></li><li><a href="https://krisha.kz/prodazha/garazhi/">https://krisha.kz/prodazha/garazhi/</a></li><li><a href="https://krisha.kz/arenda/garazhi/">https://krisha.kz/arenda/garazhi/</a></li></ul><br><p>Generally, in the future we plan to publish new releases in the changelog section.</p>
+    `,
   },
 ];

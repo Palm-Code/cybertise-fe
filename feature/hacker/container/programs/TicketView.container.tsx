@@ -9,8 +9,8 @@ const TicketView = ({ data }: { data: ProgramCardType[] }) => {
     <AnimationWrapper>
       <div className="_flexbox__col__center__start z-10 h-full w-full gap-6">
         <ProgramsTicketCardList data={data} />
-        <Pagination variant="hacker" />
       </div>
+      <Pagination variant="hacker" />
     </AnimationWrapper>
   );
 };

@@ -1,10 +1,6 @@
 "use client";
 import { filterView } from "@/core/constants/dashboard";
-import {
-  FilterViewDropdown,
-  ProgramsFilterDropdown,
-  SearchInput,
-} from "@/core/ui/components";
+import { FilterViewDropdown, SearchInput } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
@@ -15,6 +11,7 @@ import {
 } from "../../container";
 import { ProgramCardType } from "@/types/admin/programs";
 import { tableColumns } from "../../constants/programs";
+import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 
 const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
   const view = useReadLocalStorage("view") as "table" | "card" | "grid";

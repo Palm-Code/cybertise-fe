@@ -9,4 +9,5 @@ export { default as Logo } from "./logo/Logo.icon";
 export { default as VrpManagement } from "./vrp-management/VrpManagement.icon";
 export { default as EmptyFolder } from "./empty-folder/EmptyFolder.icon";
 export { default as Leaf } from "./leaf/Leaf.icon";
+export { default as HackerLeaf } from "./leaf/HackerLeaf.icon";
 export { default as Indicators } from "./indicator/Indicator.icon";

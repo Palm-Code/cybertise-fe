@@ -1,14 +1,13 @@
-import { Filter } from "lucide-react";
-import { iconColor } from "./filter-view-dropdown";
-import BaseDropdown from "./base-dropdown";
+import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
-import Separator from "../separator/separator";
 
-interface IProgramsFilterProps {
+interface IProgramsFilterDropdownProps {
   variant?: "hacker" | "company" | "mediator";
 }
 
-const ProgramsFilter = ({ variant = "hacker" }: IProgramsFilterProps) => {
+const ProgramsFilterDropdown = ({
+  variant = "hacker",
+}: IProgramsFilterDropdownProps) => {
   return (
     <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
       <BaseDropdown
@@ -26,4 +25,4 @@ const ProgramsFilter = ({ variant = "hacker" }: IProgramsFilterProps) => {
     </div>
   );
 };
-export default ProgramsFilter;
+export default ProgramsFilterDropdown;

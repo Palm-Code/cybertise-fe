@@ -8,7 +8,6 @@ export { default as SelectDropdown } from "./dropdown/select-dropdown";
 export { default as FilterDropdown } from "./dropdown/filter-dropdown";
 export { default as FilterViewDropdown } from "./dropdown/filter-view-dropdown";
 export { default as DashboardFilterDropdown } from "./dropdown/dashboard-filter-drowpdown";
-export { default as ProgramsFilterDropdown } from "./dropdown/programs-filter-dropdown";
 export { default as Tooltip } from "./tooltip/tooltip";
 export { default as ThemeSwitcher } from "./theme/theme-switcher";
 export { default as ValidationCheck } from "./validation-check/validation-check";

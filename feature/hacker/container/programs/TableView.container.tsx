@@ -13,12 +13,11 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { buttonVariants } from "@/core/ui/components/button/base-button";
-import { I_TableColumns, I_TableTicketData } from "@/interfaces";
+import { I_TableColumns } from "@/interfaces";
 import { ProgramCardType } from "@/types/admin/programs";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { AnimationWrapper } from "@/core/ui/layout";
 
 interface I_TableProps {

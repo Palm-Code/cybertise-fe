@@ -1,7 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { Button, Card, Separator, Typography } from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
-import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -70,19 +69,6 @@ const VRPHeroCard = () => {
               </Typography>
               <Typography variant="p" affects="small" weight="semibold">
                 1
-              </Typography>
-            </div>
-            <Separator orientation="vertical" />
-            <div className="grid h-full gap-2.5">
-              <Typography
-                variant="p"
-                affects="small"
-                className="!text-neutral-light-30 dark:text-neutral-dark-30"
-              >
-                Average Bounty
-              </Typography>
-              <Typography variant="p" affects="small" weight="semibold">
-                {currencyFormatters.NumberToEUR(200)}
               </Typography>
             </div>
           </div>
