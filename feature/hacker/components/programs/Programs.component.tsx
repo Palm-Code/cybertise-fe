@@ -23,7 +23,7 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+    <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
         <Typography variant="h4" weight="bold" className="mr-auto">
           Bug Bounty Programs

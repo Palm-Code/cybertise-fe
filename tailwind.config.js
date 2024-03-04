@@ -37,6 +37,7 @@ module.exports = {
       spacing: {
         2.5: "0.625rem",
         4.5: "1.125rem",
+        7.5: "1.875rem",
         19: "4.75rem",
       },
       colors: {
@@ -199,6 +200,7 @@ module.exports = {
       backgroundImage: {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
+        slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 34.68%, #C00 299.32%)",
       },
     },
   },

@@ -1,3 +1,5 @@
+import { CsvssCalculatorEnums } from "@/enums";
+
 export type ProgramCardType = {
   company_id: string;
   logo: string;
@@ -22,4 +24,12 @@ export type UpdateType = {
   title: string;
   created_at: string;
   content: string;
+};
+
+export type CsvssCalculatorType = {
+  title: string;
+  items: {
+    label: string;
+    value: string;
+  }[];
 };

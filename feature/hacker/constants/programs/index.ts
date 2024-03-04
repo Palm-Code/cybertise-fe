@@ -1,6 +1,7 @@
 import { I_TableColumns } from "@/interfaces";
 import { SortFilterType } from "@/types/admin/dashboard";
 import {
+  CsvssCalculatorType,
   ProgramCardType,
   ProgramDetailScope,
   UpdateType,
@@ -364,3 +365,140 @@ export const informations: SortFilterType[] & { description: string | null }[] =
       value: 5,
     },
   ];
+
+export const csvss_calculator: CsvssCalculatorType[] = [
+  {
+    title: "Attack Vector (AV)",
+    items: [
+      {
+        label: "Network (N)",
+        value: "N",
+      },
+      {
+        label: "Adjacent (A)",
+        value: "A",
+      },
+      {
+        label: "Local (L)",
+        value: "L",
+      },
+      {
+        label: "Physical (P)",
+        value: "P",
+      },
+    ],
+  },
+  {
+    title: "Scope (S)",
+    items: [
+      {
+        label: "Unchanged (U)",
+        value: "U",
+      },
+      {
+        label: "Changed (C)",
+        value: "C",
+      },
+    ],
+  },
+  {
+    title: "Attack Complexity (AC)",
+    items: [
+      {
+        label: "High (H)",
+        value: "H",
+      },
+      {
+        label: "Medium (M)",
+        value: "M",
+      },
+      {
+        label: "Low (L)",
+        value: "L",
+      },
+    ],
+  },
+
+  {
+    title: "Confidentiality (C)",
+    items: [
+      {
+        label: "High (H)",
+        value: "H",
+      },
+      {
+        label: "Medium (M)",
+        value: "M",
+      },
+      {
+        label: "Low (L)",
+        value: "L",
+      },
+    ],
+  },
+  {
+    title: "Privileges Required (PR)",
+    items: [
+      {
+        label: "High (H)",
+        value: "H",
+      },
+      {
+        label: "Medium (M)",
+        value: "M",
+      },
+      {
+        label: "Low (L)",
+        value: "L",
+      },
+    ],
+  },
+
+  {
+    title: "Integrity (I)",
+    items: [
+      {
+        label: "High (H)",
+        value: "H",
+      },
+      {
+        label: "Medium (M)",
+        value: "M",
+      },
+      {
+        label: "Low (L)",
+        value: "L",
+      },
+    ],
+  },
+  {
+    title: "User Interaction (UI)",
+    items: [
+      {
+        label: "None (N)",
+        value: "N",
+      },
+      {
+        label: "Required (R)",
+        value: "R",
+      },
+    ],
+  },
+  {
+    title: "Availability (A)",
+    items: [
+      {
+        label: "High (H)",
+        value: "H",
+      },
+      {
+        label: "Medium (M)",
+        value: "M",
+      },
+      {
+        label: "Low (L)",
+        value: "L",
+      },
+    ],
+  },
+];

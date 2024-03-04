@@ -1,0 +1,62 @@
+import { cn } from "@/core/lib/utils";
+import { Badge, Card, Typography } from "@/core/ui/components";
+
+interface I_BugTargetProps {
+  target_assets: string;
+  vulnerability_type: string;
+  risk_level: string;
+}
+
+const BugTargetCard = ({
+  target_assets,
+  vulnerability_type,
+  risk_level,
+}: I_BugTargetProps) => {
+  return (
+    <Card
+      className={cn(
+        "rounded-[10px] bg-neutral-light-90 p-7.5 dark:bg-neutral-dark-90",
+        "_flexbox__col__start__start w-full gap-6"
+      )}
+    >
+      <Typography variant="h6" weight="bold">
+        Bug Target
+      </Typography>
+      <div className="_flexbox__col__start__start gap-2.5">
+        <Typography
+          variant="p"
+          affects="normal"
+          className="text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          Target Assets
+        </Typography>
+        <Typography variant="p" affects="normal">
+          {target_assets}
+        </Typography>
+      </div>
+      <div className="_flexbox__col__start__start gap-2.5">
+        <Typography
+          variant="p"
+          affects="normal"
+          className="text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          Vulnerability Type
+        </Typography>
+        <Typography variant="p" affects="normal">
+          {vulnerability_type}
+        </Typography>
+      </div>
+      <div className="_flexbox__col__start__start gap-2.5">
+        <Typography
+          variant="p"
+          affects="normal"
+          className="text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          Risk Level
+        </Typography>
+        <Badge variant="critical">{risk_level} | High Risk</Badge>
+      </div>
+    </Card>
+  );
+};
+export default BugTargetCard;
