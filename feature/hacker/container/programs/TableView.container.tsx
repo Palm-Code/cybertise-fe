@@ -89,7 +89,7 @@ export default function Table({ data, columns }: I_TableProps) {
                   className={cn(columns[3].width, `text-${columns[3].align}`)}
                 >
                   <Link
-                    href={`/programs/${item.company_name}`}
+                    href={`/programs/${item.company_id}`}
                     className={cn(
                       buttonVariants({ variant: "primary-hacker" })
                     )}

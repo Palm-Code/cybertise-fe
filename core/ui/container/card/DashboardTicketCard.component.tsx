@@ -4,6 +4,8 @@ import { I_TableTicketData } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
+import { Suspense } from "react";
+import { CardLoader } from "../../layout";
 
 interface I_TicketCardProps extends I_TableTicketData {
   isGridCard?: boolean;
@@ -151,7 +153,9 @@ interface I_TicketCardListProps {
 
 const TicketCardList = ({ data, isGridCard }: I_TicketCardListProps) => {
   return data.map((item) => (
-    <TicketCard key={item.ticket_number} isGridCard={isGridCard} {...item} />
+    <Suspense fallback={<CardLoader />} key={item.ticket_number}>
+      <TicketCard isGridCard={isGridCard} {...item} />
+    </Suspense>
   ));
 };
 

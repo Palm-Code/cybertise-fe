@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { Input, InputProps } from "./input";
+import Input, { InputProps } from "./input";
 import { AnimatePresence, motion } from "framer-motion";
 import Typography from "../typography/typography";
 import ValidationCheck from "../validation-check/validation-check";

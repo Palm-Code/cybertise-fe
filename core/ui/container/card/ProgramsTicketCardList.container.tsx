@@ -93,7 +93,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
           {isGridCard && (
             <Link
               className={cn(buttonVariants({ variant: "primary-hacker" }))}
-              href={`/programs/${props.company_name}`}
+              href={`/programs/${props.company_id}`}
             >
               See Details
             </Link>

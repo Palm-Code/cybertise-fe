@@ -8,6 +8,7 @@ import {
 
 export const programsCardData: ProgramCardType[] = [
   {
+    company_id: "abc_123456",
     logo: "/images/company-logo/coinbase.png",
     company_name: "ABC Corp",
     domain: "public",
@@ -34,6 +35,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "xyz_987654",
     logo: "/images/company-logo/coinbase.png",
     company_name: "XYZ Ltd",
     domain: "private",
@@ -56,6 +58,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "pqr_234567",
     logo: "/images/company-logo/coinbase.png",
     company_name: "PQR Inc",
     domain: "public",
@@ -74,6 +77,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "lmn_345678",
     logo: "/images/company-logo/coinbase.png",
     company_name: "LMN Enterprises",
     domain: "private",
@@ -88,6 +92,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "efg_456789",
     logo: "/images/company-logo/coinbase.png",
     company_name: "EFG Corporation",
     domain: "public",
@@ -106,6 +111,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "rst_567890",
     logo: "/images/company-logo/coinbase.png",
     company_name: "RST Technologies",
     domain: "private",
@@ -120,6 +126,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "uvw_678901",
     logo: "/images/company-logo/coinbase.png",
     company_name: "UVW Innovations",
     domain: "public",
@@ -134,6 +141,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "hij_789012",
     logo: "/images/company-logo/coinbase.png",
     company_name: "HIJ Solutions",
     domain: "private",
@@ -152,6 +160,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "mno_890123",
     logo: "/images/company-logo/coinbase.png",
     company_name: "MNO Technologies",
     domain: "public",
@@ -170,6 +179,7 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
   {
+    company_id: "jkl_901234",
     logo: "/images/company-logo/coinbase.png",
     company_name: "JKL Systems",
     domain: "private",
@@ -322,3 +332,35 @@ export const updates: UpdateType[] = [
     `,
   },
 ];
+
+export const informations: SortFilterType[] & { description: string | null }[] =
+  [
+    {
+      label: "Brief",
+      description: null,
+      value: 1,
+    },
+    {
+      label: "Bug Target",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+      value: 2,
+    },
+    {
+      label: "Report Description",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+      value: 3,
+    },
+    {
+      label: "Problem and Causes",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+      value: 4,
+    },
+    {
+      label: "Review",
+      description: null,
+      value: 5,
+    },
+  ];

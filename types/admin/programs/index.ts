@@ -1,4 +1,5 @@
 export type ProgramCardType = {
+  company_id: string;
   logo: string;
   company_name: string;
   domain: "public" | "private";

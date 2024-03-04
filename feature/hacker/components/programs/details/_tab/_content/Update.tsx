@@ -3,7 +3,7 @@ import { AnimationWrapper } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
-import { sanitize } from "dompurify";
+import { sanitize } from "@/utils/sanitize-input";
 
 interface I_Update extends UpdateType {}
 

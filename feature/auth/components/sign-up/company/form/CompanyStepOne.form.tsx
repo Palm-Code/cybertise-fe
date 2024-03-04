@@ -1,12 +1,10 @@
 "use client";
 import Button from "@/core/ui/components/button/button";
-import { Input } from "@/core/ui/components/input/input";
+import { Input } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { FormSchema } from "../SignUpCompany.component";
-import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
-import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 
 interface I_CompanyStepOneProps {
   onClickNext: () => void;
@@ -17,7 +15,6 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
     register,
     formState: { errors },
     watch,
-    setValue,
     resetField,
   } = useFormContext<FormSchema>();
 

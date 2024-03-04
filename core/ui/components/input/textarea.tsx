@@ -8,7 +8,7 @@ import Image from "next/image";
 import Typography from "../typography/typography";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   prefixIcon?: React.ReactNode;
   suffixIcon?: React.ReactNode;
   withTooltip?: boolean;
@@ -22,7 +22,7 @@ export interface InputProps
   transparentBg?: boolean;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
   (
     {
       className,
@@ -45,13 +45,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [isFocused, setIsFocused] = React.useState(false);
     const [hasValue, setHasValue] = React.useState(false);
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = React.useRef<HTMLDivElement>(null);
 
     useOnClickOutside(inputRef, () => {
       setIsFocused(false);
     });
 
-    const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setHasValue(!!e.target.value);
       onChange?.(e);
     };
@@ -75,7 +75,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="_flexbox__col__start w-full gap-1">
         <div
           className={cn(
-            "relative z-10 flex h-16 w-full items-center justify-center rounded-md",
+            "relative z-10 flex h-32 w-full items-center justify-center rounded-md",
             isError && "border border-red-normal",
             transparentBg
               ? "bg-transparent"
@@ -84,10 +84,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         >
           {prefixIcon}
           <div
-            className="_flexbox__row__between relative top-1 w-full"
+            className="_flexbox__row__between relative top-1 h-full w-full"
             ref={inputRef}
           >
-            <div>
+            <div className="h-full">
               {iconValue && (
                 <Image
                   src={iconValue}
@@ -97,21 +97,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   className="mt-1.5"
                 />
               )}
-              <input
+              <textarea
                 className={cn(
-                  "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0",
+                  "absolute my-auto h-fit w-full bg-transparent text-neutral-light-0",
                   "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
-                  "focus:outline-none focus:ring-0 dark:text-white",
+                  "resize-none focus:outline-none focus:ring-0 dark:text-white",
                   prefixIcon && "pl-4",
-                  iconValue ? "top-0 pl-5" : "-top-1.5 pl-0"
-                  // props.type === "password" && hasValue
-                  //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
-                  //   : "text-base font-normal"
+                  iconValue ? "top-0 pl-5" : "top-7 pl-0",
+                  props.type === "password" && hasValue
+                    ? "text-3xl font-bold placeholder:text-base placeholder:font-normal"
+                    : "text-base font-normal"
                 )}
+                rows={3}
                 placeholder={isFocused ? placeholderText : " "}
                 onChange={onChangeValue}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
                 autoComplete="new-password"
                 disabled={props?.disabled || withTooltip}
                 {...props}
@@ -122,7 +121,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   htmlFor={props.name}
                   className={cn(
                     "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
-                    "-top-[14px] left-4 start-0 -z-10 origin-[0] scale-75 peer-focus:start-0",
+                    "left-4 start-0 top-5 -z-10 origin-[0] scale-75 peer-focus:start-0",
                     "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
                     "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
                     "peer-focus:scale-75",
@@ -174,6 +173,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
-Input.displayName = "Input";
+Textarea.displayName = "Textarea";
 
-export default Input;
+export default Textarea;

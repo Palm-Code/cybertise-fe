@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import Button from "@/core/ui/components/button/button";
-import { Input } from "@/core/ui/components/input/input";
+import { Input } from "@/core/ui/components";
 import Typography, {
   typographyVariants,
 } from "@/core/ui/components/typography/typography";

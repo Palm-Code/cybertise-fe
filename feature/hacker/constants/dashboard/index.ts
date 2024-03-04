@@ -131,8 +131,8 @@ export const filterItems: MultiFilterType = {
   ],
   asset_type: [
     { label: "URL", value: "url" },
-    { label: "Hardware/IOT", value: "hardware/iot" },
-    { label: "Android: PlayStore", value: "android:playstore" },
-    { label: "iOS:AppStore", value: "ios:appstore" },
+    { label: "Hardware/IOT", value: "iot" },
+    { label: "Android: PlayStore", value: "android" },
+    { label: "iOS:AppStore", value: "ios" },
   ],
 };

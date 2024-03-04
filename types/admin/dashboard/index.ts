@@ -1,6 +1,6 @@
 export type SortFilterType = {
   label: string;
-  value: string;
+  value: string | number;
 };
 
 export type MultiFilterType = {

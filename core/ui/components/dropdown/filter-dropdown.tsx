@@ -39,7 +39,7 @@ const FilterDropdown = ({
       <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
         {options.length! ? (
           options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.value} value={option.value as string}>
               {option.label}
             </SelectItem>
           ))

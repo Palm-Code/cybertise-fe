@@ -1,6 +1,10 @@
 import { ProgramDetails } from "@/feature/hacker/components";
 
-const ProgramDetailsFragment = () => {
-  return <ProgramDetails />;
+interface I_ProgramDetailsProps {
+  id: string;
+}
+
+const ProgramDetailsFragment = ({ id }: I_ProgramDetailsProps) => {
+  return <ProgramDetails id={id} />;
 };
 export default ProgramDetailsFragment;

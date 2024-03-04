@@ -1,6 +1,7 @@
 export { default as Button } from "./button/button";
 export { default as Avatar } from "./avatar/avatar";
-export * as Input from "./input/input";
+export { default as Input } from "./input/input";
+export { default as TextArea } from "./input/textarea";
 export { default as PasswordInput } from "./input/password-input";
 export { default as SearchInput } from "./input/search-input";
 export { default as Checkbox } from "./checkbox/checkbox";

@@ -1,11 +1,16 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Card, Separator, Typography } from "@/core/ui/components";
+import { Card, Separator, Typography } from "@/core/ui/components";
+import { buttonVariants } from "@/core/ui/components/button/base-button";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const VRPHeroCard = () => {
+interface I_VRPHeroCard {
+  id: string;
+}
+
+const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
   return (
     <Card>
       <div className="_flexbox__row__start__start w-full gap-9">
@@ -41,9 +46,13 @@ const VRPHeroCard = () => {
                 https://linktocompanysite.com
               </Link>
             </div>
-            <Button variant="primary-hacker" prefixIcon={<Send />}>
+            <Link
+              href={`/programs/send-report?company=${id}`}
+              className={cn(buttonVariants({ variant: "primary-hacker" }))}
+            >
+              <Send className="mr-2.5" />
               Send Report
-            </Button>
+            </Link>
           </div>
           <div className="grid h-fit grid-flow-col gap-12">
             <div className="grid h-full gap-2.5">

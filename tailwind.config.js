@@ -35,8 +35,9 @@ module.exports = {
         "2xl": "676px",
       },
       spacing: {
-        19: "4.75rem",
         2.5: "0.625rem",
+        4.5: "1.125rem",
+        19: "4.75rem",
       },
       colors: {
         light: "#3572AF",
