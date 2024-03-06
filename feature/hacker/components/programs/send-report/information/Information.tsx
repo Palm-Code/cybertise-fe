@@ -10,7 +10,12 @@ interface I_InformationProps {
 
 const Information = ({ activeStep, lists }: I_InformationProps) => {
   return (
-    <Card className="_flexbox__col__start__start w-full gap-6 rounded-xl px-8 py-12">
+    <Card
+      className={cn(
+        "_flexbox__col__start__start w-full gap-6 rounded-xl",
+        "!bg-transparent px-8 py-12"
+      )}
+    >
       <Typography variant="p" affects="extralarge" weight="bold">
         Information
       </Typography>

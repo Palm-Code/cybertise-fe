@@ -4,7 +4,7 @@ import ReportDescriptionCard from "./_card/review/ReportDescription";
 
 const Review = () => {
   return (
-    <div className="_flexbox__col__start__start w-full gap-6">
+    <div className="_flexbox__col__start__start w-full gap-6 bg-neutral-light-100 dark:bg-neutral-dark-100">
       <BugTargetCard
         target_assets="Lorem ipsum dolor sit amet"
         vulnerability_type="Lorem ipsum dolor sit amet"

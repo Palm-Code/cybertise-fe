@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:autofill,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+  background: transparent !important;
+}
+
+body {
+  @apply overflow-hidden transition-colors duration-200;
+}
+
+._flexbox__col__center {
+  @apply flex flex-col items-center justify-center;
+}
+
+._flexbox__row__center {
+  @apply flex flex-row items-center justify-center;
+}
+
+._flexbox__row__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__col__between {
+  @apply flex flex-col items-center justify-between;
+}
+
+._flexbox__col__start {
+  @apply flex flex-col items-start justify-center;
+}
+
+._flexbox__row__start {
+  @apply flex flex-row items-start justify-center;
+}
+
+._flexbox__col__end {
+  @apply flex flex-col items-end justify-center;
+}
+
+._flexbox__row__end {
+  @apply flex flex-row items-end justify-center;
+}
+
+._flexbox__row__center__start {
+  @apply flex flex-row items-center justify-start;
+}
+
+._flexbox__row__center__end {
+  @apply flex flex-row items-center justify-end;
+}
+
+._flexbox__row__center__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__row__center__around {
+  @apply flex flex-row items-center justify-around;
+}
+
+._flexbox__row__center__evenly {
+  @apply flex flex-row items-center justify-evenly;
+}
+
+._flexbox__col__center__start {
+  @apply flex flex-col items-center justify-start;
+}
+
+._flexbox__col__center__end {
+  @apply flex flex-col items-center justify-end;
+}
+
+._flexbox__col__center__between {
+  @apply flex flex-col items-center justify-between;
+}
+
+._flexbox__col__center__around {
+  @apply flex flex-col items-center justify-around;
+}
+
+._flexbox__col__center__evenly {
+  @apply flex flex-col items-center justify-evenly;
+}
+
+._flexbox__col__start__start {
+  @apply flex flex-col items-start justify-start;
+}
+
+._flexbox__col__start__end {
+  @apply flex flex-col items-start justify-end;
+}
+
+._flexbox__col__start__between {
+  @apply flex flex-col items-start justify-between;
+}
+
+._flexbox__col__start__around {
+  @apply flex flex-col items-start justify-around;
+}
+
+._flexbox__col__start__evenly {
+  @apply flex flex-col items-start justify-evenly;
+}
+
+._flexbox__col__end__start {
+  @apply flex flex-col items-end justify-start;
+}
+
+._flexbox__col__end__end {
+  @apply flex flex-col items-end justify-end;
+}
+
+._flexbox__col__end__between {
+  @apply flex flex-col items-end justify-between;
+}
+
+._flexbox__col__end__around {
+  @apply flex flex-col items-end justify-around;
+}
+
+._flexbox__col__end__evenly {
+  @apply flex flex-col items-end justify-evenly;
+}
+
+._flexbox__row__start__start {
+  @apply flex flex-row items-start justify-start;
+}
+
+._flexbox__row__start__end {
+  @apply flex flex-row items-start justify-end;
+}
+
+._flexbox__row__start__between {
+  @apply flex flex-row items-start justify-between;
+}
+
+._flexbox__row__start__around {
+  @apply flex flex-row items-start justify-around;
+}
+
+._flexbox__row__start__evenly {
+  @apply flex flex-row items-start justify-evenly;
+}
+
+._flexbox__row__end__start {
+  @apply flex flex-row items-end justify-start;
+}
+
+._flexbox__row__end__end {
+  @apply flex flex-row items-end justify-end;
+}
+
+._flexbox__row__end__between {
+  @apply flex flex-row items-end justify-between;
+}
+
+._flexbox__row__end__around {
+  @apply flex flex-row items-end justify-around;
+}
+
+._flexbox__row__end__evenly {
+  @apply flex flex-row items-end justify-evenly;
+}
+
+._flexbox__row__center__start__start {
+  @apply flex flex-row items-center justify-start;
+}
+
+._flexbox__row__center__start__end {
+  @apply flex flex-row items-center justify-end;
+}
+
+._flexbox__row__center__start__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__row__center__start__around {
+  @apply flex flex-row items-center justify-around;
+}
+
+._flexbox__row__center__start__evenly {
+  @apply flex flex-row items-center justify-evenly;
+}
+
+._flexbox__row__center__end__start {
+  @apply flex flex-row items-center justify-start;
+}
+
+._flexbox__row__center__end__end {
+  @apply flex flex-row items-center justify-end;
+}
+
+._flexbox__row__center__end__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__row__center__end__around {
+  @apply flex flex-row items-center justify-around;
+}
+
+._flexbox__row__center__end__evenly {
+  @apply flex flex-row items-center justify-evenly;
+}
+
+._flexbox__row__center__between__start {
+  @apply flex flex-row items-center justify-start;
+}
+
+._flexbox__row__center__between__end {
+  @apply flex flex-row items-center justify-end;
+}
+
+._flexbox__row__center__between__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__row__center__between__around {
+  @apply flex flex-row items-center justify-around;
+}
+
+._flexbox__row__center__between__evenly {
+  @apply flex flex-row items-center justify-evenly;
+}
+
+._flexbox__row__center__around__start {
+  @apply flex flex-row items-center justify-start;
+}
+
+._flexbox__row__center__around__end {
+  @apply flex flex-row items-center justify-end;
+}
+
+._flexbox__row__center__around__between {
+  @apply flex flex-row items-center justify-between;
+}
+
+._flexbox__row__center__around__around {
+  @apply flex flex-row items-center justify-around;
+}
+
+._flexbox__row__center__around__evenly {
+  @apply flex flex-row items-center justify-evenly;
+}
+
+.tiptap {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  blockquote {
+    @apply border-l-[3px] border-neutral-light-30 pl-3 dark:border-neutral-dark-30;
+  }
+
+  a {
+    color: #68cef8;
+  }
+
+  img {
+    @apply m-4;
+    max-width: 30%;
+    height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68cef8;
+    }
+  }
+
+  pre {
+    @apply border border-neutral-light-80 dark:border-neutral-dark-80;
+    border-radius: 0.5rem;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+
+    code {
+      background: none;
+      color: inherit;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #616161;
+    }
+
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-attribute,
+    .hljs-tag,
+    .hljs-name,
+    .hljs-regexp,
+    .hljs-link,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class {
+      color: #f98181;
+    }
+
+    .hljs-number,
+    .hljs-meta,
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-literal,
+    .hljs-type,
+    .hljs-params {
+      color: #fbbc88;
+    }
+
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #b9f18d;
+    }
+
+    .hljs-title,
+    .hljs-section {
+      color: #faf594;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag {
+      color: #70cff8;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: 700;
+    }
+  }
+}

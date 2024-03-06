@@ -19,3 +19,6 @@ export { default as Indicator } from "./indicator/indicator";
 export { default as Pagination } from "./pagination/pagination";
 export * from "./table/table";
 export { default as Separator } from "./separator/separator";
+export { default as Tiptap } from "./tiptap/tiptap";
+export { default as Toolbar } from "./tiptap/toolbar";
+export * from "./toggle/toggle";

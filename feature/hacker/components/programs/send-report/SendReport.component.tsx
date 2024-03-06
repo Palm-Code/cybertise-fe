@@ -56,8 +56,13 @@ const SendReport = ({ id }: I_SendReportProps) => {
   ]);
   return (
     <FormProvider {...method}>
-      <div className="_flexbox__col__start__start min-h-full w-full gap-3 rounded-2xl">
-        <div className="sticky top-0 z-30 h-fit w-full bg-background-page-light pt-12 dark:bg-background-page-dark">
+      <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
+        <div
+          className={cn(
+            "_flexbox__col__start__start sticky top-0 z-30",
+            "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
+          )}
+        >
           <Card className="rounded-2xl rounded-b-none px-8 py-6">
             <Link
               href={`/programs/${id}`}
@@ -70,13 +75,32 @@ const SendReport = ({ id }: I_SendReportProps) => {
               Submit Report - VRP Title 1
             </Link>
           </Card>
+          <AnimationWrapper key={steps[currentStepIndex].key}>
+            <div
+              className={cn(
+                "sticky top-[8.15rem] z-30 h-4 w-[calc(80%-1.6rem)] rounded-t-xl",
+                isLastStep
+                  ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
+                  : "bg-background-main-light pt-0 dark:bg-background-main-dark"
+              )}
+            ></div>
+          </AnimationWrapper>
         </div>
-        <div className="_flexbox__row__start__start relative h-full w-full gap-8">
+        <div
+          className="_flexbox__row__start__start relative h-full w-full gap-8"
+          key={steps[currentStepIndex].key}
+        >
           <AnimationWrapper
             key={steps[currentStepIndex].key}
-            className="mt-1 h-full w-[80%] overflow-y-auto"
+            className="h-full w-[80%] overflow-y-auto"
           >
-            <Card className="_flexbox__col__start__start h-full gap-6 overflow-y-auto rounded-xl px-8 py-12">
+            <Card
+              className={cn(
+                "_flexbox__col__start__start h-full gap-6",
+                "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8",
+                isLastStep && "bg-neutral-light-100 dark:bg-neutral-dark-100"
+              )}
+            >
               <div className="_flexbox__row__center__between w-full">
                 <Typography variant="h5" weight="bold">
                   {informations[currentStepIndex].label}
@@ -99,9 +123,8 @@ const SendReport = ({ id }: I_SendReportProps) => {
               <Card
                 className={cn(
                   "_flexbox__col__start__start w-full gap-8",
-                  isLastStep
-                    ? "bg-transparent p-0"
-                    : "bg-neutral-light-100 p-7 dark:bg-neutral-dark-100"
+                  "bg-neutral-light-100 dark:bg-neutral-dark-100",
+                  isLastStep ? "p-0" : "p-7"
                 )}
               >
                 {step}
@@ -124,7 +147,14 @@ const SendReport = ({ id }: I_SendReportProps) => {
               </Card>
             </Card>
           </AnimationWrapper>
-          <div className="sticky top-[9.2rem] w-[20%]">
+          <div
+            className={cn(
+              "sticky top-[9.2rem] z-40 -mt-12 w-[20%] rounded-xl",
+              isLastStep
+                ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
+                : "bg-background-main-light dark:bg-background-main-dark"
+            )}
+          >
             <Information
               lists={informations}
               activeStep={currentStepIndex + 1}
