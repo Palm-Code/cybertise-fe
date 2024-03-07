@@ -62,7 +62,7 @@ const Tiptap = ({
       attributes: {
         class: cn(
           "w-full peer appearance-none max-w-none overflow-auto whitespace-pre-line",
-          "flex flex-col justify-start h-44 pt-4",
+          "flex flex-col justify-start h-44 mt-4",
           "bg-neutral-light-90 dark:bg-neutral-dark-90 outline-none"
         ),
       },

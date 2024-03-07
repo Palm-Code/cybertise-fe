@@ -1,5 +1,4 @@
-import { cn } from "@/core/lib/utils";
-import { Button, Card, Typography } from "@/core/ui/components";
+import { Typography } from "@/core/ui/components";
 
 interface I_BriefProps {}
 

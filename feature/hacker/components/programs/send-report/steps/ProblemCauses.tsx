@@ -1,4 +1,4 @@
-import { Tiptap } from "@/core/ui/components";
+import { FileInput, Tiptap } from "@/core/ui/components";
 import { useState } from "react";
 
 const ProblemCauses = () => {
@@ -18,6 +18,7 @@ const ProblemCauses = () => {
         onChange={() => {}}
         withTooltip
       />
+      <FileInput />
     </div>
   );
 };

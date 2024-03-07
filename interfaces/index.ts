@@ -21,3 +21,10 @@ export interface I_TableTicketData {
   update: string;
   is_new_notification: boolean;
 }
+
+export interface FileWithUrl {
+  name: string;
+  url: string;
+  size: number;
+  error?: boolean | undefined;
+}

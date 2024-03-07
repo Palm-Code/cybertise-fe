@@ -1,11 +1,34 @@
 "use client";
-
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 export function useMultistepForm(
   steps: { key: string; element: ReactElement }[]
 ) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  console.log(scrollPosition);
+
+  // Function to handle scroll event
+  function handleScroll() {
+    if (containerRef.current) {
+      const currentPosition = containerRef.current.scrollTop;
+      setScrollPosition(currentPosition);
+    }
+  }
+
+  // Effect to add scroll event listener
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   function next() {
     setCurrentStepIndex((i) => {
@@ -33,6 +56,7 @@ export function useMultistepForm(
     isLastStep: currentStepIndex === steps.length - 1,
     isThirdStep: currentStepIndex === 2,
     isEightStep: currentStepIndex === 8,
+    containerRef,
     goTo,
     next,
     back,
