@@ -19,8 +19,9 @@ const Card = ({
     return (
       <Link
         className={cn(
-          buttonVariants(),
-          "relative z-20 w-full rounded-lg bg-background-main-light p-9 hover:shadow-xl dark:bg-background-main-dark",
+          "relative z-20 w-full rounded-lg bg-background-main-light p-9",
+          "transition-colors duration-75 hover:bg-neutral-light-90 hover:shadow-xl",
+          "dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
           className
         )}
         href={href ?? "#"}

@@ -3,7 +3,7 @@ import VRPHeroCard from "./_card/VRPHeroCard";
 import {
   MultiVrpContainer,
   SingleVrpContainer,
-} from "@/feature/hacker/container";
+} from "@/feature/hacker/containers";
 
 interface I_ProgramDetailsProps {
   id: string;

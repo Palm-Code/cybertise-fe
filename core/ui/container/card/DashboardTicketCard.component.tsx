@@ -62,7 +62,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
               affects="normal"
               className="!text-neutral-light-20 dark:!text-neutral-dark-20"
             >
-              {formatDateToAgo(props.date_reported ?? "")}
+              {formatDateToAgo(props.update ?? "")}
             </Typography>
           </div>
           <div

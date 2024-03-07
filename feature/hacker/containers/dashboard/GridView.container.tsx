@@ -1,7 +1,7 @@
 "use client";
 import { Pagination } from "@/core/ui/components";
 import { DashboardTicketCardList } from "@/core/ui/container";
-import { AnimationWrapper, CardLoader } from "@/core/ui/layout";
+import { AnimationWrapper } from "@/core/ui/layout";
 import { I_TableTicketData } from "@/interfaces";
 
 const GridView = ({ data }: { data: I_TableTicketData[] }) => {

@@ -21,6 +21,17 @@ export interface I_TableTicketData {
   update: string;
   is_new_notification: boolean;
 }
+export interface I_TableReportTicketData {
+  ticket_number: string;
+  company_name: string;
+  title: string;
+  description: string;
+  logo: string;
+  risk_level: "low" | "medium" | "high";
+  status: string;
+  update: string;
+  is_new_notification: boolean;
+}
 
 export interface FileWithUrl {
   name: string;
