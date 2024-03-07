@@ -19,6 +19,7 @@ export interface InputProps
   placeholderText?: string;
   iconValue?: string;
   description?: string;
+  transparentBg?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -37,6 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       defaultValue,
       iconValue,
       description,
+      transparentBg = false,
       ...props
     },
     ref
@@ -73,8 +75,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="_flexbox__col__start w-full gap-1">
         <div
           className={cn(
-            "relative z-10 flex h-16 w-full items-center justify-center rounded-md bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",
-            isError && "border border-red-normal"
+            "relative z-10 flex h-16 w-full items-center justify-center rounded-md",
+            isError && "border border-red-normal",
+            transparentBg
+              ? "bg-transparent"
+              : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90"
           )}
         >
           {prefixIcon}
@@ -94,14 +99,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
               <input
                 className={cn(
-                  "absolute my-auto h-6 w-full bg-transparent text-neutral-light-0",
+                  "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0",
                   "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
                   "focus:outline-none focus:ring-0 dark:text-white",
                   prefixIcon && "pl-4",
-                  iconValue ? "top-0 pl-5" : "-top-1.5 pl-0",
-                  props.type === "password" && hasValue
-                    ? "text-3xl font-bold placeholder:text-base placeholder:font-normal"
-                    : "text-base font-normal"
+                  iconValue ? "top-0 pl-5" : "-top-1.5 pl-0"
+                  // props.type === "password" && hasValue
+                  //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
+                  //   : "text-base font-normal"
                 )}
                 placeholder={isFocused ? placeholderText : " "}
                 onChange={onChangeValue}
@@ -171,4 +176,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-export { Input };
+export default Input;

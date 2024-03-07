@@ -28,7 +28,7 @@ const BaseDropdown = ({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger className="!w-fit !justify-start gap-1.5 text-nowrap !bg-transparent !p-0">
+      <SelectTrigger className="!w-fit !justify-start gap-4 text-nowrap !bg-transparent !p-0">
         <Typography
           variant="p"
           affects="small"
@@ -43,7 +43,7 @@ const BaseDropdown = ({
       <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
         {options.length! ? (
           options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.value} value={option.value as string}>
               {option.label}
             </SelectItem>
           ))

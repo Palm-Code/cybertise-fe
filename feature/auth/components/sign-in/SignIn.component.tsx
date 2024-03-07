@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import Button from "@/core/ui/components/button/button";
-import { Input } from "@/core/ui/components/input/input";
+import { Input } from "@/core/ui/components";
 import Typography, {
   typographyVariants,
 } from "@/core/ui/components/typography/typography";
@@ -10,10 +10,10 @@ import { useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SuccessState from "../success-state/SuccesState.component";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { login } from "@/auth";
 import { useRouter, useSearchParams } from "next/navigation";
+import { MultiFactor, SuccessState } from "..";
 
 const formShcema = z.object({
   email: z.string().email().min(1, { message: "Email is required" }),
@@ -25,7 +25,7 @@ type FormSchema = z.infer<typeof formShcema>;
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
   const { push } = useRouter();
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>(null);
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
   const {
@@ -50,7 +50,7 @@ const SignInComponent = () => {
         push(callbackUrl || "/");
       }, 5000);
     } catch (error) {
-      setIsSuccess(false);
+      setIsSuccess(null);
     }
   };
 
@@ -59,8 +59,12 @@ const SignInComponent = () => {
     password: watch("password"),
   });
 
-  if (isSuccess) {
+  if (isSuccess === "email") {
     return <SuccessState />;
+  }
+
+  if (isSuccess === "2fa") {
+    return <MultiFactor />;
   }
 
   return (

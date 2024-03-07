@@ -7,7 +7,7 @@ import {
 } from "../select/select";
 import Image from "next/image";
 import { OptionsType } from "@/types/auth/sign-up";
-import { Input, InputProps } from "../input/input";
+import Input, { InputProps } from "../input/input";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
@@ -47,7 +47,13 @@ const SelectDropdown = ({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger className="pl-0">
+      <SelectTrigger
+        className={cn(
+          "pl-0",
+          props.transparentBg && "!bg-transparent",
+          props.className
+        )}
+      >
         <Input
           iconValue={withIcon ? iconValue : undefined}
           readOnly

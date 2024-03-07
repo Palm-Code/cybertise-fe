@@ -1,15 +1,17 @@
+"use client";
 import { Pagination } from "@/core/ui/components";
-import { TicketCardList } from "@/core/ui/container";
+import { DashboardTicketCardList } from "@/core/ui/container";
+import { AnimationWrapper, CardLoader } from "@/core/ui/layout";
 import { I_TableTicketData } from "@/interfaces";
 
 const GridView = ({ data }: { data: I_TableTicketData[] }) => {
   return (
-    <>
+    <AnimationWrapper>
       <div className="z-10 grid h-full w-full grid-cols-2 gap-10">
-        <TicketCardList data={data} isGridCard />
+        <DashboardTicketCardList data={data} isGridCard />
       </div>
       <Pagination variant="hacker" />
-    </>
+    </AnimationWrapper>
   );
 };
 export default GridView;

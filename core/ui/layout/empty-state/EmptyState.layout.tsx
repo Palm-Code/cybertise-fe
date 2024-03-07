@@ -1,12 +1,12 @@
 import { Role } from "@/types/admin/sidebar";
-import { EmptyFolder, Leaf } from "../../icons";
+import { EmptyFolder, HackerLeaf, Leaf } from "../../icons";
 import { Button, Typography } from "../../components";
 import Link from "next/link";
 import { buttonVariants } from "../../components/button/base-button";
 
 interface I_EmptyStateProps {
   variant: "company" | "hacker" | "mediator";
-  type: "program" | "ticket" | "under-construction";
+  type: "program" | "ticket" | "under-construction" | "update";
   buttonText?: string;
   href?: string;
 }
@@ -54,6 +54,17 @@ const EmptyState = ({
               >
                 Add new program
               </Link>
+            </>
+          </>
+        );
+      case "update":
+        return (
+          <>
+            <>
+              <HackerLeaf />
+              <Typography variant="p" affects="extralarge" weight="bold">
+                You have no update yet
+              </Typography>
             </>
           </>
         );

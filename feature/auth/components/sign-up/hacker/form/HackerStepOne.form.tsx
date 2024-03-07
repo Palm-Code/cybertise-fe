@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/core/ui/components/button/button";
-import { Input } from "@/core/ui/components/input/input";
+import { Input } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useForm, useFormContext } from "react-hook-form";
 import { FormSchema, signupFormSchema } from "../SignUpHacker.component";

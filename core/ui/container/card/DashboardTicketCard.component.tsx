@@ -4,6 +4,8 @@ import { I_TableTicketData } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
+import { Suspense } from "react";
+import { CardLoader } from "../../layout";
 
 interface I_TicketCardProps extends I_TableTicketData {
   isGridCard?: boolean;
@@ -11,7 +13,7 @@ interface I_TicketCardProps extends I_TableTicketData {
 
 const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
   return (
-    <Card href={`/reports/${props.ticket_number}`}>
+    <Card href={`/reports/${props.ticket_number}`} isClickable>
       {props.is_new_notification && (
         <Indicator variant="warning" className="absolute -right-4 -top-4" />
       )}
@@ -100,7 +102,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 Rewards
               </Typography>
               <Typography variant="p" affects="small" weight="semibold">
-                {currencyFormatters.NumberToUSD(props.rewards ?? 0)}
+                {currencyFormatters.NumberToEUR(props.rewards ?? 0)}
               </Typography>
             </div>
             {!isGridCard && (
@@ -151,7 +153,9 @@ interface I_TicketCardListProps {
 
 const TicketCardList = ({ data, isGridCard }: I_TicketCardListProps) => {
   return data.map((item) => (
-    <TicketCard key={item.ticket_number} isGridCard={isGridCard} {...item} />
+    <Suspense fallback={<CardLoader />} key={item.ticket_number}>
+      <TicketCard isGridCard={isGridCard} {...item} />
+    </Suspense>
   ));
 };
 

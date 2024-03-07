@@ -3,7 +3,7 @@ import Button from "@/core/ui/components/button/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { FormSchema } from "../SignUpCompany.component";
-import { Input } from "@/core/ui/components/input/input";
+import { Input } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
 import { passwordValidation } from "@/core/constants";

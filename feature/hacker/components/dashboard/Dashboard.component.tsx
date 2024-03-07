@@ -6,21 +6,24 @@ import {
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
-import { TableView, TicketView } from "../../container";
 import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import MultiFilterDropdown from "@/core/ui/components/dropdown/multi-filter-drowpdown";
 import { useReadLocalStorage } from "usehooks-ts";
-import GridView from "../../container/dashboard/GridView.container";
 import { I_TableTicketData } from "@/interfaces";
+import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
+import {
+  DashboardCardView,
+  DashboardGridView,
+  DashboardTableView,
+} from "../../container";
 
 const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
   const view = useReadLocalStorage("view") as "table" | "card" | "grid";
 
   const viewsContainer = {
-    table: <TableView columns={tableColumns} data={data} />,
-    card: <TicketView data={data} />,
-    grid: <GridView data={data} />,
+    table: <DashboardTableView columns={tableColumns} data={data} />,
+    card: <DashboardCardView data={data} />,
+    grid: <DashboardGridView data={data} />,
   };
 
   return (
@@ -37,7 +40,7 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
         </div>
       </div>
       <div className="flex w-full items-center justify-between">
-        <MultiFilterDropdown variant="hacker" />
+        <DashboardFilter variant="hacker" />
         <div className="inline-flex gap-4">
           <FilterDropdown
             variant="hacker"

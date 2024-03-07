@@ -35,8 +35,10 @@ module.exports = {
         "2xl": "676px",
       },
       spacing: {
-        19: "4.75rem",
         2.5: "0.625rem",
+        4.5: "1.125rem",
+        7.5: "1.875rem",
+        19: "4.75rem",
       },
       colors: {
         light: "#3572AF",
@@ -159,6 +161,22 @@ module.exports = {
           lighter: "#9D7EF1",
           light: "#B59EF5",
         },
+        asset: {
+          background: {
+            domain: "#95B3F5",
+            cidr: "#F2C789",
+            android: "#99D3B6",
+            ios: "#B59EF5",
+            iot: "#99D3B6",
+          },
+          text: {
+            domain: "#4E80EE",
+            cidr: "#E9A23B",
+            android: "#55B685",
+            ios: "#4BA2E3",
+            iot: "#55B685",
+          },
+        },
       },
       keyframes: {
         "accordion-down": {
@@ -182,6 +200,7 @@ module.exports = {
       backgroundImage: {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
+        slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 34.68%, #C00 299.32%)",
       },
     },
   },

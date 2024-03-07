@@ -129,4 +129,10 @@ export const filterItems: MultiFilterType = {
     { label: "Open", value: "open" },
     { label: "Closed", value: "closed" },
   ],
+  asset_type: [
+    { label: "URL", value: "url" },
+    { label: "Hardware/IOT", value: "iot" },
+    { label: "Android: PlayStore", value: "android" },
+    { label: "iOS:AppStore", value: "ios" },
+  ],
 };
