@@ -4,6 +4,7 @@ import {
   CsvssCalculatorType,
   ProgramCardType,
   ProgramDetailScope,
+  SendReportStepsType,
   UpdateType,
 } from "@/types/admin/programs";
 
@@ -334,37 +335,36 @@ export const updates: UpdateType[] = [
   },
 ];
 
-export const informations: SortFilterType[] & { description: string | null }[] =
-  [
-    {
-      label: "Brief",
-      description: null,
-      value: 1,
-    },
-    {
-      label: "Bug Target",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
-      value: 2,
-    },
-    {
-      label: "Report Description",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
-      value: 3,
-    },
-    {
-      label: "Problem and Causes",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
-      value: 4,
-    },
-    {
-      label: "Review",
-      description: null,
-      value: 5,
-    },
-  ];
+export const informations: SendReportStepsType[] = [
+  {
+    label: "Brief",
+    description: null,
+    value: 1,
+  },
+  {
+    label: "Bug Target",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+    value: 2,
+  },
+  {
+    label: "Report Description",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+    value: 3,
+  },
+  {
+    label: "Problem and Causes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. ",
+    value: 4,
+  },
+  {
+    label: "Review",
+    description: null,
+    value: 5,
+  },
+];
 
 export const csvss_calculator: CsvssCalculatorType[] = [
   {

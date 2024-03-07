@@ -1,5 +1,3 @@
-import { CsvssCalculatorEnums } from "@/enums";
-
 export type ProgramCardType = {
   company_id: string;
   logo: string;
@@ -32,4 +30,10 @@ export type CsvssCalculatorType = {
     label: string;
     value: string;
   }[];
+};
+
+export type SendReportStepsType = {
+  label: string;
+  value: number;
+  description: string | null;
 };
