@@ -7,6 +7,8 @@ export default function Dashboardlayout({
 }: {
   children: React.ReactNode;
   hacker: React.ReactNode;
+  company: React.ReactNode;
+  mediator: React.ReactNode;
 }) {
   return (
     <div
