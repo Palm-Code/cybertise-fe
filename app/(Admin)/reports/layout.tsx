@@ -1,8 +1,8 @@
+import { Header } from "@/core/ui/layout";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
 export default function Dashboardlayout({
-  children,
   hacker,
 }: {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function Dashboardlayout({
       className="_flexbox__col__start__start h-full w-full"
       suppressHydrationWarning
     >
-      {children}
+      <Header />
       <Suspense
         fallback={
           <Loader2
@@ -23,7 +23,7 @@ export default function Dashboardlayout({
           />
         }
       >
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto p-12 pb-28 pl-14 pr-12">
+        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pl-14 pr-12">
           {hacker}
         </div>
       </Suspense>

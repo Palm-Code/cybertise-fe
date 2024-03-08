@@ -1,6 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Typography } from "@/core/ui/components";
-import { X, XCircle } from "lucide-react";
+import { XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface I_ModalCloseSendReportProps {

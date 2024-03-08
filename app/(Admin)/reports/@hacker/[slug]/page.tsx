@@ -1,4 +1,5 @@
-const ReportDetails = () => {
-  return <div>ReportDetails</div>;
-};
-export default ReportDetails;
+import { ReportDetailsFragment } from "@/feature/hacker/fragments";
+
+export default async function ReportDetails() {
+  return <ReportDetailsFragment />;
+}

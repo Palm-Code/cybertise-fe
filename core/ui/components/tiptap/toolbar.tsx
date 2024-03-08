@@ -15,6 +15,7 @@ import { Toggle } from "../toggle/toggle";
 import Separator from "../separator/separator";
 import { cn } from "@/core/lib/utils";
 import { useCallback } from "react";
+import { Skeleton } from "../skeleton/skeleton";
 
 interface I_ToolbarProps {
   editor: Editor | null;
@@ -45,35 +46,14 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
       .setLink({ href: url })
       .run();
   }, [editor]);
-  if (!editor) return null;
+  if (!editor) return <Skeleton className="grid h-8 w-1/2" />;
   return (
     <div
       className={cn(
         "grid h-fit w-full max-w-full grid-flow-col",
-        "place-content-start content-start gap-3 rounded-b-xl",
-        "bg-neutral-light-90 dark:bg-neutral-dark-90"
+        "place-content-start content-start gap-3 rounded-b-xl"
       )}
     >
-      {/* <Toggle
-        size="sm"
-        pressed={editor.isActive("document")}
-        onPressedChange={() =>
-          editor.chain().focus().toggleNode("pdf", "document").run()
-        }
-      >
-        <Paperclip />
-      </Toggle> */}
-      <Toggle
-        size="sm"
-        pressed={editor.isActive("link")}
-        onPressedChange={setLink}
-      >
-        <Link />
-      </Toggle>
-      <Separator
-        orientation="vertical"
-        className="space-x-1 !bg-neutral-dark-100 dark:!bg-white"
-      />
       <Toggle
         size="sm"
         pressed={editor.isActive("bold")}
@@ -137,6 +117,13 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
       >
         <TerminalSquare />
+      </Toggle>
+      <Toggle
+        size="sm"
+        pressed={editor.isActive("link")}
+        onPressedChange={setLink}
+      >
+        <Link />
       </Toggle>
     </div>
   );
