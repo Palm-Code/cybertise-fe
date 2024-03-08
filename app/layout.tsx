@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/core/ui/components/theme/theme-provider";
 import { cn } from "@/core/lib/utils";
 import Sidebar from "@/core/ui/layout/admin/Sidebar.layout";
 import { getSession } from "@/auth";
+import NextTopLoader from "nextjs-toploader";
+import { Role } from "@/types/admin/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +35,12 @@ export default async function RootLayout({
     }
   };
 
+  const colors: Record<Role, string> = {
+    hacker: "#BAFF00",
+    company: "#4BA2E3",
+    mediator: "#845EEE",
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -41,6 +49,10 @@ export default async function RootLayout({
           "bg-background-page-light dark:bg-background-page-dark"
         )}
       >
+        <NextTopLoader
+          color={colors[session?.user.role as Role]}
+          showSpinner={false}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

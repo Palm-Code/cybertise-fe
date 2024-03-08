@@ -16,8 +16,10 @@ import { common, createLowlight } from "lowlight";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import Tooltip from "../tooltip/tooltip";
-import { Info, X } from "lucide-react";
+import { Info, Paperclip, Send, X } from "lucide-react";
 import Typography from "../typography/typography";
+import Button from "../button/button";
+import Separator from "../separator/separator";
 
 const lowlight = createLowlight(common);
 lowlight.register({ html });
@@ -25,20 +27,29 @@ lowlight.register({ javascript });
 lowlight.register({ css });
 lowlight.register({ typescript });
 
-interface I_TiptapProps {
+interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   description: string;
-  onChange: (value: string) => void;
+  onChangeValue: (value: string) => void;
   label?: string;
   withTooltip?: boolean;
   onClearInput?: () => void;
+  isChat?: boolean;
+  variant: "hacker" | "company" | "mediator";
+  onClickSendAttachment?: () => void;
+  onClickSendMessage?: () => void;
 }
 
 const Tiptap = ({
   description,
-  onChange,
+  onChangeValue,
   label,
   withTooltip,
+  isChat = false,
   onClearInput = () => {},
+  variant,
+  onClickSendAttachment,
+  onClickSendMessage = () => {},
+  ...props
 }: I_TiptapProps) => {
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
@@ -62,13 +73,16 @@ const Tiptap = ({
       attributes: {
         class: cn(
           "w-full peer appearance-none max-w-none overflow-auto whitespace-pre-line",
-          "flex flex-col justify-start h-44 mt-4",
-          "bg-neutral-light-90 dark:bg-neutral-dark-90 outline-none"
+          "flex flex-col justify-start outline-none",
+          isChat
+            ? "h-full mt-0 bg-transparent"
+            : "mt-4 bg-neutral-light-90 dark:bg-neutral-dark-90"
         ),
       },
     },
+    autofocus: true,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      onChangeValue(editor.getHTML());
     },
     onFocus: () => {
       setIsFocused(true);
@@ -77,6 +91,57 @@ const Tiptap = ({
       setIsFocused(false);
     },
   });
+
+  if (isChat) {
+    return (
+      <div
+        className={cn(
+          "sticky bottom-16 z-50 w-full rounded-3xl p-5 shadow-bubble",
+          "_flexbox__col__start__start gap-3",
+          "border border-neutral-light-80 bg-neutral-light-100",
+          "dark:border-neutral-dark-80 dark:bg-neutral-dark-100",
+          props.className
+        )}
+      >
+        <label
+          htmlFor="description"
+          className={cn(
+            "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
+            "left-4 z-20 origin-[0] scale-75 peer-focus:start-0",
+            isFocus || !!description ? "top-0.5" : "top-4"
+          )}
+        >
+          {label}
+        </label>
+        <EditorContent
+          editor={editor}
+          className="peer flex max-h-12 w-full max-w-full overflow-auto whitespace-pre-line"
+        />
+        <Separator orientation="horizontal" />
+        <div className="_flexbox__row__center__between w-full">
+          <Toolbar editor={editor} />
+          {!!onClickSendAttachment && !!onClickSendMessage && (
+            <div className="_flexbox__row__center gap-4">
+              <Button
+                prefixIcon={<Paperclip />}
+                variant={`tertiary-${variant}`}
+                onClick={onClickSendAttachment}
+              >
+                Send Attachment
+              </Button>
+              <Button
+                postFixIcon={<Send />}
+                variant={`primary-${variant}`}
+                onClick={onClickSendMessage}
+              >
+                Send
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -94,14 +159,16 @@ const Tiptap = ({
         <div
           className={cn(
             "_flexbox__row__start__start w-full gap-4 bg-neutral-light-90 dark:bg-neutral-dark-90",
-            "rounded-md p-4"
+            "rounded-md p-4",
+            props.className
           )}
         >
           <div className="_flexbox__col__start__start w-full">
             <EditorContent
               editor={editor}
-              className="peer flex w-full max-w-full overflow-auto whitespace-pre-line"
+              className="peer flex h-44 w-full max-w-full overflow-auto whitespace-pre-line"
             />
+
             <Toolbar editor={editor} />
           </div>
           {withTooltip && !description ? (

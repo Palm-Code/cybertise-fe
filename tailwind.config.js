@@ -61,6 +61,7 @@ module.exports = {
             medium: "#F5891D",
             low: "#F0F00A",
             info: "#ABD9FF",
+            success: "#36CF6A",
           },
           light: {
             critical: "#CC0000",
@@ -68,6 +69,7 @@ module.exports = {
             medium: "#F5891D",
             low: "#FFFF00",
             info: "#ABD9FF",
+            success: "#36CF6A",
           },
         },
         background: {
@@ -196,6 +198,7 @@ module.exports = {
         type: "-10px 10px 15px 0px rgba(75, 162, 227, 0.20), 5px -4px 15px 0px rgba(200, 255, 51, 0.15)",
         hacker: "0px 0px 15px 0px rgba(122, 168, 0, 0.20)",
         company: "0px 0px 15px 0px rgba(75, 162, 227, 0.20)",
+        bubble: "0px -10px 25px 0px rgba(130, 130, 130, 0.10)",
       },
       backgroundImage: {
         progress:

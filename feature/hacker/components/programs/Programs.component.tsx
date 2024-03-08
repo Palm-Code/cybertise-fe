@@ -8,7 +8,7 @@ import {
   ProgramsCardView,
   ProgramsGridView,
   ProgramsTableView,
-} from "../../container";
+} from "../../containers";
 import { ProgramCardType } from "@/types/admin/programs";
 import { tableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";

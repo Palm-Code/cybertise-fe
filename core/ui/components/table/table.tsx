@@ -112,7 +112,8 @@ export const TableBodyRow = ({
       <Link
         href={props.href ?? "#"}
         className={cn(
-          "relative w-full rounded-2xl bg-background-main-light px-9 py-6 hover:bg-opacity-50 dark:bg-background-main-dark",
+          "relative w-full rounded-2xl bg-background-main-light px-9 py-6",
+          "hover:bg-neutral-light-90 dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
           className
         )}
       >

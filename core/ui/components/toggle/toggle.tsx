@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/core/lib/utils";
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-neutral-light-80 data-[state=on]:bg-neutral-light-80 dark:hover:bg-neutral-dark-80 dark:data-[state=on]:bg-neutral-dark-80",
+  "inline-flex items-center justify-center rounded-sm text-sm font-medium transition-colors hover:bg-neutral-light-80 data-[state=on]:bg-neutral-light-80 dark:hover:bg-neutral-dark-80 dark:data-[state=on]:bg-neutral-dark-80",
   {
     variants: {
       variant: {
@@ -16,7 +16,7 @@ const toggleVariants = cva(
       },
       size: {
         default: "h-9 px-3",
-        sm: "h-8 px-2",
+        sm: "h-5 w-5 p-0.5",
         lg: "h-10 px-3",
       },
     },

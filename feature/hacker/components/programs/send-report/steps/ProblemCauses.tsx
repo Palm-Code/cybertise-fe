@@ -8,14 +8,16 @@ const ProblemCauses = () => {
       <Tiptap
         description={description}
         label="Impact"
-        onChange={(v) => setDescription(v)}
+        onChangeValue={(v) => setDescription(v)}
         onClearInput={() => setDescription("")}
+        variant="hacker"
         withTooltip
       />
       <Tiptap
         description=""
         label="Proof of Concept"
-        onChange={() => {}}
+        onChangeValue={() => {}}
+        variant="hacker"
         withTooltip
       />
       <FileInput />

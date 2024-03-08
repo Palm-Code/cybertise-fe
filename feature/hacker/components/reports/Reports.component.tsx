@@ -6,28 +6,28 @@ import {
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
-import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableTicketData } from "@/interfaces";
+import { I_TableReportTicketData, I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
-  DashboardCardView,
-  DashboardGridView,
-  DashboardTableView,
+  ReportsCardView,
+  ReportsGridView,
+  ReportsTableView,
 } from "../../containers";
+import { tableColumns } from "../../constants/reports";
 
-const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
+const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
   const view = useReadLocalStorage("view") as "table" | "card" | "grid";
 
   const viewsContainer = {
-    table: <DashboardTableView columns={tableColumns} data={data} />,
-    card: <DashboardCardView data={data} />,
-    grid: <DashboardGridView data={data} />,
+    table: <ReportsTableView columns={tableColumns} data={data} />,
+    card: <ReportsCardView data={data} />,
+    grid: <ReportsGridView data={data} />,
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+    <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
         <Typography variant="h4" weight="bold" className="mr-auto">
           Open Ticket
@@ -63,4 +63,4 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
     </div>
   );
 };
-export default Dashboard;
+export default Reports;
