@@ -1,5 +1,5 @@
-import { DashboardFragment } from "@/feature/hacker/fragments";
+import { SettingsFragment } from "@/feature/settings/fragments";
 
 export default function DashboardPage() {
-  return <DashboardFragment />;
+  return <SettingsFragment role="hacker" />;
 }

@@ -1,3 +1,14 @@
+import {
+  AttackComplexity,
+  AttackVector,
+  Availability,
+  Confidentiality,
+  Integrity,
+  PrivilegesRequired,
+  Scope,
+  UserInteraction,
+} from "@/enums";
+
 export type ProgramCardType = {
   company_id: string;
   logo: string;
@@ -36,4 +47,15 @@ export type SendReportStepsType = {
   label: string;
   value: number;
   description: string | null;
+};
+
+export type MetricValues = {
+  attackVector: AttackVector;
+  attackComplexity: AttackComplexity;
+  privilegesRequired: PrivilegesRequired;
+  userInteraction: UserInteraction;
+  scope: Scope;
+  confidentiality: Confidentiality;
+  integrity: Integrity;
+  availability: Availability;
 };

@@ -35,9 +35,16 @@ const buttonVariants = cva(
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-sky-normal dark:text-white text-neutral-light-0 hover:text-white",
         "outline-mediator":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-violet-normal dark:text-white text-neutral-light-0 hover:text-white",
+        "ghost-hacker":
+          "bg-transparent text-lime-normal hover:text-lime-dark focus:text-lime-dark active:text-lime-darker",
+        "ghost-mediator":
+          "bg-transparent text-violet-normal hover:text-violet-dark focus:text-violet-dark active:text-violet-darker",
+        "ghost-company":
+          "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
       },
       size: {
         default: "h-9 px-4 py-2 text-sm",
+        ghost: "w-auto h-auto px-0 py-0",
         lg: "py-3 px-6 text-base",
         icon: "h-9 w-9",
       },
@@ -59,12 +66,11 @@ export interface BaseButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   fullWidth?: boolean;
-  childern?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, BaseButtonProps>(
   (
-    { className, variant, childern, asChild = false, fullWidth, ...props },
+    { className, variant, size, radius, asChild = false, fullWidth, ...props },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
@@ -72,7 +78,7 @@ const Button = React.forwardRef<HTMLButtonElement, BaseButtonProps>(
     return (
       <Comp
         className={cn(
-          buttonVariants({ variant, className }),
+          buttonVariants({ variant, size, radius, className }),
           fullWidth ? "w-full" : "w-fit"
         )}
         ref={ref}

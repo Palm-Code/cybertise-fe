@@ -11,6 +11,7 @@ export { default as FilterViewDropdown } from "./dropdown/filter-view-dropdown";
 export { default as DashboardFilterDropdown } from "./dropdown/dashboard-filter-drowpdown";
 export { default as Tooltip } from "./tooltip/tooltip";
 export { default as ThemeSwitcher } from "./theme/theme-switcher";
+export { default as Switch } from "./switch/switch";
 export { default as ValidationCheck } from "./validation-check/validation-check";
 export { default as Typography } from "./typography/typography";
 export { default as Card } from "./card/card";

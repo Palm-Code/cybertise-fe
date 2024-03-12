@@ -6,6 +6,7 @@ import Tooltip from "../tooltip/tooltip";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import Typography from "../typography/typography";
+import { disableArrowKeys } from "@/utils/disable-arrow-number";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -114,6 +115,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 onBlur={handleBlur}
                 autoComplete="new-password"
                 disabled={props?.disabled || withTooltip}
+                onKeyDown={disableArrowKeys}
                 {...props}
                 ref={ref}
               />
