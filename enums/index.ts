@@ -4,3 +4,57 @@ export enum TabsItem {
   updates = "updates",
   thanks = "thanks",
 }
+
+export enum SettingItems {
+  details = "details",
+  notifications = "notifications",
+  security = "security",
+  data_privacy = "data_privacy",
+  billings = "billings",
+}
+
+export enum AttackVector {
+  PHYSICAL = "P",
+  LOCAL = "L",
+  ADJACENT_NETWORK = "A",
+  NETWORK = "N",
+}
+
+export enum AttackComplexity {
+  HIGH = "H",
+  LOW = "L",
+}
+
+export enum PrivilegesRequired {
+  NONE = "N",
+  LOW = "L",
+  HIGH = "H",
+}
+
+export enum UserInteraction {
+  NONE = "N",
+  REQUIRED = "R",
+}
+
+export enum Scope {
+  UNCHANGED = "U",
+  CHANGED = "C",
+}
+
+export enum Confidentiality {
+  NONE = "N",
+  LOW = "L",
+  HIGH = "H",
+}
+
+export enum Integrity {
+  NONE = "N",
+  LOW = "L",
+  HIGH = "H",
+}
+
+export enum Availability {
+  NONE = "N",
+  LOW = "L",
+  HIGH = "H",
+}

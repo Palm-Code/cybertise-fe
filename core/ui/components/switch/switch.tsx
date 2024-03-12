@@ -1,40 +1,59 @@
 "use client";
-
-import * as React from "react";
-import * as SwitchPrimitives from "@radix-ui/react-switch";
-
+import { useState } from "react";
 import { cn } from "@/core/lib/utils";
-import Moon from "../../icons/moon/Moon.icon";
-import Sun from "../../icons/sun/Sun.icon";
+import { Role } from "@/types/admin/sidebar";
 
-const Switch = React.forwardRef<
-  React.ElementRef<typeof SwitchPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
->(({ className, ...props }, ref) => (
-  <SwitchPrimitives.Root
-    className={cn(
-      "peer inline-flex h-8 w-19 shrink-0 cursor-pointer items-center justify-between rounded-full border-2 border-transparent px-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-neutral-900 data-[state=unchecked]:bg-neutral-200 dark:focus-visible:ring-neutral-300 dark:focus-visible:ring-offset-neutral-950 dark:data-[state=checked]:bg-neutral-50 dark:data-[state=unchecked]:bg-neutral-800",
-      className
-    )}
-    {...props}
-    ref={ref}
-  >
-    <SwitchPrimitives.Thumb
-      className={cn(
-        "pointer-events-none rounded-full bg-transparent shadow-lg ring-0 transition-all duration-300 data-[state=checked]:block data-[state=unchecked]:hidden data-[state=checked]:translate-x-10 data-[state=unchecked]:translate-x-0 data-[state=checked]:rotate-90 data-[state=unchecked]:rotate-0 dark:bg-transparent"
-      )}
-    >
-      <Moon />
-    </SwitchPrimitives.Thumb>
-    <SwitchPrimitives.Thumb
-      className={cn(
-        "pointer-events-none rounded-full bg-transparent shadow-lg ring-0 transition-all duration-300 data-[state=unchecked]:block data-[state=checked]:hidden data-[state=checked]:-translate-x-10 data-[state=unchecked]:translate-x-0 data-[state=checked]:rotate-90 data-[state=unchecked]:rotate-0 dark:bg-transparent"
-      )}
-    >
-      <Sun />
-    </SwitchPrimitives.Thumb>
-  </SwitchPrimitives.Root>
-));
-Switch.displayName = SwitchPrimitives.Root.displayName;
+interface I_SwitchProps {
+  className?: string;
+  onChange?: () => void;
+  variant?: keyof typeof Role;
+}
 
-export { Switch };
+const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
+  hacker: {
+    active: "bg-lime-normal",
+    inactive: "bg-lime-lighter/20",
+  },
+  company: {
+    active: "bg-sky-normal",
+    inactive: "bg-sky-lighter/20",
+  },
+  mediator: {
+    active: "bg-violet-normal",
+    inactive: "bg-violet-darker",
+  },
+};
+
+const Switch = ({ className, onChange, variant = "hacker" }: I_SwitchProps) => {
+  const [active, setActive] = useState<boolean>(false);
+  const onClickSwitch = () => {
+    setActive(!active);
+    if (onChange) {
+      onChange();
+    }
+  };
+
+  return (
+    <div
+      className={cn(
+        "relative flex h-6 w-12 cursor-pointer items-center justify-between",
+        "overflow-hidden rounded-full px-1.5 py-1 transition-all duration-200",
+        active
+          ? colorSwitch[variant].active
+          : "bg-neutral-light-80 dark:bg-neutral-dark-80",
+        className
+      )}
+      onClick={onClickSwitch}
+    >
+      <div
+        className={cn(
+          "aspect-square h-full rounded-full transition-all duration-200",
+          active
+            ? "translate-x-5 bg-white"
+            : `translate-x-0 ${colorSwitch[variant].inactive}`
+        )}
+      />
+    </div>
+  );
+};
+export default Switch;

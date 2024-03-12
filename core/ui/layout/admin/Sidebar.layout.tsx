@@ -13,7 +13,7 @@ import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
 import { VrpManagement } from "../../icons";
 import { usePathname } from "next/navigation";
-import { menuItems } from "@/core/constants";
+import { borderColor, menuItems } from "@/core/constants";
 
 interface SidebarProps {
   type: string;
@@ -26,12 +26,6 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   companies: <Building2 className="h-6 w-6" />,
   "vrp launchpad": <Bug className="h-6 w-6" />,
   "vrp management": <VrpManagement className="h-6 w-6" />,
-};
-
-const borderColor: { [key in Role]: string } = {
-  hacker: "border-lime-normal",
-  company: "border-sky-normal",
-  mediator: "border-violet-normal",
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
@@ -71,7 +65,12 @@ const Sidebar = ({ type }: SidebarProps) => {
           ))}
         </div>
       </div>
-      <div className="_flexbox__col__center sticky bottom-[calc(64px+env(safe-area-inset-bottom))] w-full gap-4 pr-5">
+      <div
+        className={cn(
+          "_flexbox__col__center sticky bottom-[calc(64px+env(safe-area-inset-bottom))]",
+          "w-full gap-4 pr-5"
+        )}
+      >
         <Link
           href="/settings"
           className={cn(
@@ -79,7 +78,9 @@ const Sidebar = ({ type }: SidebarProps) => {
             "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
             "border-l-2 border-transparent",
             `hover:${borderColor[type as keyof typeof borderColor]}`,
-            "bg-transparent font-normal"
+            pathname.includes("/settings")
+              ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
+              : "bg-transparent font-normal"
           )}
         >
           <Settings className="h-6 w-6" />

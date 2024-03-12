@@ -1,4 +1,4 @@
-import { MenuItemType } from "@/types/admin/sidebar";
+import { MenuItemType, Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 
 export const passwordValidation: PasswordValidationItemsType[] = [
@@ -71,4 +71,10 @@ export const menuItems: MenuItemType = {
       path: "/vrp-launchpad",
     },
   ],
+};
+
+export const borderColor: { [key in Role]: string } = {
+  hacker: "border-lime-normal",
+  company: "border-sky-normal",
+  mediator: "border-violet-normal",
 };

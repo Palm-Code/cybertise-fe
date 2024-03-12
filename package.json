@@ -45,7 +45,7 @@
     "input-otp": "^0.3.31-beta",
     "isomorphic-dompurify": "^2.4.0",
     "lowlight": "^3.1.0",
-    "lucide-react": "^0.313.0",
+    "lucide-react": "^0.352.0",
     "next": "14.0.4",
     "next-auth": "^4.24.6",
     "next-themes": "^0.2.1",

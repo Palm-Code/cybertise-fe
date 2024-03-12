@@ -1,13 +1,15 @@
 import { AvatarFallback, AvatarImage, BaseAvatar } from "./base-avatar";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
-interface I_AvatarProps {
+interface I_AvatarProps
+  extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {
   image?: string;
   initials?: string;
 }
 
-const Avatar = ({ image, initials }: I_AvatarProps) => {
+const Avatar = ({ image, initials, ...props }: I_AvatarProps) => {
   return (
-    <BaseAvatar>
+    <BaseAvatar {...props}>
       <AvatarImage src={image} alt={initials} />
       <AvatarFallback>{initials}</AvatarFallback>
     </BaseAvatar>
