@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "./core/lib/config";
 import { UserType } from "./types/auth/sign-up";
 import { FormLoginSchema } from "./types/auth/sign-in";
+import { redirect } from "next/navigation";
 
 const secretKey = SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
@@ -29,7 +30,7 @@ export async function login(formData: FormLoginSchema) {
   const user = {
     email: formData.email,
     name: "john",
-    role: "hacker",
+    role: "mediator",
     token: "eysdaksdjkahskfkjashfkjdshkjshdfjkhsdkjfds",
   };
 
@@ -40,8 +41,13 @@ export async function login(formData: FormLoginSchema) {
 }
 
 export async function logout() {
-  // Destroy the session
-  cookies().set("session", "", { expires: new Date(0) });
+  try {
+    cookies().set("session", "", { expires: new Date(0) });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    redirect("/auth/signin");
+  }
 }
 
 export async function getSession(): Promise<UserType | null> {
