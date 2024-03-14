@@ -1,15 +1,28 @@
+import { getSession } from "@/server/session";
+import { Role } from "@/types/admin/sidebar";
+import { UserType } from "@/types/auth/sign-up";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
-export default function Dashboardlayout({
+export default async function Dashboardlayout({
   children,
   hacker,
+  company,
+  mediator,
 }: {
   children: React.ReactNode;
   hacker: React.ReactNode;
   company: React.ReactNode;
   mediator: React.ReactNode;
 }) {
+  const session = (await getSession()) as UserType;
+
+  const child: { [key: string]: React.ReactNode } = {
+    [Role.hacker]: hacker,
+    [Role.company]: company,
+    [Role.mediator]: mediator,
+  };
+
   return (
     <>
       <div
@@ -27,7 +40,7 @@ export default function Dashboardlayout({
           }
         >
           <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto p-12 pb-28 pl-14 pr-12">
-            {hacker}
+            {child[session.user.role]}
           </div>
         </Suspense>
       </div>

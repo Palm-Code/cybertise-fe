@@ -12,7 +12,7 @@ export default function (
   return async (req: NextRequest, next: NextFetchEvent) => {
     const pathname = req.nextUrl.pathname;
 
-    if (requireAuth.includes(pathname)) {
+    if (requireAuth.some((path) => pathname.startsWith(path))) {
       const session = req.cookies.get("session")?.value;
       if (!session) {
         const url = new URL("/auth/signin", req.url);

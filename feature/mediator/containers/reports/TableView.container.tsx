@@ -4,6 +4,7 @@ import {
   Badge,
   BaseTable,
   Indicator,
+  Pagination,
   TableBody,
   TableBodyRow,
   TableData,
@@ -13,15 +14,16 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
-import { I_TableColumns, I_TableTicketData } from "@/interfaces";
-import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { I_TableColumns, I_TableReportTicketData } from "@/interfaces";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import { sanitize } from "@/utils/sanitize-input";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
 
 interface I_TableProps {
   columns: I_TableColumns[];
-  data: I_TableTicketData[];
+  data: I_TableReportTicketData[];
 }
 
 export default function Table({ data, columns }: I_TableProps) {
@@ -31,7 +33,10 @@ export default function Table({ data, columns }: I_TableProps) {
         <TableHeader>
           <TableRow>
             {columns.map((column, index) => (
-              <TableHead className={column.width} key={`table-head-${index}`}>
+              <TableHead
+                className={cn(column.width, "text-nowrap")}
+                key={`table-head-${index}`}
+              >
                 {column.title}
               </TableHead>
             ))}
@@ -42,8 +47,6 @@ export default function Table({ data, columns }: I_TableProps) {
             {data.map((item, index) => (
               <TableBodyRow
                 key={`table-row-${index}`}
-                isClickable
-                href={`/reports/${item.ticket_number}`}
                 hasNotification={item.is_new_notification}
               >
                 <TableRow>
@@ -58,20 +61,13 @@ export default function Table({ data, columns }: I_TableProps) {
                           width={24}
                           height={24}
                         />
-                        <Typography
-                          variant="p"
-                          affects="small"
-                          weight="semibold"
-                        >
+                        <Typography variant="p" affects="small" weight="normal">
                           #{item.ticket_number} - {item.title}
                         </Typography>
                       </div>
-                      <div className="_flexbox__row__center__start gap-4">
-                        <Badge variant="default">{item.domain}</Badge>
-                        <Typography variant="p" affects="small" weight="normal">
-                          {item.date_reported}
-                        </Typography>
-                      </div>
+                      <Typography variant="p" affects="small" weight="semibold">
+                        {item.company_name}
+                      </Typography>
                     </div>
                   </TableData>
                   <TableData
@@ -84,17 +80,14 @@ export default function Table({ data, columns }: I_TableProps) {
                   <TableData
                     className={cn(columns[2].width, `text-${columns[2].align}`)}
                   >
-                    {item.vulnerability_type}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: sanitize(item.description),
+                      }}
+                    ></div>
                   </TableData>
                   <TableData
                     className={cn(columns[3].width, `text-${columns[3].align}`)}
-                  >
-                    {item.rewards
-                      ? currencyFormatters.NumberToEUR(item.rewards)
-                      : currencyFormatters.NumberToEUR(item.rewards)}
-                  </TableData>
-                  <TableData
-                    className={cn(columns[4].width, `text-${columns[4].align}`)}
                   >
                     <div className="_flexbox__row__center__start gap-3">
                       <Indicator
@@ -104,9 +97,13 @@ export default function Table({ data, columns }: I_TableProps) {
                     </div>
                   </TableData>
                   <TableData
-                    className={cn(columns[5].width, `text-${columns[5].align}`)}
+                    className={cn(
+                      columns[4].width,
+                      `text-${columns[4].align} _flexbox__row__center__between gap-2`
+                    )}
                   >
                     {item.update ? formatDateToAgo(item.update) : "-"}
+                    <ChevronRight />
                   </TableData>
                 </TableRow>
               </TableBodyRow>

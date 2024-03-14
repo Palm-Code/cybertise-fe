@@ -14,7 +14,7 @@ import { cn } from "@/core/lib/utils";
 import { VrpManagement } from "../../icons";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { borderColor, menuItems } from "@/core/constants";
-import { logout } from "@/auth";
+import { logout } from "@/server/auth";
 
 interface SidebarProps {
   type: string;

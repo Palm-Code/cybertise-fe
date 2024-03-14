@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { updateSession } from "./auth";
+import { updateSession } from "./server/auth";
 import withAuth from "./middlewares/withAuth";
 
 export async function mainMiddleware(request: NextRequest) {

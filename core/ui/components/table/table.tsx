@@ -127,11 +127,15 @@ export const TableBodyRow = ({
   return (
     <div
       className={cn(
-        "w-full rounded-2xl bg-background-main-light px-9 py-6 dark:bg-background-main-dark",
+        "relative w-full rounded-2xl bg-background-main-light",
+        "px-9 py-6 dark:bg-background-main-dark",
         className
       )}
       {...props}
     >
+      {hasNotification && (
+        <Indicator variant="warning" className="absolute -right-4 -top-4" />
+      )}
       {children}
     </div>
   );

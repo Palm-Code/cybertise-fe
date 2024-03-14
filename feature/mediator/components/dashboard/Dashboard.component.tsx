@@ -35,31 +35,31 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
         </Typography>
         <div className="ml-auto w-full max-w-xl">
           <SearchInput
-            variant="hacker"
+            variant="mediator"
             placeholder="Try “#21231” or “Company name”"
           />
         </div>
       </div>
       <div className="flex w-full items-center justify-between">
-        <DashboardFilter variant="hacker" />
+        <DashboardFilter variant="mediator" />
         <div className="inline-flex gap-4">
           <FilterDropdown
-            variant="hacker"
+            variant="mediator"
             value="Sort By"
             options={filterItems}
             onValueChange={() => {}}
           />
-          <FilterViewDropdown type="hacker" options={filterView} />
+          <FilterViewDropdown type="mediator" options={filterView} />
         </div>
       </div>
       {data.length! ? (
         <>
           {viewsContainer[view]}
-          <Pagination variant="hacker" />
+          <Pagination variant="mediator" />
         </>
       ) : (
         <EmptyState
-          variant="hacker"
+          variant="mediator"
           type="ticket"
           buttonText="See VRP Launchpad"
         />

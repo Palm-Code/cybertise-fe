@@ -1,3 +1,5 @@
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+
 export default function DashboardDefaultPage() {
-  return null;
+  return <EmptyState type="under-construction" variant="mediator" />;
 }
