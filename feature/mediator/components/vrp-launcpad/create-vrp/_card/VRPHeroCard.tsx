@@ -1,16 +1,14 @@
 import { cn } from "@/core/lib/utils";
-import { Card, Separator, Typography } from "@/core/ui/components";
+import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
 import { buttonVariants } from "@/core/ui/components/button/base-button";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface I_VRPHeroCard {
-  id: string;
-}
+interface I_VRPHeroCard {}
 
-const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
+const VRPHeroCard = ({}: I_VRPHeroCard) => {
   return (
     <Card>
       <div className="_flexbox__row__start__start w-full gap-9">
@@ -19,6 +17,7 @@ const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
           alt="Company Logo"
           width={48}
           height={48}
+          className="mt-2.5"
         />
         <div className="_flexbox__col__start__start w-full gap-12">
           <div className="_flexbox__row__start__between w-full">
@@ -36,13 +35,7 @@ const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
                 </Typography>
               </div>
             </div>
-            <Link
-              href={`/programs/send-report?company=${id}`}
-              className={cn(buttonVariants({ variant: "primary-hacker" }))}
-            >
-              <Send className="mr-2.5" />
-              Send Report
-            </Link>
+            <Indicator variant="clear">Published</Indicator>
           </div>
           <div className="grid h-fit grid-flow-col gap-12">
             <div className="grid h-full gap-2.5">
