@@ -12,6 +12,7 @@ import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { VRPCardView, VRPGridView, VRPTableView } from "../../containers";
 import { VRPCardType } from "@/types/admin/vrp-launchpad";
 import { tableColumns } from "../../constants/vrp-launchpad";
+import SortBy from "./_dropdown/SortBy.component";
 
 const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
   const view = useReadLocalStorage("view") as "table" | "card" | "grid";
@@ -23,14 +24,11 @@ const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
+    <div className="_flexbox__col__start__start min-h-full w-full gap-10">
       <div className="grid w-full grid-cols-2 place-items-center content-between">
         <Typography variant="h4" weight="bold" className="mr-auto">
-          Bug Bounty Programs
+          VRP Launchpad
         </Typography>
-        <div className="ml-auto w-fit max-w-xl">
-          <FilterViewDropdown type="mediator" options={filterView} />
-        </div>
       </div>
       <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
         <Typography variant="h6" weight="bold">
@@ -38,6 +36,12 @@ const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
         </Typography>
         <SearchInput variant="mediator" placeholder="Try search company name" />
         <ProgramsFilterDropdown />
+      </div>
+      <div className="_flexbox__row__center__between w-full">
+        <SortBy />
+        <div className="ml-auto w-fit max-w-xl">
+          <FilterViewDropdown type="mediator" options={filterView} />
+        </div>
       </div>
       {data.length! ? (
         <>
