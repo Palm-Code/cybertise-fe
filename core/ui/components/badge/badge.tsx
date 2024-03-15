@@ -28,6 +28,10 @@ const badgeVariants = cva(
         low: "text-neutral-light-0 dark:text-neutral-dark-80 bg-semantic-light-low dark:bg-semantic-dark-low px-2.5 py-1",
         info: "text-white bg-semantic-light-info dark:bg-semantic-dark-info px-2.5 py-1",
         url: "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
+        windows:
+          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
+        hardware:
+          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
       },
     },
     defaultVariants: {

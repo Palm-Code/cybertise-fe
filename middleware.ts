@@ -11,6 +11,8 @@ export async function mainMiddleware(request: NextRequest) {
 export default withAuth(mainMiddleware, [
   "/dashboard",
   "/programs",
+  "/companies",
+  "/vrp-launchpad",
   "/reports",
   "/settings",
 ]);

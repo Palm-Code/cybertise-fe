@@ -5,3 +5,6 @@ export { default as ReportsCardView } from "./reports/TicketView.container";
 export { default as ReportsTableView } from "./reports/TableView.container";
 export { default as ReportsGridView } from "./reports/GridView.container";
 export { default as ChatBubble } from "./reports/details/ChatBubble.container";
+export { default as VRPCardView } from "./vrp-launchpad/TicketView.container";
+export { default as VRPGridView } from "./vrp-launchpad/GridView.container";
+export { default as VRPTableView } from "./vrp-launchpad/TableView.container";

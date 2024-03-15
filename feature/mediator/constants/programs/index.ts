@@ -201,17 +201,12 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
     align: "left",
-    width: "w-3/12",
+    width: "w-5/12",
   },
   {
     title: "Asset Type",
     align: "left",
     width: "w-5/12",
-  },
-  {
-    title: "Bounty",
-    align: "left",
-    width: "w-2/12",
   },
   {
     title: "",
