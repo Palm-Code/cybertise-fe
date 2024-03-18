@@ -41,6 +41,7 @@ module.exports = {
         19: "4.75rem",
       },
       colors: {
+        separator: "#E0E0E7",
         light: "#3572AF",
         dark: "#1B1E2A",
         brand: {

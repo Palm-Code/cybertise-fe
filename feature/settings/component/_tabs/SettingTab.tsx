@@ -1,5 +1,5 @@
 "use client";
-import { borderColor } from "@/core/constants";
+import { borderColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { SettingItems } from "@/enums";

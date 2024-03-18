@@ -21,16 +21,16 @@ export default function (
 
     if (requireAuth.some((path) => pathname.startsWith(path))) {
       const session = req.cookies.get("session")?.value;
-      const decryptedSession = await decrypt(session as string);
-      if (
-        pathname.includes("/vrp-launchpad") &&
-        decryptedSession?.user.role !== Role.mediator
-      ) {
-        const url = new URL("/dashboard", req.url);
-        return NextResponse.redirect(url);
-      }
       if (!session) {
-        redirects();
+        return redirects();
+      }
+      if (pathname.includes("/vrp-launchpad")) {
+        const decryptedSession = await decrypt(session as string);
+        const isNotMediator = decryptedSession?.user.role !== Role.mediator;
+        if (isNotMediator) {
+          const url = new URL("/dashboard", req.url);
+          return NextResponse.redirect(url);
+        }
       }
     }
     return middleware(req, next);
