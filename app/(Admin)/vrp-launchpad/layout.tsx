@@ -22,7 +22,7 @@ export default async function SettingsLayout({
           />
         }
       >
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto py-12 pl-14 pr-12">
+        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pb-12 pl-14 pr-12">
           {children}
         </div>
       </Suspense>

@@ -30,7 +30,7 @@ export async function login(formData: FormLoginSchema) {
   const user = {
     email: formData.email,
     name: "john",
-    role: "mediator",
+    role: formData.email.includes("@mediator.com") ? "mediator" : "hacker",
     token: "eysdaksdjkahskfkjashfkjdshkjshdfjkhsdkjfds",
   };
 

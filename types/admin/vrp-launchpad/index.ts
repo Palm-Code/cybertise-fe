@@ -9,3 +9,18 @@ export type VRPCardType = {
   }[];
   status: "active" | "inactive";
 };
+
+export type PricingProps = {
+  tier: string;
+  list: {
+    label: string;
+    value: number;
+  }[];
+  checked: boolean;
+};
+
+export type MonetaryAwardType = {
+  title: string;
+  category: "S" | "M" | "L" | "XL";
+  priceData: PricingProps[];
+};

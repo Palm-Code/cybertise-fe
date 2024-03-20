@@ -7,6 +7,8 @@ import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import Typography from "../typography/typography";
 import { disableArrowKeys } from "@/utils/disable-arrow-number";
+import { NumericFormat } from "react-number-format";
+import CustomNumberFormat from "./price-format-input";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,6 +23,7 @@ export interface InputProps
   iconValue?: string;
   description?: string;
   transparentBg?: boolean;
+  isPrice?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -40,6 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       iconValue,
       description,
       transparentBg = false,
+      isPrice = false,
       ...props
     },
     ref
@@ -98,27 +102,44 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   className="mt-1.5"
                 />
               )}
-              <input
-                className={cn(
-                  "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0",
-                  "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
-                  "focus:outline-none focus:ring-0 dark:text-white",
-                  prefixIcon && "pl-4",
-                  iconValue ? "top-0 pl-5" : "-top-1.5 pl-0"
-                  // props.type === "password" && hasValue
-                  //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
-                  //   : "text-base font-normal"
-                )}
-                placeholder={isFocused ? placeholderText : " "}
-                onChange={onChangeValue}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                autoComplete="new-password"
-                disabled={props?.disabled || withTooltip}
-                onKeyDown={disableArrowKeys}
-                {...props}
-                ref={ref}
-              />
+              {isPrice ? (
+                <CustomNumberFormat
+                  className={cn(
+                    "absolute my-auto h-4 w-full bg-transparent text-neutral-light-0",
+                    "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+                    "focus:outline-none focus:ring-0 dark:text-white"
+                  )}
+                  placeholder={isFocused ? placeholderText : " "}
+                  onChange={onChangeValue}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  autoComplete="new-password"
+                  disabled={props?.disabled || withTooltip}
+                  onKeyDown={disableArrowKeys}
+                />
+              ) : (
+                <input
+                  className={cn(
+                    "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0",
+                    "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+                    "focus:outline-none focus:ring-0 dark:text-white",
+                    prefixIcon && "pl-4",
+                    iconValue ? "top-0 pl-5" : "-top-1.5 pl-0"
+                    // props.type === "password" && hasValue
+                    //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
+                    //   : "text-base font-normal"
+                  )}
+                  placeholder={isFocused ? placeholderText : " "}
+                  onChange={onChangeValue}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  autoComplete="new-password"
+                  disabled={props?.disabled || withTooltip}
+                  onKeyDown={disableArrowKeys}
+                  {...props}
+                  ref={ref}
+                />
+              )}
               {!!label && (
                 <label
                   htmlFor={props.name}

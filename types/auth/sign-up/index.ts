@@ -1,5 +1,5 @@
 export type OptionsType = {
-  icon: string;
+  icon?: string;
   value: string;
   label: string;
 };
