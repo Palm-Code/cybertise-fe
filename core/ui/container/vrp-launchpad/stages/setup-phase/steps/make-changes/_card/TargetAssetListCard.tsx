@@ -1,11 +1,35 @@
+"use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
-import { ShieldCheck } from "@/core/ui/icons";
-import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { Card, Input, Typography } from "@/core/ui/components";
+import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
+import { filterItems } from "@/feature/mediator/constants/dashboard";
+import { FilePenLine, X } from "lucide-react";
+import { useState } from "react";
 
 const TargetAssetListCard = () => {
+  const [assetCount, setAssetCount] = useState(5);
+  const [isEditingList, setIsEditingList] = useState<boolean[]>(
+    Array(assetCount).fill(false)
+  );
+
+  const handleEditClick = (index: number) => {
+    setIsEditingList((prevEditingList) => {
+      const newList = [...prevEditingList];
+      newList[index] = !newList[index];
+      return newList;
+    });
+  };
   return (
-    <>
+    <div className="_flexbox__col__start__start w-full gap-6">
+      <Typography variant="h5" weight="bold">
+        Scope
+      </Typography>
+      <Typography variant="p" affects="small">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi
+        tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi
+        tristique senectus et netus et malesuada fames ac turpis.
+      </Typography>
       <Card
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
@@ -16,27 +40,65 @@ const TargetAssetListCard = () => {
         <Typography variant="h6" weight="bold">
           List of Target Assets
         </Typography>
-        {Array(5)
+        {Array(assetCount)
           .fill(0)
           .map((_, index) => (
             <Card
-              className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100"
-              key={`asset-${index}`}
+              className={cn(
+                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl px-6 py-4",
+                "border border-transparent transition-colors duration-100",
+                "bg-neutral-light-100 dark:bg-neutral-dark-100"
+              )}
+              key={`list-make-changes-target-assets-${index}`}
             >
-              <Typography
-                variant="p"
-                affects="normal"
-                className="text-neutral-light-30 dark:text-neutral-dark-30"
-              >
-                Asset {index + 1}
-              </Typography>
-              <Typography variant="p" affects="normal">
-                Hostname or IP Address Hostname or IP Address
-              </Typography>
+              <Input
+                label="Other"
+                placeholderText="Input url"
+                value="Hostname or IP Address"
+                className="bg-transparen w-full"
+                transparentBg
+                readOnly={!isEditingList[index]}
+              />
+              {isEditingList[index] ? (
+                <AssetType
+                  label="Asset type"
+                  value="ios"
+                  onValueChange={() => {}}
+                  options={filterItems.asset_type}
+                />
+              ) : (
+                <div className="_flexbox__row__center gap-4">
+                  <button
+                    type="button"
+                    title="Edit"
+                    onClick={() => handleEditClick(index)}
+                  >
+                    <FilePenLine />
+                  </button>
+                  <button
+                    type="button"
+                    title="Delete"
+                    onClick={() => setAssetCount(assetCount - 1)}
+                  >
+                    <X />
+                  </button>
+                </div>
+              )}
             </Card>
           ))}
+        <button
+          title="Add"
+          type="button"
+          className={cn(
+            "w-full rounded-md border",
+            "border-neutral-light-0 px-4 py-4.5 dark:border-neutral-dark-0"
+          )}
+          onClick={() => setAssetCount(assetCount + 1)}
+        >
+          + Add New Assets
+        </button>
       </Card>
-    </>
+    </div>
   );
 };
 export default TargetAssetListCard;

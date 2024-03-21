@@ -17,23 +17,9 @@ const MakeChanges = ({ onClickNext, onClickPrev }: I_MakeChangesProps) => {
   const [activeElement, setActiveElement] = useState<number>(0);
 
   const element: Array<React.ReactNode> = [
-    <>
-      <Typography variant="h5" weight="bold">
-        Review VRP {"Title 1"}
-      </Typography>
-      <VrpDescriptionCard />
-    </>,
-    <div
-      className={cn(
-        "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
-        "_flexbox__col__start__start gap-6"
-      )}
-    >
-      <Typography variant="h6" weight="bold">
-        Monetary Awards
-      </Typography>
-      <MonetaryAwardsCard data={monetaryAwardData} />
-    </div>,
+    <VrpDescriptionCard />,
+    <MonetaryAwardsCard data={monetaryAwardData} />,
+    <TargetAssetListCard />,
   ];
 
   const handleActiveElement = (index: number) => {
@@ -50,7 +36,7 @@ const MakeChanges = ({ onClickNext, onClickPrev }: I_MakeChangesProps) => {
             if (activeElement === 0) {
               return onClickPrev();
             }
-            handleActiveElement(0);
+            handleActiveElement(activeElement - 1);
           }}
         >
           Previous
@@ -58,10 +44,10 @@ const MakeChanges = ({ onClickNext, onClickPrev }: I_MakeChangesProps) => {
         <Button
           variant="primary-mediator"
           onClick={() => {
-            if (activeElement === 1) {
+            if (activeElement > 2) {
               return onClickNext();
             }
-            handleActiveElement(1);
+            handleActiveElement(activeElement + 1);
           }}
         >
           Next

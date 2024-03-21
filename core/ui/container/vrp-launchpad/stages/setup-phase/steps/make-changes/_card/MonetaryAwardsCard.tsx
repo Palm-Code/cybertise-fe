@@ -73,21 +73,31 @@ const MonetaryAwardCardList = ({ data }: PricingCardListProps) => {
     );
   };
   return (
-    <div className="_flexbox__col__start w-full gap-6">
-      {data.map((item, idx) => (
-        <MonetaryAwardsCard
-          key={idx}
-          title={item.title}
-          category={item.category}
-          priceData={item.priceData}
-          activeCard={activeCard === item.category}
-          handleClickExpand={() => handleCardClick(item.category)}
+    <div
+      className={cn(
+        "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
+        "_flexbox__col__start__start gap-6"
+      )}
+    >
+      <Typography variant="h6" weight="bold">
+        Monetary Awards
+      </Typography>
+      <div className="_flexbox__col__start w-full gap-6">
+        {data.map((item, idx) => (
+          <MonetaryAwardsCard
+            key={idx}
+            title={item.title}
+            category={item.category}
+            priceData={item.priceData}
+            activeCard={activeCard === item.category}
+            handleClickExpand={() => handleCardClick(item.category)}
+          />
+        ))}
+        <CustomPricing
+          handleClickExpand={() => handleCardClick("custom")}
+          activeCard={activeCard === "custom"}
         />
-      ))}
-      <CustomPricing
-        handleClickExpand={() => handleCardClick("custom")}
-        activeCard={activeCard === "custom"}
-      />
+      </div>
     </div>
   );
 };
