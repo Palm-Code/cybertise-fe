@@ -20,7 +20,7 @@ const CustomPricing = ({
       <button
         type="button"
         title="Expand"
-        className="_flexbox__row__center__start gap-6 focus:outline-none active:outline-none"
+        className="_flexbox__row__center__start w-full gap-6 focus:outline-none active:outline-none"
         onClick={handleClickExpand}
       >
         <ChevronRight
@@ -44,6 +44,9 @@ const CustomPricing = ({
             className="grid w-full grid-cols-2 gap-6 overflow-hidden"
           >
             <Input label="Low" isPrice />
+            <Input label="Medium" isPrice />
+            <Input label="High" isPrice />
+            <Input label="Critical" isPrice />
           </motion.div>
         )}
       </AnimatePresence>

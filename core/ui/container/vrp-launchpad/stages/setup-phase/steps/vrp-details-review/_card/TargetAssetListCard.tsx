@@ -19,7 +19,10 @@ const TargetAssetListCard = () => {
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <Card className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100">
+            <Card
+              className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100"
+              key={`asset-target-${index}`}
+            >
               <Typography
                 variant="p"
                 affects="normal"

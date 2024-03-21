@@ -48,7 +48,7 @@ const PasswordInput = (props: I_PasswordInputProps) => {
               {props.options?.length! &&
                 props.options.map((item, index) => (
                   <Typography
-                    key={index}
+                    key={`item-${index}`}
                     variant="p"
                     affects="small"
                     className="inline-flex items-center gap-2"

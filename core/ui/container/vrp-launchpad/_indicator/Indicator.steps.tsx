@@ -62,7 +62,10 @@ const IndicatorSteps = ({ variant, currentSteps }: I_IndicatorStepsProps) => {
         {Array(5)
           .fill(0)
           .map((_, index) => (
-            <div className="_flexbox__col__start relative w-full gap-1">
+            <div
+              className="_flexbox__col__start relative w-full gap-1"
+              key={`step-${index}`}
+            >
               {index < 5 && {
                 ...stepsIcon(index, currentStatus[variant].icon, "mx-auto"),
               }}

@@ -176,7 +176,10 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 )}
               >
                 {input.map((file, index) => (
-                  <Card className="_flexbox__row__center__start h-fit w-full gap-4 p-4">
+                  <Card
+                    className="_flexbox__row__center__start h-fit w-full gap-4 p-4"
+                    key={`file-${index}`}
+                  >
                     <div className="h-10 w-10">
                       <File
                         width={40}

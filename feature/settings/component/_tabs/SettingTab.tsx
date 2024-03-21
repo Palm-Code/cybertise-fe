@@ -18,7 +18,7 @@ const Tab = ({ items, active, variant, onValueChange }: I_TabProps) => {
       <div className="grid w-fit grid-flow-col gap-[42px]">
         {items.map((item) => (
           <Typography
-            key={item.value}
+            key={`tab-${item.value}`}
             variant="p"
             affects="small"
             className={cn(

@@ -20,9 +20,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#00B59C" />
-        <stop offset="0.0001" stop-color="#B1B500" />
-        <stop offset="1" stop-color="#FDFF9C" />
+        <stop stopColor="#00B59C" />
+        <stop offset="0.0001" stopColor="#B1B500" />
+        <stop offset="1" stopColor="#FDFF9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71293">
         <rect width="24" height="24" fill="white" />
@@ -37,9 +37,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#70B500" />
-        <stop offset="0.0001" stop-color="#7BB500" />
-        <stop offset="1" stop-color="#B6FF9C" />
+        <stop stopColor="#70B500" />
+        <stop offset="0.0001" stopColor="#7BB500" />
+        <stop offset="1" stopColor="#B6FF9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71303">
         <rect width="24" height="24" fill="white" />
@@ -54,9 +54,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#B55700" />
-        <stop offset="0.0001" stop-color="#B58200" />
-        <stop offset="1" stop-color="#FFAE9C" />
+        <stop stopColor="#B55700" />
+        <stop offset="0.0001" stopColor="#B58200" />
+        <stop offset="1" stopColor="#FFAE9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71313">
         <rect width="24" height="24" fill="white" />
@@ -71,10 +71,10 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#B50000" />
-        <stop offset="0.0001" stop-color="#B50000" />
-        <stop offset="1" stop-color="#FF9C9C" />
-        <stop offset="1" stop-color="#FF9C9C" />
+        <stop stopColor="#B50000" />
+        <stop offset="0.0001" stopColor="#B50000" />
+        <stop offset="1" stopColor="#FF9C9C" />
+        <stop offset="1" stopColor="#FF9C9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71324">
         <rect width="24" height="24" fill="white" />

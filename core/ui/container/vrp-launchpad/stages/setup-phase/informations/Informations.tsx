@@ -29,7 +29,7 @@ const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
       </Typography>
       <div className="_flexbox__col__start__start gap-5">
         {lists.map((info, index) => (
-          <div className="grid grid-flow-col gap-3">
+          <div className="grid grid-flow-col gap-3" key={`info-${index}`}>
             <Square
               width={20}
               height={20}

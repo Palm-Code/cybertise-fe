@@ -26,7 +26,7 @@ const CardBilling = () => {
       <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
         {menus.slice(0, 3).map((menu) => (
           <Typography
-            key={menu}
+            key={`menu-card-billing-${menu}`}
             variant="p"
             affects="normal"
             className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
@@ -47,7 +47,7 @@ const CardBilling = () => {
       <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
         {menus.slice(3, 6).map((menu) => (
           <Typography
-            key={menu}
+            key={`menu-card-billing-ID-${menu}`}
             variant="p"
             affects="normal"
             className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"

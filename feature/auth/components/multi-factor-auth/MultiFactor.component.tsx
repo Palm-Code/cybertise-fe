@@ -51,7 +51,7 @@ const MultiFactorAuth = (props: I_MultiFactorAuth) => {
             <>
               <div className="_flexbox__row__center__between w-full">
                 {slots.map((slot, idx) => (
-                  <Slot key={idx} {...slot} />
+                  <Slot key={`slot-${idx}`} {...slot} />
                 ))}
               </div>
             </>

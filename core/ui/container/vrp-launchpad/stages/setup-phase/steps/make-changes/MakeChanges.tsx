@@ -16,32 +16,33 @@ interface I_MakeChangesProps {
 const MakeChanges = ({ onClickNext, onClickPrev }: I_MakeChangesProps) => {
   const [activeElement, setActiveElement] = useState<number>(0);
 
+  const element: Array<React.ReactNode> = [
+    <>
+      <Typography variant="h5" weight="bold">
+        Review VRP {"Title 1"}
+      </Typography>
+      <VrpDescriptionCard />
+    </>,
+    <div
+      className={cn(
+        "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
+        "_flexbox__col__start__start gap-6"
+      )}
+    >
+      <Typography variant="h6" weight="bold">
+        Monetary Awards
+      </Typography>
+      <MonetaryAwardsCard data={monetaryAwardData} />
+    </div>,
+  ];
+
   const handleActiveElement = (index: number) => {
     setActiveElement(index);
   };
 
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
-      {activeElement === 0 ? (
-        <>
-          <Typography variant="h5" weight="bold">
-            Review VRP {"Title 1"}
-          </Typography>
-          <VrpDescriptionCard />
-        </>
-      ) : (
-        <div
-          className={cn(
-            "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
-            "_flexbox__col__start__start gap-6"
-          )}
-        >
-          <Typography variant="h6" weight="bold">
-            Monetary Awards
-          </Typography>
-          <MonetaryAwardsCard data={monetaryAwardData} />
-        </div>
-      )}
+      {element[activeElement]}
       <div className="_flexbox__row__center gap-8">
         <Button
           variant="secondary-mediator"

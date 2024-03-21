@@ -18,7 +18,10 @@ const PricingCard = ({ tier, list, checked }: PricingProps) => {
         </Typography>
       </div>
       {list.map((data, idx) => (
-        <div className="_flexbox__row__center__between w-full" key={idx}>
+        <div
+          className="_flexbox__row__center__between w-full"
+          key={`list-make-changes-${idx}`}
+        >
           <Typography
             variant="p"
             affects="normal"
@@ -42,7 +45,7 @@ type PricingCardListProps = {
 const PricingCardList = ({ data }: PricingCardListProps) => {
   return data.map((data, idx) => (
     <PricingCard
-      key={idx}
+      key={`list-make-changes-card-${idx}`}
       tier={data.tier}
       list={data.list}
       checked={data.checked}

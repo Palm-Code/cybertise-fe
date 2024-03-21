@@ -26,7 +26,7 @@ const MonetaryAwardsCard = ({
       <button
         type="button"
         title="Expand"
-        className="_flexbox__row__center__start gap-6 focus:outline-none active:outline-none"
+        className="_flexbox__row__center__start w-full gap-6 focus:outline-none active:outline-none"
         onClick={handleClickExpand}
       >
         <ChevronRight

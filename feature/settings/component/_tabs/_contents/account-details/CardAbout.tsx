@@ -31,7 +31,7 @@ const CardAbout = () => {
       <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
         {menus.map((menu) => (
           <Typography
-            key={menu}
+            key={`menu-${menu}`}
             variant="p"
             affects="normal"
             className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
