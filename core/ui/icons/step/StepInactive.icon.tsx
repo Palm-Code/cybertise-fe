@@ -10,7 +10,7 @@ const StepInactive = ({ ...props }: I_Icons) => {
       fill="none"
       {...props}
     >
-      <g clip-path="url(#clip0_1971_62633)">
+      <g clipPath="url(#clip0_1971_62633)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

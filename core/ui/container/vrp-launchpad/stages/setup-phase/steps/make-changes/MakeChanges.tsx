@@ -3,10 +3,9 @@ import { Button, Typography } from "@/core/ui/components";
 import VrpDescriptionCard from "./_card/VrpDescriptionCard";
 import MonetaryAwardsCard from "./_card/MonetaryAwardsCard";
 import TargetAssetListCard from "./_card/TargetAssetListCard";
-import Notes from "./_card/Notes";
+import Notes from "../notes/Notes";
 import { useState } from "react";
 import { monetaryAwardData } from "@/core/constants/vrp-launchpad";
-import { cn } from "@/core/lib/utils";
 
 interface I_MakeChangesProps {
   onClickNext: () => void;
@@ -44,7 +43,7 @@ const MakeChanges = ({ onClickNext, onClickPrev }: I_MakeChangesProps) => {
         <Button
           variant="primary-mediator"
           onClick={() => {
-            if (activeElement > 2) {
+            if (activeElement > element.length - 2) {
               return onClickNext();
             }
             handleActiveElement(activeElement + 1);

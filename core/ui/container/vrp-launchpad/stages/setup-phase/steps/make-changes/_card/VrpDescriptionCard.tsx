@@ -11,12 +11,12 @@ const VrpDescriptionCard = () => {
   return (
     <>
       <Typography variant="h5" weight="bold">
-        Review VRP {"Title 1"}
+        VRP Details
       </Typography>
       <Card
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
-          "bg-background-page-light dark:bg-background-page-dark",
+          "bg-neutral-light-100 dark:bg-neutral-dark-100",
           "p-7.5"
         )}
       >

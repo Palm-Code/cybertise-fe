@@ -37,7 +37,11 @@ const TargetAssetListCard = () => {
           "p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="p"
+          affects="normal"
+          className="text-neutral-light-40 dark:text-neutral-dark-40"
+        >
           List of Target Assets
         </Typography>
         {Array(assetCount)

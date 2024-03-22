@@ -9,6 +9,7 @@ import Information from "./informations/Informations";
 import { vrpInformations } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "./steps/vrp-details-review/VrpDetailsReview";
 import MakeChanges from "./steps/make-changes/MakeChanges";
+import Notes from "./steps/notes/Notes";
 
 interface I_SetupProps {
   id: string;
@@ -41,15 +42,11 @@ const Setup = ({ id, variant }: I_SetupProps) => {
       key: "make-changes",
     },
     {
-      element: <></>,
-      key: "reportDescription",
+      element: <Notes onClickNext={() => next()} onClickPrev={() => back()} />,
+      key: "notes",
     },
     {
-      element: <></>,
-      key: "problemCauses",
-    },
-    {
-      element: <></>,
+      element: <VrpDetailsReview isLastStep onClickEdit={() => goTo(1)} />,
       key: "review",
     },
   ]);
@@ -84,9 +81,7 @@ const Setup = ({ id, variant }: I_SetupProps) => {
                 <Card
                   className={cn(
                     "_flexbox__col__start__start h-full gap-6",
-                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8",
-                    isLastStep &&
-                      "bg-neutral-light-100 dark:bg-neutral-dark-100"
+                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8"
                   )}
                 >
                   {step}
