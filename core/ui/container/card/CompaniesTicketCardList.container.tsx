@@ -41,9 +41,6 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
               <Typography variant="p" affects="normal">
                 {props.company_name}
               </Typography>
-              <div className="_flexbox__row__center gap-4">
-                <Badge variant="default">{props.domain}</Badge>
-              </div>
             </div>
             <div className="_flexbox__row__center ml-auto gap-4">
               <Indicator variant="warning">{props.status}</Indicator>

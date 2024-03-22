@@ -3,3 +3,4 @@ export { default as ProgramsTicketCardList } from "./card/ProgramsTicketCardList
 export { default as ReportsTicketCardList } from "./card/ReportsTicketCardList.container";
 export { default as VRPTicketCardList } from "./card/VRPTicketCardList.container";
 export { default as CreateVRPLaunchpad } from "./vrp-launchpad/CreateVrp.container";
+export { default as CompaniesTicketCardList } from "./card/CompaniesTicketCardList.container";

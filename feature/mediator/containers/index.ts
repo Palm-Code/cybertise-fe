@@ -8,3 +8,6 @@ export { default as ChatBubble } from "./reports/details/ChatBubble.container";
 export { default as VRPCardView } from "./vrp-launchpad/TicketView.container";
 export { default as VRPGridView } from "./vrp-launchpad/GridView.container";
 export { default as VRPTableView } from "./vrp-launchpad/TableView.container";
+export { default as CompaniesCardView } from "./companies/TicketView.container";
+export { default as CompaniesTableView } from "./companies/TableView.container";
+export { default as CompaniesGridView } from "./companies/GridView.container";
