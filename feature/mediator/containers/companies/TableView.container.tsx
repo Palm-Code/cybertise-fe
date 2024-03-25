@@ -40,7 +40,11 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableBodyRow key={`table-row-${index}`}>
+            <TableBodyRow
+              key={`table-row-${index}`}
+              isClickable
+              href={`/companies/${item.company_id}`}
+            >
               <TableRow>
                 <TableData
                   className={cn(columns[0].width, `text-${columns[0].align}`)}
@@ -85,18 +89,6 @@ export default function Table({ data, columns }: I_TableProps) {
                   >
                     {item.status}
                   </Indicator>
-                </TableData>
-                <TableData
-                  className={cn(columns[3].width, `text-${columns[3].align}`)}
-                >
-                  <Link
-                    href={`/companies/${item.company_id}`}
-                    className={cn(
-                      buttonVariants({ variant: "primary-mediator" })
-                    )}
-                  >
-                    See Details
-                  </Link>
                 </TableData>
               </TableRow>
             </TableBodyRow>

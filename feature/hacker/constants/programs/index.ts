@@ -204,6 +204,11 @@ export const tableColumns: I_TableColumns[] = [
     width: "w-3/12",
   },
   {
+    title: "VRP Type",
+    align: "center",
+    width: "w-2/12",
+  },
+  {
     title: "Asset Type",
     align: "left",
     width: "w-5/12",
@@ -212,11 +217,6 @@ export const tableColumns: I_TableColumns[] = [
     title: "Bounty",
     align: "left",
     width: "w-2/12",
-  },
-  {
-    title: "",
-    align: "right",
-    width: "w-2/12 ml-auto",
   },
 ];
 export const scopeTableColumns: I_TableColumns[] = [

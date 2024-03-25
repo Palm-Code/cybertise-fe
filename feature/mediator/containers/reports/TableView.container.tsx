@@ -92,8 +92,9 @@ export default function Table({ data, columns }: I_TableProps) {
                     <div className="_flexbox__row__center__start gap-3">
                       <Indicator
                         variant={item.status === "Open" ? "warning" : "clear"}
-                      />
-                      {item.status}
+                      >
+                        {item.status}
+                      </Indicator>
                     </div>
                   </TableData>
                   <TableData

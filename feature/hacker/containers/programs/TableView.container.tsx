@@ -32,7 +32,11 @@ export default function Table({ data, columns }: I_TableProps) {
         <TableHeader>
           <TableRow>
             {columns.map((column, index) => (
-              <TableHead className={column.width} key={`table-head-${index}`}>
+              <TableHead
+                className={column.width}
+                key={`table-head-${index}`}
+                align={column.align}
+              >
                 {column.title}
               </TableHead>
             ))}
@@ -40,30 +44,35 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableBodyRow key={`table-row-${index}`}>
+            <TableBodyRow
+              key={`table-row-${index}`}
+              isClickable
+              href={`/programs/${item.company_id}`}
+            >
               <TableRow>
                 <TableData
                   className={cn(columns[0].width, `text-${columns[0].align}`)}
                 >
-                  <div className="_flexbox__col__start__start gap-4">
-                    <div className="_flexbox__row__center__start gap-1">
-                      <Image
-                        src={item.logo}
-                        alt={`${item.company_name} logo`}
-                        width={24}
-                        height={24}
-                      />
-                      <Typography variant="p" affects="small" weight="semibold">
-                        {item.company_name}
-                      </Typography>
-                    </div>
-                    <div className="_flexbox__row__center__start gap-4">
-                      <Badge variant="default">{item.domain}</Badge>
-                    </div>
+                  <div className="_flexbox__row__center__start gap-4">
+                    <Image
+                      src={item.logo}
+                      alt={`${item.company_name} logo`}
+                      width={32}
+                      height={32}
+                    />
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {item.company_name}
+                    </Typography>
                   </div>
                 </TableData>
                 <TableData
-                  className={cn(columns[1].width, `text-${columns[1].align}`)}
+                  className={cn(columns[1].width)}
+                  align={columns[1].align}
+                >
+                  <Badge variant="default">{item.domain}</Badge>
+                </TableData>
+                <TableData
+                  className={cn(columns[2].width, `text-${columns[2].align}`)}
                 >
                   <div className="_flexbox__row__center__start flex-wrap gap-3">
                     {item.asset_type.map((type, index) => (
@@ -74,7 +83,7 @@ export default function Table({ data, columns }: I_TableProps) {
                   </div>
                 </TableData>
                 <TableData
-                  className={cn(columns[2].width, `text-${columns[2].align}`)}
+                  className={cn(columns[3].width, `text-${columns[3].align}`)}
                 >
                   <Typography
                     variant="p"
@@ -84,18 +93,6 @@ export default function Table({ data, columns }: I_TableProps) {
                     {currencyFormatters.NumberToEUR(item.min_bounty ?? 0)} -{" "}
                     {currencyFormatters.NumberToEUR(item.max_bounty ?? 0)}
                   </Typography>
-                </TableData>
-                <TableData
-                  className={cn(columns[3].width, `text-${columns[3].align}`)}
-                >
-                  <Link
-                    href={`/programs/${item.company_id}`}
-                    className={cn(
-                      buttonVariants({ variant: "primary-hacker" })
-                    )}
-                  >
-                    See Details
-                  </Link>
                 </TableData>
               </TableRow>
             </TableBodyRow>

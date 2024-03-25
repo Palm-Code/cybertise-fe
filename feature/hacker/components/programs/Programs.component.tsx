@@ -14,7 +14,8 @@ import { tableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 
 const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
     table: <ProgramsTableView columns={tableColumns} data={data} />,

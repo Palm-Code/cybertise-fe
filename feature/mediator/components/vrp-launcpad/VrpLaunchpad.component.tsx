@@ -1,6 +1,7 @@
 "use client";
 import { filterView } from "@/core/constants/dashboard";
 import {
+  Button,
   FilterViewDropdown,
   Pagination,
   SearchInput,
@@ -15,7 +16,8 @@ import { tableColumns } from "../../constants/vrp-launchpad";
 import SortBy from "./_dropdown/SortBy.component";
 
 const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
     table: <VRPTableView columns={tableColumns} data={data} />,
@@ -25,10 +27,17 @@ const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
 
   return (
     <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
-      <div className="grid w-full grid-cols-2 place-items-center content-between">
+      <div className="_flexbox__row__center__between w-full">
         <Typography variant="h4" weight="bold" className="mr-auto">
           VRP Launchpad
         </Typography>
+        <div className="grid w-fit grid-cols-3 gap-4">
+          <Button variant="primary-mediator" fullWidth>
+            All
+          </Button>
+          <Button variant="secondary-mediator">Phase 2</Button>
+          <Button variant="secondary-mediator">Phase 4</Button>
+        </div>
       </div>
       <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
         <Typography variant="h6" weight="bold">

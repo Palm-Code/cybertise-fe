@@ -1,13 +1,11 @@
 import { filterItems } from "@/core/constants/dashboard";
 import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 
-interface IProgramsFilterDropdownProps {
+interface ISortByDropdownProps {
   variant?: "hacker" | "company" | "mediator";
 }
 
-const ProgramsFilterDropdown = ({
-  variant = "hacker",
-}: IProgramsFilterDropdownProps) => {
+const SortByDropdown = ({ variant = "hacker" }: ISortByDropdownProps) => {
   return (
     <BaseDropdown
       label="Sort By"
@@ -17,4 +15,4 @@ const ProgramsFilterDropdown = ({
     />
   );
 };
-export default ProgramsFilterDropdown;
+export default SortByDropdown;

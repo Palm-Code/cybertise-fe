@@ -19,7 +19,8 @@ import {
 import { tableColumns } from "../../constants/reports";
 
 const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
     table: <ReportsTableView columns={tableColumns} data={data} />,

@@ -67,6 +67,7 @@ export const TableHead = ({
   children,
   className,
   isClickable = false,
+  align = "left",
   ...props
 }: I_TableProps) => {
   const textAlign: { [key: string]: string } = {
@@ -76,8 +77,11 @@ export const TableHead = ({
   };
 
   return (
-    <div className={cn("w-full", textAlign, className)} {...props}>
-      <Typography variant="p" affects="normal" weight="semibold">
+    <div
+      className={cn("w-full", textAlign[align as string], className)}
+      {...props}
+    >
+      <Typography variant="p" affects="normal" weight="semibold" align={align}>
         {children}
       </Typography>
     </div>

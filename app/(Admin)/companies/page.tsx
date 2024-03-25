@@ -1,4 +1,4 @@
-import CompaniesFragment from "@/feature/mediator/fragments/companies/VRPLaunchpad.fragment";
+import { CompaniesFragment } from "@/feature/mediator/fragments";
 
 export default function VRPLaunchpadPage() {
   return <CompaniesFragment />;

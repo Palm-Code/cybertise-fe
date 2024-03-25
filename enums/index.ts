@@ -5,6 +5,14 @@ export enum TabsItem {
   thanks = "thanks",
 }
 
+export enum companyTabsItemEnums {
+  vulnerability_program = "vulnerability_program",
+  active_tickets = "active_tickets",
+  thanks = "thanks",
+  collaborators = "collaborators",
+  activity_logs = "activity_logs",
+}
+
 export enum SettingItems {
   details = "details",
   notifications = "notifications",

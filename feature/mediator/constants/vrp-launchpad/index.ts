@@ -1,7 +1,34 @@
 import { I_TableColumns } from "@/interfaces";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
+import { SortFilterType } from "@/types/admin/dashboard";
+import {
+  CollaboratorCardDataType,
+  VRPCardType,
+  VRPCompaniesCardType,
+} from "@/types/admin/vrp-launchpad";
 
 export const tableColumns: I_TableColumns[] = [
+  {
+    title: "Company Name",
+    align: "left",
+    width: "w-3/12",
+  },
+  {
+    title: "VRP Type",
+    align: "center",
+    width: "w-2/12",
+  },
+  {
+    title: "Asset Type",
+    align: "left",
+    width: "w-5/12",
+  },
+  {
+    title: "Status",
+    align: "left",
+    width: "w-2/12",
+  },
+];
+export const companiesTableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
     align: "left",
@@ -17,10 +44,28 @@ export const tableColumns: I_TableColumns[] = [
     align: "left",
     width: "w-2/12",
   },
+];
+
+export const companyTabsItem: SortFilterType[] = [
   {
-    title: "",
-    align: "right",
-    width: "w-2/12 ml-auto",
+    label: "Vulnerability Program",
+    value: "vulnerability_program",
+  },
+  {
+    label: "Active Tickets",
+    value: "active_tickets",
+  },
+  {
+    label: "Thanks",
+    value: "thanks",
+  },
+  {
+    label: "Collaborators",
+    value: "collaborators",
+  },
+  {
+    label: "Activity Logs",
+    value: "activity_logs",
   },
 ];
 
@@ -117,5 +162,60 @@ export const vrpCardsData: VRPCardType[] = [
       { label: "Cloud Platform", value: "url" }, // Added another record
     ],
     status: "active",
+  },
+];
+
+export const vrpCompaniesCardsData: VRPCompaniesCardType[] = [
+  {
+    id: "EX-001",
+    title: "EX-001 - Example Corp",
+    asset_type: [
+      { label: "Mobile App", value: "android" },
+      { label: "Website", value: "url" },
+      { label: "Backend API", value: "url" }, // Added another record
+    ],
+    status: "active",
+  },
+  {
+    id: "EX-002",
+    title: "EX-002 - Another Corp",
+    asset_type: [{ label: "VR Device", value: "hardware" }],
+    status: "inactive",
+  },
+];
+
+export const collaboratorTableColums: I_TableColumns[] = [
+  {
+    title: "Hacker Name",
+    align: "left",
+    width: "w-1/2",
+  },
+  {
+    title: "Location",
+    align: "center",
+    width: "w-1/2",
+  },
+];
+
+export const collaboratorCardData: CollaboratorCardDataType[] = [
+  {
+    name: "Kevin",
+    location: "USA",
+  },
+  {
+    name: "Giga",
+    location: "Canada",
+  },
+  {
+    name: "Tantri",
+    location: "Canada",
+  },
+  {
+    name: "Junianto",
+    location: "Canada",
+  },
+  {
+    name: "Rizky",
+    location: "Canada",
   },
 ];

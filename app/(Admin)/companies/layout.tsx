@@ -1,6 +1,4 @@
 import { Header } from "@/core/ui/layout";
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
 export default async function SettingsLayout({
   children,
@@ -13,19 +11,9 @@ export default async function SettingsLayout({
       suppressHydrationWarning
     >
       <Header />
-      <Suspense
-        fallback={
-          <Loader2
-            width={64}
-            height={64}
-            className="m-auto animate-spin stroke-2 text-lime-normal"
-          />
-        }
-      >
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pb-12 pl-14 pr-12">
-          {children}
-        </div>
-      </Suspense>
+      <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pb-12 pl-14 pr-12">
+        {children}
+      </div>
     </div>
   );
 }

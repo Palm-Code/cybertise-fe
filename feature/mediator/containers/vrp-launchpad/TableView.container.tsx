@@ -33,7 +33,11 @@ export default function Table({ data, columns }: I_TableProps) {
         <TableHeader>
           <TableRow>
             {columns.map((column, index) => (
-              <TableHead className={column.width} key={`table-head-${index}`}>
+              <TableHead
+                className={column.width}
+                key={`table-head-${index}`}
+                align={column.align}
+              >
                 {column.title}
               </TableHead>
             ))}
@@ -41,7 +45,11 @@ export default function Table({ data, columns }: I_TableProps) {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableBodyRow key={`table-row-${index}`}>
+            <TableBodyRow
+              key={`table-row-${index}`}
+              isClickable
+              href={`/reports/${item.company_id}`}
+            >
               <TableRow>
                 <TableData
                   className={cn(columns[0].width, `text-${columns[0].align}`)}
@@ -53,18 +61,18 @@ export default function Table({ data, columns }: I_TableProps) {
                       width={24}
                       height={24}
                     />
-                    <div className="_flexbox__col__start__start gap-4">
-                      <Typography variant="p" affects="small" weight="semibold">
-                        {item.company_name}
-                      </Typography>
-                      <div className="_flexbox__row__center__start gap-4">
-                        <Badge variant="default">{item.domain}</Badge>
-                      </div>
-                    </div>
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {item.company_name}
+                    </Typography>
                   </div>
                 </TableData>
                 <TableData
                   className={cn(columns[1].width, `text-${columns[1].align}`)}
+                >
+                  <Badge variant="default">{item.domain}</Badge>
+                </TableData>
+                <TableData
+                  className={cn(columns[2].width, `text-${columns[2].align}`)}
                 >
                   <div className="_flexbox__row__center__start flex-wrap gap-3">
                     {item.asset_type.map((type, index) => (
@@ -75,25 +83,13 @@ export default function Table({ data, columns }: I_TableProps) {
                   </div>
                 </TableData>
                 <TableData
-                  className={cn(columns[2].width, `text-${columns[2].align}`)}
+                  className={cn(columns[3].width, `text-${columns[3].align}`)}
                 >
                   <Indicator
                     variant={item.status === "active" ? "warning" : "clear"}
                   >
                     {item.status}
                   </Indicator>
-                </TableData>
-                <TableData
-                  className={cn(columns[3].width, `text-${columns[3].align}`)}
-                >
-                  <Link
-                    href={`/programs/${item.company_id}`}
-                    className={cn(
-                      buttonVariants({ variant: "primary-mediator" })
-                    )}
-                  >
-                    See Details
-                  </Link>
                 </TableData>
               </TableRow>
             </TableBodyRow>

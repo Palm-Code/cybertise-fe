@@ -10,19 +10,20 @@ import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { VRPCardType } from "@/types/admin/vrp-launchpad";
-import { tableColumns } from "../../constants/vrp-launchpad";
-import SortBy from "./_dropdown/SortBy.component";
+import { companiesTableColumns } from "../../constants/vrp-launchpad";
 import {
   CompaniesCardView,
   CompaniesGridView,
   CompaniesTableView,
 } from "../../containers";
+import SortByDropdown from "./_dropdown/SortBy.component";
 
 const Companies = ({ data }: { data: VRPCardType[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <CompaniesTableView columns={tableColumns} data={data} />,
+    table: <CompaniesTableView columns={companiesTableColumns} data={data} />,
     card: <CompaniesCardView data={data} />,
     grid: <CompaniesGridView data={data} />,
   };
@@ -42,7 +43,7 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
         <ProgramsFilterDropdown />
       </div>
       <div className="_flexbox__row__center__between w-full">
-        <SortBy />
+        <SortByDropdown />
         <div className="ml-auto w-fit max-w-xl">
           <FilterViewDropdown type="mediator" options={filterView} />
         </div>

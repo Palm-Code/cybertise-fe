@@ -19,7 +19,8 @@ import {
 } from "../../containers";
 
 const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
     table: <DashboardTableView columns={tableColumns} data={data} />,

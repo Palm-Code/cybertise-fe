@@ -11,7 +11,7 @@ interface I_TicketCardProps extends VRPCardType {
 
 const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
   return (
-    <Card>
+    <Card isClickable href={`/vrp-launchpad/${props.company_name}`}>
       <div className="_flexbox__row__start w-full gap-9">
         {!isGridCard && (
           <Image
@@ -45,7 +45,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 <Badge variant="default">{props.domain}</Badge>
               </div>
             </div>
-            <div className="_flexbox__row__center ml-auto gap-4">
+            <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
               <Indicator variant="warning">{props.status}</Indicator>
             </div>
           </div>
@@ -73,23 +73,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 )}
               </div>
             </div>
-            {!isGridCard && (
-              <Link
-                className={cn(buttonVariants({ variant: "primary-mediator" }))}
-                href={`/vrp-launchpad/${props.company_name}`}
-              >
-                See Details
-              </Link>
-            )}
           </div>
-          {isGridCard && (
-            <Link
-              className={cn(buttonVariants({ variant: "primary-mediator" }))}
-              href={`/vrp-launchpad/${props.company_id}`}
-            >
-              See Details
-            </Link>
-          )}
         </div>
       </div>
     </Card>

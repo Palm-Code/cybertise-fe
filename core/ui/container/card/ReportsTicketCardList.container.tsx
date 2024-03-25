@@ -77,7 +77,6 @@ const TicketCard = ({
             <div className="_flexbox__col__start gap-2.5">
               <Indicator
                 variant={props.status === "Open" ? "warning" : "clear"}
-                className="-m-2.5"
               >
                 {props.status}
               </Indicator>
