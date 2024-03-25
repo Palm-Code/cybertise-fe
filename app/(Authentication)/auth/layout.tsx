@@ -1,5 +1,5 @@
-import { getSession } from "@/auth";
 import { AuthWrapper } from "@/core/ui/layout";
+import { getSession } from "@/server/session";
 import { redirect } from "next/navigation";
 
 export default async function AuthLayout({

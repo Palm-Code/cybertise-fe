@@ -79,7 +79,7 @@ const SelectDropdown = ({
             <SelectItem key={option.value} value={option.value}>
               {withIcon && (
                 <Image
-                  src={option.icon}
+                  src={option.icon ?? ""}
                   alt={option.label}
                   width={24}
                   height={16}

@@ -6,7 +6,7 @@ import { FormSchema } from "../SignUpCompany.component";
 import { Input } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
-import { passwordValidation } from "@/core/constants";
+import { passwordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";

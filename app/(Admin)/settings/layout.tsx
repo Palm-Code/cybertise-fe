@@ -2,13 +2,10 @@ import { Header } from "@/core/ui/layout";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
-export default function SettingsLayout({
-  hacker,
+export default async function SettingsLayout({
+  children,
 }: {
   children: React.ReactNode;
-  hacker: React.ReactNode;
-  company: React.ReactNode;
-  mediator: React.ReactNode;
 }) {
   return (
     <div
@@ -26,7 +23,7 @@ export default function SettingsLayout({
         }
       >
         <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto py-12 pl-14 pr-12">
-          {hacker}
+          {children}
         </div>
       </Suspense>
     </div>

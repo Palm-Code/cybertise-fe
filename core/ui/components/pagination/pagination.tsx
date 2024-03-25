@@ -18,12 +18,12 @@ const Pagination = ({ variant }: I_PaginationProps) => {
           <PaginationPrevious variant={variant} href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink variant={variant} href="#">
+          <PaginationLink variant={variant} href="#" isActive>
             1
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink variant={variant} href="#" isActive>
+          <PaginationLink variant={variant} href="#">
             2
           </PaginationLink>
         </PaginationItem>

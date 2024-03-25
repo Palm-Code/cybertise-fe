@@ -1,5 +1,5 @@
 export type OptionsType = {
-  icon: string;
+  icon?: string;
   value: string;
   label: string;
 };
@@ -13,10 +13,10 @@ export type UserType = {
   user: {
     email: string;
     name: string;
-    role: string;
+    role: "hacker" | "company" | "mediator";
     token: string;
   };
-  role: string;
+  role: "hacker" | "company" | "mediator";
   token: string;
   token_expired: Date;
 };

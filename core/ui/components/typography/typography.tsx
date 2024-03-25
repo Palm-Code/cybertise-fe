@@ -59,12 +59,12 @@ export interface TypographyProps
     VariantProps<typeof typographyVariants> {}
 
 const Typography = React.forwardRef<HTMLHeadingElement, TypographyProps>(
-  ({ className, variant, affects, weight, ...props }, ref) => {
+  ({ className, variant, affects, weight, align, ...props }, ref) => {
     const Comp = variant || "p";
     return (
       <Comp
         className={cn(
-          typographyVariants({ variant, affects, weight, className })
+          typographyVariants({ variant, affects, weight, align, className })
         )}
         ref={ref}
         {...props}

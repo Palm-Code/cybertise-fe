@@ -3,6 +3,7 @@ import {
   Bug,
   Building2,
   LayoutDashboard,
+  LogOut,
   Settings,
   TextSearch,
 } from "lucide-react";
@@ -10,10 +11,10 @@ import Typography from "../../components/typography/typography";
 import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
-import { Role } from "@/types/admin/sidebar";
 import { VrpManagement } from "../../icons";
-import { usePathname } from "next/navigation";
-import { borderColor, menuItems } from "@/core/constants";
+import { redirect, usePathname, useRouter } from "next/navigation";
+import { borderColor, menuItems } from "@/core/constants/common";
+import { logout } from "@/server/auth";
 
 interface SidebarProps {
   type: string;
@@ -30,6 +31,7 @@ const iconsObject: { [key: string]: React.ReactNode } = {
 
 const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
+  const { push } = useRouter();
   const menu = menuItems[type as keyof typeof menuItems];
   return (
     <div
@@ -88,6 +90,28 @@ const Sidebar = ({ type }: SidebarProps) => {
             Settings
           </Typography>
         </Link>
+        <form
+          action={async () => {
+            await logout();
+          }}
+          className="w-full"
+        >
+          <button
+            type="submit"
+            className={cn(
+              "_flexbox__row__center__start h-16 w-full gap-4",
+              "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+              "border-l-2 border-transparent",
+              `hover:${borderColor[type as keyof typeof borderColor]}`,
+              "bg-transparent font-normal"
+            )}
+          >
+            <LogOut className="h-6 w-6" />
+            <Typography variant="p" affects="normal">
+              Logout
+            </Typography>
+          </button>
+        </form>
       </div>
     </div>
   );

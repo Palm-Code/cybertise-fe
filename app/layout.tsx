@@ -4,9 +4,9 @@ import "./globals.scss";
 import { ThemeProvider } from "@/core/ui/components/theme/theme-provider";
 import { cn } from "@/core/lib/utils";
 import Sidebar from "@/core/ui/layout/admin/Sidebar.layout";
-import { getSession } from "@/auth";
 import NextTopLoader from "nextjs-toploader";
 import { Role } from "@/types/admin/sidebar";
+import { getSession } from "@/server/session";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +21,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
-
-  const renderSidebar = () => {
-    switch (session?.user.role) {
-      case "hacker":
-        return <Sidebar type={"hacker"} />;
-      case "company":
-        return <Sidebar type={"company"} />;
-      case "mediator":
-        return <Sidebar type={"mediator"} />;
-      default:
-        return null;
-    }
-  };
 
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
@@ -60,7 +47,7 @@ export default async function RootLayout({
         >
           {session ? (
             <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
-              {renderSidebar()}
+              <Sidebar type={session?.user.role} />
               {children}
             </div>
           ) : (

@@ -67,6 +67,7 @@ export const TableHead = ({
   children,
   className,
   isClickable = false,
+  align = "left",
   ...props
 }: I_TableProps) => {
   const textAlign: { [key: string]: string } = {
@@ -76,8 +77,11 @@ export const TableHead = ({
   };
 
   return (
-    <div className={cn("w-full", textAlign, className)} {...props}>
-      <Typography variant="p" affects="normal" weight="semibold">
+    <div
+      className={cn("w-full", textAlign[align as string], className)}
+      {...props}
+    >
+      <Typography variant="p" affects="normal" weight="semibold" align={align}>
         {children}
       </Typography>
     </div>
@@ -127,11 +131,15 @@ export const TableBodyRow = ({
   return (
     <div
       className={cn(
-        "w-full rounded-2xl bg-background-main-light px-9 py-6 dark:bg-background-main-dark",
+        "relative w-full rounded-2xl bg-background-main-light",
+        "px-9 py-6 dark:bg-background-main-dark",
         className
       )}
       {...props}
     >
+      {hasNotification && (
+        <Indicator variant="warning" className="absolute -right-4 -top-4" />
+      )}
       {children}
     </div>
   );

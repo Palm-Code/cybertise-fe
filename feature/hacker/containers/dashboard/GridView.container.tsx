@@ -10,7 +10,6 @@ const GridView = ({ data }: { data: I_TableTicketData[] }) => {
       <div className="z-10 grid h-full w-full grid-cols-2 gap-10">
         <DashboardTicketCardList data={data} isGridCard />
       </div>
-      <Pagination variant="hacker" />
     </AnimationWrapper>
   );
 };

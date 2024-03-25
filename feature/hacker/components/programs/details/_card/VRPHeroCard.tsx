@@ -35,16 +35,6 @@ const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
                   Company description{" "}
                 </Typography>
               </div>
-              <Link
-                href={"https://linktocompanysite.com"}
-                target="_blank"
-                className={cn(
-                  typographyVariants({ variant: "p", affects: "small" }),
-                  "text-neutral-light-20 underline dark:text-neutral-dark-20"
-                )}
-              >
-                https://linktocompanysite.com
-              </Link>
             </div>
             <Link
               href={`/programs/send-report?company=${id}`}
@@ -79,6 +69,26 @@ const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
               <Typography variant="p" affects="small" weight="semibold">
                 1
               </Typography>
+            </div>
+            <Separator orientation="vertical" />
+            <div className="grid h-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="small"
+                className="!text-neutral-light-30 dark:text-neutral-dark-30"
+              >
+                Company Website
+              </Typography>
+              <Link
+                href={"https://linktocompanysite.com"}
+                target="_blank"
+                className={cn(
+                  typographyVariants({ variant: "p", affects: "small" }),
+                  "text-neutral-light-20 underline dark:text-neutral-dark-20"
+                )}
+              >
+                https://linktocompanysite.com
+              </Link>
             </div>
           </div>
         </div>

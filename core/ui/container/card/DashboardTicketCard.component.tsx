@@ -116,7 +116,6 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 </Typography>
                 <Indicator
                   variant={props.status === "Open" ? "warning" : "clear"}
-                  className="-m-2.5"
                 >
                   {props.status}
                 </Indicator>
@@ -134,7 +133,6 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
               </Typography>
               <Indicator
                 variant={props.status === "Open" ? "warning" : "clear"}
-                className="-m-2.5"
               >
                 {props.status}
               </Indicator>

@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Pagination,
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
@@ -18,7 +19,8 @@ import {
 } from "../../containers";
 
 const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
-  const view = useReadLocalStorage("view") as "table" | "card" | "grid";
+  const view =
+    (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
     table: <DashboardTableView columns={tableColumns} data={data} />,
@@ -52,7 +54,10 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
         </div>
       </div>
       {data.length! ? (
-        viewsContainer[view]
+        <>
+          {viewsContainer[view]}
+          <Pagination variant="hacker" />
+        </>
       ) : (
         <EmptyState
           variant="hacker"

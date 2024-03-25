@@ -13,7 +13,7 @@ interface I_TicketCardProps extends ProgramCardType {
 
 const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
   return (
-    <Card>
+    <Card isClickable href={`/programs/${props.company_name}`}>
       <div className="_flexbox__row__start w-full gap-9">
         {!isGridCard && (
           <Image
@@ -81,23 +81,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 )}
               </div>
             </div>
-            {!isGridCard && (
-              <Link
-                className={cn(buttonVariants({ variant: "primary-hacker" }))}
-                href={`/programs/${props.company_name}`}
-              >
-                See Details
-              </Link>
-            )}
           </div>
-          {isGridCard && (
-            <Link
-              className={cn(buttonVariants({ variant: "primary-hacker" }))}
-              href={`/programs/${props.company_id}`}
-            >
-              See Details
-            </Link>
-          )}
         </div>
       </div>
     </Card>
