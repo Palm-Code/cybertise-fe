@@ -1,5 +1,5 @@
 import { SettingsFragment } from "@/feature/settings/fragments";
-import { getSession } from "@/server/session";
+import { getSession } from "@/service/server/session";
 import { Role } from "@/types/admin/sidebar";
 
 export default async function DashboardPage() {

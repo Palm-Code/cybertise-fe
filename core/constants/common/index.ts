@@ -70,6 +70,10 @@ export const menuItems: MenuItemType = {
       title: "VRP Launchpad",
       path: "/vrp-launchpad",
     },
+    {
+      title: "Manage Company",
+      path: "/manage-company",
+    },
   ],
 };
 

@@ -3,8 +3,8 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { SECRET_KEY } from "../core/lib/config";
-import { FormLoginSchema } from "../types/auth/sign-in";
+import { SECRET_KEY } from "../../core/lib/config";
+import { FormLoginSchema } from "../../types/auth/sign-in";
 import { redirect } from "next/navigation";
 
 const secretKey = SECRET_KEY;
@@ -30,7 +30,11 @@ export async function login(formData: FormLoginSchema) {
   const user = {
     email: formData.email,
     name: "john",
-    role: formData.email.includes("@mediator.com") ? "mediator" : "hacker",
+    role: formData.email.includes("@mediator.com")
+      ? "mediator"
+      : formData.email.includes("@company.com")
+        ? "company"
+        : "hacker",
     token: "eysdaksdjkahskfkjashfkjdshkjshdfjkhsdkjfds",
   };
 

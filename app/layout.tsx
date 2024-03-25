@@ -6,7 +6,7 @@ import { cn } from "@/core/lib/utils";
 import Sidebar from "@/core/ui/layout/admin/Sidebar.layout";
 import NextTopLoader from "nextjs-toploader";
 import { Role } from "@/types/admin/sidebar";
-import { getSession } from "@/server/session";
+import { getSession } from "@/service/server/session";
 
 const inter = Inter({ subsets: ["latin"] });
 

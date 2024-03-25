@@ -1,4 +1,4 @@
-import { decrypt } from "@/server/auth";
+import { decrypt } from "@/service/server/auth";
 import { Role } from "@/types/admin/sidebar";
 import {
   NextFetchEvent,

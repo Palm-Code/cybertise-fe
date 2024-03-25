@@ -1,4 +1,4 @@
-import { decrypt } from "@/server/auth";
+import { decrypt } from "@/service/server/auth";
 import { UserType } from "@/types/auth/sign-up";
 import { cookies } from "next/headers";
 import { cache } from "react";

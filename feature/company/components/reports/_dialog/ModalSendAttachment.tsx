@@ -41,7 +41,7 @@ const ModalSendAttachment = ({
             <Tiptap
               description=""
               label="Write a caption"
-              variant="mediator"
+              variant="company"
               isChat
               className="pb-12 shadow-none"
               onChangeValue={() => {}}
@@ -49,11 +49,11 @@ const ModalSendAttachment = ({
           </div>
         </div>
         <div className="_flexbox__row__start__start gap-8">
-          <Button variant="secondary-mediator" fullWidth onClick={onClose}>
+          <Button variant="secondary-company" fullWidth onClick={onClose}>
             Cancel
           </Button>
           <Button
-            variant="primary-mediator"
+            variant="primary-company"
             fullWidth
             onClick={onClickSendAttachment}
           >
