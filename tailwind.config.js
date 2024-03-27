@@ -204,7 +204,7 @@ module.exports = {
       backgroundImage: {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
-        slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 34.68%, #C00 299.32%)",
+        slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 30.34%, #C00 99.48%)",
       },
     },
   },

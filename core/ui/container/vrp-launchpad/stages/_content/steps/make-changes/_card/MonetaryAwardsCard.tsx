@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
+import { Button, Card, Typography } from "@/core/ui/components";
 import { ShieldCheck } from "@/core/ui/icons";
 import { ChevronRight } from "lucide-react";
 import PricingCardList from "./Pricing";
@@ -60,11 +60,21 @@ const MonetaryAwardsCard = ({
   );
 };
 
+interface I_MonetaryAwardCardList<T extends boolean> {
+  isCompany?: T;
+  onClickNext?: T extends true ? () => void : undefined;
+  onClickPrev?: T extends true ? () => void : undefined;
+}
 type PricingCardListProps = {
   data: MonetaryAwardsCardProps[];
-};
+} & I_MonetaryAwardCardList<boolean>;
 
-const MonetaryAwardCardList = ({ data }: PricingCardListProps) => {
+const MonetaryAwardCardList = ({
+  data,
+  isCompany = false,
+  onClickNext,
+  onClickPrev,
+}: PricingCardListProps) => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   const handleCardClick = (category: string) => {
@@ -73,32 +83,44 @@ const MonetaryAwardCardList = ({ data }: PricingCardListProps) => {
     );
   };
   return (
-    <div
-      className={cn(
-        "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
-        "_flexbox__col__start__start gap-6"
-      )}
-    >
-      <Typography variant="h6" weight="bold">
-        Monetary Awards
-      </Typography>
-      <div className="_flexbox__col__start w-full gap-6">
-        {data.map((item, idx) => (
-          <MonetaryAwardsCard
-            key={idx}
-            title={item.title}
-            category={item.category}
-            priceData={item.priceData}
-            activeCard={activeCard === item.category}
-            handleClickExpand={() => handleCardClick(item.category)}
+    <>
+      <div
+        className={cn(
+          "w-full rounded-[10px] bg-background-page-light p-7.5 dark:bg-background-page-dark",
+          "_flexbox__col__start__start gap-6"
+        )}
+      >
+        <Typography variant="h6" weight="bold">
+          Monetary Awards
+        </Typography>
+        <div className="_flexbox__col__start w-full gap-6">
+          {data.map((item, idx) => (
+            <MonetaryAwardsCard
+              key={idx}
+              title={item.title}
+              category={item.category}
+              priceData={item.priceData}
+              activeCard={activeCard === item.category}
+              handleClickExpand={() => handleCardClick(item.category)}
+            />
+          ))}
+          <CustomPricing
+            handleClickExpand={() => handleCardClick("custom")}
+            activeCard={activeCard === "custom"}
           />
-        ))}
-        <CustomPricing
-          handleClickExpand={() => handleCardClick("custom")}
-          activeCard={activeCard === "custom"}
-        />
+        </div>
       </div>
-    </div>
+      {isCompany && (
+        <div className="_flexbox__row__center gap-8">
+          <Button variant="secondary-company" onClick={onClickPrev}>
+            Previous
+          </Button>
+          <Button variant="primary-company" onClick={onClickNext}>
+            Next
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

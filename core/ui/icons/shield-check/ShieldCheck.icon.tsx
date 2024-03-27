@@ -11,7 +11,7 @@ const categoryColor: {
   };
 } = {
   element: [
-    <defs>
+    <>
       <linearGradient
         id="paint0_linear_2071_71293"
         x1="12"
@@ -27,8 +27,8 @@ const categoryColor: {
       <clipPath id="clip0_2071_71293">
         <rect width="24" height="24" fill="white" />
       </clipPath>
-    </defs>,
-    <defs>
+    </>,
+    <>
       <linearGradient
         id="paint0_linear_2071_71303"
         x1="12"
@@ -44,8 +44,8 @@ const categoryColor: {
       <clipPath id="clip0_2071_71303">
         <rect width="24" height="24" fill="white" />
       </clipPath>
-    </defs>,
-    <defs>
+    </>,
+    <>
       <linearGradient
         id="paint0_linear_2071_71313"
         x1="12"
@@ -61,8 +61,8 @@ const categoryColor: {
       <clipPath id="clip0_2071_71313">
         <rect width="24" height="24" fill="white" />
       </clipPath>
-    </defs>,
-    <defs>
+    </>,
+    <>
       <linearGradient
         id="paint0_linear_2071_71324"
         x1="12"
@@ -79,7 +79,7 @@ const categoryColor: {
       <clipPath id="clip0_2071_71324">
         <rect width="24" height="24" fill="white" />
       </clipPath>
-    </defs>,
+    </>,
   ],
   code: {
     S: "paint0_linear_2071_71293",
@@ -105,7 +105,7 @@ const ShieldCheck = ({ category, ...props }: I_ShieldCheck) => {
         />
       </g>
       {categoryColor.element.map((item, index) => {
-        return item;
+        return <defs key={`${category}-${index}`}>{item}</defs>;
       })}
     </svg>
   );

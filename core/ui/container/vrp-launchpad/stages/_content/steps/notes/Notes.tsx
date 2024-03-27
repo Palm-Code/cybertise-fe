@@ -4,11 +4,16 @@ import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
 import { useState } from "react";
 
 interface INotesProps {
-  onClickNext: () => void;
-  onClickPrev: () => void;
+  variant?: "mediator" | "company";
+  onClickNext?: () => void;
+  onClickPrev?: () => void;
 }
 
-const Notes = ({ onClickNext, onClickPrev }: INotesProps) => {
+const Notes = ({
+  onClickNext,
+  onClickPrev,
+  variant = "mediator",
+}: INotesProps) => {
   const [description, setDescription] = useState<string>("");
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 p-0")}>
@@ -30,20 +35,10 @@ const Notes = ({ onClickNext, onClickPrev }: INotesProps) => {
         withTooltip
       />
       <div className="_flexbox__row__center gap-8">
-        <Button
-          variant="secondary-mediator"
-          onClick={() => {
-            onClickPrev();
-          }}
-        >
+        <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
           Previous
         </Button>
-        <Button
-          variant="primary-mediator"
-          onClick={() => {
-            onClickNext();
-          }}
-        >
+        <Button variant={`primary-${variant}`} onClick={onClickNext}>
           Next
         </Button>
       </div>

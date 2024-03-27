@@ -9,12 +9,14 @@ interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
   isLastStep?: boolean;
   onClickEdit?: () => void;
+  variant?: "mediator" | "company";
 }
 
 const VrpDetailsReview = ({
   onClickNext,
   isLastStep = false,
   onClickEdit,
+  variant = "mediator",
 }: I_VrpDetailsReviewProps) => {
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
@@ -24,7 +26,7 @@ const VrpDetailsReview = ({
         </Typography>
         {isLastStep && (
           <Button
-            variant="tertiary-mediator"
+            variant={`tertiary-${variant}`}
             prefixIcon={<FilePenLine />}
             onClick={onClickEdit}
           >
@@ -36,9 +38,15 @@ const VrpDetailsReview = ({
       <MonetaryAwardsCard />
       <TargetAssetListCard />
       <Notes />
-      <Button variant="primary-mediator" onClick={onClickNext}>
-        {isLastStep ? "Continue" : "Next"}
-      </Button>
+      {variant === "company" ? (
+        <Button variant="primary-company" onClick={onClickNext}>
+          Send to Mediator
+        </Button>
+      ) : (
+        <Button variant="primary-mediator" onClick={onClickNext}>
+          {isLastStep ? "Continue" : "Next"}
+        </Button>
+      )}
     </div>
   );
 };

@@ -14,8 +14,8 @@ const ProgramDetails = ({ id }: I_ProgramDetailsProps) => {
     <div className="_flexbox__col__start__start w-full gap-10 pt-12">
       <VRPHeroCard id={id} />
       <div className="_flexbox__col__start__start w-full gap-4">
-        <SingleVrpContainer />
-        {/* <MultiVrpContainer /> */}
+        {/* <SingleVrpContainer /> */}
+        <MultiVrpContainer />
       </div>
     </div>
   );

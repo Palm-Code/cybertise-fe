@@ -26,8 +26,8 @@ export default function (
       }
       if (pathname.includes("/vrp-launchpad")) {
         const decryptedSession = await decrypt(session as string);
-        const isNotMediator = decryptedSession?.user.role !== Role.mediator;
-        if (isNotMediator) {
+        const isHacker = decryptedSession?.user.role === Role.hacker;
+        if (isHacker) {
           const url = new URL("/dashboard", req.url);
           return NextResponse.redirect(url);
         }

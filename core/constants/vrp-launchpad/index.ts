@@ -3,6 +3,32 @@ import { MonetaryAwardType, PricingProps } from "@/types/admin/vrp-launchpad";
 export const vrpInformations = {
   vrp_details: [
     {
+      label: "Brief",
+      value: 1,
+    },
+    {
+      label: "VRP Details",
+      value: 2,
+    },
+    {
+      label: "Setup Monetary Awards",
+      value: 3,
+    },
+    {
+      label: "Setup Initial Scope",
+      value: 4,
+    },
+    {
+      label: "Notes",
+      value: 5,
+    },
+    {
+      label: "Review",
+      value: 6,
+    },
+  ],
+  setup_phase: [
+    {
       label: "Review VRP Details",
       value: 1,
     },
@@ -17,6 +43,85 @@ export const vrpInformations = {
     {
       label: "Review",
       value: 4,
+    },
+  ],
+  company_revision: [
+    {
+      label: "Notes",
+      value: 1,
+    },
+    {
+      label: "VRP Details",
+      value: 2,
+    },
+    {
+      label: "Monetary Awards",
+      value: 3,
+    },
+    {
+      label: "Scope",
+      value: 4,
+    },
+    {
+      label: "Rules & Policies",
+      value: 5,
+    },
+    {
+      label: "Notes",
+      value: 6,
+    },
+    {
+      label: "Review",
+      value: 7,
+    },
+  ],
+  mediator_revision: [
+    {
+      label: "Review VRP Details",
+      value: 1,
+    },
+    {
+      label: "Setup Monetary Awards",
+      value: 2,
+    },
+    {
+      label: "Setup Initial Scope",
+      value: 3,
+    },
+    {
+      label: "Notes",
+      value: 4,
+    },
+    {
+      label: "Review",
+      value: 5,
+    },
+  ],
+  publish: [
+    {
+      label: "VRP Details",
+      value: 1,
+    },
+
+    {
+      label: "Rules & Policies",
+      value: 2,
+    },
+    {
+      label: "Monetary Awards",
+      value: 3,
+    },
+    {
+      label: "Scope",
+      value: 4,
+    },
+    {
+      label: "Notes",
+      value: 5,
+    },
+    {
+      label: "Review",
+      value: 6,
     },
   ],
 };

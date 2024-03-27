@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import {
+  Button,
   Card,
   Input,
   SelectDropdown,
@@ -7,7 +8,17 @@ import {
   Typography,
 } from "@/core/ui/components";
 
-const VrpDescriptionCard = () => {
+interface I_VrpDescriptionCard<T extends boolean> {
+  isCompany?: T;
+  onClickNext?: T extends true ? () => void : undefined;
+  onClickPrev?: T extends true ? () => void : undefined;
+}
+
+const VrpDescriptionCard = ({
+  isCompany = false,
+  onClickNext,
+  onClickPrev,
+}: I_VrpDescriptionCard<boolean>) => {
   return (
     <>
       <Typography variant="h5" weight="bold">
@@ -51,6 +62,16 @@ const VrpDescriptionCard = () => {
           </Typography>
         </div>
       </Card>
+      {isCompany && (
+        <div className="_flexbox__row__center gap-8">
+          <Button variant="secondary-company" onClick={onClickPrev}>
+            Previous
+          </Button>
+          <Button variant="primary-company" onClick={onClickNext}>
+            Next
+          </Button>
+        </div>
+      )}
     </>
   );
 };

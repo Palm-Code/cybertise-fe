@@ -5,18 +5,19 @@ import { useMultistepForm } from "@/utils/multi-step-form";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
-import Information from "./informations/Informations";
+import Information from "../_content/informations/Informations";
 import { vrpInformations } from "@/core/constants/vrp-launchpad";
-import VrpDetailsReview from "./steps/vrp-details-review/VrpDetailsReview";
-import MakeChanges from "./steps/make-changes/MakeChanges";
-import Notes from "./steps/notes/Notes";
+import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
+import MakeChanges from "../_content/steps/make-changes/MakeChanges";
+import Notes from "../_content/steps/notes/Notes";
 
 interface I_SetupProps {
   id: string;
   variant: "mediator" | "company";
+  currentStep?: number;
 }
 
-const Setup = ({ id, variant }: I_SetupProps) => {
+const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
   const method = useForm();
@@ -65,7 +66,10 @@ const Setup = ({ id, variant }: I_SetupProps) => {
         >
           <AnimationWrapper
             key={steps[currentStepIndex].key}
-            className="sticky top-[17.5rem] z-30 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark"
+            className={cn(
+              "sticky z-30 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark",
+              variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
+            )}
           >
             <div className="w-[calc(80%-1.6rem) h-6 bg-background-page-light dark:bg-background-page-dark"></div>
             <div
@@ -90,8 +94,9 @@ const Setup = ({ id, variant }: I_SetupProps) => {
             </div>
             <div
               className={cn(
-                "sticky top-[19rem] z-40 -mt-4 w-[20%] rounded-xl",
-                "bg-background-main-light dark:bg-background-main-dark"
+                "sticky z-40 -mt-4 w-[20%] rounded-xl",
+                "bg-background-main-light dark:bg-background-main-dark",
+                variant === "mediator" ? "top-[19rem]" : "top-[17.5rem]"
               )}
             >
               <Information

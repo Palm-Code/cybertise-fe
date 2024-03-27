@@ -1,12 +1,22 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Input, Typography } from "@/core/ui/components";
+import { Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
 import { filterItems } from "@/feature/mediator/constants/dashboard";
 import { FilePenLine, X } from "lucide-react";
 import { useState } from "react";
 
-const TargetAssetListCard = () => {
+interface I_TargetAssetListCard<T extends boolean> {
+  isCompany?: T;
+  onClickNext?: T extends true ? () => void : undefined;
+  onClickPrev?: T extends true ? () => void : undefined;
+}
+
+const TargetAssetListCard = ({
+  isCompany = false,
+  onClickNext,
+  onClickPrev,
+}: I_TargetAssetListCard<boolean>) => {
   const [assetCount, setAssetCount] = useState(5);
   const [isEditingList, setIsEditingList] = useState<boolean[]>(
     Array(assetCount).fill(false)
@@ -49,7 +59,7 @@ const TargetAssetListCard = () => {
           .map((_, index) => (
             <Card
               className={cn(
-                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl px-6 py-4",
+                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md p-0 px-4",
                 "border border-transparent transition-colors duration-100",
                 "bg-neutral-light-100 dark:bg-neutral-dark-100"
               )}
@@ -102,6 +112,16 @@ const TargetAssetListCard = () => {
           + Add New Assets
         </button>
       </Card>
+      {isCompany && (
+        <div className="_flexbox__row__center gap-8">
+          <Button variant="secondary-company" onClick={onClickPrev}>
+            Previous
+          </Button>
+          <Button variant="primary-company" onClick={onClickNext}>
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

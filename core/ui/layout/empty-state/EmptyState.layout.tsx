@@ -52,7 +52,7 @@ const EmptyState = ({
                 className={buttonVariants({ variant: `primary-${variant}` })}
                 href={href}
               >
-                Add new program
+                {buttonText ?? "Add new program"}
               </Link>
             </>
           </>

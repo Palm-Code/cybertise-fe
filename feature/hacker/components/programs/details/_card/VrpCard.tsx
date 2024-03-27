@@ -8,21 +8,24 @@ interface I_VRPCard {
 const VRPCard = ({ onClickSeeDetails }: I_VRPCard) => {
   return (
     <AnimationWrapper>
-      <Card>
+      <Card isButton onClick={onClickSeeDetails}>
         <div className="_flexbox__col__start__start w-full gap-12">
           <Typography variant="p" affects="large" weight="semibold">
             VRP Title 1
           </Typography>
-          <div className="_flexbox__row__center__between w-full">
+          <div className="_flexbox__col__start__start gap-2.5">
+            <Typography
+              variant="p"
+              affects="small"
+              className="text-neutal-light-20 dark:text-neutral-dark-20"
+            >
+              Asset type Available
+            </Typography>
             <div className="grid grid-flow-col gap-4">
               <Badge variant="url">Domain</Badge>
-              <Badge variant="url">Domain</Badge>
-              <Badge variant="url">Domain</Badge>
-              <Badge variant="url">Domain</Badge>
+              <Badge variant="iot">Hardware/IOT</Badge>
+              <Badge variant="android">Android:Playstore</Badge>
             </div>
-            <Button variant="primary-hacker" onClick={onClickSeeDetails}>
-              See Details
-            </Button>
           </div>
         </div>
       </Card>
