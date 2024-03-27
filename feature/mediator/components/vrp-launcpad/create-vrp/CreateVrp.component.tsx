@@ -1,5 +1,4 @@
 import { CreateVRPLaunchpad } from "@/core/ui/container";
-import VRPHeroCard from "./_card/VRPHeroCard";
 
 const CreateVrp = () => {
   return (

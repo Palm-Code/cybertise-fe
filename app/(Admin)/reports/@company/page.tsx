@@ -1,3 +1,5 @@
-export default function DashboardCompanyPage() {
-  return null;
+import { ReportsFragment } from "@/feature/company/fragments";
+
+export default function DashboardPage() {
+  return <ReportsFragment />;
 }

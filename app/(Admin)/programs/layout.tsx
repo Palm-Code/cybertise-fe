@@ -1,6 +1,6 @@
 import { Header } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { getSession } from "@/server/session";
+import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
 
 export default async function Dashboardlayout({

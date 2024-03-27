@@ -1,5 +1,5 @@
 import { Header } from "@/core/ui/layout";
-import { getSession } from "@/server/session";
+import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";

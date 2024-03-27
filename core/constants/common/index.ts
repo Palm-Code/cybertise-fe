@@ -64,11 +64,11 @@ export const menuItems: MenuItemType = {
     },
     {
       title: "VRP Management",
-      path: "/vrp-management",
+      path: "/vrp-launchpad",
     },
     {
-      title: "VRP Launchpad",
-      path: "/vrp-launchpad",
+      title: "Manage Company",
+      path: "/manage-company",
     },
   ],
 };

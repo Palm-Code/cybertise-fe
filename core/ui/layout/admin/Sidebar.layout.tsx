@@ -14,7 +14,7 @@ import { cn } from "@/core/lib/utils";
 import { VrpManagement } from "../../icons";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { borderColor, menuItems } from "@/core/constants/common";
-import { logout } from "@/server/auth";
+import { logout } from "@/service/server/auth";
 
 interface SidebarProps {
   type: string;
@@ -27,11 +27,11 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   companies: <Building2 className="h-6 w-6" />,
   "vrp launchpad": <Bug className="h-6 w-6" />,
   "vrp management": <VrpManagement className="h-6 w-6" />,
+  "manage company": <Building2 className="h-6 w-6" />,
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
-  const { push } = useRouter();
   const menu = menuItems[type as keyof typeof menuItems];
   return (
     <div

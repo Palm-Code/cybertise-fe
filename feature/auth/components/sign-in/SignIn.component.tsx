@@ -11,7 +11,7 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
-import { login } from "@/server/auth";
+import { login } from "@/service/server/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MultiFactor, SuccessState } from "..";
 

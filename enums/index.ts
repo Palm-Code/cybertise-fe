@@ -13,6 +13,13 @@ export enum companyTabsItemEnums {
   activity_logs = "activity_logs",
 }
 
+export enum manageCompanyTabsItemEnums {
+  company_details = "company_details",
+  staffs = "staffs",
+  emergency_contact = "emergency_contact",
+  activity_logs = "activity_logs",
+}
+
 export enum SettingItems {
   details = "details",
   notifications = "notifications",
