@@ -68,6 +68,24 @@ export const companyTabsItem: SortFilterType[] = [
     value: "activity_logs",
   },
 ];
+export const manageCompanyTabsItem: SortFilterType[] = [
+  {
+    label: "Company Details",
+    value: "company_details",
+  },
+  {
+    label: "Staffs",
+    value: "staffs",
+  },
+  {
+    label: "Emergency Contact",
+    value: "emergency_contact",
+  },
+  {
+    label: "Activity Logs",
+    value: "activity_logs",
+  },
+];
 
 export const vrpCardsData: VRPCardType[] = [
   {
