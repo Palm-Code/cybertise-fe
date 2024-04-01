@@ -54,6 +54,9 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
+    confirmPassworText.content && confirmPassworText.content !== newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
+      : setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setValue("password", newPassword, { shouldValidate: true });
   };
@@ -76,6 +79,10 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
       ? confirmPassworText.content
       : "",
   });
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
 
   return (
     <StepWrapper
@@ -119,7 +126,12 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
         fullWidth
         variant="primary-hacker"
         onClick={submitForm}
-        disabled={validateIsFormFilled || isSubmit || !isPolicyChecked}
+        disabled={
+          validateIsFormFilled ||
+          isSubmit ||
+          !isPolicyChecked ||
+          !validatePasswordRegex
+        }
         isLoading={isSubmit}
       >
         Register Account

@@ -33,7 +33,8 @@ export default async function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-background-page-light dark:bg-background-page-dark"
+          "bg-background-page-light dark:bg-background-page-dark",
+          session && "overflow-hidden"
         )}
       >
         <NextTopLoader
