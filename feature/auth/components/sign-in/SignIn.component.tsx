@@ -14,6 +14,7 @@ import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { login } from "@/service/server/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MultiFactor, SuccessState } from "..";
+import { Desktop, Mobile } from "@/core/ui/layout";
 
 const formShcema = z.object({
   email: z.string().email().min(1, { message: "Email is required" }),
@@ -27,14 +28,16 @@ const SignInComponent = () => {
   const { push } = useRouter();
   const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>(null);
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     register,
     watch,
+    getValues,
+    setValue,
     resetField,
   } = useForm<FormSchema>({
+    mode: "onSubmit",
     resolver: zodResolver(formShcema),
     defaultValues: {
       email: "",
@@ -42,8 +45,9 @@ const SignInComponent = () => {
     },
   });
 
+  const forms = getValues();
+
   const onSubmit: SubmitHandler<FormSchema> = async (data) => {
-    setIsLoadingSubmit(true);
     try {
       setTimeout(async () => {
         await login(data);
@@ -55,8 +59,8 @@ const SignInComponent = () => {
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    email: watch("email"),
-    password: watch("password"),
+    email: forms.email,
+    password: forms.password,
   });
 
   if (isSuccess === "email") {
@@ -67,68 +71,139 @@ const SignInComponent = () => {
     return <MultiFactor />;
   }
 
+  console.log({ errors });
+
   return (
     <form
-      autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
-      className={cn(
-        "w-full max-w-[467px] rounded-lg bg-background-main-light px-10 py-20 dark:bg-background-main-dark",
-        "_flexbox__col__center gap-12"
-      )}
+      className={cn("mx-auto w-full max-w-[467px] rounded-lg")}
     >
-      <Typography variant="h4" weight="bold">
-        Sign In
-      </Typography>
-      <div className="_flexbox__col__center w-full gap-7">
-        {errors.email || errors.password ? (
-          <div className="w-full rounded-md bg-red-error/20 p-3.5">
-            <Typography variant="p" affects="tiny">
-              Your email or password is incorrect.
+      <Mobile className="_flexbox__col__center gap-8 bg-transparent px-6">
+        <Typography variant="h4" weight="bold">
+          Sign In
+        </Typography>
+        <div className="_flexbox__col__center w-full gap-7">
+          {errors.email || errors.password ? (
+            <div className="w-full rounded-md bg-red-error/20 p-3.5">
+              <Typography variant="p" affects="tiny">
+                Your email or password is incorrect.
+              </Typography>
+            </div>
+          ) : null}
+          <Input
+            type="email"
+            label="Email"
+            value={forms.email}
+            placeholderText="Enter your email"
+            onClearInput={() => resetField("email")}
+            onChange={(e) =>
+              setValue("email", e.target.value, { shouldValidate: true })
+            }
+            isError={errors === null}
+          />
+          <div className="w-full space-y-1">
+            <Input
+              type={revealPassword ? "text" : "password"}
+              label="Password"
+              placeholderText="Enter your password"
+              value={forms.password}
+              onClickRevealPassword={() => setRevealPassword(!revealPassword)}
+              onChange={(e) =>
+                setValue("password", e.target.value, {
+                  shouldValidate: true,
+                })
+              }
+              isError={errors === null}
+            />
+            <Link
+              href={"/auth/forgot-password"}
+              className={typographyVariants({
+                variant: "p",
+                affects: "tiny",
+              })}
+            >
+              Forgot your password?
+            </Link>
+          </div>
+        </div>
+        <div className="w-full space-y-1">
+          <Button
+            type="submit"
+            fullWidth
+            variant="primary-hacker"
+            isLoading={isSubmitting}
+            disabled={validateIsFormFilled || isSubmitting}
+          >
+            Sign In
+          </Button>
+          <Typography variant="p" affects="normal" align="center">
+            Didn&apos;t have account yet?{" "}
+            <Link href={"/auth/signup"} className="ml-2 font-semibold">
+              Sign Up
+            </Link>
+          </Typography>
+        </div>
+      </Mobile>
+      <Desktop>
+        <div className="_flexbox__col__center gap-12 bg-background-main-light px-10 py-20 dark:bg-background-main-dark">
+          <Typography variant="h4" weight="bold">
+            Sign In
+          </Typography>
+          <div className="_flexbox__col__center w-full gap-7">
+            {errors.email || errors.password ? (
+              <div className="w-full rounded-md bg-red-error/20 p-3.5">
+                <Typography variant="p" affects="tiny">
+                  Your email or password is incorrect.
+                </Typography>
+              </div>
+            ) : null}
+            <Input
+              type="email"
+              label="Email"
+              placeholderText="Enter your email"
+              onClearInput={() => resetField("email")}
+              {...register("email")}
+              // isError={!!errors}
+            />
+            <div className="w-full space-y-1">
+              <Input
+                type={revealPassword ? "text" : "password"}
+                label="Password"
+                placeholderText="Enter your password"
+                onClickRevealPassword={() => setRevealPassword(!revealPassword)}
+                {...register("password")}
+                // isError={!!errors}
+              />
+              <Link
+                href={"/auth/forgot-password"}
+                className={typographyVariants({
+                  variant: "p",
+                  affects: "tiny",
+                })}
+              >
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
+          <div className="w-full space-y-1">
+            <Button
+              type="submit"
+              fullWidth
+              variant="primary-hacker"
+              isLoading={isSubmitting}
+              disabled={validateIsFormFilled || isSubmitting}
+            >
+              Sign In
+            </Button>
+            <Typography variant="p" affects="normal" align="center">
+              Didn&apos;t have account yet?{" "}
+              <Link href={"/auth/signup"} className="ml-2 font-semibold">
+                Sign Up
+              </Link>
             </Typography>
           </div>
-        ) : null}
-        <Input
-          type="email"
-          label="Email"
-          placeholderText="Enter your email"
-          onClearInput={() => resetField("email")}
-          {...register("email")}
-          // isError={!!errors}
-        />
-        <div className="w-full space-y-1">
-          <Input
-            type={revealPassword ? "text" : "password"}
-            label="Password"
-            placeholderText="Enter your password"
-            onClickRevealPassword={() => setRevealPassword(!revealPassword)}
-            {...register("password")}
-            // isError={!!errors}
-          />
-          <Link
-            href={"/auth/forgot-password"}
-            className={typographyVariants({ variant: "p", affects: "tiny" })}
-          >
-            Forgot your password?
-          </Link>
         </div>
-      </div>
-      <div className="w-full space-y-1">
-        <Button
-          type="submit"
-          fullWidth
-          variant="primary-hacker"
-          isLoading={isLoadingSubmit}
-          disabled={validateIsFormFilled || isLoadingSubmit}
-        >
-          Sign In
-        </Button>
-        <Typography variant="p" affects="normal" align="center">
-          Didn&apos;t have account yet?{" "}
-          <Link href={"/auth/signup"} className="ml-2 font-semibold">
-            Sign Up
-          </Link>
-        </Typography>
-      </div>
+      </Desktop>
     </form>
   );
 };

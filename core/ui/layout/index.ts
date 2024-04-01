@@ -6,3 +6,6 @@ export { default as EmptState } from "./empty-state/EmptyState.layout";
 export { default as AnimationWrapper } from "./wrapper/Animation.wrapper";
 export { default as TableLoader } from "./loader/table/TableLoader.layout";
 export { default as CardLoader } from "./loader/card/CardLoader.layout";
+export { default as Sidebar } from "./admin/Sidebar.layout";
+export { default as Mobile } from "./wrapper/MobileLayout.wrapper";
+export { default as Desktop } from "./wrapper/DesktopLayout.wrapper";

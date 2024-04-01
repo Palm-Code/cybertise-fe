@@ -45,7 +45,7 @@ const buttonVariants = cva(
       size: {
         default: "h-9 px-4 py-2 text-sm",
         ghost: "w-auto h-auto px-0 py-0",
-        lg: "py-3 px-6 text-base",
+        lg: "py-3 px-6 md:text-base text-sm",
         icon: "h-9 w-9",
       },
       radius: {
