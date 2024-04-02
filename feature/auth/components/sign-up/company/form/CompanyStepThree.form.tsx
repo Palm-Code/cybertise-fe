@@ -3,19 +3,21 @@ import Button from "@/core/ui/components/button/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { FormSchema } from "../SignUpCompany.component";
-import { Input } from "@/core/ui/components";
+import { Checkbox, Input, Typography } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
 import { passwordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
+import Link from "next/link";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
 }
 
 const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
+  const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
@@ -24,15 +26,15 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
       checked: false,
     });
   const {
-    register,
+    getValues,
     formState: { errors },
-    watch,
     setValue,
     resetField,
   } = useFormContext<FormSchema>();
+  const forms = getValues();
 
   const submitForm = () => {
-    alert(JSON.stringify(watch(), null, 2));
+    alert(JSON.stringify(forms, null, 2));
     onClickNext();
   };
 
@@ -46,6 +48,9 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
+    confirmPassworText.content && confirmPassworText.content !== newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
+      : setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setValue("password", newPassword, { shouldValidate: true });
   };
@@ -53,7 +58,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
   const passwordConfirmationCheck = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const passwordMatch = watch("password") === e.target.value;
+    const passwordMatch = forms.password === e.target.value;
     setConfirmPassworText({
       ...confirmPassworText,
       content: e.target.value,
@@ -62,12 +67,16 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    email: watch("email"),
-    password: watch("password"),
+    email: forms.email,
+    password: forms.password,
     confirmPassworText: confirmPassworText.checked
       ? confirmPassworText.content
       : "",
   });
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
 
   return (
     <StepWrapper
@@ -76,34 +85,56 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
       title="Company Sign Up"
       subtitle="Account Setup"
     >
-      <Input
-        type="email"
-        label="Email"
-        onClearInput={() => resetField("email")}
-        {...register("email")}
-        isError={!!errors.email}
-      />
-      <PasswordInput
-        label="Password"
-        onChange={checkPassword}
-        options={passwordValidationItems}
-        withRegex
-      />
-      <PasswordInput
-        value={confirmPassworText.content}
-        label="Confirm Password"
-        onChange={passwordConfirmationCheck}
-        isConfirmation={!!confirmPassworText.content}
-        check={confirmPassworText.checked}
-      />
-      <Button
-        fullWidth
-        variant="primary-hacker"
-        onClick={submitForm}
-        disabled={validateIsFormFilled}
-      >
-        Register Account
-      </Button>
+      <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
+        <div className="_flexbox__col__center w-full gap-7">
+          <Input
+            type="email"
+            label="Email"
+            onClearInput={() => resetField("email")}
+            value={forms.email}
+            onChange={(e) =>
+              setValue("email", e.target.value, { shouldValidate: true })
+            }
+            isError={!!errors.email}
+          />
+          <PasswordInput
+            label="Password"
+            onChange={checkPassword}
+            options={passwordValidationItems}
+            withRegex
+          />
+          <PasswordInput
+            value={confirmPassworText.content}
+            label="Confirm Password"
+            onChange={passwordConfirmationCheck}
+            isConfirmation={!!confirmPassworText.content}
+            check={confirmPassworText.checked}
+          />
+          <div className="_flexbox__row__center__start w-full gap-3">
+            <Checkbox
+              variant="company"
+              checked={isPolicyChecked}
+              onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
+            />
+            <Typography variant="p" affects="normal">
+              I have read and accepted the all sites{" "}
+              <Link href={"/privacy-policy"} className="underline">
+                Policies
+              </Link>
+            </Typography>
+          </div>
+        </div>
+        <Button
+          fullWidth
+          variant="primary-company"
+          onClick={submitForm}
+          disabled={
+            validateIsFormFilled || !validatePasswordRegex || !isPolicyChecked
+          }
+        >
+          Register Account
+        </Button>
+      </div>
     </StepWrapper>
   );
 };

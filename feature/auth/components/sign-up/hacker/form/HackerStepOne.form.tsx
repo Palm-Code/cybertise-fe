@@ -17,18 +17,20 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
   const {
     register,
     formState: { errors },
-    watch,
+    getValues,
     setValue,
     resetField,
   } = useFormContext<FormSchema>();
+
+  const forms = getValues();
 
   const onClickValidate = () => {
     onClickNext();
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    username: watch("username"),
-    country: watch("country"),
+    username: forms.username,
+    country: forms.country,
   });
 
   return (
@@ -38,31 +40,38 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
       title="Hacker Sign Up"
       subtitle="Hacker Details"
     >
-      <div className="_flexbox__col__center w-full gap-7">
-        <Input
-          type="text"
-          label="Username"
-          onClearInput={() => resetField("username")}
-          {...register("username")}
-          isError={!!errors.username}
-        />
-        <SelectDropdown
-          label="Country"
-          value={watch("country")}
-          withIcon
-          withSearch
-          options={countryOptions}
-          onValueChange={(v) => setValue("country", v)}
-        />
+      <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
+        <div className="_flexbox__col__center w-full gap-7">
+          <Input
+            type="text"
+            label="Username"
+            onClearInput={() => resetField("username")}
+            value={forms.username}
+            onChange={(e) =>
+              setValue("username", e.target.value, { shouldValidate: true })
+            }
+            isError={!!errors.username}
+          />
+          <SelectDropdown
+            label="Country"
+            value={forms.country}
+            withIcon
+            withSearch
+            options={countryOptions}
+            onValueChange={(v) =>
+              setValue("country", v, { shouldValidate: true })
+            }
+          />
+        </div>
+        <Button
+          fullWidth
+          variant="primary-hacker"
+          onClick={onClickValidate}
+          disabled={validateIsFormFilled}
+        >
+          Next
+        </Button>
       </div>
-      <Button
-        fullWidth
-        variant="primary-hacker"
-        onClick={onClickValidate}
-        disabled={validateIsFormFilled}
-      >
-        Next
-      </Button>
     </StepWrapper>
   );
 };

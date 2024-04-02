@@ -31,14 +31,15 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   const {
     register,
     formState: { errors },
-    watch,
     setValue,
+    getValues,
   } = useFormContext<FormSchema>();
+  const forms = getValues();
 
   const submitForm = () => {
     setIsSubmit(true);
     setTimeout(() => {
-      alert(JSON.stringify(watch(), null, 2));
+      alert(JSON.stringify(forms, null, 2));
       setIsSubmit(false);
       onClickNext();
     }, 2000);
@@ -64,7 +65,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   const passwordConfirmationCheck = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const passwordMatch = watch("password") === e.target.value;
+    const passwordMatch = forms.password === e.target.value;
     setConfirmPassworText({
       ...confirmPassworText,
       content: e.target.value,
@@ -73,8 +74,8 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    email: watch("email"),
-    password: watch("password"),
+    email: forms.email,
+    password: forms.password,
     confirmPassworText: confirmPassworText.checked
       ? confirmPassworText.content
       : "",
@@ -91,51 +92,58 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
       title="Hacker Sign Up"
       subtitle="Account Setup"
     >
-      <Input
-        type="email"
-        label="Email"
-        {...register("email")}
-        isError={!!errors.email}
-      />
-      <PasswordInput
-        label="Password"
-        onChange={checkPassword}
-        options={passwordValidationItems}
-        withRegex
-      />
-      <PasswordInput
-        value={confirmPassworText.content}
-        label="Confirm Password"
-        onChange={passwordConfirmationCheck}
-        isConfirmation={!!confirmPassworText.content}
-        check={confirmPassworText.checked}
-      />
-      <div className="_flexbox__row__center__start w-full gap-3">
-        <Checkbox
-          checked={isPolicyChecked}
-          onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
-        />
-        <Typography variant="p" affects="normal">
-          I have read and accepted the all sites{" "}
-          <Link href={"/privacy-policy"} className="underline">
-            Policies
-          </Link>
-        </Typography>
+      <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
+        <div className="_flexbox__col__center w-full gap-8">
+          <Input
+            type="email"
+            label="Email"
+            value={forms.email}
+            onChange={(e) =>
+              setValue("email", e.target.value, { shouldValidate: true })
+            }
+            isError={!!errors.email}
+          />
+          <PasswordInput
+            label="Password"
+            onChange={checkPassword}
+            options={passwordValidationItems}
+            withRegex
+          />
+          <PasswordInput
+            value={confirmPassworText.content}
+            label="Confirm Password"
+            onChange={passwordConfirmationCheck}
+            isConfirmation={!!confirmPassworText.content}
+            check={confirmPassworText.checked}
+          />
+          <div className="_flexbox__row__center__start w-full gap-3">
+            <Checkbox
+              checked={isPolicyChecked}
+              onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
+            />
+            <Typography variant="p" affects="normal">
+              I have read and accepted the all sites{" "}
+              <Link href={"/privacy-policy"} className="underline">
+                Policies
+              </Link>
+            </Typography>
+          </div>
+        </div>
+        <Button
+          fullWidth
+          variant="primary-hacker"
+          onClick={submitForm}
+          disabled={
+            validateIsFormFilled ||
+            isSubmit ||
+            !isPolicyChecked ||
+            !validatePasswordRegex
+          }
+          isLoading={isSubmit}
+        >
+          Register Account
+        </Button>
       </div>
-      <Button
-        fullWidth
-        variant="primary-hacker"
-        onClick={submitForm}
-        disabled={
-          validateIsFormFilled ||
-          isSubmit ||
-          !isPolicyChecked ||
-          !validatePasswordRegex
-        }
-        isLoading={isSubmit}
-      >
-        Register Account
-      </Button>
     </StepWrapper>
   );
 };

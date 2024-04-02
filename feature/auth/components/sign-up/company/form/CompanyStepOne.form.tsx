@@ -14,17 +14,19 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
   const {
     register,
     formState: { errors },
-    watch,
+    setValue,
+    getValues,
     resetField,
   } = useFormContext<FormSchema>();
+  const forms = getValues();
 
   const onClickValidate = () => {
     onClickNext();
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    corporate_name: watch("corporate_name"),
-    corporate_website: watch("corporate_website"),
+    corporate_name: forms.corporate_name,
+    corporate_website: forms.corporate_website,
   });
 
   return (
@@ -34,30 +36,42 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
       title="Company Sign Up"
       subtitle="Company Details"
     >
-      <div className="_flexbox__col__center w-full gap-7">
-        <Input
-          type="text"
-          label="Corporate Name"
-          onClearInput={() => resetField("corporate_name")}
-          {...register("corporate_name")}
-          isError={!!errors.corporate_name}
-        />
-        <Input
-          type="text"
-          label="Corporate Website"
-          onClearInput={() => resetField("corporate_website")}
-          {...register("corporate_website")}
-          isError={!!errors.corporate_website}
-        />
+      <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
+        <div className="_flexbox__col__center w-full gap-7">
+          <Input
+            type="text"
+            label="Corporate Name"
+            onClearInput={() => resetField("corporate_name")}
+            value={forms.corporate_name}
+            onChange={(e) =>
+              setValue("corporate_name", e.target.value, {
+                shouldValidate: true,
+              })
+            }
+            isError={!!errors.corporate_name}
+          />
+          <Input
+            type="text"
+            label="Corporate Website"
+            onClearInput={() => resetField("corporate_website")}
+            value={forms.corporate_website}
+            onChange={(e) =>
+              setValue("corporate_website", e.target.value, {
+                shouldValidate: true,
+              })
+            }
+            isError={!!errors.corporate_website}
+          />
+        </div>
+        <Button
+          fullWidth
+          onClick={onClickValidate}
+          disabled={validateIsFormFilled}
+          variant="primary-company"
+        >
+          Next
+        </Button>
       </div>
-      <Button
-        fullWidth
-        onClick={onClickValidate}
-        disabled={validateIsFormFilled}
-        variant="primary-hacker"
-      >
-        Next
-      </Button>
     </StepWrapper>
   );
 };
