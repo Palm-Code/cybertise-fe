@@ -14,23 +14,24 @@ interface I_CompanyStepTwoProps {
 
 const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
   const {
-    register,
     formState: { errors },
-    watch,
+    getValues,
     setValue,
     resetField,
   } = useFormContext<FormSchema>();
+
+  const forms = getValues();
 
   const onClickValidate = () => {
     onClickNext();
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    address: watch("address"),
-    country: watch("country"),
-    state: watch("state"),
-    city: watch("city"),
-    zip_code: watch("zip_code"),
+    address: forms.address,
+    country: forms.country,
+    state: forms.state,
+    city: forms.city,
+    zip_code: forms.zip_code,
   });
 
   return (
@@ -40,61 +41,80 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
       title="Company Sign Up"
       subtitle="Correspondency Details"
     >
-      <div className="_flexbox__col__center w-full gap-7">
-        <Input
-          type="text"
-          label="Address"
-          onClearInput={() => resetField("address")}
-          {...register("address")}
-          isError={!!errors.corporate_name}
-        />
-        <Input
-          type="text"
-          label="Address Line 2"
-          onClearInput={() => resetField("address_line_2")}
-          {...register("address_line_2")}
-          description="Optional"
-        />
-        <div className="grid w-full grid-cols-2 gap-7">
-          <SelectDropdown
-            label="Country"
-            value={watch("country")}
-            withIcon
-            withSearch
-            options={countryOptions}
-            onValueChange={(v) => setValue("country", v)}
-          />
-          <SelectDropdown
-            label="State"
-            value={watch("state")}
-            withSearch
-            options={countryOptions}
-            onValueChange={(v) => setValue("state", v)}
-          />
-          <SelectDropdown
-            label="City"
-            value={watch("city")}
-            withSearch
-            options={countryOptions}
-            onValueChange={(v) => setValue("city", v)}
+      <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
+        <div className="_flexbox__col__center w-full gap-7">
+          <Input
+            type="text"
+            label="Address"
+            onClearInput={() => resetField("address")}
+            value={forms.address}
+            onChange={(e) =>
+              setValue("address", e.target.value, { shouldValidate: true })
+            }
+            isError={!!errors.corporate_name}
           />
           <Input
             type="text"
-            label="Zip Code"
-            onClearInput={() => resetField("zip_code")}
-            {...register("zip_code")}
-            isError={!!errors.zip_code}
+            label="Address Line 2"
+            onClearInput={() => resetField("address_line_2")}
+            value={forms.address_line_2}
+            onChange={(e) =>
+              setValue("address_line_2", e.target.value, {
+                shouldValidate: true,
+              })
+            }
+            description="Optional"
           />
+          <div className="grid w-full grid-cols-1 gap-7 md:grid-cols-2">
+            <SelectDropdown
+              label="Country"
+              value={forms.country}
+              withIcon
+              withSearch
+              options={countryOptions}
+              onValueChange={(v) =>
+                setValue("country", v, { shouldValidate: true })
+              }
+            />
+            <SelectDropdown
+              label="State"
+              value={forms.state}
+              withSearch
+              options={countryOptions}
+              onValueChange={(v) =>
+                setValue("state", v, { shouldValidate: true })
+              }
+            />
+            <SelectDropdown
+              label="City"
+              value={forms.city}
+              withSearch
+              options={countryOptions}
+              onValueChange={(v) =>
+                setValue("city", v, { shouldValidate: true })
+              }
+            />
+            <Input
+              type="text"
+              label="Zip Code"
+              onClearInput={() => resetField("zip_code")}
+              value={forms.zip_code}
+              onChange={(e) =>
+                setValue("zip_code", e.target.value, { shouldValidate: true })
+              }
+              isError={!!errors.zip_code}
+            />
+          </div>
         </div>
+        <Button
+          fullWidth
+          onClick={onClickValidate}
+          disabled={validateIsFormFilled}
+          variant="primary-company"
+        >
+          Next
+        </Button>
       </div>
-      <Button
-        fullWidth
-        onClick={onClickValidate}
-        disabled={validateIsFormFilled}
-        variant="primary-hacker"
-      >
-        Next
-      </Button>
     </StepWrapper>
   );
 };

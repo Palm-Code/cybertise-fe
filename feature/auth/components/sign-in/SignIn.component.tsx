@@ -63,6 +63,8 @@ const SignInComponent = () => {
     password: forms.password,
   });
 
+  console.log({ validateIsFormFilled });
+
   if (isSuccess === "email") {
     return <SuccessState />;
   }
@@ -71,7 +73,7 @@ const SignInComponent = () => {
     return <MultiFactor />;
   }
 
-  console.log({ errors });
+  // console.log({ errors });
 
   return (
     <form
@@ -136,13 +138,21 @@ const SignInComponent = () => {
           >
             Sign In
           </Button>
-          <Typography variant="p" affects="normal" align="center">
-            Didn&apos;t have account yet?{" "}
-            <Link href={"/auth/signup"} className="ml-2 font-semibold">
-              Sign Up
-            </Link>
-          </Typography>
         </div>
+        <Typography
+          variant="p"
+          affects="normal"
+          align="center"
+          className="absolute bottom-8"
+        >
+          Didn&apos;t have account yet?{" "}
+          <Link
+            href={"/auth/signup"}
+            className="ml-2 font-semibold text-lime-normal"
+          >
+            Sign Up
+          </Link>
+        </Typography>
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__center gap-12 bg-background-main-light px-10 py-20 dark:bg-background-main-dark">
@@ -162,7 +172,10 @@ const SignInComponent = () => {
               label="Email"
               placeholderText="Enter your email"
               onClearInput={() => resetField("email")}
-              {...register("email")}
+              value={forms.email}
+              onChange={(e) =>
+                setValue("email", e.target.value, { shouldValidate: true })
+              }
               // isError={!!errors}
             />
             <div className="w-full space-y-1">
@@ -171,7 +184,10 @@ const SignInComponent = () => {
                 label="Password"
                 placeholderText="Enter your password"
                 onClickRevealPassword={() => setRevealPassword(!revealPassword)}
-                {...register("password")}
+                value={forms.password}
+                onChange={(e) =>
+                  setValue("password", e.target.value, { shouldValidate: true })
+                }
                 // isError={!!errors}
               />
               <Link

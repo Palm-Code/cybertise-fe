@@ -7,7 +7,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Mobile>
-        <div className="flex min-h-screen w-full flex-col items-center justify-start gap-12 py-8">
+        <div className="relative flex h-screen w-full flex-col items-center justify-start gap-8 py-8">
           <Link href="/auth/signin">
             <Logo className="h-12 w-32" />
           </Link>

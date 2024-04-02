@@ -74,11 +74,11 @@ const SignUpCompany = () => {
         {!isLastStep && (
           <Progress
             value={((currentStepIndex + 1) * 100) / (steps.length - 1)}
-            className="absolute left-0 top-0 rounded-none rounded-t-lg"
+            className="fixed left-0 top-0 rounded-none xl:absolute xl:rounded-t-lg"
           />
         )}
-        <div className="_flexbox__col__start w-full gap-12">
-          <div className="_flexbox__col__start w-full gap-8 transition-all duration-75">
+        <div className="_flexbox__col__start h-full w-full gap-12">
+          <div className="_flexbox__col__start__start h-full w-full gap-8 transition-all duration-75">
             {isFirstStep ? (
               <Link
                 href="/auth/signup"

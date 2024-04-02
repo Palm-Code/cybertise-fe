@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import SignUpHacker from "./hacker/SignUpHacker.component";
 import SignUpCompany from "./company/SignUpCompany.component";
 import { Building2 } from "lucide-react";
+import { Desktop, Mobile } from "@/core/ui/layout";
 
 const SignUpType = () => {
   const searchParams = useSearchParams();
@@ -20,56 +21,117 @@ const SignUpType = () => {
   }
 
   return (
-    <div
-      className={cn(
-        "_flexbox__col__center w-full max-w-[676px] gap-14 rounded-lg",
-        "bg-background-main-light p-20 dark:bg-background-main-dark"
-      )}
-    >
-      <div className="_flexbox__col__center w-full gap-12">
-        <Typography variant="h4" weight="bold" align="center">
-          Please Choose What Type of Account That You Want to Create
-        </Typography>
-        <div className="grid w-full grid-cols-2 gap-7">
-          <Link
-            href="/auth/signup?type=hacker"
-            className={cn(
-              "transition-color bg-main-dark _flexbox__col__center shadow-hacker",
-              "group aspect-[244/236] w-full cursor-pointer active:bg-lime-lighter",
-              "gap-6 rounded-lg duration-100 hover:bg-brand-hacker"
-            )}
-          >
-            <Hacker className="group-hover:text-brand-neutral" />
-            <Typography
-              variant="h6"
-              weight="bold"
-              className="group-hover:text-brand-neutral"
-            >
-              Hackers
+    <>
+      <Mobile className="_flexbox__col__center">
+        <div
+          className={cn(
+            "_flexbox__col__center relative mx-auto w-full max-w-[676px] gap-14 rounded-lg",
+            "px-6 py-8"
+          )}
+        >
+          <div className="_flexbox__col__center w-full gap-8">
+            <Typography variant="h5" weight="semibold" align="center">
+              Please Choose What Type of Account That You Want to Create
             </Typography>
-          </Link>
-          <Link
-            href="/auth/signup?type=company"
-            className={cn(
-              "_flexbox__col__center bg-background-main-light shadow-company dark:bg-background-main-dark",
-              "transition-color group aspect-[244/236] w-full cursor-pointer",
-              "gap-6 rounded-lg duration-100 hover:bg-sky-light/20 active:bg-sky-lighter"
-            )}
-          >
-            <Building2 />
-            <Typography variant="h6" weight="bold">
-              Company
-            </Typography>
-          </Link>
+            <div className="flex w-full flex-col gap-7">
+              <Link
+                href="/auth/signup?type=hacker"
+                className={cn(
+                  "transition-color _flexbox__row__center bg-background-main-light shadow-hacker dark:bg-background-main-dark",
+                  "group w-full cursor-pointer px-6 py-8 active:bg-lime-lighter",
+                  "gap-4 rounded-lg duration-100 hover:bg-brand-hacker"
+                )}
+              >
+                <Hacker className="group-hover:text-brand-neutral" />
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                  className="group-hover:text-brand-neutral"
+                >
+                  Hackers
+                </Typography>
+              </Link>
+              <Link
+                href="/auth/signup?type=company"
+                className={cn(
+                  "_flexbox__row__center bg-background-main-light shadow-company dark:bg-background-main-dark",
+                  "transition-color group w-full cursor-pointer px-6 py-8",
+                  "gap-4 rounded-lg duration-100 hover:bg-sky-light/20 active:bg-sky-lighter"
+                )}
+              >
+                <Building2 />
+                <Typography variant="h6" weight="bold">
+                  Company
+                </Typography>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-      <Typography variant="p" affects="normal">
-        Already have an account?{" "}
-        <Link href="/auth/signin" className="ml-2 font-semibold underline">
-          Sign In
-        </Link>
-      </Typography>
-    </div>
+        <Typography
+          variant="p"
+          affects="normal"
+          className="absolute bottom-8"
+          align="center"
+        >
+          Already have an account?{" "}
+          <Link href="/auth/signin" className="ml-2 font-semibold underline">
+            Sign In
+          </Link>
+        </Typography>
+      </Mobile>
+      <Desktop>
+        <div
+          className={cn(
+            "_flexbox__col__center mx-auto w-full max-w-[676px] gap-14 rounded-lg",
+            "bg-background-main-light p-20 dark:bg-background-main-dark"
+          )}
+        >
+          <div className="_flexbox__col__center w-full gap-12">
+            <Typography variant="h4" weight="bold" align="center">
+              Please Choose What Type of Account That You Want to Create
+            </Typography>
+            <div className="grid w-full grid-cols-2 gap-7">
+              <Link
+                href="/auth/signup?type=hacker"
+                className={cn(
+                  "transition-color _flexbox__col__center bg-background-main-light shadow-hacker dark:bg-background-main-dark",
+                  "group aspect-[244/236] w-full cursor-pointer active:bg-lime-lighter",
+                  "gap-6 rounded-lg duration-100 hover:bg-brand-hacker"
+                )}
+              >
+                <Hacker className="group-hover:text-brand-neutral" />
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                  className="group-hover:text-brand-neutral"
+                >
+                  Hackers
+                </Typography>
+              </Link>
+              <Link
+                href="/auth/signup?type=company"
+                className={cn(
+                  "_flexbox__col__center bg-background-main-light shadow-company dark:bg-background-main-dark",
+                  "transition-color group aspect-[244/236] w-full cursor-pointer",
+                  "gap-6 rounded-lg duration-100 hover:bg-sky-light/20 active:bg-sky-lighter"
+                )}
+              >
+                <Building2 />
+                <Typography variant="h6" weight="bold">
+                  Company
+                </Typography>
+              </Link>
+            </div>
+          </div>
+          <Typography variant="p" affects="normal">
+            Already have an account?{" "}
+            <Link href="/auth/signin" className="ml-2 font-semibold underline">
+              Sign In
+            </Link>
+          </Typography>
+        </div>
+      </Desktop>
+    </>
   );
 };
 export default SignUpType;
