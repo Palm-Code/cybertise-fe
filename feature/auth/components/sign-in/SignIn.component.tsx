@@ -27,17 +27,15 @@ const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
   const { push } = useRouter();
   const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>(null);
+  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
-    register,
-    watch,
+    formState: { errors },
     getValues,
     setValue,
     resetField,
   } = useForm<FormSchema>({
-    mode: "onSubmit",
     resolver: zodResolver(formShcema),
     defaultValues: {
       email: "",
@@ -48,11 +46,13 @@ const SignInComponent = () => {
   const forms = getValues();
 
   const onSubmit: SubmitHandler<FormSchema> = async (data) => {
+    setIsSuccess(null);
+    setLoadingSubmit(true);
     try {
       setTimeout(async () => {
         await login(data);
         push(callbackUrl || "/");
-      }, 5000);
+      }, 1500);
     } catch (error) {
       setIsSuccess(null);
     }
@@ -62,8 +62,6 @@ const SignInComponent = () => {
     email: forms.email,
     password: forms.password,
   });
-
-  console.log({ validateIsFormFilled });
 
   if (isSuccess === "email") {
     return <SuccessState />;
@@ -133,8 +131,8 @@ const SignInComponent = () => {
             type="submit"
             fullWidth
             variant="primary-hacker"
-            isLoading={isSubmitting}
-            disabled={validateIsFormFilled || isSubmitting}
+            isLoading={loadingSubmit}
+            disabled={validateIsFormFilled || loadingSubmit}
           >
             Sign In
           </Button>
@@ -206,8 +204,8 @@ const SignInComponent = () => {
               type="submit"
               fullWidth
               variant="primary-hacker"
-              isLoading={isSubmitting}
-              disabled={validateIsFormFilled || isSubmitting}
+              isLoading={loadingSubmit}
+              disabled={validateIsFormFilled || loadingSubmit}
             >
               Sign In
             </Button>

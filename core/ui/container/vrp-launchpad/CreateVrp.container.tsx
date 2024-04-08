@@ -16,6 +16,10 @@ const CreateVrpLaunchpad = ({
   variant,
   currentStep = 1,
 }: I_CreateVrpLaunchpadProps) => {
+  const currSteps = [
+    <Setup id={id} variant={variant} />,
+    <VrpDetails id="vrp-details" variant={variant} />,
+  ];
   return (
     <>
       <div
@@ -30,8 +34,7 @@ const CreateVrpLaunchpad = ({
         <VRPHeroCard variant={variant} />
         <IndicatorSteps currentSteps={currentStep} variant={variant} />
       </div>
-      {/* <Setup id={id} variant={variant} /> */}
-      <VrpDetails id="vrp-details" variant={variant} />
+      {currSteps[currentStep]}
     </>
   );
 };

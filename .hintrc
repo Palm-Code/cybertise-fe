@@ -4,6 +4,7 @@
   ],
   "hints": {
     "typescript-config/is-valid": "off",
-    "compat-api/css": "off"
+    "compat-api/css": "off",
+    "typescript-config/consistent-casing": "off"
   }
 }

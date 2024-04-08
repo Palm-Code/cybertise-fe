@@ -103,7 +103,7 @@ const TicketCard = ({
                   Hacker Ticket
                 </Button>
               </Link>
-              <Link href={`/reports/${props.ticket_number}`}>
+              <Link href={`/reports/new?=${props.ticket_number}`}>
                 <Button
                   variant="primary-mediator"
                   prefixIcon={!isGridCard && <Building2 />}
