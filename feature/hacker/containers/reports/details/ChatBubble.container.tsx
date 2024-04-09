@@ -9,7 +9,7 @@ import Review from "@/feature/hacker/components/programs/send-report/steps/Revie
 
 const ChatBubble = () => {
   return (
-    <div className="_flexbox__col__start__start h-fit w-full gap-6 pb-28">
+    <div className="_flexbox__col__start__start h-fit w-full gap-6 xl:pb-28">
       <div className="grid h-fit max-h-full w-full grid-cols-[auto_1fr] place-items-start content-start gap-3">
         <div className="_flexbox__col__center__start h-full w-fit gap-3">
           <Avatar

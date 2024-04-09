@@ -28,7 +28,7 @@ export default async function Dashboardlayout({
           className={cn(
             "h-fit max-h-[calc(100vh-86px)] w-full overflow-auto",
             "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
-            "px-6 pb-8"
+            "p-0"
           )}
         >
           {child[session?.user.role]}

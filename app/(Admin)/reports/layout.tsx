@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/utils";
 import { Header } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
@@ -36,7 +37,13 @@ export default async function Dashboardlayout({
           />
         }
       >
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pl-14 pr-12">
+        <div
+          className={cn(
+            "h-fit max-h-[calc(100vh-86px)] w-full overflow-auto",
+            "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
+            "p-0"
+          )}
+        >
           {child[session?.user.role]}
         </div>
       </Suspense>

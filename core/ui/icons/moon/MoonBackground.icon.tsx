@@ -27,28 +27,28 @@ const MoonBackground = (props: I_Icons) => {
         cy="16.851"
         r="47.3939"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="61.2155"
         cy="16.8581"
         r="38.6667"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="61.2136"
         cy="16.8523"
         r="28.7273"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="61.2127"
         cy="16.8591"
         r="19.7576"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle cx="33.3382" cy="11.5121" r="0.363636" fill="white" />
       <circle cx="40.1254" cy="20.4886" r="0.363636" fill="white" />

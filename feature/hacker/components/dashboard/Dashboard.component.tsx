@@ -55,7 +55,7 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
           </div>
           {data.length! ? (
             <>
-              <DashboardCardView data={data} />
+              <DashboardGridView data={data} />
             </>
           ) : (
             <EmptyState

@@ -7,7 +7,7 @@ import { ProgramCardType } from "@/types/admin/programs";
 const GridView = ({ data }: { data: ProgramCardType[] }) => {
   return (
     <AnimationWrapper>
-      <div className="z-10 grid h-full w-full grid-cols-2 gap-10">
+      <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
         <ProgramsTicketCardList data={data} isGridCard />
       </div>
     </AnimationWrapper>

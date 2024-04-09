@@ -1,5 +1,4 @@
 import Link, { type LinkProps } from "next/link";
-import { buttonVariants } from "../button/base-button";
 import { cn } from "@/core/lib/utils";
 
 interface I_CardProps {

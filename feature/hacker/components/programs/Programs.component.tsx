@@ -34,7 +34,12 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
   return (
     <>
       <Mobile>
-        <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-8">
+        <div
+          className={cn(
+            "_flexbox__col__start__start min-h-full w-full gap-10 pt-8",
+            "px-6 pb-8"
+          )}
+        >
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
@@ -55,7 +60,7 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
             </div>
           </div>
           {data.length! ? (
-            <ProgramsCardView data={data} />
+            <ProgramsGridView data={data} />
           ) : (
             <EmptyState
               variant="hacker"
