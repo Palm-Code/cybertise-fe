@@ -9,6 +9,7 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { ArrowUpDown } from "lucide-react";
 import { iconColor } from "./filter-view-dropdown";
+import { Desktop, Mobile } from "../../layout";
 
 interface I_FilterDropdownProps {
   onValueChange: (value: string) => void;
@@ -29,27 +30,54 @@ const FilterDropdown = ({
   )?.label;
 
   return (
-    <Select onValueChange={onValueChange}>
-      <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
-        <ArrowUpDown className={iconColor[variant]} />
-        <Typography variant="p" affects="small">
-          {inputValueLabel || "Sort By"}
-        </Typography>
-      </SelectTrigger>
-      <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
-        {options.length! ? (
-          options.map((option) => (
-            <SelectItem key={option.value} value={option.value as string}>
-              {option.label}
-            </SelectItem>
-          ))
-        ) : (
-          <SelectItem value="no items" disabled>
-            No options
-          </SelectItem>
-        )}
-      </SelectContent>
-    </Select>
+    <>
+      <Mobile>
+        <Select onValueChange={onValueChange}>
+          <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
+            <ArrowUpDown className={iconColor[variant]} />
+            <Typography variant="p" affects="small">
+              {inputValueLabel || "Sort By"}
+            </Typography>
+          </SelectTrigger>
+          <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+            {options.length! ? (
+              options.map((option) => (
+                <SelectItem key={option.value} value={option.value as string}>
+                  {option.label}
+                </SelectItem>
+              ))
+            ) : (
+              <SelectItem value="no items" disabled>
+                No options
+              </SelectItem>
+            )}
+          </SelectContent>
+        </Select>
+      </Mobile>
+      <Desktop>
+        <Select onValueChange={onValueChange}>
+          <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
+            <ArrowUpDown className={iconColor[variant]} />
+            <Typography variant="p" affects="small">
+              {inputValueLabel || "Sort By"}
+            </Typography>
+          </SelectTrigger>
+          <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+            {options.length! ? (
+              options.map((option) => (
+                <SelectItem key={option.value} value={option.value as string}>
+                  {option.label}
+                </SelectItem>
+              ))
+            ) : (
+              <SelectItem value="no items" disabled>
+                No options
+              </SelectItem>
+            )}
+          </SelectContent>
+        </Select>
+      </Desktop>
+    </>
   );
 };
 export default FilterDropdown;

@@ -23,7 +23,7 @@ const Card = ({
     return (
       <Link
         className={cn(
-          "relative z-20 flex w-full rounded-lg bg-background-main-light p-9",
+          "relative z-20 flex w-full rounded-lg bg-background-main-light px-6 py-8 xl:p-9",
           "transition-colors duration-75 hover:bg-neutral-light-90 hover:shadow-xl",
           "dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
           className
