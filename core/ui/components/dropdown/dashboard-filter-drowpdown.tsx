@@ -17,7 +17,7 @@ const DashboardFilter = ({ variant = "hacker" }: IDashboardFilterProps) => {
       <Mobile className="w-fit">
         <div
           className={cn(
-            "min-w-28",
+            "min-w-32",
             "_flexbox__row__center__start gap-2.5 rounded-lg",
             "bg-neutral-light-100 px-3 py-2 dark:bg-neutral-dark-100"
           )}
@@ -26,25 +26,6 @@ const DashboardFilter = ({ variant = "hacker" }: IDashboardFilterProps) => {
           <Typography variant="p" affects="small">
             Filter
           </Typography>
-          {/* <Separator orientation="vertical" className="h-6 w-0.5 text-white" />
-          <BaseDropdown
-            label="Type"
-            value="All type"
-            options={filterItems.type}
-            onValueChange={() => {}}
-          />
-          <BaseDropdown
-            label="Risk Level"
-            value="All Level"
-            options={filterItems.risk_level}
-            onValueChange={() => {}}
-          />
-          <BaseDropdown
-            label="Status"
-            value="All status"
-            options={filterItems.status}
-            onValueChange={() => {}}
-          /> */}
         </div>
       </Mobile>
       <Desktop className="w-fit">

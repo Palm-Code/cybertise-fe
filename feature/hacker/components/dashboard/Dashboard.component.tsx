@@ -42,7 +42,7 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
               placeholder="Try “#21231” or “Company name”"
             />
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
             <DashboardFilter variant="hacker" />
             <div className="inline-flex gap-4">
               <FilterDropdown

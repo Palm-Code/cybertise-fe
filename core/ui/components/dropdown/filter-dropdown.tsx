@@ -16,6 +16,7 @@ interface I_FilterDropdownProps {
   options: SortFilterType[];
   value: string;
   variant?: "hacker" | "company" | "mediator";
+  withIcon?: boolean;
 }
 
 const FilterDropdown = ({
@@ -23,6 +24,7 @@ const FilterDropdown = ({
   options,
   value,
   variant = "hacker",
+  withIcon,
   ...props
 }: I_FilterDropdownProps) => {
   const inputValueLabel = options.find(
@@ -33,7 +35,10 @@ const FilterDropdown = ({
     <>
       <Mobile>
         <Select onValueChange={onValueChange}>
-          <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
+          <SelectTrigger
+            className="justify-start gap-2.5 !bg-white dark:!bg-neutral-dark-100"
+            withIcon={withIcon}
+          >
             <ArrowUpDown className={iconColor[variant]} />
             <Typography variant="p" affects="small">
               {inputValueLabel || "Sort By"}
