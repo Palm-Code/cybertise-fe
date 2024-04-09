@@ -7,6 +7,7 @@ import Sidebar from "@/core/ui/layout/admin/Sidebar.layout";
 import NextTopLoader from "nextjs-toploader";
 import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
+import { Desktop, Mobile } from "@/core/ui/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,10 +48,20 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {session ? (
-            <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
-              <Sidebar type={session?.user.role} />
-              {children}
-            </div>
+            <>
+              <Mobile>
+                <div className="h-screen w-full overflow-hidden">
+                  <Sidebar type={session?.user.role} />
+                  {children}
+                </div>
+              </Mobile>
+              <Desktop>
+                <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+                  <Sidebar type={session?.user.role} />
+                  {children}
+                </div>
+              </Desktop>
+            </>
           ) : (
             <>{children}</>
           )}
