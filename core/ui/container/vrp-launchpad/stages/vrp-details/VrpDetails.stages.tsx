@@ -16,6 +16,7 @@ import Brief from "../_content/steps/brief/Brief";
 import VrpDescriptionCard from "../_content/steps/make-changes/_card/VrpDescriptionCard";
 import MonetaryAwardCardList from "../_content/steps/make-changes/_card/MonetaryAwardsCard";
 import TargetAssetListCard from "../_content/steps/make-changes/_card/TargetAssetListCard";
+import ModalPublishVRP from "../../_dialog/ModalPublishVRP";
 
 interface I_VRPDetailsProps {
   id: string;
@@ -89,6 +90,7 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
           variant="company"
           isLastStep
           onClickEdit={() => goTo(1)}
+          onClickNext={() => setOpenModal(true)}
         />
       ),
       key: "review",
@@ -151,6 +153,7 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
           </div>
         </form>
       </FormProvider>
+      <ModalPublishVRP isOpen={openModal} onClose={() => setOpenModal(false)} />
     </>
   );
 };

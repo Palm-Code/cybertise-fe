@@ -5,3 +5,4 @@ export { default as VRPLaunchpadFragment } from "./vrp-launchpad/VRPLaunchpad.fr
 export { default as CreateVrpFragment } from "./vrp-launchpad/create-vrp/CreateVrp.fragment";
 export { default as CompaniesFragment } from "./companies/Companies.fragment";
 export { default as CompaniesDetailFragment } from "./companies/details/CompaniesDetails.fragment";
+export { default as NewCompanyReportFragment } from "./reports/new/NewCompanyReport.fragment";
