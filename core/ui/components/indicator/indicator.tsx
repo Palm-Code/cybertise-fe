@@ -6,7 +6,7 @@ import Typography from "../typography/typography";
 const indicatorVariants = cva("", {
   variants: {
     variant: {
-      hacker: "text-lime-normal rounded-md",
+      hacker: "text-lime-normal-light dark:text-lime-normal-dark rounded-md",
       company: "text-sky-normal rounded-md",
       mediator: "text-violet-normal rounded-md",
       warning: "text-red-normal rounded-full",

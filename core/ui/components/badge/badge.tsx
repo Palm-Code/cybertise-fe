@@ -13,7 +13,7 @@ const badgeVariants = cva(
         android:
           "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:
-          "bg-neutral-light-70 dark:bg-neutral-dark-70 text-neutral-light-0 dark:text-white px-2.5 py-1",
+          "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         hacker:
           "text-lime-badge bg-neutral-light-90 dark:bg-neutral-dark-90 px-2.5 py-0",
         company:

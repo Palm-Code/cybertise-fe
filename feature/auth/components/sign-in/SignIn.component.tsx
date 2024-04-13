@@ -146,7 +146,7 @@ const SignInComponent = () => {
           Didn&apos;t have account yet?{" "}
           <Link
             href={"/auth/signup"}
-            className="ml-2 font-semibold text-lime-normal"
+            className="ml-2 font-semibold text-lime-normal-light dark:text-lime-normal-dark"
           >
             Sign Up
           </Link>

@@ -2,20 +2,24 @@ import { Typography } from "@/core/ui/components";
 import CardLogin from "../component/_tabs/_contents/security/CardLoginInfo";
 import Authentication from "../component/_tabs/_contents/security/Authecntication";
 
-const Security = () => {
+interface I_SecurityProps {
+  variant: "hacker" | "mediator" | "company";
+}
+
+const Security = ({ variant }: I_SecurityProps) => {
   const menus: { title: string; element: JSX.Element }[] = [
     {
       title: "Login info",
-      element: <CardLogin />,
+      element: <CardLogin variant={variant} />,
     },
     {
       title: "Two-Factor Authentication",
-      element: <Authentication />,
+      element: <Authentication variant={variant} />,
     },
   ];
   return (
-    <>
-      <div className="_flexbox__row__center__between w-full">
+    <div className="_flexbox__col__start__start w-full gap-6">
+      <div className="xl:_flexbox__row__center__between hidden w-full">
         <Typography variant="h5" weight="bold">
           Security
         </Typography>
@@ -31,7 +35,7 @@ const Security = () => {
           {menu.element}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 export default Security;

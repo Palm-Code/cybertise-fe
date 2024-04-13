@@ -5,18 +5,20 @@ import { ChevronRight, FileKey2 } from "lucide-react";
 const CardPrivacyPolicy = () => {
   return (
     <Card
+      isClickable
+      href={"#"}
       className={cn(
-        "_flexbox__col__start__start w-full gap-3 rounded-xl p-7.5",
-        "bg-neutral-light-100 dark:bg-neutral-dark-100"
+        "_flexbox__col__start__start w-full gap-3 rounded-xl px-4 py-8 xl:p-7.5",
+        "xl:bg-neutral-light-100 xl:dark:bg-neutral-dark-100"
       )}
     >
-      <div className="_flexbox__row__start__between w-full">
-        <Typography variant="h6" weight="bold" className="inline-flex">
-          <FileKey2 className="mr-4 h-8 w-8" />
+      <button className="_flexbox__row__start__between w-full">
+        <Typography variant="h6" weight="bold" className="xl:inline-flex">
+          <FileKey2 className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
           Privacy Policy
         </Typography>
-        <ChevronRight />
-      </div>
+        <ChevronRight className="hidden xl:block" />
+      </button>
       <Typography
         variant="p"
         affects="normal"

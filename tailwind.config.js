@@ -130,7 +130,10 @@ module.exports = {
         lime: {
           dark: "#C0D093",
           darker: "#CFE593",
-          normal: "#BAFF00",
+          normal: {
+            light: "#7BA509",
+            dark: "#BAFF00",
+          },
           lighter: "#C8FF33",
           light: "#D6FF66",
           "dark-green": "#4D6900",

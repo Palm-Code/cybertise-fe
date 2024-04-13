@@ -74,7 +74,7 @@ export const menuItems: MenuItemType = {
 };
 
 export const borderColor: { [key in Role]: string } = {
-  hacker: "border-lime-normal",
+  hacker: "border-lime-normal-light",
   company: "border-sky-normal",
   mediator: "border-violet-normal",
 };

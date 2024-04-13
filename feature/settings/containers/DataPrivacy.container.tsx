@@ -7,7 +7,7 @@ import CardDeactivateAccount from "../component/_tabs/_contents/data-privacy/Car
 
 const DataPrivacy = () => {
   return (
-    <>
+    <div className="_flexbox__col__start__start gap-6">
       <div className="_flexbox__row__center__between w-full">
         <Typography variant="h5" weight="bold">
           Data & Privacy
@@ -15,18 +15,13 @@ const DataPrivacy = () => {
       </div>
       <CardPrivacyPolicy />
       <CardFaq />
-      <div className="_flexbox__row__center__between w-full">
-        <Typography variant="h5" weight="bold">
-          Security
-        </Typography>
-      </div>
       <div className="_flexbox__col__start__start w-full gap-6">
         <Typography variant="h6" weight="bold">
           Account
         </Typography>
         <CardDeactivateAccount />
       </div>
-    </>
+    </div>
   );
 };
 export default DataPrivacy;

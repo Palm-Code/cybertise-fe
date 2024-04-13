@@ -9,7 +9,8 @@ export interface I_PaginationProps {
 }
 
 const iconColor: { [key in I_PaginationProps["variant"]]: string } = {
-  hacker: "text-lime-normal hover:text-lime-lighter",
+  hacker:
+    "text-lime-normal-light dark:text-lime-normal-dark hover:text-lime-lighter",
   company: "text-sky-light hover:text-sky-lighter",
   mediator: "text-violet-light hover:text-violet-lighter",
 };

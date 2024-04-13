@@ -36,13 +36,13 @@ export default async function Dashboardlayout({
             <Loader2
               width={64}
               height={64}
-              className="m-auto animate-spin stroke-2 text-lime-normal"
+              className="m-auto animate-spin stroke-2 text-lime-normal-light dark:text-lime-normal-dark"
             />
           }
         >
           <div
             className={cn(
-              "h-fit max-h-[calc(100vh-86px)] w-full overflow-auto",
+              "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
               "xl:p-12 xl:pb-28 xl:pl-14 xl:pr-12",
               "px-6 py-8"
             )}

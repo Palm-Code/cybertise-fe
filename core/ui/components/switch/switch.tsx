@@ -11,7 +11,7 @@ interface I_SwitchProps {
 
 const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
   hacker: {
-    active: "bg-lime-normal",
+    active: "bg-lime-normal-light dark:bg-lime-normal-dark",
     inactive: "bg-lime-lighter/20",
   },
   company: {

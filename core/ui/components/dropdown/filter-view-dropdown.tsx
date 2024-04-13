@@ -19,7 +19,7 @@ interface I_FilterViewDropdownProps extends InputProps {
 }
 
 export const iconColor: { [key in Role]: string } = {
-  hacker: "text-lime-normal",
+  hacker: "text-lime-normal-light dark:text-lime-normal-dark",
   company: "text-sky-normal",
   mediator: "text-violet-normal",
 };

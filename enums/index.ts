@@ -21,11 +21,11 @@ export enum manageCompanyTabsItemEnums {
 }
 
 export enum SettingItems {
-  details = "details",
-  notifications = "notifications",
-  security = "security",
-  data_privacy = "data_privacy",
-  billings = "billings",
+  details = 0,
+  notifications = 2,
+  security = 3,
+  data_privacy = 4,
+  billings = 1,
 }
 
 export enum AttackVector {

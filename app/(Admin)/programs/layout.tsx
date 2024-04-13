@@ -26,7 +26,7 @@ export default async function Dashboardlayout({
         <Header />
         <div
           className={cn(
-            "h-fit max-h-[calc(100vh-86px)] w-full overflow-auto",
+            "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
             "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
             "p-0"
           )}

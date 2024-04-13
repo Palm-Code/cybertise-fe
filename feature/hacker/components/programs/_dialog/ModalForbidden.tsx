@@ -13,7 +13,7 @@ const ModalForbiddden = ({ isOpen, onClose }: I_ModalForbidddenProps) => {
       className="bg-background-page-light/90 backdrop-blur-sm dark:bg-background-page-dark/90"
     >
       <div className="_flexbox__col__center mx-auto w-full max-w-56 gap-6">
-        <MonitorSmartphone className="h-12 w-12 text-lime-normal" />
+        <MonitorSmartphone className="h-12 w-12 text-lime-normal-light dark:text-lime-normal-dark" />
         <div className="_flexbox__col__center w-full gap-2">
           <Typography variant="h5" weight="semibold">
             Report fom Desktop
