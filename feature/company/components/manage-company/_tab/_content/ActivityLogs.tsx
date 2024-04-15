@@ -1,4 +1,6 @@
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+
 const ActivityLogs = () => {
-  return <div>ActivityLogs</div>;
+  return <EmptyState variant="company" type="under-construction" />;
 };
 export default ActivityLogs;

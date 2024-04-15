@@ -27,7 +27,7 @@ interface I_TableProps {
 
 export default function Table({ data, columns }: I_TableProps) {
   return (
-    <AnimationWrapper>
+    <AnimationWrapper className="hidden md:flex">
       <BaseTable>
         <TableHeader>
           <TableRow>

@@ -21,10 +21,7 @@ export const BaseTable = ({
 }: I_TableProps) => {
   return (
     <div
-      className={cn(
-        "hidden w-full flex-col items-center gap-4 md:flex",
-        className
-      )}
+      className={cn("w-full flex-col items-center gap-4", className)}
       {...props}
     >
       {children}

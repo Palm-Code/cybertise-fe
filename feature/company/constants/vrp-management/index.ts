@@ -18,6 +18,10 @@ export const vrpData = [
         label: "iOS: AppStore",
         value: "ios",
       },
+      {
+        label: "Hardware/IOT",
+        value: "iot",
+      },
     ],
     name: "VRP Title 1",
     status: "Phase 2: Setup Phase",
