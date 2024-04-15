@@ -99,7 +99,6 @@ export default function Table({ data, columns }: I_TableProps) {
           ))}
         </TableBody>
       </BaseTable>
-      <Pagination variant="hacker" />
     </AnimationWrapper>
   );
 }

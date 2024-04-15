@@ -28,7 +28,7 @@ const BaseDropdown = ({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger className="!w-fit !justify-start gap-4 text-nowrap !bg-transparent !p-0">
+      <SelectTrigger className="!w-fit !justify-start gap-4 text-nowrap !bg-transparent">
         <Typography
           variant="p"
           affects="small"

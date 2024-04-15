@@ -1,3 +1,5 @@
+import { cn } from "@/core/lib/utils";
+import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
 import { Header } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
@@ -32,11 +34,20 @@ export default async function Dashboardlayout({
           <Loader2
             width={64}
             height={64}
-            className="m-auto animate-spin stroke-2 text-lime-normal"
+            className={cn(
+              "m-auto animate-spin stroke-2",
+              iconColor[session.user.role]
+            )}
           />
         }
       >
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pl-14 pr-12">
+        <div
+          className={cn(
+            "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+            "pt-0 xl:pl-14 xl:pr-12",
+            "p-0"
+          )}
+        >
           {child[session?.user.role]}
         </div>
       </Suspense>

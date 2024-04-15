@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         "primary-hacker":
-          "border bg-lime-normal !text-brand-neutral hover:bg-lime-darker active:bg-lime-dark border-lime-normal hover:border-lime-darker focus:border-lime-darker active:border-lime-dark disabled:bg-lime-dark disabled:border-lime-dark disabled:opacity-20",
+          "border bg-lime-normal-light dark:bg-lime-normal-dark !text-brand-neutral hover:bg-lime-darker active:bg-lime-dark border-lime-normal hover:border-lime-darker focus:border-lime-darker active:border-lime-dark disabled:bg-lime-dark disabled:border-lime-dark disabled:opacity-20",
         "secondary-hacker":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-lime-lighter/20 focus:bg-lime-lighter/20 active:bg-lime-lighter/20 border-lime-normal hover:border-lime-normal active:border-lime-lighter-20/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:bg-lime-lighter/20 focus:bg-lime-lighter/20 active:bg-lime-lighter/20 border-lime-normal-light dark:border-lime-normal-dark hover:border-lime-normal-light dark:hover:border-lime-normal-dark active:border-lime-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-hacker":
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-lime-normal focus:text-lime-normal active:text-lime-dark",
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-lime-normal-light dark:hover:text-lime-normal-dark focus:text-lime-normal-light dark:focus:text-lime-normal-dark active:text-lime-dark",
         "primary-company":
           "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark disabled:opacity-20",
         "secondary-company":
@@ -30,13 +30,13 @@ const buttonVariants = cva(
         default:
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-brand-neutral focus:text-brand-neutral active:text-brand-neutral",
         "outline-hacker":
-          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-lime-normal hover:text-neutral-light-0",
+          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-lime-normal-light dark:hover:bg-lime-normal-dark hover:text-neutral-light-0",
         "outline-company":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-sky-normal dark:text-white text-neutral-light-0 hover:text-white",
         "outline-mediator":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-violet-normal dark:text-white text-neutral-light-0 hover:text-white",
         "ghost-hacker":
-          "bg-transparent text-lime-normal hover:text-lime-dark focus:text-lime-dark active:text-lime-darker",
+          "bg-transparent text-lime-normal-light dark:text-lime-normal-dark hover:text-lime-dark focus:text-lime-dark active:text-lime-darker",
         "ghost-mediator":
           "bg-transparent text-violet-normal hover:text-violet-dark focus:text-violet-dark active:text-violet-darker",
         "ghost-company":

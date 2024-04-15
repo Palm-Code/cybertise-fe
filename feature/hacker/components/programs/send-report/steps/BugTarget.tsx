@@ -29,7 +29,7 @@ const BugTarget = ({}: I_BugTargetProps) => {
             className={cn(
               "_flexbox__col__start__start w-full cursor-pointer gap-2 rounded-2xl px-6 py-4",
               "border border-transparent transition-colors duration-100",
-              "bg-neutral-light-100 hover:border-lime-normal dark:bg-neutral-dark-100"
+              "bg-neutral-light-100 hover:border-lime-normal-light dark:bg-neutral-dark-100 dark:hover:border-lime-normal-dark"
             )}
           >
             <Typography variant="p" affects="normal">
@@ -41,7 +41,7 @@ const BugTarget = ({}: I_BugTargetProps) => {
             className={cn(
               "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl px-6 py-4",
               "border border-transparent transition-colors duration-100",
-              "bg-neutral-light-100 hover:border-lime-normal dark:bg-neutral-dark-100"
+              "bg-neutral-light-100 hover:border-lime-normal-light dark:bg-neutral-dark-100 dark:hover:border-lime-normal-dark"
             )}
           >
             <Input

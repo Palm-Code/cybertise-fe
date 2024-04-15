@@ -130,7 +130,10 @@ module.exports = {
         lime: {
           dark: "#C0D093",
           darker: "#CFE593",
-          normal: "#BAFF00",
+          normal: {
+            light: "#7BA509",
+            dark: "#BAFF00",
+          },
           lighter: "#C8FF33",
           light: "#D6FF66",
           "dark-green": "#4D6900",
@@ -200,6 +203,7 @@ module.exports = {
         hacker: "0px 0px 15px 0px rgba(122, 168, 0, 0.20)",
         company: "0px 0px 15px 0px rgba(75, 162, 227, 0.20)",
         bubble: "0px -10px 25px 0px rgba(130, 130, 130, 0.10)",
+        sidebar: "4px 0px 50px 0px rgba(255, 255, 255, 0.10)",
       },
       backgroundImage: {
         progress:

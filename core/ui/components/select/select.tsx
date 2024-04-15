@@ -12,22 +12,31 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
+interface SelectTriggerProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
+  withIcon?: boolean;
+}
+
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  SelectTriggerProps
+>(({ className, withIcon, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "text-neutral-30 relative z-10 flex h-16 w-full items-center justify-between rounded-lg bg-neutral-light-90 px-4 outline-none dark:bg-neutral-dark-90",
+      "text-neutral-30 relative z-10 flex w-full items-center justify-between",
+      "px-3 py-2 xl:p-3",
+      "rounded-lg bg-neutral-light-90 outline-none dark:bg-neutral-dark-90",
       className
     )}
     {...props}
   >
     {children}
-    <SelectPrimitive.Icon asChild>
-      <ChevronDownIcon className="h-6 w-6 transition-all duration-200" />
-    </SelectPrimitive.Icon>
+    {withIcon && (
+      <SelectPrimitive.Icon asChild>
+        <ChevronDownIcon className="h-6 w-6 transition-all duration-200" />
+      </SelectPrimitive.Icon>
+    )}
   </SelectPrimitive.Trigger>
 ));
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;

@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/utils";
 import { Header } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { getSession } from "@/service/server/session";
@@ -23,7 +24,13 @@ export default async function Dashboardlayout({
     <>
       <div className="_flexbox__col__start__start h-full w-full">
         <Header />
-        <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pb-28 pl-14 pr-12">
+        <div
+          className={cn(
+            "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+            "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
+            "p-0"
+          )}
+        >
           {child[session?.user.role]}
         </div>
       </div>

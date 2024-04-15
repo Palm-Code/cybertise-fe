@@ -1,5 +1,5 @@
 import { Card, Typography } from "@/core/ui/components";
-import { AnimationWrapper } from "@/core/ui/layout";
+import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
@@ -10,27 +10,52 @@ interface I_Update extends UpdateType {}
 const Update = ({ title, created_at, content }: I_Update) => {
   return (
     <AnimationWrapper>
-      <Card className="px-6 py-12">
-        <div className="_flexbox__col__start__start w-full gap-6">
-          <div className="_flexbox__col__start__start w-full gap-2">
-            <Typography variant="p" affects="extralarge" weight="bold">
-              {title}
-            </Typography>
-            <Typography
-              variant="p"
-              affects="small"
-              className="!dark:text-neutral-dark-50 text-neutral-light-50"
-            >
-              {formatDateToAgo2(created_at ?? "")}
-            </Typography>
+      <Mobile className="px-6">
+        <Card className="px-6 py-12">
+          <div className="_flexbox__col__start__start w-full gap-6">
+            <div className="_flexbox__col__start__start w-full gap-2">
+              <Typography variant="p" affects="large" weight="bold">
+                {title}
+              </Typography>
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutral-light-50 dark:text-neutral-dark-50"
+              >
+                {formatDateToAgo2(created_at ?? "")}
+              </Typography>
+            </div>
+            <article
+              dangerouslySetInnerHTML={{
+                __html: sanitize(content ?? ""),
+              }}
+            ></article>
           </div>
-          <article
-            dangerouslySetInnerHTML={{
-              __html: sanitize(content ?? ""),
-            }}
-          ></article>
-        </div>
-      </Card>
+        </Card>
+      </Mobile>
+      <Desktop>
+        <Card className="px-6 py-12">
+          <div className="_flexbox__col__start__start w-full gap-6">
+            <div className="_flexbox__col__start__start w-full gap-2">
+              <Typography variant="p" affects="extralarge" weight="bold">
+                {title}
+              </Typography>
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutral-light-50 dark:text-neutral-dark-50"
+              >
+                {formatDateToAgo2(created_at ?? "")}
+              </Typography>
+            </div>
+            <article
+              dangerouslySetInnerHTML={{
+                __html: sanitize(content ?? ""),
+              }}
+            ></article>
+          </div>
+        </Card>
+      </Desktop>
     </AnimationWrapper>
   );
 };

@@ -4,7 +4,6 @@ import {
   Badge,
   BaseTable,
   Indicator,
-  Pagination,
   TableBody,
   TableBodyRow,
   TableData,
@@ -15,7 +14,6 @@ import {
 } from "@/core/ui/components";
 import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
 import { I_TableColumns, I_TableReportTicketData } from "@/interfaces";
-import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 import Image from "next/image";
@@ -110,7 +108,6 @@ export default function Table({ data, columns }: I_TableProps) {
           </Suspense>
         </TableBody>
       </BaseTable>
-      <Pagination variant="hacker" />
     </AnimationWrapper>
   );
 }

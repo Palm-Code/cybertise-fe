@@ -21,28 +21,28 @@ const SunBackground = (props: I_SunBackground) => {
         cy="16.851"
         r="47.3939"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="17.5768"
         cy="16.8464"
         r="38.6667"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="17.5788"
         cy="16.8523"
         r="28.7273"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle
         cx="17.5759"
         cy="16.8474"
         r="19.7576"
         fill="white"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
 
       <path

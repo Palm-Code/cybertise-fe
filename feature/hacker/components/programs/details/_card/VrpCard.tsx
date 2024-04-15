@@ -1,5 +1,5 @@
 import { Badge, Button, Card, Typography } from "@/core/ui/components";
-import { AnimationWrapper } from "@/core/ui/layout";
+import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 
 interface I_VRPCard {
   onClickSeeDetails: () => void;
@@ -8,27 +8,52 @@ interface I_VRPCard {
 const VRPCard = ({ onClickSeeDetails }: I_VRPCard) => {
   return (
     <AnimationWrapper>
-      <Card isButton onClick={onClickSeeDetails}>
-        <div className="_flexbox__col__start__start w-full gap-12">
-          <Typography variant="p" affects="large" weight="semibold">
-            VRP Title 1
-          </Typography>
-          <div className="_flexbox__col__start__start gap-2.5">
-            <Typography
-              variant="p"
-              affects="small"
-              className="text-neutal-light-20 dark:text-neutral-dark-20"
-            >
-              Asset type Available
+      <Mobile className="px-6">
+        <Card isButton onClick={onClickSeeDetails}>
+          <div className="_flexbox__col__start__start w-full gap-12">
+            <Typography variant="p" affects="large" weight="semibold">
+              VRP Title 1
             </Typography>
-            <div className="grid grid-flow-col gap-4">
-              <Badge variant="url">Domain</Badge>
-              <Badge variant="iot">Hardware/IOT</Badge>
-              <Badge variant="android">Android:Playstore</Badge>
+            <div className="_flexbox__col__start__start gap-2.5">
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutal-light-20 dark:text-neutral-dark-20"
+              >
+                Asset type Available
+              </Typography>
+              <div className="flex flex-wrap gap-4">
+                <Badge variant="url">Domain</Badge>
+                <Badge variant="iot">Hardware/IOT</Badge>
+                <Badge variant="android">Android:Playstore</Badge>
+              </div>
             </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </Mobile>
+      <Desktop>
+        <Card isButton onClick={onClickSeeDetails}>
+          <div className="_flexbox__col__start__start w-full gap-12">
+            <Typography variant="p" affects="large" weight="semibold">
+              VRP Title 1
+            </Typography>
+            <div className="_flexbox__col__start__start gap-2.5">
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutal-light-20 dark:text-neutral-dark-20"
+              >
+                Asset type Available
+              </Typography>
+              <div className="grid grid-flow-col gap-4">
+                <Badge variant="url">Domain</Badge>
+                <Badge variant="iot">Hardware/IOT</Badge>
+                <Badge variant="android">Android:Playstore</Badge>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </Desktop>
     </AnimationWrapper>
   );
 };

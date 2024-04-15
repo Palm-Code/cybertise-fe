@@ -7,9 +7,10 @@ import { useOnClickOutside } from "usehooks-ts";
 interface I_ModalProps {
   children: React.ReactNode;
   isOpen: boolean;
+  className?: string;
 }
 
-const BaseModal = ({ children, isOpen }: I_ModalProps) => {
+const BaseModal = ({ children, isOpen, className }: I_ModalProps) => {
   const [isVisible, setIsVisible] = useState(isOpen);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -34,7 +35,8 @@ const BaseModal = ({ children, isOpen }: I_ModalProps) => {
             transition={{ duration: 0.2 }}
             className={cn(
               "_flexbox__col__center fixed inset-0 z-[9999] min-h-screen w-full overflow-hidden",
-              "bg-background-page-light/70 dark:bg-background-page-dark/70"
+              "bg-background-page-light/70 dark:bg-background-page-dark/70",
+              className
             )}
           >
             <motion.div

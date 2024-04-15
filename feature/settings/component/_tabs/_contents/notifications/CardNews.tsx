@@ -1,21 +1,29 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Switch, Typography } from "@/core/ui/components";
-import { BellRing, Megaphone } from "lucide-react";
+import { Megaphone } from "lucide-react";
 
-const CardNews = () => {
+interface I_CardNewsProps {
+  variant: "hacker" | "mediator" | "company";
+}
+
+const CardNews = ({ variant }: I_CardNewsProps) => {
   return (
     <Card
       className={cn(
-        "_flexbox__col__start__start w-full gap-3 rounded-xl p-7.5",
-        "bg-neutral-light-100 dark:bg-neutral-dark-100"
+        "_flexbox__col__start__start w-full gap-3 rounded-xl px-4 py-8 xl:p-7.5",
+        "xl:bg-neutral-light-100 xl:dark:bg-neutral-dark-100"
       )}
     >
       <div className="_flexbox__row__start__between w-full">
-        <Typography variant="h6" weight="bold" className="inline-flex">
+        <Typography
+          variant="h6"
+          weight="bold"
+          className="block space-y-4 xl:inline-flex"
+        >
           <Megaphone className="mr-4 h-8 w-8" />
           News
         </Typography>
-        <Switch variant="hacker" />
+        <Switch variant={variant} />
       </div>
       <Typography
         variant="p"

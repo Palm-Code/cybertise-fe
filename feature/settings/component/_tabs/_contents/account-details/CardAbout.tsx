@@ -20,32 +20,43 @@ const CardAbout = () => {
   return (
     <Card
       className={cn(
-        "_flexbox__col__start__start w-full gap-6 rounded-xl p-7.5",
-        "bg-neutral-light-100 dark:bg-neutral-dark-100"
+        "_flexbox__col__start__start w-full gap-8 rounded-xl p-7.5",
+        "xl:bg-neutral-light-100 xl:dark:bg-neutral-dark-100"
       )}
     >
       <Typography variant="h6" weight="bold" className="inline-flex">
         <HackerIcon className="mr-4 h-8 w-8" />
         About You
       </Typography>
-      <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
-        {menus.map((menu) => (
-          <Typography
-            key={`menu-${menu}`}
-            variant="p"
-            affects="normal"
-            className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
-          >
-            {menu}
-          </Typography>
-        ))}
+      <div className="_flexbox__col__start__start gap-6">
+        <Typography
+          variant="p"
+          affects="normal"
+          className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          {menus[0]}
+        </Typography>
         <Avatar
           image="https://api.lorem.space/image/face?w=150&h=150"
           initials="J"
           className="h-12 w-12"
         />
+        <Typography
+          variant="p"
+          affects="normal"
+          className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          {menus[1]}
+        </Typography>
         <Typography variant="p" affects="normal" className="col-span-1">
           John Doe
+        </Typography>
+        <Typography
+          variant="p"
+          affects="normal"
+          className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+        >
+          {menus[2]}
         </Typography>
         <div className="_flexbox__row__center__start gap-2.5">
           <Image

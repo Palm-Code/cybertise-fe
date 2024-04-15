@@ -184,7 +184,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal dark:bg-neutral-dark-90"
+                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
                       />
                     </div>
                     <Tooltip content={file.name}>
@@ -216,7 +216,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                             <Progress
                               value={80}
                               className="h-2"
-                              indicatorColor="bg-lime-normal"
+                              indicatorColor="bg-lime-normal-light dark:bg-lime-normal-dark"
                             />
                             <div className="_flexbox__row__center__between w-full">
                               <Typography
@@ -256,7 +256,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               </div>
               <label
                 htmlFor="dropzone-file"
-                className="cursor-pointer text-lime-normal underline"
+                className="cursor-pointer text-lime-normal-light underline dark:text-lime-normal-dark"
               >
                 + Upload more files
                 <input

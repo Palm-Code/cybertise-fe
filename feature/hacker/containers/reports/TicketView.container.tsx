@@ -9,7 +9,6 @@ const TicketView = ({ data }: { data: I_TableReportTicketData[] }) => {
       <div className="_flexbox__col__center__start z-10 h-full w-full gap-6">
         <ReportsTicketCardList data={data} />
       </div>
-      <Pagination variant="hacker" />
     </AnimationWrapper>
   );
 };

@@ -1,82 +1,159 @@
+"use client";
 import Image from "next/image";
-import { Badge, Card, Indicator, Typography } from "../../components";
+import {
+  Badge,
+  Card,
+  Indicator,
+  Separator,
+  Typography,
+} from "../../components";
 import { cn } from "@/core/lib/utils";
-import Link from "next/link";
-import { buttonVariants } from "../../components/button/base-button";
 import { VRPCardType } from "@/types/admin/vrp-launchpad";
+import { Desktop, Mobile } from "../../layout";
+import { useState } from "react";
+import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 
 interface I_TicketCardProps extends VRPCardType {
   isGridCard?: boolean;
 }
 
 const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
+  const [showModal, setShowModal] = useState(false);
   return (
-    <Card isClickable href={`/vrp-launchpad/${props.company_name}`}>
-      <div className="_flexbox__row__start w-full gap-9">
-        {!isGridCard && (
-          <Image
-            src={props.logo}
-            alt={`${props.company_name} logo`}
-            width={48}
-            height={48}
-          />
-        )}
-        <div
-          className={cn(
-            "_flexbox__col__start w-full",
-            isGridCard ? "gap-8" : "gap-12"
-          )}
-        >
-          <div className="_flexbox__row__center__start w-full">
-            {isGridCard && (
+    <>
+      <Mobile>
+        <Card isButton onClick={() => setShowModal(true)}>
+          <div className="_flexbox__row__start w-full gap-9">
+            <div className={cn("_flexbox__col__start w-full gap-8")}>
+              <div className="_flexbox__row__center__between w-full">
+                <Badge variant="default">{props.domain}</Badge>
+                <Indicator variant="clear">{props.status}</Indicator>
+              </div>
+              <div className="_flexbox__col__start__start w-full gap-4">
+                <div className="_flexbox__row__center__start w-full">
+                  <Image
+                    src={props.logo}
+                    alt={`${props.company_name} logo`}
+                    width={48}
+                    height={48}
+                    className="mr-4"
+                  />
+                  <div className="_flexbox__col__start w-full max-w-xl gap-1">
+                    <Typography variant="p" affects="normal">
+                      {props.company_name}
+                    </Typography>
+                  </div>
+                </div>
+                <Separator orientation="horizontal" />
+                <div className="_flexbox__row__center__between w-full">
+                  <div className="_flexbox__col__start gap-2.5">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      Asset type available
+                    </Typography>
+                    <div className={cn("flex flex-wrap items-center gap-4")}>
+                      {props.asset_type
+                        ?.map((item, idx) => (
+                          <Badge
+                            key={`asset_types-${idx}`}
+                            variant={item.value}
+                          >
+                            {item.label}
+                          </Badge>
+                        ))
+                        .slice(0, 3)}
+                      {props.asset_type.length > 3 && (
+                        <Badge variant="default">
+                          +{props.asset_type.length - 3} more
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+        <ModalForbiddden
+          title="Continue on Desktop"
+          subtitle="Creating VRP feature are currently only accessible on the desktop version of our website."
+          variant="mediator"
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+        />
+      </Mobile>
+      <Desktop>
+        <Card isClickable href={`/vrp-launchpad/${props.company_name}`}>
+          <div className="_flexbox__row__start w-full gap-9">
+            {!isGridCard && (
               <Image
                 src={props.logo}
                 alt={`${props.company_name} logo`}
                 width={48}
                 height={48}
-                className="mr-4"
               />
             )}
-            <div className="_flexbox__col__start w-full max-w-xl gap-1">
-              <Typography variant="p" affects="normal">
-                {props.company_name}
-              </Typography>
-              <div className="_flexbox__row__center gap-4">
-                <Badge variant="default">{props.domain}</Badge>
-              </div>
-            </div>
-            <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
-              <Indicator variant="warning">{props.status}</Indicator>
-            </div>
-          </div>
-          <div className="_flexbox__row__center__between w-full">
-            <div className="_flexbox__col__start gap-2.5">
-              <Typography
-                variant="p"
-                affects="small"
-                className="text-neutral-light-30 dark:text-neutral-dark-30"
-              >
-                Asset type available
-              </Typography>
-              <div className={cn("flex flex-wrap items-center gap-4")}>
-                {props.asset_type
-                  ?.map((item, idx) => (
-                    <Badge key={`asset_types-${idx}`} variant={item.value}>
-                      {item.label}
-                    </Badge>
-                  ))
-                  .slice(0, 3)}
-                {props.asset_type.length > 3 && (
-                  <Badge variant="default">
-                    +{props.asset_type.length - 3} more
-                  </Badge>
+            <div
+              className={cn(
+                "_flexbox__col__start w-full",
+                isGridCard ? "gap-8" : "gap-12"
+              )}
+            >
+              <div className="_flexbox__row__center__start w-full">
+                {isGridCard && (
+                  <Image
+                    src={props.logo}
+                    alt={`${props.company_name} logo`}
+                    width={48}
+                    height={48}
+                    className="mr-4"
+                  />
                 )}
+                <div className="_flexbox__col__start w-full max-w-xl gap-1">
+                  <Typography variant="p" affects="normal">
+                    {props.company_name}
+                  </Typography>
+                  <div className="_flexbox__row__center gap-4">
+                    <Badge variant="default">{props.domain}</Badge>
+                  </div>
+                </div>
+                <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
+                  <Indicator variant="warning">{props.status}</Indicator>
+                </div>
+              </div>
+              <div className="_flexbox__row__center__between w-full">
+                <div className="_flexbox__col__start gap-2.5">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="text-neutral-light-30 dark:text-neutral-dark-30"
+                  >
+                    Asset type available
+                  </Typography>
+                  <div className={cn("flex flex-wrap items-center gap-4")}>
+                    {props.asset_type
+                      ?.map((item, idx) => (
+                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                          {item.label}
+                        </Badge>
+                      ))
+                      .slice(0, 3)}
+                    {props.asset_type.length > 3 && (
+                      <Badge variant="default">
+                        +{props.asset_type.length - 3} more
+                      </Badge>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </Card>
+        </Card>
+      </Desktop>
+    </>
   );
 };
 
