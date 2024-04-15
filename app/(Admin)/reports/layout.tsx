@@ -1,4 +1,5 @@
 import { cn } from "@/core/lib/utils";
+import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
 import { Header } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
@@ -33,7 +34,10 @@ export default async function Dashboardlayout({
           <Loader2
             width={64}
             height={64}
-            className="m-auto animate-spin stroke-2 text-lime-normal-light dark:text-lime-normal-dark"
+            className={cn(
+              "m-auto animate-spin stroke-2",
+              iconColor[session.user.role]
+            )}
           />
         }
       >

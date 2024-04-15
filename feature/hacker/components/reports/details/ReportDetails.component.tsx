@@ -87,7 +87,7 @@ const ReportDetails = () => {
             <Card
               className={cn(
                 "_flexbox__row__center__between sticky top-0",
-                "z-30 w-full rounded-b-none rounded-t-2xl p-6"
+                "z-30 w-full rounded-b-none rounded-t-2xl !p-6"
               )}
             >
               <div className="_flexbox__row__center__start gap-5">

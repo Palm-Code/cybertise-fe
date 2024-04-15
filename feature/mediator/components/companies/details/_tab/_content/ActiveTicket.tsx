@@ -11,6 +11,7 @@ import {
 import SortByDropdown from "../../../_dropdown/SortBy.component";
 import { I_TableTicketData } from "@/interfaces";
 import { tableColumns } from "@/feature/mediator/constants/dashboard";
+import { Desktop, Mobile } from "@/core/ui/layout";
 
 const ActiveTicket = ({ data }: { data: I_TableTicketData[] }) => {
   const view =
@@ -23,26 +24,45 @@ const ActiveTicket = ({ data }: { data: I_TableTicketData[] }) => {
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-6">
-      <div className="_flexbox__row__center__between w-full">
-        <SortByDropdown />
-        <div className="ml-auto w-fit max-w-xl">
-          <FilterViewDropdown type="mediator" options={filterView} />
+    <>
+      <Mobile>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-6">
+          {data.length! ? (
+            <>
+              <DashboardGridView data={data} />
+            </>
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
         </div>
-      </div>
-      {data.length! ? (
-        <>
-          {viewsContainer[view]}
-          <Pagination variant="mediator" />
-        </>
-      ) : (
-        <EmptyState
-          variant="mediator"
-          type="ticket"
-          buttonText="See VRP Launchpad"
-        />
-      )}
-    </div>
+      </Mobile>
+      <Desktop>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-6">
+          <div className="_flexbox__row__center__between w-full">
+            <SortByDropdown />
+            <div className="ml-auto w-fit max-w-xl">
+              <FilterViewDropdown type="mediator" options={filterView} />
+            </div>
+          </div>
+          {data.length! ? (
+            <>
+              {viewsContainer[view]}
+              <Pagination variant="mediator" />
+            </>
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
+        </div>
+      </Desktop>
+    </>
   );
 };
 export default ActiveTicket;

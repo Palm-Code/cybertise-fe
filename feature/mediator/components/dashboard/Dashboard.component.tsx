@@ -17,6 +17,7 @@ import {
   DashboardGridView,
   DashboardTableView,
 } from "../../containers";
+import { Desktop, Mobile } from "@/core/ui/layout";
 
 const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
   const view =
@@ -29,43 +30,80 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-10">
-      <div className="grid w-full grid-cols-2 place-items-center content-between">
-        <Typography variant="h4" weight="bold" className="mr-auto">
-          Open Ticket
-        </Typography>
-        <div className="ml-auto w-full max-w-xl">
-          <SearchInput
-            variant="mediator"
-            placeholder="Try “#21231” or “Company name”"
-          />
+    <>
+      <Mobile>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+          <div className="_flexbox__row__center__between w-full">
+            <Typography variant="h4" weight="bold" className="mr-auto">
+              Open Ticket
+            </Typography>
+            <SearchInput
+              variant="mediator"
+              placeholder="Try “#21231” or “Company name”"
+            />
+          </div>
+          <div className="flex w-full items-center justify-between">
+            <DashboardFilter variant="mediator" />
+            <div className="inline-flex gap-4">
+              <FilterDropdown
+                variant="mediator"
+                value="Sort By"
+                options={filterItems}
+                onValueChange={() => {}}
+              />
+            </div>
+          </div>
+          {data.length! ? (
+            <DashboardGridView data={data} />
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
         </div>
-      </div>
-      <div className="flex w-full items-center justify-between">
-        <DashboardFilter variant="mediator" />
-        <div className="inline-flex gap-4">
-          <FilterDropdown
-            variant="mediator"
-            value="Sort By"
-            options={filterItems}
-            onValueChange={() => {}}
-          />
-          <FilterViewDropdown type="mediator" options={filterView} />
+      </Mobile>
+      <Desktop>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+          <div className="grid w-full grid-cols-2 place-items-center content-between">
+            <Typography variant="h4" weight="bold" className="mr-auto">
+              Open Ticket
+            </Typography>
+            <div className="ml-auto w-full max-w-xl">
+              <SearchInput
+                variant="mediator"
+                placeholder="Try “#21231” or “Company name”"
+              />
+            </div>
+          </div>
+          <div className="flex w-full items-center justify-between">
+            <DashboardFilter variant="mediator" />
+            <div className="inline-flex gap-4">
+              <FilterDropdown
+                variant="mediator"
+                value="Sort By"
+                options={filterItems}
+                onValueChange={() => {}}
+              />
+              <FilterViewDropdown type="mediator" options={filterView} />
+            </div>
+          </div>
+          {data.length! ? (
+            <>
+              {viewsContainer[view]}
+              <Pagination variant="mediator" />
+            </>
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
         </div>
-      </div>
-      {data.length! ? (
-        <>
-          {viewsContainer[view]}
-          <Pagination variant="mediator" />
-        </>
-      ) : (
-        <EmptyState
-          variant="mediator"
-          type="ticket"
-          buttonText="See VRP Launchpad"
-        />
-      )}
-    </div>
+      </Desktop>
+    </>
   );
 };
 export default Dashboard;

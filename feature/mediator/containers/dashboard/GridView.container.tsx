@@ -6,7 +6,7 @@ import { I_TableTicketData } from "@/interfaces";
 const GridView = ({ data }: { data: I_TableTicketData[] }) => {
   return (
     <AnimationWrapper>
-      <div className="z-10 grid h-full w-full grid-cols-2 gap-10">
+      <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
         <DashboardTicketCardList data={data} isGridCard />
       </div>
     </AnimationWrapper>

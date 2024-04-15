@@ -66,8 +66,8 @@ const Sidebar = ({ type }: SidebarProps) => {
               "w-[275px] bg-background-main-light pb-16 dark:bg-background-main-dark"
             )}
           >
-            <div className="_flexbox__col__start w-full gap-8">
-              <div className="_flexbox__row__center__between mb-6 mt-8 w-full px-6">
+            <div className="_flexbox__col__start w-full gap-6">
+              <div className="_flexbox__row__center__between mt-8 w-full px-6">
                 <div className="_flexbox__row__center__start gap-4">
                   <SheetClose>
                     <X />

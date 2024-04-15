@@ -1,6 +1,7 @@
 "use client";
-import { filterView } from "@/core/constants/dashboard";
+import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
+  FilterDropdown,
   FilterViewDropdown,
   Pagination,
   SearchInput,
@@ -17,6 +18,8 @@ import {
   CompaniesTableView,
 } from "../../containers";
 import SortByDropdown from "./_dropdown/SortBy.component";
+import { Desktop, Mobile } from "@/core/ui/layout";
+import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 
 const Companies = ({ data }: { data: VRPCardType[] }) => {
   const view =
@@ -29,38 +32,80 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
   };
 
   return (
-    <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
-      <div className="grid w-full grid-cols-2 place-items-center content-between">
-        <Typography variant="h4" weight="bold" className="mr-auto">
-          Companies
-        </Typography>
-      </div>
-      <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
-        <Typography variant="h6" weight="bold">
-          Search Company
-        </Typography>
-        <SearchInput variant="mediator" placeholder="Try search company name" />
-        <ProgramsFilterDropdown />
-      </div>
-      <div className="_flexbox__row__center__between w-full">
-        <SortByDropdown />
-        <div className="ml-auto w-fit max-w-xl">
-          <FilterViewDropdown type="mediator" options={filterView} />
+    <>
+      <Mobile>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-10 px-6 py-8">
+          <div className="_flexbox__row__center__between w-full">
+            <Typography variant="h4" weight="bold" className="mr-auto">
+              Companies
+            </Typography>
+            <SearchInput
+              variant="mediator"
+              placeholder="Try search company name"
+            />
+          </div>
+          <div className="_flexbox__row__center__between w-full">
+            <DashboardFilter variant="mediator" />
+            <div className="inline-flex gap-4">
+              <FilterDropdown
+                variant="mediator"
+                value="Sort By"
+                options={filterItems}
+                onValueChange={() => {}}
+              />
+            </div>
+          </div>
+          {data.length! ? (
+            <>
+              <CompaniesGridView data={data} />
+            </>
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
         </div>
-      </div>
-      {data.length! ? (
-        <>
-          {viewsContainer[view]}
-          <Pagination variant="mediator" />
-        </>
-      ) : (
-        <EmptyState
-          variant="mediator"
-          type="ticket"
-          buttonText="See VRP Launchpad"
-        />
-      )}
-    </div>
+      </Mobile>
+      <Desktop>
+        <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
+          <div className="grid w-full grid-cols-2 place-items-center content-between">
+            <Typography variant="h4" weight="bold" className="mr-auto">
+              Companies
+            </Typography>
+          </div>
+          <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
+            <Typography variant="h6" weight="bold">
+              Search Company
+            </Typography>
+            <SearchInput
+              variant="mediator"
+              placeholder="Try search company name"
+            />
+            <ProgramsFilterDropdown />
+          </div>
+          <div className="_flexbox__row__center__between w-full">
+            <SortByDropdown />
+            <div className="ml-auto w-fit max-w-xl">
+              <FilterViewDropdown type="mediator" options={filterView} />
+            </div>
+          </div>
+          {data.length! ? (
+            <>
+              {viewsContainer[view]}
+              <Pagination variant="mediator" />
+            </>
+          ) : (
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText="See VRP Launchpad"
+            />
+          )}
+        </div>
+      </Desktop>
+    </>
   );
 };
 export default Companies;

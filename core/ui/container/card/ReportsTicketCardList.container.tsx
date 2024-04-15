@@ -88,32 +88,29 @@ const TicketCard = ({
                 </div>
               </div>
               {isMediator && (
-                <div
-                  className={cn(
-                    "w-full gap-3",
-                    isGridCard
-                      ? "_flexbox__row__center__between"
-                      : "_flexbox__row__end__end"
-                  )}
-                >
-                  <Link href={`/reports/${props.ticket_number}`}>
-                    <Button
-                      variant="secondary-mediator"
-                      prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
-                      postFixIcon={<ChevronRight />}
-                    >
-                      Hacker Ticket
-                    </Button>
-                  </Link>
-                  <Link href={`/reports/new?=${props.ticket_number}`}>
-                    <Button
-                      variant="primary-mediator"
-                      prefixIcon={!isGridCard && <Building2 />}
-                      postFixIcon={<ChevronRight />}
-                    >
-                      Create Company Ticket
-                    </Button>
-                  </Link>
+                <div className={cn("_flexbox__col__start__start w-full gap-3")}>
+                  <Button
+                    variant="secondary-mediator"
+                    prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
+                    postFixIcon={<ChevronRight />}
+                    className="justify-between"
+                    asLink
+                    href={`/reports/${props.ticket_number}`}
+                    fullWidth
+                  >
+                    Hacker Ticket
+                  </Button>
+                  <Button
+                    variant="primary-mediator"
+                    prefixIcon={!isGridCard && <Building2 />}
+                    postFixIcon={<ChevronRight />}
+                    fullWidth
+                    asLink
+                    className="justify-between"
+                    href={`/reports/new?=${props.ticket_number}`}
+                  >
+                    Create Company Ticket
+                  </Button>
                 </div>
               )}
             </div>
@@ -196,24 +193,26 @@ const TicketCard = ({
                       : "_flexbox__row__end__end"
                   )}
                 >
-                  <Link href={`/reports/${props.ticket_number}`}>
-                    <Button
-                      variant="secondary-mediator"
-                      prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
-                      postFixIcon={<ChevronRight />}
-                    >
-                      Hacker Ticket
-                    </Button>
-                  </Link>
-                  <Link href={`/reports/new?=${props.ticket_number}`}>
-                    <Button
-                      variant="primary-mediator"
-                      prefixIcon={!isGridCard && <Building2 />}
-                      postFixIcon={<ChevronRight />}
-                    >
-                      Create Company Ticket
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="secondary-mediator"
+                    prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
+                    postFixIcon={<ChevronRight />}
+                    asLink
+                    href={`/reports/${props.ticket_number}`}
+                    fullWidth
+                  >
+                    Hacker Ticket
+                  </Button>
+                  <Button
+                    variant="primary-mediator"
+                    prefixIcon={!isGridCard && <Building2 />}
+                    postFixIcon={<ChevronRight />}
+                    fullWidth
+                    asLink
+                    href={`/reports/new?=${props.ticket_number}`}
+                  >
+                    Create Company Ticket
+                  </Button>
                 </div>
               )}
             </div>

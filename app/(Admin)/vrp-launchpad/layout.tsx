@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/utils";
 import { Header } from "@/core/ui/layout";
 
 export default async function SettingsLayout({
@@ -11,7 +12,13 @@ export default async function SettingsLayout({
       suppressHydrationWarning
     >
       <Header />
-      <div className="h-fit max-h-[calc(100vh-86px)] w-full overflow-auto pb-12 pl-14 pr-12">
+      <div
+        className={cn(
+          "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+          "xl:p-12 xl:pb-28 xl:pl-14 xl:pr-12 xl:pt-0",
+          "px-6 py-8"
+        )}
+      >
         {children}
       </div>
     </div>

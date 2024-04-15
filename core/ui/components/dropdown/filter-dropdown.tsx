@@ -43,6 +43,7 @@ const FilterDropdown = ({
             <Typography variant="p" affects="small">
               {inputValueLabel || "Sort By"}
             </Typography>
+            <div></div>
           </SelectTrigger>
           <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
             {options.length! ? (

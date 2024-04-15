@@ -7,10 +7,9 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import { Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useScroll } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
-import ModalForbiddden from "../../_dialog/ModalForbidden";
+import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 
 interface I_VRPHeroCard {
   id: string;
