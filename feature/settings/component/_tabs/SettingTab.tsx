@@ -13,7 +13,7 @@ interface I_TabProps {
 
 const Tab = ({ items, active, variant, onValueChange }: I_TabProps) => {
   return (
-    <Card className="rounded-2xl rounded-b-none px-8 py-6 pt-9">
+    <Card className="rounded-2xl rounded-b-none pt-9 xl:py-6">
       <div className="grid w-fit grid-flow-col gap-[42px]">
         {items.map((item, idx) => (
           <Typography
@@ -21,9 +21,11 @@ const Tab = ({ items, active, variant, onValueChange }: I_TabProps) => {
             variant="p"
             affects="small"
             className={cn(
-              "cursor-pointer border-b-4 border-transparent font-bold",
-              `hover:${borderColor[variant]}`,
-              active === idx && borderColor[variant]
+              "cursor-pointer border-b-4 font-bold",
+              borderColor[variant],
+              active === idx
+                ? borderColor[variant]
+                : "border-transparent dark:border-transparent"
             )}
             onClick={() => onValueChange(idx)}
           >

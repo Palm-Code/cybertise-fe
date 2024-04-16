@@ -62,7 +62,7 @@ const Sidebar = ({ type }: SidebarProps) => {
           <SheetContent
             side="left"
             className={cn(
-              "_flexbox__col__between fixed left-0 h-full max-h-screen shadow-sidebar",
+              "_flexbox__col__between fixed left-0 h-full max-h-dvh shadow-sidebar",
               "w-[275px] bg-background-main-light pb-16 dark:bg-background-main-dark"
             )}
           >
@@ -86,11 +86,11 @@ const Sidebar = ({ type }: SidebarProps) => {
                     className={cn(
                       "_flexbox__row__center__start h-16 w-full gap-4",
                       "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                      "border-l-2 border-transparent",
+                      "border-l-2",
                       `hover:${borderColor[type as keyof typeof borderColor]}`,
                       pathname.includes(item.path)
                         ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
-                        : "bg-transparent font-normal"
+                        : "border-transparent bg-transparent font-normal dark:border-transparent"
                     )}
                   >
                     {iconsObject[item.title.toLowerCase()]}
@@ -104,11 +104,11 @@ const Sidebar = ({ type }: SidebarProps) => {
                   className={cn(
                     "_flexbox__row__center__start h-16 w-full gap-4",
                     "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                    "border-l-2 border-transparent",
+                    "border-l-2 ",
                     `hover:${borderColor[type as keyof typeof borderColor]}`,
                     pathname.includes("/settings")
                       ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
-                      : "bg-transparent font-normal"
+                      : "border-transparent bg-transparent font-normal dark:border-transparent"
                   )}
                 >
                   <Settings className="h-6 w-6" />
@@ -127,9 +127,9 @@ const Sidebar = ({ type }: SidebarProps) => {
                     className={cn(
                       "_flexbox__row__center__start h-16 w-full gap-4",
                       "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                      "border-l-2 border-transparent",
+                      "border-l-2",
                       `hover:${borderColor[type as keyof typeof borderColor]}`,
-                      "bg-transparent font-normal"
+                      "border-transparent bg-transparent font-normal dark:border-transparent"
                     )}
                   >
                     <LogOut className="h-6 w-6" />
@@ -173,11 +173,11 @@ const Sidebar = ({ type }: SidebarProps) => {
                   className={cn(
                     "_flexbox__row__center__start h-16 w-full gap-4",
                     "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                    "border-l-2 border-transparent",
+                    "border-l-2",
                     `hover:${borderColor[type as keyof typeof borderColor]}`,
                     pathname.includes(item.path)
                       ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
-                      : "bg-transparent font-normal"
+                      : "border-transparent bg-transparent font-normal dark:border-transparent"
                   )}
                 >
                   {iconsObject[item.title.toLowerCase()]}
@@ -199,11 +199,11 @@ const Sidebar = ({ type }: SidebarProps) => {
               className={cn(
                 "_flexbox__row__center__start h-16 w-full gap-4",
                 "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                "border-l-2 border-transparent",
+                "border-l-2",
                 `hover:${borderColor[type as keyof typeof borderColor]}`,
                 pathname.includes("/settings")
                   ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
-                  : "bg-transparent font-normal"
+                  : "border-transparent bg-transparent font-normal dark:border-transparent"
               )}
             >
               <Settings className="h-6 w-6" />
@@ -222,9 +222,9 @@ const Sidebar = ({ type }: SidebarProps) => {
                 className={cn(
                   "_flexbox__row__center__start h-16 w-full gap-4",
                   "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                  "border-l-2 border-transparent",
+                  "border-l-2",
                   `hover:${borderColor[type as keyof typeof borderColor]}`,
-                  "bg-transparent font-normal"
+                  "border-transparent bg-transparent font-normal dark:border-transparent"
                 )}
               >
                 <LogOut className="h-6 w-6" />

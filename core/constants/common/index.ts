@@ -74,7 +74,10 @@ export const menuItems: MenuItemType = {
 };
 
 export const borderColor: { [key in Role]: string } = {
-  hacker: "border-lime-normal-light",
-  company: "border-sky-normal",
-  mediator: "border-violet-normal",
+  hacker:
+    "border-lime-normal-light dark:border-lime-normal-dark hover:border-lime-normal-light dark:hover:border-lime-normal-dark",
+  company:
+    "border-sky-normal dark:border-sky-normal hover:border-sky-normal dark:hover:border-sky-normal",
+  mediator:
+    "border-violet-normal dark:border-violet-normal hover:border-violet-normal dark:hover:border-violet-normal",
 };

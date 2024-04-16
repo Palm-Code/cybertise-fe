@@ -14,7 +14,7 @@ const ModalCloseSendReport = ({
 }: I_ModalCloseSendReportProps) => {
   const router = useRouter();
   return (
-    <BaseModal isOpen={isOpen}>
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div
         className={cn(
           "relative mx-auto w-fit max-w-[602px] rounded-lg p-20",
