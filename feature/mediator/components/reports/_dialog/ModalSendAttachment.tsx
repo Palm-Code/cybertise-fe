@@ -19,7 +19,7 @@ const ModalSendAttachment = ({
   onClickSendAttachment,
 }: I_ModalSendAttachmentProps) => {
   return (
-    <BaseModal isOpen={isOpen}>
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div
         className={cn(
           "relative mx-auto w-full max-w-3xl rounded-xl px-8 py-12",

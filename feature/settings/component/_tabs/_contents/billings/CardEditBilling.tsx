@@ -1,19 +1,15 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Card, Input, Typography } from "@/core/ui/components";
-import { Desktop, Mobile } from "@/core/ui/layout";
+import { Card, Input, Typography } from "@/core/ui/components";
+import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { Banknote } from "lucide-react";
 
 interface I_CardEditBillingProps {
-  onClickDiscard: () => void;
   variant: "hacker" | "company" | "mediator";
 }
 
-const CardEditBilling = ({
-  onClickDiscard,
-  variant,
-}: I_CardEditBillingProps) => {
+const CardEditBilling = ({ variant }: I_CardEditBillingProps) => {
   return (
-    <>
+    <AnimationWrapper>
       <Mobile>
         <Card
           className={cn(
@@ -38,27 +34,13 @@ const CardEditBilling = ({
               <Input type="text" label="IBAN" />
               <Input type="text" label="BIC" />
             </div>
-            <div className="_flexbox__col__center w-full gap-4">
-              <Button
-                variant={`secondary-${variant}`}
-                type="button"
-                onClick={onClickDiscard}
-                fullWidth
-              >
-                Discard
-              </Button>
-              <Button variant={`primary-${variant}`} fullWidth>
-                Save Changes
-              </Button>
-            </div>
           </form>
         </Card>
       </Mobile>
       <Desktop>
         <Card
           className={cn(
-            "_flexbox__col__start__start w-full gap-6 rounded-xl p-7.5",
-            "bg-neutral-light-100 dark:bg-neutral-dark-100"
+            "_flexbox__col__start__start w-full gap-6 rounded-xl p-7.5"
           )}
         >
           <Typography variant="h6" weight="bold" className="inline-flex">
@@ -79,20 +61,10 @@ const CardEditBilling = ({
               <Input type="text" label="IBAN" />
               <Input type="text" label="BIC" />
             </div>
-            <div className="_flexbox__row__center gap-8">
-              <Button
-                variant={`secondary-${variant}`}
-                type="button"
-                onClick={onClickDiscard}
-              >
-                Discard
-              </Button>
-              <Button variant={`primary-${variant}`}>Save Changes</Button>
-            </div>
           </form>
         </Card>
       </Desktop>
-    </>
+    </AnimationWrapper>
   );
 };
 export default CardEditBilling;

@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Pagination,
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
@@ -89,7 +90,10 @@ const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
             </div>
           </div>
           {data.length! ? (
-            viewsContainer[view]
+            <>
+              {viewsContainer[view]}
+              <Pagination variant="company" />
+            </>
           ) : (
             <EmptyState
               variant="company"

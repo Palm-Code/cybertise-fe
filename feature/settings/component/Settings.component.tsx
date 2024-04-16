@@ -22,12 +22,31 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
     SettingItems.details
   );
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
+  const [editing, setEditing] = useState<boolean>(false);
 
   const tabs: { [key in SettingItems]: JSX.Element } = {
-    0: <Details variant={role} />,
-    1: <Billing variant={role} />,
+    0: (
+      <Details
+        variant={role}
+        isEditing={editing}
+        handleClickEdit={setEditing}
+      />
+    ),
+    1: (
+      <Billing
+        variant={role}
+        isEditing={editing}
+        handleClickEdit={setEditing}
+      />
+    ),
     2: <Notifications variant={role} />,
-    3: <Security variant={role} />,
+    3: (
+      <Security
+        variant={role}
+        isEditing={editing}
+        handleClickEdit={setEditing}
+      />
+    ),
     4: <DataPrivacy />,
   };
 
@@ -92,14 +111,21 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
           <Typography variant="h4" weight="bold">
             Settings
           </Typography>
-          <Tab
-            items={hackerSettingTabItems}
-            variant={role}
-            active={activeTab}
-            onValueChange={(v) => setActiveTab(v)}
-          />
+          {!editing && (
+            <Tab
+              items={hackerSettingTabItems}
+              variant={role}
+              active={activeTab}
+              onValueChange={(v) => setActiveTab(v)}
+            />
+          )}
           <AnimationWrapper key={activeTab}>
-            <Card className={cn("w-full rounded-xl px-8 py-12")}>
+            <Card
+              className={cn(
+                "w-full rounded-xl",
+                editing ? "!bg-transparent !p-0" : "xl:px-8 xl:py-12"
+              )}
+            >
               {tabs[activeTab]}
             </Card>
           </AnimationWrapper>

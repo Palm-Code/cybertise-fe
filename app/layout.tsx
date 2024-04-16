@@ -50,7 +50,7 @@ export default async function RootLayout({
           {session ? (
             <>
               <Mobile>
-                <div className="h-screen w-full overflow-hidden">
+                <div className="h-dvh w-full overflow-hidden">
                   <Sidebar type={session?.user.role} />
                   {children}
                 </div>
