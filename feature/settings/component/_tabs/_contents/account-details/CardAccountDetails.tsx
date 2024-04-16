@@ -1,11 +1,37 @@
 import { cn } from "@/core/lib/utils";
-import { Badge, Card, Typography } from "@/core/ui/components";
+import { Badge, Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { UserRound } from "lucide-react";
 
 const menus: string[] = ["Your Email", "Your Website", "Phone"];
 
-const CardAccountDetails = () => {
+interface I_CardAccountDetailsProps {
+  variant?: "hacker" | "mediator" | "company";
+  isEditing?: boolean;
+}
+
+const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
+  if (isEditing)
+    return (
+      <>
+        <Desktop>
+          <Card
+            className={cn(
+              "_flexbox__col__start__start w-full gap-8 rounded-xl p-7.5"
+            )}
+          >
+            <Typography variant="h6" weight="bold" className="inline-flex">
+              Account Details
+            </Typography>
+            <div className="_flexbox__col__start__start w-full gap-6">
+              <Input value={menus[0]} label={menus[0]} />
+              <Input value={menus[1]} label={menus[1]} />
+              <Input value={menus[2]} label={menus[2]} />
+            </div>
+          </Card>
+        </Desktop>
+      </>
+    );
   return (
     <>
       <Mobile>

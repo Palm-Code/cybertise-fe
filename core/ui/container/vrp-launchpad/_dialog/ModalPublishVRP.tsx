@@ -20,7 +20,7 @@ interface I_ModalPublishVRPProps {
 const ModalPublishVRP = ({ isOpen, onClose }: I_ModalPublishVRPProps) => {
   const [isPublishNow, setIsPublishNow] = useState<boolean>(true);
   return (
-    <BaseModal isOpen={isOpen}>
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div
         className={cn(
           "_flexbox__col__start__start mx-auto w-full max-w-[602px] gap-12 p-20",

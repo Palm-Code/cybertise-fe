@@ -49,7 +49,7 @@ const SelectDropdown = ({
     <Select onValueChange={onValueChange}>
       <SelectTrigger
         className={cn(
-          "pl-0",
+          "pl-0 xl:p-0",
           props.transparentBg && "!bg-transparent",
           props.className
         )}

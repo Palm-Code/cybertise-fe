@@ -21,6 +21,7 @@ const ModalForbiddden = ({
   return (
     <BaseModal
       isOpen={isOpen}
+      onClose={onClose}
       className="bg-background-page-light/90 backdrop-blur-sm dark:bg-background-page-dark/90"
     >
       <div className="_flexbox__col__center mx-auto w-full max-w-56 gap-6">
