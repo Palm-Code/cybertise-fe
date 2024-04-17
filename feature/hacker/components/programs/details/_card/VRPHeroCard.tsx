@@ -161,7 +161,7 @@ const VRPHeroCard = ({ id }: I_VRPHeroCard) => {
                   Send Report
                 </Link>
               </div>
-              <div className="grid h-fit grid-flow-col gap-12">
+              <div className="grid h-fit max-h-12 grid-flow-col gap-12">
                 <div className="grid h-full gap-2.5">
                   <Typography
                     variant="p"

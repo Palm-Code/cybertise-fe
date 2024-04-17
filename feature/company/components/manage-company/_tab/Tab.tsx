@@ -24,7 +24,8 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
                 variant="p"
                 affects="small"
                 className={cn(
-                  "cursor-pointer text-nowrap border-b-4 border-transparent pb-2 font-bold hover:border-sky-normal",
+                  "cursor-pointer whitespace-nowrap text-nowrap border-b-4 border-transparent",
+                  "pb-2 font-bold hover:border-sky-normal",
                   active === item.value && "border-sky-normal"
                 )}
                 onClick={() =>

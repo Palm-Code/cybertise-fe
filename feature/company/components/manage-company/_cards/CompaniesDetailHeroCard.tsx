@@ -44,8 +44,8 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
               <Indicator variant="clear">Published</Indicator>
             </div>
             <Separator orientation="horizontal" />
-            <div className="grid h-fit gap-2">
-              <div className="grid h-full gap-2.5">
+            <div className="_flexbox__col__start__start gap-2">
+              <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
                   variant="p"
                   affects="small"
@@ -57,7 +57,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                   732
                 </Typography>
               </div>
-              <div className="grid h-full gap-2.5">
+              <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
                   variant="p"
                   affects="small"
@@ -69,7 +69,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                   1
                 </Typography>
               </div>
-              <div className="grid h-full gap-2.5">
+              <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
                   variant="p"
                   affects="small"
@@ -140,7 +140,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                 </div>
                 <Indicator variant="clear">Published</Indicator>
               </div>
-              <div className="grid h-fit grid-flow-col gap-12">
+              <div className="grid h-fit max-h-12 grid-flow-col gap-12">
                 <div className="grid h-full gap-2.5">
                   <Typography
                     variant="p"

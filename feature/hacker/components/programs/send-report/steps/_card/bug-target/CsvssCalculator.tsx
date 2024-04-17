@@ -66,7 +66,8 @@ const CsvssCalculator = ({
                       key={`button-label-${index}`}
                       type="button"
                       className={cn(
-                        "w-fit text-nowrap rounded-md border border-transparent bg-neutral-light-100 px-4 py-3 dark:bg-neutral-dark-100",
+                        "w-fit  whitespace-nowrap rounded-md border border-transparent",
+                        "bg-neutral-light-100 px-4 py-3 dark:bg-neutral-dark-100",
                         "hover:bg-lime-lighter/20 disabled:cursor-not-allowed"
                       )}
                       disabled={isManualRisk}

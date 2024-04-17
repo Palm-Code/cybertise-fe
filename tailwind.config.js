@@ -91,7 +91,7 @@ module.exports = {
             20: "#E6E6E6",
             30: "#CCCCCC",
             40: "#B3B3B3",
-            50: "#999999",
+            50: "#888888",
             60: "#808080",
             70: "#666666",
             80: "#4D4D4D",
@@ -104,7 +104,7 @@ module.exports = {
             20: "#323232",
             30: "#4F4E4E",
             40: "#6A6A6A",
-            50: "#999999",
+            50: "#888888",
             60: "#B3B3B3",
             70: "#CCCCCC",
             80: "#E6E6E6",
@@ -128,15 +128,30 @@ module.exports = {
           light: "#F2C789",
         },
         lime: {
-          dark: "#C0D093",
-          darker: "#CFE593",
+          dark: {
+            light: "#597902",
+            dark: "#C0D093",
+          },
+          darker: {
+            light: "#55700C",
+            dark: "#CFE593",
+          },
           normal: {
-            light: "#7BA509",
+            light: "#94CA03",
             dark: "#BAFF00",
           },
-          lighter: "#C8FF33",
-          light: "#D6FF66",
-          "dark-green": "#4D6900",
+          lighter: {
+            light: "#A9D535",
+            dark: "#C8FF33",
+          },
+          light: {
+            light: "#C9E581",
+            dark: "#D6FF66",
+          },
+          "dark-green": {
+            light: "#4D6900",
+            dark: "#4D6900",
+          },
           badge: "#A3DF02",
         },
         emerald: {

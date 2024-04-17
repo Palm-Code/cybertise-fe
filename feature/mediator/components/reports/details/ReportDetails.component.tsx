@@ -60,31 +60,29 @@ const ReportDetails = () => {
                 </Typography>
               </div>
             </Card>
-            <AnimationWrapper>
-              <div
-                className={cn(
-                  "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
-                  "bg-neutral-light-70 dark:bg-neutral-dark-70"
-                )}
-              >
-                <div className="_flexbox__row__center__between w-full py-4">
-                  <Typography
-                    variant="p"
-                    affects="small"
-                    className="text-violet-light dark:text-violet-light"
-                  >
-                    Hacker Ticket
-                  </Typography>
-                  <Link href="#" className="underline">
-                    Go to Company Ticket
-                  </Link>
-                </div>
-                <Typography variant="p" affects="small">
-                  This chat is read only on this device. Please access using
-                  desktop to interact.
+            <div
+              className={cn(
+                "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
+                "bg-neutral-light-70 dark:bg-neutral-dark-70"
+              )}
+            >
+              <div className="_flexbox__row__center__between w-full py-4">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  className="text-violet-light dark:text-violet-light"
+                >
+                  Hacker Ticket
                 </Typography>
+                <Link href="#" className="underline">
+                  Go to Company Ticket
+                </Link>
               </div>
-            </AnimationWrapper>
+              <Typography variant="p" affects="small">
+                This chat is read only on this device. Please access using
+                desktop to interact.
+              </Typography>
+            </div>
           </div>
           <div className="px-6 py-8">
             <ChatBubble />
@@ -145,7 +143,6 @@ const ReportDetails = () => {
             </AnimationWrapper>
           </div>
           <ChatBubble />
-          <div ref={chatRef}></div>
         </div>
         <Tiptap
           description=""
@@ -160,6 +157,7 @@ const ReportDetails = () => {
           onClickSendAttachment={() => {}}
         />
       </Desktop>
+      <div ref={chatRef}></div>
     </>
   );
 };

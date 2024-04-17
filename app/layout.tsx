@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
-import { ThemeProvider } from "@/core/ui/components/theme/theme-provider";
 import { cn } from "@/core/lib/utils";
 import Sidebar from "@/core/ui/layout/admin/Sidebar.layout";
 import NextTopLoader from "nextjs-toploader";
 import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,30 +42,32 @@ export default async function RootLayout({
           color={colors[session?.user.role as Role]}
           showSpinner={false}
         />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
-          {session ? (
-            <>
-              <Mobile>
-                <div className="h-dvh w-full overflow-hidden">
-                  <Sidebar type={session?.user.role} />
-                  {children}
-                </div>
-              </Mobile>
-              <Desktop>
-                <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
-                  <Sidebar type={session?.user.role} />
-                  {children}
-                </div>
-              </Desktop>
-            </>
-          ) : (
-            <>{children}</>
-          )}
-        </ThemeProvider>
+        <ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            {session ? (
+              <>
+                <Mobile>
+                  <div className="h-dvh w-full overflow-hidden">
+                    <Sidebar type={session?.user.role} />
+                    {children}
+                  </div>
+                </Mobile>
+                <Desktop>
+                  <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+                    <Sidebar type={session?.user.role} />
+                    {children}
+                  </div>
+                </Desktop>
+              </>
+            ) : (
+              <>{children}</>
+            )}
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

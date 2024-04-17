@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { ChatBubble } from "@/feature/hacker/containers";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
+import { ChatBubble } from "@/feature/hacker/containers";
 
 const ReportDetails = () => {
   const chatRef = useRef<HTMLDivElement>(null);
@@ -58,22 +58,19 @@ const ReportDetails = () => {
                 </Typography>
               </div>
             </Card>
-            <AnimationWrapper>
-              <div
-                className={cn(
-                  "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
-                  "bg-neutral-light-70 dark:bg-neutral-dark-70"
-                )}
-              >
-                This chat is read only on this device. Please access using
-                desktop to interact.
-              </div>
-            </AnimationWrapper>
+            <div
+              className={cn(
+                "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
+                "bg-neutral-light-70 dark:bg-neutral-dark-70"
+              )}
+            >
+              This chat is read only on this device. Please access using desktop
+              to interact.
+            </div>
           </div>
           <div className="px-6 py-8">
             <ChatBubble />
           </div>
-          <div ref={chatRef}></div>
         </div>
       </Mobile>
       <Desktop>
@@ -115,7 +112,6 @@ const ReportDetails = () => {
             </AnimationWrapper>
           </div>
           <ChatBubble />
-          <div ref={chatRef}></div>
         </div>
         <Tiptap
           description=""
@@ -130,6 +126,7 @@ const ReportDetails = () => {
           onClickSendAttachment={() => {}}
         />
       </Desktop>
+      <div ref={chatRef}></div>
     </>
   );
 };
