@@ -58,22 +58,19 @@ const ReportDetails = () => {
                 </Typography>
               </div>
             </Card>
-            <AnimationWrapper>
-              <div
-                className={cn(
-                  "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
-                  "bg-neutral-light-70 dark:bg-neutral-dark-70"
-                )}
-              >
-                This chat is read only on this device. Please access using
-                desktop to interact.
-              </div>
-            </AnimationWrapper>
+            <div
+              className={cn(
+                "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
+                "bg-neutral-light-70 dark:bg-neutral-dark-70"
+              )}
+            >
+              This chat is read only on this device. Please access using desktop
+              to interact.
+            </div>
           </div>
           <div className="px-6 py-8">
             <ChatBubble />
           </div>
-          <div ref={chatRef}></div>
         </div>
       </Mobile>
       <Desktop>
@@ -115,12 +112,11 @@ const ReportDetails = () => {
             </AnimationWrapper>
           </div>
           <ChatBubble />
-          <div ref={chatRef}></div>
         </div>
         <Tiptap
           description=""
           onChangeValue={() => {}}
-          variant="hacker"
+          variant="company"
           isChat
           onClickSendAttachment={() => setOpenAttachment(true)}
         />
@@ -130,6 +126,7 @@ const ReportDetails = () => {
           onClickSendAttachment={() => {}}
         />
       </Desktop>
+      <div ref={chatRef}></div>
     </>
   );
 };

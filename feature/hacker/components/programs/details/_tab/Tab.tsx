@@ -24,7 +24,7 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
                 variant="p"
                 affects="small"
                 className={cn(
-                  "text-nowrap",
+                  "whitespace-nowrap text-nowrap",
                   "cursor-pointer border-b-4 font-bold hover:border-lime-normal-light dark:hover:border-lime-normal-dark",
                   active === item.value
                     ? "border-lime-normal-light dark:border-lime-normal-dark"
@@ -50,7 +50,7 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
                 variant="p"
                 affects="small"
                 className={cn(
-                  "text-nowrap",
+                  "whitespace-nowrap text-nowrap",
                   "cursor-pointer border-b-4 font-bold hover:border-lime-normal-light dark:hover:border-lime-normal-dark",
                   active === item.value
                     ? "border-lime-normal-light dark:border-lime-normal-dark"

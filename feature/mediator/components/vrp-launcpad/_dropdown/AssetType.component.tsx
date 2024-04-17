@@ -28,7 +28,7 @@ const AssetType = ({
 
   return (
     <Select>
-      <SelectTrigger className="!w-fit !justify-start gap-2 text-nowrap !bg-transparent !p-0">
+      <SelectTrigger className="!w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0">
         <Typography
           variant="p"
           affects="small"

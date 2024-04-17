@@ -88,7 +88,7 @@ export default function Table({ data, columns }: I_TableProps) {
                   <Typography
                     variant="p"
                     affects="normal"
-                    className="text-nowrap"
+                    className="whitespace-nowrap text-nowrap"
                   >
                     {currencyFormatters.NumberToEUR(item.min_bounty ?? 0)} -{" "}
                     {currencyFormatters.NumberToEUR(item.max_bounty ?? 0)}

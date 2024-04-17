@@ -61,7 +61,7 @@ const FilterViewDropdown = ({
         <Typography
           variant="p"
           affects="normal"
-          className="text-nowrap capitalize"
+          className="whitespace-nowrap text-nowrap capitalize"
           transform="capitalize"
         >
           {view} View

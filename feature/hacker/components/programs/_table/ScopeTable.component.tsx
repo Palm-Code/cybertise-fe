@@ -62,7 +62,7 @@ export default function ScopeTable({ data, columns }: I_TableProps) {
                   <Typography
                     variant="p"
                     affects="normal"
-                    className="text-nowrap"
+                    className="whitespace-nowrap text-nowrap"
                   >
                     {(item.update && item.update.toString().split("T")[0]) ||
                       "-"}

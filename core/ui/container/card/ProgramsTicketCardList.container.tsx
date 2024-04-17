@@ -35,9 +35,9 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 </div>
                 <Typography
                   variant="p"
-                  affects="large"
+                  affects="normal"
                   weight="bold"
-                  className="text-nowrap"
+                  className="whitespace-nowrap text-nowrap"
                 >
                   {currencyFormatters.NumberToEUR(props.min_bounty ?? 0)} -{" "}
                   {currencyFormatters.NumberToEUR(props.max_bounty ?? 0)}
@@ -112,7 +112,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   variant="p"
                   affects="large"
                   weight="bold"
-                  className="text-nowrap"
+                  className="whitespace-nowrap text-nowrap"
                 >
                   {currencyFormatters.NumberToEUR(props.min_bounty ?? 0)} -{" "}
                   {currencyFormatters.NumberToEUR(props.max_bounty ?? 0)}

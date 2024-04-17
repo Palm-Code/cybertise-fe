@@ -34,7 +34,7 @@ export default function Table({ data, columns }: I_TableProps) {
           <TableRow>
             {columns.map((column, index) => (
               <TableHead
-                className={cn(column.width, "text-nowrap")}
+                className={cn(column.width, "whitespace-nowrap text-nowrap")}
                 key={`table-head-${index}`}
               >
                 {column.title}

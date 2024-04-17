@@ -27,7 +27,7 @@ const SingleVrp = () => {
         onValueChange={(v) => setActive(TabsItem[v])}
         updates={updates.length}
       />
-      {tabs[active]}
+      <div className="w-full pb-12">{tabs[active]}</div>
     </>
   );
 };
