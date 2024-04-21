@@ -1,16 +1,28 @@
-"use client";
-import { Pagination } from "@/core/ui/components";
-import { ProgramsTicketCardList } from "@/core/ui/container";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
+import {
+  ProgramsTicketCardList,
+  ProgramsTicketLoadingCardList,
+} from "@/core/ui/container";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { ProgramCardType } from "@/types/admin/programs";
 
-const GridView = ({ data }: { data: ProgramCardType[] }) => {
-  return (
-    <AnimationWrapper>
-      <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
-        <ProgramsTicketCardList data={data} isGridCard />
-      </div>
-    </AnimationWrapper>
-  );
+const GridView = ({
+  data,
+  isLoading,
+}: {
+  data?: I_GetProgramListSuccessResponse["data"];
+  isLoading?: boolean;
+}) => {
+  if (data)
+    return (
+      <AnimationWrapper>
+        <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
+          {isLoading ? (
+            <ProgramsTicketLoadingCardList isGridCard />
+          ) : (
+            <ProgramsTicketCardList data={data} isGridCard />
+          )}
+        </div>
+      </AnimationWrapper>
+    );
 };
 export default GridView;

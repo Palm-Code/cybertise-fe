@@ -35,18 +35,21 @@ export async function login(formData: FormLoginSchema) {
       : formData.email.includes("@company.com")
         ? "company"
         : "hacker",
-    token: "eysdaksdjkahskfkjashfkjdshkjshdfjkhsdkjfds",
+    token: "1|QA0V66U747gR7JLQOXzWf9KtdGfRWCh0LVOs7ujO",
   };
 
   // Create the session
   const expires = new Date(Date.now() + 36000 * 1000);
   const session = await encrypt({ user, expires });
   cookies().set("session", session, { expires, httpOnly: true });
+
+  return { user };
 }
 
 export async function logout() {
   try {
     cookies().set("session", "", { expires: new Date(0) });
+    cookies().set("token", "", { expires: new Date(0) });
   } catch (error) {
     console.log(error);
   } finally {

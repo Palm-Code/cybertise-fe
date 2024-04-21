@@ -8,6 +8,7 @@ import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
+import HydrationZustand from "@/core/provider/hydration";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,32 +43,34 @@ export default async function RootLayout({
           color={colors[session?.user.role as Role]}
           showSpinner={false}
         />
-        <ReactQueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-          >
-            {session ? (
-              <>
-                <Mobile>
-                  <div className="h-dvh w-full overflow-hidden">
-                    <Sidebar type={session?.user.role} />
-                    {children}
-                  </div>
-                </Mobile>
-                <Desktop>
-                  <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
-                    <Sidebar type={session?.user.role} />
-                    {children}
-                  </div>
-                </Desktop>
-              </>
-            ) : (
-              <>{children}</>
-            )}
-          </ThemeProvider>
-        </ReactQueryProvider>
+        <HydrationZustand>
+          <ReactQueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+            >
+              {session ? (
+                <>
+                  <Mobile>
+                    <div className="h-dvh w-full overflow-hidden">
+                      <Sidebar type={session?.user.role} />
+                      {children}
+                    </div>
+                  </Mobile>
+                  <Desktop>
+                    <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+                      <Sidebar type={session?.user.role} />
+                      {children}
+                    </div>
+                  </Desktop>
+                </>
+              ) : (
+                <>{children}</>
+              )}
+            </ThemeProvider>
+          </ReactQueryProvider>
+        </HydrationZustand>
       </body>
     </html>
   );

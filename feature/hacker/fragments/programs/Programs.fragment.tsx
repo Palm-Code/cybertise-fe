@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
-import { programsCardData } from "../../constants/programs";
+import { useParamStore } from "../../zustand/store/programs/params";
+import { useProgramStore } from "../../zustand/store/program-list";
 
 const Programs = dynamic(
   () => import("@/feature/hacker/components/programs/Programs.component"),
@@ -9,6 +10,6 @@ const Programs = dynamic(
 );
 
 const ProgramsFragment = () => {
-  return <Programs data={programsCardData} />;
+  return <Programs />;
 };
 export default ProgramsFragment;

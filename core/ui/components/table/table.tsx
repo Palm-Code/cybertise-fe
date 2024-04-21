@@ -21,7 +21,7 @@ export const BaseTable = ({
 }: I_TableProps) => {
   return (
     <div
-      className={cn("w-full flex-col items-center gap-4", className)}
+      className={cn("_flexbox__col__start__start w-full gap-4", className)}
       {...props}
     >
       {children}

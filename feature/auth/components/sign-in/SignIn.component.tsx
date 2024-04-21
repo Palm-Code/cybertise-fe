@@ -15,6 +15,7 @@ import { login } from "@/service/server/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MultiFactor, SuccessState } from "..";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import Cookies from "universal-cookie";
 
 const formShcema = z.object({
   email: z.string().email().min(1, { message: "Email is required" }),
@@ -50,9 +51,11 @@ const SignInComponent = () => {
     setLoadingSubmit(true);
     try {
       setTimeout(async () => {
-        await login(data);
+        const { user } = await login(data);
+        const cookies = new Cookies();
+        cookies.set("token", user.token, { path: "/" });
         push(callbackUrl || "/");
-      }, 1500);
+      }, 100);
     } catch (error) {
       setIsSuccess(null);
     }

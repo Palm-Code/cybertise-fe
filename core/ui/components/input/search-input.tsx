@@ -8,6 +8,9 @@ import BaseModal, { I_ModalProps } from "../modal/modal";
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: "hacker" | "company" | "mediator";
+  onSubmitSearch?: () => void;
+  disabledButton?: boolean;
+  isLoading?: boolean;
 }
 
 const ModalSearch = ({
@@ -70,7 +73,14 @@ const SearchInput = ({ variant, ...props }: SearchInputProps) => {
             className="w-full bg-transparent outline-none"
             {...props}
           />
-          <Button variant={`primary-${variant}`}>Search</Button>
+          <Button
+            variant={`primary-${variant}`}
+            onClick={props.onSubmitSearch}
+            disabled={props.disabledButton}
+            isLoading={props.isLoading}
+          >
+            Search
+          </Button>
         </div>
       </Desktop>
     </>

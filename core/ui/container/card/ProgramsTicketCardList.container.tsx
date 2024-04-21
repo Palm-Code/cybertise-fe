@@ -3,34 +3,35 @@ import Image from "next/image";
 import { Badge, Card, Separator, Typography } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { cn } from "@/core/lib/utils";
-import { ProgramCardType } from "@/types/admin/programs";
-import Link from "next/link";
-import { buttonVariants } from "../../components/button/base-button";
 import { Desktop, Mobile } from "../../layout";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 
-interface I_TicketCardProps extends ProgramCardType {
+interface I_TicketCardProps {
   isGridCard?: boolean;
 }
 
-const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
+const TicketCard = ({
+  isGridCard,
+  ...props
+}: I_TicketCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
   return (
     <>
       <Mobile>
-        <Card isClickable href={`/programs/${props.company_name}`}>
+        <Card isClickable href={`/programs/${props.id}`}>
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full", "gap-8")}>
-              <Badge variant="default">{props.domain}</Badge>
+              <Badge variant="default">{props.type}</Badge>
               <div className="_flexbox__row__center__between w-full">
-                <Image
-                  src={props.logo}
-                  alt={`${props.company_name} logo`}
-                  width={32}
-                  height={32}
-                  className="rounded-full object-cover"
-                />
+                <div className="relative aspect-square w-19 overflow-hidden rounded-full">
+                  <Image
+                    src={"https://picsum.photos/200/300"}
+                    alt={`${props.id} logo`}
+                    fill
+                  />
+                </div>
                 <div className="_flexbox__col__start ml-4 w-full max-w-xl gap-1">
                   <Typography variant="p" affects="normal">
-                    {props.company_name}
+                    {props.company?.name}
                   </Typography>
                 </div>
                 <Typography
@@ -39,8 +40,13 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   weight="bold"
                   className="whitespace-nowrap text-nowrap"
                 >
-                  {currencyFormatters.NumberToEUR(props.min_bounty ?? 0)} -{" "}
-                  {currencyFormatters.NumberToEUR(props.max_bounty ?? 0)}
+                  {currencyFormatters.NumberToEUR(
+                    props.company?.lowest_bounty ?? 0
+                  )}{" "}
+                  -{" "}
+                  {currencyFormatters.NumberToEUR(
+                    props.company?.highest_bounty ?? 0
+                  )}
                 </Typography>
               </div>
               <Separator orientation="horizontal" />
@@ -54,16 +60,16 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Asset type available
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
-                    {props.asset_type
+                    {props.asset_types
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                        <Badge key={`asset_types-${idx}`} variant={"ios"}>
                           {item.label}
                         </Badge>
                       ))
                       .slice(0, 3)}
-                    {props.asset_type.length > 3 && (
+                    {props.asset_types && props.asset_types?.length > 3 && (
                       <Badge variant="default">
-                        +{props.asset_type.length - 3} more
+                        +{props.asset_types?.length - 3} more
                       </Badge>
                     )}
                   </div>
@@ -74,38 +80,39 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
         </Card>
       </Mobile>
       <Desktop>
-        <Card isClickable href={`/programs/${props.company_name}`}>
-          <div className="_flexbox__row__start w-full gap-9">
+        <Card isClickable href={`/programs/${props.id}`}>
+          <div className="_flexbox__row__start__start w-full gap-9">
             {!isGridCard && (
-              <Image
-                src={props.logo}
-                alt={`${props.company_name} logo`}
-                width={48}
-                height={48}
-              />
+              <div className="relative aspect-square w-12 overflow-hidden rounded-full">
+                <Image
+                  src={"https://picsum.photos/200/300"}
+                  alt={`${props.id} logo`}
+                  fill
+                />
+              </div>
             )}
             <div
               className={cn(
-                "_flexbox__col__start w-full",
-                isGridCard ? "gap-8" : "gap-12"
+                "_flexbox__col__start",
+                isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__center__between w-full">
+              <div className="_flexbox__row__start__between w-full">
                 {isGridCard && (
-                  <Image
-                    src={props.logo}
-                    alt={`${props.company_name} logo`}
-                    width={48}
-                    height={48}
-                    className="mr-4"
-                  />
+                  <div className="relative mr-4 aspect-square w-19 overflow-hidden rounded-full">
+                    <Image
+                      src={"https://picsum.photos/200/300"}
+                      alt={`${props.id} logo`}
+                      fill
+                    />
+                  </div>
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-1">
                   <Typography variant="p" affects="normal">
-                    {props.company_name}
+                    {props.company?.name}
                   </Typography>
                   <div className="_flexbox__row__center gap-4">
-                    <Badge variant="default">{props.domain}</Badge>
+                    <Badge variant="default">{props.type}</Badge>
                   </div>
                 </div>
                 <Typography
@@ -114,8 +121,13 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   weight="bold"
                   className="whitespace-nowrap text-nowrap"
                 >
-                  {currencyFormatters.NumberToEUR(props.min_bounty ?? 0)} -{" "}
-                  {currencyFormatters.NumberToEUR(props.max_bounty ?? 0)}
+                  {currencyFormatters.NumberToEUR(
+                    props.company?.lowest_bounty ?? 0
+                  )}{" "}
+                  -{" "}
+                  {currencyFormatters.NumberToEUR(
+                    props.company?.highest_bounty ?? 0
+                  )}
                 </Typography>
               </div>
               <div className="_flexbox__row__center__between w-full">
@@ -128,16 +140,16 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Asset type available
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
-                    {props.asset_type
+                    {props.asset_types
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                        <Badge key={`asset_types-${idx}`} variant={"ios"}>
                           {item.label}
                         </Badge>
                       ))
                       .slice(0, 3)}
-                    {props.asset_type.length > 3 && (
+                    {props.asset_types && props.asset_types.length > 3 && (
                       <Badge variant="default">
-                        +{props.asset_type.length - 3} more
+                        +{props.asset_types.length - 3} more
                       </Badge>
                     )}
                   </div>
@@ -152,7 +164,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
 };
 
 interface I_TicketCardListProps {
-  data: ProgramCardType[];
+  data: I_GetProgramListSuccessResponse["data"];
   isGridCard?: boolean;
 }
 

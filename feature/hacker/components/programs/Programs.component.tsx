@@ -14,21 +14,56 @@ import {
   ProgramsGridView,
   ProgramsTableView,
 } from "../../containers";
-import { ProgramCardType } from "@/types/admin/programs";
 import { tableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
+import { useGetProgramList } from "../../query/client/useGetProgramList";
+import { useParamStore } from "../../zustand/store/programs/params";
 
-const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
+const Dashboard = () => {
+  const { payload, setPayload } = useParamStore();
+  const {
+    data: programList,
+    isLoading,
+    isFetching,
+    isRefetching,
+    refetch: refetchProgramList,
+  } = useGetProgramList(payload);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <ProgramsTableView columns={tableColumns} data={data} />,
-    card: <ProgramsCardView data={data} />,
-    grid: <ProgramsGridView data={data} />,
+    table: (
+      <ProgramsTableView
+        isLoading={isLoading || isFetching}
+        columns={tableColumns}
+        data={programList?.data}
+      />
+    ),
+    card: (
+      <ProgramsCardView
+        isLoading={isLoading || isFetching}
+        data={programList?.data}
+      />
+    ),
+    grid: (
+      <ProgramsGridView
+        isLoading={isLoading || isFetching}
+        data={programList?.data}
+      />
+    ),
+  };
+
+  const submitChange = (type: "type" | "has_asset_type", value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: { [type]: value === "all" ? undefined : value },
+      },
+    });
   };
 
   return (
@@ -59,8 +94,11 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
               </div>
             </div>
           </div>
-          {data.length! ? (
-            <ProgramsGridView data={data} />
+          {programList && programList.data.length! ? (
+            <ProgramsGridView
+              isLoading={isLoading || isFetching}
+              data={programList?.data}
+            />
           ) : (
             <EmptyState
               variant="hacker"
@@ -89,10 +127,30 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
             <Typography variant="h6" weight="bold">
               Search around 400+ programs
             </Typography>
-            <SearchInput variant="hacker" placeholder="Search for programs" />
-            <ProgramsFilterDropdown />
+            <SearchInput
+              variant="hacker"
+              placeholder="Search for programs"
+              value={payload.params?.search}
+              onChange={(e) => {
+                setPayload({
+                  ...payload,
+                  params: {
+                    ...payload.params,
+                    search: e.target.value,
+                  },
+                });
+              }}
+              disabledButton={isFetching || !payload.params?.search}
+              isLoading={isLoading && isRefetching}
+              onSubmitSearch={() => refetchProgramList()}
+            />
+            <ProgramsFilterDropdown
+              payload={payload}
+              onValueChangeType={(v) => submitChange("type", v)}
+              onValueChangeAssetType={(v) => submitChange("has_asset_type", v)}
+            />
           </div>
-          {data.length! ? (
+          {programList && programList.data.length! ? (
             <>
               {viewsContainer[view]}
               <Pagination variant="hacker" />

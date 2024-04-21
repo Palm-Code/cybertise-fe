@@ -122,6 +122,7 @@ export const filterItems: MultiFilterType = {
     { label: "High", value: "high" },
   ],
   type: [
+    { label: "All type", value: "all" },
     { label: "Public", value: "public" },
     { label: "Private", value: "private" },
   ],
