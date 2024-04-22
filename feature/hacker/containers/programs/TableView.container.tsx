@@ -24,7 +24,7 @@ interface I_TableProps {
 }
 
 export default function Table({ data, columns, isLoading }: I_TableProps) {
-  if (!isLoading) return <TableLoadingList columns={columns} />;
+  if (isLoading) return <TableLoadingList columns={columns} />;
 
   if (data)
     return (
@@ -57,12 +57,17 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     <div className="_flexbox__row__center__start gap-4">
                       <div className="relative aspect-square w-8 overflow-hidden rounded-full">
                         <Image
-                          src={"https://picsum.photos/200/300"}
+                          src={item.company?.logo as string}
                           alt={`${item.title} logo`}
                           fill
                         />
                       </div>
-                      <Typography variant="p" affects="small" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                        className="w-[calc(100%-36px)]"
+                      >
                         {item.company?.name}
                       </Typography>
                     </div>

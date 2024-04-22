@@ -1,15 +1,15 @@
-import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
-import { getProgramListAPIURL } from "@/core/routes/hacker/programs";
 import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
+import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get_chat_list";
+import { getChatListAPIURL } from "@/core/routes/hacker/dashboard";
 import { I_GetParamsPayload } from "@/core/models/common";
 
-export const fetchGetProgramList = async (payload?: I_GetParamsPayload) => {
+export const fetchGetChatList = async (payload?: I_GetParamsPayload) => {
   const res = await axiosInterceptorInstance
-    .get(getProgramListAPIURL(), {
+    .get(getChatListAPIURL(), {
       params: payload?.params,
     })
-    .then((res: AxiosResponse<I_GetProgramListSuccessResponse>) => {
+    .then((res: AxiosResponse<I_GetChatListSuccessResponse>) => {
       return res.data;
     })
     .catch((err) => {

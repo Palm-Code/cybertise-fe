@@ -24,7 +24,7 @@ const TicketCard = ({
               <div className="_flexbox__row__center__between w-full">
                 <div className="relative aspect-square w-19 overflow-hidden rounded-full">
                   <Image
-                    src={"https://picsum.photos/200/300"}
+                    src={props.company?.logo as string}
                     alt={`${props.id} logo`}
                     fill
                   />
@@ -85,7 +85,7 @@ const TicketCard = ({
             {!isGridCard && (
               <div className="relative aspect-square w-12 overflow-hidden rounded-full">
                 <Image
-                  src={"https://picsum.photos/200/300"}
+                  src={props.company?.logo as string}
                   alt={`${props.id} logo`}
                   fill
                 />
@@ -101,7 +101,7 @@ const TicketCard = ({
                 {isGridCard && (
                   <div className="relative mr-4 aspect-square w-19 overflow-hidden rounded-full">
                     <Image
-                      src={"https://picsum.photos/200/300"}
+                      src={props.company?.logo as string}
                       alt={`${props.id} logo`}
                       fill
                     />

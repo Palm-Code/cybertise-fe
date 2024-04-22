@@ -1,3 +1,4 @@
+"use client";
 import { Filter } from "lucide-react";
 import { iconColor } from "./filter-view-dropdown";
 import BaseDropdown from "./base-dropdown";
@@ -6,12 +7,19 @@ import Separator from "../separator/separator";
 import { Desktop, Mobile } from "../../layout";
 import Typography from "../typography/typography";
 import { cn } from "@/core/lib/utils";
+import { ChatFilter } from "@/core/models/hacker/dashboard";
+import { useChatListParamStore } from "@/feature/hacker/zustand/store/dashboard";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
+  onValueChange?: (value: string, type: keyof typeof ChatFilter) => void;
 }
 
-const DashboardFilter = ({ variant = "hacker" }: IDashboardFilterProps) => {
+const DashboardFilter = ({
+  variant = "hacker",
+  onValueChange = () => {},
+}: IDashboardFilterProps) => {
+  const { payload } = useChatListParamStore();
   return (
     <>
       <Mobile className="w-fit">
@@ -34,21 +42,21 @@ const DashboardFilter = ({ variant = "hacker" }: IDashboardFilterProps) => {
           <Separator orientation="vertical" className="h-6 w-0.5 text-white" />
           <BaseDropdown
             label="Type"
-            value="All type"
+            value={payload?.params?.filter?.["program.type"] || "All type"}
             options={filterItems.type}
-            onValueChange={() => {}}
+            onValueChange={(v) => onValueChange(v, "program.type")}
           />
           <BaseDropdown
             label="Risk Level"
-            value="All Level"
+            value={payload?.params?.filter?.level || "All level"}
             options={filterItems.risk_level}
-            onValueChange={() => {}}
+            onValueChange={(v) => onValueChange(v, "level")}
           />
           <BaseDropdown
             label="Status"
-            value="All status"
+            value={payload?.params?.filter?.status || "All status"}
             options={filterItems.status}
-            onValueChange={() => {}}
+            onValueChange={(v) => onValueChange(v, "status")}
           />
         </div>
       </Desktop>

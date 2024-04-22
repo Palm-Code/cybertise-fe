@@ -10,7 +10,7 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Risk Level",
     align: "left",
-    width: "w-[80px]",
+    width: "w-[120px]",
   },
   {
     title: "Vulnerability type (CWE)",
@@ -117,6 +117,7 @@ export const tableTicketData: I_TableTicketData[] = [
 
 export const filterItems: MultiFilterType = {
   risk_level: [
+    { label: "All level", value: "all" },
     { label: "Low", value: "low" },
     { label: "Medium", value: "medium" },
     { label: "High", value: "high" },
@@ -127,10 +128,12 @@ export const filterItems: MultiFilterType = {
     { label: "Private", value: "private" },
   ],
   status: [
+    { label: "All status", value: "all" },
     { label: "Open", value: "open" },
     { label: "Closed", value: "closed" },
   ],
   asset_type: [
+    { label: "All asset type", value: "all" },
     { label: "URL", value: "url" },
     { label: "Hardware/IOT", value: "iot" },
     { label: "Android: PlayStore", value: "android" },

@@ -20,10 +20,17 @@ import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import { useGetProgramList } from "../../query/client/useGetProgramList";
-import { useParamStore } from "../../zustand/store/programs/params";
+import { useProgramListParamStore } from "../../zustand/store/programs";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
 
 const Dashboard = () => {
-  const { payload, setPayload } = useParamStore();
+  const store = useProgramListParamStore();
+  const { payload, setPayload } = store;
   const {
     data: programList,
     isLoading,
@@ -61,7 +68,10 @@ const Dashboard = () => {
       ...payload,
       params: {
         ...payload.params,
-        filter: { [type]: value === "all" ? undefined : value },
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
       },
     });
   };
@@ -87,9 +97,9 @@ const Dashboard = () => {
               <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
-                  value="Sort By"
+                  value={payload.params?.sort}
                   options={filterItems}
-                  onValueChange={() => {}}
+                  onValueChange={(v) => useClickSort(v, store)}
                 />
               </div>
             </div>
@@ -131,18 +141,13 @@ const Dashboard = () => {
               variant="hacker"
               placeholder="Search for programs"
               value={payload.params?.search}
-              onChange={(e) => {
-                setPayload({
-                  ...payload,
-                  params: {
-                    ...payload.params,
-                    search: e.target.value,
-                  },
-                });
-              }}
-              disabledButton={isFetching || !payload.params?.search}
-              isLoading={isLoading && isRefetching}
-              onSubmitSearch={() => refetchProgramList()}
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetchProgramList)
+              }
+              loadingSubmit={isLoading && isRefetching}
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetchProgramList)
+              }
             />
             <ProgramsFilterDropdown
               payload={payload}
@@ -153,7 +158,28 @@ const Dashboard = () => {
           {programList && programList.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="hacker" />
+              <Pagination
+                variant="hacker"
+                active={payload.params?.page?.size}
+                meta={programList?.meta}
+                activePage={payload.params?.page?.number}
+                onClickPrevious={() =>
+                  useClickPaginate(payload?.params?.page?.number! - 1, store)
+                }
+                onClickNext={() =>
+                  useClickPaginate(payload?.params?.page?.number! + 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) =>
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: { ...payload.params?.page!, size: v },
+                    },
+                  })
+                }
+              />
             </>
           ) : (
             <EmptyState

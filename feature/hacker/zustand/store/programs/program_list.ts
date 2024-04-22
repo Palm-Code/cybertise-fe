@@ -1,12 +1,12 @@
-import { I_GetProgramListPayload } from "@/core/models/hacker/programs";
+import { I_GetParamsPayload } from "@/core/models/common";
 import { create } from "zustand";
 
 export type State = {
-  payload: I_GetProgramListPayload;
+  payload: I_GetParamsPayload;
 };
 
 export type Actions = {
-  setPayload: (payload: I_GetProgramListPayload) => void;
+  setPayload: (payload: I_GetParamsPayload) => void;
 };
 
 const initialState: State = {
@@ -25,10 +25,10 @@ const initialState: State = {
   },
 };
 
-export const useParamStore = create<State & Actions>()((set) => {
+export const useProgramListParamStore = create<State & Actions>()((set) => {
   return {
     ...initialState,
-    setPayload: (payload: I_GetProgramListPayload) => {
+    setPayload: (payload: I_GetParamsPayload) => {
       set((state) => ({
         ...state,
         payload,

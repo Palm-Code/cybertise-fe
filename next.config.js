@@ -14,6 +14,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "3f93-103-89-77-157.ngrok-free.app",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   rewrites: async () => {

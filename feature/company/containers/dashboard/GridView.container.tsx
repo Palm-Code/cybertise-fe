@@ -1,5 +1,4 @@
 "use client";
-import { Pagination } from "@/core/ui/components";
 import { DashboardTicketCardList } from "@/core/ui/container";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { I_TableTicketData } from "@/interfaces";

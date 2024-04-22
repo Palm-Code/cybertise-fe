@@ -1,12 +1,4 @@
-import { NextApiRequest } from "next";
-
-export interface I_GetProgramListRequest extends NextApiRequest {
-  payload?: I_GetProgramListPayload;
-}
-
-export interface I_GetProgramListPayload {
-  params?: I_GetProgramListParamsRequest;
-}
+import { I_Company, I_Meta } from "../../common/get_included_data";
 
 export interface I_AssetType {
   id: string;
@@ -30,25 +22,6 @@ export interface I_TargetAsset {
   asset_type: I_AssetType;
 }
 
-export interface I_Company {
-  id: string;
-  user_id: string;
-  thanks_message: string;
-  report_resolved: number;
-  program_count: number;
-  status: string;
-  auth_company_profiles_id: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
-  name: string;
-  website: string;
-  highest_bounty: number;
-  lowest_bounty: number;
-  description: string;
-  rules: string;
-}
-
 export interface I_GetProgramListSuccessResponse {
   data: {
     id: string;
@@ -64,30 +37,7 @@ export interface I_GetProgramListSuccessResponse {
     target_assets?: I_TargetAsset[];
     company?: I_Company;
   }[];
-}
-
-enum Filter {
-  has_asset_type = "has_asset_type",
-  type = "type",
-  company_id = "company_id",
-  "programs.status" = "programs.status",
-}
-
-export interface I_GetProgramListParamsRequest {
-  sort?: string;
-  search?: string;
-  fields?: {
-    [key: string]: string;
-  };
-  include?: string;
-  page?: {
-    size: number;
-    number: number;
-  };
-  append?: string;
-  filter?: {
-    [key in Filter]?: string;
-  };
+  meta?: I_Meta;
 }
 
 export interface I_GetErrorResponse {

@@ -1,14 +1,24 @@
 "use client";
-import { Pagination } from "@/core/ui/components";
+import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get_chat_list";
 import { DashboardTicketCardList } from "@/core/ui/container";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { I_TableTicketData } from "@/interfaces";
 
-const GridView = ({ data }: { data: I_TableTicketData[] }) => {
+const GridView = ({
+  data,
+  isLoading,
+}: {
+  data?: I_GetChatListSuccessResponse["data"];
+  isLoading?: boolean;
+}) => {
   return (
     <AnimationWrapper>
       <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
-        <DashboardTicketCardList data={data} isGridCard />
+        {isLoading ? (
+          <ChatListCardLoadingList isGridCard />
+        ) : (
+          <DashboardTicketCardList data={data} isGridCard />
+        )}
       </div>
     </AnimationWrapper>
   );

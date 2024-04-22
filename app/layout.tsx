@@ -9,6 +9,7 @@ import { getSession } from "@/service/server/session";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import HydrationZustand from "@/core/provider/hydration";
+import { Toaster } from "@/core/ui/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,6 +70,7 @@ export default async function RootLayout({
                 <>{children}</>
               )}
             </ThemeProvider>
+            <Toaster position="top-center" />
           </ReactQueryProvider>
         </HydrationZustand>
       </body>

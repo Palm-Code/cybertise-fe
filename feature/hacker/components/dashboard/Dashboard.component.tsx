@@ -10,7 +10,6 @@ import Typography from "@/core/ui/components/typography/typography";
 import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
   DashboardCardView,
@@ -18,15 +17,61 @@ import {
   DashboardTableView,
 } from "../../containers";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useGetChatList } from "../../query/client";
+import { useChatListParamStore } from "../../zustand/store/dashboard";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
 
-const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
+const Dashboard = () => {
+  const store = useChatListParamStore();
+  const { payload, setPayload } = store;
+  const {
+    data: dashboardData,
+    isLoading,
+    isFetching,
+    refetch,
+    isRefetching,
+  } = useGetChatList(payload);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <DashboardTableView columns={tableColumns} data={data} />,
-    card: <DashboardCardView data={data} />,
-    grid: <DashboardGridView data={data} />,
+    table: (
+      <DashboardTableView
+        columns={tableColumns}
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    card: (
+      <DashboardCardView
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    grid: (
+      <DashboardGridView
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+  };
+
+  const submitChange = (type: string, value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
+      },
+    });
   };
 
   return (
@@ -47,15 +92,18 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="hacker"
-                value="Sort By"
+                value={payload?.params?.sort}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
           </div>
-          {data.length! ? (
+          {dashboardData?.data.length! ? (
             <>
-              <DashboardGridView data={data} />
+              <DashboardGridView
+                data={dashboardData?.data}
+                isLoading={isLoading || isFetching}
+              />
             </>
           ) : (
             <EmptyState
@@ -76,25 +124,60 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
               <SearchInput
                 variant="hacker"
                 placeholder="Try “#21231” or “Company name”"
+                value={payload?.params?.search}
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                loadingSubmit={isLoading && isRefetching}
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
               />
             </div>
           </div>
           <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="hacker" />
+            <DashboardFilter
+              variant="hacker"
+              onValueChange={(v, t) => submitChange(t, v)}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="hacker"
-                value="Sort By"
+                value={payload?.params?.sort as string}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
               <FilterViewDropdown type="hacker" options={filterView} />
             </div>
           </div>
-          {data.length! ? (
+          {dashboardData?.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="hacker" />
+              <Pagination
+                variant="hacker"
+                active={payload.params?.page?.size}
+                meta={dashboardData?.meta}
+                activePage={payload.params?.page?.number}
+                onClickNext={() =>
+                  useClickPaginate(payload.params?.page?.number! + 1, store)
+                }
+                onClickPrevious={() =>
+                  useClickPaginate(payload.params?.page?.number! - 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) => {
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: {
+                        ...payload.params?.page!,
+                        size: v,
+                      },
+                    },
+                  });
+                }}
+              />
             </>
           ) : (
             <EmptyState
