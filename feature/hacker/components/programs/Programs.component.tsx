@@ -27,8 +27,13 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 
-const Dashboard = () => {
+interface I_ProgramsProps {
+  assetTypes: I_GetAssetTypeSuccessResponse["data"];
+}
+
+const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
   const store = useProgramListParamStore();
   const { payload, setPayload } = store;
   const {
@@ -70,7 +75,12 @@ const Dashboard = () => {
         ...payload.params,
         filter: {
           ...payload.params?.filter,
-          [type]: value === "all" ? undefined : value,
+          [type]:
+            value === "all"
+              ? undefined
+              : type === "type"
+                ? value
+                : assetTypes?.find((v) => v.value === value)?.id,
         },
       },
     });
@@ -151,6 +161,7 @@ const Dashboard = () => {
             />
             <ProgramsFilterDropdown
               payload={payload}
+              assetTypeOptions={assetTypes}
               onValueChangeType={(v) => submitChange("type", v)}
               onValueChangeAssetType={(v) => submitChange("has_asset_type", v)}
             />

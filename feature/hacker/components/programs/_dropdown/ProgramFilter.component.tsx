@@ -1,12 +1,14 @@
 "use client";
-import { I_GetProgramListPayload } from "@/core/models/hacker/programs";
+import { I_GetParamsPayload } from "@/core/models/common";
 import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
+import { SortFilterType } from "@/types/admin/dashboard";
 
 interface IProgramsFilterDropdownProps {
   variant?: "hacker" | "company" | "mediator";
   refetch?: () => void;
-  payload?: I_GetProgramListPayload;
+  payload?: I_GetParamsPayload;
+  assetTypeOptions?: SortFilterType[];
   onValueChangeType?: (value: string) => void;
   onValueChangeAssetType?: (value: string) => void;
 }
@@ -14,6 +16,7 @@ interface IProgramsFilterDropdownProps {
 const ProgramsFilterDropdown = ({
   variant = "hacker",
   payload = {},
+  assetTypeOptions = [],
   onValueChangeType = () => {},
   onValueChangeAssetType = () => {},
 }: IProgramsFilterDropdownProps) => {
@@ -27,8 +30,12 @@ const ProgramsFilterDropdown = ({
       />
       <BaseDropdown
         label="Asset type"
-        value="All Asset"
-        options={filterItems.asset_type}
+        value={
+          assetTypeOptions?.find(
+            (item) => item.id === payload?.params?.filter?.has_asset_type
+          )?.value as string
+        }
+        options={assetTypeOptions}
         onValueChange={onValueChangeAssetType}
       />
     </div>

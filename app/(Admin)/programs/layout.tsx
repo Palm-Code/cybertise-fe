@@ -1,4 +1,5 @@
 import { cn } from "@/core/lib/utils";
+import { prefetchGetAssetType } from "@/core/react-query/server/prefetchGetAssetType";
 import { Header } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { getSession } from "@/service/server/session";
@@ -13,6 +14,7 @@ export default async function Dashboardlayout({
   company: React.ReactNode;
 }) {
   const session = (await getSession()) as UserType;
+  await prefetchGetAssetType(session?.user.token);
 
   const child: { [key: string]: React.ReactNode } = {
     hacker: hacker,

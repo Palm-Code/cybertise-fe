@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Badge, Card, Separator, Typography } from "../../components";
+import { Badge, Card, Separator, Tooltip, Typography } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "../../layout";
@@ -62,8 +62,11 @@ const TicketCard = ({
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={"ios"}>
-                          {item.label}
+                        <Badge
+                          key={`asset_types-${idx}`}
+                          variant={item.label as any}
+                        >
+                          {item.value}
                         </Badge>
                       ))
                       .slice(0, 3)}
@@ -142,15 +145,25 @@ const TicketCard = ({
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={"ios"}>
-                          {item.label}
+                        <Badge
+                          key={`asset_types-${idx}`}
+                          variant={item.label as any}
+                        >
+                          {item.value}
                         </Badge>
                       ))
                       .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Badge variant="default">
-                        +{props.asset_types.length - 3} more
-                      </Badge>
+                      <Tooltip
+                        content={props.asset_types
+                          .map((item) => item.value)
+                          .slice(3, props.asset_types.length - 1)
+                          .join(", ")}
+                      >
+                        <Badge variant="default">
+                          +{props.asset_types.length - 3} more
+                        </Badge>
+                      </Tooltip>
                     )}
                   </div>
                 </div>

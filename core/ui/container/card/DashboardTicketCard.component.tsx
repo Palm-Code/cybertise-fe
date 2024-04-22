@@ -7,7 +7,10 @@ import {
   Typography,
 } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import {
+  formatDateToAgo,
+  formatDateToAgo2,
+} from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
 import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
@@ -111,7 +114,7 @@ const TicketCard = ({
                   affects="small"
                   className="text-neutral-light-20 dark:text-neutral-dark-20"
                 >
-                  Reported {props.program?.created_at}
+                  Reported {formatDateToAgo2(props.program?.created_at ?? "")}
                 </Typography>
               </div>
             </div>
@@ -160,7 +163,8 @@ const TicketCard = ({
                       affects="small"
                       className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                     >
-                      {props.program?.created_at}
+                      Reported{" "}
+                      {formatDateToAgo2(props.program?.created_at ?? "")}
                     </Typography>
                   </div>
                 </div>

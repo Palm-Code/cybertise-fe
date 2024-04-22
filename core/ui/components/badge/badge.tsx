@@ -8,11 +8,15 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        ios: "text-asset-text-ios bg-asset-background-ios/10 px-2.5 py-1",
-        iot: "text-asset-text-iot bg-asset-background-iot/10 px-2.5 py-1",
-        android:
+        "mobile-app-ios":
+          "text-asset-text-ios bg-asset-background-ios/10 px-2.5 py-1",
+        blockchain:
+          "text-asset-text-iot bg-asset-background-iot/10 px-2.5 py-1",
+        "mobile-app-android":
           "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:
+          "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
+        domain:
           "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         hacker:
           "text-lime-badge bg-neutral-light-90 dark:bg-neutral-dark-90 px-2.5 py-0",
@@ -27,10 +31,16 @@ const badgeVariants = cva(
           "text-white bg-semantic-light-medium dark:bg-semantic-dark-medium px-2.5 py-1",
         low: "text-neutral-light-0 dark:text-neutral-dark-80 bg-semantic-light-low dark:bg-semantic-dark-low px-2.5 py-1",
         info: "text-white bg-semantic-light-info dark:bg-semantic-dark-info px-2.5 py-1",
+        others:
+          "text-white bg-semantic-light-info dark:bg-semantic-dark-info px-2.5 py-1",
+        "landing-page":
+          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
         url: "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
         windows:
           "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
-        hardware:
+        website:
+          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
+        "ip-address":
           "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
       },
     },

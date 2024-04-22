@@ -1,56 +1,55 @@
 export function formatDateToAgo(dateString: string): string {
   const date = new Date(dateString);
-  const now = new Date();
-  const diffTime = Math.abs(now.getTime() - date.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-
-  if (diffHours < 24) {
-    return `${diffHours}h`;
-  } else {
-    return `${diffDays}d`;
-  }
-}
-
-export function formatDateToAgo2(dateString: string): string {
-  const date = new Date(dateString);
+  //format date to En Us
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
-  const formattedDate = date.toLocaleDateString("en-US", options);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+  const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+  const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
 
-  const currentDate = new Date();
-  const differenceInDays = Math.floor(
-    (currentDate.getTime() - date.getTime()) / (1000 * 3600 * 24)
-  );
-  let daysAgo = "";
-
-  if (differenceInDays === 0) {
-    daysAgo = "today";
-  } else if (differenceInDays === 1) {
-    daysAgo = "yesterday";
-  } else if (
-    differenceInDays < 31 &&
-    currentDate.getMonth() === date.getMonth() &&
-    currentDate.getFullYear() === date.getFullYear()
-  ) {
-    daysAgo = `${differenceInDays} day${differenceInDays > 1 ? "s" : ""} ago`;
-  } else if (currentDate.getFullYear() === date.getFullYear()) {
-    const options: Intl.DateTimeFormatOptions = {
-      month: "long",
-      day: "numeric",
-    };
-    daysAgo = date.toLocaleDateString("en-US", options);
+  if (diffHours < 24) {
+    return `${diffHours}h}`;
+  } else if (diffDays < 7) {
+    return `${diffDays}d`;
+  } else if (diffDays < 30) {
+    return `${diffDays}w`;
+  } else if (diffMonths < 12) {
+    return `${diffMonths}m`;
   } else {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    daysAgo = date.toLocaleDateString("en-US", options);
+    return `${diffYears}y`;
   }
+}
 
-  return `${formattedDate} (${daysAgo})`;
+export function formatDateToAgo2(dateString: string): string {
+  const date = new Date(dateString);
+  //format date to En Us
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+  const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+  const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
+
+  if (diffHours < 24) {
+    return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago}`;
+  } else if (diffDays < 7) {
+    return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+  } else if (diffDays < 30) {
+    return `${diffDays} week${diffDays > 1 ? "s" : ""} ago`;
+  } else if (diffMonths < 12) {
+    return `${diffMonths} month${diffMonths > 1 ? "s" : ""} ago`;
+  } else {
+    return `${diffYears} year${diffYears > 1 ? "s" : ""} ago`;
+  }
 }

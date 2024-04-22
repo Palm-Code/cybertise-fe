@@ -1,1 +1,1 @@
-export * from "./vulnerability-type";
+export * from "./common";
