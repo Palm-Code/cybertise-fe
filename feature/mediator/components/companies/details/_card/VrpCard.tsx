@@ -32,7 +32,7 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
                 </Typography>
                 <div className="flex flex-wrap items-center gap-4">
                   {asset_type.map((item, index) => (
-                    <Badge key={index} variant={item.value}>
+                    <Badge key={index} variant={item.value as any}>
                       {item.label}
                     </Badge>
                   ))}
@@ -65,7 +65,7 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
                 </Typography>
                 <div className="grid grid-flow-col gap-4">
                   {asset_type.map((item, index) => (
-                    <Badge key={index} variant={item.value}>
+                    <Badge key={index} variant={item.value as any}>
                       {item.label}
                     </Badge>
                   ))}

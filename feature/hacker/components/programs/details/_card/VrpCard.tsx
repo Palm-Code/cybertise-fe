@@ -24,8 +24,8 @@ const VRPCard = ({ onClickSeeDetails }: I_VRPCard) => {
               </Typography>
               <div className="flex flex-wrap gap-4">
                 <Badge variant="url">Domain</Badge>
-                <Badge variant="iot">Hardware/IOT</Badge>
-                <Badge variant="android">Android:Playstore</Badge>
+                <Badge variant="default">Hardware/IOT</Badge>
+                <Badge variant="default">Android:Playstore</Badge>
               </div>
             </div>
           </div>
@@ -47,8 +47,8 @@ const VRPCard = ({ onClickSeeDetails }: I_VRPCard) => {
               </Typography>
               <div className="grid grid-flow-col gap-4">
                 <Badge variant="url">Domain</Badge>
-                <Badge variant="iot">Hardware/IOT</Badge>
-                <Badge variant="android">Android:Playstore</Badge>
+                <Badge variant="default">Hardware/IOT</Badge>
+                <Badge variant="default">Android:Playstore</Badge>
               </div>
             </div>
           </div>

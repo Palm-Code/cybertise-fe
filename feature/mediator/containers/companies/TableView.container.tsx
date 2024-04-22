@@ -75,7 +75,7 @@ export default function Table({ data, columns }: I_TableProps) {
                 >
                   <div className="_flexbox__row__center__start flex-wrap gap-3">
                     {item.asset_type.map((type, index) => (
-                      <Badge key={`badge-${index}`} variant={type.value}>
+                      <Badge key={`badge-${index}`} variant={type.value as any}>
                         {type.label}
                       </Badge>
                     ))}

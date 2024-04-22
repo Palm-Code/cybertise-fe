@@ -51,7 +51,10 @@ export default function ScopeTable({ data, columns }: I_TableProps) {
                   className={cn(columns[1].width, `text-${columns[1].align}`)}
                 >
                   <div className="_flexbox__row__center__start gap-4">
-                    <Badge className="!min-w-24" variant={item.asset_type}>
+                    <Badge
+                      className="!min-w-24"
+                      variant={item.asset_type as any}
+                    >
                       {item.asset_type}
                     </Badge>
                   </div>

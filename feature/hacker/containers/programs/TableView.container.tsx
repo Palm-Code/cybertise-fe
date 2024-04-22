@@ -83,8 +83,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                   >
                     <div className="_flexbox__row__center__start flex-wrap gap-3">
                       {item.asset_types?.slice(0, 3).map((type, index) => (
-                        <Badge key={`badge-${index}`} variant={"ios"}>
-                          {type.label}
+                        <Badge
+                          key={`badge-${index}`}
+                          variant={type.label as any}
+                        >
+                          {type.value}
                         </Badge>
                       ))}
                       {item.asset_types && item.asset_types?.length > 3 && (
