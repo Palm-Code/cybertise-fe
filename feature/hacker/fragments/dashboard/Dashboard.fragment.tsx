@@ -9,6 +9,6 @@ const Dashboard = dynamic(
 );
 
 const DashboardFragment = () => {
-  return <Dashboard data={tableTicketData} />;
+  return <Dashboard />;
 };
 export default DashboardFragment;

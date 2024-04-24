@@ -1,5 +1,7 @@
 export { default as DashboardTicketCardList } from "./card/DashboardTicketCard.component";
 export { default as ProgramsTicketCardList } from "./card/ProgramsTicketCardList.container";
+export { default as ProgramsTicketLoadingCardList } from "./loading-state/ProgramsTicketCardLoadingList.container";
+export { default as TableLoadingList } from "./loading-state/TableLoadingState.container";
 export { default as ReportsTicketCardList } from "./card/ReportsTicketCardList.container";
 export { default as VRPTicketCardList } from "./card/VRPTicketCardList.container";
 export { default as CreateVRPLaunchpad } from "./vrp-launchpad/CreateVrp.container";

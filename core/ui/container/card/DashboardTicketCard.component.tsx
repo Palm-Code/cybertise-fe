@@ -6,41 +6,48 @@ import {
   Separator,
   Typography,
 } from "../../components";
-import { I_TableTicketData } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import {
+  formatDateToAgo,
+  formatDateToAgo2,
+} from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
 import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
+import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get_chat_list";
 
-interface I_TicketCardProps extends I_TableTicketData {
+interface I_TicketCardProps {
   isGridCard?: boolean;
 }
 
-const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
+const TicketCard = ({
+  isGridCard,
+  ...props
+}: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   return (
     <>
       <Mobile>
-        <Card href={`/reports/${props.ticket_number}`} isClickable>
-          {props.is_new_notification && (
+        <Card href={`/reports/${props.id}`} isClickable>
+          {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
             <div className="_flexbox__row__center__between w-full">
-              <Badge variant="default">{props.domain}</Badge>
-              <Indicator variant="clear">Status</Indicator>
+              <Badge variant="default">{props.program?.type}</Badge>
+              <Indicator variant="clear">{props.status}</Indicator>
             </div>
             <div className="_flexbox__col__start__start w-full gap-4">
               <div className="_flexbox__row__center__between w-full">
-                <Image
-                  src={props.logo}
-                  alt={`${props.title} logo`}
-                  width={48}
-                  height={48}
-                />
+                <div className="relative aspect-square w-19 overflow-hidden rounded-full">
+                  <Image
+                    src={props.company?.logo as string}
+                    alt={`${props.id} logo`}
+                    fill
+                  />
+                </div>
                 <div className="_flexbox__col__start ml-6 w-full gap-1">
                   <Typography variant="p" affects="small">
-                    #{props.ticket_number} <br /> {props.title}
+                    #{props.code} <br /> {props.title}
                   </Typography>
                   {/* <div className="_flexbox__row__center gap-4">
                   <Typography
@@ -57,7 +64,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.update ?? "")}
+                  {formatDateToAgo(props.program?.updated_at ?? "")}
                 </Typography>
               </div>
               <Separator orientation="horizontal" />
@@ -83,7 +90,11 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     >
                       Risk Level
                     </Typography>
-                    <Badge variant={props.risk_level}>{props.risk_level}</Badge>
+                    <Badge
+                      variant={props.risk_level_category.toLowerCase() as any}
+                    >
+                      {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                    </Badge>
                   </div>
                   <div className="_flexbox__col__start gap-2">
                     <Typography
@@ -94,7 +105,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                       Rewards
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
-                      {currencyFormatters.NumberToEUR(props.rewards ?? 0)}
+                      {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
                     </Typography>
                   </div>
                 </div>
@@ -103,55 +114,57 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   affects="small"
                   className="text-neutral-light-20 dark:text-neutral-dark-20"
                 >
-                  Reported {props.date_reported}
+                  Reported {formatDateToAgo2(props.program?.created_at ?? "")}
                 </Typography>
               </div>
             </div>
           </div>
         </Card>
       </Mobile>
-      <Desktop>
-        <Card href={`/reports/${props.ticket_number}`} isClickable>
-          {props.is_new_notification && (
+      <Desktop className="h-full">
+        <Card href={`/reports/${props.id}`} isClickable className="h-full">
+          {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className="_flexbox__row__start w-full gap-9">
             {!isGridCard && (
-              <Image
-                src={props.logo}
-                alt={`${props.title} logo`}
-                width={48}
-                height={48}
-              />
+              <div className="relative aspect-square w-12 overflow-hidden rounded-full">
+                <Image
+                  src={props.company?.logo as string}
+                  alt={`${props.id} logo`}
+                  fill
+                />
+              </div>
             )}
             <div
               className={cn(
                 "_flexbox__col__start w-full",
-                isGridCard ? "gap-8" : "gap-12"
+                isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__center__between w-full">
+              <div className="_flexbox__row__center__between w-full gap-4">
                 {isGridCard && (
-                  <Image
-                    src={props.logo}
-                    alt={`${props.title} logo`}
-                    width={48}
-                    height={48}
-                    className="mr-4"
-                  />
+                  <div className="relative aspect-square w-12 overflow-hidden rounded-full">
+                    <Image
+                      src={props.company?.logo as string}
+                      alt={`${props.id} logo`}
+                      fill
+                    />
+                  </div>
                 )}
                 <div className="_flexbox__col__start w-full gap-1">
                   <Typography variant="p" affects="normal">
-                    #{props.ticket_number} - {props.title}
+                    #{props.code} - {props.title}
                   </Typography>
                   <div className="_flexbox__row__center gap-4">
-                    <Badge variant="default">{props.domain}</Badge>
+                    <Badge variant="default">{props.program?.type}</Badge>
                     <Typography
                       variant="p"
                       affects="small"
                       className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                     >
-                      {props.date_reported}
+                      Reported{" "}
+                      {formatDateToAgo2(props.program?.created_at ?? "")}
                     </Typography>
                   </div>
                 </div>
@@ -160,13 +173,15 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.update ?? "")}
+                  {formatDateToAgo(props.program?.updated_at ?? "")}
                 </Typography>
               </div>
               <div
                 className={cn(
-                  "flex flex-wrap items-center gap-y-8",
-                  isGridCard ? "gap-x-[60px]" : "gap-x-28"
+                  "grid items-start gap-y-8",
+                  isGridCard
+                    ? "grid-cols-2 gap-x-[60px]"
+                    : "grid-flow-col gap-x-28"
                 )}
               >
                 <div className="_flexbox__col__start gap-2.5">
@@ -178,7 +193,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Vulnerability type (CWE)
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    Path Transversal
+                    {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
@@ -189,7 +204,11 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   >
                     Risk Level
                   </Typography>
-                  <Badge variant={props.risk_level}>{props.risk_level}</Badge>
+                  <Badge
+                    variant={props.risk_level_category.toLowerCase() as any}
+                  >
+                    {`${props.risk_level && props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                  </Badge>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
                   <Typography
@@ -200,7 +219,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Rewards
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    {currencyFormatters.NumberToEUR(props.rewards ?? 0)}
+                    {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
                   </Typography>
                 </div>
                 {!isGridCard && (
@@ -213,7 +232,9 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                       Status
                     </Typography>
                     <Indicator
-                      variant={props.status === "Open" ? "warning" : "clear"}
+                      variant={
+                        props.status && (props.status.toLowerCase() as any)
+                      }
                     >
                       {props.status}
                     </Indicator>
@@ -230,7 +251,9 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Status
                   </Typography>
                   <Indicator
-                    variant={props.status === "Open" ? "warning" : "clear"}
+                    variant={
+                      props.status && (props.status.toLowerCase() as any)
+                    }
                   >
                     {props.status}
                   </Indicator>
@@ -245,16 +268,17 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
 };
 
 interface I_TicketCardListProps {
-  data: I_TableTicketData[];
+  data?: I_GetChatListSuccessResponse["data"];
   isGridCard?: boolean;
 }
 
 const TicketCardList = ({ data, isGridCard }: I_TicketCardListProps) => {
-  return data.map((item) => (
-    <Suspense fallback={<CardLoader />} key={item.ticket_number}>
-      <TicketCard isGridCard={isGridCard} {...item} />
-    </Suspense>
-  ));
+  if (data)
+    return data.map((item) => (
+      <Suspense fallback={<CardLoader />} key={item.id}>
+        <TicketCard isGridCard={isGridCard} {...item} />
+      </Suspense>
+    ));
 };
 
 export default TicketCardList;

@@ -73,7 +73,7 @@ const VRPLaunchpad = ({ data }: { data: VRPCardType[] }) => {
         </div>
       </Mobile>
       <Desktop>
-        <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
+        <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
               VRP Launchpad

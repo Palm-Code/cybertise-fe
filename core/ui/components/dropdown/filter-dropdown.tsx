@@ -14,7 +14,7 @@ import { Desktop, Mobile } from "../../layout";
 interface I_FilterDropdownProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
-  value: string;
+  value?: string;
   variant?: "hacker" | "company" | "mediator";
   withIcon?: boolean;
 }
@@ -40,7 +40,11 @@ const FilterDropdown = ({
             withIcon={withIcon}
           >
             <ArrowUpDown className={iconColor[variant]} />
-            <Typography variant="p" affects="small">
+            <Typography
+              variant="p"
+              affects="small"
+              className="whitespace-nowrap text-nowrap"
+            >
               {inputValueLabel || "Sort By"}
             </Typography>
             <div></div>
@@ -64,7 +68,11 @@ const FilterDropdown = ({
         <Select onValueChange={onValueChange}>
           <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
             <ArrowUpDown className={iconColor[variant]} />
-            <Typography variant="p" affects="small">
+            <Typography
+              variant="p"
+              affects="small"
+              className="whitespace-nowrap text-nowrap"
+            >
               {inputValueLabel || "Sort By"}
             </Typography>
           </SelectTrigger>

@@ -5,7 +5,7 @@ import { VRPCardType } from "@/types/admin/vrp-launchpad";
 const GridView = ({ data }: { data: VRPCardType[] }) => {
   return (
     <AnimationWrapper>
-      <div className="z-10 grid h-full w-full gap-4 md:grid-cols-2 md:gap-10">
+      <div className="z-10 grid h-full w-full gap-4 md:h-fit md:grid-cols-2 md:gap-10">
         <CompaniesTicketCardList data={data} isGridCard />
       </div>
     </AnimationWrapper>

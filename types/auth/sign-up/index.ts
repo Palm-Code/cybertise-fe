@@ -16,7 +16,4 @@ export type UserType = {
     role: "hacker" | "company" | "mediator";
     token: string;
   };
-  role: "hacker" | "company" | "mediator";
-  token: string;
-  token_expired: Date;
 };

@@ -4,11 +4,11 @@ import { OptionsType } from "@/types/auth/sign-up";
 export const filterItems: SortFilterType[] = [
   {
     label: "Latest update",
-    value: "latest",
+    value: "-updated_at",
   },
   {
     label: "Oldest",
-    value: "oldest",
+    value: "created_at",
   },
 ];
 

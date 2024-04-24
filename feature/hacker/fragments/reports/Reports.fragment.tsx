@@ -1,14 +1,13 @@
 import dynamic from "next/dynamic";
-import { tableTicketData } from "../../constants/reports";
 
 const Reports = dynamic(
   () => import("@/feature/hacker/components/reports/Reports.component"),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
 const ReportsFragment = () => {
-  return <Reports data={tableTicketData} />;
+  return <Reports />;
 };
 export default ReportsFragment;

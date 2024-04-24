@@ -9,7 +9,6 @@ import {
 import Typography from "@/core/ui/components/typography/typography";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableReportTicketData, I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
   ReportsCardView,
@@ -19,15 +18,61 @@ import {
 import { tableColumns } from "../../constants/reports";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
+import { useGetChatList } from "../../query/client";
+import { useReportListStore } from "@/feature/hacker/zustand/store/reports";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
 
-const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
+const Reports = () => {
+  const store = useReportListStore();
+  const { payload, setPayload } = store;
+  const {
+    data: reportsData,
+    isLoading,
+    isFetching,
+    refetch,
+    isRefetching,
+  } = useGetChatList(payload);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <ReportsTableView columns={tableColumns} data={data} />,
-    card: <ReportsCardView data={data} />,
-    grid: <ReportsGridView data={data} />,
+    table: (
+      <ReportsTableView
+        columns={tableColumns}
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    card: (
+      <ReportsCardView
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    grid: (
+      <ReportsGridView
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+  };
+
+  const submitChange = (type: string, value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
+      },
+    });
   };
 
   return (
@@ -47,19 +92,19 @@ const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
               <SearchInput variant="hacker" placeholder="Search for programs" />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
-              <DashboardFilter variant="hacker" />
+              <DashboardFilter variant="hacker" store={store} />
               <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
-                  value="Sort By"
+                  value={payload?.params?.sort}
                   options={filterItems}
-                  onValueChange={() => {}}
+                  onValueChange={(v) => useClickSort(v, store)}
                 />
               </div>
             </div>
           </div>
-          {data.length! ? (
-            <ReportsGridView data={data} />
+          {reportsData?.data.length! ? (
+            <ReportsGridView data={reportsData?.data} />
           ) : (
             <EmptyState
               variant="hacker"
@@ -79,25 +124,61 @@ const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
               <SearchInput
                 variant="hacker"
                 placeholder="Try “#21231” or “Company name”"
+                value={payload?.params?.search}
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                loadingSubmit={isLoading && isRefetching}
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
               />
             </div>
           </div>
           <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="hacker" />
+            <DashboardFilter
+              variant="hacker"
+              store={store}
+              onValueChange={(v, t) => submitChange(t, v)}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="hacker"
-                value="Sort By"
+                value={payload?.params?.sort as string}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
               <FilterViewDropdown type="hacker" options={filterView} />
             </div>
           </div>
-          {data.length! ? (
+          {reportsData?.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="hacker" />
+              <Pagination
+                variant="hacker"
+                active={payload.params?.page?.size}
+                meta={reportsData?.meta}
+                activePage={payload.params?.page?.number}
+                onClickNext={() =>
+                  useClickPaginate(payload.params?.page?.number! + 1, store)
+                }
+                onClickPrevious={() =>
+                  useClickPaginate(payload.params?.page?.number! - 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) => {
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: {
+                        ...payload.params?.page!,
+                        size: v,
+                      },
+                    },
+                  });
+                }}
+              />
             </>
           ) : (
             <EmptyState

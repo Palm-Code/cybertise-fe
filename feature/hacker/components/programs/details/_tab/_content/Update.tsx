@@ -1,13 +1,11 @@
+import { I_LatestUpdates } from "@/core/models/hacker/programs";
 import { Card, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 
-interface I_Update extends UpdateType {}
-
-const Update = ({ title, created_at, content }: I_Update) => {
+const Update = ({ title, created_at, content }: I_LatestUpdates) => {
   return (
     <AnimationWrapper>
       <Mobile className="px-6">
@@ -61,11 +59,11 @@ const Update = ({ title, created_at, content }: I_Update) => {
 };
 
 interface I_UpdateList {
-  data: UpdateType[];
+  data?: I_LatestUpdates[];
 }
 
 const UpdateList = ({ data }: I_UpdateList) => {
-  if (!data.length) return <EmptyState type="update" variant="hacker" />;
+  if (!data) return <EmptyState type="update" variant="hacker" />;
 
   return (
     <div className="_flexbox__col__start__start mt-4 w-full gap-8">

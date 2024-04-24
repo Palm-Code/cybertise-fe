@@ -367,19 +367,19 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "Network (N)",
-        value: "N",
+        value: 0.85,
       },
       {
         label: "Adjacent (A)",
-        value: "A",
+        value: 0.62,
       },
       {
         label: "Local (L)",
-        value: "L",
+        value: 0.55,
       },
       {
         label: "Physical (P)",
-        value: "P",
+        value: 0.2,
       },
     ],
   },
@@ -388,11 +388,11 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "Unchanged (U)",
-        value: "U",
+        value: 0.85,
       },
       {
         label: "Changed (C)",
-        value: "C",
+        value: 0.62,
       },
     ],
   },
@@ -401,33 +401,32 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "High (H)",
-        value: "H",
+        value: 0.44,
       },
       {
         label: "Medium (M)",
-        value: "M",
+        value: 0.77,
       },
       {
         label: "Low (L)",
-        value: "L",
+        value: 0.85,
       },
     ],
   },
-
   {
     title: "Confidentiality (C)",
     items: [
       {
         label: "High (H)",
-        value: "H",
+        value: 0.85,
       },
       {
         label: "Medium (M)",
-        value: "M",
+        value: 0.62,
       },
       {
         label: "Low (L)",
-        value: "L",
+        value: 0.55,
       },
     ],
   },
@@ -436,33 +435,32 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "High (H)",
-        value: "H",
+        value: 0.85,
       },
       {
         label: "Medium (M)",
-        value: "M",
+        value: 0.62,
       },
       {
         label: "Low (L)",
-        value: "L",
+        value: 0.55,
       },
     ],
   },
-
   {
     title: "Integrity (I)",
     items: [
       {
         label: "High (H)",
-        value: "H",
+        value: 0.85,
       },
       {
         label: "Medium (M)",
-        value: "M",
+        value: 0.62,
       },
       {
         label: "Low (L)",
-        value: "L",
+        value: 0.55,
       },
     ],
   },
@@ -471,11 +469,11 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "None (N)",
-        value: "N",
+        value: 0.85,
       },
       {
         label: "Required (R)",
-        value: "R",
+        value: 0.62,
       },
     ],
   },
@@ -484,15 +482,15 @@ export const csvss_calculator: CsvssCalculatorType[] = [
     items: [
       {
         label: "High (H)",
-        value: "H",
+        value: 0.85,
       },
       {
         label: "Medium (M)",
-        value: "M",
+        value: 0.62,
       },
       {
         label: "Low (L)",
-        value: "L",
+        value: 0.55,
       },
     ],
   },

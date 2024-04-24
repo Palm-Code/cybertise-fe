@@ -9,14 +9,14 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import { Badge, Typography, badgeVariants } from "@/core/ui/components";
 
 interface I_AssetTypeProps {
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void;
   options: SortFilterType[];
   value: string;
   label?: string;
 }
 
 const AssetType = ({
-  onValueChange,
+  onValueChange = () => {},
   options,
   value,
   label = "Sort By",
@@ -27,7 +27,7 @@ const AssetType = ({
   )?.label;
 
   return (
-    <Select>
+    <Select onValueChange={(v) => onValueChange(v)}>
       <SelectTrigger className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0">
         <Typography
           variant="p"
@@ -36,7 +36,18 @@ const AssetType = ({
         >
           {label}
         </Typography>
-        {inputValueLabel && <Badge variant={"url"}>{inputValueLabel}</Badge>}
+        {inputValueLabel && (
+          <Badge
+            variant={
+              badgeVariants[
+                options.find((option) => option.value === value)
+                  ?.value as keyof typeof badgeVariants
+              ]
+            }
+          >
+            {inputValueLabel}
+          </Badge>
+        )}
       </SelectTrigger>
       <SelectContent
         align="end"
@@ -53,7 +64,7 @@ const AssetType = ({
                 className="!w-fit rounded-full !p-0"
                 value={option.value as string}
                 key={`asset-type-${idx}`}
-                noCheck
+                // noCheck
               >
                 <Badge variant={option.value as keyof typeof badgeVariants}>
                   {option.label}

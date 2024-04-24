@@ -21,7 +21,7 @@ export const BaseTable = ({
 }: I_TableProps) => {
   return (
     <div
-      className={cn("w-full flex-col items-center gap-4", className)}
+      className={cn("_flexbox__col__start__start w-full gap-4", className)}
       {...props}
     >
       {children}
@@ -114,7 +114,7 @@ export const TableBodyRow = ({
   if (isClickable) {
     return (
       <Link
-        href={props.href ?? "#"}
+        href={props.href as string}
         className={cn(
           "relative w-full rounded-2xl bg-background-main-light px-9 py-6",
           "hover:bg-neutral-light-90 dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",

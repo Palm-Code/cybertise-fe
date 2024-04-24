@@ -59,7 +59,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                         ?.map((item, idx) => (
                           <Badge
                             key={`asset_types-${idx}`}
-                            variant={item.value}
+                            variant={item.value as any}
                           >
                             {item.label}
                           </Badge>
@@ -136,7 +136,10 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_type
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                        <Badge
+                          key={`asset_types-${idx}`}
+                          variant={item.value as any}
+                        >
                           {item.label}
                         </Badge>
                       ))

@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 import { BaseButton, BaseButtonProps } from "./base-button";
 import Link from "next/link";
 
-interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends BaseButtonProps {
   prefixIcon?: React.ReactNode;
   postFixIcon?: React.ReactNode;
   children?: React.ReactNode;

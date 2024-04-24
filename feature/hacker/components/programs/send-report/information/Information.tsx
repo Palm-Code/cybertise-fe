@@ -32,7 +32,7 @@ const Information = ({ activeStep, lists }: I_InformationProps) => {
                 "text-transparent",
                 activeStep <= index
                   ? "fill-neutral-light-50 dark:fill-neutral-dark-50"
-                  : "fill-lime-normal"
+                  : "fill-lime-normal-light dark:fill-lime-normal-dark"
               )}
             />
             <Typography key={index} variant="p" affects="small">

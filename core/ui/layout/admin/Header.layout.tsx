@@ -2,9 +2,8 @@
 import { cn } from "@/core/lib/utils";
 import Avatar from "../../components/avatar/avatar";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
-import { Desktop, Mobile, Sidebar } from "..";
+import { Desktop, Mobile } from "..";
 import { Logo } from "../../icons";
-import { AlignJustify } from "lucide-react";
 
 const Header = () => {
   return (
