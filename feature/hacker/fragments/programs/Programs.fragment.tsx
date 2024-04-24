@@ -1,12 +1,15 @@
-import { useCommonStore } from "@/core/zustands/asset-type/store";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import dynamic from "next/dynamic";
 
 const Programs = dynamic(
   () => import("@/feature/hacker/components/programs/Programs.component")
 );
 
-const ProgramsFragment = () => {
-  const { data: assetTypes } = useCommonStore.getState();
-  return <Programs assetTypes={assetTypes} />;
+const ProgramsFragment = async ({
+  data,
+}: {
+  data: I_GetAssetTypeSuccessResponse["data"];
+}) => {
+  return <Programs assetTypes={data} />;
 };
 export default ProgramsFragment;

@@ -6,6 +6,7 @@ interface I_VulnerabilityType {
   deleted_at: string | null;
   created_at: string;
   updated_at: string;
+  label: string;
 }
 
 export enum ChatFilter {
@@ -27,6 +28,7 @@ export interface I_GetChatListSuccessResponse {
     program_id: string;
     has_new: number;
     risk_level_category: string;
+    last_message: string;
     vulnerabiity_type: I_VulnerabilityType;
     program?: I_Program;
     company?: I_Company;

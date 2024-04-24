@@ -8,18 +8,20 @@ import { Desktop, Mobile } from "../../layout";
 import Typography from "../typography/typography";
 import { cn } from "@/core/lib/utils";
 import { ChatFilter } from "@/core/models/hacker/dashboard";
-import { useChatListParamStore } from "@/feature/hacker/zustand/store/dashboard";
+import { StoreType } from "@/core/hooks/types";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
   onValueChange?: (value: string, type: keyof typeof ChatFilter) => void;
+  store: StoreType;
 }
 
 const DashboardFilter = ({
   variant = "hacker",
   onValueChange = () => {},
+  store,
 }: IDashboardFilterProps) => {
-  const { payload } = useChatListParamStore();
+  const { payload } = store;
   return (
     <>
       <Mobile className="w-fit">
@@ -42,19 +44,19 @@ const DashboardFilter = ({
           <Separator orientation="vertical" className="h-6 w-0.5 text-white" />
           <BaseDropdown
             label="Type"
-            value={payload?.params?.filter?.["program.type"] || "All type"}
+            value={payload?.params?.filter?.["program.type"] || "all"}
             options={filterItems.type}
             onValueChange={(v) => onValueChange(v, "program.type")}
           />
           <BaseDropdown
             label="Risk Level"
-            value={payload?.params?.filter?.level || "All level"}
+            value={payload?.params?.filter?.level || "all"}
             options={filterItems.risk_level}
             onValueChange={(v) => onValueChange(v, "level")}
           />
           <BaseDropdown
             label="Status"
-            value={payload?.params?.filter?.status || "All status"}
+            value={payload?.params?.filter?.status || "all"}
             options={filterItems.status}
             onValueChange={(v) => onValueChange(v, "status")}
           />

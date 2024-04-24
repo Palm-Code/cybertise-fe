@@ -1,17 +1,15 @@
 import Image from "next/image";
 import { Badge, Button, Card, Indicator, Typography } from "../../components";
-import { I_TableReportTicketData } from "@/interfaces";
 import { cn } from "@/core/lib/utils";
 import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
-import Link from "next/link";
 import { Hacker } from "../../icons";
 import { Building2, ChevronRight } from "lucide-react";
-import { buttonVariants } from "../../components/button/base-button";
+import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 
-interface I_TicketCardProps extends I_TableReportTicketData {
+interface I_TicketCardProps {
   isGridCard?: boolean;
   isMediator?: boolean;
 }
@@ -20,21 +18,18 @@ const TicketCard = ({
   isGridCard,
   isMediator = false,
   ...props
-}: I_TicketCardProps) => {
+}: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   return (
     <>
       <Mobile>
-        <Card
-          href={`/reports/${props.ticket_number}`}
-          isClickable={!isMediator}
-        >
-          {props.is_new_notification && (
+        <Card href={`/reports/${props.id}`} isClickable={!isMediator}>
+          {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
             <div className="_flexbox__row__center__between w-full">
               <Image
-                src={props.logo}
+                src={props.company?.logo as string}
                 alt={`${props.title} logo`}
                 width={48}
                 height={48}
@@ -45,12 +40,12 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.update ?? "")}
+                {formatDateToAgo(props.program?.updated_at ?? "")}
               </Typography>
             </div>
             <div className="_flexbox__col__start w-full gap-1">
               <Typography variant="p" affects="large" weight="semibold">
-                {props.company_name}
+                {props.company?.name}
               </Typography>
               <div className="_flexbox__row__center gap-4">
                 <Typography
@@ -58,12 +53,12 @@ const TicketCard = ({
                   affects="small"
                   className="!text-neutral-light-30 dark:!text-neutral-dark-30"
                 >
-                  #{props.ticket_number} - {props.title}
+                  #{props.code} - {props.title}
                 </Typography>
               </div>
             </div>
             <div
-              dangerouslySetInnerHTML={{ __html: sanitize(props.description) }}
+              dangerouslySetInnerHTML={{ __html: sanitize(props.last_message) }}
             ></div>
             <div
               className={cn(
@@ -78,13 +73,22 @@ const TicketCard = ({
               >
                 <div className="_flexbox__col__start gap-2.5">
                   <Indicator
-                    variant={props.status === "Open" ? "warning" : "clear"}
+                    variant={
+                      props.status && (props.status.toLowerCase() as any)
+                    }
                   >
                     {props.status}
                   </Indicator>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
-                  <Badge variant={props.risk_level}>{props.risk_level}</Badge>
+                  <Badge
+                    variant={
+                      props.risk_level_category &&
+                      (props.risk_level_category.toLowerCase() as any)
+                    }
+                  >
+                    {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                  </Badge>
                 </div>
               </div>
               {isMediator && (
@@ -95,7 +99,7 @@ const TicketCard = ({
                     postFixIcon={<ChevronRight />}
                     className="justify-between"
                     asLink
-                    href={`/reports/${props.ticket_number}`}
+                    href={`/reports/${props.code}`}
                     fullWidth
                   >
                     Hacker Ticket
@@ -107,7 +111,7 @@ const TicketCard = ({
                     fullWidth
                     asLink
                     className="justify-between"
-                    href={`/reports/new?=${props.ticket_number}`}
+                    href={`/reports/new?=${props.code}`}
                   >
                     Create Company Ticket
                   </Button>
@@ -117,12 +121,13 @@ const TicketCard = ({
           </div>
         </Card>
       </Mobile>
-      <Desktop>
+      <Desktop className="h-full">
         <Card
-          href={`/reports/${props.ticket_number}`}
+          href={`/reports/${props.id}`}
           isClickable={!isMediator}
+          className="h-full"
         >
-          {props.is_new_notification && (
+          {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div
@@ -131,9 +136,9 @@ const TicketCard = ({
               isGridCard ? "gap-8" : "gap-12"
             )}
           >
-            <div className="_flexbox__row__center__between w-full">
+            <div className="_flexbox__row__start__between w-full">
               <Image
-                src={props.logo}
+                src={props.company?.logo as string}
                 alt={`${props.title} logo`}
                 width={48}
                 height={48}
@@ -141,7 +146,7 @@ const TicketCard = ({
               />
               <div className="_flexbox__col__start w-full gap-1">
                 <Typography variant="p" affects="large" weight="semibold">
-                  #{props.ticket_number} - {props.title}
+                  #{props.code} - {props.title}
                 </Typography>
                 <div className="_flexbox__row__center gap-4">
                   <Typography
@@ -149,7 +154,7 @@ const TicketCard = ({
                     affects="small"
                     className="!text-neutral-light-30 dark:!text-neutral-dark-30"
                   >
-                    {props.company_name}
+                    {props.company?.name}
                   </Typography>
                 </div>
               </div>
@@ -158,11 +163,11 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.update ?? "")}
+                {formatDateToAgo(props.program?.updated_at ?? "")}
               </Typography>
             </div>
             <div
-              dangerouslySetInnerHTML={{ __html: sanitize(props.description) }}
+              dangerouslySetInnerHTML={{ __html: sanitize(props.last_message) }}
             ></div>
             <div
               className={cn(
@@ -175,13 +180,22 @@ const TicketCard = ({
               <div className={cn("flex w-full flex-wrap items-center gap-8")}>
                 <div className="_flexbox__col__start gap-2.5">
                   <Indicator
-                    variant={props.status === "Open" ? "warning" : "clear"}
+                    variant={
+                      props.status && (props.status.toLowerCase() as any)
+                    }
                   >
                     {props.status}
                   </Indicator>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
-                  <Badge variant={props.risk_level}>{props.risk_level}</Badge>
+                  <Badge
+                    variant={
+                      props.risk_level_category &&
+                      (props.risk_level_category.toLowerCase() as any)
+                    }
+                  >
+                    {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                  </Badge>
                 </div>
               </div>
               {isMediator && (
@@ -198,7 +212,7 @@ const TicketCard = ({
                     prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
                     postFixIcon={<ChevronRight />}
                     asLink
-                    href={`/reports/${props.ticket_number}`}
+                    href={`/reports/${props.id}`}
                     fullWidth
                   >
                     Hacker Ticket
@@ -209,7 +223,7 @@ const TicketCard = ({
                     postFixIcon={<ChevronRight />}
                     fullWidth
                     asLink
-                    href={`/reports/new?=${props.ticket_number}`}
+                    href={`/reports/new?=${props.id}`}
                   >
                     Create Company Ticket
                   </Button>
@@ -224,7 +238,7 @@ const TicketCard = ({
 };
 
 interface I_TicketCardListProps {
-  data: I_TableReportTicketData[];
+  data: I_GetChatListSuccessResponse["data"];
   isGridCard?: boolean;
   isMediator?: boolean;
 }
@@ -235,7 +249,7 @@ const TicketCardList = ({
   isMediator = false,
 }: I_TicketCardListProps) => {
   return data.map((item) => (
-    <Suspense fallback={<CardLoader />} key={item.ticket_number}>
+    <Suspense fallback={<CardLoader />} key={item.code}>
       <TicketCard isGridCard={isGridCard} isMediator={isMediator} {...item} />
     </Suspense>
   ));

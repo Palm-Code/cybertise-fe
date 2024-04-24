@@ -88,7 +88,7 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
-            <DashboardFilter variant="hacker" />
+            <DashboardFilter variant="hacker" store={store} />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="hacker"
@@ -139,6 +139,7 @@ const Dashboard = () => {
             <DashboardFilter
               variant="hacker"
               onValueChange={(v, t) => submitChange(t, v)}
+              store={store}
             />
             <div className="inline-flex gap-4">
               <FilterDropdown

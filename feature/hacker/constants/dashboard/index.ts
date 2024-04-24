@@ -129,8 +129,11 @@ export const filterItems: MultiFilterType = {
   ],
   status: [
     { label: "All status", value: "all" },
-    { label: "Open", value: "open" },
-    { label: "Closed", value: "closed" },
+    { label: "Open", value: "Open" },
+    { label: "Closed", value: "Closed" },
+    { label: "Waiting for Payment", value: "Waiting for Payment" },
+    { label: "Paid", value: "Paid" },
+    { label: "Canceled", value: "Canceled" },
   ],
   asset_type: [
     { label: "All asset type", value: "all" },

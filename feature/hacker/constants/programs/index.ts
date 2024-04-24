@@ -227,7 +227,7 @@ export const scopeTableColumns: I_TableColumns[] = [
   },
   {
     title: "Type",
-    align: "left",
+    align: "center",
     width: "w-4/12",
   },
   {

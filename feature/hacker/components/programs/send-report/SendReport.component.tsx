@@ -15,7 +15,7 @@ import Review from "./steps/Review";
 import { informations } from "@/feature/hacker/constants/programs";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import ModalCloseSendReport from "../_dialog/ModalCloseSendReport";
 import ModalSuccessSubmit from "../_dialog/ModalSuccessSubmit";
 

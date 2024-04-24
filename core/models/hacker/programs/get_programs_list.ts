@@ -22,6 +22,16 @@ export interface I_TargetAsset {
   asset_type: I_AssetType;
 }
 
+export interface I_LatestUpdates {
+  id: string;
+  program_id: string;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
 export interface I_GetProgramListSuccessResponse {
   data: {
     id: string;
@@ -36,6 +46,7 @@ export interface I_GetProgramListSuccessResponse {
     asset_types?: I_AssetType[];
     target_assets?: I_TargetAsset[];
     company?: I_Company;
+    latest_updates?: I_LatestUpdates[];
   }[];
   meta?: I_Meta;
 }

@@ -15,10 +15,8 @@ export function formatDateToAgo(dateString: string): string {
 
   if (diffHours < 24) {
     return `${diffHours}h}`;
-  } else if (diffDays < 7) {
-    return `${diffDays}d`;
   } else if (diffDays < 30) {
-    return `${diffDays}w`;
+    return `${diffDays}d`;
   } else if (diffMonths < 12) {
     return `${diffMonths}m`;
   } else {
@@ -43,10 +41,8 @@ export function formatDateToAgo2(dateString: string): string {
 
   if (diffHours < 24) {
     return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago}`;
-  } else if (diffDays < 7) {
-    return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
   } else if (diffDays < 30) {
-    return `${diffDays} week${diffDays > 1 ? "s" : ""} ago`;
+    return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
   } else if (diffMonths < 12) {
     return `${diffMonths} month${diffMonths > 1 ? "s" : ""} ago`;
   } else {

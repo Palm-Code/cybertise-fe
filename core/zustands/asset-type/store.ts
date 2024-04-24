@@ -1,5 +1,5 @@
 import { StateCreator, create } from "zustand";
-interface AssetTypeSlice {
+export interface AssetTypeSlice {
   data: {
     id: string;
     value: string;

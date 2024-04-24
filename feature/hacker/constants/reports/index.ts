@@ -8,8 +8,8 @@ export const tableColumns: I_TableColumns[] = [
   },
   {
     title: "Risk Level",
-    align: "left",
-    width: "w-[100px]",
+    align: "center",
+    width: "w-[120px]",
   },
   {
     title: "Last Message",

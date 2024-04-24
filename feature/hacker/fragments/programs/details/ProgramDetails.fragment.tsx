@@ -1,3 +1,4 @@
+import { useCommonStore } from "@/core/zustands/asset-type/store";
 import { ProgramDetails } from "@/feature/hacker/components";
 
 interface I_ProgramDetailsProps {
@@ -5,6 +6,7 @@ interface I_ProgramDetailsProps {
 }
 
 const ProgramDetailsFragment = ({ id }: I_ProgramDetailsProps) => {
-  return <ProgramDetails id={id} />;
+  const { data } = useCommonStore.getState();
+  return <ProgramDetails id={id} assetTypes={data} />;
 };
 export default ProgramDetailsFragment;

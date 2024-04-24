@@ -6,7 +6,12 @@ import { buttonVariants } from "../../components/button/base-button";
 
 interface I_EmptyStateProps {
   variant: "company" | "hacker" | "mediator";
-  type: "program" | "ticket" | "under-construction" | "update";
+  type:
+    | "program"
+    | "ticket"
+    | "under-construction"
+    | "update"
+    | "target-assets";
   buttonText?: string;
   href?: string;
 }
@@ -54,6 +59,17 @@ const EmptyState = ({
               >
                 {buttonText ?? "Add new program"}
               </Link>
+            </>
+          </>
+        );
+      case "target-assets":
+        return (
+          <>
+            <>
+              <EmptyFolder className={iconColors[variant]} />
+              <Typography variant="p" affects="extralarge" weight="bold">
+                Target assets not Found
+              </Typography>
             </>
           </>
         );

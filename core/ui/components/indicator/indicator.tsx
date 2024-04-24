@@ -12,6 +12,11 @@ const indicatorVariants = cva("", {
       warning: "text-red-normal rounded-full",
       caution: "text-yellow-normal rounded-full",
       clear: "text-emerald-normal rounded-full",
+      open: "text-red-normal rounded-full",
+      closed: "text-emerald-normal rounded-full",
+      "waiting for payment": "text-yellow-normal rounded-full",
+      paid: "text-emerald-normal rounded-full",
+      canceled: "text-red-normal rounded-full",
     },
   },
   defaultVariants: {

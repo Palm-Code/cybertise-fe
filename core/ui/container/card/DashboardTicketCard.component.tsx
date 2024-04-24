@@ -93,7 +93,7 @@ const TicketCard = ({
                     <Badge
                       variant={props.risk_level_category.toLowerCase() as any}
                     >
-                      {props.risk_level_category}
+                      {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
                     </Badge>
                   </div>
                   <div className="_flexbox__col__start gap-2">
@@ -121,8 +121,8 @@ const TicketCard = ({
           </div>
         </Card>
       </Mobile>
-      <Desktop>
-        <Card href={`/reports/${props.code}`} isClickable>
+      <Desktop className="h-full">
+        <Card href={`/reports/${props.code}`} isClickable className="h-full">
           {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
@@ -178,8 +178,10 @@ const TicketCard = ({
               </div>
               <div
                 className={cn(
-                  "flex flex-wrap items-center gap-y-8",
-                  isGridCard ? "gap-x-[60px]" : "gap-x-28"
+                  "grid items-start gap-y-8",
+                  isGridCard
+                    ? "grid-cols-2 gap-x-[60px]"
+                    : "grid-flow-col gap-x-28"
                 )}
               >
                 <div className="_flexbox__col__start gap-2.5">
@@ -191,7 +193,7 @@ const TicketCard = ({
                     Vulnerability type (CWE)
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    {props.vulnerabiity_type?.value}
+                    {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
@@ -231,9 +233,7 @@ const TicketCard = ({
                     </Typography>
                     <Indicator
                       variant={
-                        props.status.toLowerCase() === "open"
-                          ? "warning"
-                          : "clear"
+                        props.status && (props.status.toLowerCase() as any)
                       }
                     >
                       {props.status}
@@ -252,9 +252,7 @@ const TicketCard = ({
                   </Typography>
                   <Indicator
                     variant={
-                      props.status.toLowerCase() === "open"
-                        ? "warning"
-                        : "clear"
+                      props.status && (props.status.toLowerCase() as any)
                     }
                   >
                     {props.status}

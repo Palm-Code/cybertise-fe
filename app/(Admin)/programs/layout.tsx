@@ -15,7 +15,6 @@ export default async function Dashboardlayout({
 }) {
   const session = (await getSession()) as UserType;
   await prefetchGetAssetType(session?.user.token);
-
   const child: { [key: string]: React.ReactNode } = {
     hacker: hacker,
     company: company,

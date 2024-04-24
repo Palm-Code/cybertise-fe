@@ -10,7 +10,9 @@ const ReactQueryProvider = ({ children }: { children: React.ReactNode }) => {
       new QueryClient({
         defaultOptions: {
           queries: {
-            retry: false,
+            refetchOnReconnect: true,
+            refetchOnWindowFocus: false,
+            refetchOnMount: true,
           },
         },
       })

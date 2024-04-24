@@ -118,7 +118,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           `text-${columns[2].align}`
                         )}
                       >
-                        {item.vulnerabiity_type?.value}
+                        {item.vulnerabiity_type?.label}
                       </TableData>
                       <TableData
                         className={cn(
@@ -137,7 +137,9 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         )}
                       >
                         <Indicator
-                          variant={item.status === "Open" ? "warning" : "clear"}
+                          variant={
+                            item.status && (item.status.toLowerCase() as any)
+                          }
                         >
                           {item.status}
                         </Indicator>
