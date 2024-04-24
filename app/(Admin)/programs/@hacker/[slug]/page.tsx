@@ -1,9 +1,9 @@
 import { ProgramDetailsFragment } from "@/feature/hacker/fragments";
 
 export default function ProgramsDetailPage({
-  params,
+  params: { slug },
 }: {
-  params: { id: string };
+  params: { slug: string };
 }) {
-  return <ProgramDetailsFragment id={params.id} />;
+  return <ProgramDetailsFragment id={slug} />;
 }

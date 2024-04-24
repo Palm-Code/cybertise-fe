@@ -9,6 +9,6 @@ const Reports = dynamic(
 );
 
 const ReportsFragment = () => {
-  return <Reports data={tableTicketData} />;
+  return <Reports data={[]} />;
 };
 export default ReportsFragment;

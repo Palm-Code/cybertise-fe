@@ -1,14 +1,13 @@
+"use client";
+import { useGetAssetType } from "@/core/react-query/client/useGetAssetType";
 import dynamic from "next/dynamic";
-import { programsCardData } from "../../constants/programs";
 
 const Programs = dynamic(
-  () => import("@/feature/hacker/components/programs/Programs.component"),
-  {
-    ssr: false,
-  }
+  () => import("@/feature/hacker/components/programs/Programs.component")
 );
 
 const ProgramsFragment = () => {
-  return <Programs data={programsCardData} />;
+  const { data: assetType } = useGetAssetType();
+  return <Programs assetTypes={assetType ?? []} />;
 };
 export default ProgramsFragment;

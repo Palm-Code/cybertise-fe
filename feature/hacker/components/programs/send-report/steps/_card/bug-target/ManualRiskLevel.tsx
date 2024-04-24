@@ -3,15 +3,25 @@ import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
 import { Slider } from "@/core/ui/components/slider/slider";
 import { I_CsvssCalculatorProps } from "./CsvssCalculator";
 import { motion } from "framer-motion";
+import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { useFormContext } from "react-hook-form";
 
 const ManualRiskLevel = ({
   isManualRisk,
   onChangeManualRisk,
 }: I_CsvssCalculatorProps) => {
+  const {
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext<SendReportRequestType>();
+
+  const forms = getValues();
+
   return (
     <Card
       className={cn(
-        "rounded-md bg-neutral-light-90 px-4 py-4.5 dark:bg-neutral-dark-90",
+        "rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90",
         "_flexbox__col__start__start gap-4 transition-all duration-100"
       )}
     >
@@ -30,35 +40,52 @@ const ManualRiskLevel = ({
             Set Risk Level Manually
           </Typography>
         </div>
-        {isManualRisk && <Badge variant="default">50 (Medium Risk)</Badge>}
+        {isManualRisk && (
+          <Badge variant="default">
+            {forms.risk_level} (
+            {forms.risk_level === 0
+              ? "No"
+              : forms.risk_level < 4
+                ? "Low"
+                : forms.risk_level >= 4 && forms.risk_level < 7
+                  ? "Medium"
+                  : "High"}{" "}
+            Risk)
+          </Badge>
+        )}
       </div>
       {isManualRisk && (
         <motion.div
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="_flexbox__col__start__start w-full gap-2"
+          className="_flexbox__col__start__start w-full gap-3"
         >
-          <div className="grid w-full grid-cols-10 place-items-center gap-4">
-            {Array.from({ length: 10 }).map((_, idx) => (
+          <div className="grid w-full grid-cols-11 place-items-start gap-4">
+            {Array.from({ length: 11 }).map((_, idx) => (
               <Typography
                 key={`risk-level-${idx}`}
                 variant="p"
                 affects="normal"
                 className={cn(
-                  idx + 1 === 5
+                  "ml-4 h-10",
+                  idx === forms.risk_level
                     ? "text-2xl font-extrabold"
                     : "text-neutral-light-50 dark:text-neutral-dark-50"
                 )}
               >
-                {idx + 1}
+                {idx}
               </Typography>
             ))}
             <Slider
-              defaultValue={[50]}
-              max={100}
+              defaultValue={[0]}
+              value={[forms.risk_level]}
+              onValueChange={(v) =>
+                setValue("risk_level", v[0], { shouldValidate: true })
+              }
+              max={10}
               step={1}
-              className="col-span-10 w-full"
+              className="col-span-11 w-full"
             />
           </div>
         </motion.div>

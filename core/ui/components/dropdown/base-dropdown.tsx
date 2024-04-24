@@ -11,7 +11,7 @@ import Typography from "../typography/typography";
 interface I_BaseDropdownProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
-  value: string;
+  value?: string;
   label?: string;
 }
 

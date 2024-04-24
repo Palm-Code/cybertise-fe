@@ -25,7 +25,7 @@ const Scope = () => {
               className="_flexbox__col__start__start w-full gap-6 md:hidden"
               key={`collaborators-data-${idx}`}
             >
-              <Badge variant={item.asset_type}>{item.asset_type}</Badge>
+              <Badge variant={item.asset_type as any}>{item.asset_type}</Badge>
               <div className="mt-2 grid w-full max-w-xl grid-rows-2 gap-2">
                 <Typography
                   variant="p"

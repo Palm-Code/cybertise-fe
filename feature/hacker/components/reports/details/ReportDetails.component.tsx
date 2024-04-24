@@ -13,8 +13,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/hacker/containers";
+import { useGetChatListItem } from "@/feature/hacker/query/client/useGetChatListItem";
+import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/reports";
+import { useRouter } from "next/navigation";
 
-const ReportDetails = () => {
+const ReportDetails = ({ id }: { id: string }) => {
+  const { back } = useRouter();
+  const store = useReportDetailsParamStore();
+  const { data } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
 
@@ -69,7 +75,7 @@ const ReportDetails = () => {
             </div>
           </div>
           <div className="px-6 py-8">
-            <ChatBubble />
+            <ChatBubble data={data?.data} />
           </div>
         </div>
       </Mobile>
@@ -88,9 +94,12 @@ const ReportDetails = () => {
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
-                <Link href="/reports">
-                  <MoveLeft width={24} height={24} />
-                </Link>
+                <MoveLeft
+                  width={24}
+                  height={24}
+                  className="cursor-pointer"
+                  onClick={back}
+                />
                 <Typography variant="h5" weight="bold">
                   Report Title
                 </Typography>
@@ -111,7 +120,7 @@ const ReportDetails = () => {
               ></div>
             </AnimationWrapper>
           </div>
-          <ChatBubble />
+          <ChatBubble data={data?.data} />
         </div>
         <Tiptap
           description=""

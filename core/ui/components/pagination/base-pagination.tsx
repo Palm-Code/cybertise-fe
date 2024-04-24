@@ -2,7 +2,8 @@ import * as React from "react";
 
 import { cn } from "@/core/lib/utils";
 import { MoreHorizontalIcon } from "lucide-react";
-import { BaseButtonProps, buttonVariants } from "../button/base-button";
+import { BaseButtonProps } from "../button/base-button";
+import Button, { ButtonProps } from "../button/button";
 
 export interface I_PaginationProps {
   variant: "hacker" | "company" | "mediator";
@@ -50,35 +51,33 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<BaseButtonProps, "size"> &
-  React.ComponentProps<"a"> &
+  className?: string;
+  children?: React.ReactNode;
+} & React.ComponentProps<"button"> &
+  Pick<BaseButtonProps, "size"> &
   I_PaginationProps;
 
 const PaginationLink = ({
   className,
   isActive,
-  size = "icon",
-  variant = "hacker",
+  children,
+  size = "default",
+  variant,
   ...props
 }: PaginationLinkProps) => (
-  <a
-    aria-current={isActive ? "page" : undefined}
-    className={cn(
-      buttonVariants({
-        variant: isActive ? `primary-${variant}` : `outline-${variant}`,
-        radius: "none",
-        size,
-      }),
-      className
-    )}
+  <Button
+    variant={isActive ? `primary-${variant}` : `outline-${variant}`}
+    className={cn("aspect-square h-9 rounded-lg p-2.5", className)}
     {...props}
-  />
+  >
+    {children}
+  </Button>
 );
 PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = ({
   className,
-  variant = "hacker",
+  variant: variant = "hacker",
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
@@ -99,7 +98,7 @@ PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
   className,
-  variant = "hacker",
+  variant: variant = "hacker",
   ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink

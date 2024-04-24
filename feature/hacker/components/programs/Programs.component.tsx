@@ -14,21 +14,76 @@ import {
   ProgramsGridView,
   ProgramsTableView,
 } from "../../containers";
-import { ProgramCardType } from "@/types/admin/programs";
 import { tableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
+import { useGetProgramList } from "../../query/client/useGetProgramList";
+import { useProgramListParamStore } from "../../zustand/store/programs";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 
-const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
+interface I_ProgramsProps {
+  assetTypes: I_GetAssetTypeSuccessResponse["data"];
+}
+
+const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
+  const store = useProgramListParamStore();
+  const { payload, setPayload } = store;
+  const {
+    data: programList,
+    isLoading,
+    isFetching,
+    isRefetching,
+    refetch: refetchProgramList,
+  } = useGetProgramList(payload);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <ProgramsTableView columns={tableColumns} data={data} />,
-    card: <ProgramsCardView data={data} />,
-    grid: <ProgramsGridView data={data} />,
+    table: (
+      <ProgramsTableView
+        isLoading={isLoading || isFetching}
+        columns={tableColumns}
+        data={programList?.data}
+      />
+    ),
+    card: (
+      <ProgramsCardView
+        isLoading={isLoading || isFetching}
+        data={programList?.data}
+      />
+    ),
+    grid: (
+      <ProgramsGridView
+        isLoading={isLoading || isFetching}
+        data={programList?.data}
+      />
+    ),
+  };
+
+  const submitChange = (type: "type" | "has_asset_type", value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]:
+            value === "all"
+              ? undefined
+              : type === "type"
+                ? value
+                : assetTypes?.find((v) => v.value === value)?.id,
+        },
+      },
+    });
   };
 
   return (
@@ -48,19 +103,22 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
               <SearchInput variant="hacker" placeholder="Search for programs" />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
-              <DashboardFilter variant="hacker" />
+              <DashboardFilter variant="hacker" store={store} />
               <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
-                  value="Sort By"
+                  value={payload.params?.sort}
                   options={filterItems}
-                  onValueChange={() => {}}
+                  onValueChange={(v) => useClickSort(v, store)}
                 />
               </div>
             </div>
           </div>
-          {data.length! ? (
-            <ProgramsGridView data={data} />
+          {programList && programList.data.length! ? (
+            <ProgramsGridView
+              isLoading={isLoading || isFetching}
+              data={programList?.data}
+            />
           ) : (
             <EmptyState
               variant="hacker"
@@ -89,13 +147,50 @@ const Dashboard = ({ data }: { data: ProgramCardType[] }) => {
             <Typography variant="h6" weight="bold">
               Search around 400+ programs
             </Typography>
-            <SearchInput variant="hacker" placeholder="Search for programs" />
-            <ProgramsFilterDropdown />
+            <SearchInput
+              variant="hacker"
+              placeholder="Search for programs"
+              value={payload.params?.search}
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetchProgramList)
+              }
+              loadingSubmit={isLoading || isRefetching}
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetchProgramList)
+              }
+            />
+            <ProgramsFilterDropdown
+              payload={payload}
+              assetTypeOptions={assetTypes}
+              onValueChangeType={(v) => submitChange("type", v)}
+              onValueChangeAssetType={(v) => submitChange("has_asset_type", v)}
+            />
           </div>
-          {data.length! ? (
+          {programList && programList.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="hacker" />
+              <Pagination
+                variant="hacker"
+                active={payload.params?.page?.size}
+                meta={programList?.meta}
+                activePage={payload.params?.page?.number}
+                onClickPrevious={() =>
+                  useClickPaginate(payload?.params?.page?.number! - 1, store)
+                }
+                onClickNext={() =>
+                  useClickPaginate(payload?.params?.page?.number! + 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) =>
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: { ...payload.params?.page!, size: v },
+                    },
+                  })
+                }
+              />
             </>
           ) : (
             <EmptyState

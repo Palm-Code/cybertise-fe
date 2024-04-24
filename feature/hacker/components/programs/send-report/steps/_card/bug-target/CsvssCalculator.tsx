@@ -14,7 +14,7 @@ const CsvssCalculator = ({
   return (
     <Card
       className={cn(
-        "rounded-md px-4 py-4.5 transition-all duration-100",
+        "rounded-md transition-all duration-100 xl:px-4 xl:py-4.5",
         !isManualRisk
           ? "bg-neutral-light-80 dark:bg-neutral-dark-80 "
           : "bg-neutral-light-90 dark:bg-neutral-dark-90"
@@ -44,7 +44,7 @@ const CsvssCalculator = ({
               <Card
                 key={`card-csvss-${idx}`}
                 className={cn(
-                  "_flexbox__col__start__start gap-4 rounded-md  px-4 py-4.5",
+                  "_flexbox__col__start__start gap-4 rounded-md  xl:px-4 xl:py-4.5",
                   "transition-colors duration-100",
                   isManualRisk
                     ? "bg-neutral-light-100 dark:bg-neutral-dark-100"

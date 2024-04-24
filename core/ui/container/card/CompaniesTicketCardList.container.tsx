@@ -7,8 +7,6 @@ import {
   Typography,
 } from "../../components";
 import { cn } from "@/core/lib/utils";
-import Link from "next/link";
-import { buttonVariants } from "../../components/button/base-button";
 import { VRPCardType } from "@/types/admin/vrp-launchpad";
 import { Desktop, Mobile } from "../../layout";
 
@@ -52,7 +50,10 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_type
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                        <Badge
+                          key={`asset_types-${idx}`}
+                          variant={item.value as any}
+                        >
                           {item.label}
                         </Badge>
                       ))
@@ -117,7 +118,10 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_type
                       ?.map((item, idx) => (
-                        <Badge key={`asset_types-${idx}`} variant={item.value}>
+                        <Badge
+                          key={`asset_types-${idx}`}
+                          variant={item.value as any}
+                        >
                           {item.label}
                         </Badge>
                       ))
