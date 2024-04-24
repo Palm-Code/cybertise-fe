@@ -14,7 +14,7 @@ export function formatDateToAgo(dateString: string): string {
   const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
 
   if (diffHours < 24) {
-    return `${diffHours}h}`;
+    return `${diffHours}h`;
   } else if (diffDays < 30) {
     return `${diffDays}d`;
   } else if (diffMonths < 12) {
@@ -40,7 +40,7 @@ export function formatDateToAgo2(dateString: string): string {
   const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
 
   if (diffHours < 24) {
-    return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago}`;
+    return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
   } else if (diffDays < 30) {
     return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
   } else if (diffMonths < 12) {

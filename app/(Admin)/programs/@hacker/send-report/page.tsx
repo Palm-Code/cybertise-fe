@@ -5,7 +5,7 @@ const SendReportPage = ({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
-  const { company } = searchParams ?? { company: "" };
-  return <SendReportFragment id={company as string} />;
+  const { programs } = searchParams ?? { programs: "" };
+  return <SendReportFragment id={programs as string} />;
 };
 export default SendReportPage;

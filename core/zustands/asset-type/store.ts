@@ -1,23 +1,23 @@
 import { StateCreator, create } from "zustand";
 export interface AssetTypeSlice {
-  data: {
+  assetType: {
     id: string;
     value: string;
     label: string;
   }[];
-  setValue: (value: AssetTypeSlice["data"]) => void;
+  setAssetType: (value: AssetTypeSlice["assetType"]) => void;
 }
 
-const initialState: AssetTypeSlice = {
-  data: [
+export const initialState: AssetTypeSlice = {
+  assetType: [
     {
       id: "",
       value: "all",
       label: "All type",
     },
   ],
-  setValue: (value) => {
-    initialState.data = value;
+  setAssetType: (value) => {
+    initialState.assetType = value;
   },
 };
 
@@ -28,11 +28,11 @@ const createAssetTypeSlice: StateCreator<
   AssetTypeSlice
 > = (set) => ({
   ...initialState,
-  setValue: (value: AssetTypeSlice["data"]) => {
-    const newValue = [...initialState.data, ...value];
+  setAssetType: (value: AssetTypeSlice["assetType"]) => {
+    const newValue = [...initialState.assetType, ...value];
     set((state) => ({
       ...state,
-      data: newValue,
+      assetType: newValue,
     }));
   },
 });

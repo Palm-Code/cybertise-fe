@@ -54,7 +54,7 @@ const SignInComponent = () => {
         const { user } = await login(data);
         const cookies = new Cookies();
         cookies.set("token", user.token, { path: "/" });
-        push(callbackUrl || "/");
+        push(callbackUrl || "/dashboard");
       }, 100);
     } catch (error) {
       setIsSuccess(null);

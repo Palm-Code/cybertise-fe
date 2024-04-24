@@ -39,7 +39,7 @@ export type CsvssCalculatorType = {
   title: string;
   items: {
     label: string;
-    value: string;
+    value: number;
   }[];
 };
 

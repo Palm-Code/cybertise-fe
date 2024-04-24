@@ -35,7 +35,7 @@ export async function login(formData: FormLoginSchema) {
       : formData.email.includes("@company.com")
         ? "company"
         : "hacker",
-    token: "1|QA0V66U747gR7JLQOXzWf9KtdGfRWCh0LVOs7ujO",
+    token: "1|KuqjwG8cC2XyatakotMS0gfokqy0l4fLevpX4bsW",
   };
 
   // Create the session

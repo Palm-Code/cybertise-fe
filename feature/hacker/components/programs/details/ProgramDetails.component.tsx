@@ -4,14 +4,14 @@ import VRPHeroCard from "./_card/VRPHeroCard";
 import { SingleVrpContainer } from "@/feature/hacker/containers";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useProgramDetailsParamStore } from "@/feature/hacker/zustand/store/programs/program_details";
-import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import { useGetAssetType } from "@/core/react-query/client/useGetAssetType";
 
 interface I_ProgramDetailsProps {
   id: string;
-  assetTypes?: I_GetAssetTypeSuccessResponse["data"];
 }
 
-const ProgramDetails = ({ id, assetTypes }: I_ProgramDetailsProps) => {
+const ProgramDetails = ({ id }: I_ProgramDetailsProps) => {
+  const { data: assetTypes } = useGetAssetType();
   const store = useProgramDetailsParamStore();
   const { data: programDetails } = useGetProgramDetails(store.payload, id);
 

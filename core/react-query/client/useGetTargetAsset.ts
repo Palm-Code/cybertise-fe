@@ -6,7 +6,6 @@ import { fetchGetTargetAsset } from "@/core/services/common/fetchGetTargetAsset"
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetTargetAsset = (payload?: I_GetParamsPayload) => {
-  console.log({ payload });
   const query = useQuery<I_GetTargetAssetSuccessResponse, I_GetErrorResponse>({
     queryKey: [
       "getTargetAsset",

@@ -1,9 +1,9 @@
 import { I_GetParamsPayload } from "../models/common";
 
-type State = {
+export type State = {
   payload: I_GetParamsPayload;
 };
-type Actions = {
+export type Actions = {
   setPayload: (payload: I_GetParamsPayload) => void;
 };
 

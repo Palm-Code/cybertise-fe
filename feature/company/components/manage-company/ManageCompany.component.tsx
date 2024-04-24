@@ -23,7 +23,7 @@ const ManageCompany = () => {
     activity_logs: <ActivityLogs />,
   };
   return (
-    <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10">
+    <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10 xl:pb-28 xl:pt-12">
       <CompaniesDetailHeroCard id="" />
       <div className="_flexbox__col__start__start w-full gap-6">
         <Tab
@@ -32,7 +32,7 @@ const ManageCompany = () => {
           onValueChange={(v) => setActive(manageCompanyTabsItemEnums[v])}
         />
         <AnimationWrapper key={active}>
-          <Card className="w-full !bg-transparent pt-2 xl:p-8">
+          <Card className="w-full bg-transparent pt-2 xl:bg-background-main-light xl:p-8 dark:bg-transparent dark:xl:bg-background-main-dark">
             {tabs[active]}
           </Card>
         </AnimationWrapper>

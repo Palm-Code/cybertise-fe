@@ -86,7 +86,7 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
                   Company Website
                 </Typography>
                 <Link
-                  href={data.company?.website as string}
+                  href={data.company?.website ?? "#"}
                   target="_blank"
                   className={cn(
                     typographyVariants({ variant: "p", affects: "small" })
@@ -216,7 +216,7 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
                       Company Website
                     </Typography>
                     <Link
-                      href={data.company?.website as string}
+                      href={data.company?.website ?? "#"}
                       target="_blank"
                       className={cn(
                         typographyVariants({ variant: "p", affects: "small" }),

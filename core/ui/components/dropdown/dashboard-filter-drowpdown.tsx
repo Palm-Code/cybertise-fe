@@ -13,7 +13,7 @@ import { StoreType } from "@/core/hooks/types";
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
   onValueChange?: (value: string, type: keyof typeof ChatFilter) => void;
-  store: StoreType;
+  store?: StoreType;
 }
 
 const DashboardFilter = ({
@@ -21,6 +21,7 @@ const DashboardFilter = ({
   onValueChange = () => {},
   store,
 }: IDashboardFilterProps) => {
+  if (!store) return null;
   const { payload } = store;
   return (
     <>

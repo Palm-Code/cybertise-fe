@@ -1,6 +1,5 @@
 "use client";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
-import { I_AssetType } from "@/core/models/hacker/programs";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { TabsItem } from "@/enums";
 import Tab from "@/feature/hacker/components/programs/details/_tab/Tab";
@@ -8,10 +7,7 @@ import RnP from "@/feature/hacker/components/programs/details/_tab/_content/RnP"
 import Scope from "@/feature/hacker/components/programs/details/_tab/_content/Scope";
 import Thanks from "@/feature/hacker/components/programs/details/_tab/_content/Thanks";
 import UpdateList from "@/feature/hacker/components/programs/details/_tab/_content/Update";
-import {
-  programDetailTabItems,
-  updates,
-} from "@/feature/hacker/constants/programs";
+import { programDetailTabItems } from "@/feature/hacker/constants/programs";
 import { useState } from "react";
 
 const SingleVrp = ({
@@ -35,7 +31,7 @@ const SingleVrp = ({
         items={programDetailTabItems}
         active={active}
         onValueChange={(v) => setActive(TabsItem[v])}
-        updates={updates.length}
+        updates={data?.latest_updates?.length}
       />
       <div className="w-full pb-12">{tabs[active]}</div>
     </>

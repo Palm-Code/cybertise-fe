@@ -1,9 +1,10 @@
 import { BASE_URL } from "@/utils/config";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { getAssetTypeAPIURL } from "@/core/routes/common";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import axiosInterceptorInstance from "../interceptor/axiosInterceptor";
 
-export const fetchGetAssetType = async (token: string) => {
+export const fetchGetAssetType = async () => {
   const params = {
     fields: {
       asset_types: "id,value",
@@ -14,12 +15,8 @@ export const fetchGetAssetType = async (token: string) => {
     },
   };
   const url = BASE_URL + getAssetTypeAPIURL();
-  return await axios
+  return await axiosInterceptorInstance
     .get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": true,
-      },
       params: params?.fields,
     })
     .then((res: AxiosResponse<I_GetAssetTypeSuccessResponse>) => {

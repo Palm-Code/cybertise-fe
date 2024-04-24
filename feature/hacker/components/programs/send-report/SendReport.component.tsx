@@ -18,15 +18,42 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import ModalCloseSendReport from "../_dialog/ModalCloseSendReport";
 import ModalSuccessSubmit from "../_dialog/ModalSuccessSubmit";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  sendReportFormSchema,
+  SendReportRequestType,
+} from "@/core/models/hacker/programs/post_send_report";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
+import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
 
 interface I_SendReportProps {
   id: string;
+  defaultData?: {
+    assetType?: I_GetAssetTypeSuccessResponse["data"];
+  };
 }
 
-const SendReport = ({ id }: I_SendReportProps) => {
+const SendReport = ({ id, defaultData }: I_SendReportProps) => {
+  const { data } = useGetProgramDetails(
+    {
+      params: {
+        include: "targetAssets",
+      },
+    },
+    id
+  );
+  const { data: vulnerabilityType } = useGetVulnerabilityType();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
-  const method = useForm();
+  const method = useForm<SendReportRequestType>({
+    resolver: zodResolver(sendReportFormSchema),
+    defaultValues: {
+      program_id: id,
+      risk_level: 10,
+    },
+  });
+
   const {
     step,
     steps,
@@ -43,7 +70,15 @@ const SendReport = ({ id }: I_SendReportProps) => {
       key: "brief",
     },
     {
-      element: <BugTarget />,
+      element: (
+        <BugTarget
+          defaultData={{
+            assetType: defaultData?.assetType,
+            targetAssets: data?.data.target_assets,
+            vulnerabilityType: vulnerabilityType,
+          }}
+        />
+      ),
       key: "bugTarget",
     },
     {
@@ -61,6 +96,7 @@ const SendReport = ({ id }: I_SendReportProps) => {
   ]);
 
   const onSubmitForm = () => {
+    console.log("triggered");
     setSuccessSubmit(true);
   };
 
@@ -78,7 +114,7 @@ const SendReport = ({ id }: I_SendReportProps) => {
               "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
             )}
           >
-            <Card className="rounded-2xl rounded-b-none px-8 py-6">
+            <Card className="rounded-2xl rounded-b-none xl:px-8 xl:py-6">
               <div
                 className={cn(
                   typographyVariants({ variant: "h5", weight: "bold" }),
@@ -106,7 +142,7 @@ const SendReport = ({ id }: I_SendReportProps) => {
                 <Card
                   className={cn(
                     "_flexbox__col__start__start h-full gap-6",
-                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8",
+                    "overflow-y-auto rounded-b-xl rounded-t-none xl:px-8 xl:pb-12 xl:pt-8",
                     isLastStep &&
                       "bg-neutral-light-100 dark:bg-neutral-dark-100"
                   )}
@@ -134,7 +170,7 @@ const SendReport = ({ id }: I_SendReportProps) => {
                     className={cn(
                       "_flexbox__col__start__start w-full gap-8",
                       "bg-neutral-light-100 dark:bg-neutral-dark-100",
-                      isLastStep ? "p-0" : "p-7"
+                      isLastStep ? "xl:p-0" : "xl:p-7"
                     )}
                   >
                     {step}

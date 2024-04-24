@@ -28,7 +28,7 @@ const VrpManagement = () => {
         </div>
       </Mobile>
       <Desktop>
-        <div className="_flexbox__col__start__start w-full gap-10 pt-12">
+        <div className="_flexbox__col__start__start w-full gap-10">
           <Typography variant="h4" weight="bold">
             VRP Management
           </Typography>

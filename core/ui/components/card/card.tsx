@@ -8,6 +8,7 @@ interface I_CardProps {
   className?: string;
   isButton?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }
 const Card = ({
   children,
@@ -16,6 +17,7 @@ const Card = ({
   href,
   isButton = false,
   onClick,
+  disabled = false,
   ...props
 }: I_CardProps) => {
   if (isClickable) {
@@ -46,6 +48,7 @@ const Card = ({
         )}
         type="button"
         onClick={onClick}
+        disabled={disabled}
         {...props}
       >
         {children}

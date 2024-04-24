@@ -95,6 +95,7 @@ const Overview = () => {
               <Button
                 asLink
                 variant="tertiary-company"
+                className="py-0"
                 prefixIcon={<FilePenLine />}
                 href={`/vrp-launchpad/${1}`}
               >

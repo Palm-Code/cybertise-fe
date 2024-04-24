@@ -42,7 +42,7 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
         </Card>
       </Mobile>
       <Desktop>
-        <Card className="rounded-2xl rounded-b-none px-8 py-6 pt-9">
+        <Card className="rounded-2xl rounded-b-none xl:px-8 xl:py-6">
           <div className="grid w-fit grid-flow-col gap-[42px]">
             {items.map((item) => (
               <Typography

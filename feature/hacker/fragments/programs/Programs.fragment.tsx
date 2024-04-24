@@ -1,15 +1,13 @@
-import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+"use client";
+import { useGetAssetType } from "@/core/react-query/client/useGetAssetType";
 import dynamic from "next/dynamic";
 
 const Programs = dynamic(
   () => import("@/feature/hacker/components/programs/Programs.component")
 );
 
-const ProgramsFragment = async ({
-  data,
-}: {
-  data: I_GetAssetTypeSuccessResponse["data"];
-}) => {
-  return <Programs assetTypes={data} />;
+const ProgramsFragment = () => {
+  const { data: assetType } = useGetAssetType();
+  return <Programs assetTypes={assetType ?? []} />;
 };
 export default ProgramsFragment;

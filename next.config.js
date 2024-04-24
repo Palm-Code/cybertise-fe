@@ -20,6 +20,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cybertise-backend-mmppce625q-de.a.run.app",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   rewrites: async () => {
