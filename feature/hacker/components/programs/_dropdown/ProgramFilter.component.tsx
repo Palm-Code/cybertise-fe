@@ -24,7 +24,7 @@ const ProgramsFilterDropdown = ({
     <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
       <BaseDropdown
         label="Scope"
-        value={payload?.params?.filter?.type}
+        value={payload?.params?.filter?.type as string}
         options={filterItems.type}
         onValueChange={onValueChangeType}
       />
