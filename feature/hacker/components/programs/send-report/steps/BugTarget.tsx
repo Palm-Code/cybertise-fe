@@ -36,8 +36,6 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
   const forms = getValues();
   const [manualRisk, setManualRisk] = useState<boolean>(true);
 
-  console.log(errors);
-
   return (
     <>
       <Card className="rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90">
@@ -81,7 +79,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           </div>
           <Card
             className={cn(
-              "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl xl:px-6 xl:py-4",
+              "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl xl:px-6 xl:py-0",
               "border border-transparent transition-colors duration-100",
               "bg-neutral-light-100 hover:border-lime-normal-light dark:bg-neutral-dark-100 dark:hover:border-lime-normal-dark"
             )}
@@ -103,20 +101,20 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             <AssetType
               label="Asset type"
               value={
-                defaultData?.assetType
+                defaultData?.assetType && forms.custom_ta_asset_type_id
                   ? (defaultData.assetType.find(
                       (item) => item.id === forms.custom_ta_asset_type_id
                     )?.value as string)
-                  : "all"
+                  : "url"
               }
-              options={defaultData?.assetType ?? []}
+              options={defaultData?.assetType?.slice(1) ?? []}
               onValueChange={(v) => {
                 setValue("target_asset_id", undefined, {
                   shouldValidate: true,
                 });
                 setValue(
                   "custom_ta_asset_type_id",
-                  defaultData?.assetType?.find((item) => item.label === v)?.id,
+                  defaultData?.assetType?.find((item) => item.value === v)?.id,
                   { shouldValidate: true }
                 );
               }}
@@ -129,13 +127,12 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
         value={
           defaultData?.vulnerabilityType?.find(
             (item) => item.id === forms.vulnerability_type_id
-          )?.label as string
+          )?.value as string
         }
         options={defaultData?.vulnerabilityType ?? []}
         onValueChange={(v) => {
-          console.log(v, "kereset juga?");
           const vulnerability_type_id = defaultData?.vulnerabilityType?.find(
-            (item) => item.label === v
+            (item) => item.value === v
           )?.id;
 
           setValue("vulnerability_type_id", vulnerability_type_id as string, {

@@ -84,7 +84,7 @@ const ManualRiskLevel = ({
                 setValue("risk_level", v[0], { shouldValidate: true })
               }
               max={10}
-              step={1}
+              step={0.1}
               className="col-span-11 w-full"
             />
           </div>

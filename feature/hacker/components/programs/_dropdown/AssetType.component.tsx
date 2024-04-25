@@ -26,6 +26,8 @@ const AssetType = ({
     (option) => option.value === value
   )?.label;
 
+  const badgeVariants = options.find((option) => option.value === value)?.value;
+
   return (
     <Select onValueChange={(v) => onValueChange(v)}>
       <SelectTrigger className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0">
@@ -37,16 +39,7 @@ const AssetType = ({
           {label}
         </Typography>
         {inputValueLabel && (
-          <Badge
-            variant={
-              badgeVariants[
-                options.find((option) => option.value === value)
-                  ?.value as keyof typeof badgeVariants
-              ]
-            }
-          >
-            {inputValueLabel}
-          </Badge>
+          <Badge variant={badgeVariants as any}>{inputValueLabel}</Badge>
         )}
       </SelectTrigger>
       <SelectContent
@@ -64,7 +57,7 @@ const AssetType = ({
                 className="!w-fit rounded-full !p-0"
                 value={option.value as string}
                 key={`asset-type-${idx}`}
-                // noCheck
+                noCheck
               >
                 <Badge variant={option.value as keyof typeof badgeVariants}>
                   {option.label}

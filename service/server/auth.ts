@@ -39,7 +39,7 @@ export async function login(formData: FormLoginSchema) {
   };
 
   // Create the session
-  const expires = new Date(Date.now() + 36000 * 1000);
+  const expires = new Date(Date.now() + 3600000 * 1000);
   const session = await encrypt({ user, expires });
   cookies().set("session", session, { expires, httpOnly: true });
 
@@ -63,7 +63,7 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 36000 * 1000);
+  parsed.expires = new Date(Date.now() + 3600000 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",

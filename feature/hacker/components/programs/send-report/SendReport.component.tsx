@@ -26,6 +26,7 @@ import {
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
+import { Form } from "@/core/ui/components/form/form";
 
 interface I_SendReportProps {
   id: string;
@@ -50,7 +51,8 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     resolver: zodResolver(sendReportFormSchema),
     defaultValues: {
       program_id: id,
-      risk_level: 10,
+      risk_level: 0,
+      custom_ta_asset_type_id: undefined,
     },
   });
 
@@ -102,10 +104,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
 
   return (
     <>
-      <FormProvider {...method}>
+      <Form {...method}>
         <div ref={containerRef}></div>
-        <form
-          onSubmit={method.handleSubmit(onSubmitForm)}
+        <div
+          // onSubmit={method.handleSubmit(onSubmitForm)}
           className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl"
         >
           <div
@@ -181,7 +183,11 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                         </Button>
                       ) : null}
                       {isLastStep ? (
-                        <Button type="submit" variant="primary-hacker">
+                        <Button
+                          type="button"
+                          variant="primary-hacker"
+                          onClick={() => onSubmitForm()}
+                        >
                           Send Report
                         </Button>
                       ) : (
@@ -208,8 +214,8 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               />
             </div>
           </div>
-        </form>
-      </FormProvider>
+        </div>
+      </Form>
       <ModalCloseSendReport
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
