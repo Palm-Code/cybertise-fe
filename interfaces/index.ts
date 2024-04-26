@@ -38,5 +38,5 @@ export interface FileWithUrl {
   url: string;
   size: number;
   file_id?: string;
-  error?: boolean | undefined;
+  error?: boolean;
 }

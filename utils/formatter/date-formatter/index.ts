@@ -49,3 +49,17 @@ export function formatDateToAgo2(dateString: string): string {
     return `${diffYears} year${diffYears > 1 ? "s" : ""} ago`;
   }
 }
+
+export function formatTimestamp(timestamp: string): string {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+  const hours = ("0" + date.getHours()).slice(-2);
+  const minutes = ("0" + date.getMinutes()).slice(-2);
+
+  // Construct the formatted timestamp string
+  const formattedTimestamp = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+  return formattedTimestamp;
+}

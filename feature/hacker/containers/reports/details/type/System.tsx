@@ -1,5 +1,6 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
 import { Avatar, Badge, Separator, Typography } from "@/core/ui/components";
+import { formatTimestamp } from "@/utils/formatter/date-formatter";
 
 const System = ({
   data,
@@ -32,7 +33,7 @@ const System = ({
           weight="medium"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          {data?.updated_at.toString().split("T")[0]}
+          {formatTimestamp(data?.updated_at ?? "")}
         </Typography>
       </div>
     </div>

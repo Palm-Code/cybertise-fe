@@ -14,7 +14,7 @@ import html from "highlight.js/lib/languages/xml";
 import typescript from "highlight.js/lib/languages/typescript";
 import { common, createLowlight } from "lowlight";
 import { cn } from "@/core/lib/utils";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Tooltip from "../tooltip/tooltip";
 import { Info, Paperclip, Send, X } from "lucide-react";
 import Typography from "../typography/typography";
@@ -68,7 +68,7 @@ const Tiptap = ({
         validate: (href) => /^https?:\/\//.test(href),
       }),
     ],
-    content: description,
+    content: description && description !== "<p></p>" ? description : "",
     editorProps: {
       attributes: {
         class: cn(
@@ -82,7 +82,8 @@ const Tiptap = ({
     },
     autofocus: true,
     onUpdate: ({ editor }) => {
-      onChangeValue(editor.getHTML());
+      const value = editor.isEmpty ? "" : editor.getHTML();
+      onChangeValue(value);
     },
     onFocus: () => {
       setIsFocused(true);
@@ -130,6 +131,7 @@ const Tiptap = ({
                 Send Attachment
               </Button>
               <Button
+                disabled={!description}
                 postFixIcon={<Send />}
                 variant={`primary-${variant}`}
                 onClick={onClickSendMessage}
@@ -179,6 +181,7 @@ const Tiptap = ({
             <X
               className="h-6 w-6 cursor-pointer"
               onClick={() => {
+                editor?.commands.clearContent();
                 onClearInput();
               }}
             />
