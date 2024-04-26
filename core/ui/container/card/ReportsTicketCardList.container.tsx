@@ -21,8 +21,12 @@ const TicketCard = ({
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   return (
     <>
-      <Mobile>
-        <Card href={`/reports/${props.id}`} isClickable={!isMediator}>
+      <Mobile className="h-full">
+        <Card
+          href={`/reports/${props.id}`}
+          isClickable={!isMediator}
+          className="h-full"
+        >
           {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
