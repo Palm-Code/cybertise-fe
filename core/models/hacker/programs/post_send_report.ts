@@ -11,8 +11,7 @@ export interface I_PostSendReportRequest {
     risk_level: number;
     ticket_type: string;
     program_id?: string;
-    "attachment[0]"?: string;
-    "attachment[1]"?: string;
+    attachment?: string[];
     custom_ta_asset_type_id?: string;
     custom_ta_value?: string;
   };
@@ -27,16 +26,26 @@ export const sendReportFormSchema = z.object({
     .string()
     .min(1, { message: "Target asset is required" })
     .optional(),
-  vulnerability_type_id: z
+  vulnerabiity_type_id: z
     .string()
     .min(1, { message: "Vulnerability type is required" }),
   risk_level: z.number().min(1, { message: "Risk level is required" }),
   ticket_type: z.string().min(1, { message: "Ticket type is required" }),
   program_id: z.string().optional(),
-  "attachment[0]": z.string().optional(),
-  "attachment[1]": z.string().optional(),
+  attachments: z.array(z.string()).optional(),
   custom_ta_asset_type_id: z.string().optional(),
   custom_ta_value: z.string().optional(),
+  files: z
+    .array(
+      z.object({
+        name: z.string(),
+        url: z.string(),
+        size: z.number(),
+        file_id: z.string().optional(),
+        error: z.boolean().optional(),
+      })
+    )
+    .optional(),
 });
 
 export type SendReportRequestType = z.infer<typeof sendReportFormSchema>;

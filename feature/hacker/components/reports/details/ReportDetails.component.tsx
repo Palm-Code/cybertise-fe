@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { MoveLeft } from "lucide-react";
+import { Loader2, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
@@ -20,15 +20,28 @@ import { useRouter } from "next/navigation";
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data } = useGetChatListItem(store.payload, id);
+  const { data, isLoading, isFetching } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
+  const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollIntoView({ behavior: "auto" });
+    if (chatRef.current && data) {
+      chatRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, []);
+  }, [isLoading, isFetching]);
+
+  if (isLoading || isFetching) {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <Loader2
+          className="m-auto animate-spin text-lime-normal-light dark:text-lime-normal-dark"
+          width={64}
+          height={64}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -52,16 +65,25 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Link>
                 <div className="grid gap-4">
                   <Typography variant="h5" weight="bold">
-                    Report Title
+                    {data?.data[0].chat_ticket.title}
                   </Typography>
-                  <Badge variant={"medium"}>Medium</Badge>
+                  <Badge
+                    variant={
+                      data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                    }
+                  >
+                    {`${data?.data[0].chat_ticket.risk_level} | ${data?.data[0].chat_ticket.risk_level_category}`}
+                  </Badge>
                 </div>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator variant="warning" />
-                <Typography variant="p" affects="small" weight="medium">
-                  Status
-                </Typography>
+                <Indicator
+                  variant={
+                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
+                  }
+                >
+                  {data?.data[0].chat_ticket.status}
+                </Indicator>
               </div>
             </Card>
             <div
@@ -75,7 +97,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             </div>
           </div>
           <div className="px-6 py-8">
-            <ChatBubble data={data?.data} />
+            <ChatBubble data={data?.data ?? []} />
           </div>
         </div>
       </Mobile>
@@ -101,15 +123,24 @@ const ReportDetails = ({ id }: { id: string }) => {
                   onClick={back}
                 />
                 <Typography variant="h5" weight="bold">
-                  Report Title
+                  {data?.data[0].chat_ticket.title}
                 </Typography>
-                <Badge variant={"medium"}>Medium</Badge>
+                <Badge
+                  variant={
+                    data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                  }
+                >
+                  {`${data?.data[0].chat_ticket.risk_level} | ${data?.data[0].chat_ticket.risk_level_category}`}
+                </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator variant="warning" />
-                <Typography variant="p" affects="small" weight="medium">
-                  Status
-                </Typography>
+                <Indicator
+                  variant={
+                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
+                  }
+                >
+                  {data?.data[0].chat_ticket.status}
+                </Indicator>
               </div>
             </Card>
             <AnimationWrapper>
@@ -120,11 +151,13 @@ const ReportDetails = ({ id }: { id: string }) => {
               ></div>
             </AnimationWrapper>
           </div>
-          <ChatBubble data={data?.data} />
+          <ChatBubble data={data?.data ?? []} />
         </div>
         <Tiptap
-          description=""
-          onChangeValue={() => {}}
+          description={description}
+          onChangeValue={(v) => {
+            setDescription(v);
+          }}
           variant="hacker"
           isChat
           onClickSendAttachment={() => setOpenAttachment(true)}

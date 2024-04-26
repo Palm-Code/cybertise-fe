@@ -4,7 +4,7 @@ import { Badge, Card, Typography } from "@/core/ui/components";
 interface I_BugTargetProps {
   target_assets: string;
   vulnerability_type: string;
-  risk_level: string;
+  risk_level: number;
 }
 
 const BugTargetCard = ({
@@ -54,7 +54,27 @@ const BugTargetCard = ({
         >
           Risk Level
         </Typography>
-        <Badge variant="critical">{risk_level} | High Risk</Badge>
+        <Badge
+          variant={
+            risk_level === 0
+              ? "default"
+              : risk_level < 4
+                ? "low"
+                : risk_level >= 4 && risk_level < 7
+                  ? "medium"
+                  : "high"
+          }
+        >
+          {risk_level} | (
+          {risk_level === 0
+            ? "No"
+            : risk_level < 4
+              ? "Low"
+              : risk_level >= 4 && risk_level < 7
+                ? "Medium"
+                : "High"}{" "}
+          Risk)
+        </Badge>
       </div>
     </Card>
   );

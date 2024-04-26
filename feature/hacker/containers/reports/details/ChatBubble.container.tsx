@@ -1,11 +1,4 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
-import {
-  Avatar,
-  Badge,
-  Card,
-  Separator,
-  Typography,
-} from "@/core/ui/components";
 import Review from "@/feature/hacker/components/programs/send-report/steps/Review";
 import Summary from "./type/Summary";
 import System from "./type/System";
@@ -14,7 +7,7 @@ import Sender from "./type/Sender";
 const ChatBubble = ({
   data,
 }: {
-  data?: I_GetChatListItemSuccessResponse["data"];
+  data: I_GetChatListItemSuccessResponse["data"];
 }) => {
   return (
     <div className="_flexbox__col__start__start h-fit w-full gap-6 xl:pb-28">

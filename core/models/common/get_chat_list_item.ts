@@ -10,7 +10,7 @@ interface I_ChatTicket {
   program_id: string;
   related_ticket_id: string | null;
   target_asset_id: string;
-  vulnerability_type_id: string;
+  vulnerabiity_type_id: string;
   risk_level: number;
   ticket_type: string;
   status: string;
@@ -34,7 +34,7 @@ interface I_ChatTicket {
   };
 }
 
-interface I_Media {
+export interface I_Media {
   id: number;
   model_type: string;
   model_id: string;

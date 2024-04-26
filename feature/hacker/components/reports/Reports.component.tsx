@@ -96,7 +96,7 @@ const Reports = () => {
               <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
-                  value={payload?.params?.sort}
+                  value={payload?.params?.sort!}
                   options={filterItems}
                   onValueChange={(v) => useClickSort(v, store)}
                 />
