@@ -159,7 +159,7 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
                         weight="bold"
                         className="leading-none"
                       >
-                        Coinbase
+                        {data.company?.name}
                       </Typography>
                       <Typography
                         variant="p"

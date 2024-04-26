@@ -37,7 +37,7 @@ const ModalSendAttachment = ({
               "rounded-[10px] bg-neutral-light-100 dark:bg-neutral-dark-100"
             )}
           >
-            <FileInput />
+            <FileInput onFileRemoved={() => {}} onFileSelected={() => {}} />
             <Tiptap
               description=""
               label="Write a caption"

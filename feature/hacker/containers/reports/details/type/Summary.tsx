@@ -1,12 +1,22 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
+import {
+  useGetAssetType,
+  useGetTargetAsset,
+  useGetVulnerabilityType,
+} from "@/core/react-query/client";
 import { Avatar, Separator, Typography } from "@/core/ui/components";
 import Review from "@/feature/hacker/components/programs/send-report/steps/Review";
+import { formatTimestamp } from "@/utils/formatter/date-formatter";
 
 const Summary = ({
   data,
 }: {
   data: I_GetChatListItemSuccessResponse["data"][0];
 }) => {
+  const { data: assetType } = useGetAssetType();
+  const { data: targetAsset } = useGetTargetAsset();
+  const { data: vulnerabilityType } = useGetVulnerabilityType();
+
   return (
     <div className="grid h-fit max-h-full w-full grid-cols-[auto_1fr] place-items-start content-start gap-3">
       <div className="_flexbox__col__center__start h-full w-fit gap-3">
@@ -22,16 +32,23 @@ const Summary = ({
           <span className="font-normal text-lime-normal-light dark:text-lime-normal-dark">
             reported a bug
           </span>{" "}
-          to [Company Name]
+          to [{data.chat_ticket.title}]
         </Typography>
-        <Review />
+        <Review
+          data={data.chat_ticket}
+          defaultData={{
+            assetType: assetType ?? [],
+            targetAssets: targetAsset?.data ?? [],
+            vulnerabilityType: vulnerabilityType ?? [],
+          }}
+        />
         <Typography
           variant="p"
           affects="tiny"
           weight="medium"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          {data.updated_at.toString().split("T")[0]}
+          {formatTimestamp(data?.updated_at ?? "")}
         </Typography>
       </div>
     </div>

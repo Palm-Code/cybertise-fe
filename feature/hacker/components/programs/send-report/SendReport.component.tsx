@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Button, Card } from "@/core/ui/components";
+import { Button, Card, Tooltip } from "@/core/ui/components";
 import Typography, {
   typographyVariants,
 } from "@/core/ui/components/typography/typography";
@@ -27,6 +27,7 @@ import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
 import { Form } from "@/core/ui/components/form/form";
+import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 
 interface I_SendReportProps {
   id: string;
@@ -44,12 +45,13 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     },
     id
   );
+  const { mutateAsync, isPending, isSuccess } = usePostSendReports();
   const { data: vulnerabilityType } = useGetVulnerabilityType();
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
   const method = useForm<SendReportRequestType>({
     resolver: zodResolver(sendReportFormSchema),
     defaultValues: {
+      ticket_type: "Hacker",
       program_id: id,
       risk_level: 0,
       custom_ta_asset_type_id: undefined,
@@ -92,24 +94,32 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
       key: "problemCauses",
     },
     {
-      element: <Review />,
+      element: (
+        <Review
+          defaultData={{
+            assetType: defaultData?.assetType,
+            targetAssets: data?.data.target_assets,
+            vulnerabilityType: vulnerabilityType,
+          }}
+          data={method.getValues()}
+        />
+      ),
       key: "review",
     },
   ]);
 
+  console.log(method.watch());
+
   const onSubmitForm = () => {
-    console.log("triggered");
-    setSuccessSubmit(true);
+    const payload = method.getValues();
+    mutateAsync(payload);
   };
 
   return (
     <>
       <Form {...method}>
         <div ref={containerRef}></div>
-        <div
-          // onSubmit={method.handleSubmit(onSubmitForm)}
-          className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl"
-        >
+        <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <div
             className={cn(
               "_flexbox__col__start__start sticky top-0 z-30",
@@ -120,11 +130,14 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               <div
                 className={cn(
                   typographyVariants({ variant: "h5", weight: "bold" }),
-                  "inline-flex cursor-pointer items-center gap-5"
+                  "inline-flex items-center gap-5"
                 )}
               >
                 <X onClick={() => setOpenModal(true)} />
-                Submit Report - VRP Title 1
+                Submit Report -{" "}
+                <Tooltip content={data?.data.title as string}>
+                  {data?.data.title.substring(0, 50)}...
+                </Tooltip>
               </div>
             </Card>
             <AnimationWrapper key={steps[currentStepIndex].key}>
@@ -186,6 +199,8 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                         <Button
                           type="button"
                           variant="primary-hacker"
+                          isLoading={isPending}
+                          disabled={isPending}
                           onClick={() => onSubmitForm()}
                         >
                           Send Report
@@ -220,7 +235,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
       />
-      <ModalSuccessSubmit isOpen={successSubmit} />
+      <ModalSuccessSubmit isOpen={isSuccess} />
     </>
   );
 };
