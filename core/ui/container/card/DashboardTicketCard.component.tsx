@@ -66,7 +66,7 @@ const TicketCard = ({
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.program?.updated_at ?? "")}
+                  {formatDateToAgo(props?.updated_at ?? "")}
                 </Typography>
               </div>
               <Separator orientation="horizontal" />
@@ -80,7 +80,7 @@ const TicketCard = ({
                     Vulnerability type (CWE)
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    Path Transversal
+                    {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
                 <div className="_flexbox__row__center__between w-full">
@@ -116,7 +116,7 @@ const TicketCard = ({
                   affects="small"
                   className="text-neutral-light-20 dark:text-neutral-dark-20"
                 >
-                  Reported {formatDateToAgo2(props.program?.created_at ?? "")}
+                  Reported {formatDateToAgo2(props?.created_at ?? "")}
                 </Typography>
               </div>
             </div>
@@ -165,8 +165,7 @@ const TicketCard = ({
                       affects="small"
                       className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                     >
-                      Reported{" "}
-                      {formatDateToAgo2(props.program?.created_at ?? "")}
+                      Reported {formatDateToAgo2(props?.created_at ?? "")}
                     </Typography>
                   </div>
                 </div>
@@ -175,7 +174,7 @@ const TicketCard = ({
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.program?.updated_at ?? "")}
+                  {formatDateToAgo(props?.updated_at ?? "")}
                 </Typography>
               </div>
               <div

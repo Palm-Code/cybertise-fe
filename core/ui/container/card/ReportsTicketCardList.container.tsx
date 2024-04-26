@@ -44,7 +44,7 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.program?.updated_at ?? "")}
+                {formatDateToAgo(props?.updated_at ?? "")}
               </Typography>
             </div>
             <div className="_flexbox__col__start w-full gap-1">
@@ -167,7 +167,7 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.program?.updated_at ?? "")}
+                {formatDateToAgo(props?.updated_at ?? "")}
               </Typography>
             </div>
             <div

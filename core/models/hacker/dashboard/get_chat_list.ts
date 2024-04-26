@@ -32,6 +32,8 @@ export interface I_GetChatListSuccessResponse {
     vulnerabiity_type: I_VulnerabilityType;
     program?: I_Program;
     company?: I_Company;
+    created_at: string;
+    updated_at: string;
   }[];
   meta?: I_Meta;
 }
