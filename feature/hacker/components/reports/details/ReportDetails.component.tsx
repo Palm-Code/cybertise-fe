@@ -16,33 +16,64 @@ import { ChatBubble } from "@/feature/hacker/containers";
 import { useGetChatListItem } from "@/feature/hacker/query/client/useGetChatListItem";
 import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/reports";
 import { useRouter } from "next/navigation";
+import { usePostChatItem } from "@/core/react-query/client";
+import { handleClickScroll } from "@/utils/handle-scroll";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data, isLoading, isFetching } = useGetChatListItem(store.payload, id);
+  const { data, isError } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
+  const [attachments, setAttachments] = useState<string[]>([]);
+  const { mutateAsync, isPending } = usePostChatItem();
+
+  const scrollView = () => {
+    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+  };
 
   useEffect(() => {
-    if (chatRef.current && data) {
-      chatRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [isLoading, isFetching]);
+    scrollView();
+  }, [description, data]);
 
-  if (isLoading || isFetching) {
+  const sendMessage = async () => {
+    if (description) {
+      // setAttachments([]);
+      setDescription("");
+      await mutateAsync({
+        chat_ticket_id: id,
+        sender_name: data?.data[0].sender_name,
+        sender_avatar: data?.data[0].sender_avatar,
+        content: description,
+        attachments:
+          attachments.length > 0
+            ? attachments
+            : ["70eb031b-6999-4db2-96cf-b1205773f983"],
+      });
+      // refetch();
+      setOpenAttachment(false);
+    }
+  };
+
+  if (isError) {
     return (
-      <div className="flex min-h-screen w-full items-center justify-center">
-        <Loader2
-          className="m-auto animate-spin text-lime-normal-light dark:text-lime-normal-dark"
-          width={64}
-          height={64}
-        />
+      <div className="flex h-screen w-full items-center justify-center">
+        No Chat Found
       </div>
     );
   }
 
+  if (!data)
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader2
+          className="m-auto animate-spin text-lime-normal-light dark:text-lime-normal-dark"
+          width={32}
+          height={32}
+        />
+      </div>
+    );
   return (
     <>
       <Mobile>
@@ -65,14 +96,14 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Link>
                 <div className="grid gap-4">
                   <Typography variant="h5" weight="bold">
-                    {data?.data[0].chat_ticket.title}
+                    {data?.data[0].chat_ticket?.title}
                   </Typography>
                   <Badge
                     variant={
                       data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
                     }
                   >
-                    {`${data?.data[0].chat_ticket.risk_level} | ${data?.data[0].chat_ticket.risk_level_category}`}
+                    {`${data?.data[0].chat_ticket?.risk_level} | ${data?.data[0].chat_ticket?.risk_level_category}`}
                   </Badge>
                 </div>
               </div>
@@ -82,7 +113,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     data?.data[0]?.chat_ticket?.status.toLowerCase() as any
                   }
                 >
-                  {data?.data[0].chat_ticket.status}
+                  {data?.data[0].chat_ticket?.status}
                 </Indicator>
               </div>
             </Card>
@@ -123,14 +154,14 @@ const ReportDetails = ({ id }: { id: string }) => {
                   onClick={back}
                 />
                 <Typography variant="h5" weight="bold">
-                  {data?.data[0].chat_ticket.title}
+                  {data?.data[0]?.chat_ticket?.title}
                 </Typography>
                 <Badge
                   variant={
                     data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
                   }
                 >
-                  {`${data?.data[0].chat_ticket.risk_level} | ${data?.data[0].chat_ticket.risk_level_category}`}
+                  {`${data?.data[0].chat_ticket?.risk_level} | ${data?.data[0].chat_ticket?.risk_level_category}`}
                 </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
@@ -139,7 +170,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     data?.data[0]?.chat_ticket?.status.toLowerCase() as any
                   }
                 >
-                  {data?.data[0].chat_ticket.status}
+                  {data?.data[0].chat_ticket?.status}
                 </Indicator>
               </div>
             </Card>
@@ -159,16 +190,18 @@ const ReportDetails = ({ id }: { id: string }) => {
             setDescription(v);
           }}
           variant="hacker"
+          isLoading={isPending}
           isChat
           onClickSendAttachment={() => setOpenAttachment(true)}
+          onClickSendMessage={sendMessage}
         />
         <ModalSendAttachment
           isOpen={openAttachment}
           onClose={() => setOpenAttachment(false)}
           onClickSendAttachment={() => {}}
         />
+        <div ref={chatRef}></div>
       </Desktop>
-      <div ref={chatRef}></div>
     </>
   );
 };

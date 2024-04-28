@@ -1,7 +1,5 @@
 import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
 import { FileInput, Tiptap } from "@/core/ui/components";
-import { FileWithUrl } from "@/interfaces";
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const ProblemCauses = () => {
@@ -10,8 +8,6 @@ const ProblemCauses = () => {
     getValues,
     formState: { errors },
   } = useFormContext<SendReportRequestType>();
-
-  console.log(getValues("attachments"));
 
   return (
     <div className="_flexbox__col__start__start w-full gap-8">
@@ -38,6 +34,14 @@ const ProblemCauses = () => {
           setValue(
             "attachments",
             oldValue?.filter((i) => i !== v),
+            {
+              shouldValidate: true,
+            }
+          );
+          const oldInputValue = getValues("files");
+          setValue(
+            "files",
+            oldInputValue?.filter((i) => i.file_id !== v),
             {
               shouldValidate: true,
             }

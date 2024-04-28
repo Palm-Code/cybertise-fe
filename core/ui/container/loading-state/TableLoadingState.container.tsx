@@ -29,7 +29,7 @@ const TableLoadingState = ({ columns }: { columns: I_TableColumns[] }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Array(6)
+        {Array(10)
           .fill(0)
           .map((item, index) => (
             <TableBodyRow key={`table-row-${index}`}>

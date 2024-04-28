@@ -5,6 +5,7 @@ import { SingleVrpContainer } from "@/feature/hacker/containers";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useProgramDetailsParamStore } from "@/feature/hacker/zustand/store/programs/program_details";
 import { useGetAssetType } from "@/core/react-query/client/useGetAssetType";
+import { VRPHeroLoading } from "@/core/ui/container";
 
 interface I_ProgramDetailsProps {
   id: string;
@@ -13,13 +14,23 @@ interface I_ProgramDetailsProps {
 const ProgramDetails = ({ id }: I_ProgramDetailsProps) => {
   const { data: assetTypes } = useGetAssetType();
   const store = useProgramDetailsParamStore();
-  const { data: programDetails } = useGetProgramDetails(store.payload, id);
+  const { data: programDetails, isLoading } = useGetProgramDetails(
+    store.payload,
+    id
+  );
 
   return (
     <>
       <Mobile>
-        <div className="_flexbox__col__start__start w-full">
-          <VRPHeroCard id={id} data={programDetails?.data} />
+        <div
+          className="_flexbox__col__start__start w-full"
+          suppressHydrationWarning
+        >
+          {isLoading ? (
+            <VRPHeroLoading />
+          ) : (
+            <VRPHeroCard data={programDetails?.data} />
+          )}
           <div className="_flexbox__col__start__start w-full gap-4">
             <SingleVrpContainer
               data={programDetails?.data}
@@ -29,8 +40,15 @@ const ProgramDetails = ({ id }: I_ProgramDetailsProps) => {
         </div>
       </Mobile>
       <Desktop>
-        <div className="_flexbox__col__start__start w-full gap-10 pt-12">
-          <VRPHeroCard id={id} data={programDetails?.data} />
+        <div
+          className="_flexbox__col__start__start w-full gap-10 pt-12"
+          suppressHydrationWarning
+        >
+          {isLoading ? (
+            <VRPHeroLoading />
+          ) : (
+            <VRPHeroCard data={programDetails?.data} />
+          )}
           <div className="_flexbox__col__start__start w-full gap-4">
             <SingleVrpContainer
               data={programDetails?.data}

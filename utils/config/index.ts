@@ -1,3 +1,3 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "/base-api";
 
 export { BASE_URL };

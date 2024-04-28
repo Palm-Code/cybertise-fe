@@ -12,12 +12,7 @@ const ProblemCausesCard = ({
   proof_of_concept,
 }: I_ProblemCausesProps) => {
   return (
-    <Card
-      className={cn(
-        "rounded-[10px] bg-neutral-light-90 px-4 py-6 xl:px-7.5 xl:py-7.5 dark:bg-neutral-dark-90",
-        "_flexbox__col__start__start w-full gap-6"
-      )}
-    >
+    <>
       <Typography variant="h6" weight="bold">
         Problem and Causes
       </Typography>
@@ -45,7 +40,7 @@ const ProblemCausesCard = ({
           dangerouslySetInnerHTML={{ __html: sanitize(proof_of_concept) }}
         ></article>
       </div>
-    </Card>
+    </>
   );
 };
 export default ProblemCausesCard;

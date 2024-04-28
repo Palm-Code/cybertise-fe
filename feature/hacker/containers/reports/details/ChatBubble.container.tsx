@@ -1,16 +1,21 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
-import Review from "@/feature/hacker/components/programs/send-report/steps/Review";
 import Summary from "./type/Summary";
 import System from "./type/System";
 import Sender from "./type/Sender";
+import { useGetMutationState } from "@/core/react-query/client";
 
 const ChatBubble = ({
   data,
 }: {
   data: I_GetChatListItemSuccessResponse["data"];
 }) => {
+  const mutations = useGetMutationState();
+
   return (
-    <div className="_flexbox__col__start__start h-fit w-full gap-6 xl:pb-28">
+    <div className="flex h-fit w-full flex-col-reverse items-start justify-start gap-6 xl:pb-28">
+      {mutations?.map((item, idx) => (
+        <Sender data={item} key={`sender-mutation-${idx}`} isLoading />
+      ))}
       {data &&
         data.map((item, idx) => {
           if (item.sender === "Summary")

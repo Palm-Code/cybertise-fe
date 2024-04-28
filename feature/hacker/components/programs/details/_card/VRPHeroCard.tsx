@@ -12,15 +12,16 @@ import { useInView } from "react-intersection-observer";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 
 interface I_VRPHeroCard {
-  id: string;
   data?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
-const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
+const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.1 });
+
   if (data)
     return (
       <>
@@ -34,12 +35,14 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
             <div className="_flexbox__col__start__start w-full gap-4" ref={ref}>
               <div className="_flexbox__row__center__between w-full gap-9">
                 <div className="_flexbox__col__start__start w-full gap-4">
-                  <Image
-                    src={data.company?.logo as string}
-                    alt={data.company?.name as string}
-                    width={48}
-                    height={48}
-                  />
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                    <Image
+                      src={data.company?.logo as string}
+                      alt={data.company?.name as string}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <Typography variant="p" affects="large" weight="bold">
                     {data.company?.name}
                   </Typography>
@@ -113,12 +116,14 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
           >
             <div className="_flexbox__row__center__between w-full gap-9">
               <div className="_flexbox__row__center__start w-full gap-2">
-                <Image
-                  src={data.company?.logo as string}
-                  alt={data.company?.name as string}
-                  width={24}
-                  height={24}
-                />
+                <div className="relative h-6 w-6 overflow-hidden rounded-full">
+                  <Image
+                    src={data.company?.logo as string}
+                    alt={data.company?.name as string}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <Typography variant="p" affects="small" weight="bold">
                   {data.company?.name}
                 </Typography>
@@ -143,13 +148,15 @@ const VRPHeroCard = ({ id, data }: I_VRPHeroCard) => {
         </Mobile>
         <Desktop>
           <Card>
-            <div className="_flexbox__row__start__start w-full gap-9">
-              <Image
-                src={data.company?.logo as string}
-                alt={data.company?.name as string}
-                width={48}
-                height={48}
-              />
+            <div className="grid w-full grid-cols-[auto_1fr] gap-9">
+              <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                <Image
+                  src={data.company?.logo as string}
+                  alt={data.company?.name as string}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div className="_flexbox__col__start__start w-full gap-12">
                 <div className="_flexbox__row__start__between w-full">
                   <div className="_flexbox__col__start__start gap-9">

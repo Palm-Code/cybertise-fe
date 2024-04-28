@@ -37,6 +37,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hacker" | "company" | "mediator";
   onClickSendAttachment?: () => void;
   onClickSendMessage?: () => void;
+  isLoading?: boolean;
 }
 
 const Tiptap = ({
@@ -45,6 +46,7 @@ const Tiptap = ({
   label,
   withTooltip,
   isChat = false,
+  isLoading = false,
   onClearInput = () => {},
   variant,
   onClickSendAttachment,
@@ -68,7 +70,7 @@ const Tiptap = ({
         validate: (href) => /^https?:\/\//.test(href),
       }),
     ],
-    content: description && description !== "<p></p>" ? description : "",
+    content: description,
     editorProps: {
       attributes: {
         class: cn(
@@ -86,6 +88,7 @@ const Tiptap = ({
       onChangeValue(value);
     },
     onFocus: () => {
+      editor?.commands.focus();
       setIsFocused(true);
     },
     onBlur: () => {
@@ -116,7 +119,16 @@ const Tiptap = ({
         </label>
         <EditorContent
           editor={editor}
-          className="peer flex max-h-12 w-full max-w-full overflow-auto whitespace-pre-line"
+          onKeyDown={(e) => {
+            if (!description) return;
+            if (e.key === "Enter" && e.shiftKey) {
+              e.preventDefault();
+              onClickSendMessage();
+              editor?.commands.clearContent();
+            }
+          }}
+          autoFocus
+          className="peer flex max-h-19 w-full max-w-full overflow-auto whitespace-pre-line"
         />
         <Separator orientation="horizontal" />
         <div className="_flexbox__row__center__between w-full">
@@ -134,7 +146,10 @@ const Tiptap = ({
                 disabled={!description}
                 postFixIcon={<Send />}
                 variant={`primary-${variant}`}
-                onClick={onClickSendMessage}
+                onClick={() => {
+                  onClickSendMessage();
+                  editor?.commands.clearContent();
+                }}
               >
                 Send
               </Button>

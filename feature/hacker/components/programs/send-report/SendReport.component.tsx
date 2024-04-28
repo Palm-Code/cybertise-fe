@@ -1,9 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Button, Card, Tooltip } from "@/core/ui/components";
-import Typography, {
-  typographyVariants,
-} from "@/core/ui/components/typography/typography";
+import { Button, Card, Checkbox, Tooltip } from "@/core/ui/components";
+import Typography from "@/core/ui/components/typography/typography";
 import { FilePenLine, X } from "lucide-react";
 import Information from "./information/Information";
 import { useMultistepForm } from "@/utils/multi-step-form";
@@ -13,9 +11,9 @@ import ReportDescription from "./steps/ReportDescription";
 import ProblemCauses from "./steps/ProblemCauses";
 import Review from "./steps/Review";
 import { informations } from "@/feature/hacker/constants/programs";
-import { AnimationWrapper } from "@/core/ui/layout";
+import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ModalCloseSendReport from "../_dialog/ModalCloseSendReport";
 import ModalSuccessSubmit from "../_dialog/ModalSuccessSubmit";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,8 +24,8 @@ import {
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
-import { Form } from "@/core/ui/components/form/form";
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 interface I_SendReportProps {
   id: string;
@@ -45,18 +43,45 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     },
     id
   );
+  const [isAgreed, setIsAgreed] = useState<boolean>(false);
   const { mutateAsync, isPending, isSuccess } = usePostSendReports();
   const { data: vulnerabilityType } = useGetVulnerabilityType();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const method = useForm<SendReportRequestType>({
+    mode: "all",
     resolver: zodResolver(sendReportFormSchema),
     defaultValues: {
       ticket_type: "Hacker",
       program_id: id,
       risk_level: 0,
       custom_ta_asset_type_id: undefined,
+      custom_ta_value: undefined,
+      title: "",
+      description: "",
+      impact: "",
+      poc: "",
+      vulnerabiity_type_id: "",
+      target_asset_id: "",
     },
   });
+  const forms = method.getValues();
+
+  const disabledButton = useMemo(() => {
+    const disabled: { [key: string]: boolean } = {
+      0: false,
+      1:
+        !forms.vulnerabiity_type_id ||
+        forms.risk_level === 0 ||
+        (!forms.custom_ta_asset_type_id &&
+          !forms.target_asset_id &&
+          !forms.custom_ta_value),
+      2: !forms.title || !forms.description,
+      3: !forms.impact || !forms.poc,
+      4: !isAgreed,
+    };
+
+    return disabled;
+  }, [forms]);
 
   const {
     step,
@@ -108,134 +133,179 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     },
   ]);
 
-  console.log(method.watch());
-
   const onSubmitForm = () => {
     const payload = method.getValues();
     mutateAsync(payload);
   };
 
+  const checkDisabled = (val: number) => {
+    switch (val) {
+      case 0:
+        return false;
+      case 1:
+        return false;
+      case 2:
+        return false;
+      case 3:
+        return false;
+      case 4:
+        return true;
+      default:
+        return false;
+    }
+  };
+
   return (
     <>
-      <Form {...method}>
-        <div ref={containerRef}></div>
-        <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
-          <div
-            className={cn(
-              "_flexbox__col__start__start sticky top-0 z-30",
-              "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
-            )}
-          >
-            <Card className="rounded-2xl rounded-b-none xl:px-8 xl:py-6">
-              <div
-                className={cn(
-                  typographyVariants({ variant: "h5", weight: "bold" }),
-                  "inline-flex items-center gap-5"
-                )}
-              >
-                <X onClick={() => setOpenModal(true)} />
-                Submit Report -{" "}
-                <Tooltip content={data?.data.title as string}>
-                  {data?.data.title.substring(0, 50)}...
-                </Tooltip>
-              </div>
-            </Card>
-            <AnimationWrapper key={steps[currentStepIndex].key}>
-              <div
-                className={cn(
-                  "sticky top-[8.15rem] z-30 h-4 w-[calc(80%-1.6rem)] rounded-t-xl",
-                  isLastStep
-                    ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
-                    : "bg-background-main-light pt-0 dark:bg-background-main-dark"
-                )}
-              ></div>
-            </AnimationWrapper>
-          </div>
-          <div className="_flexbox__row__start__start relative h-full w-full gap-8">
-            <div className="h-full w-[80%] overflow-y-auto">
-              <AnimationWrapper key={steps[currentStepIndex].key}>
-                <Card
-                  className={cn(
-                    "_flexbox__col__start__start h-full gap-6",
-                    "overflow-y-auto rounded-b-xl rounded-t-none xl:px-8 xl:pb-12 xl:pt-8",
-                    isLastStep &&
-                      "bg-neutral-light-100 dark:bg-neutral-dark-100"
-                  )}
-                >
-                  <div className="_flexbox__row__center__between w-full">
+      <Mobile>
+        <EmptyState variant="hacker" />
+      </Mobile>
+      <Desktop>
+        <FormProvider {...method}>
+          <div ref={containerRef}></div>
+          <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
+            <div
+              className={cn(
+                "_flexbox__col__start__start sticky top-0 z-30",
+                "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
+              )}
+            >
+              <Card className="rounded-2xl rounded-b-none xl:px-8 xl:py-6">
+                <div className={cn("inline-flex items-center gap-5")}>
+                  <X
+                    onClick={() => setOpenModal(true)}
+                    className="cursor-pointer"
+                  />
+                  <div>
                     <Typography variant="h5" weight="bold">
-                      {informations[currentStepIndex].label}
+                      Submit Report -{" "}
+                      <Tooltip content={data?.data.title as string}>
+                        {data?.data.title.substring(0, 50)}...
+                      </Tooltip>
                     </Typography>
-                    {isLastStep && (
-                      <Button
-                        variant="tertiary-hacker"
-                        prefixIcon={<FilePenLine />}
-                        onClick={() => goTo(0)}
-                      >
-                        Edit Report
-                      </Button>
-                    )}
                   </div>
-                  {informations[currentStepIndex].description && (
-                    <Typography variant="p" affects="small">
-                      {informations[currentStepIndex].description}
-                    </Typography>
+                </div>
+              </Card>
+              <AnimationWrapper key={steps[currentStepIndex].key}>
+                <div
+                  className={cn(
+                    "sticky top-[8.15rem] z-30 h-4 w-[calc(80%-1.6rem)] rounded-t-xl",
+                    isLastStep
+                      ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
+                      : "bg-background-main-light pt-0 dark:bg-background-main-dark"
                   )}
+                ></div>
+              </AnimationWrapper>
+            </div>
+            <div className="_flexbox__row__start__start relative h-full w-full gap-8">
+              <div className="h-full w-[80%] overflow-y-auto">
+                <AnimationWrapper key={steps[currentStepIndex].key}>
                   <Card
                     className={cn(
-                      "_flexbox__col__start__start w-full gap-8",
-                      "bg-neutral-light-100 dark:bg-neutral-dark-100",
-                      isLastStep ? "xl:p-0" : "xl:p-7"
+                      "_flexbox__col__start__start h-full gap-6",
+                      "overflow-y-auto rounded-b-xl rounded-t-none xl:px-8 xl:pb-12 xl:pt-8",
+                      isLastStep &&
+                        "bg-neutral-light-100 dark:bg-neutral-dark-100"
                     )}
                   >
-                    {step}
-                    <div className="_flexbox__row__center gap-8">
-                      {!isFirstStep && !isLastStep ? (
-                        <Button variant="secondary-hacker" onClick={back}>
-                          Previous
-                        </Button>
-                      ) : null}
-                      {isLastStep ? (
+                    <div className="_flexbox__row__center__between w-full">
+                      <Typography variant="h5" weight="bold">
+                        {informations[currentStepIndex].label}
+                      </Typography>
+                      {isLastStep && (
                         <Button
-                          type="button"
-                          variant="primary-hacker"
-                          isLoading={isPending}
-                          disabled={isPending}
-                          onClick={() => onSubmitForm()}
+                          variant="tertiary-hacker"
+                          prefixIcon={<FilePenLine />}
+                          onClick={() => goTo(0)}
                         >
-                          Send Report
-                        </Button>
-                      ) : (
-                        <Button variant="primary-hacker" onClick={next}>
-                          Next
+                          Edit Report
                         </Button>
                       )}
                     </div>
+                    {informations[currentStepIndex].description && (
+                      <Typography variant="p" affects="small">
+                        {informations[currentStepIndex].description}
+                      </Typography>
+                    )}
+                    <Card
+                      className={cn(
+                        "_flexbox__col__start__start w-full gap-8",
+                        "bg-neutral-light-100 dark:bg-neutral-dark-100",
+                        isLastStep ? "xl:p-0" : "xl:p-7"
+                      )}
+                    >
+                      {step}
+                      <div className="_flexbox__row__start__start w-full gap-8">
+                        {!isFirstStep && !isLastStep ? (
+                          <Button variant="secondary-hacker" onClick={back}>
+                            Previous
+                          </Button>
+                        ) : null}
+                        {isLastStep ? (
+                          <div className="_flexbox__col__start__start w-full gap-6">
+                            <Card
+                              className={cn(
+                                "rounded-[10px] bg-neutral-light-90 px-4 py-6 xl:px-7.5 xl:py-7.5 dark:bg-neutral-dark-90",
+                                "_flexbox__row__start__start w-full gap-6"
+                              )}
+                            >
+                              <Checkbox
+                                checked={isAgreed}
+                                onCheckedChange={() => setIsAgreed(!isAgreed)}
+                              />
+                              <Typography variant="p" affects="normal">
+                                By clicking 'Submit Report', you agree to our
+                                Terms and Conditions and acknowledge that you
+                                have read our Code of Conduct, Privacy Policy
+                                and Disclosure Guidelines.
+                              </Typography>
+                            </Card>
+                            <Button
+                              type="button"
+                              variant="primary-hacker"
+                              isLoading={isPending}
+                              disabled={isPending || !isAgreed}
+                              onClick={() => onSubmitForm()}
+                            >
+                              Send Report
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button
+                            variant="primary-hacker"
+                            onClick={next}
+                            disabled={disabledButton[currentStepIndex]}
+                          >
+                            Next
+                          </Button>
+                        )}
+                      </div>
+                    </Card>
                   </Card>
-                </Card>
-              </AnimationWrapper>
-            </div>
-            <div
-              className={cn(
-                "sticky top-[8.8rem] z-40 -mt-12 w-[20%] rounded-xl",
-                isLastStep
-                  ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
-                  : "bg-background-main-light dark:bg-background-main-dark"
-              )}
-            >
-              <Information
-                lists={informations}
-                activeStep={currentStepIndex + 1}
-              />
+                </AnimationWrapper>
+              </div>
+              <div
+                className={cn(
+                  "sticky top-[8.8rem] z-40 -mt-12 w-[20%] rounded-xl",
+                  isLastStep
+                    ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
+                    : "bg-background-main-light dark:bg-background-main-dark"
+                )}
+              >
+                <Information
+                  lists={informations}
+                  activeStep={currentStepIndex + 1}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </Form>
-      <ModalCloseSendReport
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-      />
-      <ModalSuccessSubmit isOpen={isSuccess} />
+        </FormProvider>
+        <ModalCloseSendReport
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+        <ModalSuccessSubmit isOpen={isSuccess} />
+      </Desktop>
     </>
   );
 };
