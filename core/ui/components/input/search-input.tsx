@@ -49,7 +49,7 @@ const SearchInput = ({
   variant,
   loadingSubmit,
   disabledButton,
-  onSubmitSearch,
+  onSubmitSearch = () => {},
   ...props
 }: SearchInputProps) => {
   const [open, setOpen] = useState(false);
@@ -77,6 +77,7 @@ const SearchInput = ({
           <input
             type="text"
             className="w-full bg-transparent outline-none"
+            onKeyDown={(e) => e.key === "Enter" && onSubmitSearch()}
             {...props}
           />
           <Button

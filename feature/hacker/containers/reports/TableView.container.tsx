@@ -109,7 +109,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     >
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: sanitize(item.last_message),
+                          __html: sanitize(
+                            item.last_message.length > 50
+                              ? item.last_message.substring(0, 50) + "..."
+                              : item.last_message
+                          ),
                         }}
                       ></div>
                     </TableData>

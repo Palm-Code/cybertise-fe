@@ -62,7 +62,13 @@ const TicketCard = ({
               </div>
             </div>
             <div
-              dangerouslySetInnerHTML={{ __html: sanitize(props.last_message) }}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(
+                  props.last_message.length > 50
+                    ? props.last_message.substring(0, 50) + "..."
+                    : props.last_message
+                ),
+              }}
             ></div>
             <div
               className={cn(
@@ -171,7 +177,13 @@ const TicketCard = ({
               </Typography>
             </div>
             <div
-              dangerouslySetInnerHTML={{ __html: sanitize(props.last_message) }}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(
+                  props.last_message.length > 50
+                    ? props.last_message.substring(0, 50) + "..."
+                    : props.last_message
+                ),
+              }}
             ></div>
             <div
               className={cn(

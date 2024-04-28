@@ -68,7 +68,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         weight="semibold"
                         className="w-[calc(100%-36px)]"
                       >
-                        {item.company?.name}
+                        {item.title}
                       </Typography>
                     </div>
                   </TableData>

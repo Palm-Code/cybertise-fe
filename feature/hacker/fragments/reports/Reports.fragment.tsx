@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const Reports = dynamic(
   () => import("@/feature/hacker/components/reports/Reports.component"),
   {
-    ssr: true,
+    ssr: false,
   }
 );
 

@@ -9,6 +9,7 @@ export interface ButtonProps extends BaseButtonProps {
   isLoading?: boolean;
   asLink?: boolean;
   href?: string;
+  target?: string;
 }
 
 const Button = ({
@@ -18,11 +19,12 @@ const Button = ({
   isLoading,
   asLink = false,
   href,
+  target = "_self",
   ...props
 }: ButtonProps) => {
   if (asLink) {
     return (
-      <Link href={href as string} className="w-full">
+      <Link href={href as string} target={target} className="mt-1 w-full">
         <BaseButton {...props}>
           {isLoading ? (
             <div className="relative flex w-full items-center justify-between gap-2.5">
