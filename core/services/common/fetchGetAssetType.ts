@@ -1,4 +1,3 @@
-import { BASE_URL } from "@/utils/config";
 import { AxiosResponse } from "axios";
 import { getAssetTypeAPIURL } from "@/core/routes/common";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
@@ -14,7 +13,7 @@ export const fetchGetAssetType = async () => {
       },
     },
   };
-  const url = BASE_URL + getAssetTypeAPIURL();
+  const url = getAssetTypeAPIURL();
   return await axiosInterceptorInstance
     .get(url, {
       params: params?.fields,

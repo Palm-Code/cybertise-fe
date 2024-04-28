@@ -126,7 +126,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
         label="Vulnerability Type"
         value={
           defaultData?.vulnerabilityType?.find(
-            (item) => item.id === forms.vulnerability_type_id
+            (item) => item.id === forms.vulnerabiity_type_id
           )?.value as string
         }
         options={defaultData?.vulnerabilityType ?? []}
@@ -135,12 +135,12 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             (item) => item.value === v
           )?.id;
 
-          setValue("vulnerability_type_id", vulnerability_type_id as string, {
+          setValue("vulnerabiity_type_id", vulnerability_type_id as string, {
             shouldValidate: true,
           });
         }}
         className="!h-auto bg-neutral-light-90 px-4 py-4 pr-6 dark:bg-neutral-dark-90"
-        isError={!!errors.vulnerability_type_id}
+        isError={!!errors.vulnerabiity_type_id}
       />
       <CsvssCalculator
         isManualRisk={manualRisk}

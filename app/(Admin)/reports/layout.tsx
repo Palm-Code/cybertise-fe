@@ -1,10 +1,7 @@
 import { cn } from "@/core/lib/utils";
-import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
 import { Header } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
 export default async function Dashboardlayout({
   hacker,
@@ -29,28 +26,16 @@ export default async function Dashboardlayout({
       suppressHydrationWarning
     >
       <Header />
-      <Suspense
-        fallback={
-          <Loader2
-            width={64}
-            height={64}
-            className={cn(
-              "m-auto animate-spin stroke-2",
-              iconColor[session.user.role]
-            )}
-          />
-        }
+      <div
+        className={cn(
+          "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+          "pt-0 xl:pl-14 xl:pr-12",
+          "p-0"
+        )}
       >
-        <div
-          className={cn(
-            "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-            "pt-0 xl:pl-14 xl:pr-12",
-            "p-0"
-          )}
-        >
-          {child[session?.user.role]}
-        </div>
-      </Suspense>
+        {child[session?.user.role]}
+      </div>
+      <div id="new-chat"></div>
     </div>
   );
 }

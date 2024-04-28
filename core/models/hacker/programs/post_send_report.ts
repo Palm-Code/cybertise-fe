@@ -11,32 +11,62 @@ export interface I_PostSendReportRequest {
     risk_level: number;
     ticket_type: string;
     program_id?: string;
-    "attachment[0]"?: string;
-    "attachment[1]"?: string;
+    attachment?: string[];
     custom_ta_asset_type_id?: string;
     custom_ta_value?: string;
   };
 }
 
 export const sendReportFormSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
+  title: z
+    .string({
+      required_error: "Title is required",
+      invalid_type_error: "Title is required",
+    })
+    .min(1, { message: "Title is required" }),
+  description: z
+    .string({
+      required_error: "Description is required",
+      invalid_type_error: "Description is required",
+    })
+    .min(1, { message: "Description is required" }),
   impact: z.string().min(1, { message: "Impact is required" }),
   poc: z.string().min(1, { message: "POC is required" }),
   target_asset_id: z
-    .string()
+    .string({
+      required_error: "Target asset is required",
+      invalid_type_error: "Target asset is required",
+    })
     .min(1, { message: "Target asset is required" })
     .optional(),
-  vulnerability_type_id: z
-    .string()
+  vulnerabiity_type_id: z
+    .string({
+      required_error: "Vulnerability type is required",
+      invalid_type_error: "Vulnerability type is required",
+    })
     .min(1, { message: "Vulnerability type is required" }),
-  risk_level: z.number().min(1, { message: "Risk level is required" }),
+  risk_level: z
+    .number({
+      required_error: "Risk level is required",
+      invalid_type_error: "Risk level is required",
+    })
+    .min(1, { message: "Risk level is required" }),
   ticket_type: z.string().min(1, { message: "Ticket type is required" }),
   program_id: z.string().optional(),
-  "attachment[0]": z.string().optional(),
-  "attachment[1]": z.string().optional(),
+  attachments: z.array(z.string()).optional(),
   custom_ta_asset_type_id: z.string().optional(),
   custom_ta_value: z.string().optional(),
+  files: z
+    .array(
+      z.object({
+        name: z.string(),
+        url: z.string(),
+        size: z.number(),
+        file_id: z.string().optional(),
+        error: z.boolean().optional(),
+      })
+    )
+    .optional(),
 });
 
 export type SendReportRequestType = z.infer<typeof sendReportFormSchema>;

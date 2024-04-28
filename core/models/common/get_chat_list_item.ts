@@ -1,5 +1,6 @@
 interface I_ChatTicket {
   id: string;
+  chat_ticket_id?: string;
   code: string;
   title: string;
   description: string;
@@ -10,7 +11,7 @@ interface I_ChatTicket {
   program_id: string;
   related_ticket_id: string | null;
   target_asset_id: string;
-  vulnerability_type_id: string;
+  vulnerabiity_type_id: string;
   risk_level: number;
   ticket_type: string;
   status: string;
@@ -34,7 +35,7 @@ interface I_ChatTicket {
   };
 }
 
-interface I_Media {
+export interface I_Media {
   id: number;
   model_type: string;
   model_id: string;
@@ -57,24 +58,25 @@ interface I_Media {
   preview_url: string;
 }
 
-interface I_Data {
-  id: string;
+export interface I_Data {
+  id?: string;
   chat_ticket_id: string;
-  sender: string;
+  sender?: string;
   content: string;
-  badge: string;
-  has_link: boolean;
-  og_image: string;
-  og_title: string;
-  og_description: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
-  sender_name: string;
-  files: string[];
-  sender_avatar: string;
-  chat_ticket: I_ChatTicket;
-  media: I_Media[];
+  badge?: string;
+  has_link?: boolean;
+  og_image?: string;
+  og_title?: string;
+  og_description?: string;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string | null;
+  sender_name?: string;
+  files?: string[];
+  sender_avatar?: string;
+  chat_ticket?: I_ChatTicket;
+  attachments?: string[];
+  media?: I_Media[];
 }
 
 export interface I_GetChatListItemSuccessResponse {

@@ -74,8 +74,6 @@ const SignInComponent = () => {
     return <MultiFactor />;
   }
 
-  // console.log({ errors });
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

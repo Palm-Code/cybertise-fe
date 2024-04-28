@@ -4,6 +4,7 @@ export { default as ProgramsTicketLoadingCardList } from "./loading-state/Progra
 export { default as TableLoadingList } from "./loading-state/TableLoadingState.container";
 export { default as ReportsTicketCardList } from "./card/ReportsTicketCardList.container";
 export { default as VRPTicketCardList } from "./card/VRPTicketCardList.container";
+export { default as VRPHeroLoading } from "./loading-state/VRPHeroLoading";
 export { default as CreateVRPLaunchpad } from "./vrp-launchpad/CreateVrp.container";
 export { default as CompaniesTicketCardList } from "./card/CompaniesTicketCardList.container";
 export { default as ModalForbidden } from "./modals/ModalForbidden";

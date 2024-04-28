@@ -1,5 +1,7 @@
 export interface I_PostChatListItemsPayload {
-  chat_tricket_id: string;
+  chat_ticket_id: string;
+  sender: string;
+  sender_name?: string;
   content: string;
-  "attachments[0]": string;
+  attachments?: string[];
 }

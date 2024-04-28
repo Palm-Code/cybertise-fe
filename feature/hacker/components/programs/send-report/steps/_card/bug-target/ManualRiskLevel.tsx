@@ -61,22 +61,24 @@ const ManualRiskLevel = ({
           transition={{ duration: 0.5 }}
           className="_flexbox__col__start__start w-full gap-3"
         >
-          <div className="grid w-full grid-cols-11 place-items-start gap-4">
-            {Array.from({ length: 11 }).map((_, idx) => (
-              <Typography
-                key={`risk-level-${idx}`}
-                variant="p"
-                affects="normal"
-                className={cn(
-                  "ml-4 h-10",
-                  idx === forms.risk_level
-                    ? "text-2xl font-extrabold"
-                    : "text-neutral-light-50 dark:text-neutral-dark-50"
-                )}
-              >
-                {idx}
-              </Typography>
-            ))}
+          <div className="grid w-full grid-cols-11 place-items-center gap-4">
+            <div className="col-span-11 flex h-11 w-full items-center justify-between gap-4">
+              {Array.from({ length: 11 }).map((_, idx) => (
+                <Typography
+                  key={`risk-level-${idx}`}
+                  variant="p"
+                  affects="normal"
+                  className={cn(
+                    idx < 4 ? "ml-3" : idx === 4 ? "ml-2.5" : "mr-2.5",
+                    idx === forms.risk_level
+                      ? "text-2xl font-extrabold"
+                      : "text-neutral-light-50 dark:text-neutral-dark-50"
+                  )}
+                >
+                  {idx}
+                </Typography>
+              ))}
+            </div>
             <Slider
               defaultValue={[0]}
               value={[forms.risk_level]}
@@ -84,7 +86,7 @@ const ManualRiskLevel = ({
                 setValue("risk_level", v[0], { shouldValidate: true })
               }
               max={10}
-              step={0.1}
+              step={1}
               className="col-span-11 w-full"
             />
           </div>

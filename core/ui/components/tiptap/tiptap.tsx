@@ -14,7 +14,7 @@ import html from "highlight.js/lib/languages/xml";
 import typescript from "highlight.js/lib/languages/typescript";
 import { common, createLowlight } from "lowlight";
 import { cn } from "@/core/lib/utils";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Tooltip from "../tooltip/tooltip";
 import { Info, Paperclip, Send, X } from "lucide-react";
 import Typography from "../typography/typography";
@@ -37,6 +37,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "hacker" | "company" | "mediator";
   onClickSendAttachment?: () => void;
   onClickSendMessage?: () => void;
+  isLoading?: boolean;
 }
 
 const Tiptap = ({
@@ -45,6 +46,7 @@ const Tiptap = ({
   label,
   withTooltip,
   isChat = false,
+  isLoading = false,
   onClearInput = () => {},
   variant,
   onClickSendAttachment,
@@ -82,9 +84,11 @@ const Tiptap = ({
     },
     autofocus: true,
     onUpdate: ({ editor }) => {
-      onChangeValue(editor.getHTML());
+      const value = editor.isEmpty ? "" : editor.getHTML();
+      onChangeValue(value);
     },
     onFocus: () => {
+      editor?.commands.focus();
       setIsFocused(true);
     },
     onBlur: () => {
@@ -115,7 +119,16 @@ const Tiptap = ({
         </label>
         <EditorContent
           editor={editor}
-          className="peer flex max-h-12 w-full max-w-full overflow-auto whitespace-pre-line"
+          onKeyDown={(e) => {
+            if (!description) return;
+            if (e.key === "Enter" && e.shiftKey) {
+              e.preventDefault();
+              onClickSendMessage();
+              editor?.commands.clearContent();
+            }
+          }}
+          autoFocus
+          className="peer flex max-h-19 w-full max-w-full overflow-auto whitespace-pre-line"
         />
         <Separator orientation="horizontal" />
         <div className="_flexbox__row__center__between w-full">
@@ -130,9 +143,13 @@ const Tiptap = ({
                 Send Attachment
               </Button>
               <Button
+                disabled={!description}
                 postFixIcon={<Send />}
                 variant={`primary-${variant}`}
-                onClick={onClickSendMessage}
+                onClick={() => {
+                  onClickSendMessage();
+                  editor?.commands.clearContent();
+                }}
               >
                 Send
               </Button>
@@ -179,6 +196,7 @@ const Tiptap = ({
             <X
               className="h-6 w-6 cursor-pointer"
               onClick={() => {
+                editor?.commands.clearContent();
                 onClearInput();
               }}
             />

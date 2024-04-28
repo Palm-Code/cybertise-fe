@@ -31,7 +31,7 @@ const TicketCard = ({
                 </div>
                 <div className="_flexbox__col__start ml-4 w-full max-w-xl gap-1">
                   <Typography variant="p" affects="normal">
-                    {props.company?.name}
+                    {props.title}
                   </Typography>
                 </div>
                 <Typography
@@ -112,7 +112,7 @@ const TicketCard = ({
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-1">
                   <Typography variant="p" affects="normal">
-                    {props.company?.name}
+                    {props.title}
                   </Typography>
                   <div className="_flexbox__row__center gap-4">
                     <Badge variant="default">{props.type}</Badge>

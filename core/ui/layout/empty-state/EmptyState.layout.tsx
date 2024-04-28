@@ -6,13 +6,15 @@ import { buttonVariants } from "../../components/button/base-button";
 
 interface I_EmptyStateProps {
   variant: "company" | "hacker" | "mediator";
-  type:
+  type?:
+    | "default"
     | "program"
     | "ticket"
     | "under-construction"
     | "update"
     | "target-assets";
   buttonText?: string;
+  titleText?: string;
   href?: string;
 }
 
@@ -24,9 +26,10 @@ const iconColors: { [key in Role]: string } = {
 
 const EmptyState = ({
   variant,
-  type,
+  type = "default",
   buttonText = "See VRP Launchpad",
   href = "/",
+  titleText = "You're not Allowed Here",
 }: I_EmptyStateProps) => {
   const iconsType = () => {
     switch (type) {
@@ -84,21 +87,34 @@ const EmptyState = ({
             </>
           </>
         );
+      case "under-construction":
+        return (
+          <>
+            <EmptyFolder className={iconColors[variant]} />
+            <Typography variant="p" affects="extralarge" weight="bold">
+              Under Construction
+            </Typography>
+            <Link
+              className={buttonVariants({ variant: `primary-${variant}` })}
+              href={href}
+            >
+              Back
+            </Link>
+          </>
+        );
       default:
         return (
           <>
-            <>
-              <EmptyFolder className={iconColors[variant]} />
-              <Typography variant="p" affects="extralarge" weight="bold">
-                Under Construction
-              </Typography>
-              <Link
-                className={buttonVariants({ variant: `primary-${variant}` })}
-                href={href}
-              >
-                Back
-              </Link>
-            </>
+            <EmptyFolder className={iconColors[variant]} />
+            <Typography variant="p" affects="extralarge" weight="bold">
+              {titleText}
+            </Typography>
+            <Link
+              className={buttonVariants({ variant: `primary-${variant}` })}
+              href={href}
+            >
+              Back
+            </Link>
           </>
         );
     }
