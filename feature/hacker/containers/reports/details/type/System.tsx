@@ -23,7 +23,7 @@ const System = ({
           </Typography>
           {data?.badge && (
             <Badge variant={data.badge.toLowerCase() as any}>
-              {`${data.chat_ticket.risk_level} | ${data.badge}`}
+              {`${data.chat_ticket?.risk_level} | ${data.badge}`}
             </Badge>
           )}
         </div>

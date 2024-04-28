@@ -1,10 +1,7 @@
 import { cn } from "@/core/lib/utils";
-import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
 import { Header } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
 export default async function Dashboardlayout({
   hacker,
