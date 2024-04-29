@@ -11,23 +11,12 @@ import {
 import { MetricValues } from "@/types/admin/programs";
 
 export function calculateCSVSS(metricValues: MetricValues): number {
-  const {
-    attackVector,
-    attackComplexity,
-    privilegesRequired,
-    userInteraction,
-    scope,
-    confidentiality,
-    integrity,
-    availability,
-  } = metricValues;
+  const { av, a, ac, c, i, pr, s, ui } = metricValues;
 
-  // Base Score
-  let baseScore = 0;
   let impact = 0;
   let exploitability = 0;
 
-  switch (confidentiality) {
+  switch (c) {
     case Confidentiality.NONE:
       impact = 0;
       break;
@@ -41,9 +30,9 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (integrity) {
+  switch (i) {
     case Integrity.NONE:
-      // Do nothing, impact remains unchanged
+      impact = Math.max(impact, 0);
       break;
     case Integrity.LOW:
       impact = Math.max(impact, 0.22);
@@ -55,9 +44,9 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (availability) {
+  switch (a) {
     case Availability.NONE:
-      // Do nothing, impact remains unchanged
+      impact = Math.max(impact, 0);
       break;
     case Availability.LOW:
       impact = Math.max(impact, 0.22);
@@ -69,7 +58,7 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (scope) {
+  switch (s) {
     case Scope.UNCHANGED:
       exploitability = 8.22;
       break;
@@ -80,7 +69,7 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (attackVector) {
+  switch (av) {
     case AttackVector.PHYSICAL:
       exploitability = Math.min(exploitability, 0.56);
       break;
@@ -97,7 +86,7 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (attackComplexity) {
+  switch (ac) {
     case AttackComplexity.HIGH:
       exploitability = Math.min(exploitability, 0.35);
       break;
@@ -108,7 +97,7 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (privilegesRequired) {
+  switch (pr) {
     case PrivilegesRequired.NONE:
       exploitability = Math.min(exploitability, 0.85);
       break;
@@ -122,7 +111,7 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  switch (userInteraction) {
+  switch (ui) {
     case UserInteraction.NONE:
       exploitability = Math.min(exploitability, 0.85);
       break;
@@ -133,9 +122,13 @@ export function calculateCSVSS(metricValues: MetricValues): number {
       break;
   }
 
-  baseScore = 0.6 * impact + 0.4 * exploitability;
+  // Calculate Base Score using the CVSS formula
+  const exploitabilityCoefficient =
+    8.22 * (1 - 0.02 * Math.min(impact + exploitability, 10));
+  const impactCoefficient = 1.0 - (1.0 - impact) * (1.0 - exploitability);
+  const baseScore =
+    (0.6 * impactCoefficient + 0.4 * exploitabilityCoefficient - 1.5) * 10;
 
-  // Temporal Score and Environmental Score are not implemented in this function
-
-  return baseScore;
+  // Limit the output to a maximum of two decimal places
+  return parseFloat(baseScore.toFixed(2));
 }

@@ -91,7 +91,8 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                               weight="normal"
                             >
                               Reporeted{" "}
-                              {formatDateToAgo(item?.created_at ?? "")} ago
+                              {formatDateToAgo(item.program?.created_at ?? "")}{" "}
+                              ago
                             </Typography>
                           </div>
                         </div>
@@ -149,8 +150,8 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           `text-${columns[5].align}`
                         )}
                       >
-                        {item?.updated_at
-                          ? formatDateToAgo(item.updated_at)
+                        {item.program?.updated_at
+                          ? formatDateToAgo(item.program.updated_at)
                           : "-"}
                       </TableData>
                     </TableRow>

@@ -34,7 +34,7 @@ const SelectTrigger = React.forwardRef<
     {children}
     {withIcon && (
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="h-6 w-6 transition-all duration-200" />
+        <ChevronDownIcon className="mr-4 h-6 w-6 transition-all duration-200" />
       </SelectPrimitive.Icon>
     )}
   </SelectPrimitive.Trigger>

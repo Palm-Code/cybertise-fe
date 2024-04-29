@@ -37,9 +37,10 @@ export type UpdateType = {
 
 export type CsvssCalculatorType = {
   title: string;
+  key: string;
   items: {
     label: string;
-    value: number;
+    value: string;
   }[];
 };
 
@@ -50,12 +51,12 @@ export type SendReportStepsType = {
 };
 
 export type MetricValues = {
-  attackVector: AttackVector;
-  attackComplexity: AttackComplexity;
-  privilegesRequired: PrivilegesRequired;
-  userInteraction: UserInteraction;
-  scope: Scope;
-  confidentiality: Confidentiality;
-  integrity: Integrity;
-  availability: Availability;
+  av: AttackVector;
+  ac: AttackComplexity;
+  pr: PrivilegesRequired;
+  ui: UserInteraction;
+  s: Scope;
+  c: Confidentiality;
+  i: Integrity;
+  a: Availability;
 };

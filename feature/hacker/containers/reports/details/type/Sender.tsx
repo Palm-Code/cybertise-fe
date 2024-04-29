@@ -9,6 +9,7 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
+import { fileDownload } from "@/utils/file-download";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 import { motion } from "framer-motion";
@@ -22,18 +23,6 @@ const Sender = ({
   data?: I_GetChatListItemSuccessResponse["data"][0];
   isLoading?: boolean;
 }) => {
-  const onFileDownload = (url: string, fileName: string) => {
-    //downloaad file from url
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = url.substring(url.lastIndexOf("/") + 1);
-    link.setAttribute(
-      "download",
-      fileName || url.substring(url.lastIndexOf("/") + 1)
-    );
-    link.click();
-  };
-
   if (data)
     return (
       <motion.div
@@ -87,12 +76,7 @@ const Sender = ({
           )}
           {data.media && data.media.length > 0 && (
             <div
-              className={cn(
-                "grid w-full gap-4 md:max-w-80",
-                data.media && data.media.length > 1
-                  ? "grid-cols-2"
-                  : "grid-cols-1"
-              )}
+              className={cn("grid w-full gap-4", "grid-cols-2  md:max-w-2xl")}
             >
               {data.media?.map((file, index) => (
                 <Card
@@ -109,15 +93,17 @@ const Sender = ({
                   <div
                     className={cn(
                       "_flexbox__col__start__between h-full gap-1.5",
-                      "w-full"
+                      "w-full max-w-40 truncate overflow-ellipsis"
                     )}
                   >
-                    <Tooltip content={file.collection_name}>
+                    <Tooltip
+                      content={`${file.name}.${file.file_name.split(".")[1]}`}
+                    >
                       <Typography variant="p" affects="small" weight="semibold">
-                        {data.files && data.files?.length > 1
-                          ? `${file.collection_name.substring(0, 15)}.${file.file_name.split(".")[1]}` +
+                        {data.media && data.media?.length > 1
+                          ? `${file.name.substring(0, 15)}.${file.file_name.split(".")[1]}` +
                             "..."
-                          : `${file.collection_name}.${file.file_name.split(".")[1]}`}
+                          : `${file.name.substring(0, 15)}.${file.file_name.split(".")[1]}...`}
                       </Typography>
                     </Tooltip>
                     <Typography
@@ -140,9 +126,7 @@ const Sender = ({
                     <Button
                       variant="ghost-hacker"
                       className="p-0"
-                      onClick={() =>
-                        onFileDownload(file.original_url, file.collection_name)
-                      }
+                      onClick={() => fileDownload(file.original_url, file.name)}
                       prefixIcon={<Download className="h-6 w-6" />}
                     />
                   </div>
