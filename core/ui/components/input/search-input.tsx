@@ -98,6 +98,7 @@ const SearchInput = ({
             type="text"
             className="w-full bg-transparent outline-none"
             onKeyDown={(e) => e.key === "Enter" && onSubmitSearch()}
+            onChange={onChange}
             {...props}
           />
           <Button

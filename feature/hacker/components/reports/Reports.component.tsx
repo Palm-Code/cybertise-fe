@@ -91,7 +91,7 @@ const Reports = () => {
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
-                Programs
+                Reports
               </Typography>
               <SearchInput
                 value={payload?.params?.search}
@@ -139,7 +139,7 @@ const Reports = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              Reports
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
