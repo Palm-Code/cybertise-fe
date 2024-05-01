@@ -27,14 +27,16 @@ const TicketCard = ({
   return (
     <>
       <Mobile>
-        <Card href={`/reports/${props.id}`} isClickable>
+        <Card href={`/reports/${props.id}`} isClickable className="h-full">
           {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
-            <div className="_flexbox__row__center__between w-full">
+            <div className="_flexbox__row__center__between w-full gap-4">
               <Badge variant="default">{props.program?.type}</Badge>
-              <Indicator variant="clear">{props.status}</Indicator>
+              <Indicator variant={props.status.toLowerCase() as any}>
+                {props.status}
+              </Indicator>
             </div>
             <div className="_flexbox__col__start__start w-full gap-4">
               <div className="_flexbox__row__center__between w-full">
@@ -64,7 +66,7 @@ const TicketCard = ({
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.program?.updated_at ?? "")}
+                  {formatDateToAgo(props?.updated_at ?? "")}
                 </Typography>
               </div>
               <Separator orientation="horizontal" />
@@ -78,7 +80,7 @@ const TicketCard = ({
                     Vulnerability type (CWE)
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    Path Transversal
+                    {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
                 <div className="_flexbox__row__center__between w-full">
@@ -114,7 +116,7 @@ const TicketCard = ({
                   affects="small"
                   className="text-neutral-light-20 dark:text-neutral-dark-20"
                 >
-                  Reported {formatDateToAgo2(props.program?.created_at ?? "")}
+                  Reported {formatDateToAgo2(props?.created_at ?? "")}
                 </Typography>
               </div>
             </div>
@@ -163,8 +165,7 @@ const TicketCard = ({
                       affects="small"
                       className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                     >
-                      Reported{" "}
-                      {formatDateToAgo2(props.program?.created_at ?? "")}
+                      Reported {formatDateToAgo2(props?.created_at ?? "")}
                     </Typography>
                   </div>
                 </div>
@@ -173,7 +174,7 @@ const TicketCard = ({
                   affects="normal"
                   className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                 >
-                  {formatDateToAgo(props.program?.updated_at ?? "")}
+                  {formatDateToAgo(props?.updated_at ?? "")}
                 </Typography>
               </div>
               <div

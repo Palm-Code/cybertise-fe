@@ -21,8 +21,12 @@ const TicketCard = ({
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   return (
     <>
-      <Mobile>
-        <Card href={`/reports/${props.id}`} isClickable={!isMediator}>
+      <Mobile className="h-full">
+        <Card
+          href={`/reports/${props.id}`}
+          isClickable={!isMediator}
+          className="h-full"
+        >
           {!!props.has_new && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
@@ -40,7 +44,7 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.program?.updated_at ?? "")}
+                {formatDateToAgo(props?.updated_at ?? "")}
               </Typography>
             </div>
             <div className="_flexbox__col__start w-full gap-1">
@@ -169,7 +173,7 @@ const TicketCard = ({
                 affects="normal"
                 className="!text-neutral-light-20 dark:!text-neutral-dark-20"
               >
-                {formatDateToAgo(props.program?.updated_at ?? "")}
+                {formatDateToAgo(props?.updated_at ?? "")}
               </Typography>
             </div>
             <div

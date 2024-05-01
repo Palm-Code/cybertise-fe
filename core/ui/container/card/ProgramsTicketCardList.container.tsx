@@ -16,8 +16,8 @@ const TicketCard = ({
 }: I_TicketCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
   return (
     <>
-      <Mobile>
-        <Card isClickable href={`/programs/${props.id}`}>
+      <Mobile className="h-full">
+        <Card isClickable href={`/programs/${props.id}`} className="h-full">
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full", "gap-8")}>
               <Badge variant="default">{props.type}</Badge>
@@ -82,8 +82,8 @@ const TicketCard = ({
           </div>
         </Card>
       </Mobile>
-      <Desktop>
-        <Card isClickable href={`/programs/${props.id}`}>
+      <Desktop className="h-full">
+        <Card isClickable href={`/programs/${props.id}`} className="h-full">
           <div className="_flexbox__row__start__start w-full gap-9">
             {!isGridCard && (
               <div className="relative aspect-square w-12 overflow-hidden rounded-full">

@@ -6,18 +6,44 @@ import {
   Tiptap,
   Typography,
 } from "@/core/ui/components";
+import { FileWithUrl } from "@/interfaces";
+import { useState } from "react";
 
 interface I_ModalSendAttachmentProps {
   isOpen: boolean;
   onClose: () => void;
-  onClickSendAttachment?: () => void;
+  onClickSendAttachment: () => void;
+  description?: string;
+  attachment?: string[];
+  onChangeAttachment: (v: string[]) => void;
+  onChangeValue: (v: string) => void;
+  files?: FileWithUrl[];
+  onChangeFiles: (v?: FileWithUrl[]) => void;
 }
 
 const ModalSendAttachment = ({
   isOpen,
   onClose,
   onClickSendAttachment,
+  description,
+  attachment,
+  onChangeAttachment,
+  onChangeValue,
+  files,
+  onChangeFiles,
 }: I_ModalSendAttachmentProps) => {
+  const onFileSelected = (v: string, file: FileWithUrl[]) => {
+    const newFilesValue = [...(files ? files : []), ...file];
+    onChangeAttachment([...(attachment ?? []), v]);
+    onChangeFiles(newFilesValue);
+  };
+
+  const onFileRemoved = (v?: string) => {
+    if (!v) return;
+    onChangeFiles(files?.filter((file) => file.file_id !== v));
+    onChangeAttachment(attachment?.filter((file) => file !== v) ?? []);
+  };
+
   return (
     <BaseModal isOpen={isOpen} onClose={onClose}>
       <div
@@ -37,14 +63,18 @@ const ModalSendAttachment = ({
               "rounded-[10px] bg-neutral-light-100 dark:bg-neutral-dark-100"
             )}
           >
-            <FileInput onFileRemoved={() => {}} onFileSelected={() => {}} />
+            <FileInput
+              fileValues={files}
+              onFileRemoved={onFileRemoved}
+              onFileSelected={(v, file) => onFileSelected(v, file)}
+            />
             <Tiptap
-              description=""
+              description={description ?? ""}
               label="Write a caption"
               variant="hacker"
               isChat
               className="pb-12 shadow-none"
-              onChangeValue={() => {}}
+              onChangeValue={onChangeValue}
             />
           </div>
         </div>
@@ -54,8 +84,12 @@ const ModalSendAttachment = ({
           </Button>
           <Button
             variant="primary-hacker"
+            disabled={!description}
             fullWidth
-            onClick={onClickSendAttachment}
+            onClick={() => {
+              onClickSendAttachment();
+              // onClose();
+            }}
           >
             Send Attachment
           </Button>

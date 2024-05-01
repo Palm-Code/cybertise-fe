@@ -13,7 +13,7 @@ import Review from "./steps/Review";
 import { informations } from "@/feature/hacker/constants/programs";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ModalCloseSendReport from "../_dialog/ModalCloseSendReport";
 import ModalSuccessSubmit from "../_dialog/ModalSuccessSubmit";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -136,23 +136,6 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
   const onSubmitForm = () => {
     const payload = method.getValues();
     mutateAsync(payload);
-  };
-
-  const checkDisabled = (val: number) => {
-    switch (val) {
-      case 0:
-        return false;
-      case 1:
-        return false;
-      case 2:
-        return false;
-      case 3:
-        return false;
-      case 4:
-        return true;
-      default:
-        return false;
-    }
   };
 
   return (

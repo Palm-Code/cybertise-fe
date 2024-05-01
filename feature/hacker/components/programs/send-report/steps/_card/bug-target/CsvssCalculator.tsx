@@ -1,22 +1,63 @@
 import { cn } from "@/core/lib/utils";
+import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
 import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
+import {
+  AttackComplexity,
+  AttackVector,
+  Availability,
+  Confidentiality,
+  Integrity,
+  PrivilegesRequired,
+  Scope,
+  UserInteraction,
+} from "@/enums";
 import { csvss_calculator } from "@/feature/hacker/constants/programs";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { CVSS30 } from "@pandatix/js-cvss";
 
 export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
   onChangeManualRisk: () => void;
 }
 
+const initialValues = {
+  av: AttackVector.NETWORK,
+  ac: AttackComplexity.LOW,
+  pr: PrivilegesRequired.NONE,
+  ui: UserInteraction.NONE,
+  s: Scope.UNCHANGED,
+  c: Confidentiality.NONE,
+  i: Integrity.NONE,
+  a: Availability.NONE,
+};
+
 const CsvssCalculator = ({
   isManualRisk,
   onChangeManualRisk,
 }: I_CsvssCalculatorProps) => {
+  const { setValue, getValues } = useFormContext<SendReportRequestType>();
+  const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
+    initialValues
+  );
+
+  const forms = getValues();
+
+  const onClickCsvssCalculator = (key: string, value: string) => {
+    const newValue = { ...metricsValue, [key]: value };
+    const metValue = new CVSS30(
+      `CVSS:3.0/AV:${newValue.av}/AC:${newValue.ac}/PR:${newValue.pr}/UI:${newValue.ui}/S:${newValue.s}/C:${newValue.c}/I:${newValue.i}/A:${newValue.a}`
+    );
+    setMetricsValue(newValue);
+    setValue("risk_level", metValue.BaseScore(), { shouldValidate: true });
+  };
+
   return (
     <Card
       className={cn(
         "rounded-md transition-all duration-100 xl:px-4 xl:py-4.5",
         !isManualRisk
-          ? "bg-neutral-light-80 dark:bg-neutral-dark-80 "
+          ? "bg-neutral-light-80 dark:bg-neutral-dark-80"
           : "bg-neutral-light-90 dark:bg-neutral-dark-90"
       )}
     >
@@ -26,7 +67,12 @@ const CsvssCalculator = ({
             <Checkbox
               variant="hacker"
               checked={!isManualRisk}
-              onCheckedChange={onChangeManualRisk}
+              disabled={!isManualRisk}
+              onCheckedChange={() => {
+                setValue("risk_level", 0, { shouldValidate: true });
+                setMetricsValue(initialValues);
+                onChangeManualRisk();
+              }}
             />
             <Typography
               variant="p"
@@ -36,7 +82,29 @@ const CsvssCalculator = ({
               CVSS Calculator
             </Typography>
           </div>
-          {!isManualRisk && <Badge variant="default">0 (No Risk)</Badge>}
+          {!isManualRisk && (
+            <Badge
+              variant={
+                forms.risk_level === 0
+                  ? "default"
+                  : forms.risk_level < 4
+                    ? "low"
+                    : forms.risk_level >= 4 && forms.risk_level < 7
+                      ? "medium"
+                      : "high"
+              }
+            >
+              {forms.risk_level} (
+              {forms.risk_level === 0
+                ? "No"
+                : forms.risk_level < 4
+                  ? "Low"
+                  : forms.risk_level >= 4 && forms.risk_level < 7
+                    ? "Medium"
+                    : "High"}{" "}
+              Risk)
+            </Badge>
+          )}
         </div>
         {!isManualRisk && (
           <div className="relative grid h-fit w-full grid-cols-2 gap-4">
@@ -61,26 +129,36 @@ const CsvssCalculator = ({
                   </Typography>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {item.items.map((label, index) => (
-                    <button
-                      key={`button-label-${index}`}
-                      type="button"
-                      className={cn(
-                        "w-fit  whitespace-nowrap rounded-md border border-transparent",
-                        "bg-neutral-light-100 px-4 py-3 dark:bg-neutral-dark-100",
-                        "hover:bg-lime-lighter/20 disabled:cursor-not-allowed"
-                      )}
-                      disabled={isManualRisk}
-                    >
-                      <Typography
-                        variant="p"
-                        affects="small"
-                        className="text-neutral-light-40 dark:text-neutral-dark-40"
+                  {item.items.map((label, index) => {
+                    return (
+                      <button
+                        key={`button-label-${index}`}
+                        type="button"
+                        className={cn(
+                          "w-fit  whitespace-nowrap rounded-md border border-transparent",
+                          "bg-neutral-light-100 px-4 py-3 dark:bg-neutral-dark-100",
+                          "hover:bg-lime-lighter/20 disabled:cursor-not-allowed",
+
+                          "hover:border-lime-normal-light dark:hover:border-lime-normal-dark",
+                          label.value === metricsValue[item.key]
+                            ? "border-lime-normal-light dark:border-lime-normal-dark"
+                            : "border border-transparent dark:border-transparent"
+                        )}
+                        onClick={() => {
+                          onClickCsvssCalculator(item.key, label.value);
+                        }}
+                        disabled={isManualRisk}
                       >
-                        {label.label}
-                      </Typography>
-                    </button>
-                  ))}
+                        <Typography
+                          variant="p"
+                          affects="small"
+                          className="text-neutral-light-40 dark:text-neutral-dark-40"
+                        >
+                          {label.label}
+                        </Typography>
+                      </button>
+                    );
+                  })}
                 </div>
               </Card>
             ))}

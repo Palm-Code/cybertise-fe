@@ -16,11 +16,20 @@ const ProgramDetailScopeDropdown = ({
   options = [],
   onValueChange = () => {},
 }: IProgramDetailScopeDropdownProps) => {
+  console.log(
+    options.find((v) => v.id === payload?.params?.filter?.asset_type_id)?.value
+  );
   return (
     <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
       <BaseDropdown
         label="Asset type"
-        value={payload?.params?.filter?.asset_type_id || "all"}
+        value={
+          payload?.params?.filter?.asset_type_id
+            ? (options.find(
+                (v) => v.id === payload?.params?.filter?.asset_type_id
+              )?.value as string)
+            : "all"
+        }
         options={options}
         onValueChange={onValueChange}
       />

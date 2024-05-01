@@ -37,7 +37,12 @@ const EmptyState = ({
         return (
           <>
             <EmptyFolder className={iconColors[variant]} />
-            <Typography variant="p" affects="extralarge" weight="bold">
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+              align={"center"}
+            >
               You Have No Ticket Here
             </Typography>
             <Link
@@ -53,7 +58,12 @@ const EmptyState = ({
           <>
             <>
               <Leaf />
-              <Typography variant="p" affects="extralarge" weight="bold">
+              <Typography
+                variant="p"
+                affects="extralarge"
+                weight="bold"
+                align={"center"}
+              >
                 You have no any program yet
               </Typography>
               <Link
@@ -70,7 +80,12 @@ const EmptyState = ({
           <>
             <>
               <EmptyFolder className={iconColors[variant]} />
-              <Typography variant="p" affects="extralarge" weight="bold">
+              <Typography
+                variant="p"
+                affects="extralarge"
+                weight="bold"
+                align={"center"}
+              >
                 Target assets not Found
               </Typography>
             </>
@@ -91,7 +106,12 @@ const EmptyState = ({
         return (
           <>
             <EmptyFolder className={iconColors[variant]} />
-            <Typography variant="p" affects="extralarge" weight="bold">
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+              align={"center"}
+            >
               Under Construction
             </Typography>
             <Link
@@ -106,7 +126,12 @@ const EmptyState = ({
         return (
           <>
             <EmptyFolder className={iconColors[variant]} />
-            <Typography variant="p" affects="extralarge" weight="bold">
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+              align={"center"}
+            >
               {titleText}
             </Typography>
             <Link

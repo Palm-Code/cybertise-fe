@@ -17,7 +17,7 @@ import { useGetChatListItem } from "@/feature/hacker/query/client/useGetChatList
 import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/reports";
 import { useRouter } from "next/navigation";
 import { usePostChatItem } from "@/core/react-query/client";
-import { handleClickScroll } from "@/utils/handle-scroll";
+import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
@@ -27,6 +27,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
+  const [files, setFiles] = useState<SendReportRequestType["files"]>();
   const { mutateAsync, isPending } = usePostChatItem();
 
   const scrollView = () => {
@@ -39,24 +40,21 @@ const ReportDetails = ({ id }: { id: string }) => {
 
   const sendMessage = async () => {
     if (description) {
-      // setAttachments([]);
+      setAttachments([]);
       setDescription("");
       await mutateAsync({
         chat_ticket_id: id,
         sender_name: data?.data[0].sender_name,
         sender_avatar: data?.data[0].sender_avatar,
         content: description,
-        attachments:
-          attachments.length > 0
-            ? attachments
-            : ["70eb031b-6999-4db2-96cf-b1205773f983"],
+        attachments: attachments.length > 0 ? attachments : undefined,
       });
-      // refetch();
+      setFiles(undefined);
       setOpenAttachment(false);
     }
   };
 
-  if (isError) {
+  if (isError || data?.data.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found
@@ -196,12 +194,27 @@ const ReportDetails = ({ id }: { id: string }) => {
           onClickSendMessage={sendMessage}
         />
         <ModalSendAttachment
+          files={files}
+          onChangeFiles={(v) => {
+            setFiles(v);
+          }}
+          description={description}
           isOpen={openAttachment}
-          onClose={() => setOpenAttachment(false)}
-          onClickSendAttachment={() => {}}
+          onClose={() => {
+            setFiles(undefined);
+            setOpenAttachment(false);
+          }}
+          onChangeAttachment={(v) => {
+            setAttachments(v);
+          }}
+          attachment={attachments}
+          onChangeValue={(v) => {
+            setDescription(v);
+          }}
+          onClickSendAttachment={sendMessage}
         />
-        <div ref={chatRef}></div>
       </Desktop>
+      <div ref={chatRef}></div>
     </>
   );
 };

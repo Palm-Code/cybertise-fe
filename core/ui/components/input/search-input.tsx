@@ -18,6 +18,9 @@ const ModalSearch = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  value: string | number | readonly string[];
 }) => {
   return (
     <BaseModal
@@ -33,12 +36,15 @@ const ModalSearch = ({
       >
         <Search />
         <input
+          value={props.value}
           title="search"
           type="text"
           placeholder="Search"
           pattern=""
           enterKeyHint="search"
           className="w-full bg-transparent p-2 outline-none"
+          onChange={props.onChange}
+          onKeyDown={props.onKeyDown}
         />
       </div>
     </BaseModal>
@@ -50,6 +56,8 @@ const SearchInput = ({
   loadingSubmit,
   disabledButton,
   onSubmitSearch = () => {},
+  onChange = () => {},
+  value = "",
   ...props
 }: SearchInputProps) => {
   const [open, setOpen] = useState(false);
@@ -64,7 +72,18 @@ const SearchInput = ({
         >
           <Search />
         </button>
-        <ModalSearch isOpen={open} onClose={() => setOpen(false)} />
+        <ModalSearch
+          value={value}
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          onChange={onChange}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setOpen(false);
+              onSubmitSearch();
+            }
+          }}
+        />
       </Mobile>
       <Desktop>
         <div
@@ -75,9 +94,11 @@ const SearchInput = ({
         >
           <Search />
           <input
+            value={value}
             type="text"
             className="w-full bg-transparent outline-none"
             onKeyDown={(e) => e.key === "Enter" && onSubmitSearch()}
+            onChange={onChange}
             {...props}
           />
           <Button
