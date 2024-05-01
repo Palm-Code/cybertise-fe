@@ -9,6 +9,9 @@ import Typography from "../typography/typography";
 import { cn } from "@/core/lib/utils";
 import { ChatFilter } from "@/core/models/hacker/dashboard";
 import { StoreType } from "@/core/hooks/types";
+import { FilterDrawer } from "../drawer/filter-drawer";
+import { useState } from "react";
+import { I_GetParamsPayload } from "@/core/models/common";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
@@ -22,22 +25,72 @@ const DashboardFilter = ({
   store,
 }: IDashboardFilterProps) => {
   if (!store) return null;
-  const { payload } = store;
+  const { payload, setPayload } = store;
+  const [tempPayload, setTempPayload] = useState<I_GetParamsPayload>(payload);
+
   return (
     <>
       <Mobile className="w-fit">
-        <div
-          className={cn(
-            "min-w-32",
-            "_flexbox__row__center__start gap-2.5 rounded-lg",
-            "bg-neutral-light-100 px-3 py-2 dark:bg-neutral-dark-100"
-          )}
+        <FilterDrawer
+          variant={variant}
+          onSubmitFilter={() => setPayload(tempPayload)}
         >
-          <Filter className={iconColor[variant]} />
-          <Typography variant="p" affects="small">
-            Filter
-          </Typography>
-        </div>
+          <div className="_flexbox__col__start__start w-full gap-6">
+            <BaseDropdown
+              label="Type"
+              value={tempPayload?.params?.filter?.["program.type"] || "all"}
+              options={filterItems.type}
+              onValueChange={(v) => {
+                setTempPayload({
+                  ...tempPayload,
+                  params: {
+                    ...tempPayload.params,
+                    filter: {
+                      ...tempPayload.params?.filter,
+                      ["program.type"]: v === "all" ? undefined : v,
+                    },
+                  },
+                });
+              }}
+            />
+            <Separator />
+            <BaseDropdown
+              label="Risk Level"
+              value={tempPayload?.params?.filter?.level || "all"}
+              options={filterItems.risk_level}
+              onValueChange={(v) => {
+                setTempPayload({
+                  ...tempPayload,
+                  params: {
+                    ...tempPayload.params,
+                    filter: {
+                      ...tempPayload.params?.filter,
+                      level: v === "all" ? undefined : v,
+                    },
+                  },
+                });
+              }}
+            />
+            <Separator />
+            <BaseDropdown
+              label="Status"
+              value={tempPayload?.params?.filter?.status || "all"}
+              options={filterItems.status}
+              onValueChange={(v) => {
+                setTempPayload({
+                  ...tempPayload,
+                  params: {
+                    ...tempPayload.params,
+                    filter: {
+                      ...tempPayload.params?.filter,
+                      status: v === "all" ? undefined : v,
+                    },
+                  },
+                });
+              }}
+            />
+          </div>
+        </FilterDrawer>
       </Mobile>
       <Desktop className="w-fit">
         <div className="_flexbox__row__center__start gap-2.5 rounded-lg bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100">

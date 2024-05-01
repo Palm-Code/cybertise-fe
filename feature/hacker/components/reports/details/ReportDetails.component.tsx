@@ -17,7 +17,6 @@ import { useGetChatListItem } from "@/feature/hacker/query/client/useGetChatList
 import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/reports";
 import { useRouter } from "next/navigation";
 import { usePostChatItem } from "@/core/react-query/client";
-import { FileWithUrl } from "@/interfaces";
 import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
 
 const ReportDetails = ({ id }: { id: string }) => {
@@ -55,7 +54,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     }
   };
 
-  if (isError) {
+  if (isError || data?.data.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found

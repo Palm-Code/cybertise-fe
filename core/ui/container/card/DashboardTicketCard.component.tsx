@@ -32,7 +32,7 @@ const TicketCard = ({
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
-            <div className="_flexbox__row__center__between w-full">
+            <div className="_flexbox__row__center__between w-full gap-4">
               <Badge variant="default">{props.program?.type}</Badge>
               <Indicator variant={props.status.toLowerCase() as any}>
                 {props.status}

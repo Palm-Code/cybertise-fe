@@ -18,7 +18,6 @@ import { tableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import { useGetProgramList } from "../../query/client/useGetProgramList";
 import { useProgramListParamStore } from "../../zustand/store/programs";
 import {
@@ -28,6 +27,8 @@ import {
   useSubmitSearch,
 } from "@/core/hooks";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
 interface I_ProgramsProps {
   assetTypes: I_GetAssetTypeSuccessResponse["data"];
@@ -43,6 +44,8 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
     isRefetching,
     refetch: refetchProgramList,
   } = useGetProgramList(payload);
+  const pageNumbers = programList?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -100,25 +103,47 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               <Typography variant="h4" weight="bold" className="mr-auto">
                 Programs
               </Typography>
-              <SearchInput variant="hacker" placeholder="Search for programs" />
+              <SearchInput
+                value={payload?.params?.search}
+                variant="hacker"
+                placeholder="Search for programs"
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetchProgramList)
+                }
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetchProgramList)
+                }
+              />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
-              <DashboardFilter variant="hacker" store={store} />
-              <div className="inline-flex min-w-32 gap-4">
+              <ProgramsFilterDropdown
+                variant="hacker"
+                store={store}
+                assetTypeOptions={assetTypes}
+                onValueChange={(v, t) => submitChange(t, v)}
+              />
+              {/* <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
                   value={payload.params?.sort}
                   options={filterItems}
                   onValueChange={(v) => useClickSort(v, store)}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           {programList && programList.data.length! ? (
-            <ProgramsGridView
-              isLoading={isLoading || isFetching}
-              data={programList?.data}
-            />
+            <>
+              <ProgramsGridView
+                isLoading={isLoading || isFetching}
+                data={programList?.data}
+              />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
+            </>
           ) : (
             <EmptyState
               variant="hacker"
@@ -160,10 +185,9 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               }
             />
             <ProgramsFilterDropdown
-              payload={payload}
+              store={store}
               assetTypeOptions={assetTypes}
-              onValueChangeType={(v) => submitChange("type", v)}
-              onValueChangeAssetType={(v) => submitChange("has_asset_type", v)}
+              onValueChange={(v, t) => submitChange(t, v)}
             />
           </div>
           {programList && programList.data.length! ? (

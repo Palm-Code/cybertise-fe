@@ -32,3 +32,4 @@ export { default as Timepicker } from "./timepicker/timepicker";
 export * from "./sheet/sheet";
 export * from "./sonner/sonner";
 export { default as ShowingButton } from "./showing/showing";
+export * from "./drawer/filter-drawer";

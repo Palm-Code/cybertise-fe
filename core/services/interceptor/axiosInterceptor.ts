@@ -1,3 +1,4 @@
+import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -36,6 +37,9 @@ axiosInterceptorInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error?.response?.data.code === 401) {
+      logout();
+    }
     // Handle response errors here
     return Promise.reject(error);
   }

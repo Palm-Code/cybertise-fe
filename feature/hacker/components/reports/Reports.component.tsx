@@ -26,6 +26,8 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
 const Reports = () => {
   const store = useReportListStore();
@@ -37,6 +39,8 @@ const Reports = () => {
     refetch,
     isRefetching,
   } = useGetChatList(payload);
+  const pageNumbers = reportsData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -89,7 +93,17 @@ const Reports = () => {
               <Typography variant="h4" weight="bold" className="mr-auto">
                 Programs
               </Typography>
-              <SearchInput variant="hacker" placeholder="Search for programs" />
+              <SearchInput
+                value={payload?.params?.search}
+                variant="hacker"
+                placeholder="Search for programs"
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
+              />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
               <DashboardFilter variant="hacker" store={store} />
@@ -104,7 +118,14 @@ const Reports = () => {
             </div>
           </div>
           {reportsData?.data.length! ? (
-            <ReportsGridView data={reportsData?.data} />
+            <>
+              <ReportsGridView data={reportsData?.data} />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
+            </>
           ) : (
             <EmptyState
               variant="hacker"
