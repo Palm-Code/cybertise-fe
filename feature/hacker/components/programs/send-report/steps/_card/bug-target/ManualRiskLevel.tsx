@@ -30,6 +30,7 @@ const ManualRiskLevel = ({
           <Checkbox
             variant="hacker"
             checked={isManualRisk}
+            disabled={isManualRisk}
             onCheckedChange={onChangeManualRisk}
           />
           <Typography
@@ -41,7 +42,17 @@ const ManualRiskLevel = ({
           </Typography>
         </div>
         {isManualRisk && (
-          <Badge variant="default">
+          <Badge
+            variant={
+              forms.risk_level === 0
+                ? "default"
+                : forms.risk_level < 4
+                  ? "low"
+                  : forms.risk_level >= 4 && forms.risk_level < 7
+                    ? "medium"
+                    : "high"
+            }
+          >
             {forms.risk_level} (
             {forms.risk_level === 0
               ? "No"

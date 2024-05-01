@@ -25,6 +25,10 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
 const Dashboard = () => {
   const store = useChatListParamStore();
@@ -36,6 +40,8 @@ const Dashboard = () => {
     refetch,
     isRefetching,
   } = useGetChatList(payload);
+  const pageNumbers = dashboardData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -77,14 +83,21 @@ const Dashboard = () => {
   return (
     <>
       <Mobile>
-        <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+        <div className="_flexbox__col__start__start min-h-full w-full gap-8">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="semibold" className="mr-auto">
               Open Ticket
             </Typography>
             <SearchInput
+              value={payload?.params?.search}
               variant="hacker"
               placeholder="Try “#21231” or “Company name”"
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetch)
+              }
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetch)
+              }
             />
           </div>
           <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
@@ -104,6 +117,11 @@ const Dashboard = () => {
                 data={dashboardData?.data}
                 isLoading={isLoading || isFetching}
               />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
             </>
           ) : (
             <EmptyState

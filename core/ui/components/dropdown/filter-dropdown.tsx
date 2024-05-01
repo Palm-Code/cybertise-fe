@@ -39,7 +39,11 @@ const FilterDropdown = ({
             className="justify-start gap-2.5 !bg-white dark:!bg-neutral-dark-100"
             withIcon={withIcon}
           >
-            <ArrowUpDown className={iconColor[variant]} />
+            <ArrowUpDown
+              className={iconColor[variant]}
+              width={20}
+              height={20}
+            />
             <Typography
               variant="p"
               affects="small"

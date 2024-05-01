@@ -26,6 +26,8 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
 const Reports = () => {
   const store = useReportListStore();
@@ -37,6 +39,8 @@ const Reports = () => {
     refetch,
     isRefetching,
   } = useGetChatList(payload);
+  const pageNumbers = reportsData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -87,9 +91,19 @@ const Reports = () => {
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
-                Programs
+                Reports
               </Typography>
-              <SearchInput variant="hacker" placeholder="Search for programs" />
+              <SearchInput
+                value={payload?.params?.search}
+                variant="hacker"
+                placeholder="Search for programs"
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
+              />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
               <DashboardFilter variant="hacker" store={store} />
@@ -104,7 +118,14 @@ const Reports = () => {
             </div>
           </div>
           {reportsData?.data.length! ? (
-            <ReportsGridView data={reportsData?.data} />
+            <>
+              <ReportsGridView data={reportsData?.data} />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
+            </>
           ) : (
             <EmptyState
               variant="hacker"
@@ -118,7 +139,7 @@ const Reports = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              Reports
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput

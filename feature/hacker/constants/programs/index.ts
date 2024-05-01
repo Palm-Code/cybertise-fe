@@ -369,133 +369,137 @@ export const informations: SendReportStepsType[] = [
 export const csvss_calculator: CsvssCalculatorType[] = [
   {
     title: "Attack Vector (AV)",
+    key: "av",
     items: [
       {
         label: "Network (N)",
-        value: 0.85,
+        value: "N",
       },
       {
         label: "Adjacent (A)",
-        value: 0.62,
+        value: "A",
       },
       {
         label: "Local (L)",
-        value: 0.55,
+        value: "L",
       },
       {
         label: "Physical (P)",
-        value: 0.2,
+        value: "P",
       },
     ],
   },
   {
     title: "Scope (S)",
+    key: "s",
     items: [
       {
         label: "Unchanged (U)",
-        value: 0.85,
+        value: "U",
       },
       {
         label: "Changed (C)",
-        value: 0.62,
+        value: "C",
       },
     ],
   },
   {
     title: "Attack Complexity (AC)",
+    key: "ac",
     items: [
       {
-        label: "High (H)",
-        value: 0.44,
-      },
-      {
-        label: "Medium (M)",
-        value: 0.77,
-      },
-      {
         label: "Low (L)",
-        value: 0.85,
+        value: "L",
+      },
+      {
+        label: "High (H)",
+        value: "H",
       },
     ],
   },
   {
     title: "Confidentiality (C)",
+    key: "c",
     items: [
       {
-        label: "High (H)",
-        value: 0.85,
-      },
-      {
-        label: "Medium (M)",
-        value: 0.62,
+        label: "None (N)",
+        value: "N",
       },
       {
         label: "Low (L)",
-        value: 0.55,
+        value: "L",
+      },
+      {
+        label: "High (H)",
+        value: "H",
       },
     ],
   },
   {
     title: "Privileges Required (PR)",
+    key: "pr",
     items: [
       {
-        label: "High (H)",
-        value: 0.85,
-      },
-      {
-        label: "Medium (M)",
-        value: 0.62,
+        label: "None (N)",
+        value: "N",
       },
       {
         label: "Low (L)",
-        value: 0.55,
+        value: "L",
+      },
+      {
+        label: "High (H)",
+        value: "H",
       },
     ],
   },
   {
     title: "Integrity (I)",
+    key: "i",
     items: [
       {
-        label: "High (H)",
-        value: 0.85,
-      },
-      {
-        label: "Medium (M)",
-        value: 0.62,
+        label: "None (N)",
+        value: "N",
       },
       {
         label: "Low (L)",
-        value: 0.55,
+        value: "L",
+      },
+      {
+        label: "High (H)",
+        value: "H",
       },
     ],
   },
   {
     title: "User Interaction (UI)",
+    key: "ui",
     items: [
       {
         label: "None (N)",
-        value: 0.85,
+        value: "N",
       },
       {
         label: "Required (R)",
-        value: 0.62,
+        value: "R",
       },
     ],
   },
   {
     title: "Availability (A)",
+    key: "a",
     items: [
       {
-        label: "High (H)",
-        value: 0.85,
-      },
-      {
-        label: "Medium (M)",
-        value: 0.62,
+        label: "None (N)",
+        value: "N",
       },
       {
         label: "Low (L)",
-        value: 0.55,
+        value: "L",
+      },
+      {
+        label: "High (H)",
+        value: "H",
       },
     ],
   },

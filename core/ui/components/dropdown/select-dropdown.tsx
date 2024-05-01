@@ -53,10 +53,13 @@ const SelectDropdown = ({
           props.transparentBg && "!bg-transparent",
           props.className
         )}
+        withIcon
       >
         <Input
           iconValue={withIcon ? iconValue : undefined}
           readOnly
+          disabled
+          className="disabled:cursor-pointer"
           value={inputValueLabel}
           {...props}
         />
