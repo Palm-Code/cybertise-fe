@@ -46,7 +46,7 @@ export const FilterDrawer = ({
         <div className="w-full overflow-auto px-6">{children}</div>
         <DrawerFooter>
           <DrawerClose onClick={() => onSubmitFilter()}>
-            <Button variant="primary-hacker" fullWidth>
+            <Button variant={`primary-${variant}`} fullWidth>
               Apply Filter
             </Button>
           </DrawerClose>

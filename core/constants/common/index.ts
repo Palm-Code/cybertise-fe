@@ -81,3 +81,15 @@ export const borderColor: { [key in Role]: string } = {
   mediator:
     "border-violet-normal dark:border-violet-normal hover:border-violet-normal dark:hover:border-violet-normal",
 };
+
+export const backgroundColor: { [key in Role]: string } = {
+  hacker: "bg-lime-normal-light dark:bg-lime-normal-dark",
+  company: "bg-sky-normal",
+  mediator: "bg-violet-normal",
+};
+
+export const iconColor: { [key in Role]: string } = {
+  hacker: "text-lime-normal-light dark:text-lime-normal-dark",
+  company: "text-sky-normal",
+  mediator: "text-violet-normal",
+};

@@ -8,6 +8,7 @@ interface I_ChatTicket {
   poc: string;
   user_id: string;
   company_id: string;
+  company_name: string;
   program_id: string;
   related_ticket_id: string | null;
   target_asset_id: string;
@@ -62,7 +63,7 @@ export interface I_Data {
   id?: string;
   chat_ticket_id: string;
   sender?: string;
-  content: string;
+  content?: string;
   badge?: string;
   has_link?: boolean;
   og_image?: string;

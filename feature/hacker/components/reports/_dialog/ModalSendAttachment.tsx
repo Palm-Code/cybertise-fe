@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { FileWithUrl } from "@/interfaces";
-import { useState } from "react";
 
 interface I_ModalSendAttachmentProps {
   isOpen: boolean;
@@ -19,6 +18,7 @@ interface I_ModalSendAttachmentProps {
   onChangeValue: (v: string) => void;
   files?: FileWithUrl[];
   onChangeFiles: (v?: FileWithUrl[]) => void;
+  isLoading?: boolean;
 }
 
 const ModalSendAttachment = ({
@@ -31,6 +31,7 @@ const ModalSendAttachment = ({
   onChangeValue,
   files,
   onChangeFiles,
+  isLoading,
 }: I_ModalSendAttachmentProps) => {
   const onFileSelected = (v: string, file: FileWithUrl[]) => {
     const newFilesValue = [...(files ? files : []), ...file];
@@ -84,7 +85,8 @@ const ModalSendAttachment = ({
           </Button>
           <Button
             variant="primary-hacker"
-            disabled={!description}
+            disabled={(!description && !attachment?.length) || isLoading}
+            isLoading={isLoading}
             fullWidth
             onClick={() => {
               onClickSendAttachment();

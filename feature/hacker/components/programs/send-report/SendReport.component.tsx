@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   sendReportFormSchema,
   SendReportRequestType,
-} from "@/core/models/hacker/programs/post_send_report";
+} from "@/core/models/common/post_send_report";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgramDetails";
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";

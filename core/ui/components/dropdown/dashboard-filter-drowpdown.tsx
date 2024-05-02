@@ -5,8 +5,6 @@ import BaseDropdown from "./base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import Separator from "../separator/separator";
 import { Desktop, Mobile } from "../../layout";
-import Typography from "../typography/typography";
-import { cn } from "@/core/lib/utils";
 import { ChatFilter } from "@/core/models/hacker/dashboard";
 import { StoreType } from "@/core/hooks/types";
 import { FilterDrawer } from "../drawer/filter-drawer";
@@ -37,6 +35,7 @@ const DashboardFilter = ({
         >
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
+              variant={variant}
               label="Type"
               value={tempPayload?.params?.filter?.["program.type"] || "all"}
               options={filterItems.type}
@@ -55,6 +54,7 @@ const DashboardFilter = ({
             />
             <Separator />
             <BaseDropdown
+              variant={variant}
               label="Risk Level"
               value={tempPayload?.params?.filter?.level || "all"}
               options={filterItems.risk_level}
@@ -73,6 +73,7 @@ const DashboardFilter = ({
             />
             <Separator />
             <BaseDropdown
+              variant={variant}
               label="Status"
               value={tempPayload?.params?.filter?.status || "all"}
               options={filterItems.status}

@@ -10,7 +10,6 @@ import Typography from "@/core/ui/components/typography/typography";
 import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
   DashboardCardView,
@@ -18,44 +17,109 @@ import {
   DashboardTableView,
 } from "../../containers";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useGetChatList } from "../../query/client";
+import { useChatListParamStore } from "../../zustand/store/dashboard";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
-const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
+const Dashboard = () => {
+  const store = useChatListParamStore();
+  const { payload, setPayload } = store;
+  const {
+    data: dashboardData,
+    isLoading,
+    isFetching,
+    refetch,
+    isRefetching,
+  } = useGetChatList(payload);
+  const pageNumbers = dashboardData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <DashboardTableView columns={tableColumns} data={data} />,
-    card: <DashboardCardView data={data} />,
-    grid: <DashboardGridView data={data} />,
+    table: (
+      <DashboardTableView
+        columns={tableColumns}
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    card: (
+      <DashboardCardView
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    grid: (
+      <DashboardGridView
+        data={dashboardData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+  };
+
+  const submitChange = (type: string, value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
+      },
+    });
   };
 
   return (
     <>
       <Mobile>
-        <div className="_flexbox__col__start__start min-h-full w-full gap-10">
+        <div className="_flexbox__col__start__start min-h-full w-full gap-8">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography variant="h4" weight="semibold" className="mr-auto">
               Open Ticket
             </Typography>
             <SearchInput
+              value={payload?.params?.search}
               variant="company"
               placeholder="Try “#21231” or “Company name”"
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetch)
+              }
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetch)
+              }
             />
           </div>
-          <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="company" />
+          <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
+            <DashboardFilter variant="company" store={store} />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="company"
-                value="Sort By"
+                value={payload?.params?.sort}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
           </div>
-          {data.length! ? (
+          {dashboardData?.data.length! ? (
             <>
-              <DashboardGridView data={data} />
+              <DashboardGridView
+                data={dashboardData?.data}
+                isLoading={isLoading || isFetching}
+              />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
             </>
           ) : (
             <EmptyState
@@ -76,25 +140,61 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
               <SearchInput
                 variant="company"
                 placeholder="Try “#21231” or “Company name”"
+                value={payload?.params?.search}
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                loadingSubmit={isLoading && isRefetching}
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
               />
             </div>
           </div>
           <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="company" />
+            <DashboardFilter
+              variant="company"
+              onValueChange={(v, t) => submitChange(t, v)}
+              store={store}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="company"
-                value="Sort By"
+                value={payload?.params?.sort as string}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
               <FilterViewDropdown type="company" options={filterView} />
             </div>
           </div>
-          {data.length! ? (
+          {dashboardData?.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="company" />
+              <Pagination
+                variant="company"
+                active={payload.params?.page?.size}
+                meta={dashboardData?.meta}
+                activePage={payload.params?.page?.number}
+                onClickNext={() =>
+                  useClickPaginate(payload.params?.page?.number! + 1, store)
+                }
+                onClickPrevious={() =>
+                  useClickPaginate(payload.params?.page?.number! - 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) => {
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: {
+                        ...payload.params?.page!,
+                        size: v,
+                      },
+                    },
+                  });
+                }}
+              />
             </>
           ) : (
             <EmptyState

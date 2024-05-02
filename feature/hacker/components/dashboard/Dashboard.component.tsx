@@ -26,8 +26,6 @@ import {
   useSubmitSearch,
 } from "@/core/hooks";
 import useLoadMore from "@/core/hooks/useLoadMore";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
 const Dashboard = () => {

@@ -15,6 +15,7 @@ interface I_BaseDropdownProps {
   options: SortFilterType[];
   value?: string;
   label?: string;
+  variant?: "hacker" | "company" | "mediator";
 }
 
 const BaseDropdown = ({
@@ -22,6 +23,7 @@ const BaseDropdown = ({
   options,
   value,
   label = "Sort By",
+  variant = "hacker",
   ...props
 }: I_BaseDropdownProps) => {
   const inputValueLabel = options.find(
@@ -46,6 +48,7 @@ const BaseDropdown = ({
                     {option.label}
                   </Typography>
                   <Checkbox
+                    variant={variant}
                     checked={value === option.value}
                     onCheckedChange={() => {
                       onValueChange(option.value as string);
