@@ -93,3 +93,10 @@ export const iconColor: { [key in Role]: string } = {
   company: "text-sky-normal",
   mediator: "text-violet-normal",
 };
+
+export const currentPhase: { [key: string]: string } = {
+  phase2: "Setup Phase",
+  phase3: "Company Revision",
+  phase4: "Mediator Revision",
+  phase5: "Publish",
+};

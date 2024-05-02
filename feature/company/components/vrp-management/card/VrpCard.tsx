@@ -1,9 +1,11 @@
+import { currentPhase } from "@/core/constants/common";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import {
   Badge,
-  badgeVariants,
   Card,
   Indicator,
   Separator,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
@@ -11,12 +13,12 @@ import { SortFilterType } from "@/types/admin/dashboard";
 
 interface I_VRPCard {
   id?: string;
-  name?: string;
+  title?: string;
   status?: string;
-  asset_type?: SortFilterType[];
+  asset_types?: SortFilterType[];
 }
 
-const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
+const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
   return (
     <>
       <Mobile>
@@ -24,9 +26,15 @@ const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="_flexbox__col__start__between w-full gap-4">
               <Typography variant="p" affects="large" weight="semibold">
-                {name}
+                {title}
               </Typography>
-              <Indicator variant="caution">{status}</Indicator>
+              <Indicator
+                variant={
+                  status?.toLowerCase().includes("phase") ? "open" : "clear"
+                }
+              >
+                {`${status} ${status?.toLowerCase().includes("phase") ? `: ${currentPhase[status?.toLowerCase()]}` : ""}`}
+              </Indicator>
             </div>
             <Separator orientation="horizontal" />
             <div className="_flexbox__col__start__start gap-2.5">
@@ -38,19 +46,19 @@ const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
                 Asset type Available
               </Typography>
               <div className="flex flex-wrap gap-4">
-                {asset_type?.slice(0, 3)?.map((item) => {
+                {asset_types?.slice(0, 3)?.map((item) => {
                   return (
                     <Badge
                       key={`asset_type-${item?.value}`}
-                      variant={item.value as keyof typeof badgeVariants}
+                      variant={item.label?.toLowerCase() as any}
                     >
-                      {item.label}
+                      {item.value}
                     </Badge>
                   );
                 })}
-                {asset_type && asset_type?.length > 3 && (
+                {asset_types && asset_types?.length > 3 && (
                   <Badge variant="default">
-                    +{asset_type?.length - 3} More
+                    +{asset_types?.length - 3} More
                   </Badge>
                 )}
               </div>
@@ -63,9 +71,15 @@ const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="p" affects="large" weight="semibold">
-                {name}
+                {title}
               </Typography>
-              <Indicator variant="caution">{status}</Indicator>
+              <Indicator
+                variant={
+                  status?.toLowerCase().includes("phase") ? "open" : "clear"
+                }
+              >
+                {`${status} ${status?.toLowerCase().includes("phase") ? `: ${currentPhase[status?.toLowerCase()]}` : ""}`}
+              </Indicator>
             </div>
             <div className="_flexbox__col__start__start gap-2.5">
               <Typography
@@ -76,20 +90,27 @@ const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
                 Asset type Available
               </Typography>
               <div className="grid grid-flow-col gap-4">
-                {asset_type?.slice(0, 3)?.map((item) => {
+                {asset_types?.slice(0, 3)?.map((item) => {
                   return (
                     <Badge
                       key={`asset_type-${item?.value}`}
-                      variant={item.value as keyof typeof badgeVariants}
+                      variant={item.label?.toLowerCase() as any}
                     >
-                      {item.label}
+                      {item.value}
                     </Badge>
                   );
                 })}
-                {asset_type && asset_type?.length > 3 && (
-                  <Badge variant="default">
-                    +{asset_type?.length - 3} More
-                  </Badge>
+                {asset_types && asset_types?.length > 3 && (
+                  <Tooltip
+                    content={asset_types
+                      .map((item) => item.value)
+                      .slice(3, asset_types.length - 1)
+                      .join(", ")}
+                  >
+                    <Badge variant="default">
+                      +{asset_types?.length - 3} More
+                    </Badge>
+                  </Tooltip>
                 )}
               </div>
             </div>
@@ -101,7 +122,7 @@ const VRPCard = ({ id, name, status, asset_type }: I_VRPCard) => {
 };
 
 interface I_VRPCardList {
-  data?: I_VRPCard[];
+  data?: I_GetProgramListSuccessResponse["data"];
 }
 
 const VRPCardList = ({ data }: I_VRPCardList) => {

@@ -16,6 +16,7 @@ interface I_EmptyStateProps {
   buttonText?: string;
   titleText?: string;
   href?: string;
+  onClickButton?: () => void;
 }
 
 const iconColors: { [key in Role]: string } = {
@@ -30,6 +31,7 @@ const EmptyState = ({
   buttonText = "See VRP Launchpad",
   href = "/",
   titleText = "You're not Allowed Here",
+  onClickButton = () => {},
 }: I_EmptyStateProps) => {
   const iconsType = () => {
     switch (type) {
@@ -99,6 +101,15 @@ const EmptyState = ({
               <Typography variant="p" affects="extralarge" weight="bold">
                 You have no update yet
               </Typography>
+              {!!buttonText && (
+                <Button
+                  variant="primary-company"
+                  className="w-full"
+                  onClick={() => onClickButton()}
+                >
+                  {buttonText}
+                </Button>
+              )}
             </>
           </>
         );

@@ -4,6 +4,8 @@ import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
+import ModalAddUpdates from "../../_modals/ModalAddUpdates";
+import { useState } from "react";
 
 interface I_Update extends UpdateType {}
 
@@ -40,14 +42,39 @@ interface I_UpdateList {
 }
 
 const UpdateList = ({ data }: I_UpdateList) => {
-  if (!data.length) return <EmptyState type="update" variant="company" />;
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  if (!data.length)
+    return (
+      <>
+        <EmptyState
+          type="update"
+          variant="company"
+          buttonText="Add New Update"
+          onClickButton={() => setOpenModal(true)}
+        />
+        <ModalAddUpdates
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      </>
+    );
 
   return (
-    <div className="_flexbox__col__start__start mt-4 w-full gap-8">
-      {data.map((item, idx) => (
-        <Update key={`update-${idx}`} {...item} />
-      ))}
-    </div>
+    <>
+      <div className="_flexbox__col__start__start mt-4 w-full gap-8">
+        <button
+          type="button"
+          onClick={() => setOpenModal(true)}
+          className="w-full rounded-md border border-white px-4 py-6 text-center"
+        >
+          + Add New VRP
+        </button>
+        {data.map((item, idx) => (
+          <Update key={`update-${idx}`} {...item} />
+        ))}
+      </div>
+      <ModalAddUpdates isOpen={openModal} onClose={() => setOpenModal(false)} />
+    </>
   );
 };
 

@@ -24,7 +24,11 @@ const Button = ({
 }: ButtonProps) => {
   if (asLink) {
     return (
-      <Link href={href as string} target={target} className="mt-1 w-full">
+      <Link
+        href={href as string}
+        target={target}
+        className={`${props.fullWidth && "w-full"} mt-1`}
+      >
         <BaseButton {...props}>
           {isLoading ? (
             <div className="relative flex w-full items-center justify-between gap-2.5">
