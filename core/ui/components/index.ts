@@ -33,4 +33,4 @@ export * from "./sheet/sheet";
 export * from "./sonner/sonner";
 export { default as ShowingButton } from "./showing/showing";
 export * from "./drawer/filter-drawer";
-export * from "./loader/loader";
+export { default as Loader } from "./loader/loader";

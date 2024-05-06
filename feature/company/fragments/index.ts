@@ -5,3 +5,4 @@ export { default as ManageCompanyFragment } from "./manage-company/ManageCompany
 export { default as VrpManagementFragment } from "./vrp-management/VrpManagement.fragment";
 export { default as OverviewFragment } from "./vrp-management/overview/Overview.fragment";
 export { default as CreateVrpFragment } from "./vrp-management/create-vrp/CreateVrp.fragment";
+export { default as DetailsVRPFragment } from "./vrp-management/details/DetailsVrp.fragment";

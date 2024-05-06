@@ -3,7 +3,8 @@ import IndicatorSteps from "./_indicator/Indicator.steps";
 import Setup from "./stages/setup-phase/Setup.stages";
 import VRPHeroCard from "@/core/ui/container/vrp-launchpad/_card/VRPHeroCard";
 import { AnimationWrapper } from "../../layout";
-import VrpDetails from "./stages/vrp-details/VrpDetails.stages";
+import VRPCreation from "./stages/vrp-creation/VrpCreation.stages";
+import VRPDetails from "./stages/vrp-details/VrpDetails.stages";
 
 interface I_CreateVrpLaunchpadProps {
   variant: "mediator" | "company";
@@ -24,7 +25,7 @@ const CreateVrpLaunchpad = ({
       case "Phase3":
         return {
           currentSteps: 3,
-          element: <VrpDetails variant={variant} />,
+          element: <VRPDetails currentStep={"Phase3"} variant={variant} />,
         };
       case "Phase4":
         return {
@@ -39,7 +40,7 @@ const CreateVrpLaunchpad = ({
       default:
         return {
           currentSteps: 1,
-          element: <VrpDetails variant={variant} />,
+          element: <VRPCreation variant={variant} />,
         };
     }
   };

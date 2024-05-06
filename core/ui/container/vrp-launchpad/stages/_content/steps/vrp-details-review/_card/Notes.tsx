@@ -2,7 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
-const Notes = ({ data }: { data: string }) => {
+const Notes = ({ data }: { data?: string }) => {
   return (
     <Card
       className={cn(
@@ -16,7 +16,7 @@ const Notes = ({ data }: { data: string }) => {
       </Typography>
       <div
         dangerouslySetInnerHTML={{
-          __html: sanitize(data),
+          __html: sanitize(data ?? ""),
         }}
       ></div>
     </Card>

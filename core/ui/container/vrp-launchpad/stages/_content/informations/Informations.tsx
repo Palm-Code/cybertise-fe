@@ -21,7 +21,7 @@ const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
     <Card
       className={cn(
         "_flexbox__col__start__start w-full gap-6 rounded-xl",
-        "!bg-transparent px-8 py-12"
+        "!bg-transparent xl:px-8 xl:py-12"
       )}
     >
       <Typography variant="p" affects="extralarge" weight="bold">

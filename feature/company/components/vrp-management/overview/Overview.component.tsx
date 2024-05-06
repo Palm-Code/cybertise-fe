@@ -122,7 +122,7 @@ const Overview = ({ id }: { id: string }) => {
                 variant="tertiary-company"
                 className="py-0"
                 prefixIcon={<FilePenLine />}
-                href={`/vrp-launchpad/${1}`}
+                href={`/vrp-launchpad/${id}`}
               >
                 Edit VRP
               </Button>

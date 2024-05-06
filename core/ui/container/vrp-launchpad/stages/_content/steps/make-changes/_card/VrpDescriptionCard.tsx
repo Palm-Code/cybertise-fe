@@ -33,7 +33,7 @@ const VrpDescriptionCard = ({
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
           "bg-neutral-light-100 dark:bg-neutral-dark-100",
-          "p-7.5"
+          "xl:p-7.5"
         )}
       >
         <Typography variant="h6" weight="bold">

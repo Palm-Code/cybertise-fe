@@ -6,32 +6,43 @@ import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import Information from "../_content/informations/Informations";
-import { vrpInformations } from "@/core/constants/vrp-launchpad";
+import {
+  monetaryAwardData,
+  vrpInformations,
+} from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
-import MakeChanges from "../_content/steps/make-changes/MakeChanges";
 import Notes from "../_content/steps/notes/Notes";
-import { useGetAssetType } from "@/core/react-query/client";
-import { SortFilterType } from "@/types/admin/dashboard";
-import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import Brief from "../_content/steps/brief/Brief";
+import VrpDescriptionCard from "../_content/steps/make-changes/_card/VrpDescriptionCard";
+import MonetaryAwardCardList from "../_content/steps/make-changes/_card/MonetaryAwardsCard";
+import TargetAssetListCard from "../_content/steps/make-changes/_card/TargetAssetListCard";
+import ModalPublishVRP from "../../_dialog/ModalPublishVRP";
 import {
   createVrpSchema,
   CreateVrpType,
 } from "@/core/models/common/post_create_vrp";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import { useGetAssetType } from "@/core/react-query/client";
+import { SortFilterType } from "@/types/admin/dashboard";
+import { usePostCreateVrp } from "@/core/react-query/client/usePostCreateVrp";
+import { toast } from "sonner";
+import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
+import RulesAndPolicies from "../_content/steps/vrp-details-review/_card/RulesAndPolicies";
 
-interface I_SetupProps {
+interface I_VRPCreationProps {
   variant: "mediator" | "company";
   currentStep?: string;
-  initialData?: I_GetProgramDetailsSuccessResponse["data"];
+  initialValues?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
-const Setup = ({
+const VRPCreation = ({
   variant,
-  currentStep,
-  initialData: initialValues,
-}: I_SetupProps) => {
+  initialValues,
+  currentStep = "Phase1",
+}: I_VRPCreationProps) => {
+  console.log("initialData", currentStep);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
   const { data: assetTypeOptions } = useGetAssetType();
   const options: SortFilterType[] =
     assetTypeOptions
@@ -43,6 +54,19 @@ const Setup = ({
         };
       })
       .filter((item) => item.id !== "") || [];
+  const lists: {
+    [key: string]: {
+      label: string;
+      value: number;
+    }[];
+  } = {
+    Phase1: vrpInformations.vrp_details,
+    Phase2: vrpInformations.setup_phase,
+    Phase3: vrpInformations.company_revision,
+    Phase4: vrpInformations.mediator_revision,
+    Phase5: vrpInformations.publish,
+  };
+  const { mutateAsync, isPending, isSuccess } = usePostCreateVrp();
   const method = useForm<CreateVrpType>({
     mode: "onChange",
     resolver: zodResolver(createVrpSchema),
@@ -65,39 +89,66 @@ const Setup = ({
   const { step, steps, currentStepIndex, goTo, next, back, containerRef } =
     useMultistepForm([
       {
+        element:
+          currentStep === "Phase1" ? (
+            <Brief onClickNext={() => next()} />
+          ) : (
+            <Notes currentSteps={currentStep} onClickNext={() => next()} />
+          ),
+        key: currentStep === "Phase1" ? "brief" : "notes",
+      },
+      {
         element: (
-          <VrpDetailsReview
-            currentStep={currentStep}
-            variant={variant}
-            assetTypes={options}
+          <VrpDescriptionCard
+            isCompany
             onClickNext={() => next()}
+            onClickPrev={() => back()}
           />
         ),
         key: "vrp-details",
       },
       {
         element: (
-          <MakeChanges
+          <MonetaryAwardCardList
+            data={monetaryAwardData}
+            variant={variant}
+            isCompany
+            onClickNext={() => next()}
+            onClickPrev={() => back()}
+          />
+        ),
+        key: "monetary-award",
+      },
+      {
+        element: (
+          <TargetAssetListCard
+            isCompany
             options={options}
             onClickNext={() => next()}
             onClickPrev={() => back()}
           />
         ),
-        key: "make-changes",
+        key: "target-asset",
       },
       {
         element: (
-          <Notes onClickNext={() => next()} onClickPrev={() => back()} />
+          <Notes
+            variant="company"
+            onClickNext={() => next()}
+            onClickPrev={() => back()}
+          />
         ),
         key: "notes",
       },
       {
         element: (
           <VrpDetailsReview
-            currentStep={currentStep}
+            variant="company"
             assetTypes={options}
+            isLoading={isPending}
             isLastStep
             onClickEdit={() => goTo(1)}
+            onClickNext={() => onSubmitForm()}
           />
         ),
         key: "review",
@@ -105,7 +156,12 @@ const Setup = ({
     ]);
 
   const onSubmitForm = () => {
-    setSuccessSubmit(true);
+    if (Object.values(method.formState.errors).length === 0) {
+      const data = method.getValues();
+      mutateAsync(data);
+    } else {
+      toast.error("Please fill in all required fields");
+    }
   };
 
   return (
@@ -134,7 +190,7 @@ const Setup = ({
                 <Card
                   className={cn(
                     "_flexbox__col__start__start h-full gap-6",
-                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8"
+                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 xl:pb-12 xl:pt-8"
                   )}
                 >
                   {step}
@@ -149,7 +205,7 @@ const Setup = ({
               )}
             >
               <Information
-                lists={vrpInformations.setup_phase}
+                lists={lists[currentStep]}
                 variant={variant}
                 activeStep={currentStepIndex + 1}
               />
@@ -157,7 +213,9 @@ const Setup = ({
           </div>
         </div>
       </FormProvider>
+      <ModalPublishVRP isOpen={openModal} onClose={() => setOpenModal(false)} />
+      <ModalSubmitVRP isOpen={isSuccess} />
     </>
   );
 };
-export default Setup;
+export default VRPCreation;

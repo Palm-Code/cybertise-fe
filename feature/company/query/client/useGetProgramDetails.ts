@@ -14,7 +14,7 @@ export const useGetProgramDetails = (
     I_GetErrorResponse
   >({
     queryKey: [
-      "getProgramList",
+      "getProgramListDetails",
       payload?.params?.page,
       payload?.params?.filter,
     ],

@@ -48,14 +48,16 @@ export interface I_GetProgramListSuccessResponse {
     monetary_awards_medium: number;
     monetary_awards_low: number;
     monetary_awards_critical: number;
-    rules: string;
+    rules: string | null;
+    policies: string | null;
     company_id: string;
     type: string;
     asset_types?: I_AssetType[];
     target_assets?: I_TargetAsset[];
     company?: I_Company;
     latest_updates?: I_LatestUpdates[];
-    notes?: I_Note;
+    note?: I_Note;
+    notes?: string;
   }[];
   meta?: I_Meta;
 }

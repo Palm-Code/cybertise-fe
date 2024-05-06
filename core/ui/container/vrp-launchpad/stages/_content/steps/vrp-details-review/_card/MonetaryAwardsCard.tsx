@@ -5,7 +5,7 @@ import { ShieldCheck } from "@/core/ui/icons";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 
 const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
-  const category = data?.monetary_awards_level.split("-")[0] || "custom";
+  const category = data?.monetary_awards_level?.split("-")[0] || "custom";
   return (
     <>
       <Card

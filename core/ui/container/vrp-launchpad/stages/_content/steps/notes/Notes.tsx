@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
+import { sanitize } from "@/utils/sanitize-input";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -9,15 +10,43 @@ interface INotesProps {
   variant?: "mediator" | "company";
   onClickNext?: () => void;
   onClickPrev?: () => void;
+  currentSteps?: string;
 }
 
 const Notes = ({
   onClickNext,
   onClickPrev,
   variant = "mediator",
+  currentSteps = "Phase1",
 }: INotesProps) => {
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
+
+  if (currentSteps === "Phase3")
+    return (
+      <div className="_flexbox__col__start__start w-full gap-6">
+        <Typography variant="h5" weight="bold">
+          Notes
+        </Typography>
+        <Card
+          className={cn(
+            "_flexbox__col__start__start w-full gap-6 rounded-[10px]",
+            "bg-neutral-light-100 dark:bg-neutral-dark-100",
+            "xl:p-7.5"
+          )}
+        >
+          <div
+            dangerouslySetInnerHTML={{
+              __html: sanitize(forms.notes ?? ""),
+            }}
+          ></div>
+          <Button variant="primary-company" onClick={onClickNext}>
+            Next
+          </Button>
+        </Card>
+      </div>
+    );
+
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
       <Typography variant="h5" weight="bold">

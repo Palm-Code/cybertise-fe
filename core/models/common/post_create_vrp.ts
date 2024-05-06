@@ -37,6 +37,7 @@ export const createVrpSchema = z.object({
     .number()
     .min(1, { message: "Monetary Awards Low is required" }),
   rules: z.string().min(1, { message: "Rules is required" }).optional(),
+  policies: z.string().min(1, { message: "Policies is required" }).optional(),
   monetary_awards_level: z
     .string()
     .min(1, { message: "Monetary Awards Level is required" }),

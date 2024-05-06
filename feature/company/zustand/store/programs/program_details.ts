@@ -12,15 +12,8 @@ export type Actions = {
 const initialState: State = {
   payload: {
     params: {
-      page: {
-        size: 10,
-        number: 1,
-      },
       include: "company,targetAssets",
-      append: "asset_types,latest_updates",
-      filter: {
-        "programs.status": "published",
-      },
+      append: "asset_types,latest_updates,notes",
     },
   },
 };
