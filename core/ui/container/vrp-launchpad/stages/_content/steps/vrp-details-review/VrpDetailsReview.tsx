@@ -4,12 +4,17 @@ import MonetaryAwardsCard from "./_card/MonetaryAwardsCard";
 import TargetAssetListCard from "./_card/TargetAssetListCard";
 import Notes from "./_card/Notes";
 import { FilePenLine } from "lucide-react";
+import { useFormContext } from "react-hook-form";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
+import { SortFilterType } from "@/types/admin/dashboard";
 
 interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
   isLastStep?: boolean;
   onClickEdit?: () => void;
   variant?: "mediator" | "company";
+  assetTypes: SortFilterType[];
+  isLoading?: boolean;
 }
 
 const VrpDetailsReview = ({
@@ -17,7 +22,10 @@ const VrpDetailsReview = ({
   isLastStep = false,
   onClickEdit,
   variant = "mediator",
+  isLoading = false,
 }: I_VrpDetailsReviewProps) => {
+  const { getValues } = useFormContext<CreateVrpType>();
+  const forms = getValues();
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
@@ -34,12 +42,16 @@ const VrpDetailsReview = ({
           </Button>
         )}
       </div>
-      <VrpDescriptionCard />
-      <MonetaryAwardsCard />
-      <TargetAssetListCard />
-      <Notes />
+      <VrpDescriptionCard data={forms} />
+      <MonetaryAwardsCard data={forms} />
+      <TargetAssetListCard data={forms} />
+      <Notes data={forms.notes} />
       {variant === "company" ? (
-        <Button variant="primary-company" onClick={onClickNext}>
+        <Button
+          variant="primary-company"
+          onClick={onClickNext}
+          isLoading={isLoading}
+        >
           Send to Mediator
         </Button>
       ) : (

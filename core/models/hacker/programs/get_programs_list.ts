@@ -32,21 +32,30 @@ export interface I_LatestUpdates {
   deleted_at: string | null;
 }
 
+export interface I_Note {
+  id: string;
+  content: string;
+}
+
 export interface I_GetProgramListSuccessResponse {
   data: {
     id: string;
     title: string;
     status: string;
+    description?: string;
     monetary_awards_level: string;
     monetary_awards_high: number;
     monetary_awards_medium: number;
     monetary_awards_low: number;
+    monetary_awards_critical: number;
+    rules: string;
     company_id: string;
     type: string;
     asset_types?: I_AssetType[];
     target_assets?: I_TargetAsset[];
     company?: I_Company;
     latest_updates?: I_LatestUpdates[];
+    notes?: I_Note;
   }[];
   meta?: I_Meta;
 }

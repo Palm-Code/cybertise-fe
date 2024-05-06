@@ -17,17 +17,57 @@ import VrpDescriptionCard from "../_content/steps/make-changes/_card/VrpDescript
 import MonetaryAwardCardList from "../_content/steps/make-changes/_card/MonetaryAwardsCard";
 import TargetAssetListCard from "../_content/steps/make-changes/_card/TargetAssetListCard";
 import ModalPublishVRP from "../../_dialog/ModalPublishVRP";
+import {
+  createVrpSchema,
+  CreateVrpType,
+  I_GetCreateVrpListSuccessResponse,
+} from "@/core/models/common/post_create_vrp";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import { useGetAssetType } from "@/core/react-query/client";
+import { SortFilterType } from "@/types/admin/dashboard";
+import { usePostCreateVrp } from "@/core/react-query/client/usePostCreateVrp";
+import { toast } from "sonner";
+import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
 
 interface I_VRPDetailsProps {
-  id: string;
   variant: "mediator" | "company";
   currentStep?: number;
+  initialValues?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
-const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
+const VRPDetails = ({ variant, initialValues }: I_VRPDetailsProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
-  const method = useForm();
+  const { data: assetTypeOptions } = useGetAssetType();
+  const options: SortFilterType[] =
+    assetTypeOptions
+      ?.map((item) => {
+        return {
+          value: item.value.toLowerCase(),
+          label: item.label,
+          id: item.id,
+        };
+      })
+      .filter((item) => item.id !== "") || [];
+  const { mutateAsync, isPending, isSuccess } = usePostCreateVrp();
+  const method = useForm<CreateVrpType>({
+    mode: "onChange",
+    resolver: zodResolver(createVrpSchema),
+    defaultValues: {
+      title: initialValues?.title || "",
+      description: initialValues?.description || "",
+      monetary_awards_critical: initialValues?.monetary_awards_critical || 0,
+      monetary_awards_high: initialValues?.monetary_awards_high || 0,
+      monetary_awards_medium: initialValues?.monetary_awards_medium || 0,
+      monetary_awards_low: initialValues?.monetary_awards_low || 0,
+      target_assets: initialValues?.target_assets || [],
+      notes: initialValues?.notes?.content || "",
+      monetary_awards_level: initialValues?.monetary_awards_level || "",
+      type: initialValues?.type || "",
+      rules: initialValues?.rules || "",
+      asset_types_values: initialValues?.asset_types || [],
+    },
+  });
   const {
     step,
     steps,
@@ -57,6 +97,7 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
       element: (
         <MonetaryAwardCardList
           data={monetaryAwardData}
+          variant={variant}
           isCompany
           onClickNext={() => next()}
           onClickPrev={() => back()}
@@ -68,6 +109,7 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
       element: (
         <TargetAssetListCard
           isCompany
+          options={options}
           onClickNext={() => next()}
           onClickPrev={() => back()}
         />
@@ -88,9 +130,11 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
       element: (
         <VrpDetailsReview
           variant="company"
+          assetTypes={options}
+          isLoading={isPending}
           isLastStep
           onClickEdit={() => goTo(1)}
-          onClickNext={() => setOpenModal(true)}
+          onClickNext={() => onSubmitForm()}
         />
       ),
       key: "review",
@@ -98,17 +142,19 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
   ]);
 
   const onSubmitForm = () => {
-    setSuccessSubmit(true);
+    if (Object.values(method.formState.errors).length === 0) {
+      const data = method.getValues();
+      mutateAsync(data);
+    } else {
+      toast.error("Please fill in all required fields");
+    }
   };
 
   return (
     <>
       <FormProvider {...method}>
         <div ref={containerRef} className="absolute top-0"></div>
-        <form
-          onSubmit={method.handleSubmit(onSubmitForm)}
-          className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl"
-        >
+        <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <AnimationWrapper
             key={steps[currentStepIndex].key}
             className={cn(
@@ -130,7 +176,7 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
                 <Card
                   className={cn(
                     "_flexbox__col__start__start h-full gap-6",
-                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 pb-12 pt-8"
+                    "overflow-y-auto rounded-b-xl rounded-t-none px-8 xl:pb-12 xl:pt-8"
                   )}
                 >
                   {step}
@@ -151,9 +197,10 @@ const VRPDetails = ({ id, variant, currentStep = 1 }: I_VRPDetailsProps) => {
               />
             </div>
           </div>
-        </form>
+        </div>
       </FormProvider>
       <ModalPublishVRP isOpen={openModal} onClose={() => setOpenModal(false)} />
+      <ModalSubmitVRP isOpen={isSuccess} />
     </>
   );
 };

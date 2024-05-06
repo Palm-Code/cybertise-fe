@@ -54,7 +54,7 @@ const IndicatorSteps = ({ variant, currentSteps }: I_IndicatorStepsProps) => {
   return (
     <Card
       className={cn(
-        "rounded-none p-0 py-4",
+        "rounded-none xl:p-0 xl:py-4",
         "_flexbox__col__start__start w-full gap-3"
       )}
     >

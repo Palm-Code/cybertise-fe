@@ -5,18 +5,24 @@ import { AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { NumericFormat } from "react-number-format";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
+import { UseFormSetValue } from "react-hook-form";
 
 interface CustomPricingProps {
   handleClickExpand: () => void;
   activeCard: boolean;
+  value: CreateVrpType;
+  setValue: UseFormSetValue<CreateVrpType>;
 }
 
 const CustomPricing = ({
   handleClickExpand,
   activeCard,
+  value,
+  setValue,
 }: CustomPricingProps) => {
   return (
-    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 p-8 dark:bg-neutral-dark-100">
+    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:p-8 dark:bg-neutral-dark-100">
       <button
         type="button"
         title="Expand"
@@ -43,10 +49,50 @@ const CustomPricing = ({
             transition={{ duration: 0.3 }}
             className="grid w-full grid-cols-2 gap-6 overflow-hidden"
           >
-            <Input label="Low" isPrice />
-            <Input label="Medium" isPrice />
-            <Input label="High" isPrice />
-            <Input label="Critical" isPrice />
+            <Input
+              label="Low"
+              value={value.monetary_awards_low}
+              isPrice
+              onChangeNumberValue={(value) =>
+                setValue("monetary_awards_low", value.floatValue as number, {
+                  shouldValidate: true,
+                })
+              }
+            />
+            <Input
+              label="Medium"
+              value={value.monetary_awards_medium}
+              isPrice
+              onChangeNumberValue={(value) =>
+                setValue("monetary_awards_medium", value.floatValue as number, {
+                  shouldValidate: true,
+                })
+              }
+            />
+            <Input
+              label="High"
+              value={value.monetary_awards_high}
+              isPrice
+              onChangeNumberValue={(value) =>
+                setValue("monetary_awards_high", value.floatValue as number, {
+                  shouldValidate: true,
+                })
+              }
+            />
+            <Input
+              label="Critical"
+              value={value.monetary_awards_critical}
+              isPrice
+              onChangeNumberValue={(value) =>
+                setValue(
+                  "monetary_awards_critical",
+                  value.floatValue as number,
+                  {
+                    shouldValidate: true,
+                  }
+                )
+              }
+            />
           </motion.div>
         )}
       </AnimatePresence>

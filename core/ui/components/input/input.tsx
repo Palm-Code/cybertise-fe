@@ -7,7 +7,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import Typography from "../typography/typography";
 import { disableArrowKeys } from "@/utils/disable-arrow-number";
-import { NumericFormat } from "react-number-format";
+import { OnValueChange } from "react-number-format";
 import CustomNumberFormat from "./price-format-input";
 
 export interface InputProps
@@ -24,6 +24,8 @@ export interface InputProps
   description?: string;
   transparentBg?: boolean;
   isPrice?: boolean;
+  onChangeNumberValue?: OnValueChange;
+  containerClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -40,10 +42,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isError = false,
       placeholderText,
       defaultValue,
+      value,
       iconValue,
       description,
       transparentBg = false,
       isPrice = false,
+      onChangeNumberValue,
+      containerClassName,
       ...props
     },
     ref
@@ -77,7 +82,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }, [onClickRevealPassword]);
 
     return (
-      <div className="_flexbox__col__start w-full gap-1">
+      <div
+        className={cn("_flexbox__col__start w-full gap-1", containerClassName)}
+      >
         <div
           className={cn(
             "relative z-10 flex h-16 w-full items-center justify-center rounded-md",
@@ -104,6 +111,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
               {isPrice ? (
                 <CustomNumberFormat
+                  value={value as number}
                   className={cn(
                     "absolute my-auto h-4 w-full bg-transparent text-neutral-light-0",
                     "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
@@ -111,6 +119,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   )}
                   placeholder={isFocused ? placeholderText : " "}
                   onChange={onChangeValue}
+                  onValueChange={onChangeNumberValue}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
                   autoComplete="new-password"
@@ -129,6 +138,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
                     //   : "text-base font-normal"
                   )}
+                  value={value}
                   placeholder={isFocused ? placeholderText : " "}
                   onChange={onChangeValue}
                   onFocus={handleFocus}

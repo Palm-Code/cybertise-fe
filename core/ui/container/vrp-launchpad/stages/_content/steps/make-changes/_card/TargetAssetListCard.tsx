@@ -1,25 +1,37 @@
 "use client";
 import { cn } from "@/core/lib/utils";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
+import { useGetAssetType } from "@/core/react-query/client";
 import { Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
-import { filterItems } from "@/feature/mediator/constants/dashboard";
+import { SortFilterType } from "@/types/admin/dashboard";
 import { FilePenLine, X } from "lucide-react";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface I_TargetAssetListCard<T extends boolean> {
   isCompany?: T;
   onClickNext?: T extends true ? () => void : undefined;
   onClickPrev?: T extends true ? () => void : undefined;
+  options: SortFilterType[];
 }
+
+const initialValues: CreateVrpType["target_assets"][0] = {
+  content: "",
+  asset_type_id: "",
+};
 
 const TargetAssetListCard = ({
   isCompany = false,
   onClickNext,
   onClickPrev,
+  options,
 }: I_TargetAssetListCard<boolean>) => {
+  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const forms = watch();
   const [assetCount, setAssetCount] = useState(5);
   const [isEditingList, setIsEditingList] = useState<boolean[]>(
-    Array(assetCount).fill(false)
+    Array(forms.target_assets.length).fill(false)
   );
 
   const handleEditClick = (index: number) => {
@@ -29,6 +41,16 @@ const TargetAssetListCard = ({
       return newList;
     });
   };
+
+  const handleAddAsset = () => {
+    const oldTeargetAssets = forms.target_assets;
+    setValue("target_assets", [...oldTeargetAssets, { ...initialValues }]);
+  };
+
+  const disabledButton =
+    forms.target_assets.length < 1 ||
+    forms.target_assets.some((v) => v.asset_type_id === "" || v.content === "");
+
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <Typography variant="h5" weight="bold">
@@ -44,7 +66,7 @@ const TargetAssetListCard = ({
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
           "bg-background-page-light dark:bg-background-page-dark",
-          "p-7.5"
+          "xl:p-7.5"
         )}
       >
         <Typography
@@ -54,52 +76,92 @@ const TargetAssetListCard = ({
         >
           List of Target Assets
         </Typography>
-        {Array(assetCount)
-          .fill(0)
-          .map((_, index) => (
-            <Card
-              className={cn(
-                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md p-0 px-4",
-                "border border-transparent transition-colors duration-100",
-                "bg-neutral-light-100 dark:bg-neutral-dark-100"
-              )}
-              key={`list-make-changes-target-assets-${index}`}
-            >
-              <Input
-                label="Other"
-                placeholderText="Input url"
-                value="Hostname or IP Address"
-                className="bg-transparen w-full"
-                transparentBg
-                readOnly={!isEditingList[index]}
+        {forms.target_assets.map((v, index) => (
+          <Card
+            className={cn(
+              "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md xl:p-0 xl:px-4",
+              "border border-transparent transition-colors duration-100",
+              "bg-neutral-light-100 dark:bg-neutral-dark-100"
+            )}
+            key={`list-make-changes-target-assets-${index}`}
+          >
+            <Input
+              label={"Asset " + (index + 1)}
+              placeholderText="Hostname or IP Address"
+              value={v.content ?? "Hostname or IP Address"}
+              className="bg-transparen w-full"
+              onChange={(e) =>
+                setValue(
+                  "target_assets",
+                  forms.target_assets.map((v, i) =>
+                    i === index ? { ...v, content: e.target.value } : v
+                  ),
+                  { shouldValidate: true }
+                )
+              }
+              transparentBg
+              readOnly={!isEditingList[index]}
+            />
+            {isEditingList[index] ? (
+              <AssetType
+                label="Asset type"
+                value={forms.target_assets[index].asset_type_id}
+                onValueChange={(e) => {
+                  const oldValueAssetType = forms.asset_types_values;
+                  const newAssetTypeValue = options.find(
+                    (v) => v.id === e
+                  ) as CreateVrpType["asset_types_values"][0];
+                  setValue(
+                    "asset_types_values",
+                    [
+                      ...oldValueAssetType.filter((v, i) => i !== index),
+                      newAssetTypeValue,
+                    ],
+                    {
+                      shouldValidate: true,
+                    }
+                  );
+                  setValue(
+                    "target_assets",
+                    forms.target_assets.map((v, i) =>
+                      i === index ? { ...v, asset_type_id: e } : v
+                    ),
+                    { shouldValidate: true }
+                  );
+                }}
+                options={options}
               />
-              {isEditingList[index] ? (
-                <AssetType
-                  label="Asset type"
-                  value="ios"
-                  onValueChange={() => {}}
-                  options={filterItems.asset_type}
-                />
-              ) : (
-                <div className="_flexbox__row__center gap-4">
-                  <button
-                    type="button"
-                    title="Edit"
-                    onClick={() => handleEditClick(index)}
-                  >
-                    <FilePenLine />
-                  </button>
-                  <button
-                    type="button"
-                    title="Delete"
-                    onClick={() => setAssetCount(assetCount - 1)}
-                  >
-                    <X />
-                  </button>
-                </div>
-              )}
-            </Card>
-          ))}
+            ) : (
+              <div className="_flexbox__row__center gap-4">
+                <button
+                  type="button"
+                  title="Edit"
+                  onClick={() => handleEditClick(index)}
+                >
+                  <FilePenLine />
+                </button>
+              </div>
+            )}
+            <button
+              type="button"
+              title="Delete"
+              onClick={() => {
+                setValue(
+                  "asset_types_values",
+                  forms.asset_types_values.filter((v, i) => i !== index),
+                  { shouldValidate: true }
+                );
+                setValue(
+                  "target_assets",
+                  forms.target_assets.filter((v, i) => i !== index),
+                  { shouldValidate: true }
+                );
+              }}
+            >
+              <X />
+            </button>
+          </Card>
+        ))}
         <button
           title="Add"
           type="button"
@@ -107,7 +169,7 @@ const TargetAssetListCard = ({
             "w-full rounded-md border",
             "border-neutral-light-0 px-4 py-4.5 dark:border-neutral-dark-0"
           )}
-          onClick={() => setAssetCount(assetCount + 1)}
+          onClick={() => handleAddAsset()}
         >
           + Add New Assets
         </button>
@@ -117,7 +179,11 @@ const TargetAssetListCard = ({
           <Button variant="secondary-company" onClick={onClickPrev}>
             Previous
           </Button>
-          <Button variant="primary-company" onClick={onClickNext}>
+          <Button
+            variant="primary-company"
+            disabled={disabledButton}
+            onClick={onClickNext}
+          >
             Next
           </Button>
         </div>

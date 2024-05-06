@@ -1,6 +1,6 @@
 export type OptionsType = {
   icon?: string;
-  value: string;
+  value: string | number;
   label: string;
 };
 

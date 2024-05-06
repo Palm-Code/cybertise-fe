@@ -129,6 +129,7 @@ export const vrpInformations = {
 export const monetarySData: PricingProps[] = [
   {
     tier: "Tier I",
+    category: "S-Tier1",
     list: [
       {
         label: "Low",
@@ -147,10 +148,10 @@ export const monetarySData: PricingProps[] = [
         value: 200,
       },
     ],
-    checked: false,
   },
   {
     tier: "Tier II",
+    category: "S-Tier2",
     list: [
       {
         label: "Low",
@@ -169,10 +170,10 @@ export const monetarySData: PricingProps[] = [
         value: 200,
       },
     ],
-    checked: false,
   },
   {
     tier: "Tier III",
+    category: "S-Tier3",
     list: [
       {
         label: "Low",
@@ -191,7 +192,210 @@ export const monetarySData: PricingProps[] = [
         value: 200,
       },
     ],
-    checked: false,
+  },
+];
+export const monetaryMData: PricingProps[] = [
+  {
+    tier: "Tier I",
+    category: "M-Tier1",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier II",
+    category: "M-Tier2",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier III",
+    category: "M-Tier3",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+];
+export const monetaryLData: PricingProps[] = [
+  {
+    tier: "Tier I",
+    category: "L-Tier1",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier II",
+    category: "L-Tier2",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier III",
+    category: "L-Tier3",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+];
+export const monetaryXLData: PricingProps[] = [
+  {
+    tier: "Tier I",
+    category: "XL-Tier1",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier II",
+    category: "XL-Tier2",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
+  },
+  {
+    tier: "Tier III",
+    category: "XL-Tier3",
+    list: [
+      {
+        label: "Low",
+        value: 200,
+      },
+      {
+        label: "Medium",
+        value: 200,
+      },
+      {
+        label: "High",
+        value: 200,
+      },
+      {
+        label: "Critical",
+        value: 200,
+      },
+    ],
   },
 ];
 
@@ -200,20 +404,50 @@ export const monetaryAwardData: MonetaryAwardType[] = [
     title: "Category S",
     category: "S",
     priceData: monetarySData,
+    variant: "company",
   },
   {
     title: "Category M",
     category: "M",
-    priceData: monetarySData,
+    priceData: monetaryMData,
+    variant: "company",
   },
   {
     title: "Category L",
     category: "L",
-    priceData: monetarySData,
+    priceData: monetaryLData,
+    variant: "company",
   },
   {
     title: "Category XL",
     category: "XL",
+    priceData: monetaryXLData,
+    variant: "company",
+  },
+];
+export const monetaryAwardMediatorData: MonetaryAwardType[] = [
+  {
+    title: "Category S",
+    category: "S",
     priceData: monetarySData,
+    variant: "company",
+  },
+  {
+    title: "Category M",
+    category: "M",
+    priceData: monetaryMData,
+    variant: "company",
+  },
+  {
+    title: "Category L",
+    category: "L",
+    priceData: monetaryLData,
+    variant: "company",
+  },
+  {
+    title: "Category XL",
+    category: "XL",
+    priceData: monetaryXLData,
+    variant: "company",
   },
 ];

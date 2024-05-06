@@ -1,18 +1,41 @@
+import { borderColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Checkbox, Typography } from "@/core/ui/components";
 import { PricingProps } from "@/types/admin/vrp-launchpad";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 
-const PricingCard = ({ tier, list, checked }: PricingProps) => {
+const PricingCard = ({
+  tier,
+  list,
+  variant = "company",
+  onClickCard,
+  value,
+  category,
+}: PricingProps & {
+  value: string;
+  variant?: "hacker" | "company" | "mediator";
+  onClickCard: (
+    value: { value: number; label: string }[],
+    category: string
+  ) => void;
+  category?: string;
+}) => {
+  const checked = value === category;
   return (
     <Card
+      isButton
       className={cn(
-        "rounded-[10px] bg-neutral-light-90 px-4 py-7.5 dark:bg-neutral-dark-90",
-        "_flexbox__col__start__start w-full gap-6"
+        "rounded-[10px]  xl:px-4 xl:py-7.5 ",
+        "_flexbox__col__start__start w-full gap-6 border",
+        checked ? borderColor[variant] : "border-transparent",
+        checked
+          ? "bg-background-main-light dark:bg-background-main-dark"
+          : "bg-neutral-light-90 dark:bg-neutral-dark-90"
       )}
+      onClick={() => onClickCard(list, category)}
     >
       <div className="_flexbox__row__start gap-6">
-        <Checkbox variant="mediator" checked={checked} />
+        <Checkbox variant={variant} checked={checked} />
         <Typography variant="h6" weight="bold">
           {tier}
         </Typography>
@@ -40,15 +63,29 @@ const PricingCard = ({ tier, list, checked }: PricingProps) => {
 
 type PricingCardListProps = {
   data: PricingProps[];
+  value: string;
+  variant?: "hacker" | "company" | "mediator";
+  onClickCard: (
+    value: { value: number; label: string }[],
+    category: string
+  ) => void;
 };
 
-const PricingCardList = ({ data }: PricingCardListProps) => {
+const PricingCardList = ({
+  data,
+  variant = "company",
+  onClickCard,
+  value,
+}: PricingCardListProps) => {
   return data.map((data, idx) => (
     <PricingCard
+      value={value}
       key={`list-make-changes-card-${idx}`}
       tier={data.tier}
       list={data.list}
-      checked={data.checked}
+      variant={variant}
+      onClickCard={onClickCard}
+      category={data.category}
     />
   ));
 };

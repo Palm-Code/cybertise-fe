@@ -79,7 +79,7 @@ const SelectDropdown = ({
         )}
         {optionsFilter.length! ? (
           optionsFilter.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.value} value={option.value as string}>
               {withIcon && (
                 <Image
                   src={option.icon ?? ""}

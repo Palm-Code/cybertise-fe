@@ -1,7 +1,9 @@
 "use client";
 import { cn } from "@/core/lib/utils";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface INotesProps {
   variant?: "mediator" | "company";
@@ -14,9 +16,10 @@ const Notes = ({
   onClickPrev,
   variant = "mediator",
 }: INotesProps) => {
-  const [description, setDescription] = useState<string>("");
+  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const forms = watch();
   return (
-    <Card className={cn("_flexbox__col__start__start w-full gap-6 p-0")}>
+    <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
       <Typography variant="h5" weight="bold">
         Change Notes
       </Typography>
@@ -27,18 +30,22 @@ const Notes = ({
         tristique senectus et netus et malesuada fames ac turpis.
       </Typography>
       <Tiptap
-        description={description}
+        description={forms.notes}
         label="Change Notes"
-        onChangeValue={(v) => setDescription(v)}
-        onClearInput={() => setDescription("")}
-        variant="mediator"
+        onChangeValue={(v) => setValue("notes", v)}
+        onClearInput={() => setValue("notes", "")}
+        variant={variant}
         withTooltip
       />
       <div className="_flexbox__row__center gap-8">
         <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
           Previous
         </Button>
-        <Button variant={`primary-${variant}`} onClick={onClickNext}>
+        <Button
+          variant={`primary-${variant}`}
+          disabled={!forms.notes}
+          onClick={onClickNext}
+        >
           Next
         </Button>
       </div>

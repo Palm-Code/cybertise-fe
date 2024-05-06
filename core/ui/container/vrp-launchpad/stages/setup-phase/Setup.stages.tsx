@@ -10,16 +10,28 @@ import { vrpInformations } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
 import MakeChanges from "../_content/steps/make-changes/MakeChanges";
 import Notes from "../_content/steps/notes/Notes";
+import { useGetAssetType } from "@/core/react-query/client";
+import { SortFilterType } from "@/types/admin/dashboard";
 
 interface I_SetupProps {
-  id: string;
   variant: "mediator" | "company";
   currentStep?: number;
 }
 
-const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
+const Setup = ({ variant, currentStep = 1 }: I_SetupProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
+  const { data: assetTypeOptions } = useGetAssetType();
+  const options: SortFilterType[] =
+    assetTypeOptions
+      ?.map((item) => {
+        return {
+          value: item.value.toLowerCase(),
+          label: item.label,
+          id: item.id,
+        };
+      })
+      .filter((item) => item.id !== "") || [];
   const method = useForm();
   const {
     step,
@@ -33,12 +45,18 @@ const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
     containerRef,
   } = useMultistepForm([
     {
-      element: <VrpDetailsReview onClickNext={() => next()} />,
+      element: (
+        <VrpDetailsReview assetTypes={options} onClickNext={() => next()} />
+      ),
       key: "vrp-details",
     },
     {
       element: (
-        <MakeChanges onClickNext={() => next()} onClickPrev={() => back()} />
+        <MakeChanges
+          options={options}
+          onClickNext={() => next()}
+          onClickPrev={() => back()}
+        />
       ),
       key: "make-changes",
     },
@@ -47,7 +65,13 @@ const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
       key: "notes",
     },
     {
-      element: <VrpDetailsReview isLastStep onClickEdit={() => goTo(1)} />,
+      element: (
+        <VrpDetailsReview
+          assetTypes={options}
+          isLastStep
+          onClickEdit={() => goTo(1)}
+        />
+      ),
       key: "review",
     },
   ]);
