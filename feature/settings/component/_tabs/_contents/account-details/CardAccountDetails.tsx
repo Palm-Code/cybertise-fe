@@ -53,7 +53,6 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
               >
                 {menus[0]}
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
               email@example.com
@@ -66,7 +65,6 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
               >
                 {menus[1]}
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
               wwww.example.com
@@ -79,7 +77,6 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
               >
                 {menus[2]}
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
               +1 123 456 789
@@ -113,19 +110,16 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
               <Typography variant="p" affects="normal" className="col-span-1">
                 email@example.com
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
             <div className="_flexbox__row__center__start gap-2.5">
               <Typography variant="p" affects="normal" className="col-span-1">
                 wwww.example.com
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
             <div className="_flexbox__row__center__start gap-2.5">
               <Typography variant="p" affects="normal" className="col-span-1">
                 +1 123 456 789
               </Typography>
-              <Badge variant="default">verified</Badge>
             </div>
           </div>
         </Card>

@@ -5,14 +5,21 @@ import CardAccountDetails from "../component/_tabs/_contents/account-details/Car
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 
 interface I_DetailsProps {
   variant: Role;
   isEditing: boolean;
   handleClickEdit: (v: boolean) => void;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
-const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
+const Details = ({
+  variant,
+  isEditing,
+  handleClickEdit,
+  data,
+}: I_DetailsProps) => {
   if (isEditing)
     return (
       <>
@@ -60,7 +67,7 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between mb-6 w-full">
           <Typography variant="h5" weight="bold">
-            Account Details
+            {variant === "company" ? "Company" : "Account"} Details
           </Typography>
           <Button
             variant={`tertiary-${variant}`}
@@ -69,8 +76,8 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
             onClick={() => {}}
           ></Button>
         </div>
-        <CardAbout />
-        <CardAccountDetails />
+        <CardAbout variant={variant} />
+        <CardAccountDetails variant={variant} />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-6">
@@ -86,8 +93,8 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
               Edit Account Details
             </Button>
           </div>
-          <CardAbout />
-          <CardAccountDetails />
+          <CardAbout variant={variant} />
+          <CardAccountDetails variant={variant} />
         </div>
       </Desktop>
     </>

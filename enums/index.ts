@@ -22,10 +22,10 @@ export enum manageCompanyTabsItemEnums {
 
 export enum SettingItems {
   details = 0,
+  billings = 1,
   notifications = 2,
   security = 3,
   data_privacy = 4,
-  billings = 1,
 }
 
 export enum AttackVector {

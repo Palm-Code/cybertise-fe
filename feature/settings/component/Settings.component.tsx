@@ -1,8 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Loader, Typography } from "@/core/ui/components";
 import Tab from "./_tabs/SettingTab";
-import { hackerSettingTabItems } from "../constants";
 import { useState } from "react";
 import { SettingItems } from "@/enums";
 import {
@@ -16,6 +15,8 @@ import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { I_SettingsFragmentProps } from "../fragments/Settings.fragment";
 import { ChevronRight, MoveLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { settingTabItems } from "../constants";
+import { useGetUserProfile } from "@/core/react-query/client";
 
 const Setting = ({ role }: I_SettingsFragmentProps) => {
   const [activeTab, setActiveTab] = useState<SettingItems>(
@@ -24,9 +25,14 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
   const [editing, setEditing] = useState<boolean>(false);
 
+  const { data: userData, isLoading, isFetching } = useGetUserProfile();
+
+  if (isLoading || isFetching) return <Loader variant={role} />;
+
   const tabs: { [key in SettingItems]: JSX.Element } = {
     0: (
       <Details
+        data={userData?.data}
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}
@@ -59,7 +65,7 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
               Settings
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-4">
-              {hackerSettingTabItems.map((item, idx) => (
+              {settingTabItems[role].map((item, idx) => (
                 <Card
                   key={`item-setting-${idx}`}
                   isButton
@@ -97,7 +103,7 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
                 className="inline-flex items-center gap-2.5"
               >
                 <MoveLeft onClick={() => setActiveState(null)} />
-                {hackerSettingTabItems[activeState].label}
+                {settingTabItems[role][activeState].label}
               </Typography>
             </Card>
             <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
@@ -113,7 +119,7 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
           </Typography>
           {!editing && (
             <Tab
-              items={hackerSettingTabItems}
+              items={settingTabItems[role]}
               variant={role}
               active={activeTab}
               onValueChange={(v) => setActiveTab(v)}

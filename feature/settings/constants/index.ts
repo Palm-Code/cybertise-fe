@@ -1,4 +1,5 @@
 import { SortFilterType } from "@/types/admin/dashboard";
+import { Role } from "@/types/admin/sidebar";
 
 export const hackerSettingTabItems: SortFilterType[] = [
   {
@@ -41,3 +42,27 @@ export const mediatorSettingTabItems: SortFilterType[] = [
     value: "data_privacy",
   },
 ];
+export const companySettingTabItems: SortFilterType[] = [
+  {
+    label: "Company Details",
+    value: "details",
+  },
+  {
+    label: "Notifications",
+    value: "notifications",
+  },
+  {
+    label: "Security",
+    value: "security",
+  },
+  {
+    label: "Data & Privacy",
+    value: "data_privacy",
+  },
+];
+
+export const settingTabItems: { [key in Role]: SortFilterType[] } = {
+  [Role.hacker]: hackerSettingTabItems,
+  [Role.mediator]: mediatorSettingTabItems,
+  [Role.company]: companySettingTabItems,
+};
