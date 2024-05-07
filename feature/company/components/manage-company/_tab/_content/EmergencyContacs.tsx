@@ -1,10 +1,15 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Card, Input, Typography } from "@/core/ui/components";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { Button, Card, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import { FilePenLine, UserPlus, X } from "lucide-react";
-import Image from "next/image";
+import { FilePenLine } from "lucide-react";
+import Link from "next/link";
 
-const EmergencyContacs = () => {
+const EmergencyContacs = ({
+  data,
+}: {
+  data?: I_GetUserProfileSuccessResponse["data"];
+}) => {
   return (
     <>
       <Mobile>
@@ -32,20 +37,20 @@ const EmergencyContacs = () => {
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Registered email
+                  Contact Person
                 </Typography>
                 <Typography variant="p" affects="normal">
-                  email@example.com
+                  {data?.emergency_contact_person}
                 </Typography>
                 <Typography
                   variant="p"
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Website
+                  Email
                 </Typography>
                 <Typography variant="p" affects="normal">
-                  companywebsite.com
+                  {data?.emergency_email}
                 </Typography>
                 <Typography
                   variant="p"
@@ -55,7 +60,7 @@ const EmergencyContacs = () => {
                   Phone number
                 </Typography>
                 <Typography variant="p" affects="normal">
-                  +47092031911
+                  {data?.emergency_phone}
                 </Typography>
               </div>
             </div>
@@ -68,7 +73,12 @@ const EmergencyContacs = () => {
             <Typography variant="h5" weight="bold">
               Emergency Contact
             </Typography>
-            <Button variant="tertiary-company" prefixIcon={<FilePenLine />}>
+            <Button
+              asLink
+              href="/manage-company?edit=emergency_contact"
+              variant="tertiary-company"
+              prefixIcon={<FilePenLine />}
+            >
               Edit Emergency Contact
             </Button>
           </div>
@@ -85,10 +95,10 @@ const EmergencyContacs = () => {
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Registered email
+                  Contact Person
                 </Typography>
                 <Typography variant="p" affects="normal">
-                  email@example.com
+                  {data?.emergency_contact_person}
                 </Typography>
               </div>
               <div className="_flexbox__col__start__start gap-2.5">
@@ -97,10 +107,10 @@ const EmergencyContacs = () => {
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Website
+                  Email
                 </Typography>
                 <Typography variant="p" affects="normal">
-                  companywebsite.com
+                  {data?.emergency_email}
                 </Typography>
               </div>
             </div>
@@ -112,7 +122,7 @@ const EmergencyContacs = () => {
               Phone number
             </Typography>
             <Typography variant="p" affects="normal">
-              +47092031911
+              {data?.emergency_phone}
             </Typography>
           </Card>
         </div>

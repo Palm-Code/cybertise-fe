@@ -106,7 +106,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   alt={label || " "}
                   width={24}
                   height={16}
-                  className="mt-1.5"
+                  className="mt-2 object-contain"
                 />
               )}
               {isPrice ? (
@@ -133,7 +133,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
                     "focus:outline-none focus:ring-0 dark:text-white",
                     prefixIcon && "pl-4",
-                    iconValue ? "top-0 pl-5" : "-top-1.5 pl-0"
+                    iconValue ? "top-0 pl-5" : "-top-1.5 pl-0",
+                    !label && "bottom-1 h-16"
                     // props.type === "password" && hasValue
                     //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
                     //   : "text-base font-normal"

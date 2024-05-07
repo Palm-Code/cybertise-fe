@@ -86,6 +86,7 @@ const SelectDropdown = ({
                   alt={option.label}
                   width={24}
                   height={16}
+                  className="object-cover"
                 />
               )}
               {option.label}

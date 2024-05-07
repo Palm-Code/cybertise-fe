@@ -4,9 +4,13 @@ import { Skeleton } from "../../components/skeleton/skeleton";
 import { Desktop, Mobile } from "../../layout";
 import { Send } from "lucide-react";
 
-const VRPHeroLoading = () => {
+const VRPHeroLoading = ({
+  variant = "hacker",
+}: {
+  variant?: "company" | "mediator" | "hacker";
+}) => {
   return (
-    <>
+    <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10 xl:pb-28 xl:pt-12">
       <Mobile>
         <Card
           className={cn(
@@ -52,14 +56,16 @@ const VRPHeroLoading = () => {
               </Typography>
               <Skeleton />
             </div>
-            <Button
-              variant="primary-hacker"
-              fullWidth
-              prefixIcon={<Send />}
-              disabled
-            >
-              Send Report
-            </Button>
+            {variant === "hacker" && (
+              <Button
+                variant="primary-hacker"
+                fullWidth
+                prefixIcon={<Send />}
+                disabled
+              >
+                Send Report
+              </Button>
+            )}
           </div>
         </Card>
       </Mobile>
@@ -75,13 +81,16 @@ const VRPHeroLoading = () => {
                     <Skeleton />
                   </div>
                 </div>
-                <Button
-                  variant={"primary-hacker"}
-                  prefixIcon={<Send />}
-                  disabled
-                >
-                  Send Report
-                </Button>
+                {variant === "hacker" && (
+                  <Button
+                    variant="primary-hacker"
+                    fullWidth
+                    prefixIcon={<Send />}
+                    disabled
+                  >
+                    Send Report
+                  </Button>
+                )}
               </div>
               <div className="grid h-fit max-h-12 grid-flow-col gap-12">
                 <div className="grid h-full gap-2.5">
@@ -121,7 +130,7 @@ const VRPHeroLoading = () => {
           </div>
         </Card>
       </Desktop>
-    </>
+    </div>
   );
 };
 export default VRPHeroLoading;

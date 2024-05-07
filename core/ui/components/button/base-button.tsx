@@ -41,6 +41,8 @@ const buttonVariants = cva(
           "bg-transparent text-violet-normal hover:text-violet-dark focus:text-violet-dark active:text-violet-darker",
         "ghost-company":
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
+        alert:
+          "border bg-semantic-light-critical/10 dark:bg-semantic-dark-critical/10 text-semantic-light-critical dark:text-semantic-dark-critical border-semantic-light-critical dark:border-semantic-dark-critica hover:bg-semantic-light-critical/20 dark:hover:bg-semantic-dark-critical/20 focus:bg-semantic-light-critical/20 dark:focus:bg-semantic-dark-critical/20 active:bg-semantic-light-critical/20 dark:active:bg-semantic-dark-critical/20",
       },
       size: {
         default: "h-9 px-4 py-2 text-sm",

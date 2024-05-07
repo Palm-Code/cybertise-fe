@@ -147,25 +147,28 @@ const TicketCard = ({
             )}
           >
             <div className="_flexbox__row__start__between w-full">
-              <Image
-                src={props.company?.logo as string}
-                alt={`${props.title} logo`}
-                width={48}
-                height={48}
-                className="mr-4"
-              />
-              <div className="_flexbox__col__start w-full gap-1">
-                <Typography variant="p" affects="large" weight="semibold">
-                  #{props.code} - {props.title}
-                </Typography>
-                <div className="_flexbox__row__center gap-4">
-                  <Typography
-                    variant="p"
-                    affects="small"
-                    className="!text-neutral-light-30 dark:!text-neutral-dark-30"
-                  >
-                    {props.company?.name}
+              <div className="grid w-full grid-cols-[auto_1fr] gap-4">
+                <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                  <Image
+                    src={props.company?.logo as string}
+                    alt={`${props.title} logo`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="_flexbox__col__start w-full gap-1">
+                  <Typography variant="p" affects="large" weight="semibold">
+                    #{props.code} - {props.title}
                   </Typography>
+                  <div className="_flexbox__row__center gap-4">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="!text-neutral-light-30 dark:!text-neutral-dark-30"
+                    >
+                      {props.company?.name}
+                    </Typography>
+                  </div>
                 </div>
               </div>
               <Typography

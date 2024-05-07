@@ -51,15 +51,6 @@ const TicketCard = ({
                   <Typography variant="p" affects="small">
                     #{props.code} <br /> {props.title}
                   </Typography>
-                  {/* <div className="_flexbox__row__center gap-4">
-                  <Typography
-                    variant="p"
-                    affects="small"
-                    className="!text-neutral-light-20 dark:!text-neutral-dark-20"
-                  >
-                    {props.date_reported}
-                  </Typography>
-                </div> */}
                 </div>
                 <Typography
                   variant="p"
@@ -144,7 +135,7 @@ const TicketCard = ({
                 isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__center__between w-full gap-4">
+              <div className="_flexbox__row__start__between w-full gap-4">
                 {isGridCard && (
                   <div className="relative aspect-square w-12 overflow-hidden rounded-full">
                     <Image

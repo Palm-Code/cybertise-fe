@@ -7,3 +7,6 @@ export const postChatItemAPIURL = () => "/api/chat_items";
 export const postCreateVrpAPIURL = () => "/api/programs";
 export const postUpdateVrpAPIURL = (id: string) =>
   `/api/programs/${id}?_method=PATCH`;
+export const getUserProfileAPIURL = () => "/api/my_profile";
+export const postUpdateProfileAPIURL = () => "/api/my_profile?_method=PATCH";
+export const getCountryListAPIURL = () => "/api/countries";
