@@ -1,6 +1,6 @@
 "use client";
 import { I_GetErrorRes } from "@/core/models/common";
-import { I_StaffRequestType } from "@/core/models/company/settings";
+import { I_StaffRequestType } from "@/core/models/company/manage-company";
 import { fetchPostUpdateEmergencyContact } from "@/core/services/company/manage-company";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

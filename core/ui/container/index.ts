@@ -9,3 +9,4 @@ export { default as CreateVRPLaunchpad } from "./vrp-launchpad/CreateVrp.contain
 export { default as DetailsVRPLaunchpad } from "./vrp-launchpad/details/DetailsVrp.container";
 export { default as CompaniesTicketCardList } from "./card/CompaniesTicketCardList.container";
 export { default as ModalForbidden } from "./modals/ModalForbidden";
+export { default as VRPCardLoadingList } from "./loading-state/VRPCardLoadingList";

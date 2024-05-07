@@ -5,12 +5,12 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import EditNavBar from "../../components/manage-company/_cards/EditNavBar";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePostUpdateEmergencyContact } from "../../query/client/usePostUpdateEmergencyContact";
 import {
   createCompanyStaffSchema,
   I_StaffRequestType,
-} from "@/core/models/company/settings";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { usePostUpdateEmergencyContact } from "../../query/client/usePostUpdateEmergencyContact";
+} from "@/core/models/company/manage-company";
 
 const EditEmergencyContact = ({
   data,

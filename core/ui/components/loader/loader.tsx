@@ -7,15 +7,21 @@ interface I_LoaderProps {
   variant?: "hacker" | "company" | "mediator";
   width?: number;
   height?: number;
+  className?: string;
+  noText?: boolean;
 }
 
 const Loader = ({
   variant = "hacker",
   width = 36,
   height = 36,
+  className = "",
+  noText = false,
 }: I_LoaderProps) => {
   return (
-    <div className="_flexbox__col__center h-screen w-full gap-4">
+    <div
+      className={cn("_flexbox__col__center h-screen w-full gap-4", className)}
+    >
       <div className="_flexbox__col__center gap-4">
         <Loader2
           width={width}
@@ -25,14 +31,16 @@ const Loader = ({
             iconColor[variant]
           )}
         />
-        <Typography
-          variant="p"
-          affects="small"
-          align="center"
-          className="animate-pulse transition-all duration-1000"
-        >
-          Getting data...
-        </Typography>
+        {!noText && (
+          <Typography
+            variant="p"
+            affects="small"
+            align="center"
+            className="animate-pulse transition-all duration-1000"
+          >
+            Getting data...
+          </Typography>
+        )}
       </div>
     </div>
   );

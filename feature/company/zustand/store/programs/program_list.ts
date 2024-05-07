@@ -18,7 +18,7 @@ const initialState: State = {
         number: 1,
       },
       include: "company,targetAssets",
-      append: "asset_types",
+      append: "asset_types,latest_updates",
     },
   },
 };

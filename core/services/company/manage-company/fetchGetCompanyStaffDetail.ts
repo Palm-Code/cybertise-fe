@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
 import { getCompanyStaffDetailAPIURL } from "@/core/routes/company/manage-company";
-import { I_GetStaffSuccessResponse } from "@/core/models/company/settings";
+import { I_GetStaffSuccessResponse } from "@/core/models/company/manage-company";
 
 export const fetchGetCompanyStaffDetail = async (id: string) => {
   const res = await axiosInterceptorInstance

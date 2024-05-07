@@ -20,7 +20,6 @@ const CompanyDetails = ({
     (country &&
       country.data?.find((item) => item.value === data?.country_code)) ||
     ({} as OptionsType);
-  console.log(dataCountry);
   const [openModal, setOpenModal] = useState(false);
   return (
     <>

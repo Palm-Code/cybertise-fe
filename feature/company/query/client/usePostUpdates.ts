@@ -1,17 +1,17 @@
 "use client";
 import { I_GetErrorRes } from "@/core/models/common";
-import { I_StaffRequestType } from "@/core/models/company/manage-company";
-import { fetchUpdateCompanyStaff } from "@/core/services/company/manage-company";
+import { UpdateFormRequestType } from "@/core/models/company/vrp-management/publish_update";
+import { fetchPostUpdates } from "@/core/services/company/vrp-management";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export const useUpdateStaff = (id: string) => {
+export const usePostUpdates = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const mutations = useMutation<[], I_GetErrorRes, I_StaffRequestType>({
+  const mutations = useMutation<[], I_GetErrorRes, UpdateFormRequestType>({
     mutationFn: (payload) => {
-      return fetchUpdateCompanyStaff(payload, id);
+      return fetchPostUpdates(payload);
     },
   });
 
@@ -22,7 +22,7 @@ export const useUpdateStaff = (id: string) => {
       action: {
         label: "retry",
         onClick: () => {
-          mutations.mutateAsync(mutations.variables as I_StaffRequestType);
+          mutations.mutateAsync(mutations.variables as UpdateFormRequestType);
         },
       },
       cancel: {
@@ -36,29 +36,28 @@ export const useUpdateStaff = (id: string) => {
   }
 
   if (mutations.isSuccess) {
-    toast.success("Staff has been updated", {
+    toast.success("Successfully create an update", {
       position: "bottom-right",
       cancel: {
         label: "Close",
         onClick: () => {
           queryClient.invalidateQueries({
-            queryKey: ["getUserProfile"],
+            queryKey: ["getProgramListDetails"],
           });
-          router.back();
+          toast.dismiss();
         },
       },
-      duration: 3000,
       onDismiss: () => {
         queryClient.invalidateQueries({
-          queryKey: ["getUserProfile"],
+          queryKey: ["getProgramListDetails"],
         });
-        router.back();
+        router.forward();
       },
       onAutoClose: () => {
         queryClient.invalidateQueries({
-          queryKey: ["getUserProfile"],
+          queryKey: ["getProgramListDetails"],
         });
-        router.back();
+        router.forward();
       },
     });
   }

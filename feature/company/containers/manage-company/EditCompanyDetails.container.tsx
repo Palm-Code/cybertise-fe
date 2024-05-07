@@ -4,6 +4,7 @@ import {
   AvatarInput,
   Card,
   Input,
+  Loader,
   SelectDropdown,
   TextArea,
   Typography,
@@ -20,7 +21,10 @@ import {
 } from "@/core/models/company/settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useGetCountry } from "@/core/hooks";
-import { usePostUpdateProfile } from "@/core/react-query/client";
+import {
+  usePostTempFiles,
+  usePostUpdateProfile,
+} from "@/core/react-query/client";
 import { toast } from "sonner";
 
 const EditCompnayDetails = ({
@@ -48,12 +52,25 @@ const EditCompnayDetails = ({
       want_news: data?.want_news,
       website: data?.website,
       zip: data?.zip,
+      logo: data?.company_logo,
     },
   });
   const { mutateAsync, isPending } = usePostUpdateProfile();
+  const { mutateAsync: mutate, isPending: isPendingUpload } =
+    usePostTempFiles();
   const forms = watch();
-  const handleChangeAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeAvatar = (e: any) => {
     e.preventDefault();
+    console.log(e.target.files);
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setValue("logo", url, { shouldValidate: true });
+      mutate(file).then((data) => {
+        setValue("logo", data?.data?.file, { shouldValidate: true });
+        setValue("attachment_id", data?.data?.id, { shouldValidate: true });
+      });
+    }
   };
 
   const handleSubmitForm = () => {
@@ -97,17 +114,27 @@ const EditCompnayDetails = ({
                       Company logo
                     </Typography>
                     <div className="relative h-12 w-12 overflow-hidden rounded-full">
-                      <Image
-                        src={data?.company_logo as string}
-                        alt={data?.name as string}
-                        fill
-                        className="object-cover"
-                      />
+                      {isPendingUpload ? (
+                        <Loader
+                          width={15}
+                          height={15}
+                          variant="company"
+                          className="h-full w-full bg-neutral-light-90 dark:bg-neutral-dark-90"
+                          noText
+                        />
+                      ) : (
+                        <Image
+                          src={forms.logo as string}
+                          alt={data?.name as string}
+                          fill
+                          className="object-cover"
+                        />
+                      )}
                     </div>
                   </div>
                   <AvatarInput
                     variant="company"
-                    onChange={handleChangeAvatar}
+                    onChange={(e) => handleChangeAvatar(e)}
                   />
                 </div>
                 <Input

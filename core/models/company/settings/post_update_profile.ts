@@ -18,6 +18,8 @@ export const updatePorfileSchema = z.object({
       invalid_type_error: "Want news is required",
     })
     .min(1, { message: "Want news is required" }),
+  logo: z.string().optional(),
+  attachment_id: z.string().optional(),
 });
 
 export const updateEmergencyContactSchema = z.object({

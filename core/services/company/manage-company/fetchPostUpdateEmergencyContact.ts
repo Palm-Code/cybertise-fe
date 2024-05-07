@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
-import { I_StaffRequestType } from "@/core/models/company/settings";
 import { postUpdateEmergencyContactAPIURL } from "@/core/routes/company/manage-company";
+import { I_StaffRequestType } from "@/core/models/company/manage-company";
 
 export const fetchPostUpdateEmergencyContact = async (
   payload: I_StaffRequestType

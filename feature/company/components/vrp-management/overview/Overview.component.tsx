@@ -37,7 +37,10 @@ const Overview = ({ id }: { id: string }) => {
     rules: <RnP data={programListDetails?.data?.company?.rules} />,
     scope: <Scope id={id} assetTypes={assetTypes} />,
     updates: (
-      <UpdateList data={programListDetails?.data?.latest_updates || []} />
+      <UpdateList
+        id={id}
+        data={programListDetails?.data?.latest_updates || []}
+      />
     ),
     thanks: <Thanks data={programListDetails?.data?.company?.thanks_message} />,
   };
@@ -86,7 +89,7 @@ const Overview = ({ id }: { id: string }) => {
             items={programDetailTabItems}
             active={active}
             onValueChange={(v) => setActive(TabsItem[v])}
-            updates={updates.length}
+            updates={programListDetails?.data?.latest_updates?.length || 0}
           />
           <div className="w-full px-6 pb-6">{tabs[active]}</div>
         </div>

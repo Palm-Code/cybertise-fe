@@ -1,13 +1,10 @@
 import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
-import { updateCompanyStaffAPIURL } from "@/core/routes/company/manage-company";
-import { I_StaffRequestType } from "@/core/models/company/manage-company";
+import { UpdateFormRequestType } from "@/core/models/company/vrp-management/publish_update";
+import { postUpdateAPIURL } from "@/core/routes/company/vrp-management";
 
-export const fetchUpdateCompanyStaff = async (
-  payload: I_StaffRequestType,
-  id: string
-) => {
-  const url = updateCompanyStaffAPIURL(id);
+export const fetchPostUpdates = async (payload: UpdateFormRequestType) => {
+  const url = postUpdateAPIURL();
   return await axiosInterceptorInstance
     .post(url, payload)
     .then((res: AxiosResponse<any>) => {

@@ -5,10 +5,6 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import EditNavBar from "../../components/manage-company/_cards/EditNavBar";
 import { useForm } from "react-hook-form";
-import {
-  createCompanyStaffSchema,
-  I_StaffRequestType,
-} from "@/core/models/company/settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   usePostCreateStaff,
@@ -18,6 +14,10 @@ import {
 import { useSearchParams } from "next/navigation";
 import ModalDeleteStaff from "../../components/manage-company/_dialog/ModalDeleteStaff";
 import { useState } from "react";
+import {
+  createCompanyStaffSchema,
+  I_StaffRequestType,
+} from "@/core/models/company/manage-company";
 
 const EditStaffs = ({
   data,

@@ -1,5 +1,9 @@
 import { cn } from "@/core/lib/utils";
 import {
+  UpdateFormRequestType,
+  updateFormSchema,
+} from "@/core/models/company/vrp-management/publish_update";
+import {
   BaseModal,
   Button,
   Card,
@@ -7,14 +11,41 @@ import {
   Tiptap,
   Typography,
 } from "@/core/ui/components";
+import { usePostUpdates } from "@/feature/company/query/client/usePostUpdates";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { X } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface I_ModalAddUpdatesProps {
   onClose: () => void;
   isOpen: boolean;
+  id: string;
 }
 
-const ModalAddUpdates = ({ isOpen, onClose }: I_ModalAddUpdatesProps) => {
+const ModalAddUpdates = ({ isOpen, onClose, id }: I_ModalAddUpdatesProps) => {
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<UpdateFormRequestType>({
+    resolver: zodResolver(updateFormSchema),
+    defaultValues: {
+      program_id: id,
+      title: "",
+      content: "",
+    },
+  });
+  const { mutate, isPending, isSuccess } = usePostUpdates();
+
+  const forms = watch();
+
+  const handleSubmitUpdate = () => {
+    if (Object.values(errors).length > 0)
+      return toast.error("Please fill in all required fields");
+    mutate(forms);
+  };
+
   return (
     <BaseModal isOpen={isOpen} onClose={onClose}>
       <Card
@@ -52,15 +83,37 @@ const ModalAddUpdates = ({ isOpen, onClose }: I_ModalAddUpdatesProps) => {
             amet tellus. Morbi tristique senectus et netus et malesuada fames ac
             turpis.
           </Typography>
-          <Input type="text" label="Title" />
-          <Tiptap
-            description=""
-            label="Updates"
-            onChangeValue={(e) => {}}
-            variant="company"
-            withTooltip
+          <Input
+            type="text"
+            label="Title"
+            value={forms.title}
+            onChange={(e) => {
+              setValue("title", e.target.value, { shouldValidate: true });
+            }}
+            isError={!!errors.title}
           />
-          <Button variant="primary-company">Publish Update</Button>
+          <div className="w-full">
+            <Tiptap
+              description={forms.content}
+              label="Updates"
+              onChangeValue={(e) => {
+                setValue("content", e, { shouldValidate: true });
+              }}
+              onClearInput={() => {
+                setValue("content", "", { shouldValidate: true });
+              }}
+              variant="company"
+              withTooltip
+            />
+          </div>
+          <Button
+            variant="primary-company"
+            disabled={!forms.title || !forms.content || isPending || isSuccess}
+            isLoading={isPending}
+            onClick={handleSubmitUpdate}
+          >
+            Publish Update
+          </Button>
         </Card>
       </Card>
     </BaseModal>

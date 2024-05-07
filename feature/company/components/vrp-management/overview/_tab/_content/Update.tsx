@@ -12,7 +12,7 @@ interface I_Update extends UpdateType {}
 const Update = ({ title, created_at, content }: I_Update) => {
   return (
     <AnimationWrapper>
-      <Card className="px-6 py-12">
+      <Card className="xl:px-6 xl:py-12">
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="_flexbox__col__start__start w-full gap-2">
             <Typography variant="p" affects="extralarge" weight="bold">
@@ -27,6 +27,7 @@ const Update = ({ title, created_at, content }: I_Update) => {
             </Typography>
           </div>
           <article
+            className="tiptap"
             dangerouslySetInnerHTML={{
               __html: sanitize(content ?? ""),
             }}
@@ -39,9 +40,10 @@ const Update = ({ title, created_at, content }: I_Update) => {
 
 interface I_UpdateList {
   data: UpdateType[];
+  id: string;
 }
 
-const UpdateList = ({ data }: I_UpdateList) => {
+const UpdateList = ({ data, id }: I_UpdateList) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   if (!data.length)
     return (
@@ -53,6 +55,7 @@ const UpdateList = ({ data }: I_UpdateList) => {
           onClickButton={() => setOpenModal(true)}
         />
         <ModalAddUpdates
+          id={id}
           isOpen={openModal}
           onClose={() => setOpenModal(false)}
         />
@@ -67,13 +70,17 @@ const UpdateList = ({ data }: I_UpdateList) => {
           onClick={() => setOpenModal(true)}
           className="w-full rounded-md border border-white px-4 py-6 text-center"
         >
-          + Add New VRP
+          + Add New Update
         </button>
         {data.map((item, idx) => (
           <Update key={`update-${idx}`} {...item} />
         ))}
       </div>
-      <ModalAddUpdates isOpen={openModal} onClose={() => setOpenModal(false)} />
+      <ModalAddUpdates
+        id={id}
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </>
   );
 };

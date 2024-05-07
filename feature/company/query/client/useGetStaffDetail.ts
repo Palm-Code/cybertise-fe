@@ -1,5 +1,5 @@
 "use client";
-import { I_GetStaffSuccessResponse } from "@/core/models/company/settings";
+import { I_GetStaffSuccessResponse } from "@/core/models/company/manage-company";
 import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { fetchGetCompanyStaffDetail } from "@/core/services/company/manage-company";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";

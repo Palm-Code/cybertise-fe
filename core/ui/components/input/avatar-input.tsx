@@ -8,7 +8,6 @@ interface I_AvatarInputProps
 }
 
 const AvatarInput = ({
-  onChange,
   title = "Change Logo",
   variant = "hacker",
   ...props

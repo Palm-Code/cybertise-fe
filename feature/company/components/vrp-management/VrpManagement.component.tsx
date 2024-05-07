@@ -4,7 +4,7 @@ import VRPCardList from "./card/VrpCard";
 import Link from "next/link";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { useState } from "react";
-import { ModalForbidden } from "@/core/ui/container";
+import { ModalForbidden, VRPCardLoadingList } from "@/core/ui/container";
 import { useGetProgramList } from "../../query/client";
 import { useProgramListParamStore } from "../../zustand/store/programs";
 import Loader from "@/core/ui/components/loader/loader";
@@ -18,16 +18,18 @@ const VrpManagement = () => {
   } = useGetProgramList(store.payload);
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
-  if (isLoading || isFetching) return <Loader variant="company" />;
-
   return (
-    <AnimationWrapper className="px-6 pt-12">
+    <AnimationWrapper className="px-6 pb-28 pt-12">
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-10">
           <Typography variant="h4" weight="bold">
             VRP Management
           </Typography>
-          <VRPCardList data={programList?.data} />
+          {isLoading || isFetching ? (
+            <VRPCardLoadingList />
+          ) : (
+            <VRPCardList data={programList?.data} />
+          )}
           <Button
             variant="secondary-company"
             fullWidth
@@ -42,7 +44,11 @@ const VrpManagement = () => {
           <Typography variant="h4" weight="bold">
             VRP Management
           </Typography>
-          <VRPCardList data={programList?.data} />
+          {isLoading || isFetching ? (
+            <VRPCardLoadingList />
+          ) : (
+            <VRPCardList data={programList?.data} />
+          )}
           <Link
             href={"/vrp-launchpad/create-vrp"}
             className="w-full rounded-md border border-white px-4 py-6 text-center"

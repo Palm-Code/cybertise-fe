@@ -1,15 +1,17 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Button, Card, Typography } from "@/core/ui/components";
+import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { FilePenLine } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
 
 const EmergencyContacs = ({
   data,
 }: {
   data?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       <Mobile>
@@ -22,6 +24,7 @@ const EmergencyContacs = ({
               variant="tertiary-company"
               prefixIcon={<FilePenLine />}
               className="p-0"
+              onClick={() => setOpenModal(true)}
             />
           </div>
           <Card
@@ -66,6 +69,13 @@ const EmergencyContacs = ({
             </div>
           </Card>
         </div>
+        <ModalForbiddden
+          variant="company"
+          title="Edit from Desktop"
+          subtitle="Emergency Contact are currently only editable on the desktop version of our website."
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start gap-6">
