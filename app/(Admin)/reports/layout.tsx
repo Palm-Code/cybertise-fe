@@ -19,6 +19,7 @@ export default async function Dashboardlayout({
     hacker: hacker,
     company: company,
     mediator: mediator,
+    "company staff": company,
   };
   return (
     <div

@@ -1,4 +1,4 @@
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { FileInput, Tiptap } from "@/core/ui/components";
 import { useFormContext } from "react-hook-form";
 

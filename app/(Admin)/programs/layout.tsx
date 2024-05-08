@@ -1,5 +1,5 @@
+import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
-import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
 import { Header } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { getSession } from "@/service/server/session";

@@ -3,7 +3,6 @@ import { BaseModal, Button, Typography } from "@/core/ui/components";
 import { buttonVariants } from "@/core/ui/components/button/base-button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface I_ModalSuccessSubmitProps {
   isOpen: boolean;

@@ -22,12 +22,11 @@ const AssetType = ({
   label = "Sort By",
   ...props
 }: I_AssetTypeProps) => {
-  const inputValueLabel = options.find(
-    (option) => option.value === value
-  )?.label;
+  const inputValueLabel = options.find((option) => option.id === value)?.label;
+  const badgeValue = options.find((option) => option.id === value)?.value;
 
   return (
-    <Select>
+    <Select onValueChange={onValueChange}>
       <SelectTrigger className="!w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0">
         <Typography
           variant="p"
@@ -36,7 +35,11 @@ const AssetType = ({
         >
           {label}
         </Typography>
-        {inputValueLabel && <Badge variant={"url"}>{inputValueLabel}</Badge>}
+        {inputValueLabel && (
+          <Badge variant={badgeValue as keyof typeof badgeVariants}>
+            {inputValueLabel}
+          </Badge>
+        )}
       </SelectTrigger>
       <SelectContent
         align="end"
@@ -51,7 +54,7 @@ const AssetType = ({
             options.map((option, idx) => (
               <SelectItem
                 className="!w-fit rounded-full !p-0"
-                value={option.value as string}
+                value={option.id as string}
                 key={`asset-type-${idx}`}
                 noCheck
               >

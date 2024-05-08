@@ -5,14 +5,44 @@ import CardAccountDetails from "../component/_tabs/_contents/account-details/Car
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { useState } from "react";
+import { ModalForbidden } from "@/core/ui/container";
+import { useFormContext } from "react-hook-form";
+import { I_UpdateProfile } from "@/core/models/company/settings";
+import { usePostUpdateProfile } from "@/core/react-query/client";
+import { toast } from "sonner";
 
 interface I_DetailsProps {
-  variant: Role;
+  variant: keyof typeof Role;
   isEditing: boolean;
   handleClickEdit: (v: boolean) => void;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
-const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
+const Details = ({
+  variant,
+  isEditing,
+  handleClickEdit,
+  data,
+}: I_DetailsProps) => {
+  const {
+    getValues,
+    formState: { errors },
+  } = useFormContext<I_UpdateProfile>();
+  const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile(true);
+  const [modalForbidden, setModalForbidden] = useState<boolean>(false);
+
+  const handleSubmitForm = () => {
+    if (Object.values(errors).length === 0) {
+      mutateAsync(getValues()).then(() => {
+        handleClickEdit(false);
+      });
+    } else {
+      toast.error("Please fill in all required fields");
+    }
+  };
+
   if (isEditing)
     return (
       <>
@@ -42,14 +72,19 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
                 >
                   Discard
                 </Button>
-                <Button variant={`primary-${variant}`} onClick={() => {}}>
+                <Button
+                  disabled={isPending || isSuccess}
+                  isLoading={isPending}
+                  variant={`primary-${variant}`}
+                  onClick={() => handleSubmitForm()}
+                >
                   Save Changes
                 </Button>
               </div>
             </Card>
             <AnimationWrapper>
               <CardAbout isEditing variant={variant as Role} />
-              <CardAccountDetails isEditing />
+              <CardAccountDetails isEditing variant={variant as Role} />
             </AnimationWrapper>
           </div>
         </Desktop>
@@ -60,17 +95,26 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between mb-6 w-full">
           <Typography variant="h5" weight="bold">
-            Account Details
+            {variant === "company" ? "Company" : "Account"} Details
           </Typography>
           <Button
             variant={`tertiary-${variant}`}
             className="p-0"
             prefixIcon={<FilePenLine />}
-            onClick={() => {}}
+            onClick={() => {
+              setModalForbidden(true);
+            }}
           ></Button>
         </div>
-        <CardAbout />
-        <CardAccountDetails />
+        <CardAbout data={data} variant={variant} />
+        <CardAccountDetails data={data} variant={variant} />
+        <ModalForbidden
+          isOpen={modalForbidden}
+          onClose={() => setModalForbidden(false)}
+          title="Edit on Mobile"
+          subtitle="Sorry, you can't edit on mobile."
+          variant={variant}
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-6">
@@ -86,8 +130,8 @@ const Details = ({ variant, isEditing, handleClickEdit }: I_DetailsProps) => {
               Edit Account Details
             </Button>
           </div>
-          <CardAbout />
-          <CardAccountDetails />
+          <CardAbout data={data} variant={variant} />
+          <CardAccountDetails data={data} variant={variant} />
         </div>
       </Desktop>
     </>

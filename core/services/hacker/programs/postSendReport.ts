@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
-import { I_PostSendReportRequest } from "@/core/models/hacker/programs/post_send_report";
+import { I_PostSendReportRequest } from "@/core/models/common/post_send_report";
 import { postSendReportAPIURL } from "@/core/routes/hacker/programs/send_report";
 
 export const postSendReport = async (

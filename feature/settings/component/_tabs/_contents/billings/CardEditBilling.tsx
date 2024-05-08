@@ -1,10 +1,11 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Input, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
+import { Role } from "@/types/admin/sidebar";
 import { Banknote } from "lucide-react";
 
 interface I_CardEditBillingProps {
-  variant: "hacker" | "company" | "mediator";
+  variant: keyof typeof Role;
 }
 
 const CardEditBilling = ({ variant }: I_CardEditBillingProps) => {

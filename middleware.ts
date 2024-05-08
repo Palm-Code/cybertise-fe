@@ -13,6 +13,7 @@ export default withAuth(mainMiddleware, [
   "/programs",
   "/companies",
   "/vrp-launchpad",
+  "/manage-company",
   "/reports",
   "/settings",
 ]);

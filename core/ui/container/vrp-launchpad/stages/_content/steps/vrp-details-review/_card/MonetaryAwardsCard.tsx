@@ -1,16 +1,18 @@
 import { cn } from "@/core/lib/utils";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Card, Typography } from "@/core/ui/components";
 import { ShieldCheck } from "@/core/ui/icons";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 
-const MonetaryAwardsCard = () => {
+const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
+  const category = data?.monetary_awards_level?.split("-")[0] || "custom";
   return (
     <>
       <Card
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
           "bg-background-page-light dark:bg-background-page-dark",
-          "p-7.5"
+          "xl:p-7.5"
         )}
       >
         <Typography variant="h6" weight="bold">
@@ -18,10 +20,17 @@ const MonetaryAwardsCard = () => {
         </Typography>
 
         <Typography variant="p" affects="normal" className="inline-flex gap-4">
-          Category XL <ShieldCheck category="XL" />
+          Category{" "}
+          {data.monetary_awards_level === "custom" ? (
+            "Custom"
+          ) : (
+            <>
+              {category} <ShieldCheck category={category as any} />
+            </>
+          )}
         </Typography>
         <div className="grid w-full grid-cols-2 gap-6">
-          <Card className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
             <Typography
               variant="p"
               affects="normal"
@@ -30,10 +39,10 @@ const MonetaryAwardsCard = () => {
               Low
             </Typography>
             <Typography variant="p" affects="normal">
-              {currencyFormatters.NumberToEUR(100)}
+              {currencyFormatters.NumberToEUR(data.monetary_awards_low ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
             <Typography
               variant="p"
               affects="normal"
@@ -42,10 +51,10 @@ const MonetaryAwardsCard = () => {
               High
             </Typography>
             <Typography variant="p" affects="normal">
-              {currencyFormatters.NumberToEUR(100)}
+              {currencyFormatters.NumberToEUR(data.monetary_awards_high ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
             <Typography
               variant="p"
               affects="normal"
@@ -54,10 +63,10 @@ const MonetaryAwardsCard = () => {
               Medium
             </Typography>
             <Typography variant="p" affects="normal">
-              {currencyFormatters.NumberToEUR(100)}
+              {currencyFormatters.NumberToEUR(data.monetary_awards_medium ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
             <Typography
               variant="p"
               affects="normal"
@@ -66,7 +75,9 @@ const MonetaryAwardsCard = () => {
               Critical
             </Typography>
             <Typography variant="p" affects="normal">
-              {currencyFormatters.NumberToEUR(100)}
+              {currencyFormatters.NumberToEUR(
+                data.monetary_awards_critical ?? 0
+              )}
             </Typography>
           </Card>
         </div>

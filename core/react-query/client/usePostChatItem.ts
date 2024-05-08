@@ -4,11 +4,7 @@ import {
   I_GetErrorRes,
 } from "@/core/models/common";
 import { fetchPostChatItem } from "@/core/services/common";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const usePostChatItem = () => {
   const queryClient = useQueryClient();

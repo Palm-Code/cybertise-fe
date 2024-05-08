@@ -14,6 +14,7 @@ export const useGetTargetAsset = (payload?: I_GetParamsPayload) => {
     ],
     queryFn: () => fetchGetTargetAsset(payload),
     placeholderData: keepPreviousData,
+    refetchOnMount: false,
   });
 
   return query;

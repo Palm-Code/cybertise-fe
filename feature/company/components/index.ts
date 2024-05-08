@@ -2,6 +2,7 @@ export { default as Dashboard } from "./dashboard/Dashboard.component";
 export { default as Reports } from "./reports/Reports.component";
 export { default as ReportDetails } from "./reports/details/ReportDetails.component";
 export { default as ManageCompany } from "./manage-company/ManageCompany.component";
+export { default as EditState } from "./manage-company/EditState";
 export { default as VrpManagement } from "./vrp-management/VrpManagement.component";
 export { default as Overview } from "./vrp-management/overview/Overview.component";
 export { default as CreateVrp } from "./vrp-management/create-vrp/CreateVrp.component";

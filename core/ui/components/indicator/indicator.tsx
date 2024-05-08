@@ -11,10 +11,12 @@ const indicatorVariants = cva("", {
       mediator: "text-violet-normal rounded-md",
       warning: "text-red-normal rounded-full",
       caution: "text-yellow-normal rounded-full",
+      pending: "text-yellow-normal rounded-full",
       clear: "text-emerald-normal rounded-full",
       open: "text-red-normal rounded-full",
       closed: "text-emerald-normal rounded-full",
       "waiting for payment": "text-yellow-normal rounded-full",
+      "in review": "text-yellow-light rounded-full",
       paid: "text-emerald-normal rounded-full",
       canceled: "text-red-normal rounded-full",
     },
@@ -24,7 +26,7 @@ const indicatorVariants = cva("", {
   },
 });
 
-interface IndicatorProps
+export interface IndicatorProps
   extends React.HTMLAttributes<SVGElement>,
     VariantProps<typeof indicatorVariants> {}
 

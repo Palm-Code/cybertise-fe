@@ -9,7 +9,6 @@ import {
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { Loader2, MoveLeft } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/hacker/containers";
@@ -17,7 +16,8 @@ import { useGetChatListItem } from "@/feature/hacker/query/client/useGetChatList
 import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/reports";
 import { useRouter } from "next/navigation";
 import { usePostChatItem } from "@/core/react-query/client";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
+import { toast } from "sonner";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
@@ -48,9 +48,16 @@ const ReportDetails = ({ id }: { id: string }) => {
         sender_avatar: data?.data[0].sender_avatar,
         content: description,
         attachments: attachments.length > 0 ? attachments : undefined,
-      });
-      setFiles(undefined);
-      setOpenAttachment(false);
+      })
+        .then(() => {
+          setAttachments([]);
+          setDescription("");
+          setFiles(undefined);
+          setOpenAttachment(false);
+        })
+        .catch((err) => {
+          toast.error("Failed to send message");
+        });
     }
   };
 
@@ -88,22 +95,18 @@ const ReportDetails = ({ id }: { id: string }) => {
                 "z-30 w-full rounded-none p-6"
               )}
             >
-              <div className="_flexbox__row__start__start gap-5">
-                <Link href="/reports">
-                  <MoveLeft width={24} height={24} />
-                </Link>
-                <div className="grid gap-4">
-                  <Typography variant="h5" weight="bold">
-                    {data?.data[0].chat_ticket?.title}
-                  </Typography>
-                  <Badge
-                    variant={
-                      data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
-                    }
-                  >
-                    {`${data?.data[0].chat_ticket?.risk_level} | ${data?.data[0].chat_ticket?.risk_level_category}`}
-                  </Badge>
-                </div>
+              <div className="_flexbox__col__start__start gap-4">
+                <Typography variant="h5" weight="bold">
+                  {data?.data[0].chat_ticket?.title}
+                </Typography>
+                <Badge
+                  variant={
+                    data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                  }
+                  className="max-w-fit"
+                >
+                  {`${data?.data[0].chat_ticket?.risk_level.toFixed(2)} | ${data?.data[0].chat_ticket?.risk_level_category}`}
+                </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
                 <Indicator
@@ -202,6 +205,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           isOpen={openAttachment}
           onClose={() => {
             setFiles(undefined);
+            setAttachments([]);
             setOpenAttachment(false);
           }}
           onChangeAttachment={(v) => {
@@ -212,6 +216,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             setDescription(v);
           }}
           onClickSendAttachment={sendMessage}
+          isLoading={isPending}
         />
       </Desktop>
       <div ref={chatRef}></div>

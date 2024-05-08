@@ -9,8 +9,8 @@ export const tableColumns: I_TableColumns[] = [
   },
   {
     title: "Risk Level",
-    align: "left",
-    width: "w-[80px]",
+    align: "center",
+    width: "w-[120px]",
   },
   {
     title: "Vulnerability type (CWE)",

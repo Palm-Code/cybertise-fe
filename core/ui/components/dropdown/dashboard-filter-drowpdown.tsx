@@ -1,17 +1,15 @@
 "use client";
 import { Filter } from "lucide-react";
-import { iconColor } from "./filter-view-dropdown";
 import BaseDropdown from "./base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import Separator from "../separator/separator";
 import { Desktop, Mobile } from "../../layout";
-import Typography from "../typography/typography";
-import { cn } from "@/core/lib/utils";
 import { ChatFilter } from "@/core/models/hacker/dashboard";
 import { StoreType } from "@/core/hooks/types";
 import { FilterDrawer } from "../drawer/filter-drawer";
 import { useState } from "react";
 import { I_GetParamsPayload } from "@/core/models/common";
+import { iconColor } from "@/core/constants/common";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
@@ -37,6 +35,7 @@ const DashboardFilter = ({
         >
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
+              variant={variant}
               label="Type"
               value={tempPayload?.params?.filter?.["program.type"] || "all"}
               options={filterItems.type}
@@ -55,6 +54,7 @@ const DashboardFilter = ({
             />
             <Separator />
             <BaseDropdown
+              variant={variant}
               label="Risk Level"
               value={tempPayload?.params?.filter?.level || "all"}
               options={filterItems.risk_level}
@@ -73,6 +73,7 @@ const DashboardFilter = ({
             />
             <Separator />
             <BaseDropdown
+              variant={variant}
               label="Status"
               value={tempPayload?.params?.filter?.status || "all"}
               options={filterItems.status}

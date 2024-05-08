@@ -3,7 +3,7 @@ import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
 import { Slider } from "@/core/ui/components/slider/slider";
 import { I_CsvssCalculatorProps } from "./CsvssCalculator";
 import { motion } from "framer-motion";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { useFormContext } from "react-hook-form";
 
 const ManualRiskLevel = ({

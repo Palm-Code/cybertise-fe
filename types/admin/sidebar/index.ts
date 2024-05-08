@@ -7,6 +7,7 @@ export enum Role {
   "hacker" = "hacker",
   "company" = "company",
   "mediator" = "mediator",
+  "company staff" = "company staff",
 }
 
 export type MenuItemType = {

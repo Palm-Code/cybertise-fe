@@ -21,6 +21,12 @@ const buttonVariants = cva(
           "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-company":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
+        "primary-company staff":
+          "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
+        "secondary-company staff":
+          "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+        "tertiary-company staff":
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
         "primary-mediator":
           "border bg-violet-normal text-white hover:bg-violet-lighter focus:bg-violet-lighter active:bg-violet-darker border-violet-normal hover:border-violet-lighter active:border-violet-darker disabled:bg-violet-dark disabled:border-violet-dark/20 disabled:bg-opacity-20",
         "secondary-mediator":
@@ -41,6 +47,10 @@ const buttonVariants = cva(
           "bg-transparent text-violet-normal hover:text-violet-dark focus:text-violet-dark active:text-violet-darker",
         "ghost-company":
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
+        "ghost-company staff":
+          "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
+        alert:
+          "border bg-semantic-light-critical/10 dark:bg-semantic-dark-critical/10 text-semantic-light-critical dark:text-semantic-dark-critical border-semantic-light-critical dark:border-semantic-dark-critica hover:bg-semantic-light-critical/20 dark:hover:bg-semantic-dark-critical/20 focus:bg-semantic-light-critical/20 dark:focus:bg-semantic-dark-critical/20 active:bg-semantic-light-critical/20 dark:active:bg-semantic-dark-critical/20",
       },
       size: {
         default: "h-9 px-4 py-2 text-sm",

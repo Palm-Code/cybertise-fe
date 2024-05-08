@@ -4,10 +4,7 @@ import { Button, Card, Indicator, Typography } from "@/core/ui/components";
 import { FilePenLine, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Tab from "./_tab/Tab";
-import {
-  programDetailTabItems,
-  updates,
-} from "@/feature/company/constants/vrp-management";
+import { programDetailTabItems } from "@/feature/company/constants/vrp-management";
 import { useState } from "react";
 import { TabsItem } from "@/enums";
 import RnP from "./_tab/_content/RnP";
@@ -15,18 +12,40 @@ import Scope from "./_tab/_content/Scope";
 import UpdateList from "./_tab/_content/Update";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { ModalForbidden } from "@/core/ui/container";
-import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useProgramListParamStore } from "@/feature/company/zustand/store/programs";
+import { useGetProgramDetails } from "@/feature/company/query/client/useGetProgramDetails";
+import { useGetAssetType } from "@/core/react-query/client";
+import Thanks from "./_tab/_content/Thanks";
+import { currentPhase } from "@/core/constants/common";
+import Loader from "@/core/ui/components/loader/loader";
+import { useGetRole } from "@/core/hooks";
 
-const Overview = () => {
+const Overview = ({ id }: { id: string }) => {
+  const store = useProgramListParamStore();
+  const role = useGetRole();
+  const { data: assetTypes } = useGetAssetType();
+  const {
+    data: programListDetails,
+    isLoading,
+    isFetching,
+  } = useGetProgramDetails(store.payload, id);
   const [active, setActive] = useState<TabsItem>(TabsItem.rules);
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
-    rules: <RnP />,
-    scope: <Scope />,
-    updates: <UpdateList data={updates} />,
-    thanks: <EmptyState variant="company" type="under-construction" />,
+    rules: <RnP data={programListDetails?.data?.company?.rules} />,
+    scope: <Scope id={id} assetTypes={assetTypes} />,
+    updates: (
+      <UpdateList
+        id={id}
+        data={programListDetails?.data?.latest_updates || []}
+      />
+    ),
+    thanks: <Thanks data={programListDetails?.data?.company?.thanks_message} />,
   };
+
+  if (isLoading || isFetching) return <Loader variant="company" />;
+
   return (
     <>
       <Mobile>
@@ -45,9 +64,17 @@ const Overview = () => {
               <Link href="/vrp-launchpad">
                 <MoveLeft />
               </Link>
-              VRP Title 1
+              {programListDetails?.data?.title}
             </Typography>
-            <Indicator variant="caution">Phase 2: Setup Phase</Indicator>
+            <Indicator
+              variant={
+                programListDetails?.data.status?.toLowerCase().includes("phase")
+                  ? "open"
+                  : "clear"
+              }
+            >
+              {`${programListDetails?.data.status} ${programListDetails?.data.status?.toLowerCase().includes("phase") ? `: ${currentPhase[programListDetails?.data.status?.toLowerCase()]}` : ""}`}
+            </Indicator>
             <Button
               variant="secondary-company"
               fullWidth
@@ -61,7 +88,7 @@ const Overview = () => {
             items={programDetailTabItems}
             active={active}
             onValueChange={(v) => setActive(TabsItem[v])}
-            updates={updates.length}
+            updates={programListDetails?.data?.latest_updates?.length || 0}
           />
           <div className="w-full px-6 pb-6">{tabs[active]}</div>
         </div>
@@ -89,26 +116,37 @@ const Overview = () => {
               <Link href="/vrp-launchpad">
                 <MoveLeft />
               </Link>
-              VRP Title 1
+              {programListDetails?.data?.title}
             </Typography>
             <div className="_flexbox__row__center gap-6">
               <Button
-                asLink
+                asLink={role !== "company staff"}
                 variant="tertiary-company"
                 className="py-0"
+                disabled={role === "company staff"}
                 prefixIcon={<FilePenLine />}
-                href={`/vrp-launchpad/${1}`}
+                href={`/vrp-launchpad/${id}`}
               >
                 Edit VRP
               </Button>
-              <Indicator variant="warning">Status</Indicator>
+              <Indicator
+                variant={
+                  programListDetails?.data.status
+                    ?.toLowerCase()
+                    .includes("phase")
+                    ? "open"
+                    : "clear"
+                }
+              >
+                {`${programListDetails?.data.status} ${programListDetails?.data.status?.toLowerCase().includes("phase") ? `: ${currentPhase[programListDetails?.data.status?.toLowerCase()]}` : ""}`}
+              </Indicator>
             </div>
           </Card>
           <Tab
             items={programDetailTabItems}
             active={active}
             onValueChange={(v) => setActive(TabsItem[v])}
-            updates={updates.length}
+            updates={programListDetails?.data?.latest_updates?.length}
           />
           {tabs[active]}
         </div>

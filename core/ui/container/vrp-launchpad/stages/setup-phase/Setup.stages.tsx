@@ -10,47 +10,99 @@ import { vrpInformations } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
 import MakeChanges from "../_content/steps/make-changes/MakeChanges";
 import Notes from "../_content/steps/notes/Notes";
+import { useGetAssetType } from "@/core/react-query/client";
+import { SortFilterType } from "@/types/admin/dashboard";
+import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import {
+  createVrpSchema,
+  CreateVrpType,
+} from "@/core/models/common/post_create_vrp";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface I_SetupProps {
-  id: string;
   variant: "mediator" | "company";
-  currentStep?: number;
+  currentStep?: string;
+  initialData?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
-const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
+const Setup = ({
+  variant,
+  currentStep,
+  initialData: initialValues,
+}: I_SetupProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
-  const method = useForm();
-  const {
-    step,
-    steps,
-    currentStepIndex,
-    isFirstStep,
-    isLastStep,
-    goTo,
-    next,
-    back,
-    containerRef,
-  } = useMultistepForm([
-    {
-      element: <VrpDetailsReview onClickNext={() => next()} />,
-      key: "vrp-details",
+  const { data: assetTypeOptions } = useGetAssetType();
+  const options: SortFilterType[] =
+    assetTypeOptions
+      ?.map((item) => {
+        return {
+          value: item.value.toLowerCase(),
+          label: item.label,
+          id: item.id,
+        };
+      })
+      .filter((item) => item.id !== "") || [];
+  const method = useForm<CreateVrpType>({
+    mode: "onChange",
+    resolver: zodResolver(createVrpSchema),
+    defaultValues: {
+      title: initialValues?.title || "",
+      description: initialValues?.description || "",
+      monetary_awards_critical: initialValues?.monetary_awards_critical || 0,
+      monetary_awards_high: initialValues?.monetary_awards_high || 0,
+      monetary_awards_medium: initialValues?.monetary_awards_medium || 0,
+      monetary_awards_low: initialValues?.monetary_awards_low || 0,
+      target_assets: initialValues?.target_assets || [],
+      notes: initialValues?.notes || "",
+      monetary_awards_level: initialValues?.monetary_awards_level || "",
+      type: initialValues?.type || "",
+      rules: initialValues?.rules || "",
+      policies: initialValues?.policies || "",
+      asset_types_values: initialValues?.asset_types || [],
     },
-    {
-      element: (
-        <MakeChanges onClickNext={() => next()} onClickPrev={() => back()} />
-      ),
-      key: "make-changes",
-    },
-    {
-      element: <Notes onClickNext={() => next()} onClickPrev={() => back()} />,
-      key: "notes",
-    },
-    {
-      element: <VrpDetailsReview isLastStep onClickEdit={() => goTo(1)} />,
-      key: "review",
-    },
-  ]);
+  });
+  const { step, steps, currentStepIndex, goTo, next, back, containerRef } =
+    useMultistepForm([
+      {
+        element: (
+          <VrpDetailsReview
+            currentStep={currentStep}
+            variant={variant}
+            assetTypes={options}
+            onClickNext={() => next()}
+          />
+        ),
+        key: "vrp-details",
+      },
+      {
+        element: (
+          <MakeChanges
+            options={options}
+            onClickNext={() => next()}
+            onClickPrev={() => back()}
+          />
+        ),
+        key: "make-changes",
+      },
+      {
+        element: (
+          <Notes onClickNext={() => next()} onClickPrev={() => back()} />
+        ),
+        key: "notes",
+      },
+      {
+        element: (
+          <VrpDetailsReview
+            currentStep={currentStep}
+            assetTypes={options}
+            isLastStep
+            onClickEdit={() => goTo(1)}
+          />
+        ),
+        key: "review",
+      },
+    ]);
 
   const onSubmitForm = () => {
     setSuccessSubmit(true);
@@ -60,10 +112,7 @@ const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
     <>
       <FormProvider {...method}>
         <div ref={containerRef} className="absolute top-0"></div>
-        <form
-          onSubmit={method.handleSubmit(onSubmitForm)}
-          className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl"
-        >
+        <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <AnimationWrapper
             key={steps[currentStepIndex].key}
             className={cn(
@@ -100,13 +149,13 @@ const Setup = ({ id, variant, currentStep = 1 }: I_SetupProps) => {
               )}
             >
               <Information
-                lists={vrpInformations.vrp_details}
+                lists={vrpInformations.setup_phase}
                 variant={variant}
                 activeStep={currentStepIndex + 1}
               />
             </div>
           </div>
-        </form>
+        </div>
       </FormProvider>
     </>
   );

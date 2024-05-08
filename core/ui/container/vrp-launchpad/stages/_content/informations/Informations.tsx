@@ -1,3 +1,4 @@
+import { fillColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { SortFilterType } from "@/types/admin/dashboard";
@@ -7,21 +8,15 @@ import { Square } from "lucide-react";
 interface I_InformationProps {
   activeStep: number;
   lists: SortFilterType[];
-  variant: "mediator" | "company" | "hacker";
+  variant: keyof typeof Role;
 }
-
-const fillColor: { [key in Role]: string } = {
-  mediator: "fill-violet-normal",
-  company: "fill-sky-normal",
-  hacker: "fill-lime-normal",
-};
 
 const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
   return (
     <Card
       className={cn(
         "_flexbox__col__start__start w-full gap-6 rounded-xl",
-        "!bg-transparent px-8 py-12"
+        "!bg-transparent xl:px-8 xl:py-12"
       )}
     >
       <Typography variant="p" affects="extralarge" weight="bold">
