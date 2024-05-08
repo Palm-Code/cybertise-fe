@@ -2,9 +2,10 @@ import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Loader2 } from "lucide-react";
 import Typography from "../typography/typography";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_LoaderProps {
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   width?: number;
   height?: number;
   className?: string;

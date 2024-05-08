@@ -4,10 +4,7 @@ import { Button, Card, Indicator, Typography } from "@/core/ui/components";
 import { FilePenLine, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Tab from "./_tab/Tab";
-import {
-  programDetailTabItems,
-  updates,
-} from "@/feature/company/constants/vrp-management";
+import { programDetailTabItems } from "@/feature/company/constants/vrp-management";
 import { useState } from "react";
 import { TabsItem } from "@/enums";
 import RnP from "./_tab/_content/RnP";
@@ -21,9 +18,11 @@ import { useGetAssetType } from "@/core/react-query/client";
 import Thanks from "./_tab/_content/Thanks";
 import { currentPhase } from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
+import { useGetRole } from "@/core/hooks";
 
 const Overview = ({ id }: { id: string }) => {
   const store = useProgramListParamStore();
+  const role = useGetRole();
   const { data: assetTypes } = useGetAssetType();
   const {
     data: programListDetails,
@@ -121,9 +120,10 @@ const Overview = ({ id }: { id: string }) => {
             </Typography>
             <div className="_flexbox__row__center gap-6">
               <Button
-                asLink
+                asLink={role !== "company staff"}
                 variant="tertiary-company"
                 className="py-0"
+                disabled={role === "company staff"}
                 prefixIcon={<FilePenLine />}
                 href={`/vrp-launchpad/${id}`}
               >
@@ -137,7 +137,6 @@ const Overview = ({ id }: { id: string }) => {
                     ? "open"
                     : "clear"
                 }
-                className="w-full"
               >
                 {`${programListDetails?.data.status} ${programListDetails?.data.status?.toLowerCase().includes("phase") ? `: ${currentPhase[programListDetails?.data.status?.toLowerCase()]}` : ""}`}
               </Indicator>

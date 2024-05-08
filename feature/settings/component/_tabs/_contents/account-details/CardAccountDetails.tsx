@@ -3,11 +3,12 @@ import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profil
 import { I_UpdateProfile } from "@/core/models/company/settings";
 import { Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { Role } from "@/types/admin/sidebar";
 import { UserRound } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
 interface I_CardAccountDetailsProps {
-  variant?: "hacker" | "mediator" | "company";
+  variant?: keyof typeof Role;
   isEditing?: boolean;
   data?: I_GetUserProfileSuccessResponse["data"];
 }

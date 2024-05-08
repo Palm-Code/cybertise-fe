@@ -8,3 +8,4 @@ export * from "./fetchPostUpdateVrp";
 export * from "./fetchGetUserProfile";
 export * from "./fetchPostUpdateProfile";
 export * from "./fetchGetCountryList";
+export * from "./fetchGetUserData";

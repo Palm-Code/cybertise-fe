@@ -22,6 +22,7 @@ export default async function Dashboardlayout({
     [Role.hacker]: hacker,
     [Role.company]: company,
     [Role.mediator]: mediator,
+    "company staff": company,
   };
 
   return (

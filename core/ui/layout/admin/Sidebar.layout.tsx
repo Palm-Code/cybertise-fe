@@ -27,9 +27,10 @@ import {
   ThemeSwitcher,
 } from "../../components";
 import { useTheme } from "next-themes";
+import { Role } from "@/types/admin/sidebar";
 
 interface SidebarProps {
-  type: "hacker" | "mediator" | "company";
+  type: keyof typeof Role;
 }
 
 const iconsObject: { [key: string]: React.ReactNode } = {

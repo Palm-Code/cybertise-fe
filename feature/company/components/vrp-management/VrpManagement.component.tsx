@@ -1,5 +1,5 @@
 "use client";
-import { Button, Typography } from "@/core/ui/components";
+import { Button, Card, Typography } from "@/core/ui/components";
 import VRPCardList from "./card/VrpCard";
 import Link from "next/link";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
@@ -7,9 +7,12 @@ import { useState } from "react";
 import { ModalForbidden, VRPCardLoadingList } from "@/core/ui/container";
 import { useGetProgramList } from "../../query/client";
 import { useProgramListParamStore } from "../../zustand/store/programs";
-import Loader from "@/core/ui/components/loader/loader";
+import { Role } from "@/types/admin/sidebar";
+import { cn } from "@/core/lib/utils";
+import { useGetRole } from "@/core/hooks";
 
 const VrpManagement = () => {
+  const role = useGetRole();
   const store = useProgramListParamStore();
   const {
     data: programList,
@@ -19,7 +22,7 @@ const VrpManagement = () => {
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   return (
-    <AnimationWrapper className="px-6 pb-28 pt-12">
+    <AnimationWrapper className="px-6 pb-28 pt-12 xl:px-0">
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-10">
           <Typography variant="h4" weight="bold">
@@ -30,31 +33,37 @@ const VrpManagement = () => {
           ) : (
             <VRPCardList data={programList?.data} />
           )}
-          <Button
-            variant="secondary-company"
-            fullWidth
-            onClick={() => setShowModalForbidden(true)}
-          >
-            + Add New VRP
-          </Button>
+          {role === Role.company && (
+            <Button
+              variant="secondary-company"
+              fullWidth
+              onClick={() => setShowModalForbidden(true)}
+            >
+              + Add New VRP
+            </Button>
+          )}
         </div>
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-10">
-          <Typography variant="h4" weight="bold">
-            VRP Management
-          </Typography>
+          <Card className={cn("rounded-b-none rounded-t-2xl xl:px-9 xl:py-6")}>
+            <Typography variant="h4" weight="bold">
+              VRP Management
+            </Typography>
+          </Card>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : (
             <VRPCardList data={programList?.data} />
           )}
-          <Link
-            href={"/vrp-launchpad/create-vrp"}
-            className="w-full rounded-md border border-white px-4 py-6 text-center"
-          >
-            + Add New VRP
-          </Link>
+          {role === Role.company && (
+            <Link
+              href={"/vrp-launchpad/create-vrp"}
+              className="w-full rounded-md border border-white px-4 py-6 text-center"
+            >
+              + Add New VRP
+            </Link>
+          )}
         </div>
       </Desktop>
       <ModalForbidden

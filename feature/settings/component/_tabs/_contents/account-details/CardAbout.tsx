@@ -3,15 +3,10 @@ import { useGetCountry } from "@/core/hooks";
 import { cn } from "@/core/lib/utils";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { I_UpdateProfile } from "@/core/models/company/settings";
-import {
-  useGetCountryList,
-  usePostTempFiles,
-  usePostUpdateProfile,
-} from "@/core/react-query/client";
+import { usePostTempFiles } from "@/core/react-query/client";
 import {
   Avatar,
   AvatarInput,
-  Button,
   Card,
   Country,
   Input,
@@ -22,25 +17,25 @@ import {
 } from "@/core/ui/components";
 import HackerIcon from "@/core/ui/icons/hacker/Hacker.icon";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { Role } from "@/types/admin/sidebar";
 import { OptionsType } from "@/types/auth/sign-up";
 import { Building2, UserRound } from "lucide-react";
-import Image from "next/image";
 import { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface I_CardAboutProps {
   isEditing?: boolean;
-  variant?: Role;
+  variant?: keyof typeof Role;
   data?: I_GetUserProfileSuccessResponse["data"];
 }
 
-const icons = (variant: Role) => {
+const icons = (variant: keyof typeof Role) => {
   switch (variant) {
     case "hacker":
       return <HackerIcon className="h-8 w-8" />;
     case "company":
+      return <Building2 className="h-8 w-8" />;
+    case "company staff":
       return <Building2 className="h-8 w-8" />;
     case "mediator":
       return <UserRound className="mr-4 h-8 w-8" />;

@@ -8,8 +8,8 @@ import {
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { ArrowUpDown } from "lucide-react";
-import { iconColor } from "./filter-view-dropdown";
 import { Desktop, Mobile } from "../../layout";
+import { iconColor } from "@/core/constants/common";
 
 interface I_FilterDropdownProps {
   onValueChange: (value: string) => void;

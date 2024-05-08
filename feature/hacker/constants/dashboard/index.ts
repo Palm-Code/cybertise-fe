@@ -131,6 +131,7 @@ export const filterItems: MultiFilterType = {
     { label: "All status", value: "all" },
     { label: "Open", value: "Open" },
     { label: "Closed", value: "Closed" },
+    { label: "In Review", value: "In Review" },
     { label: "Waiting for Payment", value: "Waiting for Payment" },
     { label: "Paid", value: "Paid" },
     { label: "Canceled", value: "Canceled" },

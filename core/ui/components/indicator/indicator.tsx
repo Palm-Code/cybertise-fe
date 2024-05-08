@@ -16,6 +16,7 @@ const indicatorVariants = cva("", {
       open: "text-red-normal rounded-full",
       closed: "text-emerald-normal rounded-full",
       "waiting for payment": "text-yellow-normal rounded-full",
+      "in review": "text-yellow-light rounded-full",
       paid: "text-emerald-normal rounded-full",
       canceled: "text-red-normal rounded-full",
     },

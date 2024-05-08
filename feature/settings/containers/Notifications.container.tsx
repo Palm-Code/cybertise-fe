@@ -3,9 +3,10 @@ import CardSystemNotification from "../component/_tabs/_contents/notifications/C
 import CardNews from "../component/_tabs/_contents/notifications/CardNews";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_NotifyProps {
-  variant: "hacker" | "mediator" | "company";
+  variant: keyof typeof Role;
   data?: I_GetUserProfileSuccessResponse["data"];
 }
 

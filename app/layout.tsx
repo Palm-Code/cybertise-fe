@@ -27,6 +27,7 @@ export default async function RootLayout({
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
     company: "#4BA2E3",
+    "company staff": "#4BA2E3",
     mediator: "#845EEE",
   };
 

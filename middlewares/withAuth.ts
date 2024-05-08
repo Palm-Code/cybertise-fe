@@ -32,6 +32,22 @@ export default function (
           return NextResponse.redirect(url);
         }
       }
+      if (pathname.includes("/companies")) {
+        const decryptedSession = await decrypt(session as string);
+        const isMediator = decryptedSession?.user.role === Role.mediator;
+        if (!isMediator) {
+          const url = new URL("/dashboard", req.url);
+          return NextResponse.redirect(url);
+        }
+      }
+      if (pathname.includes("/manage-company")) {
+        const decryptedSession = await decrypt(session as string);
+        const isCompany = decryptedSession?.user.role === Role.company;
+        if (!isCompany) {
+          const url = new URL("/dashboard", req.url);
+          return NextResponse.redirect(url);
+        }
+      }
     }
     return middleware(req, next);
   };

@@ -19,6 +19,10 @@ const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
     active: "bg-sky-normal",
     inactive: "bg-sky-lighter/20",
   },
+  "company staff": {
+    active: "bg-sky-normal",
+    inactive: "bg-sky-lighter/20",
+  },
   mediator: {
     active: "bg-violet-normal",
     inactive: "bg-violet-darker",

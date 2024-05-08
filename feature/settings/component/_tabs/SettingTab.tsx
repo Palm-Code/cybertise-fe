@@ -4,12 +4,13 @@ import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { SettingItems } from "@/enums";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_TabProps {
   items: SortFilterType[];
   active: SettingItems;
   onValueChange: (value: SettingItems) => void;
-  variant: "hacker" | "mediator" | "company";
+  variant: keyof typeof Role;
 }
 
 const Tab = ({ items, active, variant, onValueChange }: I_TabProps) => {

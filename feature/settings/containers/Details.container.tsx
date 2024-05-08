@@ -8,13 +8,13 @@ import { Role } from "@/types/admin/sidebar";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { useState } from "react";
 import { ModalForbidden } from "@/core/ui/container";
-import { FormProvider, useFormContext, UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { I_UpdateProfile } from "@/core/models/company/settings";
 import { usePostUpdateProfile } from "@/core/react-query/client";
 import { toast } from "sonner";
 
 interface I_DetailsProps {
-  variant: Role;
+  variant: keyof typeof Role;
   isEditing: boolean;
   handleClickEdit: (v: boolean) => void;
   data?: I_GetUserProfileSuccessResponse["data"];

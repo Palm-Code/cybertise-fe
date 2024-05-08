@@ -3,6 +3,7 @@ import { EmptyFolder, HackerLeaf, Leaf } from "../../icons";
 import { Button, Typography } from "../../components";
 import Link from "next/link";
 import { buttonVariants } from "../../components/button/base-button";
+import { iconColor } from "@/core/constants/common";
 
 interface I_EmptyStateProps {
   variant: "company" | "hacker" | "mediator";
@@ -19,12 +20,6 @@ interface I_EmptyStateProps {
   onClickButton?: () => void;
 }
 
-const iconColors: { [key in Role]: string } = {
-  hacker: "text-emerald-normal",
-  company: "text-sky-light",
-  mediator: "text-violet-light",
-};
-
 const EmptyState = ({
   variant,
   type = "default",
@@ -38,7 +33,7 @@ const EmptyState = ({
       case "ticket":
         return (
           <>
-            <EmptyFolder className={iconColors[variant]} />
+            <EmptyFolder className={iconColor[variant]} />
             <Typography
               variant="p"
               affects="extralarge"
@@ -81,7 +76,7 @@ const EmptyState = ({
         return (
           <>
             <>
-              <EmptyFolder className={iconColors[variant]} />
+              <EmptyFolder className={iconColor[variant]} />
               <Typography
                 variant="p"
                 affects="extralarge"
@@ -116,7 +111,7 @@ const EmptyState = ({
       case "under-construction":
         return (
           <>
-            <EmptyFolder className={iconColors[variant]} />
+            <EmptyFolder className={iconColor[variant]} />
             <Typography
               variant="p"
               affects="extralarge"
@@ -136,7 +131,7 @@ const EmptyState = ({
       default:
         return (
           <>
-            <EmptyFolder className={iconColors[variant]} />
+            <EmptyFolder className={iconColor[variant]} />
             <Typography
               variant="p"
               affects="extralarge"

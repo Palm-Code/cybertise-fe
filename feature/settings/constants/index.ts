@@ -61,8 +61,24 @@ export const companySettingTabItems: SortFilterType[] = [
   },
 ];
 
+export const companyStaffSettingTabItems: SortFilterType[] = [
+  {
+    label: "Notifications",
+    value: "notifications",
+  },
+  {
+    label: "Security",
+    value: "security",
+  },
+  {
+    label: "Data & Privacy",
+    value: "data_privacy",
+  },
+];
+
 export const settingTabItems: { [key in Role]: SortFilterType[] } = {
   [Role.hacker]: hackerSettingTabItems,
   [Role.mediator]: mediatorSettingTabItems,
   [Role.company]: companySettingTabItems,
+  [Role["company staff"]]: companyStaffSettingTabItems,
 };

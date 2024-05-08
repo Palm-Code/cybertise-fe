@@ -16,7 +16,6 @@ import { I_SettingsFragmentProps } from "../fragments/Settings.fragment";
 import { ChevronRight, MoveLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { settingTabItems } from "../constants";
-import { useGetUserProfile } from "@/core/react-query/client";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   I_UpdateProfile,
@@ -32,7 +31,7 @@ const Setting = ({
   initialData?: I_GetUserProfileSuccessResponse["data"];
 }) => {
   const [activeTab, setActiveTab] = useState<SettingItems>(
-    SettingItems.details
+    role === "company staff" ? SettingItems.notifications : SettingItems.details
   );
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
   const [editing, setEditing] = useState<boolean>(false);

@@ -13,8 +13,7 @@ import { postFileTempAPIURL } from "@/core/routes/common";
 import { AxiosResponse } from "axios";
 import { I_PostTempFilesResponse } from "@/core/models/common";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
-import { iconColor } from "../dropdown/filter-view-dropdown";
-import { backgroundColor } from "@/core/constants/common";
+import { backgroundColor, iconColor } from "@/core/constants/common";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {

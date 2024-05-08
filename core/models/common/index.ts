@@ -7,3 +7,4 @@ export * from "./post_temp_files";
 export * from "./get_error_res";
 export * from "./post_send_report";
 export * from "./get_country_list";
+export * from "./get_user_data";

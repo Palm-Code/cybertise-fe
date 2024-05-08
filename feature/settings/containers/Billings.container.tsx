@@ -5,9 +5,10 @@ import CardBilling from "../component/_tabs/_contents/billings/CardBilling";
 import CardEditBilling from "../component/_tabs/_contents/billings/CardEditBilling";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_BillingProps {
-  variant: "hacker" | "mediator" | "company";
+  variant: keyof typeof Role;
   isEditing?: boolean;
   handleClickEdit?: (v: boolean) => void;
 }

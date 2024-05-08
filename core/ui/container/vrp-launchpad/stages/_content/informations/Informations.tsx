@@ -1,3 +1,4 @@
+import { fillColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { SortFilterType } from "@/types/admin/dashboard";
@@ -7,14 +8,8 @@ import { Square } from "lucide-react";
 interface I_InformationProps {
   activeStep: number;
   lists: SortFilterType[];
-  variant: "mediator" | "company" | "hacker";
+  variant: keyof typeof Role;
 }
-
-const fillColor: { [key in Role]: string } = {
-  mediator: "fill-violet-normal",
-  company: "fill-sky-normal",
-  hacker: "fill-lime-normal",
-};
 
 const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
   return (

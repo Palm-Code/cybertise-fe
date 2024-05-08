@@ -1,6 +1,5 @@
 "use client";
 import { Filter } from "lucide-react";
-import { iconColor } from "./filter-view-dropdown";
 import BaseDropdown from "./base-dropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import Separator from "../separator/separator";
@@ -10,6 +9,7 @@ import { StoreType } from "@/core/hooks/types";
 import { FilterDrawer } from "../drawer/filter-drawer";
 import { useState } from "react";
 import { I_GetParamsPayload } from "@/core/models/common";
+import { iconColor } from "@/core/constants/common";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
