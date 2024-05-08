@@ -1,9 +1,21 @@
+"use client";
+import { useGetCountry } from "@/core/hooks";
 import { cn } from "@/core/lib/utils";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { I_UpdateProfile } from "@/core/models/company/settings";
+import {
+  useGetCountryList,
+  usePostTempFiles,
+  usePostUpdateProfile,
+} from "@/core/react-query/client";
 import {
   Avatar,
+  AvatarInput,
   Button,
   Card,
+  Country,
   Input,
+  Loader,
   SelectDropdown,
   TextArea,
   Typography,
@@ -12,12 +24,16 @@ import HackerIcon from "@/core/ui/icons/hacker/Hacker.icon";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { Role } from "@/types/admin/sidebar";
+import { OptionsType } from "@/types/auth/sign-up";
 import { Building2, UserRound } from "lucide-react";
 import Image from "next/image";
+import { ChangeEvent } from "react";
+import { useFormContext } from "react-hook-form";
 
 interface I_CardAboutProps {
   isEditing?: boolean;
   variant?: Role;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
 const icons = (variant: Role) => {
@@ -33,7 +49,35 @@ const icons = (variant: Role) => {
   }
 };
 
-const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
+const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
+  const {
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext<I_UpdateProfile>();
+  const forms = watch();
+  const countryOptions = useGetCountry();
+  const countryFlag =
+    (countryOptions &&
+      countryOptions.data.find(
+        (country) => country.value === data?.country_code
+      )) ||
+    ({} as OptionsType);
+  const { mutateAsync: mutate, isPending: isPendingUpload } =
+    usePostTempFiles();
+
+  const handleChangeAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setValue("logo", url, { shouldValidate: true });
+      mutate(file).then((data) => {
+        setValue("attachment_id", data?.data?.id, { shouldValidate: true });
+      });
+    }
+  };
+
   if (isEditing)
     return (
       <>
@@ -42,9 +86,13 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
             "_flexbox__col__start__start w-full gap-8 rounded-xl xl:p-7.5"
           )}
         >
-          <Typography variant="h6" weight="bold" className="inline-flex">
-            <HackerIcon className="mr-4 h-8 w-8" />
-            About You
+          <Typography
+            variant="h6"
+            weight="bold"
+            className="inline-flex items-center gap-4"
+          >
+            {icons(variant as Role)}
+            {variant === "company" ? "Company Information" : "About You"}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
             <div className="_flexbox__row__center__between w-full">
@@ -56,44 +104,143 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                 >
                   {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
                 </Typography>
-                <Avatar
-                  image="https://api.lorem.space/image/face?w=150&h=150"
-                  initials="J"
-                  className="h-12 w-12"
-                />
+                {isPendingUpload ? (
+                  <Loader
+                    width={15}
+                    height={15}
+                    variant={variant}
+                    className="h-12 w-12 rounded-full bg-neutral-light-90 dark:bg-neutral-dark-90"
+                    noText
+                  />
+                ) : (
+                  <Avatar
+                    image={forms.logo}
+                    initials=""
+                    className="h-12 w-12"
+                  />
+                )}
               </div>
-              <Button variant={`tertiary-${variant as Role}`}>
-                Change Avatar
-              </Button>
+              <AvatarInput
+                variant="company"
+                onChange={(e) => handleChangeAvatar(e)}
+              />
             </div>
             <Input
               type="text"
               label={`${variant} Name`}
-              value={"John Doe"}
+              value={forms.name}
               containerClassName="capitalize"
-            />
-            <SelectDropdown
-              label="Country"
-              value={"us"}
-              withIcon
-              withSearch
-              options={countryOptions}
-              onValueChange={(v) => {}}
+              onChange={(e) => {
+                setValue("name", e.target.value, { shouldValidate: true });
+              }}
+              isError={!!errors.name}
             />
           </div>
+          {variant == "company" ? (
+            <div className="_flexbox__col__start__start w-full gap-6">
+              <Typography variant="h6" weight="bold">
+                Company Address
+              </Typography>
+              <div className="_flexbox__col__start__start w-full gap-6">
+                <Input
+                  type="text"
+                  label="Address"
+                  value={forms.address}
+                  onChange={(e) =>
+                    setValue("address", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
+                  onClearInput={() => {
+                    setValue("address", "", { shouldValidate: true });
+                  }}
+                  isError={!!errors.address}
+                />
+                <Input
+                  type="text"
+                  label="Address 2"
+                  value={forms.address_2}
+                  onChange={(e) =>
+                    setValue("address_2", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
+                  onClearInput={() => {
+                    setValue("address_2", "", { shouldValidate: true });
+                  }}
+                  description="Optional"
+                />
+                <div className="grid w-full grid-cols-3 gap-6">
+                  <SelectDropdown
+                    label="Country"
+                    value={forms.country_code as string}
+                    options={countryOptions?.data || []}
+                    withIcon
+                    withSearch
+                    onValueChange={(e) => {
+                      setValue("country_code", e, { shouldValidate: true });
+                    }}
+                  />
+                  <Input
+                    type="text"
+                    label="State"
+                    value={forms.state}
+                    onChange={(e) =>
+                      setValue("state", e.target.value, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onClearInput={() => {
+                      setValue("state", "", { shouldValidate: true });
+                    }}
+                    isError={!!errors.state}
+                  />
+                  <Input
+                    type="text"
+                    label="Zip Code"
+                    value={forms.zip}
+                    onChange={(e) =>
+                      setValue("zip", e.target.value, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onClearInput={() => {
+                      setValue("zip", "", { shouldValidate: true });
+                    }}
+                    isError={!!errors.zip}
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <SelectDropdown
+              label="Country"
+              value={forms.country_code}
+              withIcon
+              withSearch
+              options={countryOptions?.data || []}
+              onValueChange={(v) => {}}
+            />
+          )}
+
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <Typography
               variant="p"
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              About Your Account
+              About {`${variant == "company" ? "Company" : "Your Account"}`}
             </Typography>
             <TextArea
               label={`About ${variant}`}
-              value={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              value={forms.about}
+              onChange={(e) =>
+                setValue("about", e.target.value, { shouldValidate: true })
               }
+              onClearInput={() => {
+                setValue("about", "", { shouldValidate: true });
+              }}
+              isError={!!errors.about}
             />
           </div>
         </Card>
@@ -126,8 +273,8 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
               {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
             </Typography>
             <Avatar
-              image="https://api.lorem.space/image/face?w=150&h=150"
-              initials="J"
+              image={data?.company_logo}
+              initials=""
               className="h-12 w-12"
             />
             <Typography
@@ -138,7 +285,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
               {`${variant} Name`}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              John Doe
+              {data?.name}
             </Typography>
             <Typography
               variant="p"
@@ -148,15 +295,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
               Country
             </Typography>
             <div className="_flexbox__row__center__start gap-2.5">
-              <Image
-                src="/images/flags/germany.svg"
-                alt="flag"
-                width={20}
-                height={20}
-              />
-              <Typography variant="p" affects="normal" className="col-span-1">
-                Germany
-              </Typography>
+              <Country icon={countryFlag.icon} label={countryFlag?.label} />
             </div>
           </div>
           <div className="_flexbox__col__start__start w-full gap-2.5">
@@ -168,12 +307,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
               About {variant == "company" ? "Company" : "Your Account"}
             </Typography>
             <Typography variant="p" affects="normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              {data?.about}
             </Typography>
           </div>
         </Card>
@@ -203,7 +337,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                 {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
               </Typography>
               <Avatar
-                image="https://api.lorem.space/image/face?w=150&h=150"
+                image={data?.company_logo}
                 initials="J"
                 className="h-12 w-12"
               />
@@ -217,7 +351,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                 {`${variant} Name`}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">
-                John Doe
+                {data?.name}
               </Typography>
             </div>
             <div className="_flexbox__col__start__start gap-2.5">
@@ -229,15 +363,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                 Country
               </Typography>
               <div className="_flexbox__row__center__start gap-2.5">
-                <Image
-                  src="/images/flags/germany.svg"
-                  alt="flag"
-                  width={20}
-                  height={20}
-                />
-                <Typography variant="p" affects="normal" className="col-span-1">
-                  Germany
-                </Typography>
+                <Country icon={countryFlag?.icon} label={countryFlag?.label} />
               </div>
             </div>
             {variant === "company" && (
@@ -255,7 +381,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1"
                   >
-                    Company Address
+                    {data?.address}
                   </Typography>
                 </div>
                 <div className="_flexbox__col__start__start gap-2.5">
@@ -271,7 +397,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1"
                   >
-                    Berlin
+                    {data?.state}
                   </Typography>
                 </div>
                 <div className="_flexbox__col__start__start gap-2.5">
@@ -287,7 +413,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1"
                   >
-                    000123
+                    {data?.zip}
                   </Typography>
                 </div>
               </>
@@ -302,12 +428,7 @@ const CardAbout = ({ isEditing = false, variant }: I_CardAboutProps) => {
               About {variant == "company" ? "Company" : "Your Account"}
             </Typography>
             <Typography variant="p" affects="normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              {data?.about}
             </Typography>
           </div>
         </Card>

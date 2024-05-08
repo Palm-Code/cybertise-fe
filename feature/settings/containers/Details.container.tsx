@@ -6,6 +6,12 @@ import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { useState } from "react";
+import { ModalForbidden } from "@/core/ui/container";
+import { FormProvider, useFormContext, UseFormReturn } from "react-hook-form";
+import { I_UpdateProfile } from "@/core/models/company/settings";
+import { usePostUpdateProfile } from "@/core/react-query/client";
+import { toast } from "sonner";
 
 interface I_DetailsProps {
   variant: Role;
@@ -20,6 +26,23 @@ const Details = ({
   handleClickEdit,
   data,
 }: I_DetailsProps) => {
+  const {
+    getValues,
+    formState: { errors },
+  } = useFormContext<I_UpdateProfile>();
+  const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile(true);
+  const [modalForbidden, setModalForbidden] = useState<boolean>(false);
+
+  const handleSubmitForm = () => {
+    if (Object.values(errors).length === 0) {
+      mutateAsync(getValues()).then(() => {
+        handleClickEdit(false);
+      });
+    } else {
+      toast.error("Please fill in all required fields");
+    }
+  };
+
   if (isEditing)
     return (
       <>
@@ -49,14 +72,19 @@ const Details = ({
                 >
                   Discard
                 </Button>
-                <Button variant={`primary-${variant}`} onClick={() => {}}>
+                <Button
+                  disabled={isPending || isSuccess}
+                  isLoading={isPending}
+                  variant={`primary-${variant}`}
+                  onClick={() => handleSubmitForm()}
+                >
                   Save Changes
                 </Button>
               </div>
             </Card>
             <AnimationWrapper>
               <CardAbout isEditing variant={variant as Role} />
-              <CardAccountDetails isEditing />
+              <CardAccountDetails isEditing variant={variant as Role} />
             </AnimationWrapper>
           </div>
         </Desktop>
@@ -73,11 +101,20 @@ const Details = ({
             variant={`tertiary-${variant}`}
             className="p-0"
             prefixIcon={<FilePenLine />}
-            onClick={() => {}}
+            onClick={() => {
+              setModalForbidden(true);
+            }}
           ></Button>
         </div>
-        <CardAbout variant={variant} />
-        <CardAccountDetails variant={variant} />
+        <CardAbout data={data} variant={variant} />
+        <CardAccountDetails data={data} variant={variant} />
+        <ModalForbidden
+          isOpen={modalForbidden}
+          onClose={() => setModalForbidden(false)}
+          title="Edit on Mobile"
+          subtitle="Sorry, you can't edit on mobile."
+          variant={variant}
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-6">
@@ -93,8 +130,8 @@ const Details = ({
               Edit Account Details
             </Button>
           </div>
-          <CardAbout variant={variant} />
-          <CardAccountDetails variant={variant} />
+          <CardAbout data={data} variant={variant} />
+          <CardAccountDetails data={data} variant={variant} />
         </div>
       </Desktop>
     </>

@@ -2,9 +2,11 @@ import { Typography } from "@/core/ui/components";
 import CardSystemNotification from "../component/_tabs/_contents/notifications/CardSystemNotification";
 import CardNews from "../component/_tabs/_contents/notifications/CardNews";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 
 interface I_NotifyProps {
   variant: "hacker" | "mediator" | "company";
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
 const Notifications = ({ variant }: I_NotifyProps) => {

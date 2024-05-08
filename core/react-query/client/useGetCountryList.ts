@@ -8,6 +8,7 @@ export const useGetCountryList = () => {
   const query = useQuery<I_GetCountryListSuccessResponse, I_GetErrorResponse>({
     queryKey: ["getCountryList"],
     queryFn: () => fetchGetCountryList(),
+    refetchOnMount: false,
     placeholderData: keepPreviousData,
   });
 

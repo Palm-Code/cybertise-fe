@@ -13,7 +13,6 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import EditNavBar from "../../components/manage-company/_cards/EditNavBar";
 import Image from "next/image";
-import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import {
   I_UpdateProfile,
@@ -26,6 +25,7 @@ import {
   usePostUpdateProfile,
 } from "@/core/react-query/client";
 import { toast } from "sonner";
+import { ChangeEvent } from "react";
 
 const EditCompnayDetails = ({
   data,
@@ -59,9 +59,8 @@ const EditCompnayDetails = ({
   const { mutateAsync: mutate, isPending: isPendingUpload } =
     usePostTempFiles();
   const forms = watch();
-  const handleChangeAvatar = (e: any) => {
+  const handleChangeAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(e.target.files);
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       const url = URL.createObjectURL(file);

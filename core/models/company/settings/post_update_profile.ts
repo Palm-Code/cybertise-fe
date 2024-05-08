@@ -12,12 +12,7 @@ export const updatePorfileSchema = z.object({
   zip: z.string().min(1, { message: "Zip is required" }),
   phone: z.string().min(1, { message: "Phone is required" }),
   about: z.string().min(1, { message: "About is required" }),
-  want_news: z
-    .number({
-      required_error: "Want news is required",
-      invalid_type_error: "Want news is required",
-    })
-    .min(1, { message: "Want news is required" }),
+  want_news: z.number(),
   logo: z.string().optional(),
   attachment_id: z.string().optional(),
 });

@@ -5,8 +5,9 @@ import { Role } from "@/types/admin/sidebar";
 
 interface I_SwitchProps {
   className?: string;
-  onChange?: () => void;
+  onChange?: (v: 0 | 1) => void;
   variant?: keyof typeof Role;
+  value?: number;
 }
 
 const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
@@ -24,12 +25,15 @@ const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
   },
 };
 
-const Switch = ({ className, onChange, variant = "hacker" }: I_SwitchProps) => {
-  const [active, setActive] = useState<boolean>(false);
+const Switch = ({
+  className,
+  onChange,
+  variant = "hacker",
+  value = 0,
+}: I_SwitchProps) => {
   const onClickSwitch = () => {
-    setActive(!active);
     if (onChange) {
-      onChange();
+      onChange(value === 0 ? 1 : 0);
     }
   };
 
@@ -38,7 +42,7 @@ const Switch = ({ className, onChange, variant = "hacker" }: I_SwitchProps) => {
       className={cn(
         "relative flex h-6 w-12 cursor-pointer items-center justify-between",
         "overflow-hidden rounded-full px-1.5 py-1 transition-all duration-200",
-        active
+        value === 1
           ? colorSwitch[variant].active
           : "bg-neutral-light-80 dark:bg-neutral-dark-80",
         className
@@ -48,7 +52,7 @@ const Switch = ({ className, onChange, variant = "hacker" }: I_SwitchProps) => {
       <div
         className={cn(
           "aspect-square h-full rounded-full transition-all duration-200",
-          active
+          value === 1
             ? "translate-x-5 bg-white"
             : `translate-x-0 ${colorSwitch[variant].inactive}`
         )}

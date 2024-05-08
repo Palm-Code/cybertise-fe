@@ -23,7 +23,7 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
           <BellRing className="mr-4 h-8 w-8" />
           System Notification
         </Typography>
-        <Switch variant={variant} />
+        <Switch variant={variant} value={0} />
       </div>
       <Typography
         variant="p"

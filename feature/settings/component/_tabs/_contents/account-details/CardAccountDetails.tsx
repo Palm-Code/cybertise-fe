@@ -1,16 +1,28 @@
 import { cn } from "@/core/lib/utils";
-import { Badge, Card, Input, Typography } from "@/core/ui/components";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { I_UpdateProfile } from "@/core/models/company/settings";
+import { Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { UserRound } from "lucide-react";
-
-const menus: string[] = ["Your Email", "Your Website", "Phone"];
+import { useFormContext } from "react-hook-form";
 
 interface I_CardAccountDetailsProps {
   variant?: "hacker" | "mediator" | "company";
   isEditing?: boolean;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
-const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
+const CardAccountDetails = ({
+  isEditing,
+  variant,
+  data,
+}: I_CardAccountDetailsProps) => {
+  const {
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext<I_UpdateProfile>();
+  const forms = watch();
   if (isEditing)
     return (
       <>
@@ -24,9 +36,52 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
               Account Details
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-6">
-              <Input value={menus[0]} label={menus[0]} />
-              <Input value={menus[1]} label={menus[1]} />
-              <Input value={menus[2]} label={menus[2]} />
+              <Input
+                type="email"
+                label="Registered Email"
+                value={forms.email}
+                onChange={(e) =>
+                  setValue("email", e.target.value, {
+                    shouldValidate: true,
+                  })
+                }
+                onClearInput={() => {
+                  setValue("email", "", { shouldValidate: true });
+                }}
+                isError={!!errors.email}
+              />
+              {variant === "company" && (
+                <Input
+                  type="text"
+                  label="Company Website"
+                  value={forms.website}
+                  onChange={(e) =>
+                    setValue("website", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
+                  onClearInput={() => {
+                    setValue("website", "", { shouldValidate: true });
+                  }}
+                  isError={!!errors.website}
+                />
+              )}
+              <Input
+                type="number"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                label="Phone Number"
+                value={forms.phone}
+                onChange={(e) =>
+                  setValue("phone", e.target.value, {
+                    shouldValidate: true,
+                  })
+                }
+                onClearInput={() => {
+                  setValue("phone", "", { shouldValidate: true });
+                }}
+                isError={!!errors.phone}
+              />
             </div>
           </Card>
         </Desktop>
@@ -51,35 +106,39 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                {menus[0]}
+                Registered Email
               </Typography>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
-              email@example.com
+              {data?.email}
             </Typography>
+            {variant === "company" && (
+              <>
+                <div className="_flexbox__row__center__between w-full gap-2.5">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                    className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+                  >
+                    Company Website
+                  </Typography>
+                </div>
+                <Typography variant="p" affects="normal" className="col-span-1">
+                  {data?.website}
+                </Typography>
+              </>
+            )}
             <div className="_flexbox__row__center__between w-full gap-2.5">
               <Typography
                 variant="p"
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                {menus[1]}
+                Phone Number
               </Typography>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
-              wwww.example.com
-            </Typography>
-            <div className="_flexbox__row__center__between w-full gap-2.5">
-              <Typography
-                variant="p"
-                affects="normal"
-                className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
-              >
-                {menus[2]}
-              </Typography>
-            </div>
-            <Typography variant="p" affects="normal" className="col-span-1">
-              +1 123 456 789
+              {data?.phone}
             </Typography>
           </div>
         </Card>
@@ -96,29 +155,42 @@ const CardAccountDetails = ({ isEditing }: I_CardAccountDetailsProps) => {
             Account Details
           </Typography>
           <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
-            {menus.map((menu) => (
+            <div className="_flexbox__col__start__start gap-2.5">
               <Typography
-                key={`menu-account-details-${menu}`}
                 variant="p"
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                {menu}
+                Registered Email
               </Typography>
-            ))}
-            <div className="_flexbox__row__center__start gap-2.5">
               <Typography variant="p" affects="normal" className="col-span-1">
-                email@example.com
+                {data?.email}
               </Typography>
             </div>
-            <div className="_flexbox__row__center__start gap-2.5">
-              <Typography variant="p" affects="normal" className="col-span-1">
-                wwww.example.com
+            {variant === "company" && (
+              <div className="_flexbox__col__start__start gap-2.5">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                  className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+                >
+                  Company Website
+                </Typography>
+                <Typography variant="p" affects="normal" className="col-span-1">
+                  {data?.website}
+                </Typography>
+              </div>
+            )}
+            <div className="_flexbox__col__start__start gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                Phone Number
               </Typography>
-            </div>
-            <div className="_flexbox__row__center__start gap-2.5">
               <Typography variant="p" affects="normal" className="col-span-1">
-                +1 123 456 789
+                {data?.phone}
               </Typography>
             </div>
           </div>
