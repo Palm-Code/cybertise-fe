@@ -22,17 +22,18 @@ export type VRPCompaniesCardType = {
 
 export type PricingProps = {
   tier: string;
+  category: string;
   list: {
     label: string;
     value: number;
   }[];
-  checked: boolean;
 };
 
 export type MonetaryAwardType = {
   title: string;
   category: "S" | "M" | "L" | "XL";
   priceData: PricingProps[];
+  variant: "hacker" | "company" | "mediator";
 };
 
 export type CollaboratorCardDataType = {

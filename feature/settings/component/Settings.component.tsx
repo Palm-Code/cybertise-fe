@@ -1,8 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Loader, Typography } from "@/core/ui/components";
 import Tab from "./_tabs/SettingTab";
-import { hackerSettingTabItems } from "../constants";
 import { useState } from "react";
 import { SettingItems } from "@/enums";
 import {
@@ -16,42 +15,77 @@ import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { I_SettingsFragmentProps } from "../fragments/Settings.fragment";
 import { ChevronRight, MoveLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { settingTabItems } from "../constants";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  I_UpdateProfile,
+  updatePorfileSchema,
+} from "@/core/models/company/settings";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 
-const Setting = ({ role }: I_SettingsFragmentProps) => {
+const Setting = ({
+  role,
+  initialData,
+}: I_SettingsFragmentProps & {
+  initialData?: I_GetUserProfileSuccessResponse["data"];
+}) => {
   const [activeTab, setActiveTab] = useState<SettingItems>(
-    SettingItems.details
+    role === "company staff" ? SettingItems.notifications : SettingItems.details
   );
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
   const [editing, setEditing] = useState<boolean>(false);
 
+  const methods = useForm<I_UpdateProfile>({
+    resolver: zodResolver(updatePorfileSchema),
+    defaultValues: {
+      name: initialData?.name,
+      about: initialData?.about,
+      address: initialData?.address,
+      address_2: initialData?.address_2 || "",
+      state: initialData?.state,
+      city: initialData?.city,
+      country_code: initialData?.country_code,
+      email: initialData?.email,
+      phone: initialData?.phone,
+      want_news: initialData?.want_news,
+      website: initialData?.website,
+      zip: initialData?.zip,
+      logo: initialData?.company_logo,
+    },
+  });
+
   const tabs: { [key in SettingItems]: JSX.Element } = {
-    0: (
+    [SettingItems.details]: (
       <Details
+        data={initialData}
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}
       />
     ),
-    1: (
+    [SettingItems.billings]: (
       <Billing
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}
       />
     ),
-    2: <Notifications variant={role} />,
-    3: (
+    [SettingItems.notifications]: (
+      <Notifications data={initialData} variant={role} />
+    ),
+    [SettingItems.security]: (
       <Security
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}
       />
     ),
-    4: <DataPrivacy />,
+    [SettingItems.data_privacy]: <DataPrivacy />,
   };
 
   return (
-    <>
+    <FormProvider {...methods}>
       <Mobile>
         {activeState === null ? (
           <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
@@ -59,12 +93,12 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
               Settings
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-4">
-              {hackerSettingTabItems.map((item, idx) => (
+              {settingTabItems[role].map((item, idx) => (
                 <Card
                   key={`item-setting-${idx}`}
                   isButton
                   className="_flexbox__row__center__between w-full rounded-[10px] px-7.5 py-6"
-                  onClick={() => setActiveState(idx)}
+                  onClick={() => setActiveState(item.value as SettingItems)}
                 >
                   <Typography variant="h4" weight="semibold">
                     {item.label}
@@ -94,10 +128,10 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
               <Typography
                 variant="h4"
                 weight="bold"
-                className="inline-flex items-center gap-2.5"
+                className="inline-flex items-center gap-2.5 capitalize"
               >
                 <MoveLeft onClick={() => setActiveState(null)} />
-                {hackerSettingTabItems[activeState].label}
+                {activeState}
               </Typography>
             </Card>
             <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
@@ -113,7 +147,7 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
           </Typography>
           {!editing && (
             <Tab
-              items={hackerSettingTabItems}
+              items={settingTabItems[role]}
               variant={role}
               active={activeTab}
               onValueChange={(v) => setActiveTab(v)}
@@ -131,7 +165,7 @@ const Setting = ({ role }: I_SettingsFragmentProps) => {
           </AnimationWrapper>
         </div>
       </Desktop>
-    </>
+    </FormProvider>
   );
 };
 export default Setting;

@@ -38,7 +38,7 @@ const Summary = ({
           <span className="font-normal text-lime-normal-light dark:text-lime-normal-dark">
             reported a bug
           </span>{" "}
-          to [{data.chat_ticket?.title}]
+          to [{data.chat_ticket?.company_name}]
         </Typography>
         <Review
           data={data.chat_ticket}

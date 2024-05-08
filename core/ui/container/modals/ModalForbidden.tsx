@@ -1,12 +1,13 @@
+import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Typography } from "@/core/ui/components";
-import { iconColor } from "@/core/ui/components/dropdown/filter-view-dropdown";
+import { Role } from "@/types/admin/sidebar";
 import { MonitorSmartphone } from "lucide-react";
 
 interface I_ModalForbidddenProps {
   isOpen: boolean;
   onClose: () => void;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   title?: string;
   subtitle?: string;
 }

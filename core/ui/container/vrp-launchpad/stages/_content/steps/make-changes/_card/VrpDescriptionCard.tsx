@@ -1,4 +1,5 @@
 import { cn } from "@/core/lib/utils";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import {
   Button,
   Card,
@@ -7,6 +8,7 @@ import {
   TextArea,
   Typography,
 } from "@/core/ui/components";
+import { useFormContext } from "react-hook-form";
 
 interface I_VrpDescriptionCard<T extends boolean> {
   isCompany?: T;
@@ -19,6 +21,9 @@ const VrpDescriptionCard = ({
   onClickNext,
   onClickPrev,
 }: I_VrpDescriptionCard<boolean>) => {
+  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const forms = watch();
+
   return (
     <>
       <Typography variant="h5" weight="bold">
@@ -28,7 +33,7 @@ const VrpDescriptionCard = ({
         className={cn(
           "_flexbox__col__start__start w-full gap-6",
           "bg-neutral-light-100 dark:bg-neutral-dark-100",
-          "p-7.5"
+          "xl:p-7.5"
         )}
       >
         <Typography variant="h6" weight="bold">
@@ -36,22 +41,31 @@ const VrpDescriptionCard = ({
         </Typography>
         <SelectDropdown
           label="VRP Type"
-          value="VRP Type 1"
+          value={forms.type}
           options={[
-            {
-              label: "VRP Type 1",
-              value: "VRP Type 1",
-            },
+            { label: "Public", value: "Public" },
+            { label: "Private", value: "Private" },
           ]}
-          defaultValue={"VRP Type 1"}
-          onValueChange={(value) => console.log(value)}
+          onValueChange={(value) => {
+            setValue("type", value, { shouldValidate: true });
+          }}
         />
-        <Input type="text" label="VRP Title" value="VRP Title 1" />
+        <Input
+          type="text"
+          label="VRP Title"
+          value={forms.title}
+          onChange={(e) =>
+            setValue("title", e.target.value, { shouldValidate: true })
+          }
+        />
         <div className="w-full">
           <TextArea
             label="VRP Description"
-            value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci a scelerisque purus semper eget. Pellentesque habitant morbi tristique senectus et. Neque convallis a cras semper."
+            value={forms.description}
             maxLength={150}
+            onChange={(e) =>
+              setValue("description", e.target.value, { shouldValidate: true })
+            }
           />
           <Typography
             variant="p"
@@ -67,7 +81,11 @@ const VrpDescriptionCard = ({
           <Button variant="secondary-company" onClick={onClickPrev}>
             Previous
           </Button>
-          <Button variant="primary-company" onClick={onClickNext}>
+          <Button
+            variant="primary-company"
+            disabled={!forms.type || !forms.title || !forms.description}
+            onClick={onClickNext}
+          >
             Next
           </Button>
         </div>

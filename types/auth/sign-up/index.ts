@@ -1,6 +1,6 @@
 export type OptionsType = {
   icon?: string;
-  value: string;
+  value: string | number;
   label: string;
 };
 
@@ -13,7 +13,7 @@ export type UserType = {
   user: {
     email: string;
     name: string;
-    role: "hacker" | "company" | "mediator";
+    role: "hacker" | "company" | "mediator" | "company staff";
     token: string;
   };
 };

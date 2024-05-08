@@ -1,13 +1,11 @@
-import { Button, Card, Typography } from "@/core/ui/components";
+import { Typography } from "@/core/ui/components";
 import CardLogin from "../component/_tabs/_contents/security/CardLoginInfo";
 import Authentication from "../component/_tabs/_contents/security/Authecntication";
-import { Desktop } from "@/core/ui/layout";
-import { cn } from "@/core/lib/utils";
-import { X } from "lucide-react";
 import { useState } from "react";
+import { Role } from "@/types/admin/sidebar";
 
 export interface I_SecurityProps {
-  variant: "hacker" | "mediator" | "company";
+  variant: keyof typeof Role;
   isEditing?: boolean;
   handleClickEdit?: (v: boolean) => void;
 }

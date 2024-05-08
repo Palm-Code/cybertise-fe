@@ -12,17 +12,29 @@ import axiosFormDataInterceptorInstance from "@/core/services/interceptor/axiosF
 import { postFileTempAPIURL } from "@/core/routes/common";
 import { AxiosResponse } from "axios";
 import { I_PostTempFilesResponse } from "@/core/models/common";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
+import { backgroundColor, iconColor } from "@/core/constants/common";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   fileValues?: SendReportRequestType["files"];
   onFileSelected: (value: string, file: FileWithUrl[]) => void;
   onFileRemoved: (value: FileWithUrl["file_id"]) => void;
+  variant?: "hacker" | "company" | "mediator";
 }
 
 const FileInput = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, onFileSelected, onFileRemoved, fileValues, ...props }, ref) => {
+  (
+    {
+      className,
+      onFileSelected,
+      onFileRemoved,
+      fileValues,
+      variant = "hacker",
+      ...props
+    },
+    ref
+  ) => {
     const [uploadProggress, setUploadProggress] = useState<number[]>([]);
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [input, setInput] = useState<FileWithUrl[]>([]);
@@ -319,7 +331,10 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
+                        className={cn(
+                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                          iconColor[variant]
+                        )}
                       />
                     </div>
                     <div
@@ -372,7 +387,10 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
+                        className={cn(
+                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                          iconColor[variant]
+                        )}
                       />
                     </div>
                     <div
@@ -395,7 +413,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       <Progress
                         value={uploadProggress.filter((i) => i !== 100)[index]}
                         className="h-2"
-                        indicatorColor="bg-lime-normal-light dark:bg-lime-normal-dark"
+                        indicatorColor={backgroundColor[variant]}
                       />
                       <div className="_flexbox__row__center__between w-full">
                         <Typography
@@ -428,7 +446,10 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
+                        className={cn(
+                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                          iconColor[variant]
+                        )}
                       />
                     </div>
                     <div
@@ -467,7 +488,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               </div>
               <label
                 htmlFor="dropzone-file"
-                className="cursor-pointer text-lime-normal-light underline dark:text-lime-normal-dark"
+                className={cn("cursor-pointer underline", iconColor[variant])}
               >
                 + Upload more files
                 <input

@@ -11,7 +11,7 @@ const badgeVariants = cva(
         "mobile-app-ios":
           "text-asset-text-ios bg-asset-background-ios/10 px-2.5 py-1",
         blockchain:
-          "text-asset-text-iot bg-asset-background-iot/10 px-2.5 py-1",
+          "text-white bg-semantic-light-medium dark:bg-semantic-dark-medium px-2.5 py-1",
         "mobile-app-android":
           "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:

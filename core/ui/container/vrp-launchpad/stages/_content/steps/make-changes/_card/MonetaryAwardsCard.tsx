@@ -8,6 +8,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomPricing from "./CustomPricing";
 import { MonetaryAwardType } from "@/types/admin/vrp-launchpad";
+import { useFormContext } from "react-hook-form";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
+import { isObjectEmpty } from "@/utils/form-fill-validation";
 
 export type MonetaryAwardsCardProps = MonetaryAwardType & {
   activeCard?: boolean;
@@ -20,9 +23,13 @@ const MonetaryAwardsCard = ({
   priceData,
   handleClickExpand,
   activeCard,
+  variant = "company",
 }: MonetaryAwardsCardProps) => {
+  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const forms = watch();
+
   return (
-    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 p-8 dark:bg-neutral-dark-100">
+    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:p-8 dark:bg-neutral-dark-100">
       <button
         type="button"
         title="Expand"
@@ -51,7 +58,18 @@ const MonetaryAwardsCard = ({
             className="w-full overflow-hidden"
           >
             <div className="grid w-full grid-cols-3 gap-6">
-              <PricingCardList data={priceData} />
+              <PricingCardList
+                value={forms.monetary_awards_level}
+                variant={variant}
+                data={priceData}
+                onClickCard={(v, c) => {
+                  setValue("monetary_awards_level", c);
+                  setValue("monetary_awards_low", v[0].value);
+                  setValue("monetary_awards_medium", v[1].value);
+                  setValue("monetary_awards_high", v[2].value);
+                  setValue("monetary_awards_critical", v[3].value);
+                }}
+              />
             </div>
           </motion.div>
         )}
@@ -67,6 +85,7 @@ interface I_MonetaryAwardCardList<T extends boolean> {
 }
 type PricingCardListProps = {
   data: MonetaryAwardsCardProps[];
+  variant?: "hacker" | "company" | "mediator";
 } & I_MonetaryAwardCardList<boolean>;
 
 const MonetaryAwardCardList = ({
@@ -74,14 +93,31 @@ const MonetaryAwardCardList = ({
   isCompany = false,
   onClickNext,
   onClickPrev,
+  variant = "company",
 }: PricingCardListProps) => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const forms = watch();
 
   const handleCardClick = (category: string) => {
+    const oldValue = forms.monetary_awards_level;
+    setValue(
+      "monetary_awards_level",
+      oldValue === category ? oldValue : category
+    );
     setActiveCard((prevActiveCard) =>
       prevActiveCard === category ? null : category
     );
   };
+
+  const disabledButton = isObjectEmpty({
+    monetary_awards_level: forms.monetary_awards_level,
+    monetary_awards_low: forms.monetary_awards_low,
+    monetary_awards_medium: forms.monetary_awards_medium,
+    monetary_awards_high: forms.monetary_awards_high,
+    monetary_awards_critical: forms.monetary_awards_critical,
+  });
+
   return (
     <>
       <div
@@ -100,13 +136,23 @@ const MonetaryAwardCardList = ({
               title={item.title}
               category={item.category}
               priceData={item.priceData}
-              activeCard={activeCard === item.category}
-              handleClickExpand={() => handleCardClick(item.category)}
+              activeCard={item.priceData.some(
+                (i) => i.category === forms.monetary_awards_level
+              )}
+              variant={variant}
+              handleClickExpand={() =>
+                handleCardClick(item.priceData[0].category)
+              }
             />
           ))}
           <CustomPricing
+            value={forms}
+            setValue={setValue}
             handleClickExpand={() => handleCardClick("custom")}
-            activeCard={activeCard === "custom"}
+            activeCard={
+              activeCard === "custom" ||
+              forms.monetary_awards_level === "custom"
+            }
           />
         </div>
       </div>
@@ -115,7 +161,11 @@ const MonetaryAwardCardList = ({
           <Button variant="secondary-company" onClick={onClickPrev}>
             Previous
           </Button>
-          <Button variant="primary-company" onClick={onClickNext}>
+          <Button
+            variant="primary-company"
+            disabled={disabledButton}
+            onClick={onClickNext}
+          >
             Next
           </Button>
         </div>

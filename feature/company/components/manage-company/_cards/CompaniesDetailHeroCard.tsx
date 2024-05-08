@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Desktop, Mobile } from "@/core/ui/layout";
@@ -8,10 +9,10 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 
 interface I_CompaniesDetailHeroCard {
-  id: string;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
-const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
+const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
   const { ref, inView } = useInView({ threshold: 0.1 });
   return (
     <>
@@ -22,26 +23,40 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
           <div className="_flexbox__col__start__start w-full gap-4" ref={ref}>
             <div className="_flexbox__row__start__between w-full">
               <div className="_flexbox__col__start__start gap-4">
-                <Image
-                  src="/images/company-logo/coinbase.png"
-                  alt="Company Logo"
-                  width={48}
-                  height={48}
-                />
+                <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                  <Image
+                    src={data?.company_logo as string}
+                    alt={data?.name as string}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div className="_flexbox__col__start__start gap-2">
-                  <Typography variant="h3" weight="bold">
-                    Coinbase
+                  <Typography
+                    variant="h3"
+                    weight="bold"
+                    className="leading-none"
+                  >
+                    {data?.name}
                   </Typography>
                   <Typography
                     variant="p"
                     affects="small"
                     className="!dark:text-neutral-dark-20 text-neutral-light-20"
                   >
-                    Company description{" "}
+                    {data?.about}
                   </Typography>
                 </div>
               </div>
-              <Indicator variant="clear">Published</Indicator>
+              <Indicator
+                variant={
+                  data?.company_status
+                    ? (data.company_status.toLowerCase() as keyof typeof Indicator)
+                    : "warning"
+                }
+              >
+                {data?.company_status}
+              </Indicator>
             </div>
             <Separator orientation="horizontal" />
             <div className="_flexbox__col__start__start gap-2">
@@ -54,7 +69,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                   Reports resolved
                 </Typography>
                 <Typography variant="p" affects="small" weight="semibold">
-                  732
+                  {data?.company_reports_resolved}
                 </Typography>
               </div>
               <div className="_flexbox__col__start__start gap-2.5">
@@ -66,7 +81,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                   Bounty Program
                 </Typography>
                 <Typography variant="p" affects="small" weight="semibold">
-                  1
+                  {data?.company_program_count}
                 </Typography>
               </div>
               <div className="_flexbox__col__start__start gap-2.5">
@@ -78,14 +93,14 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                   Company Website
                 </Typography>
                 <Link
-                  href={"https://linktocompanysite.com"}
+                  href={data?.website || "#"}
                   target="_blank"
                   className={cn(
                     typographyVariants({ variant: "p", affects: "small" }),
                     "text-neutral-light-20 underline dark:text-neutral-dark-20"
                   )}
                 >
-                  https://linktocompanysite.com
+                  {data?.website}
                 </Link>
               </div>
             </div>
@@ -99,46 +114,70 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
         >
           <div className="_flexbox__row__start__between w-full">
             <div className="_flexbox__row__center__start gap-2">
-              <Image
-                src="/images/company-logo/coinbase.png"
-                alt="Company Logo"
-                width={24}
-                height={24}
-              />
+              <div className="relative h-6 w-6 overflow-hidden rounded-full">
+                <Image
+                  src={data?.company_logo as string}
+                  alt={data?.name as string}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <Typography variant="p" affects="small" weight="semibold">
-                Coinbase
+                {data?.name}
               </Typography>
             </div>
-            <Indicator variant="clear">Published</Indicator>
+            <Indicator
+              variant={
+                data?.company_status
+                  ? (data.company_status.toLowerCase() as keyof typeof Indicator)
+                  : "warning"
+              }
+            >
+              {data?.company_status}
+            </Indicator>
           </div>
         </Card>
       </Mobile>
       <Desktop>
         <Card>
-          <div className="_flexbox__row__start__start w-full gap-9">
-            <Image
-              src="/images/company-logo/coinbase.png"
-              alt="Company Logo"
-              width={48}
-              height={48}
-            />
+          <div className="grid w-full grid-cols-[auto_1fr] gap-9">
+            <div className="relative h-12 w-12 overflow-hidden rounded-full">
+              <Image
+                src={data?.company_logo as string}
+                alt={data?.name as string}
+                fill
+                className="object-cover"
+              />
+            </div>
             <div className="_flexbox__col__start__start w-full gap-12">
               <div className="_flexbox__row__start__between w-full">
                 <div className="_flexbox__col__start__start gap-9">
                   <div className="_flexbox__col__start__start gap-2">
-                    <Typography variant="h3" weight="bold">
-                      Coinbase
+                    <Typography
+                      variant="h3"
+                      weight="bold"
+                      className="leading-none"
+                    >
+                      {data?.name}
                     </Typography>
                     <Typography
                       variant="p"
                       affects="small"
                       className="!dark:text-neutral-dark-20 text-neutral-light-20"
                     >
-                      Company description{" "}
+                      {data?.about}
                     </Typography>
                   </div>
                 </div>
-                <Indicator variant="clear">Published</Indicator>
+                <Indicator
+                  variant={
+                    data?.company_status
+                      ? (data.company_status.toLowerCase() as keyof typeof Indicator)
+                      : "warning"
+                  }
+                >
+                  {data?.company_status}
+                </Indicator>
               </div>
               <div className="grid h-fit max-h-12 grid-flow-col gap-12">
                 <div className="grid h-full gap-2.5">
@@ -150,7 +189,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Reports resolved
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    732
+                    {data?.company_reports_resolved}
                   </Typography>
                 </div>
                 <Separator orientation="vertical" />
@@ -163,7 +202,7 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Bounty Program
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    1
+                    {data?.company_program_count}
                   </Typography>
                 </div>
                 <Separator orientation="vertical" />
@@ -176,14 +215,14 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Company Website
                   </Typography>
                   <Link
-                    href={"https://linktocompanysite.com"}
+                    href={data?.website || "#"}
                     target="_blank"
                     className={cn(
                       typographyVariants({ variant: "p", affects: "small" }),
                       "text-neutral-light-20 underline dark:text-neutral-dark-20"
                     )}
                   >
-                    https://linktocompanysite.com
+                    {data?.website}
                   </Link>
                 </div>
               </div>

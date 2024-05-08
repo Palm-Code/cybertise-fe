@@ -9,25 +9,17 @@ import { InputProps } from "../input/input";
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { Columns2, Grid2X2, Table2 } from "lucide-react";
-import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 import { useLocalStorage } from "usehooks-ts";
+import { iconColor } from "@/core/constants/common";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_FilterViewDropdownProps extends InputProps {
   options: SortFilterType[];
-  type: "hacker" | "company" | "mediator";
+  type: keyof typeof Role;
 }
 
-export const iconColor: { [key in Role]: string } = {
-  hacker: "text-lime-normal-light dark:text-lime-normal-dark",
-  company: "text-sky-normal",
-  mediator: "text-violet-normal",
-};
-
-const icons = (
-  variant: "hacker" | "company" | "mediator",
-  type: "card" | "table" | "grid"
-) => {
+const icons = (variant: keyof typeof Role, type: "card" | "table" | "grid") => {
   switch (type) {
     case "card":
       return <Columns2 className={cn("rotate-90", iconColor[variant])} />;

@@ -6,24 +6,27 @@ import { useState } from "react";
 import { monetaryAwardData } from "@/core/constants/vrp-launchpad";
 import { AnimationWrapper } from "@/core/ui/layout";
 import MonetaryAwardCardList from "./_card/MonetaryAwardsCard";
+import { SortFilterType } from "@/types/admin/dashboard";
 
 interface I_MakeChangesProps {
   onClickNext: () => void;
   onClickPrev: () => void;
   variant?: "mediator" | "company";
+  options?: SortFilterType[];
 }
 
 const MakeChanges = ({
   onClickNext,
   onClickPrev,
   variant = "mediator",
+  options = [],
 }: I_MakeChangesProps) => {
   const [activeElement, setActiveElement] = useState<number>(0);
 
   const element: Array<React.ReactNode> = [
     <VrpDescriptionCard />,
     <MonetaryAwardCardList data={monetaryAwardData} />,
-    <TargetAssetListCard />,
+    <TargetAssetListCard options={options} />,
   ];
 
   const handleActiveElement = (index: number) => {

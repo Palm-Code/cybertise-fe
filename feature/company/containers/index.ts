@@ -5,3 +5,6 @@ export { default as ReportsCardView } from "./reports/TicketView.container";
 export { default as ReportsTableView } from "./reports/TableView.container";
 export { default as ReportsGridView } from "./reports/GridView.container";
 export { default as ChatBubble } from "./reports/details/ChatBubble.container";
+export { default as EditCompanyDetails } from "./manage-company/EditCompanyDetails.container";
+export { default as EditStaffs } from "./manage-company/EditStaffs.container";
+export { default as EditEmergencyContact } from "./manage-company/EditEmergencyContact.container";

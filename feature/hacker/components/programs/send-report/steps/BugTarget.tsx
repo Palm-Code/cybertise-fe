@@ -12,7 +12,7 @@ import CsvssCalculator from "./_card/bug-target/CsvssCalculator";
 import ManualRiskLevel from "./_card/bug-target/ManualRiskLevel";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import {
   I_GetAssetTypeSuccessResponse,
   I_GetVulnerabilityTypeSuccessResponse,

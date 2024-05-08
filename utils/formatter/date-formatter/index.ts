@@ -51,18 +51,62 @@ export function formatDateToAgo2(dateString: string): string {
 }
 
 export function formatTimestamp(timestamp: string): string {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const date = new Date(timestamp);
-  const dayOfWeek = daysOfWeek[date.getDay()];
-  const day = ("0" + date.getDate()).slice(-2);
-  const month = ("0" + (date.getMonth() + 1)).slice(-2);
-  const hours = ("0" + (date.getHours() % 12 || 12)).slice(-2);
-  const minutes = ("0" + date.getMinutes()).slice(-2);
-  const ampm = date.getHours() >= 12 ? "PM" : "AM";
+  const currentDate = new Date();
+  const targetDate = new Date(timestamp);
 
-  // Construct the formatted timestamp string
-  const formattedTimestamp = `${dayOfWeek} ${day} ${month} ${hours}:${minutes} ${ampm}`;
+  const currentDay = currentDate.getDate();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
 
-  return formattedTimestamp;
+  const targetDay = targetDate.getDate();
+  const targetMonth = targetDate.getMonth();
+  const targetYear = targetDate.getFullYear();
+
+  if (
+    currentDay === targetDay &&
+    currentMonth === targetMonth &&
+    currentYear === targetYear
+  ) {
+    // Today
+    const hours = ("0" + (targetDate.getHours() % 12 || 12)).slice(-2);
+    const minutes = ("0" + targetDate.getMinutes()).slice(-2);
+    const ampm = targetDate.getHours() >= 12 ? "PM" : "AM";
+    return `Today at ${hours}:${minutes} ${ampm}`;
+  } else if (
+    currentDay - 1 === targetDay &&
+    currentMonth === targetMonth &&
+    currentYear === targetYear
+  ) {
+    // Yesterday
+    const hours = ("0" + (targetDate.getHours() % 12 || 12)).slice(-2);
+    const minutes = ("0" + targetDate.getMinutes()).slice(-2);
+    const ampm = targetDate.getHours() >= 12 ? "PM" : "AM";
+    return `Yesterday at ${hours}:${minutes} ${ampm}`;
+  } else {
+    // Other dates
+    const dayOfWeek = daysOfWeek[targetDate.getDay()];
+    const day = targetDate.getDate();
+    const month = months[targetDate.getMonth()];
+    const year = targetDate.getFullYear();
+    const hours = ("0" + (targetDate.getHours() % 12 || 12)).slice(-2);
+    const minutes = ("0" + targetDate.getMinutes()).slice(-2);
+    const ampm = targetDate.getHours() >= 12 ? "PM" : "AM";
+    return `${dayOfWeek} ${month} ${day}, ${year} at ${hours}:${minutes} ${ampm}`;
+  }
 }

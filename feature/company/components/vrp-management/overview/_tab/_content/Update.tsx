@@ -4,13 +4,15 @@ import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
+import ModalAddUpdates from "../../_modals/ModalAddUpdates";
+import { useState } from "react";
 
 interface I_Update extends UpdateType {}
 
 const Update = ({ title, created_at, content }: I_Update) => {
   return (
     <AnimationWrapper>
-      <Card className="px-6 py-12">
+      <Card className="xl:px-6 xl:py-12">
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="_flexbox__col__start__start w-full gap-2">
             <Typography variant="p" affects="extralarge" weight="bold">
@@ -25,6 +27,7 @@ const Update = ({ title, created_at, content }: I_Update) => {
             </Typography>
           </div>
           <article
+            className="tiptap"
             dangerouslySetInnerHTML={{
               __html: sanitize(content ?? ""),
             }}
@@ -37,17 +40,48 @@ const Update = ({ title, created_at, content }: I_Update) => {
 
 interface I_UpdateList {
   data: UpdateType[];
+  id: string;
 }
 
-const UpdateList = ({ data }: I_UpdateList) => {
-  if (!data.length) return <EmptyState type="update" variant="company" />;
+const UpdateList = ({ data, id }: I_UpdateList) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  if (!data.length)
+    return (
+      <>
+        <EmptyState
+          type="update"
+          variant="company"
+          buttonText="Add New Update"
+          onClickButton={() => setOpenModal(true)}
+        />
+        <ModalAddUpdates
+          id={id}
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      </>
+    );
 
   return (
-    <div className="_flexbox__col__start__start mt-4 w-full gap-8">
-      {data.map((item, idx) => (
-        <Update key={`update-${idx}`} {...item} />
-      ))}
-    </div>
+    <>
+      <div className="_flexbox__col__start__start mt-4 w-full gap-8">
+        <button
+          type="button"
+          onClick={() => setOpenModal(true)}
+          className="w-full rounded-md border border-white px-4 py-6 text-center"
+        >
+          + Add New Update
+        </button>
+        {data.map((item, idx) => (
+          <Update key={`update-${idx}`} {...item} />
+        ))}
+      </div>
+      <ModalAddUpdates
+        id={id}
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
+    </>
   );
 };
 

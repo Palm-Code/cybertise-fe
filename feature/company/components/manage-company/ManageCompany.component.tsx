@@ -10,21 +10,36 @@ import EmergencyContacs from "./_tab/_content/EmergencyContacs";
 import ActivityLogs from "./_tab/_content/ActivityLogs";
 import { Card } from "@/core/ui/components";
 import { AnimationWrapper } from "@/core/ui/layout";
+import { useGetUserProfile } from "@/core/react-query/client";
+import { VRPHeroLoading } from "@/core/ui/container";
+import { useSearchParams } from "next/navigation";
+import EditState from "./EditState";
+
+export enum editStaff {
+  add_staff = "add_staff",
+}
 
 const ManageCompany = () => {
+  const searchParams = useSearchParams();
+  const state = searchParams.get("edit") as manageCompanyTabsItemEnums &
+    editStaff;
+  const { data: companyData, isLoading, isFetching } = useGetUserProfile();
   const [active, setActive] = useState<manageCompanyTabsItemEnums>(
     manageCompanyTabsItemEnums.company_details
   );
 
   const tabs: { [key in manageCompanyTabsItemEnums]: JSX.Element } = {
-    company_details: <CompanyDetails />,
-    staffs: <Staffs />,
-    emergency_contact: <EmergencyContacs />,
+    company_details: <CompanyDetails data={companyData?.data} />,
+    staffs: <Staffs data={companyData?.data.staff} />,
+    emergency_contact: <EmergencyContacs data={companyData?.data} />,
     activity_logs: <ActivityLogs />,
   };
+
+  if (isLoading || isFetching) return <VRPHeroLoading variant="company" />;
+  if (state) return <EditState state={state} data={companyData?.data} />;
   return (
     <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10 xl:pb-28 xl:pt-12">
-      <CompaniesDetailHeroCard id="" />
+      <CompaniesDetailHeroCard data={companyData?.data} />
       <div className="_flexbox__col__start__start w-full gap-6">
         <Tab
           items={manageCompanyTabsItem}

@@ -1,3 +1,4 @@
+import { currentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
@@ -7,11 +8,12 @@ import Link from "next/link";
 
 interface I_VRPHeroCard {
   variant: "company" | "mediator";
+  phase: string;
 }
 
-const VRPHeroCard = ({ variant }: I_VRPHeroCard) => {
+const VRPHeroCard = ({ variant, phase }: I_VRPHeroCard) => {
   return (
-    <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none px-8 py-6">
+    <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
       <div className="_flexbox__col__start__start gap-3">
         <div
           className={cn(
@@ -73,7 +75,11 @@ const VRPHeroCard = ({ variant }: I_VRPHeroCard) => {
           </div>
         </div>
       </div>
-      <Indicator variant="clear">Published</Indicator>
+      <Indicator
+        variant={phase?.toLowerCase().includes("phase") ? "open" : "clear"}
+      >
+        {`${phase} ${phase?.toLowerCase().includes("phase") ? `: ${currentPhase[phase?.toLowerCase()]}` : ""}`}
+      </Indicator>
     </Card>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import BugTargetCard from "./_card/review/BugTarget";
 import ProblemCausesCard from "./_card/review/ProblemCauses";
 import ReportDescriptionCard from "./_card/review/ReportDescription";

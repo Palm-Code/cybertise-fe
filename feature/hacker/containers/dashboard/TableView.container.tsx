@@ -15,7 +15,7 @@ import {
 } from "@/core/ui/components";
 import { TableLoadingList } from "@/core/ui/container";
 import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
-import { I_TableColumns, I_TableTicketData } from "@/interfaces";
+import { I_TableColumns } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import Image from "next/image";

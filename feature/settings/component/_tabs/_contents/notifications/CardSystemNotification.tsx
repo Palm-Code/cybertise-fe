@@ -1,9 +1,10 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Switch, Typography } from "@/core/ui/components";
+import { Role } from "@/types/admin/sidebar";
 import { BellRing } from "lucide-react";
 
 interface I_CardSystemNotificationProps {
-  variant: "hacker" | "mediator" | "company";
+  variant: keyof typeof Role;
 }
 
 const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
@@ -23,7 +24,7 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
           <BellRing className="mr-4 h-8 w-8" />
           System Notification
         </Typography>
-        <Switch variant={variant} />
+        <Switch variant={variant} value={0} />
       </div>
       <Typography
         variant="p"

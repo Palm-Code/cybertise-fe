@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { SendReportRequestType } from "@/core/models/hacker/programs/post_send_report";
+import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
 import {
   AttackComplexity,
