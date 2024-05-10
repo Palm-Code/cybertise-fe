@@ -3,7 +3,7 @@ import React from "react";
 import { Indicators } from "../../icons";
 import Typography from "../typography/typography";
 
-const indicatorVariants = cva("", {
+export const indicatorVariants = cva("", {
   variants: {
     variant: {
       hacker: "text-lime-normal-light dark:text-lime-normal-dark rounded-md",

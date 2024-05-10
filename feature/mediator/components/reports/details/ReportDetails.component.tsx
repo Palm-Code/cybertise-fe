@@ -17,14 +17,23 @@ import { ChatBubble } from "@/feature/mediator/containers";
 import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatListItem";
 import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
 import { useRouter } from "next/navigation";
-import { usePostChatItem } from "@/core/react-query/client";
+import {
+  useGetTicketDetails,
+  usePostChatItem,
+} from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
 import { toast } from "sonner";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data, isError } = useGetChatListItem(store.payload, id);
+  const { data: ticketDetails, isError: isErrorTicket } =
+    useGetTicketDetails(id);
+  const { data, isError, isLoading, isFetching } = useGetChatListItem(
+    store.payload,
+    id
+  );
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
@@ -59,7 +68,7 @@ const ReportDetails = ({ id }: { id: string }) => {
       });
   };
 
-  if (isError || data?.data.length === 0) {
+  if (isError || isErrorTicket || data?.data.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found
@@ -67,7 +76,11 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data)
+  if (isLoading || isFetching) {
+    return <Loader variant="mediator" />;
+  }
+
+  if (!data || !ticketDetails)
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader variant="mediator" />
@@ -95,7 +108,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Link>
                 <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
-                    {data?.data[0].chat_ticket?.title}
+                    {ticketDetails.title}
                   </Typography>
                   <Badge
                     variant={
@@ -110,10 +123,10 @@ const ReportDetails = ({ id }: { id: string }) => {
               <div className="_flexbox__row__center gap-3">
                 <Indicator
                   variant={
-                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
+                    ticketDetails.status.toLowerCase() as keyof typeof indicatorVariants
                   }
                 >
-                  {data?.data[0].chat_ticket?.status}
+                  {ticketDetails.status}
                 </Indicator>
               </div>
             </Card>
@@ -123,8 +136,37 @@ const ReportDetails = ({ id }: { id: string }) => {
                 "bg-neutral-light-70 dark:bg-neutral-dark-70"
               )}
             >
-              This chat is read only on this device. Please access using desktop
-              to interact.
+              <div className="_flexbox__row__center__between w-full">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  className="text-violet-light dark:text-violet-light"
+                >
+                  {ticketDetails.ticket_type === "Hacker"
+                    ? "Hacker"
+                    : "Company"}{" "}
+                  Ticket
+                </Typography>
+                {ticketDetails.ticket_type === "Hacker" ? (
+                  <Link
+                    href={`/reports/${ticketDetails.related_ticket_id}`}
+                    className="underline"
+                  >
+                    Go to Company Ticket
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/reports/${ticketDetails.related_ticket_id}`}
+                    className="underline"
+                  >
+                    Go to Hacker Ticket
+                  </Link>
+                )}
+              </div>
+              <Typography variant="p" affects="small">
+                This chat is read only on this device. Please access using
+                desktop to interact.
+              </Typography>
             </div>
           </div>
           <div className="px-6 py-8">
@@ -147,39 +189,61 @@ const ReportDetails = ({ id }: { id: string }) => {
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
-                <MoveLeft
-                  width={24}
-                  height={24}
-                  className="cursor-pointer"
-                  onClick={back}
-                />
+                <Link href="/reports">
+                  <MoveLeft width={24} height={24} />
+                </Link>
                 <Typography variant="h5" weight="bold">
-                  {data?.data[0]?.chat_ticket?.title}
+                  {ticketDetails.title}
                 </Typography>
                 <Badge
                   variant={
                     data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
                   }
                 >
-                  {`${data?.data[0].chat_ticket?.risk_level} | ${data?.data[0].chat_ticket?.risk_level_category}`}
+                  {`${data?.data[0].chat_ticket?.risk_level.toFixed(2)} | ${data?.data[0].chat_ticket?.risk_level_category}`}
                 </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator
-                  variant={
-                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
-                  }
-                >
-                  {data?.data[0].chat_ticket?.status}
+                <Indicator variant={ticketDetails.status.toLowerCase() as any}>
+                  {ticketDetails.status}
                 </Indicator>
               </div>
             </Card>
             <AnimationWrapper>
               <div
                 className={cn(
-                  "sticky top-[8.15rem] z-30 h-4 w-full rounded-t-xl"
+                  "sticky top-[8.15rem] z-30 w-full rounded-[10px] p-4",
+                  "mb-4 bg-neutral-light-80 dark:bg-neutral-dark-80"
                 )}
-              ></div>
+              >
+                <div className="_flexbox__row__center__between w-full">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="text-violet-light dark:text-violet-light"
+                  >
+                    {ticketDetails.ticket_type === "Hacker"
+                      ? "Hacker"
+                      : "Company"}{" "}
+                    Ticket
+                  </Typography>
+                  {ticketDetails.ticket_type === "Hacker" ? (
+                    <Link
+                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      className="underline"
+                    >
+                      Go to Company Ticket
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      className="underline"
+                    >
+                      Go to Hacker Ticket
+                    </Link>
+                  )}
+                </div>
+              </div>
             </AnimationWrapper>
           </div>
           <ChatBubble data={data?.data ?? []} />

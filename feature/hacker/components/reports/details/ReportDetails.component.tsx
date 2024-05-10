@@ -4,6 +4,7 @@ import {
   Badge,
   Card,
   Indicator,
+  Loader,
   Tiptap,
   Typography,
 } from "@/core/ui/components";
@@ -69,16 +70,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data)
-    return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Loader2
-          className="m-auto animate-spin text-lime-normal-light dark:text-lime-normal-dark"
-          width={32}
-          height={32}
-        />
-      </div>
-    );
+  if (!data) return <Loader variant="hacker" />;
   return (
     <>
       <Mobile>

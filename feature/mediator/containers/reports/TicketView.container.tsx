@@ -2,7 +2,6 @@ import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import { ReportsTicketCardList } from "@/core/ui/container";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { I_TableReportTicketData } from "@/interfaces";
 
 const TicketView = ({
   data,
