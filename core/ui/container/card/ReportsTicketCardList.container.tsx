@@ -32,13 +32,14 @@ const TicketCard = ({
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
             <div className="_flexbox__row__center__between w-full">
-              <Image
-                src={props.company?.logo as string}
-                alt={`${props.title} logo`}
-                width={48}
-                height={48}
-                className="mr-4"
-              />
+              <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                <Image
+                  src={props.company?.logo as string}
+                  alt={`${props.title} logo`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <Typography
                 variant="p"
                 affects="normal"
@@ -220,14 +221,14 @@ const TicketCard = ({
               {isMediator && (
                 <div
                   className={cn(
-                    "w-full gap-3",
+                    "w-full max-w-xl gap-3",
                     isGridCard
                       ? "_flexbox__row__center__between"
                       : "_flexbox__row__end__end"
                   )}
                 >
                   <Button
-                    variant="secondary-mediator"
+                    variant="tertiary-mediator"
                     prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
                     postFixIcon={<ChevronRight />}
                     asLink
@@ -236,16 +237,29 @@ const TicketCard = ({
                   >
                     Hacker Ticket
                   </Button>
-                  <Button
-                    variant="primary-mediator"
-                    prefixIcon={!isGridCard && <Building2 />}
-                    postFixIcon={<ChevronRight />}
-                    fullWidth
-                    asLink
-                    href={`/reports/new?=${props.id}`}
-                  >
-                    Create Company Ticket
-                  </Button>
+                  {props.related_ticket_id ? (
+                    <Button
+                      variant="tertiary-mediator"
+                      prefixIcon={!isGridCard && <Building2 />}
+                      postFixIcon={<ChevronRight />}
+                      fullWidth
+                      asLink
+                      href={`/reports/${props.related_ticket_id}`}
+                    >
+                      Company Ticket
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary-mediator"
+                      prefixIcon={!isGridCard && <Building2 />}
+                      postFixIcon={<ChevronRight />}
+                      fullWidth
+                      asLink
+                      href={`/reports/new?ticket_id=${props.id}`}
+                    >
+                      Create Company Ticket
+                    </Button>
+                  )}
                 </div>
               )}
             </div>

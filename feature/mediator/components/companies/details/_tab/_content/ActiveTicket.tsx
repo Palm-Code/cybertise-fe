@@ -18,9 +18,9 @@ const ActiveTicket = ({ data }: { data: I_TableTicketData[] }) => {
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <DashboardTableView columns={tableColumns} data={data} />,
-    card: <DashboardCardView data={data} />,
-    grid: <DashboardGridView data={data} />,
+    table: <DashboardTableView columns={tableColumns} data={data as any} />,
+    card: <DashboardCardView data={data as any} />,
+    grid: <DashboardGridView data={data as any} />,
   };
 
   return (
@@ -29,7 +29,7 @@ const ActiveTicket = ({ data }: { data: I_TableTicketData[] }) => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-6">
           {data.length! ? (
             <>
-              <DashboardGridView data={data} />
+              <DashboardGridView data={data as any} />
             </>
           ) : (
             <EmptyState

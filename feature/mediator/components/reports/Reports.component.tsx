@@ -9,7 +9,6 @@ import {
 import Typography from "@/core/ui/components/typography/typography";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableReportTicketData, I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
   ReportsCardView,
@@ -18,15 +17,65 @@ import {
 } from "../../containers";
 import { tableColumns } from "../../constants/reports";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useReportListStore } from "../../zustand/store/reports";
+import { useGetChatList } from "../../query/client";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
-const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
+const Reports = () => {
+  const store = useReportListStore();
+  const { payload, setPayload } = store;
+  const {
+    data: reportsData,
+    isLoading,
+    isFetching,
+    refetch,
+    isRefetching,
+  } = useGetChatList(payload);
+  const pageNumbers = reportsData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <ReportsTableView columns={tableColumns} data={data} />,
-    card: <ReportsCardView data={data} />,
-    grid: <ReportsGridView data={data} />,
+    table: (
+      <ReportsTableView
+        columns={tableColumns}
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    card: (
+      <ReportsCardView
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    grid: (
+      <ReportsGridView
+        data={reportsData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+  };
+
+  const submitChange = (type: string, value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
+      },
+    });
   };
 
   return (
@@ -35,27 +84,42 @@ const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 px-6 py-8">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              Reports
             </Typography>
             <SearchInput
+              value={payload?.params?.search}
               variant="mediator"
-              placeholder="Try “#21231” or “Company name”"
+              placeholder="Search for programs"
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetch)
+              }
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetch)
+              }
             />
           </div>
           <div className="_flexbox__row__center__between w-full">
-            <DashboardFilter variant="mediator" />
+            <DashboardFilter variant="mediator" store={store} />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="mediator"
-                value="Sort By"
+                value={payload?.params?.sort!}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
           </div>
-          {data.length! ? (
+          {reportsData?.data.length! ? (
             <>
-              <ReportsGridView data={data} />
+              <ReportsGridView
+                data={reportsData?.data}
+                isLoading={isLoading || isFetching}
+              />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <ChatListCardLoadingList isGridCard />
+                ) : null}
+              </div>
             </>
           ) : (
             <EmptyState
@@ -70,31 +134,66 @@ const Reports = ({ data }: { data: I_TableReportTicketData[] }) => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              Reports
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
+                value={payload?.params?.search}
                 variant="mediator"
-                placeholder="Try “#21231” or “Company name”"
+                placeholder="Search for programs"
+                onChange={(e) =>
+                  useOnchangeSearch(e.target.value, store, refetch)
+                }
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
               />
             </div>
           </div>
           <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="mediator" />
+            <DashboardFilter
+              variant="mediator"
+              store={store}
+              onValueChange={(v, t) => submitChange(t, v)}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="mediator"
-                value="Sort By"
+                value={payload?.params?.sort!}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
               <FilterViewDropdown type="mediator" options={filterView} />
             </div>
           </div>
-          {data.length! ? (
+          {reportsData?.data.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="mediator" />
+              <Pagination
+                variant="mediator"
+                active={payload.params?.page?.size}
+                meta={reportsData?.meta}
+                activePage={payload.params?.page?.number}
+                onClickNext={() =>
+                  useClickPaginate(payload.params?.page?.number! + 1, store)
+                }
+                onClickPrevious={() =>
+                  useClickPaginate(payload.params?.page?.number! - 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) => {
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: {
+                        ...payload.params?.page!,
+                        size: v,
+                      },
+                    },
+                  });
+                }}
+              />
             </>
           ) : (
             <EmptyState

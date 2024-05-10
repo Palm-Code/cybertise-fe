@@ -15,13 +15,18 @@ import { cn } from "@/core/lib/utils";
 import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get_chat_list";
+import { Hacker } from "../../icons";
+import { iconColor } from "@/core/constants/common";
+import { Building2 } from "lucide-react";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
+  isMediator?: boolean;
 }
 
 const TicketCard = ({
   isGridCard,
+  isMediator = false,
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   return (
@@ -160,13 +165,29 @@ const TicketCard = ({
                     </Typography>
                   </div>
                 </div>
-                <Typography
-                  variant="p"
-                  affects="normal"
-                  className="!text-neutral-light-20 dark:!text-neutral-dark-20"
-                >
-                  {formatDateToAgo(props?.updated_at ?? "")}
-                </Typography>
+                <div className="_flexbox__row__start__start gap-8">
+                  {isMediator && (
+                    <Badge variant={"default"}>
+                      {props.ticket_type === "Hacker" ? (
+                        <Hacker
+                          className={cn(iconColor.hacker, "mr-1 h-4 w-4")}
+                        />
+                      ) : (
+                        <Building2
+                          className={cn(iconColor.company, "mr-1 h-4 w-4")}
+                        />
+                      )}
+                      {props.ticket_type}
+                    </Badge>
+                  )}
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                    className="!text-neutral-light-20 dark:!text-neutral-dark-20"
+                  >
+                    {formatDateToAgo(props?.updated_at ?? "")}
+                  </Typography>
+                </div>
               </div>
               <div
                 className={cn(
@@ -262,13 +283,18 @@ const TicketCard = ({
 interface I_TicketCardListProps {
   data?: I_GetChatListSuccessResponse["data"];
   isGridCard?: boolean;
+  isMediator?: boolean;
 }
 
-const TicketCardList = ({ data, isGridCard }: I_TicketCardListProps) => {
+const TicketCardList = ({
+  data,
+  isGridCard,
+  isMediator = false,
+}: I_TicketCardListProps) => {
   if (data)
     return data.map((item) => (
       <Suspense fallback={<CardLoader />} key={item.id}>
-        <TicketCard isGridCard={isGridCard} {...item} />
+        <TicketCard isGridCard={isGridCard} isMediator={isMediator} {...item} />
       </Suspense>
     ));
 };

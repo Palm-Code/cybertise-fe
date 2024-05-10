@@ -77,7 +77,10 @@ const Sender = ({
           )}
           {data.media && data.media.length > 0 && (
             <div
-              className={cn("grid w-full gap-4", "grid-cols-2  md:max-w-2xl")}
+              className={cn(
+                "grid w-full gap-4",
+                "grid-cols-1 md:max-w-2xl md:grid-cols-2"
+              )}
             >
               {data.media?.map((file, index) => (
                 <Card
