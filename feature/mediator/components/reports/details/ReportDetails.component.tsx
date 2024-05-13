@@ -9,14 +9,13 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { Loader2, MoveLeft } from "lucide-react";
+import { ChevronDown, Loader2, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/mediator/containers";
 import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatListItem";
 import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
-import { useRouter } from "next/navigation";
 import {
   useGetTicketDetails,
   usePostChatItem,
@@ -24,22 +23,30 @@ import {
 import { SendReportRequestType } from "@/core/models/common";
 import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
+import ModalEditRiskLevel from "../_dialog/ModalEditRiskLevel";
+import StatusDropdown from "../_dropdown/StatusDropdown";
+import { filterItems } from "@/feature/hacker/constants/dashboard";
+import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 
 const ReportDetails = ({ id }: { id: string }) => {
-  const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError, isLoading, isFetching } = useGetChatListItem(
+  const { data, isError, isRefetching, isPlaceholderData } = useGetChatListItem(
     store.payload,
     id
   );
   const chatRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
+  const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
+    useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
   const [files, setFiles] = useState<SendReportRequestType["files"]>();
   const { mutateAsync, isPending } = usePostChatItem();
+  const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
+    usePostUpdateTicket(id);
 
   const scrollView = () => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
@@ -48,6 +55,8 @@ const ReportDetails = ({ id }: { id: string }) => {
   useEffect(() => {
     scrollView();
   }, [description, data]);
+
+  console.log({ data });
 
   const sendMessage = async () => {
     await mutateAsync({
@@ -76,10 +85,6 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (isLoading || isFetching) {
-    return <Loader variant="mediator" />;
-  }
-
   if (!data || !ticketDetails)
     return (
       <div className="flex h-screen w-full items-center justify-center">
@@ -88,6 +93,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   return (
     <>
+      <div ref={loadMoreRef}></div>
       <Mobile>
         <div className="_flexbox__col__start__start relative w-full">
           <div
@@ -112,11 +118,11 @@ const ReportDetails = ({ id }: { id: string }) => {
                   </Typography>
                   <Badge
                     variant={
-                      data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                      ticketDetails.risk_level_category.toLowerCase() as any
                     }
                     className="max-w-fit"
                   >
-                    {`${data?.data[0].chat_ticket?.risk_level.toFixed(2)} | ${data?.data[0].chat_ticket?.risk_level_category}`}
+                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
                   </Badge>
                 </div>
               </div>
@@ -195,18 +201,39 @@ const ReportDetails = ({ id }: { id: string }) => {
                 <Typography variant="h5" weight="bold">
                   {ticketDetails.title}
                 </Typography>
-                <Badge
-                  variant={
-                    data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
-                  }
-                >
-                  {`${data?.data[0].chat_ticket?.risk_level.toFixed(2)} | ${data?.data[0].chat_ticket?.risk_level_category}`}
-                </Badge>
+                <div className="_flexbox__row__center gap-2.5">
+                  <Badge
+                    variant={
+                      ticketDetails.risk_level_category.toLowerCase() as any
+                    }
+                    className="max-w-fit"
+                  >
+                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                  </Badge>
+                  <ChevronDown
+                    className="cursor-pointer"
+                    onClick={() => setOpenModalSetRiskLevel(true)}
+                  />
+                </div>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator variant={ticketDetails.status.toLowerCase() as any}>
-                  {ticketDetails.status}
-                </Indicator>
+                {isPendingUpdate || isRefetching ? (
+                  <Loader
+                    variant="mediator"
+                    className="h-fit"
+                    width={24}
+                    height={40}
+                    noText
+                  />
+                ) : (
+                  <StatusDropdown
+                    value={ticketDetails.status}
+                    options={filterItems.status}
+                    onValueChange={(v) => {
+                      mutateUpdateTicket(`status=${v}`);
+                    }}
+                  />
+                )}
               </div>
             </Card>
             <AnimationWrapper>
@@ -280,6 +307,12 @@ const ReportDetails = ({ id }: { id: string }) => {
           }}
           onClickSendAttachment={sendMessage}
           isLoading={isPending}
+        />
+        <ModalEditRiskLevel
+          ticketId={id}
+          value={data?.data[0]?.chat_ticket?.risk_level || 0}
+          isOpen={openModalEditRiskLevel}
+          onClose={() => setOpenModalSetRiskLevel(false)}
         />
       </Desktop>
       <div ref={chatRef}></div>

@@ -1,10 +1,17 @@
 import { cn } from "@/core/lib/utils";
-import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
+import {
+  Badge,
+  badgeVariants,
+  Card,
+  Checkbox,
+  Typography,
+} from "@/core/ui/components";
 import { Slider } from "@/core/ui/components/slider/slider";
 import { I_CsvssCalculatorProps } from "./CsvssCalculator";
 import { motion } from "framer-motion";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { useFormContext } from "react-hook-form";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 const ManualRiskLevel = ({
   isManualRisk,
@@ -44,24 +51,12 @@ const ManualRiskLevel = ({
         {isManualRisk && (
           <Badge
             variant={
-              forms.risk_level === 0
-                ? "default"
-                : forms.risk_level < 4
-                  ? "low"
-                  : forms.risk_level >= 4 && forms.risk_level < 7
-                    ? "medium"
-                    : "high"
+              riskLevelCalculator(
+                forms.risk_level
+              ).toLowerCase() as keyof typeof badgeVariants
             }
           >
-            {forms.risk_level} (
-            {forms.risk_level === 0
-              ? "No"
-              : forms.risk_level < 4
-                ? "Low"
-                : forms.risk_level >= 4 && forms.risk_level < 7
-                  ? "Medium"
-                  : "High"}{" "}
-            Risk)
+            {forms.risk_level} | {riskLevelCalculator(forms.risk_level)} Risk
           </Badge>
         )}
       </div>

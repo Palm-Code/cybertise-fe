@@ -1,6 +1,14 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
-import { Avatar, Badge, Separator, Typography } from "@/core/ui/components";
+import {
+  Avatar,
+  Badge,
+  Indicator,
+  Separator,
+  Typography,
+} from "@/core/ui/components";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 const System = ({
   data,
@@ -21,10 +29,18 @@ const System = ({
           <Typography variant="p" affects="small" weight="bold">
             SYSTEM: {data?.content}
           </Typography>
-          {data?.badge && (
-            <Badge variant={data.badge.toLowerCase() as any}>
-              {`${data.chat_ticket?.risk_level.toFixed(2)} | ${data.badge}`}
+          {data?.badge ? (
+            <Badge variant={riskLevelCalculator(data.badge)}>
+              {`${data.badge} | ${riskLevelCalculator(data.badge)}`}
             </Badge>
+          ) : (
+            <Indicator
+              variant={
+                data?.status_badge?.toLowerCase() as keyof typeof indicatorVariants
+              }
+            >
+              {data?.status_badge}
+            </Indicator>
           )}
         </div>
         <Typography

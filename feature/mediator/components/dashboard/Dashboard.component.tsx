@@ -89,7 +89,7 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
             </Typography>
             <SearchInput
               value={payload?.params?.search}
-              variant="company"
+              variant="mediator"
               placeholder="Try “#21231” or “Company name”"
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, refetch)
@@ -139,7 +139,7 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
-                variant="company"
+                variant="mediator"
                 placeholder="Try “#21231” or “Company name”"
                 value={payload?.params?.search}
                 onChange={(e) =>

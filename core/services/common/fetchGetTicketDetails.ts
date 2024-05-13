@@ -5,7 +5,11 @@ import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 
 export const fetchGetTicketDetails = async (id: string) => {
   const res = await axiosInterceptorInstance
-    .get(getChatListDetailAPIURL(id))
+    .get(getChatListDetailAPIURL(id), {
+      params: {
+        append: "risk_level_category",
+      },
+    })
     .then(
       (
         res: AxiosResponse<{ data: I_GetChatListSuccessResponse["data"][0] }>
