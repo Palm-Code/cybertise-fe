@@ -2,12 +2,12 @@
 import { cn } from "@/core/lib/utils";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
+import { Role } from "@/types/admin/sidebar";
 import { sanitize } from "@/utils/sanitize-input";
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface INotesProps {
-  variant?: "mediator" | "company";
+  variant?: keyof typeof Role;
   onClickNext?: () => void;
   onClickPrev?: () => void;
   currentSteps?: string;
@@ -40,9 +40,11 @@ const Notes = ({
               __html: sanitize(forms.notes ?? ""),
             }}
           ></div>
-          <Button variant="primary-company" onClick={onClickNext}>
-            Next
-          </Button>
+          {variant === "company" && (
+            <Button variant="primary-company" onClick={onClickNext}>
+              Next
+            </Button>
+          )}
         </Card>
       </div>
     );

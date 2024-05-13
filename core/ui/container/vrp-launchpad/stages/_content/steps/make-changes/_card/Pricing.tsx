@@ -1,6 +1,8 @@
 import { borderColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Checkbox, Typography } from "@/core/ui/components";
+import { checkboxVariants } from "@/core/ui/components/checkbox/checkbox";
+import { Role } from "@/types/admin/sidebar";
 import { PricingProps } from "@/types/admin/vrp-launchpad";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 
@@ -13,7 +15,7 @@ const PricingCard = ({
   category,
 }: PricingProps & {
   value: string;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   onClickCard: (
     value: { value: number; label: string }[],
     category: string
@@ -35,7 +37,10 @@ const PricingCard = ({
       onClick={() => onClickCard(list, category)}
     >
       <div className="_flexbox__row__start gap-6">
-        <Checkbox variant={variant} checked={checked} />
+        <Checkbox
+          variant={variant as keyof typeof checkboxVariants}
+          checked={checked}
+        />
         <Typography variant="h6" weight="bold">
           {tier}
         </Typography>
@@ -64,7 +69,7 @@ const PricingCard = ({
 type PricingCardListProps = {
   data: PricingProps[];
   value: string;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   onClickCard: (
     value: { value: number; label: string }[],
     category: string

@@ -3,7 +3,7 @@ import { BaseCheckbox, BaseCheckboxProps } from "./base-checkbox";
 import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 
-const checkboxVariants = cva(
+export const checkboxVariants = cva(
   "disabled:bg-opacity-20 bg-neutral-light-80 dark:bg-neutral-dark-80",
   {
     variants: {

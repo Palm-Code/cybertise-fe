@@ -29,9 +29,11 @@ import { toast } from "sonner";
 import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
 import RulesAndPolicies from "../_content/steps/vrp-details-review/_card/RulesAndPolicies";
 import { usePostUpdateVrp } from "@/core/react-query/client/usePostUpdateVrp";
+import { Role } from "@/types/admin/sidebar";
+import { getCurrentTime } from "@/utils/formatter/date-formatter";
 
 interface I_VRPDetailsProps {
-  variant: "mediator" | "company";
+  variant: keyof typeof Role;
   currentStep?: string;
   initialValues?: I_GetProgramDetailsSuccessResponse["data"];
 }
@@ -64,6 +66,7 @@ const VRPDetails = ({
     Phase3: vrpInformations.company_revision,
     Phase4: vrpInformations.mediator_revision,
     Phase5: vrpInformations.publish,
+    Published: vrpInformations.publish,
   };
   const { mutateAsync, isPending, isSuccess } = usePostUpdateVrp(
     initialValues?.id!
@@ -94,8 +97,27 @@ const VRPDetails = ({
           element:
             currentStep === "Phase1" ? (
               <Brief onClickNext={() => next()} />
+            ) : currentStep === "Phase5" || currentStep === "Published" ? (
+              <VrpDetailsReview
+                currentStep={currentStep}
+                assetTypes={options}
+                variant={variant}
+                onClickNext={() => {
+                  method.setValue(
+                    "publish_date",
+                    new Date().toISOString().split("T")[0]
+                  );
+                  method.setValue("publish_time", getCurrentTime());
+                  setOpenModal(true);
+                }}
+                onClickEdit={() => next()}
+              />
             ) : (
-              <Notes currentSteps={currentStep} onClickNext={() => next()} />
+              <Notes
+                currentSteps={currentStep}
+                variant={variant}
+                onClickNext={() => next()}
+              />
             ),
           key: currentStep === "Phase1" ? "brief" : "notes",
         },
@@ -171,7 +193,9 @@ const VRPDetails = ({
   const onSubmitForm = () => {
     if (Object.values(method.formState.errors).length === 0) {
       const data = method.getValues();
-      mutateAsync(data);
+      mutateAsync(data).then(() => {
+        setOpenModal(false);
+      });
     } else {
       toast.error("Please fill in all required fields");
     }
@@ -225,8 +249,19 @@ const VRPDetails = ({
             </div>
           </div>
         </div>
+        <ModalPublishVRP
+          isOpen={openModal}
+          isLoading={isPending || isSuccess}
+          onClickPublish={() => {
+            onSubmitForm();
+          }}
+          onClose={() => {
+            method.setValue("publish_date", undefined);
+            method.setValue("publish_time", undefined);
+            setOpenModal(false);
+          }}
+        />
       </FormProvider>
-      <ModalPublishVRP isOpen={openModal} onClose={() => setOpenModal(false)} />
       <ModalSubmitVRP
         isOpen={isSuccess}
         titleText="The program has been updated."

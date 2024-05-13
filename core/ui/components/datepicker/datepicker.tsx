@@ -7,9 +7,13 @@ import { cn } from "@/core/lib/utils";
 import { Calendar } from "../calendar/calendar";
 import { ChevronDown } from "lucide-react";
 
-export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
-
+export function DatePicker({
+  value,
+  onChangeValue,
+}: {
+  value: Date | undefined;
+  onChangeValue: (value: Date | undefined) => void;
+}) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -22,12 +26,12 @@ export function DatePicker() {
             "_flexbox__row__center__between"
           )}
         >
-          {date ? format(date, "MM/dd/yyyy") : "Date"}
+          {value ? format(value, "MM/dd/yyyy") : "Date"}
           <ChevronDown />
         </button>
       </PopoverTrigger>
       <PopoverContent className="z-[9999] w-full p-0" align="start">
-        <Calendar mode="single" selected={date} onSelect={setDate} />
+        <Calendar mode="single" selected={value} onSelect={onChangeValue} />
       </PopoverContent>
     </Popover>
   );

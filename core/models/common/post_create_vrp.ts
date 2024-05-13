@@ -56,6 +56,15 @@ export const createVrpSchema = z.object({
   ),
   type: z.string().min(1, { message: "Type is required" }),
   notes: z.string().min(1, { message: "Notes is required" }),
+  status: z.string().min(1, { message: "Status is required" }).optional(),
+  publish_date: z
+    .string()
+    .min(1, { message: "Publish date is required" })
+    .optional(),
+  publish_time: z
+    .string()
+    .min(1, { message: "Publish time is required" })
+    .optional(),
 });
 
 export type CreateVrpType = z.infer<typeof createVrpSchema>;

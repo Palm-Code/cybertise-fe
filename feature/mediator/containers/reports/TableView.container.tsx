@@ -153,8 +153,16 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           ? formatDateToAgo(item.program?.updated_at)
                           : "-"}
                         <TicketDropDown
-                          hackerId={item.id}
-                          companyTicketId={item.related_ticket_id}
+                          hackerId={
+                            item.ticket_type === "Hacker"
+                              ? item.id
+                              : (item.related_ticket_id as string)
+                          }
+                          companyTicketId={
+                            item.ticket_type === "Company"
+                              ? item.id
+                              : (item.related_ticket_id as string)
+                          }
                         />
                       </TableData>
                     </TableRow>

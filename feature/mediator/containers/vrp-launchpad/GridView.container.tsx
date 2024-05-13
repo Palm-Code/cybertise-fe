@@ -1,12 +1,22 @@
-import { VRPTicketCardList } from "@/core/ui/container";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
+import { VRPCardLoadingList, VRPTicketCardList } from "@/core/ui/container";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
 
-const GridView = ({ data }: { data: VRPCardType[] }) => {
+const GridView = ({
+  data,
+  isLoading,
+}: {
+  data: I_GetProgramListSuccessResponse["data"];
+  isLoading?: boolean;
+}) => {
   return (
     <AnimationWrapper>
       <div className="z-10 grid h-full w-full gap-4 md:h-fit md:grid-cols-2 md:gap-10">
-        <VRPTicketCardList data={data} isGridCard />
+        {isLoading ? (
+          <VRPCardLoadingList />
+        ) : (
+          <VRPTicketCardList data={data} isGridCard />
+        )}
       </div>
     </AnimationWrapper>
   );

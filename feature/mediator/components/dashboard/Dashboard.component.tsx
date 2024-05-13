@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Loader,
   Pagination,
   SearchInput,
 } from "@/core/ui/components";
@@ -29,7 +30,7 @@ import {
 } from "@/core/hooks";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 
-const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
+const Dashboard = () => {
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const {
@@ -65,6 +66,8 @@ const Dashboard = ({ data }: { data: I_TableTicketData[] }) => {
       />
     ),
   };
+
+  if (!dashboardData) return <Loader variant="mediator" />;
 
   const submitChange = (type: string, value: string) => {
     setPayload({

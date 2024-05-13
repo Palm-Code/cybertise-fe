@@ -58,6 +58,8 @@ export interface I_GetProgramListSuccessResponse {
     latest_updates?: I_LatestUpdates[];
     note?: I_Note;
     notes?: string;
+    created_at: string;
+    updated_at: string;
   }[];
   meta?: I_Meta;
 }

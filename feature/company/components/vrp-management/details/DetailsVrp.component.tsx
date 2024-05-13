@@ -5,8 +5,15 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useGetProgramDetails } from "@/feature/company/query/client/useGetProgramDetails";
 import { useProgramDetailsParamStore } from "@/feature/company/zustand/store/programs/program_details";
+import { Role } from "@/types/admin/sidebar";
 
-const DetailsVRP = ({ id }: { id: string }) => {
+const DetailsVRP = ({
+  id,
+  variant = "company",
+}: {
+  id: string;
+  variant?: keyof typeof Role;
+}) => {
   const store = useProgramDetailsParamStore();
   const {
     data: detailsVrpData,
@@ -14,18 +21,18 @@ const DetailsVRP = ({ id }: { id: string }) => {
     isFetching,
   } = useGetProgramDetails(store.payload, id);
 
-  if (isLoading || isFetching) return <Loader variant="company" />;
+  if (isLoading || isFetching) return <Loader variant={variant} />;
 
   return (
     <>
       <Mobile>
-        <EmptyState variant="company" type="default" />
+        <EmptyState variant={variant} type="default" />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start relative w-full pb-28">
           <DetailsVRPLaunchpad
             initialData={detailsVrpData?.data}
-            variant="company"
+            variant={variant}
             currentStep={detailsVrpData?.data.status}
           />
         </div>

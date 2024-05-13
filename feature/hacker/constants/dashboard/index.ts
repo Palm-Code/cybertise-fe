@@ -121,6 +121,7 @@ export const filterItems: MultiFilterType = {
     { label: "Low", value: "low" },
     { label: "Medium", value: "medium" },
     { label: "High", value: "high" },
+    { label: "Critical", value: "critical" },
   ],
   type: [
     { label: "All type", value: "all" },

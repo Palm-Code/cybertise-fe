@@ -5,10 +5,13 @@ import {
   I_GetCreateVrpListSuccessResponse,
 } from "@/core/models/common/post_create_vrp";
 import { fetchPostUpdateVrp } from "@/core/services/common";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export const usePostUpdateVrp = (id: string) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const mutations = useMutation<
     I_GetCreateVrpListSuccessResponse,
     I_GetErrorRes,
@@ -18,9 +21,22 @@ export const usePostUpdateVrp = (id: string) => {
     mutationFn: (payload) => {
       return fetchPostUpdateVrp(payload, id);
     },
+
+    onSuccess: (data) => {
+      mutations.reset();
+      router.replace("/vrp-launchpad");
+      toast.success("successfully updated VRP", {
+        position: "bottom-right",
+        duration: 3000,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getProgramListDetails"],
+      });
+    },
   });
 
   if (mutations.isError) {
+    mutations.reset();
     toast.error("Failed to send VRP");
   }
 

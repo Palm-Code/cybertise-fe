@@ -6,15 +6,16 @@ import IndicatorSteps from "../_indicator/Indicator.steps";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import VRPDetails from "../stages/vrp-details/VrpDetails.stages";
 import VRPCreation from "../stages/vrp-creation/VrpCreation.stages";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_DetailsVrpLaunchpadProps {
-  variant: "mediator" | "company";
+  variant?: keyof typeof Role;
   currentStep?: string;
   initialData?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
 const DetailsVrpLaunchpad = ({
-  variant,
+  variant = "mediator",
   currentStep = "Phase1",
   initialData,
 }: I_DetailsVrpLaunchpadProps) => {
@@ -37,7 +38,7 @@ const DetailsVrpLaunchpad = ({
           element: (
             <VRPDetails
               initialValues={initialData}
-              currentStep="Phase3"
+              currentStep={currentStep}
               variant={variant}
             />
           ),
@@ -56,7 +57,24 @@ const DetailsVrpLaunchpad = ({
       case "Phase5":
         return {
           currentSteps: 5,
-          element: <VRPDetails variant={variant} />,
+          element: (
+            <VRPDetails
+              initialValues={initialData}
+              currentStep={currentStep}
+              variant={variant}
+            />
+          ),
+        };
+      case "Published":
+        return {
+          currentSteps: 5,
+          element: (
+            <VRPDetails
+              initialValues={initialData}
+              currentStep={currentStep}
+              variant={variant}
+            />
+          ),
         };
       default:
         return {
@@ -76,7 +94,11 @@ const DetailsVrpLaunchpad = ({
         <AnimationWrapper>
           <div className={cn("sticky top-[8.15rem] z-30 h-12 w-full")}></div>
         </AnimationWrapper>
-        <VRPHeroCard phase={currentStep} variant={variant} />
+        <VRPHeroCard
+          initialData={initialData}
+          phase={currentStep}
+          variant={variant}
+        />
         <IndicatorSteps
           currentSteps={currentSteps(currentStep).currentSteps}
           variant={variant}

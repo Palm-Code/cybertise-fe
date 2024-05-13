@@ -1,13 +1,20 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Separator, Typography } from "@/core/ui/components";
 import { StepActive, StepInactive, StepPassed } from "@/core/ui/icons";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_IndicatorStepsProps {
-  variant: "company" | "mediator";
+  variant?: keyof typeof Role;
   currentSteps: number;
 }
 
-const currentStatus = {
+const currentStatus: {
+  [key: string]: {
+    icon: string;
+    separator: string;
+    passedIcon: string;
+  };
+} = {
   mediator: {
     icon: "text-violet-normal dark:text-violet-normal",
     separator: "h-0.5 bg-violet-normal dark:bg-violet-normal",
@@ -28,7 +35,10 @@ const STEPS: string[] = [
   "Publish",
 ];
 
-const IndicatorSteps = ({ variant, currentSteps }: I_IndicatorStepsProps) => {
+const IndicatorSteps = ({
+  variant = "mediator",
+  currentSteps,
+}: I_IndicatorStepsProps) => {
   const stepsIcon = (idx: number, style: string, className: string) => {
     if (idx < currentSteps - 1) {
       return <StepPassed className={cn(style, className)} />;
