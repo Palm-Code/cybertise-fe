@@ -29,9 +29,10 @@ import { usePostCreateVrp } from "@/core/react-query/client/usePostCreateVrp";
 import { toast } from "sonner";
 import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
 import RulesAndPolicies from "../_content/steps/vrp-details-review/_card/RulesAndPolicies";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_VRPCreationProps {
-  variant: "mediator" | "company";
+  variant: keyof typeof Role;
   currentStep?: string;
   initialValues?: I_GetProgramDetailsSuccessResponse["data"];
 }
@@ -41,7 +42,6 @@ const VRPCreation = ({
   initialValues,
   currentStep = "Phase1",
 }: I_VRPCreationProps) => {
-  console.log("initialData", currentStep);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { data: assetTypeOptions } = useGetAssetType();
   const options: SortFilterType[] =
@@ -213,7 +213,6 @@ const VRPCreation = ({
           </div>
         </div>
       </FormProvider>
-      <ModalPublishVRP isOpen={openModal} onClose={() => setOpenModal(false)} />
       <ModalSubmitVRP isOpen={isSuccess} />
     </>
   );

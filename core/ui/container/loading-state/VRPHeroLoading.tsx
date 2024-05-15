@@ -84,7 +84,6 @@ const VRPHeroLoading = ({
                 {variant === "hacker" && (
                   <Button
                     variant="primary-hacker"
-                    fullWidth
                     prefixIcon={<Send />}
                     disabled
                   >

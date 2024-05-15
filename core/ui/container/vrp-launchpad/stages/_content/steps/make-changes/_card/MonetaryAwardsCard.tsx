@@ -11,6 +11,7 @@ import { MonetaryAwardType } from "@/types/admin/vrp-launchpad";
 import { useFormContext } from "react-hook-form";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
+import { Role } from "@/types/admin/sidebar";
 
 export type MonetaryAwardsCardProps = MonetaryAwardType & {
   activeCard?: boolean;
@@ -85,7 +86,7 @@ interface I_MonetaryAwardCardList<T extends boolean> {
 }
 type PricingCardListProps = {
   data: MonetaryAwardsCardProps[];
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
 } & I_MonetaryAwardCardList<boolean>;
 
 const MonetaryAwardCardList = ({

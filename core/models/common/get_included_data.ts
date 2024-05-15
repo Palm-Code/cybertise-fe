@@ -35,6 +35,10 @@ export interface I_Program {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+  policies: string;
+  published_at: string;
+  published_date: string;
+  published_time: string;
 }
 
 export interface I_Meta {

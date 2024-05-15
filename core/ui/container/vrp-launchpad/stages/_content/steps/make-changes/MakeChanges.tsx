@@ -7,11 +7,12 @@ import { monetaryAwardData } from "@/core/constants/vrp-launchpad";
 import { AnimationWrapper } from "@/core/ui/layout";
 import MonetaryAwardCardList from "./_card/MonetaryAwardsCard";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_MakeChangesProps {
   onClickNext: () => void;
   onClickPrev: () => void;
-  variant?: "mediator" | "company";
+  variant?: keyof typeof Role;
   options?: SortFilterType[];
 }
 
@@ -25,7 +26,7 @@ const MakeChanges = ({
 
   const element: Array<React.ReactNode> = [
     <VrpDescriptionCard />,
-    <MonetaryAwardCardList data={monetaryAwardData} />,
+    <MonetaryAwardCardList variant={variant} data={monetaryAwardData} />,
     <TargetAssetListCard options={options} />,
   ];
 

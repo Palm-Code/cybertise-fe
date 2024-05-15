@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { useState } from "react";
 import { generateTimeOptions } from "@/utils/time-options";
 import { ChevronDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../popopver/popover";
@@ -12,7 +11,6 @@ interface I_SelectDropdownProps {
 
 const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   const options = generateTimeOptions();
-  const [selectedTime, setSelectedTime] = useState(value);
 
   return (
     <Popover>
@@ -26,7 +24,7 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
             "_flexbox__row__center__between"
           )}
         >
-          {selectedTime || "Time"}
+          {value || "Time"}
           <ChevronDown />
         </button>
       </PopoverTrigger>
@@ -51,7 +49,6 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
                 "_flexbox__row__center__between"
               )}
               onClick={() => {
-                setSelectedTime(option.value);
                 onValueChange(option.value);
               }}
             >

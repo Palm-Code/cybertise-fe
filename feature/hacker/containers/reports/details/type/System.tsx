@@ -1,6 +1,7 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
 import { Avatar, Badge, Separator, Typography } from "@/core/ui/components";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 const System = ({
   data,
@@ -22,8 +23,10 @@ const System = ({
             SYSTEM: {data?.content}
           </Typography>
           {data?.badge && (
-            <Badge variant={data.badge.toLowerCase() as any}>
-              {`${data.chat_ticket?.risk_level} | ${data.badge}`}
+            <Badge variant={riskLevelCalculator(data?.badge)}>
+              {`${data.chat_ticket?.risk_level} | ${riskLevelCalculator(
+                data?.badge
+              )}`}
             </Badge>
           )}
         </div>

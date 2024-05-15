@@ -20,6 +20,7 @@ import { Info, Paperclip, Send, X } from "lucide-react";
 import Typography from "../typography/typography";
 import Button from "../button/button";
 import Separator from "../separator/separator";
+import { Role } from "@/types/admin/sidebar";
 
 const lowlight = createLowlight(common);
 lowlight.register({ html });
@@ -34,7 +35,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   withTooltip?: boolean;
   onClearInput?: () => void;
   isChat?: boolean;
-  variant: "hacker" | "company" | "mediator";
+  variant: keyof typeof Role;
   onClickSendAttachment?: () => void;
   onClickSendMessage?: () => void;
   isLoading?: boolean;

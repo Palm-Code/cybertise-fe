@@ -13,6 +13,7 @@ export const useGetAssetType = (payload?: I_GetParamsPayload) => {
     queryKey: ["getAssetType", payload?.params?.page, payload?.params?.filter],
     queryFn: () => fetchGetAssetType(),
     placeholderData: keepPreviousData,
+    refetchOnMount: false,
   });
 
   const filteredAssetTypes = data

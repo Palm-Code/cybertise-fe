@@ -11,6 +11,7 @@ import {
 } from "@/core/ui/components";
 import { fileDownload } from "@/utils/file-download";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 import { sanitize } from "@/utils/sanitize-input";
 import { motion } from "framer-motion";
 import { Download, Eye, File } from "lucide-react";
@@ -53,8 +54,8 @@ const Sender = ({
               }}
             ></article>
             {data?.badge && (
-              <Badge variant={data.badge.toLowerCase() as any}>
-                {data.badge}
+              <Badge variant={riskLevelCalculator(data.badge)}>
+                {riskLevelCalculator(data.badge)}
               </Badge>
             )}
           </div>
@@ -76,7 +77,10 @@ const Sender = ({
           )}
           {data.media && data.media.length > 0 && (
             <div
-              className={cn("grid w-full gap-4", "grid-cols-2  md:max-w-2xl")}
+              className={cn(
+                "grid w-full gap-4",
+                "grid-cols-1 md:max-w-2xl md:grid-cols-2"
+              )}
             >
               {data.media?.map((file, index) => (
                 <Card

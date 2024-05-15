@@ -10,6 +10,6 @@ const VRPLaunchpad = dynamic(
 );
 
 const VRPLaunchpadFragment = () => {
-  return <VRPLaunchpad data={vrpCardsData} />;
+  return <VRPLaunchpad />;
 };
 export default VRPLaunchpadFragment;

@@ -6,21 +6,20 @@ import { DayPicker } from "react-day-picker";
 import { cn } from "@/core/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { buttonVariants } from "../button/base-button";
+import { Role } from "@/types/admin/sidebar";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
 };
 
 function Calendar({
   className,
   classNames,
-  showOutsideDays = true,
   variant = "company",
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
-      showOutsideDays={showOutsideDays}
       className={cn(
         "rounded-md bg-neutral-light-100 p-3 dark:bg-neutral-dark-100",
         className
@@ -49,16 +48,18 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          buttonVariants({ variant: `tertiary-${variant}` }),
-          "h-8 w-8 p-0 font-normal"
+          "h-8 w-8 p-0 font-normal rounded-full hover:bg-sky-lighter dark:text-white text-neutral-900",
+          "hover:text-white dark:hover:text-white"
         ),
+        day_today: cn("rounded-full w-8 h-8 p-0 !text-white", "bg-sky-lighter"),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: cn(
-          buttonVariants({ variant: `primary-${variant}` }),
-          "rounded-full w-8 h-8 p-0 !text-white"
+          "rounded-full w-8 h-8 p-0 !text-white",
+          "bg-sky-lighter"
         ),
-        day_disabled: "text-neutral-500 opacity-50 dark:text-neutral-400",
+        day_outside: "!text-opacity-50",
+        day_disabled: "!text-neutral-light-50 opacity-50",
         day_range_middle:
           "aria-selected:bg-neutral-100 aria-selected:text-neutral-900 dark:aria-selected:bg-neutral-800 dark:aria-selected:text-neutral-50",
         day_hidden: "invisible",

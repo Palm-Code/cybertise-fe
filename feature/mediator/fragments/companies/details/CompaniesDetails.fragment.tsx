@@ -10,7 +10,7 @@ const CompaniesDetail = dynamic(
   }
 );
 
-const CompaniesDetailsFragment = () => {
-  return <CompaniesDetail />;
+const CompaniesDetailsFragment = ({ id }: { id: string }) => {
+  return <CompaniesDetail id={id} />;
 };
 export default CompaniesDetailsFragment;

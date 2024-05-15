@@ -1,7 +1,9 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import {
+  Avatar,
   Badge,
+  badgeVariants,
   BaseTable,
   Indicator,
   TableBody,
@@ -15,83 +17,116 @@ import {
 import { I_TableColumns } from "@/interfaces";
 import Image from "next/image";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
+import { TableLoadingList } from "@/core/ui/container";
 
 interface I_TableProps {
   columns: I_TableColumns[];
-  data: VRPCardType[];
+  data: I_GetProgramListSuccessResponse["data"];
+  isLoading?: boolean;
 }
 
-export default function Table({ data, columns }: I_TableProps) {
+export default function Table({
+  data,
+  columns,
+  isLoading = false,
+}: I_TableProps) {
   return (
     <AnimationWrapper>
-      <BaseTable>
-        <TableHeader>
-          <TableRow>
-            {columns.map((column, index) => (
-              <TableHead
-                className={column.width}
-                key={`table-head-${index}`}
-                align={column.align}
+      {isLoading ? (
+        <TableLoadingList columns={columns} />
+      ) : (
+        <BaseTable>
+          <TableHeader>
+            <TableRow>
+              {columns.map((column, index) => (
+                <TableHead
+                  className={column.width}
+                  key={`table-head-${index}`}
+                  align={column.align}
+                >
+                  {column.title}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item, index) => (
+              <TableBodyRow
+                key={`table-row-${index}`}
+                isClickable
+                href={`/vrp-launchpad/${item.id}`}
               >
-                {column.title}
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((item, index) => (
-            <TableBodyRow
-              key={`table-row-${index}`}
-              isClickable
-              href={`/reports/${item.company_id}`}
-            >
-              <TableRow>
-                <TableData
-                  className={cn(columns[0].width, `text-${columns[0].align}`)}
-                >
-                  <div className="_flexbox__row__start__start gap-4">
-                    <Image
-                      src={item.logo}
-                      alt={`${item.company_name} logo`}
-                      width={24}
-                      height={24}
-                    />
-                    <Typography variant="p" affects="small" weight="semibold">
-                      {item.company_name}
-                    </Typography>
-                  </div>
-                </TableData>
-                <TableData
-                  className={cn(columns[1].width, `text-${columns[1].align}`)}
-                >
-                  <Badge variant="default">{item.domain}</Badge>
-                </TableData>
-                <TableData
-                  className={cn(columns[2].width, `text-${columns[2].align}`)}
-                >
-                  <div className="_flexbox__row__center__start flex-wrap gap-3">
-                    {item.asset_type.map((type, index) => (
-                      <Badge key={`badge-${index}`} variant={type.value as any}>
-                        {type.label}
-                      </Badge>
-                    ))}
-                  </div>
-                </TableData>
-                <TableData
-                  className={cn(columns[3].width, `text-${columns[3].align}`)}
-                >
-                  <Indicator
-                    variant={item.status === "active" ? "warning" : "clear"}
+                <TableRow>
+                  <TableData
+                    className={cn(columns[0].width, `text-${columns[0].align}`)}
+                    align={columns[0].align}
                   >
-                    {item.status}
-                  </Indicator>
-                </TableData>
-              </TableRow>
-            </TableBodyRow>
-          ))}
-        </TableBody>
-      </BaseTable>
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <Avatar
+                        image={item.company?.logo}
+                        className="h-6 w-6"
+                        initials="S"
+                      />
+                      <Typography variant="p" affects="small" weight="semibold">
+                        {item.company?.name}
+                      </Typography>
+                    </div>
+                  </TableData>
+                  <TableData
+                    className={cn(columns[1].width, `text-${columns[1].align}`)}
+                    align={columns[1].align}
+                  >
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {item.title}
+                    </Typography>
+                  </TableData>
+                  <TableData
+                    className={cn(columns[2].width, `text-${columns[2].align}`)}
+                    align={columns[2].align}
+                  >
+                    <Badge variant={"default"}>{item.type}</Badge>
+                  </TableData>
+                  <TableData
+                    className={cn(columns[3].width, `text-${columns[3].align}`)}
+                    align={columns[3].align}
+                  >
+                    <div className="_flexbox__row__center flex-wrap gap-3">
+                      {item.asset_types &&
+                        item.asset_types.map((type, index) => (
+                          <Badge
+                            key={`badge-${index}`}
+                            variant={
+                              type.label.toLowerCase() as keyof typeof badgeVariants
+                            }
+                          >
+                            {type.value}
+                          </Badge>
+                        ))}
+                    </div>
+                  </TableData>
+                  <TableData
+                    className={cn(columns[4].width, `text-${columns[4].align}`)}
+                    align={columns[4].align}
+                  >
+                    <div className="mx-auto w-fit">
+                      <Indicator
+                        variant={
+                          item.status.toLowerCase().includes("phase")
+                            ? "open"
+                            : "clear"
+                        }
+                      >
+                        {item.status}
+                      </Indicator>
+                    </div>
+                  </TableData>
+                </TableRow>
+              </TableBodyRow>
+            ))}
+          </TableBody>
+        </BaseTable>
+      )}
     </AnimationWrapper>
   );
 }

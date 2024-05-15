@@ -121,6 +121,7 @@ export const filterItems: MultiFilterType = {
     { label: "Low", value: "low" },
     { label: "Medium", value: "medium" },
     { label: "High", value: "high" },
+    { label: "Critical", value: "critical" },
   ],
   type: [
     { label: "All type", value: "all" },
@@ -135,6 +136,11 @@ export const filterItems: MultiFilterType = {
     { label: "Waiting for Payment", value: "Waiting for Payment" },
     { label: "Paid", value: "Paid" },
     { label: "Canceled", value: "Canceled" },
+  ],
+  company_status: [
+    { label: "All status", value: "all" },
+    { label: "Published", value: "Published" },
+    { label: "Pending", value: "Pending" },
   ],
   asset_type: [
     { label: "All asset type", value: "all" },

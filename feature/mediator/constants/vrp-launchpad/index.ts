@@ -10,22 +10,27 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
     align: "left",
-    width: "w-3/12",
+    width: "w-1/6",
+  },
+  {
+    title: "VRP Title",
+    align: "left",
+    width: "w-1/6",
   },
   {
     title: "VRP Type",
     align: "center",
-    width: "w-2/12",
+    width: "w-1/5",
   },
   {
     title: "Asset Type",
-    align: "left",
-    width: "w-5/12",
+    align: "center",
+    width: "w-2/6",
   },
   {
     title: "Status",
-    align: "left",
-    width: "w-2/12",
+    align: "center",
+    width: "w-1/6",
   },
 ];
 export const companiesTableColumns: I_TableColumns[] = [
@@ -59,10 +64,10 @@ export const companyTabsItem: SortFilterType[] = [
     label: "Thanks",
     value: "thanks",
   },
-  {
-    label: "Collaborators",
-    value: "collaborators",
-  },
+  // {
+  //   label: "Collaborators",
+  //   value: "collaborators",
+  // },
   {
     label: "Activity Logs",
     value: "activity_logs",

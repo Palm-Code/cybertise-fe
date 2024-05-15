@@ -3,7 +3,7 @@ import { BaseCheckbox, BaseCheckboxProps } from "./base-checkbox";
 import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 
-const checkboxVariants = cva(
+export const checkboxVariants = cva(
   "disabled:bg-opacity-20 bg-neutral-light-80 dark:bg-neutral-dark-80",
   {
     variants: {
@@ -11,6 +11,8 @@ const checkboxVariants = cva(
         hacker:
           "text-brand-neutral data-[state=checked]:bg-lime-normal-light dark:data-[state=checked]:bg-lime-normal-dark hover:border hover:border-lime-normal-light dark:hover:border-lime-normal-dark focus:border-2 focus:border-lime-normal-light dark:focus:border-lime-normal-dark disabled:bg-lime-light",
         company:
+          "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
+        "company staff":
           "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
         mediator:
           "text-white data-[state=checked]:bg-violet-normal hover:border hover:border-violet-normal focus:border-2 focus:border-violet-normal disabled:bg-violet-light",

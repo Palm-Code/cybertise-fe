@@ -8,7 +8,7 @@ export const filterItems: SortFilterType[] = [
   },
   {
     label: "Oldest",
-    value: "created_at",
+    value: "updated_at",
   },
 ];
 

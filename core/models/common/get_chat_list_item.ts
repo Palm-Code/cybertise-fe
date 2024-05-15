@@ -64,7 +64,8 @@ export interface I_Data {
   chat_ticket_id: string;
   sender?: string;
   content?: string;
-  badge?: string;
+  badge?: number;
+  status_badge?: string;
   has_link?: boolean;
   og_image?: string;
   og_title?: string;
