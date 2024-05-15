@@ -22,6 +22,8 @@ const TicketCard = ({
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   const [openModal, setOpenModal] = useState(false);
+
+  console.log(props.ticket_type, props.id, props.related_ticket_id);
   return (
     <>
       <Mobile className="h-full">
@@ -30,7 +32,7 @@ const TicketCard = ({
           isClickable={!isMediator}
           className="h-full"
         >
-          {!!props.has_new && (
+          {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div
@@ -117,7 +119,7 @@ const TicketCard = ({
                     prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
                     postFixIcon={<ChevronRight />}
                     asLink
-                    href={`/reports/${props.id}`}
+                    href={`/reports/${props.ticket_type === "Hacker" ? props.id : props.related_ticket_id}`}
                     className="!justify-start"
                     fullWidth
                   >
@@ -131,7 +133,7 @@ const TicketCard = ({
                       className="!justify-start"
                       fullWidth
                       asLink
-                      href={`/reports/${props.related_ticket_id}`}
+                      href={`/reports/${props.ticket_type === "Company" ? props.id : props.related_ticket_id}`}
                     >
                       Company Ticket
                     </Button>
@@ -165,7 +167,7 @@ const TicketCard = ({
           isClickable={!isMediator}
           className="h-full"
         >
-          {!!props.has_new && (
+          {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div
@@ -259,7 +261,7 @@ const TicketCard = ({
                     prefixIcon={!isGridCard && <Hacker className="h-6 w-6" />}
                     postFixIcon={<ChevronRight />}
                     asLink
-                    href={`/reports/${props.id}`}
+                    href={`/reports/${props.ticket_type === "Hacker" ? props.id : props.related_ticket_id}`}
                     fullWidth
                   >
                     Hacker Ticket
@@ -271,7 +273,7 @@ const TicketCard = ({
                       postFixIcon={<ChevronRight />}
                       fullWidth
                       asLink
-                      href={`/reports/${props.related_ticket_id}`}
+                      href={`/reports/${props.ticket_type === "Company" ? props.id : props.related_ticket_id}`}
                     >
                       Company Ticket
                     </Button>

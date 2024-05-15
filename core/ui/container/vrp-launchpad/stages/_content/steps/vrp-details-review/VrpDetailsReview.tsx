@@ -23,7 +23,7 @@ interface I_VrpDetailsReviewProps {
 }
 
 const VrpDetailsReview = ({
-  onClickNext,
+  onClickNext = () => {},
   isLastStep = false,
   onClickEdit,
   variant = "mediator",
@@ -39,29 +39,29 @@ const VrpDetailsReview = ({
         <Typography variant="h5" weight="bold">
           {isLastStep ? "VRP Details" : `Review ${forms.title}`}
         </Typography>
-        {isLastStep ||
-          (currentStep === "Published" && (
-            <Button
-              variant={`tertiary-${variant}`}
-              prefixIcon={<FilePenLine />}
-              onClick={onClickEdit}
-            >
-              Edit Report
-            </Button>
-          ))}
+        {isLastStep || currentStep === "Published" ? (
+          <Button
+            variant={`tertiary-${variant}`}
+            prefixIcon={<FilePenLine />}
+            onClick={onClickEdit}
+          >
+            Edit Report
+          </Button>
+        ) : null}
       </div>
-      {currentStep === "Phase5" && (
-        <div
-          className={cn(
-            "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4"
-          )}
-        >
-          <Typography variant="p" affects="normal" weight="semibold">
-            VRP Approved
-          </Typography>
-          <CheckCircle2 />
-        </div>
-      )}
+      {currentStep === "Phase5" ||
+        (currentStep === "Published" && (
+          <div
+            className={cn(
+              "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4"
+            )}
+          >
+            <Typography variant="p" affects="normal" weight="semibold">
+              VRP {currentStep === "Published" ? "Published" : "Approved"}
+            </Typography>
+            <CheckCircle2 />
+          </div>
+        ))}
       <VrpDescriptionCard data={forms} />
       <MonetaryAwardsCard data={forms} />
       {!!forms.rules && !!forms.policies && <RulesAndPolicies isReview />}
@@ -71,16 +71,18 @@ const VrpDetailsReview = ({
         currentStep === "Phase1" ||
         currentStep === "Phase3" ||
         currentStep === "Phase5" ||
-        currentStep === "Published" ? (
+        (currentStep === "Published" && isLastStep) ? (
           <Button
             variant="primary-company"
-            onClick={onClickNext}
+            onClick={() =>
+              currentStep === "Published" && isLastStep
+                ? onClickRevise()
+                : onClickNext()
+            }
             isLoading={isLoading}
             disabled={isLoading}
           >
-            {currentStep === "Phase5" || currentStep === "Published"
-              ? "Publish"
-              : "Send to Mediator"}
+            {currentStep === "Phase5" ? "Publish" : "Send to Mediator"}
           </Button>
         ) : null
       ) : (

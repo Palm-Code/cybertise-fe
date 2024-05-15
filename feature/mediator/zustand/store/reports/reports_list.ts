@@ -19,7 +19,7 @@ const initialState: State = {
       },
       fields: {
         chat_tickets:
-          "id,code,title,description,risk_level,vulnerabiity_type_id,status,bounty,program_id,has_new,user_id,company_id,created_at,updated_at,related_ticket_id",
+          "id,code,title,description,risk_level,vulnerabiity_type_id,status,bounty,program_id,has_new,user_id,company_id,created_at,updated_at,related_ticket_id,has_new_mediator,ticket_type",
       },
       include: "vulnerabiityType,program,company",
     },

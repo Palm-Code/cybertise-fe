@@ -27,15 +27,14 @@ import ModalEditRiskLevel from "../_dialog/ModalEditRiskLevel";
 import StatusDropdown from "../_dropdown/StatusDropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import { usePostUpdateTicket } from "@/feature/mediator/query/client";
+import { useRouter } from "next/navigation";
 
 const ReportDetails = ({ id }: { id: string }) => {
+  const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError, isRefetching, isPlaceholderData } = useGetChatListItem(
-    store.payload,
-    id
-  );
+  const { data, isError, isRefetching } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
@@ -55,8 +54,6 @@ const ReportDetails = ({ id }: { id: string }) => {
   useEffect(() => {
     scrollView();
   }, [description, data]);
-
-  console.log({ data });
 
   const sendMessage = async () => {
     await mutateAsync({
@@ -109,9 +106,12 @@ const ReportDetails = ({ id }: { id: string }) => {
               )}
             >
               <div className="_flexbox__row__start__start gap-5">
-                <Link href="/reports">
-                  <MoveLeft width={24} height={24} />
-                </Link>
+                <MoveLeft
+                  width={24}
+                  height={24}
+                  onClick={back}
+                  className="cursor-pointer"
+                />
                 <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
                     {ticketDetails.title}
@@ -157,6 +157,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   <Link
                     href={`/reports/${ticketDetails.related_ticket_id}`}
                     className="underline"
+                    replace
                   >
                     Go to Company Ticket
                   </Link>
@@ -164,6 +165,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   <Link
                     href={`/reports/${ticketDetails.related_ticket_id}`}
                     className="underline"
+                    replace
                   >
                     Go to Hacker Ticket
                   </Link>
@@ -195,9 +197,12 @@ const ReportDetails = ({ id }: { id: string }) => {
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
-                <Link href="/reports">
-                  <MoveLeft width={24} height={24} />
-                </Link>
+                <MoveLeft
+                  width={24}
+                  height={24}
+                  onClick={back}
+                  className="cursor-pointer"
+                />
                 <Typography variant="h5" weight="bold">
                   {ticketDetails.title}
                 </Typography>
@@ -217,7 +222,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </div>
               </div>
               <div className="_flexbox__row__center gap-3">
-                {isPendingUpdate || isRefetching ? (
+                {isPendingUpdate && !isRefetching ? (
                   <Loader
                     variant="mediator"
                     className="h-fit"
@@ -258,6 +263,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     <Link
                       href={`/reports/${ticketDetails.related_ticket_id}`}
                       className="underline"
+                      replace
                     >
                       Go to Company Ticket
                     </Link>
@@ -265,6 +271,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     <Link
                       href={`/reports/${ticketDetails.related_ticket_id}`}
                       className="underline"
+                      replace
                     >
                       Go to Hacker Ticket
                     </Link>

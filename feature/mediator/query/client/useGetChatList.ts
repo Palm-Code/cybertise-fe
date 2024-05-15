@@ -13,6 +13,7 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
       payload?.params?.filter,
       payload?.params?.sort,
     ],
+    refetchOnMount: !!payload?.params?.filter?.company_id ? false : true,
     queryFn: () => fetchGetChatList(payload),
     placeholderData: keepPreviousData,
   });

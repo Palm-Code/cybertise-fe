@@ -1,12 +1,25 @@
-import { CompaniesTicketCardList } from "@/core/ui/container";
+import { I_GetCompaniesSuccessResponse } from "@/core/models/mediator/companies/get_companies";
+import {
+  CompaniesTicketCardList,
+  VRPCardLoadingList,
+} from "@/core/ui/container";
 import { AnimationWrapper } from "@/core/ui/layout";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
 
-const GridView = ({ data }: { data: VRPCardType[] }) => {
+const GridView = ({
+  data,
+  isLoading = false,
+}: {
+  data?: I_GetCompaniesSuccessResponse["data"];
+  isLoading?: boolean;
+}) => {
   return (
     <AnimationWrapper>
       <div className="z-10 grid h-full w-full gap-4 md:h-fit md:grid-cols-2 md:gap-10">
-        <CompaniesTicketCardList data={data} isGridCard />
+        {isLoading ? (
+          <VRPCardLoadingList />
+        ) : (
+          <CompaniesTicketCardList data={data ?? []} isGridCard />
+        )}
       </div>
     </AnimationWrapper>
   );

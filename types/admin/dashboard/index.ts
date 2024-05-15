@@ -9,4 +9,5 @@ export type MultiFilterType = {
   type: SortFilterType[];
   status: SortFilterType[];
   asset_type: SortFilterType[];
+  company_status?: SortFilterType[];
 };

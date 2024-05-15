@@ -102,6 +102,7 @@ const VRPDetails = ({
                 currentStep={currentStep}
                 assetTypes={options}
                 variant={variant}
+                onClickRevise={() => onSubmitForm("Phase4")}
                 onClickNext={() => {
                   method.setValue(
                     "publish_date",
@@ -119,7 +120,12 @@ const VRPDetails = ({
                 onClickNext={() => next()}
               />
             ),
-          key: currentStep === "Phase1" ? "brief" : "notes",
+          key:
+            currentStep === "Phase1"
+              ? "brief"
+              : currentStep === "Phase5" || currentStep === "Published"
+                ? "details"
+                : "notes",
         },
         {
           element: (
@@ -183,6 +189,7 @@ const VRPDetails = ({
               isLastStep
               onClickEdit={() => goTo(1)}
               onClickNext={() => onSubmitForm()}
+              onClickRevise={() => onSubmitForm("Phase4")}
             />
           ),
           key: "review",
@@ -190,9 +197,11 @@ const VRPDetails = ({
       ].filter(Boolean) as { element: JSX.Element; key: string }[]
     );
 
-  const onSubmitForm = () => {
+  const onSubmitForm = (status?: string) => {
+    console.log("clicked");
     if (Object.values(method.formState.errors).length === 0) {
       const data = method.getValues();
+      status && (data["status"] = status);
       mutateAsync(data).then(() => {
         setOpenModal(false);
       });

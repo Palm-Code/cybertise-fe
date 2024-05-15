@@ -4,7 +4,6 @@ import {
   BaseDrawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -13,13 +12,14 @@ import {
 import { Filter } from "lucide-react";
 import Typography from "../typography/typography";
 import { iconColor } from "@/core/constants/common";
+import { Role } from "@/types/admin/sidebar";
 
 export const FilterDrawer = ({
   variant,
   children,
   onSubmitFilter,
 }: {
-  variant: "hacker" | "company" | "mediator";
+  variant: keyof typeof Role;
   children: React.ReactNode;
   onSubmitFilter: () => void;
 }) => {

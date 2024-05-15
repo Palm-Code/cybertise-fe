@@ -12,6 +12,7 @@ export const indicatorVariants = cva("", {
       warning: "text-red-normal rounded-full",
       caution: "text-yellow-normal rounded-full",
       pending: "text-yellow-normal rounded-full",
+      published: "text-emerald-normal rounded-full",
       clear: "text-emerald-normal rounded-full",
       open: "text-red-normal rounded-full",
       closed: "text-emerald-normal rounded-full",

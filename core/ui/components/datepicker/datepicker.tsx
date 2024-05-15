@@ -11,9 +11,13 @@ export function DatePicker({
   value,
   onChangeValue,
 }: {
-  value: Date | undefined;
+  value: string;
   onChangeValue: (value: Date | undefined) => void;
 }) {
+  const [date, setDate] = React.useState<Date | undefined>(
+    value ? new Date(value) : new Date()
+  );
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -26,12 +30,22 @@ export function DatePicker({
             "_flexbox__row__center__between"
           )}
         >
-          {value ? format(value, "MM/dd/yyyy") : "Date"}
+          {value ? format(value, "MM-dd-yyyy") : "Date"}
           <ChevronDown />
         </button>
       </PopoverTrigger>
       <PopoverContent className="z-[9999] w-full p-0" align="start">
-        <Calendar mode="single" selected={value} onSelect={onChangeValue} />
+        <Calendar
+          mode="single"
+          showOutsideDays
+          selected={date}
+          onSelect={(e) => {
+            onChangeValue(e);
+            setDate(e);
+          }}
+          disabled={(date) => date < new Date()}
+          initialFocus
+        />
       </PopoverContent>
     </Popover>
   );

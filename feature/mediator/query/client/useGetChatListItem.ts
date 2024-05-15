@@ -30,6 +30,8 @@ export const useGetChatListItem = (
         },
       }),
     placeholderData: keepPreviousData,
+    refetchInterval: 10000,
+    refetchIntervalInBackground: true,
   });
 
   return query;

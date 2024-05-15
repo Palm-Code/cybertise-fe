@@ -137,6 +137,11 @@ export const filterItems: MultiFilterType = {
     { label: "Paid", value: "Paid" },
     { label: "Canceled", value: "Canceled" },
   ],
+  company_status: [
+    { label: "All status", value: "all" },
+    { label: "Published", value: "Published" },
+    { label: "Pending", value: "Pending" },
+  ],
   asset_type: [
     { label: "All asset type", value: "all" },
     { label: "URL", value: "url" },

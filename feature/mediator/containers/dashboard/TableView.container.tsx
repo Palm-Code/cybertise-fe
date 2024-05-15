@@ -63,7 +63,7 @@ export default function Table({
                     key={`table-row-${index}`}
                     isClickable
                     href={`/reports/${item.id}`}
-                    hasNotification={!!item.has_new}
+                    hasNotification={!!item.has_new_mediator}
                   >
                     <TableRow>
                       <TableData

@@ -1,17 +1,27 @@
 "use client";
 import {
   Badge,
+  badgeVariants,
   Card,
   Indicator,
   Separator,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
-import { VRPCompaniesCardType } from "@/types/admin/vrp-launchpad";
 import { useState } from "react";
+import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 
-const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
+type I_VRPCardProps = {};
+
+const VRPCard = ({
+  id,
+  title,
+  asset_types,
+  status,
+}: I_VRPCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <AnimationWrapper>
@@ -22,7 +32,15 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
               <Typography variant="p" affects="large" weight="semibold">
                 {title}
               </Typography>
-              <Indicator variant="caution">{status}</Indicator>
+              <Indicator
+                variant={
+                  status.includes("Phase")
+                    ? "warning"
+                    : (status.toLowerCase() as keyof typeof indicatorVariants)
+                }
+              >
+                {status}
+              </Indicator>
             </div>
             <Separator orientation="horizontal" />
             <div className="_flexbox__row__center__between w-full">
@@ -31,11 +49,15 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
                   Assets type available
                 </Typography>
                 <div className="flex flex-wrap items-center gap-4">
-                  {asset_type.map((item, index) => (
-                    <Badge key={index} variant={item.value as any}>
-                      {item.label}
-                    </Badge>
-                  ))}
+                  {asset_types &&
+                    asset_types.map((item, index) => (
+                      <Badge
+                        key={index}
+                        variant={item.label as keyof typeof badgeVariants}
+                      >
+                        {item.value}
+                      </Badge>
+                    ))}
                 </div>
               </div>
             </div>
@@ -56,7 +78,15 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
               <Typography variant="p" affects="large" weight="semibold">
                 {title}
               </Typography>
-              <Indicator variant="caution">{status}</Indicator>
+              <Indicator
+                variant={
+                  status.includes("Phase")
+                    ? "warning"
+                    : (status.toLowerCase() as keyof typeof indicatorVariants)
+                }
+              >
+                {status}
+              </Indicator>
             </div>
             <div className="_flexbox__row__center__between w-full">
               <div className="_flexbox__col__start__start gap-2.5">
@@ -64,11 +94,27 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
                   Assets type available
                 </Typography>
                 <div className="grid grid-flow-col gap-4">
-                  {asset_type.map((item, index) => (
-                    <Badge key={index} variant={item.value as any}>
-                      {item.label}
-                    </Badge>
-                  ))}
+                  {asset_types &&
+                    asset_types.slice(0, 3).map((item, index) => (
+                      <Badge
+                        key={index}
+                        variant={item.label as keyof typeof badgeVariants}
+                      >
+                        {item.value}
+                      </Badge>
+                    ))}
+                  {asset_types && asset_types.length > 3 && (
+                    <Tooltip
+                      content={asset_types
+                        .slice(3)
+                        .map((item) => item.value)
+                        .join(", ")}
+                    >
+                      <Badge variant={"default"}>
+                        +{asset_types.length - 3} more
+                      </Badge>
+                    </Tooltip>
+                  )}
                 </div>
               </div>
             </div>
@@ -79,7 +125,11 @@ const VRPCard = ({ id, title, asset_type, status }: VRPCompaniesCardType) => {
   );
 };
 
-const VrpCardList = ({ data }: { data: VRPCompaniesCardType[] }) => {
+const VrpCardList = ({
+  data,
+}: {
+  data: I_GetProgramListSuccessResponse["data"];
+}) => {
   return data.map((item, index) => <VRPCard key={index} {...item} />);
 };
 

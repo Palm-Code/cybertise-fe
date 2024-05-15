@@ -12,6 +12,8 @@ export const checkboxVariants = cva(
           "text-brand-neutral data-[state=checked]:bg-lime-normal-light dark:data-[state=checked]:bg-lime-normal-dark hover:border hover:border-lime-normal-light dark:hover:border-lime-normal-dark focus:border-2 focus:border-lime-normal-light dark:focus:border-lime-normal-dark disabled:bg-lime-light",
         company:
           "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
+        "company staff":
+          "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
         mediator:
           "text-white data-[state=checked]:bg-violet-normal hover:border hover:border-violet-normal focus:border-2 focus:border-violet-normal disabled:bg-violet-light",
       },

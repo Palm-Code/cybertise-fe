@@ -19,6 +19,8 @@ const ProgramDetails = ({ id }: I_ProgramDetailsProps) => {
     id
   );
 
+  if (isLoading) return <VRPHeroLoading />;
+
   return (
     <>
       <Mobile>

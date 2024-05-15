@@ -29,6 +29,7 @@ export interface I_GetChatListSuccessResponse {
     bounty: any;
     program_id: string;
     has_new: number;
+    has_new_mediator: number;
     risk_level_category: string;
     last_message: string;
     vulnerabiity_type: I_VulnerabilityType;

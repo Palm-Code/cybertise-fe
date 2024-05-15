@@ -32,7 +32,7 @@ const ModalPublishVRP = ({
   const forms = watch();
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal isOpen={isOpen}>
       <div
         className={cn(
           "_flexbox__col__start__start mx-auto w-full max-w-[602px] gap-12 p-20",
@@ -126,12 +126,20 @@ const ModalPublishVRP = ({
                       Select a date to make you VRP Published
                     </Typography>
                     <DatePicker
-                      value={new Date()}
+                      value={forms.publish_date as string}
                       onChangeValue={(e) => {
-                        setValue("publish_date", e?.toDateString());
+                        setValue(
+                          "publish_date",
+                          e?.toISOString().split("T")[0]
+                        );
                       }}
                     />
-                    <TimePicker onValueChange={() => {}} value="" />
+                    <TimePicker
+                      onValueChange={(e) => {
+                        setValue("publish_time", e);
+                      }}
+                      value={forms.publish_time as string}
+                    />
                   </div>
                 )}
               </div>

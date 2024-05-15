@@ -33,7 +33,7 @@ const TicketCard = ({
     <>
       <Mobile>
         <Card href={`/reports/${props.id}`} isClickable className="h-full">
-          {!!props.has_new && (
+          {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
@@ -121,7 +121,7 @@ const TicketCard = ({
       </Mobile>
       <Desktop className="h-full">
         <Card href={`/reports/${props.id}`} isClickable className="h-full">
-          {!!props.has_new && (
+          {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
             <Indicator variant="warning" className="absolute -right-4 -top-4" />
           )}
           <div className="_flexbox__row__start w-full gap-9">

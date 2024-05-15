@@ -14,6 +14,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
       payload?.params?.page,
       payload?.params?.filter,
     ],
+    refetchOnMount: !!payload?.params?.filter?.company_id ? false : true,
     queryFn: () => fetchGetProgramList(payload),
     placeholderData: keepPreviousData,
   });

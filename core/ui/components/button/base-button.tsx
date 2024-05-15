@@ -39,6 +39,8 @@ const buttonVariants = cva(
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-lime-normal-light dark:hover:bg-lime-normal-dark hover:text-neutral-light-0",
         "outline-company":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-sky-normal dark:text-white text-neutral-light-0 hover:text-white",
+        "outline-company staff":
+          "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-sky-normal dark:text-white text-neutral-light-0 hover:text-white",
         "outline-mediator":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-violet-normal dark:text-white text-neutral-light-0 hover:text-white",
         "ghost-hacker":

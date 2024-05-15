@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import {
   Badge,
+  badgeVariants,
   Card,
   Indicator,
   Loader,
@@ -17,13 +18,19 @@ import { ChatBubble } from "@/feature/company/containers";
 import { useGetChatListItem } from "@/feature/company/query/client/useGetChatListItem";
 import { useReportDetailsParamStore } from "@/feature/company/zustand/store/reports";
 import { useRouter } from "next/navigation";
-import { usePostChatItem } from "@/core/react-query/client";
+import {
+  useGetTicketDetails,
+  usePostChatItem,
+} from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
 import { toast } from "sonner";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
+  const { data: ticketDetails, isError: isErrorTicket } =
+    useGetTicketDetails(id);
   const { data, isError } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
@@ -67,7 +74,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data)
+  if (!data || !ticketDetails)
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader variant="company" />
@@ -95,25 +102,25 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Link>
                 <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
-                    {data?.data[0].chat_ticket?.title}
+                    {ticketDetails?.title}
                   </Typography>
                   <Badge
                     variant={
-                      data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                      ticketDetails.risk_level_category.toLowerCase() as any
                     }
                     className="max-w-fit"
                   >
-                    {`${data?.data[0].chat_ticket?.risk_level.toFixed(2)} | ${data?.data[0].chat_ticket?.risk_level_category}`}
+                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
                   </Badge>
                 </div>
               </div>
               <div className="_flexbox__row__center gap-3">
                 <Indicator
                   variant={
-                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
+                    ticketDetails.status.toLowerCase() as keyof typeof indicatorVariants
                   }
                 >
-                  {data?.data[0].chat_ticket?.status}
+                  {ticketDetails.status}
                 </Indicator>
               </div>
             </Card>
@@ -154,23 +161,24 @@ const ReportDetails = ({ id }: { id: string }) => {
                   onClick={back}
                 />
                 <Typography variant="h5" weight="bold">
-                  {data?.data[0]?.chat_ticket?.title}
+                  {ticketDetails.title}
                 </Typography>
                 <Badge
                   variant={
-                    data?.data[0]?.chat_ticket?.risk_level_category.toLowerCase() as any
+                    ticketDetails.risk_level_category.toLowerCase() as keyof typeof badgeVariants
                   }
+                  className="max-w-fit"
                 >
-                  {`${data?.data[0].chat_ticket?.risk_level} | ${data?.data[0].chat_ticket?.risk_level_category}`}
+                  {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
                 </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
                 <Indicator
                   variant={
-                    data?.data[0]?.chat_ticket?.status.toLowerCase() as any
+                    ticketDetails.status.toLowerCase() as keyof typeof indicatorVariants
                   }
                 >
-                  {data?.data[0].chat_ticket?.status}
+                  {ticketDetails.status}
                 </Indicator>
               </div>
             </Card>

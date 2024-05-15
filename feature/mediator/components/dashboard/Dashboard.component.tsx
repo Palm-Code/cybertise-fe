@@ -11,7 +11,6 @@ import Typography from "@/core/ui/components/typography/typography";
 import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { I_TableTicketData } from "@/interfaces";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import {
   DashboardCardView,

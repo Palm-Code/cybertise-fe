@@ -64,10 +64,10 @@ export const companyTabsItem: SortFilterType[] = [
     label: "Thanks",
     value: "thanks",
   },
-  {
-    label: "Collaborators",
-    value: "collaborators",
-  },
+  // {
+  //   label: "Collaborators",
+  //   value: "collaborators",
+  // },
   {
     label: "Activity Logs",
     value: "activity_logs",

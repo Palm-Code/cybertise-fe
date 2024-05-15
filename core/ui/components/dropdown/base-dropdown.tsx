@@ -9,13 +9,14 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { Desktop, Mobile } from "../../layout";
 import Checkbox from "../checkbox/checkbox";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_BaseDropdownProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;
   label?: string;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
 }
 
 const BaseDropdown = ({

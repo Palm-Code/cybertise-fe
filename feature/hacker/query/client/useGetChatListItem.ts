@@ -18,6 +18,10 @@ export const useGetChatListItem = (
       payload?.params?.filter,
       payload?.params?.sort,
     ],
+    refetchIntervalInBackground: true,
+    refetchInterval: 10000,
+    staleTime: 1000,
+    gcTime: 1000,
     queryFn: () =>
       fetchGetChatListItem({
         ...payload,

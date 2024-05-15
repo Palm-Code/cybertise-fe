@@ -1,40 +1,48 @@
 import Image from "next/image";
 import {
+  Avatar,
   Badge,
+  badgeVariants,
   Card,
   Indicator,
   Separator,
+  Tooltip,
   Typography,
 } from "../../components";
 import { cn } from "@/core/lib/utils";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
 import { Desktop, Mobile } from "../../layout";
+import { I_GetCompaniesSuccessResponse } from "@/core/models/mediator/companies/get_companies";
+import { indicatorVariants } from "../../components/indicator/indicator";
 
-interface I_TicketCardProps extends VRPCardType {
+interface I_TicketCardProps {
   isGridCard?: boolean;
 }
 
-const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
+const TicketCard = ({
+  isGridCard,
+  ...props
+}: I_TicketCardProps & I_GetCompaniesSuccessResponse["data"][0]) => {
   return (
     <>
       <Mobile>
-        <Card isClickable href={`/companies/${props.company_id}`}>
+        <Card isClickable href={`/companies/${props.id}`}>
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start__start w-full gap-8")}>
               <div className="_flexbox__col__start w-full max-w-xl gap-4">
                 <div className="_flexbox__row__center__start w-full gap-4">
-                  <Image
-                    src={props.logo}
-                    alt={`${props.company_name} logo`}
-                    width={32}
-                    height={32}
-                  />
+                  <Avatar image={props.logo} className="h-8 w-8" initials="C" />
                   <Typography variant="p" affects="normal">
-                    {props.company_name}
+                    {props.name}
                   </Typography>
                 </div>
                 <div className="_flexbox__row__center gap-4">
-                  <Indicator variant="warning">{props.status}</Indicator>
+                  <Indicator
+                    variant={
+                      props.status.toLowerCase() as keyof typeof indicatorVariants
+                    }
+                  >
+                    {props.status}
+                  </Indicator>
                 </div>
               </div>
               <Separator orientation="horizontal" />
@@ -48,20 +56,27 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Asset type available
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
-                    {props.asset_type
-                      ?.map((item, idx) => (
-                        <Badge
-                          key={`asset_types-${idx}`}
-                          variant={item.value as any}
-                        >
-                          {item.label}
+                    {props.asset_types &&
+                      props.asset_types
+                        ?.map((item, idx) => (
+                          <Badge
+                            key={`asset_types-${idx}`}
+                            variant={item.value as keyof typeof badgeVariants}
+                          >
+                            {item.label}
+                          </Badge>
+                        ))
+                        .slice(0, 3)}
+                    {props.asset_types && props.asset_types.length > 3 && (
+                      <Tooltip
+                        content={props.asset_types
+                          .map((item) => item.label)
+                          .join(", ")}
+                      >
+                        <Badge variant="default">
+                          +{props.asset_types.length - 3} more
                         </Badge>
-                      ))
-                      .slice(0, 3)}
-                    {props.asset_type.length > 3 && (
-                      <Badge variant="default">
-                        +{props.asset_type.length - 3} more
-                      </Badge>
+                      </Tooltip>
                     )}
                   </div>
                 </div>
@@ -71,15 +86,10 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
         </Card>
       </Mobile>
       <Desktop>
-        <Card isClickable href={`/companies/${props.company_id}`}>
+        <Card isClickable href={`/companies/${props.id}`}>
           <div className="_flexbox__row__start w-full gap-9">
             {!isGridCard && (
-              <Image
-                src={props.logo}
-                alt={`${props.company_name} logo`}
-                width={48}
-                height={48}
-              />
+              <Avatar image={props.logo} className="h-12 w-12" initials="C" />
             )}
             <div
               className={cn(
@@ -87,23 +97,27 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                 isGridCard ? "gap-8" : "gap-12"
               )}
             >
-              <div className="_flexbox__row__center__start w-full">
+              <div className="_flexbox__row__center__start w-full gap-4">
                 {isGridCard && (
-                  <Image
-                    src={props.logo}
-                    alt={`${props.company_name} logo`}
-                    width={48}
-                    height={48}
-                    className="mr-4"
+                  <Avatar
+                    image={props.logo}
+                    className="h-12 w-12"
+                    initials="C"
                   />
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-1">
                   <Typography variant="p" affects="normal">
-                    {props.company_name}
+                    {props.name}
                   </Typography>
                 </div>
                 <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
-                  <Indicator variant="warning">{props.status}</Indicator>
+                  <Indicator
+                    variant={
+                      props.status.toLowerCase() as keyof typeof indicatorVariants
+                    }
+                  >
+                    {props.status}
+                  </Indicator>
                 </div>
               </div>
               <div className="_flexbox__row__center__between w-full">
@@ -116,20 +130,27 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
                     Asset type available
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
-                    {props.asset_type
-                      ?.map((item, idx) => (
-                        <Badge
-                          key={`asset_types-${idx}`}
-                          variant={item.value as any}
-                        >
-                          {item.label}
+                    {props.asset_types &&
+                      props.asset_types
+                        ?.map((item, idx) => (
+                          <Badge
+                            key={`asset_types-${idx}`}
+                            variant={item.label as keyof typeof badgeVariants}
+                          >
+                            {item.value}
+                          </Badge>
+                        ))
+                        .slice(0, 3)}
+                    {props.asset_types && props.asset_types.length > 3 && (
+                      <Tooltip
+                        content={props.asset_types
+                          .map((item) => item.value)
+                          .join(", ")}
+                      >
+                        <Badge variant="default">
+                          +{props.asset_types.length - 3} more
                         </Badge>
-                      ))
-                      .slice(0, 3)}
-                    {props.asset_type.length > 3 && (
-                      <Badge variant="default">
-                        +{props.asset_type.length - 3} more
-                      </Badge>
+                      </Tooltip>
                     )}
                   </div>
                 </div>
@@ -143,7 +164,7 @@ const TicketCard = ({ isGridCard, ...props }: I_TicketCardProps) => {
 };
 
 interface I_TicketCardListProps {
-  data: VRPCardType[];
+  data: I_GetCompaniesSuccessResponse["data"];
   isGridCard?: boolean;
 }
 
