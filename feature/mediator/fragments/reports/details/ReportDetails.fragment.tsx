@@ -1,6 +1,6 @@
 import { ReportDetails } from "@/feature/mediator/components";
 
-const ReportDetailsFragment = () => {
-  return <ReportDetails />;
+const ReportDetailsFragment = ({ id }: { id: string }) => {
+  return <ReportDetails id={id} />;
 };
 export default ReportDetailsFragment;

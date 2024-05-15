@@ -20,7 +20,6 @@ import { I_TableColumns } from "@/interfaces";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 import Image from "next/image";
-import { Suspense } from "react";
 
 interface I_TableProps {
   columns: I_TableColumns[];
@@ -65,13 +64,14 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                       )}
                     >
                       <div className="_flexbox__col__start__start gap-4">
-                        <div className="_flexbox__row__center__start gap-1">
-                          <Image
-                            src={item.company?.logo as string}
-                            alt={`${item.title} logo`}
-                            width={32}
-                            height={32}
-                          />
+                        <div className="grid grid-cols-[auto_1fr] gap-1">
+                          <div className="relative aspect-square w-8 overflow-hidden rounded-full">
+                            <Image
+                              src={item.company?.logo as string}
+                              alt={`${item.id} logo`}
+                              fill
+                            />
+                          </div>
                           <Typography
                             variant="p"
                             affects="small"

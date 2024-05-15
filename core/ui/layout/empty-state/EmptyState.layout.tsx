@@ -6,7 +6,7 @@ import { buttonVariants } from "../../components/button/base-button";
 import { iconColor } from "@/core/constants/common";
 
 interface I_EmptyStateProps {
-  variant: "company" | "hacker" | "mediator";
+  variant?: keyof typeof Role;
   type?:
     | "default"
     | "program"
@@ -21,7 +21,7 @@ interface I_EmptyStateProps {
 }
 
 const EmptyState = ({
-  variant,
+  variant = "hacker",
   type = "default",
   buttonText = "See VRP Launchpad",
   href = "/",

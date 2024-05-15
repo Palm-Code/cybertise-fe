@@ -8,3 +8,4 @@ export * from "./useGetUserProfile";
 export * from "./usePostUpdateProfile";
 export * from "./useGetCountryList";
 export * from "./useGetUserData";
+export * from "./useGetTicketDetails";

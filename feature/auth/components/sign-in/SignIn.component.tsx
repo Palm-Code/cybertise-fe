@@ -154,7 +154,12 @@ const SignInComponent = () => {
         </Typography>
       </Mobile>
       <Desktop>
-        <div className="_flexbox__col__center gap-12 bg-background-main-light px-10 py-20 dark:bg-background-main-dark">
+        <div
+          className={cn(
+            "_flexbox__col__center gap-12 rounded-lg",
+            "bg-background-main-light px-10 py-20 dark:bg-background-main-dark"
+          )}
+        >
           <Typography variant="h4" weight="bold">
             Sign In
           </Typography>

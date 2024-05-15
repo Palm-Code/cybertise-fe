@@ -9,6 +9,6 @@ const Dashboard = dynamic(
 );
 
 const DashboardFragment = () => {
-  return <Dashboard data={[]} />;
+  return <Dashboard />;
 };
 export default DashboardFragment;

@@ -1,3 +1,5 @@
+import { Role } from "../sidebar";
+
 export type VRPCardType = {
   company_id: string;
   logo: string;
@@ -33,7 +35,7 @@ export type MonetaryAwardType = {
   title: string;
   category: "S" | "M" | "L" | "XL";
   priceData: PricingProps[];
-  variant: "hacker" | "company" | "mediator";
+  variant: keyof typeof Role;
 };
 
 export type CollaboratorCardDataType = {

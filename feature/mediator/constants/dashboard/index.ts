@@ -5,32 +5,37 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Ticket",
     align: "left",
-    width: "w-[20%]",
+    width: "w-[25%]",
   },
   {
     title: "Risk Level",
-    align: "left",
-    width: "w-[80px]",
+    align: "center",
+    width: "w-[15%]",
   },
   {
     title: "Vulnerability type (CWE)",
-    align: "left",
-    width: "w-[220px]",
+    align: "center",
+    width: "w-[25%]",
   },
   {
     title: "Rewards",
-    align: "left",
-    width: "w-[80px]",
+    align: "center",
+    width: "w-[10%]",
   },
   {
     title: "Status",
-    align: "left",
-    width: "w-[120px]",
+    align: "center",
+    width: "w-[10%]",
+  },
+  {
+    title: "Ticket",
+    align: "center",
+    width: "w-[5%]",
   },
   {
     title: "Update",
     align: "center",
-    width: "w-[80px]",
+    width: "w-[5%]",
   },
 ];
 

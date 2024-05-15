@@ -1,6 +1,14 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
+import { I_GetCompanyDetailsSuccessResponse } from "@/core/models/mediator/companies";
+import {
+  Avatar,
+  Card,
+  Indicator,
+  Separator,
+  Typography,
+} from "@/core/ui/components";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import Image from "next/image";
@@ -8,143 +16,49 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 
 interface I_CompaniesDetailHeroCard {
-  id: string;
+  data?: I_GetCompanyDetailsSuccessResponse["data"];
 }
 
-const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
+const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
   const { ref, inView } = useInView({ threshold: 0.1 });
-  return (
-    <>
-      <Mobile>
-        <Card
-          className={cn(
-            inView ? "opacity-100" : "opacity-0",
-            "_flexbox__col__start__start w-full gap-4 rounded-none"
-          )}
-        >
-          <div ref={ref} className="_flexbox__col__start__start w-full gap-4">
-            <Image
-              src="/images/company-logo/coinbase.png"
-              alt="Company Logo"
-              width={48}
-              height={48}
-            />
-            <div className="_flexbox__row__start__between w-full">
-              <div className="_flexbox__col__start__start gap-4">
-                <div className="_flexbox__col__start__start gap-4">
-                  <Typography variant="h3" weight="bold">
-                    Coinbase
-                  </Typography>
-                  <Indicator variant="clear">Published</Indicator>
-                </div>
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="!dark:text-neutral-dark-20 text-neutral-light-20"
-                >
-                  Company description{" "}
-                </Typography>
-              </div>
-            </div>
-            <Separator orientation="horizontal" />
-            <div className="grid h-fit gap-2">
-              <div className="grid h-full gap-2">
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="!text-neutral-light-30 dark:text-neutral-dark-30"
-                >
-                  Reports resolved
-                </Typography>
-                <Typography variant="p" affects="small" weight="semibold">
-                  732
-                </Typography>
-              </div>
-              <div className="grid h-full gap-2">
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="!text-neutral-light-30 dark:text-neutral-dark-30"
-                >
-                  Bounty Program
-                </Typography>
-                <Typography variant="p" affects="small" weight="semibold">
-                  1
-                </Typography>
-              </div>
-              <div className="grid h-full gap-2">
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="!text-neutral-light-30 dark:text-neutral-dark-30"
-                >
-                  Company Website
-                </Typography>
-                <Link
-                  href={"https://linktocompanysite.com"}
-                  target="_blank"
-                  className={cn(
-                    typographyVariants({ variant: "p", affects: "small" }),
-                    "text-neutral-light-20 underline dark:text-neutral-dark-20"
-                  )}
-                >
-                  https://linktocompanysite.com
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Card>
-        <Card
-          className={cn(
-            "fixed top-12 rounded-none p-6 transition-opacity duration-100",
-            !inView ? "z-50 opacity-100" : "opacity-0"
-          )}
-        >
-          <div className="_flexbox__row__center__between w-full gap-9">
-            <div className="_flexbox__row__center__start w-full gap-2">
-              <Image
-                src="/images/company-logo/coinbase.png"
-                alt="Company Logo"
-                width={48}
-                height={48}
-              />
-              <Typography variant="h4" affects="small" weight="bold">
-                Coinbase
-              </Typography>
-            </div>
-            <Indicator variant="clear">Published</Indicator>
-          </div>
-        </Card>
-      </Mobile>
-      <Desktop>
-        <Card>
-          <div className="_flexbox__row__start__start w-full gap-9">
-            <Image
-              src="/images/company-logo/coinbase.png"
-              alt="Company Logo"
-              width={48}
-              height={48}
-            />
-            <div className="_flexbox__col__start__start w-full gap-12">
+  if (data)
+    return (
+      <>
+        <Mobile>
+          <Card
+            className={cn(
+              inView ? "opacity-100" : "opacity-0",
+              "_flexbox__col__start__start w-full gap-4 rounded-none"
+            )}
+          >
+            <div ref={ref} className="_flexbox__col__start__start w-full gap-4">
+              <Avatar image={data?.logo} initials="C" className="h-12 w-12" />
               <div className="_flexbox__row__start__between w-full">
-                <div className="_flexbox__col__start__start gap-9">
-                  <div className="_flexbox__col__start__start gap-2">
+                <div className="_flexbox__col__start__start gap-4">
+                  <div className="_flexbox__col__start__start gap-4">
                     <Typography variant="h3" weight="bold">
-                      Coinbase
+                      {data?.name}
                     </Typography>
-                    <Typography
-                      variant="p"
-                      affects="small"
-                      className="!dark:text-neutral-dark-20 text-neutral-light-20"
+                    <Indicator
+                      variant={
+                        data.status.toLowerCase() as keyof typeof indicatorVariants
+                      }
                     >
-                      Company description{" "}
-                    </Typography>
+                      {data.status}
+                    </Indicator>
                   </div>
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="!dark:text-neutral-dark-20 text-neutral-light-20"
+                  >
+                    {data.description}
+                  </Typography>
                 </div>
-                <Indicator variant="clear">Published</Indicator>
               </div>
-              <div className="grid h-fit grid-flow-col gap-12">
-                <div className="grid h-full gap-2.5">
+              <Separator orientation="horizontal" />
+              <div className="grid h-fit gap-2">
+                <div className="grid h-full gap-2">
                   <Typography
                     variant="p"
                     affects="small"
@@ -153,11 +67,10 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Reports resolved
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    732
+                    {data.report_resolved}
                   </Typography>
                 </div>
-                <Separator orientation="vertical" />
-                <div className="grid h-full gap-2.5">
+                <div className="grid h-full gap-2">
                   <Typography
                     variant="p"
                     affects="small"
@@ -166,11 +79,10 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Bounty Program
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
-                    1
+                    {data.program_count}
                   </Typography>
                 </div>
-                <Separator orientation="vertical" />
-                <div className="grid h-full gap-2.5">
+                <div className="grid h-full gap-2">
                   <Typography
                     variant="p"
                     affects="small"
@@ -179,22 +91,126 @@ const CompaniesDetailHeroCard = ({ id }: I_CompaniesDetailHeroCard) => {
                     Company Website
                   </Typography>
                   <Link
-                    href={"https://linktocompanysite.com"}
+                    href={data.website ?? "#"}
                     target="_blank"
                     className={cn(
                       typographyVariants({ variant: "p", affects: "small" }),
                       "text-neutral-light-20 underline dark:text-neutral-dark-20"
                     )}
                   >
-                    https://linktocompanysite.com
+                    {data.website}
                   </Link>
                 </div>
               </div>
             </div>
-          </div>
-        </Card>
-      </Desktop>
-    </>
-  );
+          </Card>
+          <Card
+            className={cn(
+              "fixed top-12 rounded-none p-6 transition-opacity duration-100",
+              !inView ? "z-50 opacity-100" : "opacity-0"
+            )}
+          >
+            <div className="_flexbox__row__center__between w-full gap-9">
+              <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">
+                <Avatar className="h-12 w-12" image={data?.logo} initials="C" />
+                <Typography variant="h4" affects="small" weight="bold">
+                  {data?.name}
+                </Typography>
+              </div>
+              <Indicator
+                variant={
+                  data.status.toLowerCase() as keyof typeof indicatorVariants
+                }
+              >
+                {data.status}
+              </Indicator>
+            </div>
+          </Card>
+        </Mobile>
+        <Desktop>
+          <Card>
+            <div className="grid w-full grid-cols-[auto_1fr] gap-9">
+              <Avatar image={data?.logo} initials="C" className="h-12 w-12" />
+              <div className="_flexbox__col__start__start w-full gap-12">
+                <div className="_flexbox__row__start__between w-full">
+                  <div className="_flexbox__col__start__start gap-9">
+                    <div className="_flexbox__col__start__start gap-2">
+                      <Typography
+                        variant="h3"
+                        weight="bold"
+                        className="leading-none"
+                      >
+                        {data.name}
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        className="!dark:text-neutral-dark-20 text-neutral-light-20"
+                      >
+                        {data.description}
+                      </Typography>
+                    </div>
+                  </div>
+                  <Indicator
+                    variant={
+                      data.status.toLowerCase() as keyof typeof indicatorVariants
+                    }
+                  >
+                    {data.status}
+                  </Indicator>
+                </div>
+                <div className="grid h-fit grid-flow-col gap-12">
+                  <div className="grid h-full gap-2.5">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="!text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      Reports resolved
+                    </Typography>
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {data.report_resolved}
+                    </Typography>
+                  </div>
+                  <Separator orientation="vertical" />
+                  <div className="grid h-full gap-2.5">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="!text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      Bounty Program
+                    </Typography>
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {data.program_count}
+                    </Typography>
+                  </div>
+                  <Separator orientation="vertical" />
+                  <div className="grid h-full gap-2.5">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="!text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      Company Website
+                    </Typography>
+                    <Link
+                      href={data.website ?? "#"}
+                      target="_blank"
+                      className={cn(
+                        typographyVariants({ variant: "p", affects: "small" }),
+                        "text-neutral-light-20 underline dark:text-neutral-dark-20"
+                      )}
+                    >
+                      {data.website}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Desktop>
+      </>
+    );
 };
 export default CompaniesDetailHeroCard;

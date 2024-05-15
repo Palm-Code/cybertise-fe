@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Loader,
   Pagination,
   SearchInput,
 } from "@/core/ui/components";
@@ -17,18 +18,64 @@ import {
   CompaniesGridView,
   CompaniesTableView,
 } from "../../containers";
-import SortByDropdown from "./_dropdown/SortBy.component";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
+import { useCompaniesParamsStore } from "../../zustand/store/companies";
+import { useGetCompanies } from "../../query/client";
+import useLoadMore from "@/core/hooks/useLoadMore";
+import {
+  useClickPaginate,
+  useClickSort,
+  useOnchangeSearch,
+  useSubmitSearch,
+} from "@/core/hooks";
+import CompaniesFilter from "@/core/ui/components/dropdown/companies-filter-dropdown";
+import { VRPCardLoadingList } from "@/core/ui/container";
 
 const Companies = ({ data }: { data: VRPCardType[] }) => {
+  const store = useCompaniesParamsStore();
+  const { payload, setPayload } = store;
+  const {
+    data: companyData,
+    isLoading,
+    isFetching,
+    isRefetching,
+    refetch: refetchCompanyList,
+  } = useGetCompanies(payload);
+  const pageNumbers = companyData?.meta?.last_page || 1;
+  const { ref } = useLoadMore(store, pageNumbers);
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   const viewsContainer = {
-    table: <CompaniesTableView columns={companiesTableColumns} data={data} />,
-    card: <CompaniesCardView data={data} />,
-    grid: <CompaniesGridView data={data} />,
+    table: (
+      <CompaniesTableView
+        columns={companiesTableColumns}
+        isLoading={isLoading || isFetching}
+        data={companyData?.data}
+      />
+    ),
+    card: (
+      <CompaniesCardView
+        data={companyData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
+    grid: <CompaniesGridView data={companyData?.data} />,
+  };
+
+  if (!companyData) return <Loader variant="mediator" />;
+
+  const submitChange = (type: "status", value: string) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]: value === "all" ? undefined : value,
+        },
+      },
+    });
   };
 
   return (
@@ -40,24 +87,39 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
               Companies
             </Typography>
             <SearchInput
+              value={payload?.params?.search}
               variant="mediator"
               placeholder="Try search company name"
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetchCompanyList)
+              }
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetchCompanyList)
+              }
             />
           </div>
           <div className="_flexbox__row__center__between w-full">
-            <DashboardFilter variant="mediator" />
+            <CompaniesFilter variant="mediator" store={store} />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="mediator"
-                value="Sort By"
+                value={payload?.params?.sort as string}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
           </div>
-          {data.length! ? (
+          {companyData.data.length! ? (
             <>
-              <CompaniesGridView data={data} />
+              <CompaniesGridView
+                data={companyData.data}
+                isLoading={isLoading || isFetching}
+              />
+              <div ref={ref} className="w-full">
+                {isFetching && !isRefetching ? (
+                  <VRPCardLoadingList isGridCard />
+                ) : null}
+              </div>
             </>
           ) : (
             <EmptyState
@@ -82,25 +144,65 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
             <SearchInput
               variant="mediator"
               placeholder="Try search company name"
+              value={payload.params?.search}
+              onChange={(e) =>
+                useOnchangeSearch(e.target.value, store, refetchCompanyList)
+              }
+              loadingSubmit={isLoading || isRefetching}
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetchCompanyList)
+              }
             />
-            <ProgramsFilterDropdown />
+            <CompaniesFilter
+              variant="mediator"
+              store={store}
+              onValueChange={(v, t) => submitChange(t, v)}
+            />
           </div>
           <div className="_flexbox__row__center__between w-full">
-            <SortByDropdown />
+            <div className="mr-auto w-fit max-w-xl">
+              <FilterDropdown
+                variant="mediator"
+                value={payload?.params?.sort as string}
+                options={filterItems}
+                onValueChange={(v) => useClickSort(v, store)}
+              />
+            </div>
             <div className="ml-auto w-fit max-w-xl">
               <FilterViewDropdown type="mediator" options={filterView} />
             </div>
           </div>
-          {data.length! ? (
+          {companyData.data?.length! ? (
             <>
               {viewsContainer[view]}
-              <Pagination variant="mediator" />
+              <Pagination
+                variant="mediator"
+                active={payload.params?.page?.size}
+                meta={companyData?.meta}
+                activePage={payload.params?.page?.number}
+                onClickPrevious={() =>
+                  useClickPaginate(payload?.params?.page?.number! - 1, store)
+                }
+                onClickNext={() =>
+                  useClickPaginate(payload?.params?.page?.number! + 1, store)
+                }
+                setActivePage={(v) => useClickPaginate(v, store)}
+                onClickShow={(v) =>
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      page: { ...payload.params?.page!, size: v },
+                    },
+                  })
+                }
+              />
             </>
           ) : (
             <EmptyState
               variant="mediator"
-              type="ticket"
-              buttonText="See VRP Launchpad"
+              type="default"
+              titleText="No Companies Found"
             />
           )}
         </div>

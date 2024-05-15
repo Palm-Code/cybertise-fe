@@ -38,7 +38,7 @@ export async function login(formData: FormLoginSchema) {
           ? "company staff"
           : "hacker",
     token: formData.email.includes("@mediator.com")
-      ? ""
+      ? "7|7S0skbn2qeoPh700MeubhUzhJlg6m9XT2PXNZiyU"
       : formData.email.includes("@company.com")
         ? "5|qhTAoeldvLd4WSiD2qYiU6gXu7ezthZMT6nbGHDk"
         : formData.email.includes("@companystaff.com")

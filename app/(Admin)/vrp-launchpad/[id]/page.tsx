@@ -1,5 +1,4 @@
 import { DetailsVRPFragment } from "@/feature/company/fragments";
-import { CreateVrpFragment } from "@/feature/mediator/fragments";
 import { getSession } from "@/service/server/session";
 
 export default async function VRPLaunchpadDetailPage({
@@ -10,10 +9,5 @@ export default async function VRPLaunchpadDetailPage({
   };
 }) {
   const session = await getSession();
-
-  if (session?.user.role === "company") {
-    return <DetailsVRPFragment id={params.id} />;
-  }
-
-  return <CreateVrpFragment />;
+  return <DetailsVRPFragment id={params.id} variant={session?.user.role} />;
 }

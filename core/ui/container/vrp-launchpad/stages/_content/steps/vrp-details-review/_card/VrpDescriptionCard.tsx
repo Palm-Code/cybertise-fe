@@ -1,6 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
-import { Card, Typography } from "@/core/ui/components";
+import { Badge, Card, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
 const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
@@ -23,9 +23,7 @@ const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
         >
           VRP Type
         </Typography>
-        <Typography variant="p" affects="normal">
-          {data.type}
-        </Typography>
+        <Badge variant="default">{data.type}</Badge>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2.5">
         <Typography

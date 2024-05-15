@@ -18,9 +18,12 @@ import {
   CreateVrpType,
 } from "@/core/models/common/post_create_vrp";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Role } from "@/types/admin/sidebar";
+import { usePostUpdateVrp } from "@/core/react-query/client/usePostUpdateVrp";
+import { toast } from "sonner";
 
 interface I_SetupProps {
-  variant: "mediator" | "company";
+  variant: keyof typeof Role;
   currentStep?: string;
   initialData?: I_GetProgramDetailsSuccessResponse["data"];
 }
@@ -30,9 +33,10 @@ const Setup = ({
   currentStep,
   initialData: initialValues,
 }: I_SetupProps) => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [successSubmit, setSuccessSubmit] = useState<boolean>(false);
   const { data: assetTypeOptions } = useGetAssetType();
+  const { mutateAsync, isPending, isSuccess } = usePostUpdateVrp(
+    initialValues?.id!
+  );
   const options: SortFilterType[] =
     assetTypeOptions
       ?.map((item) => {
@@ -79,6 +83,7 @@ const Setup = ({
         element: (
           <MakeChanges
             options={options}
+            variant={variant}
             onClickNext={() => next()}
             onClickPrev={() => back()}
           />
@@ -96,16 +101,25 @@ const Setup = ({
           <VrpDetailsReview
             currentStep={currentStep}
             assetTypes={options}
+            isLoading={isPending}
             isLastStep
             onClickEdit={() => goTo(1)}
+            onClickNext={() => onSubmitForm()}
+            onClickRevise={() => onSubmitForm("Phase3")}
           />
         ),
         key: "review",
       },
     ]);
 
-  const onSubmitForm = () => {
-    setSuccessSubmit(true);
+  const onSubmitForm = (status?: string) => {
+    if (Object.values(method.formState.errors).length === 0) {
+      const data = method.getValues();
+      status && (data["status"] = status);
+      mutateAsync(data);
+    } else {
+      toast.error("Please fill in all required fields");
+    }
   };
 
   return (

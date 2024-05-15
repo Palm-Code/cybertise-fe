@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Loader,
   Pagination,
   SearchInput,
 } from "@/core/ui/components";
@@ -64,6 +65,8 @@ const Dashboard = () => {
       />
     ),
   };
+
+  if (!dashboardData) return <Loader variant="hacker" />;
 
   const submitChange = (type: string, value: string) => {
     setPayload({

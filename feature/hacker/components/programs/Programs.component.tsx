@@ -3,6 +3,7 @@ import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
+  Loader,
   Pagination,
   SearchInput,
 } from "@/core/ui/components";
@@ -70,6 +71,8 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
       />
     ),
   };
+
+  if (!programList) return <Loader variant="hacker" />;
 
   const submitChange = (type: "type" | "has_asset_type", value: string) => {
     setPayload({

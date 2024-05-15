@@ -1,17 +1,20 @@
 import { currentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
-import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
+import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import { Avatar, Card, Indicator, Typography } from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
-import { MoveLeft, Send } from "lucide-react";
-import Image from "next/image";
+import { Role } from "@/types/admin/sidebar";
+import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
+import { MoveLeft } from "lucide-react";
 import Link from "next/link";
 
 interface I_VRPHeroCard {
-  variant: "company" | "mediator";
+  variant: keyof typeof Role;
   phase: string;
+  initialData?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
-const VRPHeroCard = ({ variant, phase }: I_VRPHeroCard) => {
+const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
   return (
     <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
       <div className="_flexbox__col__start__start gap-3">
@@ -44,13 +47,12 @@ const VRPHeroCard = ({ variant, phase }: I_VRPHeroCard) => {
                       "inline-flex gap-2"
                     )}
                   >
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/images/company-logo/coinbase.png"
-                      alt="logo"
+                    <Avatar
+                      className="h-6 w-6"
+                      image={initialData?.company?.logo}
+                      initials="C"
                     />
-                    Coinbase
+                    {initialData?.company?.name}
                   </div>
                 </div>
                 <div className="_flexbox__row__start__start gap-2">
@@ -67,7 +69,7 @@ const VRPHeroCard = ({ variant, phase }: I_VRPHeroCard) => {
                       "inline-flex gap-2"
                     )}
                   >
-                    2 days ago
+                    {formatDateToAgo2(initialData?.updated_at ?? "")}
                   </div>
                 </div>
               </div>

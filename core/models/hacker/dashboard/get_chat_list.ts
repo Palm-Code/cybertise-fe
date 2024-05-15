@@ -22,11 +22,14 @@ export interface I_GetChatListSuccessResponse {
     title: string;
     description: string;
     risk_level: number;
+    ticket_type: string;
+    related_ticket_id: string | null;
     vulnerability_type_id: string;
     status: string;
     bounty: any;
     program_id: string;
     has_new: number;
+    has_new_mediator: number;
     risk_level_category: string;
     last_message: string;
     vulnerabiity_type: I_VulnerabilityType;

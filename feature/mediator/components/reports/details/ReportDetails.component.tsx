@@ -4,30 +4,93 @@ import {
   Badge,
   Card,
   Indicator,
+  Loader,
   Tiptap,
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { ChatBubble } from "@/feature/mediator/containers";
-import { MoveLeft } from "lucide-react";
+import { ChevronDown, Loader2, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
+import { ChatBubble } from "@/feature/mediator/containers";
+import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatListItem";
+import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
+import {
+  useGetTicketDetails,
+  usePostChatItem,
+} from "@/core/react-query/client";
+import { SendReportRequestType } from "@/core/models/common";
+import { toast } from "sonner";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
+import ModalEditRiskLevel from "../_dialog/ModalEditRiskLevel";
+import StatusDropdown from "../_dropdown/StatusDropdown";
+import { filterItems } from "@/feature/hacker/constants/dashboard";
+import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { useRouter } from "next/navigation";
 
-const ReportDetails = () => {
+const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
+  const store = useReportDetailsParamStore();
+  const { data: ticketDetails, isError: isErrorTicket } =
+    useGetTicketDetails(id);
+  const { data, isError, isRefetching } = useGetChatListItem(store.payload, id);
   const chatRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
+  const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
+    useState<boolean>(false);
+  const [description, setDescription] = useState<string>("");
+  const [attachments, setAttachments] = useState<string[]>([]);
+  const [files, setFiles] = useState<SendReportRequestType["files"]>();
+  const { mutateAsync, isPending } = usePostChatItem();
+  const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
+    usePostUpdateTicket(id);
+
+  const scrollView = () => {
+    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+  };
 
   useEffect(() => {
-    if (chatRef.current) {
-      chatRef.current.scrollIntoView({ behavior: "auto" });
-    }
-  }, []);
+    scrollView();
+  }, [description, data]);
 
+  const sendMessage = async () => {
+    await mutateAsync({
+      chat_ticket_id: id,
+      sender_name: data?.data[0].sender_name,
+      sender_avatar: data?.data[0].sender_avatar,
+      content: description ?? undefined,
+      attachments: attachments.length > 0 ? attachments : undefined,
+    })
+      .then(() => {
+        setAttachments([]);
+        setDescription("");
+        setFiles(undefined);
+        setOpenAttachment(false);
+      })
+      .catch((err) => {
+        toast.error("Failed to send message");
+      });
+  };
+
+  if (isError || isErrorTicket || data?.data.length === 0) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        No Chat Found
+      </div>
+    );
+  }
+
+  if (!data || !ticketDetails)
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader variant="mediator" />
+      </div>
+    );
   return (
     <>
+      <div ref={loadMoreRef}></div>
       <Mobile>
         <div className="_flexbox__col__start__start relative w-full">
           <div
@@ -43,21 +106,34 @@ const ReportDetails = () => {
               )}
             >
               <div className="_flexbox__row__start__start gap-5">
-                <button type="button" onClick={back} title="Back">
-                  <MoveLeft width={24} height={24} />
-                </button>
-                <div className="grid gap-4">
+                <MoveLeft
+                  width={24}
+                  height={24}
+                  onClick={back}
+                  className="cursor-pointer"
+                />
+                <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
-                    Report Title
+                    {ticketDetails.title}
                   </Typography>
-                  <Badge variant={"medium"}>Medium</Badge>
+                  <Badge
+                    variant={
+                      ticketDetails.risk_level_category.toLowerCase() as any
+                    }
+                    className="max-w-fit"
+                  >
+                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                  </Badge>
                 </div>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator variant="warning" />
-                <Typography variant="p" affects="small" weight="medium">
-                  Status
-                </Typography>
+                <Indicator
+                  variant={
+                    ticketDetails.status.toLowerCase() as keyof typeof indicatorVariants
+                  }
+                >
+                  {ticketDetails.status}
+                </Indicator>
               </div>
             </Card>
             <div
@@ -66,17 +142,34 @@ const ReportDetails = () => {
                 "bg-neutral-light-70 dark:bg-neutral-dark-70"
               )}
             >
-              <div className="_flexbox__row__center__between w-full py-4">
+              <div className="_flexbox__row__center__between w-full">
                 <Typography
                   variant="p"
                   affects="small"
                   className="text-violet-light dark:text-violet-light"
                 >
-                  Hacker Ticket
+                  {ticketDetails.ticket_type === "Hacker"
+                    ? "Hacker"
+                    : "Company"}{" "}
+                  Ticket
                 </Typography>
-                <Link href="#" className="underline">
-                  Go to Company Ticket
-                </Link>
+                {ticketDetails.ticket_type === "Hacker" ? (
+                  <Link
+                    href={`/reports/${ticketDetails.related_ticket_id}`}
+                    className="underline"
+                    replace
+                  >
+                    Go to Company Ticket
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/reports/${ticketDetails.related_ticket_id}`}
+                    className="underline"
+                    replace
+                  >
+                    Go to Hacker Ticket
+                  </Link>
+                )}
               </div>
               <Typography variant="p" affects="small">
                 This chat is read only on this device. Please access using
@@ -85,9 +178,8 @@ const ReportDetails = () => {
             </div>
           </div>
           <div className="px-6 py-8">
-            <ChatBubble />
+            <ChatBubble data={data?.data ?? []} />
           </div>
-          <div ref={chatRef}></div>
         </div>
       </Mobile>
       <Desktop>
@@ -105,19 +197,48 @@ const ReportDetails = () => {
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
-                <button type="button" onClick={back} title="Back">
-                  <MoveLeft width={24} height={24} />
-                </button>
+                <MoveLeft
+                  width={24}
+                  height={24}
+                  onClick={back}
+                  className="cursor-pointer"
+                />
                 <Typography variant="h5" weight="bold">
-                  Report Title
+                  {ticketDetails.title}
                 </Typography>
-                <Badge variant={"medium"}>Medium</Badge>
+                <div className="_flexbox__row__center gap-2.5">
+                  <Badge
+                    variant={
+                      ticketDetails.risk_level_category.toLowerCase() as any
+                    }
+                    className="max-w-fit"
+                  >
+                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                  </Badge>
+                  <ChevronDown
+                    className="cursor-pointer"
+                    onClick={() => setOpenModalSetRiskLevel(true)}
+                  />
+                </div>
               </div>
               <div className="_flexbox__row__center gap-3">
-                <Indicator variant="warning" />
-                <Typography variant="p" affects="small" weight="medium">
-                  Status
-                </Typography>
+                {isPendingUpdate && !isRefetching ? (
+                  <Loader
+                    variant="mediator"
+                    className="h-fit"
+                    width={24}
+                    height={40}
+                    noText
+                  />
+                ) : (
+                  <StatusDropdown
+                    value={ticketDetails.status}
+                    options={filterItems.status}
+                    onValueChange={(v) => {
+                      mutateUpdateTicket(`status=${v}`);
+                    }}
+                  />
+                )}
               </div>
             </Card>
             <AnimationWrapper>
@@ -133,28 +254,72 @@ const ReportDetails = () => {
                     affects="small"
                     className="text-violet-light dark:text-violet-light"
                   >
-                    Hacker Ticket
+                    {ticketDetails.ticket_type === "Hacker"
+                      ? "Hacker"
+                      : "Company"}{" "}
+                    Ticket
                   </Typography>
-                  <Link href="#" className="underline">
-                    Go to Company Ticket
-                  </Link>
+                  {ticketDetails.ticket_type === "Hacker" ? (
+                    <Link
+                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      className="underline"
+                      replace
+                    >
+                      Go to Company Ticket
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      className="underline"
+                      replace
+                    >
+                      Go to Hacker Ticket
+                    </Link>
+                  )}
                 </div>
               </div>
             </AnimationWrapper>
           </div>
-          <ChatBubble />
+          <ChatBubble data={data?.data ?? []} />
         </div>
         <Tiptap
-          description=""
-          onChangeValue={() => {}}
+          description={description}
+          onChangeValue={(v) => {
+            setDescription(v);
+          }}
           variant="mediator"
+          isLoading={isPending}
           isChat
           onClickSendAttachment={() => setOpenAttachment(true)}
+          onClickSendMessage={sendMessage}
         />
         <ModalSendAttachment
+          files={files}
+          onChangeFiles={(v) => {
+            setFiles(v);
+          }}
+          description={description}
           isOpen={openAttachment}
-          onClose={() => setOpenAttachment(false)}
-          onClickSendAttachment={() => {}}
+          onClose={() => {
+            setFiles(undefined);
+            setAttachments([]);
+            setOpenAttachment(false);
+          }}
+          onChangeAttachment={(v) => {
+            setAttachments(v);
+          }}
+          attachment={attachments}
+          onChangeValue={(v) => {
+            setDescription(v);
+          }}
+          onClickSendAttachment={sendMessage}
+          isLoading={isPending}
+        />
+        <ModalEditRiskLevel
+          ticketId={id}
+          value={data?.data[0]?.chat_ticket?.risk_level || 0}
+          isOpen={openModalEditRiskLevel}
+          onClose={() => setOpenModalSetRiskLevel(false)}
         />
       </Desktop>
       <div ref={chatRef}></div>
