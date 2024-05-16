@@ -1,4 +1,4 @@
-import { ReportDetails } from "@/feature/company/components";
+import { ReportDetails } from "@/feature/hacker/components";
 
 const ReportDetailsFragment = ({ id }: { id: string }) => {
   return <ReportDetails id={id} />;

@@ -65,7 +65,7 @@ const BugTargetCard = ({
                   : "high"
           }
         >
-          {risk_level.toFixed(2)} | (
+          {risk_level} | (
           {risk_level === 0
             ? "No"
             : risk_level < 4

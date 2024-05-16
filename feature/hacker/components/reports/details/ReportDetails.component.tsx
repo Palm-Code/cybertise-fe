@@ -23,13 +23,17 @@ import {
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
+import { useInView } from "react-intersection-observer";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError } = useGetChatListItem(store.payload, id);
+  const { data, isError, fetchNextPage, isFetchingNextPage } =
+    useGetChatListItem(store.payload, id);
+  const { ref, inView } = useInView({ threshold: 0.5 });
+  const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
@@ -41,34 +45,44 @@ const ReportDetails = ({ id }: { id: string }) => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
   };
 
+  const [firstRender, setIsFirstRender] = useState<boolean>(true);
+
   useEffect(() => {
-    scrollView();
-  }, [description, data]);
+    if (firstRender) {
+      scrollView();
+    }
+
+    return () => {
+      setIsFirstRender(false);
+    };
+  }, [data, firstRender]);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   const sendMessage = async () => {
-    if (description) {
-      setAttachments([]);
-      setDescription("");
-      await mutateAsync({
-        chat_ticket_id: id,
-        sender_name: data?.data[0].sender_name,
-        sender_avatar: data?.data[0].sender_avatar,
-        content: description,
-        attachments: attachments.length > 0 ? attachments : undefined,
+    await mutateAsync({
+      chat_ticket_id: id,
+      sender_name: chatData && chatData[0].sender_name,
+      sender_avatar: chatData && chatData[0].sender_avatar,
+      content: description ?? undefined,
+      attachments: attachments.length > 0 ? attachments : undefined,
+    })
+      .then(() => {
+        setAttachments([]);
+        setDescription("");
+        setFiles(undefined);
+        setOpenAttachment(false);
       })
-        .then(() => {
-          setAttachments([]);
-          setDescription("");
-          setFiles(undefined);
-          setOpenAttachment(false);
-        })
-        .catch((err) => {
-          toast.error("Failed to send message");
-        });
-    }
+      .catch((err) => {
+        toast.error("Failed to send message");
+      });
   };
 
-  if (isError || isErrorTicket || data?.data.length === 0) {
+  if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found
@@ -76,9 +90,10 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data || !ticketDetails) return <Loader variant="hacker" />;
+  if (!data?.pages || !ticketDetails) return <Loader variant="hacker" />;
   return (
     <>
+      <div ref={ref}></div>
       <Mobile>
         <div className="_flexbox__col__start__start relative w-full">
           <div
@@ -103,7 +118,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   }
                   className="max-w-fit"
                 >
-                  {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                  {`${ticketDetails.risk_level} | ${ticketDetails.risk_level_category}`}
                 </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
@@ -126,8 +141,11 @@ const ReportDetails = ({ id }: { id: string }) => {
               to interact.
             </div>
           </div>
+          {isFetchingNextPage && (
+            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          )}
           <div className="px-6 py-8">
-            <ChatBubble data={data?.data ?? []} />
+            <ChatBubble data={chatData ?? []} />
           </div>
         </div>
       </Mobile>
@@ -161,7 +179,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   }
                   className="max-w-fit"
                 >
-                  {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                  {`${ticketDetails.risk_level} | ${ticketDetails.risk_level_category}`}
                 </Badge>
               </div>
               <div className="_flexbox__row__center gap-3">
@@ -182,19 +200,25 @@ const ReportDetails = ({ id }: { id: string }) => {
               ></div>
             </AnimationWrapper>
           </div>
-          <ChatBubble data={data?.data ?? []} />
+          {isFetchingNextPage && (
+            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          )}
+
+          <ChatBubble data={chatData ?? []} />
         </div>
-        <Tiptap
-          description={description}
-          onChangeValue={(v) => {
-            setDescription(v);
-          }}
-          variant="hacker"
-          isLoading={isPending}
-          isChat
-          onClickSendAttachment={() => setOpenAttachment(true)}
-          onClickSendMessage={sendMessage}
-        />
+        {ticketDetails.status !== "Closed" && (
+          <Tiptap
+            description={description}
+            onChangeValue={(v) => {
+              setDescription(v);
+            }}
+            variant="hacker"
+            isLoading={isPending}
+            isChat
+            onClickSendAttachment={() => setOpenAttachment(true)}
+            onClickSendMessage={sendMessage}
+          />
+        )}
         <ModalSendAttachment
           files={files}
           onChangeFiles={(v) => {
