@@ -1,3 +1,5 @@
+import { I_Meta } from "./get_included_data";
+
 interface I_ChatTicket {
   id: string;
   chat_ticket_id?: string;
@@ -83,4 +85,5 @@ export interface I_Data {
 
 export interface I_GetChatListItemSuccessResponse {
   data: I_Data[];
+  meta?: I_Meta;
 }

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const updatePorfileSchema = z.object({
+  username: z.string().min(1, { message: "Username is required" }).optional(),
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Email is required" }),
   website: z.string().min(1, { message: "Website is required" }),
@@ -15,6 +16,12 @@ export const updatePorfileSchema = z.object({
   want_news: z.number(),
   logo: z.string().optional(),
   attachment_id: z.string().optional(),
+  bank_name: z.string().optional(),
+  account_number: z.string().optional(),
+  holder_name: z.string().optional(),
+  vat: z.string().optional(),
+  iban: z.string().optional(),
+  bic: z.string().optional(),
 });
 
 export const updateEmergencyContactSchema = z.object({

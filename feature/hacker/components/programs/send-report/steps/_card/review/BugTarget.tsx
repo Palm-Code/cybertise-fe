@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
-import { Badge, Card, Typography } from "@/core/ui/components";
+import { Badge, badgeVariants, Card, Typography } from "@/core/ui/components";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 interface I_BugTargetProps {
   target_assets: string;
@@ -56,24 +57,10 @@ const BugTargetCard = ({
         </Typography>
         <Badge
           variant={
-            risk_level === 0
-              ? "default"
-              : risk_level < 4
-                ? "low"
-                : risk_level >= 4 && risk_level < 7
-                  ? "medium"
-                  : "high"
+            riskLevelCalculator(risk_level) as keyof typeof badgeVariants
           }
         >
-          {risk_level.toFixed(2)} | (
-          {risk_level === 0
-            ? "No"
-            : risk_level < 4
-              ? "Low"
-              : risk_level >= 4 && risk_level < 7
-                ? "Medium"
-                : "High"}{" "}
-          Risk)
+          {risk_level} | ({riskLevelCalculator(risk_level)} Risk)
         </Badge>
       </div>
     </Card>

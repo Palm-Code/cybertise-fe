@@ -12,6 +12,7 @@ interface I_Staff {
 }
 
 interface I_UserData {
+  username: string;
   id: string;
   name: string;
   website: string;
@@ -31,11 +32,18 @@ interface I_UserData {
   about: string;
   email: string;
   want_news: number;
-  company_logo: string;
+  image: string;
   company_status: string;
   company_reports_resolved: number;
   company_program_count: number;
   staff?: I_Staff[];
+  bank_name: string;
+  account_number: string;
+  holder_name: string;
+  vat: string;
+  iban: string;
+  bic: string;
+  user_id: string;
 }
 
 export interface I_GetUserProfileSuccessResponse {

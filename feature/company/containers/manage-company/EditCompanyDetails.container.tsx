@@ -52,7 +52,7 @@ const EditCompnayDetails = ({
       want_news: data?.want_news,
       website: data?.website,
       zip: data?.zip,
-      logo: data?.company_logo,
+      logo: data?.image,
     },
   });
   const { mutateAsync, isPending } = usePostUpdateProfile();

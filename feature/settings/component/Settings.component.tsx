@@ -39,6 +39,7 @@ const Setting = ({
   const methods = useForm<I_UpdateProfile>({
     resolver: zodResolver(updatePorfileSchema),
     defaultValues: {
+      username: initialData?.username,
       name: initialData?.name,
       about: initialData?.about,
       address: initialData?.address,
@@ -51,7 +52,7 @@ const Setting = ({
       want_news: initialData?.want_news,
       website: initialData?.website,
       zip: initialData?.zip,
-      logo: initialData?.company_logo,
+      logo: initialData?.image,
     },
   });
 
@@ -66,6 +67,7 @@ const Setting = ({
     ),
     [SettingItems.billings]: (
       <Billing
+        data={initialData}
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}

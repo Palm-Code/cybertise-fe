@@ -9,6 +9,7 @@ export const useGetUserProfile = () => {
     queryKey: ["getUserProfile"],
     queryFn: () => fetchGetUserProfile(),
     placeholderData: keepPreviousData,
+    refetchOnMount: true,
   });
 
   return query;

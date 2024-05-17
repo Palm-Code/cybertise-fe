@@ -28,15 +28,19 @@ import StatusDropdown from "../_dropdown/StatusDropdown";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { useRouter } from "next/navigation";
+import { useInView } from "react-intersection-observer";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError, isRefetching } = useGetChatListItem(store.payload, id);
+  const { data, isError, isRefetching, fetchNextPage, isFetchingNextPage } =
+    useGetChatListItem(store.payload, id);
+
+  const { ref, inView } = useInView({ threshold: 0.5 });
+  const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
     useState<boolean>(false);
@@ -58,8 +62,8 @@ const ReportDetails = ({ id }: { id: string }) => {
   const sendMessage = async () => {
     await mutateAsync({
       chat_ticket_id: id,
-      sender_name: data?.data[0].sender_name,
-      sender_avatar: data?.data[0].sender_avatar,
+      sender_name: chatData && chatData[0].sender_name,
+      sender_avatar: chatData && chatData[0].sender_avatar,
       content: description ?? undefined,
       attachments: attachments.length > 0 ? attachments : undefined,
     })
@@ -74,7 +78,7 @@ const ReportDetails = ({ id }: { id: string }) => {
       });
   };
 
-  if (isError || isErrorTicket || data?.data.length === 0) {
+  if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found
@@ -82,7 +86,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data || !ticketDetails)
+  if (!data?.pages || !ticketDetails)
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader variant="mediator" />
@@ -90,7 +94,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   return (
     <>
-      <div ref={loadMoreRef}></div>
+      <div ref={ref}></div>
       <Mobile>
         <div className="_flexbox__col__start__start relative w-full">
           <div
@@ -122,7 +126,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     }
                     className="max-w-fit"
                   >
-                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                    {`${ticketDetails.risk_level} | ${ticketDetails.risk_level_category}`}
                   </Badge>
                 </div>
               </div>
@@ -178,7 +182,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             </div>
           </div>
           <div className="px-6 py-8">
-            <ChatBubble data={data?.data ?? []} />
+            <ChatBubble data={chatData ?? []} />
           </div>
         </div>
       </Mobile>
@@ -213,7 +217,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     }
                     className="max-w-fit"
                   >
-                    {`${ticketDetails.risk_level.toFixed(2)} | ${ticketDetails.risk_level_category}`}
+                    {`${ticketDetails.risk_level} | ${ticketDetails.risk_level_category}`}
                   </Badge>
                   <ChevronDown
                     className="cursor-pointer"
@@ -280,19 +284,21 @@ const ReportDetails = ({ id }: { id: string }) => {
               </div>
             </AnimationWrapper>
           </div>
-          <ChatBubble data={data?.data ?? []} />
+          <ChatBubble data={chatData ?? []} />
         </div>
-        <Tiptap
-          description={description}
-          onChangeValue={(v) => {
-            setDescription(v);
-          }}
-          variant="mediator"
-          isLoading={isPending}
-          isChat
-          onClickSendAttachment={() => setOpenAttachment(true)}
-          onClickSendMessage={sendMessage}
-        />
+        {ticketDetails.status !== "Closed" && (
+          <Tiptap
+            description={description}
+            onChangeValue={(v) => {
+              setDescription(v);
+            }}
+            variant="mediator"
+            isLoading={isPending}
+            isChat
+            onClickSendAttachment={() => setOpenAttachment(true)}
+            onClickSendMessage={sendMessage}
+          />
+        )}
         <ModalSendAttachment
           files={files}
           onChangeFiles={(v) => {
@@ -317,7 +323,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         />
         <ModalEditRiskLevel
           ticketId={id}
-          value={data?.data[0]?.chat_ticket?.risk_level || 0}
+          value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}
           onClose={() => setOpenModalSetRiskLevel(false)}
         />

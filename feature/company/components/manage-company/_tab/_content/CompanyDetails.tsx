@@ -56,7 +56,7 @@ const CompanyDetails = ({
                 </Typography>
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
-                    src={data?.company_logo as string}
+                    src={data?.image as string}
                     alt={data?.name as string}
                     fill
                     className="object-cover"
@@ -239,7 +239,7 @@ const CompanyDetails = ({
                 </Typography>
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
-                    src={data?.company_logo as string}
+                    src={data?.image as string}
                     alt={data?.name as string}
                     fill
                     className="object-cover"

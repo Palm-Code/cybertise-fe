@@ -6,18 +6,44 @@ import CardEditBilling from "../component/_tabs/_contents/billings/CardEditBilli
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { useFormContext } from "react-hook-form";
+import { I_UpdateProfile } from "@/core/models/company/settings";
+import { useState } from "react";
+import { ModalForbidden } from "@/core/ui/container";
+import { toast } from "sonner";
+import { usePostUpdateProfile } from "@/core/react-query/client";
 
 interface I_BillingProps {
   variant: keyof typeof Role;
   isEditing?: boolean;
   handleClickEdit?: (v: boolean) => void;
+  data?: I_GetUserProfileSuccessResponse["data"];
 }
 
 const Billing = ({
   variant,
   isEditing = false,
+  data,
   handleClickEdit = () => {},
 }: I_BillingProps) => {
+  const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile(true);
+  const [openModalForbidden, setOpenModalForbidden] = useState<boolean>(false);
+  const {
+    getValues,
+    formState: { errors },
+  } = useFormContext<I_UpdateProfile>();
+
+  const handleSubmitForm = () => {
+    if (Object.values(errors).length === 0) {
+      mutateAsync(getValues()).then(() => {
+        handleClickEdit(false);
+      });
+    } else {
+      toast.error("Please fill in all required fields");
+    }
+  };
+
   if (isEditing)
     return (
       <>
@@ -47,12 +73,17 @@ const Billing = ({
                 >
                   Discard
                 </Button>
-                <Button variant={`primary-${variant}`} onClick={() => {}}>
+                <Button
+                  isLoading={isPending}
+                  disabled={isPending}
+                  variant={`primary-${variant}`}
+                  onClick={() => handleSubmitForm()}
+                >
                   Save Changes
                 </Button>
               </div>
             </Card>
-            <CardEditBilling variant={variant} />
+            <CardEditBilling data={data} variant={variant} />
           </div>
         </Desktop>
       </>
@@ -70,11 +101,17 @@ const Billing = ({
               variant={`tertiary-${variant}`}
               className="p-0"
               prefixIcon={<FilePenLine />}
-              onClick={() => handleClickEdit(true)}
+              onClick={() => setOpenModalForbidden(true)}
             />
           )}
         </div>
-        <CardBilling />
+        <CardBilling data={data} />
+        <ModalForbidden
+          isOpen={openModalForbidden}
+          onClose={() => setOpenModalForbidden(false)}
+          title="Edit Setting"
+          subtitle="You are not allowed to edit this setting on mobile"
+        />
       </Mobile>
       <Desktop className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
@@ -91,7 +128,7 @@ const Billing = ({
             </Button>
           )}
         </div>
-        <CardBilling />
+        <CardBilling data={data} />
       </Desktop>
     </>
   );

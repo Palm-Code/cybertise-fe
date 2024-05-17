@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
+import { I_Data, I_GetChatListItemSuccessResponse } from "@/core/models/common";
 import { Button, Card, Loader } from "@/core/ui/components";
 import Typography, {
   typographyVariants,
@@ -30,10 +30,12 @@ const NewCompanyReport = () => {
   } = useGetChatListItem(store.payload, id as string);
 
   const { mutate, isPending, isSuccess } = usePostCreateCompanyTicket();
+  const initialData =
+    chatData && chatData.pages.flatMap((item) => item.data.map((item) => item));
 
-  const initialChatTicket = chatData?.data.find(
+  const initialChatTicket = initialData?.find(
     (item) => item.sender === "Summary"
-  ) as I_GetChatListItemSuccessResponse["data"][0];
+  ) as I_Data;
 
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
@@ -45,7 +47,7 @@ const NewCompanyReport = () => {
 
   if (isLoading || isFetching) return <Loader variant="mediator" />;
 
-  if (isError || chatData?.data.length === 0)
+  if (isError || chatData?.pages.length === 0)
     return (
       <EmptyState
         variant="mediator"
@@ -100,7 +102,7 @@ const NewCompanyReport = () => {
                 )}
               >
                 <Typography variant="h5" weight="bold">
-                  {chatData?.data[0].chat_ticket?.title}
+                  {chatData?.pages[0].data[0].chat_ticket?.title}
                 </Typography>
                 <div className="w-full">
                   <Card
@@ -176,7 +178,7 @@ const NewCompanyReport = () => {
                         className="w-full overflow-hidden"
                       >
                         <Card className="_flexbox__col__start__start max-h-96 overflow-auto rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
-                          <ChatBubble data={chatData?.data ?? []} />
+                          <ChatBubble data={initialData ?? []} />
                         </Card>
                       </motion.div>
                     )}

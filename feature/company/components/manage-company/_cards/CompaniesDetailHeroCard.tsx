@@ -25,7 +25,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
               <div className="_flexbox__col__start__start gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
-                    src={data?.company_logo as string}
+                    src={data?.image as string}
                     alt={data?.name as string}
                     fill
                     className="object-cover"
@@ -116,7 +116,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
             <div className="_flexbox__row__center__start gap-2">
               <div className="relative h-6 w-6 overflow-hidden rounded-full">
                 <Image
-                  src={data?.company_logo as string}
+                  src={data?.image as string}
                   alt={data?.name as string}
                   fill
                   className="object-cover"
@@ -143,7 +143,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
           <div className="grid w-full grid-cols-[auto_1fr] gap-9">
             <div className="relative h-12 w-12 overflow-hidden rounded-full">
               <Image
-                src={data?.company_logo as string}
+                src={data?.image as string}
                 alt={data?.name as string}
                 fill
                 className="object-cover"

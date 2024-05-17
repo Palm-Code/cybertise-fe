@@ -91,7 +91,7 @@ const TicketCard = ({
                     <Badge
                       variant={props.risk_level_category.toLowerCase() as any}
                     >
-                      {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                      {`${props.risk_level} | ${props.risk_level_category}`}
                     </Badge>
                   </div>
                   <div className="_flexbox__col__start gap-2">
@@ -220,7 +220,7 @@ const TicketCard = ({
                   <Badge
                     variant={props.risk_level_category.toLowerCase() as any}
                   >
-                    {`${props.risk_level && props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                    {`${props.risk_level && props.risk_level} | ${props.risk_level_category}`}
                   </Badge>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">

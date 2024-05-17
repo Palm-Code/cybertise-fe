@@ -1,4 +1,5 @@
 import { cn } from "@/core/lib/utils";
+import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Card, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { Banknote } from "lucide-react";
@@ -12,7 +13,11 @@ const menus: string[] = [
   "BIC",
 ];
 
-const CardBilling = () => {
+interface I_CardBillingProps {
+  data?: I_GetUserProfileSuccessResponse["data"];
+}
+
+const CardBilling = ({ data }: I_CardBillingProps) => {
   return (
     <>
       <Mobile>
@@ -35,7 +40,7 @@ const CardBilling = () => {
             </Typography>
 
             <Typography variant="p" affects="normal" className="col-span-1">
-              Deutsche Bank
+              {data?.bank_name || "-"}
             </Typography>
             <Typography
               variant="p"
@@ -45,7 +50,7 @@ const CardBilling = () => {
               {menus[1]}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              123456789
+              {data?.account_number || "-"}
             </Typography>
             <Typography
               variant="p"
@@ -55,7 +60,7 @@ const CardBilling = () => {
               {menus[2]}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              Kevin
+              {data?.holder_name || "-"}
             </Typography>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6">
@@ -67,7 +72,7 @@ const CardBilling = () => {
               {menus[3]}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              21456789
+              {data?.vat || "-"}
             </Typography>
             <Typography
               variant="p"
@@ -77,7 +82,7 @@ const CardBilling = () => {
               {menus[4]}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              123456789
+              {data?.iban || "-"}
             </Typography>
             <Typography
               variant="p"
@@ -87,7 +92,7 @@ const CardBilling = () => {
               {menus[5]}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              DEUTDEFXXXXXX
+              {data?.bic || "-"}
             </Typography>
           </div>
         </Card>
@@ -115,13 +120,13 @@ const CardBilling = () => {
               </Typography>
             ))}
             <Typography variant="p" affects="normal" className="col-span-1">
-              Deutsche Bank
+              {data?.bank_name || "-"}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              123456789
+              {data?.account_number || "-"}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              Kevin
+              {data?.holder_name || "-"}
             </Typography>
           </div>
           <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
@@ -136,13 +141,13 @@ const CardBilling = () => {
               </Typography>
             ))}
             <Typography variant="p" affects="normal" className="col-span-1">
-              21456789
+              {data?.vat || "-"}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              123456789
+              {data?.iban || "-"}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              DEUTDEFXXXXXX
+              {data?.bic || "-"}
             </Typography>
           </div>
         </Card>

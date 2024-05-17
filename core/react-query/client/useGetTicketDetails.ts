@@ -12,6 +12,9 @@ export const useGetTicketDetails = (id: string) => {
     queryKey: ["getTicketDetails", id],
     queryFn: () => fetchGetTicketDetails(id),
     placeholderData: keepPreviousData,
+    refetchInterval: 10000,
+    staleTime: 6 * 60 * 1000,
+    refetchIntervalInBackground: true,
   });
 
   return query;
