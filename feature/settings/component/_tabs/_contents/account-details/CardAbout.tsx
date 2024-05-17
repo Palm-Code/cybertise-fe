@@ -116,7 +116,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 )}
               </div>
               <AvatarInput
-                variant="company"
+                variant={variant}
                 onChange={(e) => handleChangeAvatar(e)}
               />
             </div>
@@ -224,26 +224,28 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             />
           ) : null}
 
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {`${variant == "company" ? "Company" : "Your Account"}`}
-            </Typography>
-            <TextArea
-              label={`About ${variant}`}
-              value={forms.about}
-              onChange={(e) =>
-                setValue("about", e.target.value, { shouldValidate: true })
-              }
-              onClearInput={() => {
-                setValue("about", "", { shouldValidate: true });
-              }}
-              isError={!!errors.about}
-            />
-          </div>
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {`${variant == "company" ? "Company" : "Your Account"}`}
+              </Typography>
+              <TextArea
+                label={`About ${variant}`}
+                value={forms.about}
+                onChange={(e) =>
+                  setValue("about", e.target.value, { shouldValidate: true })
+                }
+                onClearInput={() => {
+                  setValue("about", "", { shouldValidate: true });
+                }}
+                isError={!!errors.about}
+              />
+            </div>
+          )}
         </Card>
       </>
     );
@@ -299,18 +301,20 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               </>
             )}
           </div>
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {variant == "company" ? "Company" : "Your Account"}
-            </Typography>
-            <Typography variant="p" affects="normal">
-              {data?.about}
-            </Typography>
-          </div>
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {variant == "company" ? "Company" : "Your Account"}
+              </Typography>
+              <Typography variant="p" affects="normal">
+                {data?.about}
+              </Typography>
+            </div>
+          )}
         </Card>
       </Mobile>
       <Desktop>
@@ -421,18 +425,20 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               </>
             )}
           </div>
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {variant == "company" ? "Company" : "Your Account"}
-            </Typography>
-            <Typography variant="p" affects="normal">
-              {data?.about}
-            </Typography>
-          </div>
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {variant == "company" ? "Company" : "Your Account"}
+              </Typography>
+              <Typography variant="p" affects="normal">
+                {data?.about}
+              </Typography>
+            </div>
+          )}
         </Card>
       </Desktop>
     </>

@@ -36,8 +36,6 @@ const Setting = ({
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
   const [editing, setEditing] = useState<boolean>(false);
 
-  console.log({ initialData });
-
   const methods = useForm<I_UpdateProfile>({
     resolver: zodResolver(updatePorfileSchema),
     defaultValues: {
