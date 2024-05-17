@@ -116,17 +116,21 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 )}
               </div>
               <AvatarInput
-                variant="company"
+                variant={variant}
                 onChange={(e) => handleChangeAvatar(e)}
               />
             </div>
             <Input
               type="text"
               label={`${variant} Name`}
-              value={forms.name}
+              value={variant === "hacker" ? forms.username : forms.name}
               containerClassName="capitalize"
               onChange={(e) => {
-                setValue("name", e.target.value, { shouldValidate: true });
+                setValue(
+                  variant === "hacker" ? "username" : "name",
+                  e.target.value,
+                  { shouldValidate: true }
+                );
               }}
               isError={!!errors.name}
             />
@@ -207,37 +211,41 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : variant !== "mediator" ? (
             <SelectDropdown
               label="Country"
-              value={forms.country_code}
+              value={forms.country_code as string}
+              options={countryOptions?.data || []}
               withIcon
               withSearch
-              options={countryOptions?.data || []}
-              onValueChange={(v) => {}}
-            />
-          )}
-
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {`${variant == "company" ? "Company" : "Your Account"}`}
-            </Typography>
-            <TextArea
-              label={`About ${variant}`}
-              value={forms.about}
-              onChange={(e) =>
-                setValue("about", e.target.value, { shouldValidate: true })
-              }
-              onClearInput={() => {
-                setValue("about", "", { shouldValidate: true });
+              onValueChange={(e) => {
+                setValue("country_code", e, { shouldValidate: true });
               }}
-              isError={!!errors.about}
             />
-          </div>
+          ) : null}
+
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {`${variant == "company" ? "Company" : "Your Account"}`}
+              </Typography>
+              <TextArea
+                label={`About ${variant}`}
+                value={forms.about}
+                onChange={(e) =>
+                  setValue("about", e.target.value, { shouldValidate: true })
+                }
+                onClearInput={() => {
+                  setValue("about", "", { shouldValidate: true });
+                }}
+                isError={!!errors.about}
+              />
+            </div>
+          )}
         </Card>
       </>
     );
@@ -267,11 +275,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             >
               {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
             </Typography>
-            <Avatar
-              image={data?.company_logo}
-              initials=""
-              className="h-12 w-12"
-            />
+            <Avatar image={data?.image} initials="" className="h-12 w-12" />
             <Typography
               variant="p"
               affects="normal"
@@ -280,31 +284,37 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               {`${variant} Name`}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
-              {data?.name}
+              {variant === "hacker" ? data?.username : data?.name}
             </Typography>
-            <Typography
-              variant="p"
-              affects="normal"
-              className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              Country
-            </Typography>
-            <div className="_flexbox__row__center__start gap-2.5">
-              <Country icon={countryFlag.icon} label={countryFlag?.label} />
+            {variant !== "mediator" && (
+              <>
+                <Typography
+                  variant="p"
+                  affects="normal"
+                  className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+                >
+                  Country
+                </Typography>
+                <div className="_flexbox__row__center__start gap-2.5">
+                  <Country icon={countryFlag.icon} label={countryFlag?.label} />
+                </div>
+              </>
+            )}
+          </div>
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {variant == "company" ? "Company" : "Your Account"}
+              </Typography>
+              <Typography variant="p" affects="normal">
+                {data?.about}
+              </Typography>
             </div>
-          </div>
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {variant == "company" ? "Company" : "Your Account"}
-            </Typography>
-            <Typography variant="p" affects="normal">
-              {data?.about}
-            </Typography>
-          </div>
+          )}
         </Card>
       </Mobile>
       <Desktop>
@@ -331,11 +341,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               >
                 {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
               </Typography>
-              <Avatar
-                image={data?.company_logo}
-                initials="J"
-                className="h-12 w-12"
-              />
+              <Avatar image={data?.image} initials="C" className="h-12 w-12" />
             </div>
             <div className="_flexbox__col__start__start gap-2.5">
               <Typography
@@ -346,21 +352,26 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 {`${variant} Name`}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">
-                {data?.name}
+                {variant === "hacker" ? data?.username : data?.name}
               </Typography>
             </div>
-            <div className="_flexbox__col__start__start gap-2.5">
-              <Typography
-                variant="p"
-                affects="normal"
-                className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
-              >
-                Country
-              </Typography>
-              <div className="_flexbox__row__center__start gap-2.5">
-                <Country icon={countryFlag?.icon} label={countryFlag?.label} />
+            {variant !== "mediator" && (
+              <div className="_flexbox__col__start__start gap-2.5">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                  className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
+                >
+                  Country
+                </Typography>
+                <div className="_flexbox__row__center__start gap-2.5">
+                  <Country
+                    icon={countryFlag?.icon}
+                    label={countryFlag?.label}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             {variant === "company" && (
               <>
                 <div className="_flexbox__col__start__start gap-2.5">
@@ -414,18 +425,20 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               </>
             )}
           </div>
-          <div className="_flexbox__col__start__start w-full gap-2.5">
-            <Typography
-              variant="p"
-              affects="normal"
-              className="text-neutral-light-40 dark:text-neutral-dark-40"
-            >
-              About {variant == "company" ? "Company" : "Your Account"}
-            </Typography>
-            <Typography variant="p" affects="normal">
-              {data?.about}
-            </Typography>
-          </div>
+          {variant !== "mediator" && (
+            <div className="_flexbox__col__start__start w-full gap-2.5">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-neutral-light-40 dark:text-neutral-dark-40"
+              >
+                About {variant == "company" ? "Company" : "Your Account"}
+              </Typography>
+              <Typography variant="p" affects="normal">
+                {data?.about}
+              </Typography>
+            </div>
+          )}
         </Card>
       </Desktop>
     </>

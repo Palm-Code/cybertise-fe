@@ -108,7 +108,7 @@ const TicketCard = ({
                       (props.risk_level_category.toLowerCase() as any)
                     }
                   >
-                    {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                    {`${props.risk_level} | ${props.risk_level_category}`}
                   </Badge>
                 </div>
               </div>
@@ -243,7 +243,7 @@ const TicketCard = ({
                       (props.risk_level_category.toLowerCase() as any)
                     }
                   >
-                    {`${props.risk_level.toFixed(2)} | ${props.risk_level_category}`}
+                    {`${props.risk_level} | ${props.risk_level_category}`}
                   </Badge>
                 </div>
               </div>

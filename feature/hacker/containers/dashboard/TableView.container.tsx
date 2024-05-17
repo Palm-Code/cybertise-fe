@@ -109,7 +109,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           }
                           className="min-w-19"
                         >
-                          {`${item.risk_level && item.risk_level.toFixed(2)} | ${item.risk_level_category}`}
+                          {`${item.risk_level && item.risk_level} | ${item.risk_level_category}`}
                         </Badge>
                       </TableData>
                       <TableData

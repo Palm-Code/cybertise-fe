@@ -79,7 +79,7 @@ const Dashboard = () => {
     });
   };
 
-  if (!dashboardData?.data.length) {
+  if (!dashboardData) {
     return <Loader variant="company" />;
   }
 

@@ -104,7 +104,7 @@ const Details = ({
             onClick={() => {
               setModalForbidden(true);
             }}
-          ></Button>
+          />
         </div>
         <CardAbout data={data} variant={variant} />
         <CardAccountDetails data={data} variant={variant} />

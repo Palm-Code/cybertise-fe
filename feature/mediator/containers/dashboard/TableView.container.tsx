@@ -118,7 +118,7 @@ export default function Table({
                           }
                           className="min-w-19"
                         >
-                          {`${item.risk_level && item.risk_level.toFixed(2)} | ${item.risk_level_category}`}
+                          {`${item.risk_level && item.risk_level} | ${item.risk_level_category}`}
                         </Badge>
                       </TableData>
                       <TableData

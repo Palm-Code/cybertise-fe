@@ -1,39 +1,41 @@
 "use client";
-import {
-  I_GetChatListItemSuccessResponse,
-  I_GetParamsPayload,
-} from "@/core/models/common";
-import { I_GetErrorResponse } from "@/core/models/hacker/programs";
+import { I_GetParamsPayload } from "@/core/models/common";
 import { fetchGetChatListItem } from "@/core/services/common";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const useGetChatListItem = (
   payload?: I_GetParamsPayload,
   id?: string
 ) => {
-  const query = useQuery<I_GetChatListItemSuccessResponse, I_GetErrorResponse>({
+  const query = useInfiniteQuery({
     queryKey: [
       "getChatListItem",
+      id,
       payload?.params?.page,
       payload?.params?.filter,
-      payload?.params?.sort,
     ],
-    refetchIntervalInBackground: true,
-    refetchInterval: 10000,
-    staleTime: 1000,
-    gcTime: 1000,
-    queryFn: () =>
+    queryFn: (pageParam) =>
       fetchGetChatListItem({
-        ...payload,
         params: {
           ...payload?.params,
+          page: {
+            size: 30,
+            number: pageParam.pageParam,
+          },
           filter: {
             ...payload?.params?.filter,
             chat_ticket_id: id,
           },
         },
       }),
-    placeholderData: keepPreviousData,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.meta?.current_page !== lastPage.meta?.last_page
+        ? (lastPage?.meta?.current_page ?? 0) + 1
+        : undefined,
+    refetchOnMount: true,
+    refetchInterval: 10000,
+    staleTime: 6 * 1000 * 60,
   });
 
   return query;

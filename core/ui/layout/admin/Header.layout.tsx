@@ -4,8 +4,10 @@ import Avatar from "../../components/avatar/avatar";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
 import { Desktop, Mobile } from "..";
 import { Logo } from "../../icons";
+import { useGetUserData, useGetUserProfile } from "@/core/react-query/client";
 
 const Header = () => {
+  const { data } = useGetUserData();
   return (
     <>
       <Mobile>

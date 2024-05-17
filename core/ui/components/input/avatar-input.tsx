@@ -1,10 +1,11 @@
+import { Role } from "@/types/admin/sidebar";
 import { buttonVariants } from "../button/base-button";
 import Typography from "../typography/typography";
 
 interface I_AvatarInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
 }
 
 const AvatarInput = ({
