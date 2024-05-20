@@ -8,5 +8,6 @@ export const useGetMutationState = () => {
     select: (mutation) =>
       mutation.state.variables as I_PostChatListItemsPayload,
   });
+
   return mutations;
 };

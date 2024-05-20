@@ -17,5 +17,9 @@ export const useGetTargetAsset = (payload?: I_GetParamsPayload) => {
     refetchOnMount: false,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

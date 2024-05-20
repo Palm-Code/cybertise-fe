@@ -14,5 +14,9 @@ export const useGetStaffDetail = (id?: string) => {
     placeholderData: keepPreviousData,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

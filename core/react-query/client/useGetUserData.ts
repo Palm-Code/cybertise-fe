@@ -15,5 +15,9 @@ export const useGetUserData = () => {
     refetchOnMount: false,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

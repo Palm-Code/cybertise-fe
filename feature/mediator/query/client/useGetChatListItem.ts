@@ -37,5 +37,9 @@ export const useGetChatListItem = (
     refetchInterval: 10000,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

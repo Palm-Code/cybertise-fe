@@ -16,5 +16,9 @@ export const usePostSendReports = () => {
     },
   });
 
+  if (mutation.error) {
+    throw new Error(JSON.stringify(mutation.error));
+  }
+
   return mutation;
 };

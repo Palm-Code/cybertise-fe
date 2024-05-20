@@ -370,3 +370,9 @@ body {
     }
   }
 }
+
+.stroke-text {
+  color: transparent;
+  -webkit-text-fill-color: #000; /* Will override color (regardless of order) */
+  -webkit-text-stroke: 3px #fff;
+}

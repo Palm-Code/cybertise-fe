@@ -9,15 +9,20 @@ import { initialState } from "@/core/zustands/asset-type/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAssetType = (payload?: I_GetParamsPayload) => {
-  const { data } = useQuery<I_GetAssetTypeSuccessResponse, I_GetErrorResponse>({
+  const query = useQuery<I_GetAssetTypeSuccessResponse, I_GetErrorResponse>({
     queryKey: ["getAssetType", payload?.params?.page, payload?.params?.filter],
     queryFn: () => fetchGetAssetType(),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
+  const data = query.data?.data || [];
   const filteredAssetTypes = data
-    ? data.data.map((item) => {
+    ? data.map((item) => {
         return {
           id: item.id,
           value: item.label,
