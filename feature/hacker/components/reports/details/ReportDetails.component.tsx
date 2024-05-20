@@ -64,7 +64,6 @@ const ReportDetails = ({ id }: { id: string }) => {
   }, [inView]);
 
   const sendMessage = async () => {
-    scrollView();
     await mutateAsync({
       chat_ticket_id: id,
       sender_name: chatData && chatData[0].sender_name,

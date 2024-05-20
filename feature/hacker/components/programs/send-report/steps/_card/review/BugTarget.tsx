@@ -31,11 +31,9 @@ const BugTargetCard = ({
         >
           Target Assets
         </Typography>
-        <Badge
-          variant={target_assets.toLowerCase() as keyof typeof badgeVariants}
-        >
+        <Typography variant="p" affects="normal">
           {target_assets}
-        </Badge>
+        </Typography>
       </div>
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography
