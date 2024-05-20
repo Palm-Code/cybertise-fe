@@ -5,6 +5,7 @@ import {
 } from "@/core/models/common";
 import { fetchPostChatItem } from "@/core/services/common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const usePostChatItem = () => {
   const queryClient = useQueryClient();
@@ -20,6 +21,11 @@ export const usePostChatItem = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["getChatListItem"],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message, {
+        position: "bottom-right",
       });
     },
   });

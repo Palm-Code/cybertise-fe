@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Header } from "@/core/ui/layout";
+import { Desktop, Header, Mobile, Sidebar } from "@/core/ui/layout";
 
 export default async function SettingsLayout({
   children,
@@ -7,20 +7,47 @@ export default async function SettingsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className="_flexbox__col__start__start h-full w-full"
-      suppressHydrationWarning
-    >
-      <Header />
-      <div
-        className={cn(
-          "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-          "pt-0 xl:pl-14 xl:pr-12",
-          "p-0"
-        )}
-      >
-        {children}
-      </div>
-    </div>
+    <>
+      <Mobile>
+        <div className="h-dvh w-full overflow-hidden">
+          <Sidebar type={"company"} />
+          <div
+            className="_flexbox__col__start__start h-full w-full"
+            suppressHydrationWarning
+          >
+            <Header />
+            <div
+              className={cn(
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "pt-0 xl:pl-14 xl:pr-12",
+                "p-0"
+              )}
+            >
+              {children}
+            </div>
+          </div>
+        </div>
+      </Mobile>
+      <Desktop>
+        <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+          <Sidebar type={"company"} />
+          <div
+            className="_flexbox__col__start__start h-full w-full"
+            suppressHydrationWarning
+          >
+            <Header />
+            <div
+              className={cn(
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "pt-0 xl:pl-14 xl:pr-12",
+                "p-0"
+              )}
+            >
+              {children}
+            </div>
+          </div>
+        </div>
+      </Desktop>
+    </>
   );
 }

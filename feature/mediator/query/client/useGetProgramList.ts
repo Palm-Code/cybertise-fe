@@ -19,5 +19,9 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
     placeholderData: keepPreviousData,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

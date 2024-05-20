@@ -33,7 +33,7 @@ const VrpManagement = () => {
           ) : (
             <VRPCardList data={programList?.data} />
           )}
-          {role === Role.company && (
+          {role?.toLowerCase() === Role.company && (
             <Button
               variant="secondary-company"
               fullWidth
@@ -56,7 +56,7 @@ const VrpManagement = () => {
           ) : (
             <VRPCardList data={programList?.data} />
           )}
-          {role === Role.company && (
+          {role?.toLowerCase() === Role.company && (
             <Link
               href={"/vrp-launchpad/create-vrp"}
               className="w-full rounded-md border border-white px-4 py-6 text-center"
