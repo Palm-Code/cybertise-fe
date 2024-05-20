@@ -1,12 +1,10 @@
 import { cn } from "@/core/lib/utils";
+import { Desktop, Header, Mobile, Sidebar } from "@/core/ui/layout";
 import { getSession } from "@/service/server/session";
 import { Role } from "@/types/admin/sidebar";
 import { UserType } from "@/types/auth/sign-up";
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
 export default async function Dashboardlayout({
-  children,
   hacker,
   company,
   mediator,
@@ -27,31 +25,46 @@ export default async function Dashboardlayout({
 
   return (
     <>
-      <div
-        className="_flexbox__col__start__start h-full w-full"
-        suppressHydrationWarning
-      >
-        {children}
-        <Suspense
-          fallback={
-            <Loader2
-              width={64}
-              height={64}
-              className="m-auto animate-spin stroke-2 text-lime-normal-light dark:text-lime-normal-dark"
-            />
-          }
-        >
+      <Mobile>
+        <div className="h-dvh w-full overflow-hidden">
+          <Sidebar type={session?.user.role} />
           <div
-            className={cn(
-              "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-              "xl:p-12 xl:pb-28 xl:pl-14 xl:pr-12",
-              "px-6 py-8"
-            )}
+            className="_flexbox__col__start__start h-full w-full"
+            suppressHydrationWarning
           >
-            {child[session.user.role]}
+            <Header />
+            <div
+              className={cn(
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "xl:p-12 xl:pb-28 xl:pl-14 xl:pr-12",
+                "px-6 py-8"
+              )}
+            >
+              {child[session.user.role]}
+            </div>
           </div>
-        </Suspense>
-      </div>
+        </div>
+      </Mobile>
+      <Desktop>
+        <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+          <Sidebar type={session?.user.role} />
+          <div
+            className="_flexbox__col__start__start h-full w-full"
+            suppressHydrationWarning
+          >
+            <Header />
+            <div
+              className={cn(
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "xl:p-12 xl:pb-28 xl:pl-14 xl:pr-12",
+                "px-6 py-8"
+              )}
+            >
+              {child[session.user.role]}
+            </div>
+          </div>
+        </div>
+      </Desktop>
     </>
   );
 }

@@ -23,5 +23,9 @@ export const useGetCompaniesDetail = (
     placeholderData: keepPreviousData,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

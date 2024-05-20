@@ -1,11 +1,8 @@
-import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
-import { Header } from "@/core/ui/layout";
+import { Desktop, Header, Mobile, Sidebar } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
-import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
 export default async function Dashboardlayout({
   hacker,
@@ -22,31 +19,40 @@ export default async function Dashboardlayout({
 
   return (
     <>
-      <div className="_flexbox__col__start__start h-full w-full">
-        <Header />
-        <Suspense
-          fallback={
-            <Loader2
-              width={64}
-              height={64}
+      <Mobile>
+        <div className="h-dvh w-full overflow-hidden">
+          <Sidebar type={session?.user.role} />
+          <div className="_flexbox__col__start__start h-full w-full">
+            <Header />
+            <div
               className={cn(
-                "m-auto animate-spin stroke-2",
-                iconColor[session.user.role]
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
+                "p-0"
               )}
-            />
-          }
-        >
-          <div
-            className={cn(
-              "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-              "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
-              "p-0"
-            )}
-          >
-            {child[session?.user.role]}
+            >
+              {child[session?.user.role]}
+            </div>
           </div>
-        </Suspense>
-      </div>
+        </div>
+      </Mobile>
+      <Desktop>
+        <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
+          <Sidebar type={session?.user.role} />
+          <div className="_flexbox__col__start__start h-full w-full">
+            <Header />
+            <div
+              className={cn(
+                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+                "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
+                "p-0"
+              )}
+            >
+              {child[session?.user.role]}
+            </div>
+          </div>
+        </div>
+      </Desktop>
     </>
   );
 }

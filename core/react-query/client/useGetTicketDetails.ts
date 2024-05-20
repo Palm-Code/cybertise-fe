@@ -17,5 +17,9 @@ export const useGetTicketDetails = (id: string) => {
     refetchIntervalInBackground: true,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

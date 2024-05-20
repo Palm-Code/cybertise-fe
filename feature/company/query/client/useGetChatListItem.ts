@@ -38,5 +38,9 @@ export const useGetChatListItem = (
     staleTime: 6 * 1000 * 60,
   });
 
+  if (query.error) {
+    throw new Error(JSON.stringify(query.error));
+  }
+
   return query;
 };

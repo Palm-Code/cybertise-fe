@@ -2,6 +2,7 @@
 import { I_GetErrorRes, I_PostTempFilesResponse } from "@/core/models/common";
 import { fetchPostTempFiles } from "@/core/services/common/postTempFile";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const usePostTempFiles = () => {
   const mutation = useMutation<I_PostTempFilesResponse, I_GetErrorRes, File>({
@@ -13,6 +14,18 @@ export const usePostTempFiles = () => {
       return fetchPostTempFiles(formData);
     },
   });
+
+  if (mutation.isError) {
+    toast.error(mutation.error.message, {
+      position: "bottom-right",
+      action: {
+        label: "retry",
+        onClick: () => {
+          mutation.mutate(mutation.variables);
+        },
+      },
+    });
+  }
 
   return mutation;
 };

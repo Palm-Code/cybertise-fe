@@ -35,5 +35,25 @@ export const usePostCreateCompanyTicket = () => {
     },
   });
 
+  if (mutation.error) {
+    mutation.reset();
+    toast.error(mutation.error.message, {
+      position: "bottom-right",
+      action: {
+        label: "retry",
+        onClick: () => {
+          mutation.mutateAsync(mutation.variables as string);
+        },
+      },
+      cancel: {
+        label: "Close",
+        onClick: () => {
+          toast.dismiss();
+        },
+      },
+      duration: 3000,
+    });
+  }
+
   return mutation;
 };

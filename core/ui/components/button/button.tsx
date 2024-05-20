@@ -1,6 +1,7 @@
 import { Loader2 } from "lucide-react";
 import { BaseButton, BaseButtonProps } from "./base-button";
 import Link from "next/link";
+import { cn } from "@/core/lib/utils";
 
 export interface ButtonProps extends BaseButtonProps {
   prefixIcon?: React.ReactNode;
@@ -27,7 +28,10 @@ const Button = ({
       <Link
         href={href as string}
         target={target}
-        className={`${props.fullWidth && "w-full"} mt-1`}
+        className={cn(
+          `${props.fullWidth && "w-full"} mt-1 rounded-full`,
+          props.className
+        )}
       >
         <BaseButton {...props}>
           {isLoading ? (
