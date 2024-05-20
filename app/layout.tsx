@@ -39,7 +39,7 @@ export default async function RootLayout({
         )}
       >
         <NextTopLoader
-          color={colors[session?.user.role as Role]}
+          color={colors[session?.user.role as Role] ?? "#BAFF00"}
           showSpinner={false}
         />
         <ReactQueryProvider>
