@@ -29,7 +29,9 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     isLoading,
     isFetching,
   } = useGetCompaniesDetail(store.payload, id);
-  const { data: programList } = useGetProgramList({
+  const {
+    queryDesktop: { data: programList },
+  } = useGetProgramList({
     params: {
       filter: {
         company_id: id,

@@ -33,6 +33,7 @@ const ProgramsFilterDropdown = ({
         >
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
+              variant={variant}
               label="Type"
               value={tempPayload?.params?.filter?.["type"] || "all"}
               options={filterItems.type}
@@ -51,6 +52,7 @@ const ProgramsFilterDropdown = ({
             />
             <Separator />
             <BaseDropdown
+              variant={variant}
               label="Asset Type"
               value={
                 (assetTypeOptions?.find(

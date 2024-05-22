@@ -28,8 +28,9 @@ import {
   useSubmitSearch,
 } from "@/core/hooks";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 interface I_ProgramsProps {
   assetTypes: I_GetAssetTypeSuccessResponse["data"];
@@ -39,14 +40,24 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
   const store = useProgramListParamStore();
   const { payload, setPayload } = store;
   const {
-    data: programList,
-    isLoading,
-    isFetching,
-    isRefetching,
-    refetch: refetchProgramList,
+    queryDesktop: {
+      data: programList,
+      isLoading,
+      isFetching,
+      refetch: refetchProgramList,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
   } = useGetProgramList(payload);
-  const pageNumbers = programList?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+  const mobileProgramListData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -71,6 +82,12 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
       />
     ),
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (!programList) return <Loader variant="hacker" />;
 
@@ -111,10 +128,10 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
                 variant="hacker"
                 placeholder="Search for programs"
                 onChange={(e) =>
-                  useOnchangeSearch(e.target.value, store, refetchProgramList)
+                  useOnchangeSearch(e.target.value, store, mobileRefetch)
                 }
                 onSubmitSearch={() =>
-                  useSubmitSearch(payload.params?.search, refetchProgramList)
+                  useSubmitSearch(payload.params?.search, mobileRefetch)
                 }
               />
             </div>
@@ -125,24 +142,25 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
                 assetTypeOptions={assetTypes}
                 onValueChange={(v, t) => submitChange(t, v)}
               />
-              {/* <div className="inline-flex min-w-32 gap-4">
+              <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="hacker"
                   value={payload.params?.sort}
                   options={filterItems}
                   onValueChange={(v) => useClickSort(v, store)}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
-          {programList && programList.data.length! ? (
+          {!data && <ChatListCardLoadingList isGridCard />}
+          {mobileProgramListData && mobileProgramListData.length! ? (
             <>
               <ProgramsGridView
-                isLoading={isLoading || isFetching}
-                data={programList?.data}
+                isLoading={mobileIsLoading || mobileIsFetching}
+                data={mobileProgramListData}
               />
-              <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
+              <div ref={ref} className="w-full space-y-6">
+                {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>

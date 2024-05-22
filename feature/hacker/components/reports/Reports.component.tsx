@@ -27,21 +27,32 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const Reports = () => {
   const store = useReportListStore();
   const { payload, setPayload } = store;
   const {
-    data: reportsData,
-    isLoading,
-    isFetching,
-    refetch,
-    isRefetching,
+    queryDesktop: {
+      data: reportsData,
+      isLoading,
+      isFetching,
+      refetch,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
   } = useGetChatList(payload);
-  const pageNumbers = reportsData?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+  const mobileReportsData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -66,6 +77,12 @@ const Reports = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (!reportsData) return <Loader variant="hacker" />;
 
@@ -101,10 +118,10 @@ const Reports = () => {
                 variant="hacker"
                 placeholder="Search for programs"
                 onChange={(e) =>
-                  useOnchangeSearch(e.target.value, store, refetch)
+                  useOnchangeSearch(e.target.value, store, mobileRefetch)
                 }
                 onSubmitSearch={() =>
-                  useSubmitSearch(payload.params?.search, refetch)
+                  useSubmitSearch(payload.params?.search, mobileRefetch)
                 }
               />
             </div>
@@ -120,11 +137,15 @@ const Reports = () => {
               </div>
             </div>
           </div>
-          {reportsData?.data.length! ? (
+          {!data && <ChatListCardLoadingList isGridCard />}
+          {mobileReportsData?.length! ? (
             <>
-              <ReportsGridView data={reportsData?.data} />
-              <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
+              <ReportsGridView
+                data={mobileReportsData}
+                isLoading={mobileIsLoading || mobileIsFetching}
+              />
+              <div ref={ref} className="w-full space-y-6">
+                {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>

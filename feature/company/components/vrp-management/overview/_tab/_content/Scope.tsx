@@ -16,6 +16,7 @@ import {
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import ScopeCardList from "../../_card/ScopeCardList";
 import { scopeTableColumns } from "@/feature/company/constants/vrp-management";
+import ScopeCardLoadingList from "@/core/ui/container/loading-state/ScopeCardLoadingList";
 
 const Scope = ({
   id,
@@ -47,6 +48,7 @@ const Scope = ({
     <AnimationWrapper>
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-4 px-0">
+          {!targetAssets && <ScopeCardLoadingList />}
           <ScopeCardList data={targetAssets?.data} />
         </div>
       </Mobile>
@@ -89,6 +91,13 @@ const Scope = ({
               }
             />
           </div>
+          {!targetAssets && (
+            <ScopeTable
+              data={[]}
+              columns={scopeTableColumns}
+              isLoading={true}
+            />
+          )}
           {targetAssets?.data.length! ? (
             <>
               <ScopeTable

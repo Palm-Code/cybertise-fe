@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { Loader2, MoveLeft } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/hacker/containers";

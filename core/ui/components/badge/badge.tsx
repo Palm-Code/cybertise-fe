@@ -16,6 +16,7 @@ const badgeVariants = cva(
           "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:
           "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
+        no: "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         domain:
           "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         hacker:
