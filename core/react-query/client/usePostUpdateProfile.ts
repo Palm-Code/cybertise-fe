@@ -19,6 +19,14 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
     mutationFn: (payload) => {
       return fetchPostUpdateProfile(payload);
     },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["getUserProfile"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getUserData"],
+      });
+    },
   });
 
   if (mutations.error) {
@@ -44,9 +52,6 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
   if (mutations.isSuccess) {
     if (revalidate) {
       mutations.reset();
-      queryClient.invalidateQueries({
-        queryKey: ["getUserProfile"],
-      });
     }
     toast.success("Update profile successfully", {
       position: "bottom-right",
@@ -54,25 +59,16 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
         label: "Close",
         onClick: () => {
           if (revalidate) return mutations.reset();
-          queryClient.invalidateQueries({
-            queryKey: ["getUserProfile"],
-          });
           router.back();
         },
       },
       duration: 3000,
       onDismiss: () => {
         if (revalidate) return mutations.reset();
-        queryClient.invalidateQueries({
-          queryKey: ["getUserProfile"],
-        });
         router.back();
       },
       onAutoClose: () => {
         if (revalidate) return mutations.reset();
-        queryClient.invalidateQueries({
-          queryKey: ["getUserProfile"],
-        });
         router.back();
       },
     });

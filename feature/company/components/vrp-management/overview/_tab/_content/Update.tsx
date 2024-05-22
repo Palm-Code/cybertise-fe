@@ -1,11 +1,12 @@
 import { Card, Typography } from "@/core/ui/components";
-import { AnimationWrapper } from "@/core/ui/layout";
+import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 import ModalAddUpdates from "../../_modals/ModalAddUpdates";
 import { useState } from "react";
+import { ModalForbidden } from "@/core/ui/container";
 
 interface I_Update extends UpdateType {}
 
@@ -48,39 +49,79 @@ const UpdateList = ({ data, id }: I_UpdateList) => {
   if (!data.length)
     return (
       <>
-        <EmptyState
-          type="update"
-          variant="company"
-          buttonText="Add New Update"
-          onClickButton={() => setOpenModal(true)}
-        />
-        <ModalAddUpdates
-          id={id}
-          isOpen={openModal}
-          onClose={() => setOpenModal(false)}
-        />
+        <Mobile>
+          <EmptyState
+            type="update"
+            variant="company"
+            buttonText="Add New Update"
+            onClickButton={() => setOpenModal(true)}
+          />
+          <ModalForbidden
+            variant="company"
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+            title="Update on Mobile"
+            subtitle="Update only available on Desktop"
+          />
+        </Mobile>
+        <Desktop>
+          <EmptyState
+            type="update"
+            variant="company"
+            buttonText="Add New Update"
+            onClickButton={() => setOpenModal(true)}
+          />
+          <ModalAddUpdates
+            id={id}
+            isOpen={openModal}
+            onClose={() => setOpenModal(false)}
+          />
+        </Desktop>
       </>
     );
 
   return (
     <>
-      <div className="_flexbox__col__start__start mt-4 w-full gap-8">
-        <button
-          type="button"
-          onClick={() => setOpenModal(true)}
-          className="w-full rounded-md border border-white px-4 py-6 text-center"
-        >
-          + Add New Update
-        </button>
-        {data.map((item, idx) => (
-          <Update key={`update-${idx}`} {...item} />
-        ))}
-      </div>
-      <ModalAddUpdates
-        id={id}
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-      />
+      <Mobile>
+        <div className="_flexbox__col__start__start mt-4 w-full gap-8">
+          <button
+            type="button"
+            onClick={() => setOpenModal(true)}
+            className="w-full rounded-md border border-white px-4 py-6 text-center"
+          >
+            + Add New Update
+          </button>
+          {data.map((item, idx) => (
+            <Update key={`update-${idx}`} {...item} />
+          ))}
+        </div>
+        <ModalForbidden
+          variant="company"
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+          title="Update on Mobile"
+          subtitle="Update only available on Desktop"
+        />
+      </Mobile>
+      <Desktop>
+        <div className="_flexbox__col__start__start mt-4 w-full gap-8">
+          <button
+            type="button"
+            onClick={() => setOpenModal(true)}
+            className="w-full rounded-md border border-white px-4 py-6 text-center"
+          >
+            + Add New Update
+          </button>
+          {data.map((item, idx) => (
+            <Update key={`update-${idx}`} {...item} />
+          ))}
+        </div>
+        <ModalAddUpdates
+          id={id}
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      </Desktop>
     </>
   );
 };

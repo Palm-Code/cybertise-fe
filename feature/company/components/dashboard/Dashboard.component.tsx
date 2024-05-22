@@ -26,21 +26,32 @@ import {
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const {
-    data: dashboardData,
-    isLoading,
-    isFetching,
-    refetch,
-    isRefetching,
+    queryDesktop: {
+      data: dashboardData,
+      isLoading,
+      isFetching,
+      refetch,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
   } = useGetChatList(payload);
-  const pageNumbers = dashboardData?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+  const mobileDashboardData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -65,6 +76,12 @@ const Dashboard = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   const submitChange = (type: string, value: string) => {
     setPayload({
@@ -96,10 +113,10 @@ const Dashboard = () => {
               variant="company"
               placeholder="Try “#21231” or “Company name”"
               onChange={(e) =>
-                useOnchangeSearch(e.target.value, store, refetch)
+                useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
               onSubmitSearch={() =>
-                useSubmitSearch(payload.params?.search, refetch)
+                useSubmitSearch(payload.params?.search, mobileRefetch)
               }
             />
           </div>
@@ -114,14 +131,20 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          {dashboardData?.data.length! ? (
+          {!!payload?.params?.search && (
+            <Typography variant="p" affects="small">
+              Show result for "{payload?.params?.search}"
+            </Typography>
+          )}
+          {!data && <ChatListCardLoadingList isGridCard />}
+          {mobileDashboardData?.length! ? (
             <>
               <DashboardGridView
-                data={dashboardData?.data}
-                isLoading={isLoading || isFetching}
+                data={mobileDashboardData}
+                isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
+              <div ref={ref} className="w-full space-y-6">
+                {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>

@@ -13,58 +13,70 @@ import {
   DashboardGridView,
   DashboardTableView,
 } from "@/feature/mediator/containers";
-import SortByDropdown from "../../../_dropdown/SortBy.component";
 import { tableColumns } from "@/feature/mediator/constants/dashboard";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { useGetChatList } from "@/feature/mediator/query/client";
 import { useChatListParamStore } from "@/feature/mediator/zustand/store/dashboard";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import { useClickPaginate, useClickSort } from "@/core/hooks";
-import { DashboardTicketCardList } from "@/core/ui/container";
+import { useInView } from "react-intersection-observer";
+import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
+import { useEffect } from "react";
 
 const ActiveTicket = ({ id }: { id: string }) => {
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
-  const { data, isLoading, isFetching, isError, isRefetching } = useGetChatList(
-    {
-      params: {
-        ...payload.params,
-        filter: {
-          ...payload.params?.filter,
-          company_id: id,
-          ticket_type: "company",
-        },
+  const {
+    queryDesktop: { data: ticketData, isLoading, isFetching },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
+  } = useGetChatList({
+    params: {
+      ...payload.params,
+      filter: {
+        ...payload.params?.filter,
+        company_id: id,
+        ticket_type: "company",
       },
-    }
-  );
-  const pageNumbers = data?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+    },
+  });
+  const mobileTicketData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
   if (!data) return <Loader variant="mediator" className="h-[50vh]" />;
-  if (isError) return <EmptyState variant="mediator" type="ticket" />;
   const viewsContainer = {
     table: (
       <DashboardTableView
         columns={tableColumns}
-        data={data?.data}
+        data={ticketData?.data}
         isLoading={isLoading || isFetching}
       />
     ),
     card: (
       <DashboardCardView
-        data={data?.data}
+        data={ticketData?.data}
         isLoading={isLoading || isFetching}
       />
     ),
     grid: (
       <DashboardGridView
-        data={data?.data}
+        data={ticketData?.data}
         isLoading={isLoading || isFetching}
       />
     ),
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   return (
     <>
@@ -78,15 +90,16 @@ const ActiveTicket = ({ id }: { id: string }) => {
               onValueChange={(v) => useClickSort(v, store)}
             />
           </div>
-          {data?.data.length! ? (
+          {!data && <ChatListCardLoadingList isGridCard />}
+          {mobileTicketData?.length! ? (
             <>
               <DashboardGridView
-                data={data.data}
-                isLoading={isLoading || isFetching}
+                data={mobileTicketData}
+                isLoading={mobileIsLoading || mobileIsFetching}
               />
               <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
-                  <DashboardTicketCardList isGridCard />
+                {isFetchingNextPage ? (
+                  <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>
             </>
@@ -114,13 +127,13 @@ const ActiveTicket = ({ id }: { id: string }) => {
               <FilterViewDropdown type="mediator" options={filterView} />
             </div>
           </div>
-          {data?.data.length! ? (
+          {ticketData?.data.length! ? (
             <>
               {viewsContainer[view]}
               <Pagination
                 variant="mediator"
                 active={payload.params?.page?.size}
-                meta={data?.meta}
+                meta={ticketData?.meta}
                 activePage={payload.params?.page?.number}
                 onClickPrevious={() =>
                   useClickPaginate(payload?.params?.page?.number! - 1, store)

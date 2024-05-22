@@ -59,8 +59,8 @@ const SelectDropdown = ({
           iconValue={withIcon ? iconValue : undefined}
           readOnly
           disabled
-          className="disabled:cursor-pointer"
           value={inputValueLabel}
+          isSelect
           {...props}
         />
       </SelectTrigger>

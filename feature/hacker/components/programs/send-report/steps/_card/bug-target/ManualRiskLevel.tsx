@@ -56,7 +56,8 @@ const ManualRiskLevel = ({
               ).toLowerCase() as keyof typeof badgeVariants
             }
           >
-            {forms.risk_level} | {riskLevelCalculator(forms.risk_level)} Risk
+            {forms.risk_level.toFixed(2)} |{" "}
+            {riskLevelCalculator(forms.risk_level)} Risk
           </Badge>
         )}
       </div>
@@ -92,7 +93,7 @@ const ManualRiskLevel = ({
                 setValue("risk_level", v[0], { shouldValidate: true })
               }
               max={10}
-              step={1}
+              step={0.1}
               className="col-span-11 w-full"
             />
           </div>
