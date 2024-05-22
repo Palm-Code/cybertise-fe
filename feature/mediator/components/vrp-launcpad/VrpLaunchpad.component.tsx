@@ -14,33 +14,43 @@ import { useReadLocalStorage } from "usehooks-ts";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { VRPCardView, VRPGridView, VRPTableView } from "../../containers";
 import { tableColumns } from "../../constants/vrp-launchpad";
-import SortBy from "./_dropdown/SortBy.component";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
 import { useProgramListParamStore } from "../../zustand/store/programs";
 import { useGetProgramList } from "../../query/client";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import {
   useClickPaginate,
+  useClickSort,
   useOnchangeSearch,
   useSubmitSearch,
 } from "@/core/hooks";
 import { useGetAssetType } from "@/core/react-query/client";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const VRPLaunchpad = () => {
   const store = useProgramListParamStore();
   const { data: assetType } = useGetAssetType();
   const { payload, setPayload } = store;
   const {
-    data: programsData,
-    isLoading,
-    isFetching,
-    refetch,
-    isRefetching,
+    queryDesktop: {
+      data: programsData,
+      isLoading,
+      isFetching,
+      refetch: refetchProgramData,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
   } = useGetProgramList(payload);
-  const pageNumbers = programsData?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+  const mobileProgramData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
 
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
@@ -66,6 +76,12 @@ const VRPLaunchpad = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (!programsData) return <Loader variant="mediator" />;
 
@@ -95,10 +111,10 @@ const VRPLaunchpad = () => {
               variant="mediator"
               placeholder="Try “#21231” or “Company name”"
               onChange={(e) =>
-                useOnchangeSearch(e.target.value, store, refetch)
+                useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
               onSubmitSearch={() =>
-                useSubmitSearch(payload.params?.search, refetch)
+                useSubmitSearch(payload.params?.search, mobileRefetch)
               }
             />
           </div>
@@ -139,24 +155,30 @@ const VRPLaunchpad = () => {
             </Button>
           </div>
           <div className="_flexbox__row__center__between w-full">
-            <DashboardFilter variant="mediator" />
+            <ProgramsFilterDropdown
+              variant="mediator"
+              store={store}
+              assetTypeOptions={assetType}
+              onValueChange={(v, t) => submitChange(t, v)}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="mediator"
-                value="oldest"
+                value={payload.params?.sort}
                 options={filterItems}
-                onValueChange={() => {}}
+                onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
           </div>
-          {programsData?.data.length! ? (
+          {!data && <ChatListCardLoadingList isGridCard />}
+          {mobileProgramData?.length! ? (
             <>
               <VRPGridView
-                data={programsData.data}
-                isLoading={isLoading || isFetching}
+                data={mobileProgramData}
+                isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
+              <div ref={ref} className="w-full space-y-6">
+                {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>
@@ -223,11 +245,11 @@ const VRPLaunchpad = () => {
               placeholder="Try “#21231” or “Company name”"
               value={payload?.params?.search}
               onChange={(e) =>
-                useOnchangeSearch(e.target.value, store, refetch)
+                useOnchangeSearch(e.target.value, store, refetchProgramData)
               }
               loadingSubmit={isLoading && isRefetching}
               onSubmitSearch={() =>
-                useSubmitSearch(payload.params?.search, refetch)
+                useSubmitSearch(payload.params?.search, refetchProgramData)
               }
             />
             <ProgramsFilterDropdown
@@ -237,7 +259,14 @@ const VRPLaunchpad = () => {
             />
           </div>
           <div className="_flexbox__row__center__between w-full">
-            <SortBy />
+            <div className="inline-flex gap-4">
+              <FilterDropdown
+                variant="mediator"
+                value={payload?.params?.sort as string}
+                options={filterItems}
+                onValueChange={(v) => useClickSort(v, store)}
+              />
+            </div>
             <div className="ml-auto w-fit max-w-xl">
               <FilterViewDropdown type="mediator" options={filterView} />
             </div>

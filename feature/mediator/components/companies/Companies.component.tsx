@@ -10,8 +10,6 @@ import {
 import Typography from "@/core/ui/components/typography/typography";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
-import { VRPCardType } from "@/types/admin/vrp-launchpad";
 import { companiesTableColumns } from "../../constants/vrp-launchpad";
 import {
   CompaniesCardView,
@@ -21,7 +19,6 @@ import {
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { useCompaniesParamsStore } from "../../zustand/store/companies";
 import { useGetCompanies } from "../../query/client";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import {
   useClickPaginate,
   useClickSort,
@@ -30,19 +27,31 @@ import {
 } from "@/core/hooks";
 import CompaniesFilter from "@/core/ui/components/dropdown/companies-filter-dropdown";
 import { VRPCardLoadingList } from "@/core/ui/container";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
-const Companies = ({ data }: { data: VRPCardType[] }) => {
+const Companies = () => {
   const store = useCompaniesParamsStore();
   const { payload, setPayload } = store;
   const {
-    data: companyData,
-    isLoading,
-    isFetching,
-    isRefetching,
-    refetch: refetchCompanyList,
+    queryDesktop: {
+      data: companyData,
+      isLoading,
+      isFetching,
+      refetch: refetchCompanyList,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
   } = useGetCompanies(payload);
-  const pageNumbers = companyData?.meta?.last_page || 1;
-  const { ref } = useLoadMore(store, pageNumbers);
+  const mobileCompanyData = data?.pages.map((page) => page.data).flat();
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
@@ -62,6 +71,12 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
     ),
     grid: <CompaniesGridView data={companyData?.data} />,
   };
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (!companyData) return <Loader variant="mediator" />;
 
@@ -91,10 +106,10 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
               variant="mediator"
               placeholder="Try search company name"
               onChange={(e) =>
-                useOnchangeSearch(e.target.value, store, refetchCompanyList)
+                useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
               onSubmitSearch={() =>
-                useSubmitSearch(payload.params?.search, refetchCompanyList)
+                useSubmitSearch(payload.params?.search, mobileRefetch)
               }
             />
           </div>
@@ -109,16 +124,15 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
               />
             </div>
           </div>
-          {companyData.data.length! ? (
+          {!data && <VRPCardLoadingList isGridCard />}
+          {mobileCompanyData?.length! ? (
             <>
               <CompaniesGridView
-                data={companyData.data}
-                isLoading={isLoading || isFetching}
+                data={mobileCompanyData}
+                isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full">
-                {isFetching && !isRefetching ? (
-                  <VRPCardLoadingList isGridCard />
-                ) : null}
+              <div ref={ref} className="w-full space-y-6">
+                {isFetchingNextPage ? <VRPCardLoadingList isGridCard /> : null}
               </div>
             </>
           ) : (
@@ -149,6 +163,7 @@ const Companies = ({ data }: { data: VRPCardType[] }) => {
                 useOnchangeSearch(e.target.value, store, refetchCompanyList)
               }
               loadingSubmit={isLoading || isRefetching}
+              disabledButton={isFetching || isRefetching}
               onSubmitSearch={() =>
                 useSubmitSearch(payload.params?.search, refetchCompanyList)
               }

@@ -11,7 +11,7 @@ import { Role } from "@/types/admin/sidebar";
 interface ICompaniesFilterProps {
   variant?: keyof typeof Role;
   onValueChange?: (value: string, type: "status") => void;
-  store?: StoreType;
+  store: StoreType;
 }
 
 const CompaniesFilter = ({
@@ -19,7 +19,6 @@ const CompaniesFilter = ({
   onValueChange = () => {},
   store,
 }: ICompaniesFilterProps) => {
-  if (!store) return null;
   const { payload, setPayload } = store;
   const [tempPayload, setTempPayload] = useState<I_GetParamsPayload>(payload);
 
@@ -34,7 +33,7 @@ const CompaniesFilter = ({
             <BaseDropdown
               variant={variant}
               label="Type"
-              value={tempPayload?.params?.filter?.["status"] || "all"}
+              value={tempPayload?.params?.filter?.status || "all"}
               options={filterItems.company_status ?? []}
               onValueChange={(v) => {
                 setTempPayload({
@@ -43,7 +42,7 @@ const CompaniesFilter = ({
                     ...tempPayload.params,
                     filter: {
                       ...tempPayload.params?.filter,
-                      ["status"]: v === "all" ? undefined : v,
+                      status: v === "all" ? undefined : v,
                     },
                   },
                 });
@@ -56,7 +55,7 @@ const CompaniesFilter = ({
         <BaseDropdown
           variant={variant}
           label="Type"
-          value={tempPayload?.params?.filter?.["status"] || "all"}
+          value={payload?.params?.filter?.status || "all"}
           options={filterItems.company_status ?? []}
           onValueChange={(v) => onValueChange(v, "status")}
         />

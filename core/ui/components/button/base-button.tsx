@@ -34,7 +34,7 @@ const buttonVariants = cva(
         "tertiary-mediator":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal focus:text-violet-normal active:text-violet-dark",
         default:
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-brand-neutral focus:text-brand-neutral active:text-brand-neutral",
+          "border-none bg-white text-brand-neutral dark:text-brand-neutral hover:text-brand-neutral focus:text-brand-neutral active:text-brand-neutral",
         "outline-hacker":
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-lime-normal-light dark:hover:bg-lime-normal-dark hover:text-neutral-light-0",
         "outline-company":

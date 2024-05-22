@@ -139,7 +139,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             shouldValidate: true,
           });
         }}
-        className="!h-auto bg-neutral-light-90 px-4 py-4 pr-6 dark:bg-neutral-dark-90"
+        className="!h-auto cursor-pointer bg-neutral-light-90 px-4 py-4 pr-6 dark:bg-neutral-dark-90"
         isError={!!errors.vulnerabiity_type_id}
       />
       <CsvssCalculator

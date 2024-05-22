@@ -327,7 +327,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
           <Typography
             variant="h6"
             weight="bold"
-            className="inline-flex items-center gap-4"
+            className="inline-flex items-center"
           >
             {icons(variant as Role)}
             {variant === "company" ? "Company Information" : "About You"}

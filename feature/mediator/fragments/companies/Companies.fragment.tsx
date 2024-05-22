@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { vrpCardsData } from "../../constants/vrp-launchpad";
 
 const Companies = dynamic(
   () => import("@/feature/mediator/components/companies/Companies.component"),
@@ -9,6 +8,6 @@ const Companies = dynamic(
 );
 
 const CompaniesFragment = () => {
-  return <Companies data={vrpCardsData} />;
+  return <Companies />;
 };
 export default CompaniesFragment;

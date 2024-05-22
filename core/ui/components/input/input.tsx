@@ -26,6 +26,7 @@ export interface InputProps
   isPrice?: boolean;
   onChangeNumberValue?: OnValueChange;
   containerClassName?: string;
+  isSelect?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -49,6 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isPrice = false,
       onChangeNumberValue,
       containerClassName,
+      isSelect = false,
       ...props
     },
     ref
@@ -134,7 +136,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     "focus:outline-none focus:ring-0 dark:text-white",
                     prefixIcon && "pl-4",
                     iconValue ? "top-0 pl-5" : "-top-1.5 pl-0",
-                    !label && "bottom-1 h-16"
+                    !label && "bottom-1 h-16",
+                    isSelect && "cursor-pointer"
                     // props.type === "password" && hasValue
                     //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
                     //   : "text-base font-normal"

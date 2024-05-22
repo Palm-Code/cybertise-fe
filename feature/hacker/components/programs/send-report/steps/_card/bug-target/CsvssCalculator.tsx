@@ -15,6 +15,7 @@ import { csvss_calculator } from "@/feature/hacker/constants/programs";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { CVSS30 } from "@pandatix/js-cvss";
+import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
@@ -83,26 +84,9 @@ const CsvssCalculator = ({
             </Typography>
           </div>
           {!isManualRisk && (
-            <Badge
-              variant={
-                forms.risk_level === 0
-                  ? "default"
-                  : forms.risk_level < 4
-                    ? "low"
-                    : forms.risk_level >= 4 && forms.risk_level < 7
-                      ? "medium"
-                      : "high"
-              }
-            >
-              {forms.risk_level} (
-              {forms.risk_level === 0
-                ? "No"
-                : forms.risk_level < 4
-                  ? "Low"
-                  : forms.risk_level >= 4 && forms.risk_level < 7
-                    ? "Medium"
-                    : "High"}{" "}
-              Risk)
+            <Badge variant={riskLevelCalculator(forms.risk_level)}>
+              {forms.risk_level.toFixed(2)} (
+              {riskLevelCalculator(forms.risk_level)} Risk)
             </Badge>
           )}
         </div>
