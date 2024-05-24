@@ -198,7 +198,6 @@ const VRPDetails = ({
     );
 
   const onSubmitForm = (status?: string) => {
-    console.log("clicked");
     if (Object.values(method.formState.errors).length === 0) {
       const data = method.getValues();
       status && (data["status"] = status);

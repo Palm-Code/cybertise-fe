@@ -3,8 +3,8 @@ import Button from "@/core/ui/components/button/button";
 import { Input } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { FormSchema } from "../SignUpCompany.component";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
+import { SignupCompanyFormType } from "@/core/models/auth/register";
 
 interface I_CompanyStepOneProps {
   onClickNext: () => void;
@@ -12,12 +12,11 @@ interface I_CompanyStepOneProps {
 
 const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
   const {
-    register,
     formState: { errors },
     setValue,
     getValues,
     resetField,
-  } = useFormContext<FormSchema>();
+  } = useFormContext<SignupCompanyFormType>();
   const forms = getValues();
 
   const onClickValidate = () => {
@@ -25,8 +24,8 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
   };
 
   const validateIsFormFilled = isObjectEmpty({
-    corporate_name: forms.corporate_name,
-    corporate_website: forms.corporate_website,
+    name: forms.name,
+    website: forms.website,
   });
 
   return (
@@ -41,26 +40,26 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
           <Input
             type="text"
             label="Corporate Name"
-            onClearInput={() => resetField("corporate_name")}
-            value={forms.corporate_name}
+            onClearInput={() => resetField("name")}
+            value={forms.name}
             onChange={(e) =>
-              setValue("corporate_name", e.target.value, {
+              setValue("name", e.target.value, {
                 shouldValidate: true,
               })
             }
-            isError={!!errors.corporate_name}
+            isError={!!errors.name}
           />
           <Input
             type="text"
             label="Corporate Website"
-            onClearInput={() => resetField("corporate_website")}
-            value={forms.corporate_website}
+            onClearInput={() => resetField("website")}
+            value={forms.website}
             onChange={(e) =>
-              setValue("corporate_website", e.target.value, {
+              setValue("website", e.target.value, {
                 shouldValidate: true,
               })
             }
-            isError={!!errors.corporate_website}
+            isError={!!errors.website}
           />
         </div>
         <Button

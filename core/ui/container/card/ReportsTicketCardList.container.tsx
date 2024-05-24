@@ -22,8 +22,6 @@ const TicketCard = ({
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   const [openModal, setOpenModal] = useState(false);
-
-  console.log(props.ticket_type, props.id, props.related_ticket_id);
   return (
     <>
       <Mobile className="h-full">

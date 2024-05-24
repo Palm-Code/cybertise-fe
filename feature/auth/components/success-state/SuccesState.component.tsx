@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import { Locker } from "@/core/ui/icons";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,6 +10,8 @@ interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const SuccessState = (props: I_SuccesStateProps) => {
+  const searchparams = useSearchParams();
+  const email = searchparams.get("authenticate_email");
   return (
     <>
       <Mobile>
@@ -31,7 +34,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
               activity by clicking the magic sent to your email:
             </Typography>
             <Typography variant="p" affects="small" weight="semibold">
-              email@example.com
+              {email}
             </Typography>
           </div>
           <Typography variant="p" affects="small" align="center">
@@ -63,7 +66,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
               activity by clicking the magic sent to your email:
             </Typography>
             <Typography variant="p" affects="normal" weight="semibold">
-              email@example.com
+              {email}
             </Typography>
           </div>
           <Typography variant="p" affects="normal" align="center">
