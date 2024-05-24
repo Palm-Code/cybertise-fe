@@ -6,6 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "../../core/lib/config";
 import { FormLoginSchema } from "../../types/auth/sign-in";
 import { redirect } from "next/navigation";
+import { Role } from "@/types/admin/sidebar";
+import { I_GetAccessTokenSuccessResponse } from "@/core/models/auth/login/get_access_token";
 
 const secretKey = SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
@@ -25,25 +27,12 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function login(formData: FormLoginSchema) {
-  // Verify credentials && get the user
+export async function authorize(
+  formData: I_GetAccessTokenSuccessResponse["data"]
+) {
   const user = {
-    email: formData.email,
-    name: "john",
-    role: formData.email.includes("@mediator.com")
-      ? "mediator"
-      : formData.email.includes("@company.com")
-        ? "company"
-        : formData.email.includes("@companystaff.com")
-          ? "company staff"
-          : "hacker",
-    token: formData.email.includes("@mediator.com")
-      ? "7|7S0skbn2qeoPh700MeubhUzhJlg6m9XT2PXNZiyU"
-      : formData.email.includes("@company.com")
-        ? "5|qhTAoeldvLd4WSiD2qYiU6gXu7ezthZMT6nbGHDk"
-        : formData.email.includes("@companystaff.com")
-          ? "6|xqEfx0PZROjujETNE9czTR6UACUdJtFR8Rz2rLy8"
-          : "1|KuqjwG8cC2XyatakotMS0gfokqy0l4fLevpX4bsW",
+    role: formData.role && (formData.role.toLowerCase() as keyof typeof Role),
+    token: formData["access-token"],
   };
 
   // Create the session
@@ -59,7 +48,7 @@ export async function logout() {
     cookies().set("session", "", { expires: new Date(0) });
     cookies().set("token", "", { expires: new Date(0) });
   } catch (error) {
-    console.log(error);
+    throw new Error("Failed to logout");
   } finally {
     redirect("/auth/signin");
   }

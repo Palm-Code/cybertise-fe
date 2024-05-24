@@ -28,6 +28,7 @@ import {
 } from "../../components";
 import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
+import { usePostLogout } from "@/core/react-query/client";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -47,6 +48,9 @@ const Sidebar = ({ type }: SidebarProps) => {
   const { theme } = useTheme();
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
+
+  const { mutate } = usePostLogout();
+
   return (
     <>
       <Mobile>
@@ -213,8 +217,8 @@ const Sidebar = ({ type }: SidebarProps) => {
               </Typography>
             </Link>
             <form
-              action={async () => {
-                await logout();
+              action={() => {
+                mutate();
               }}
               className="w-full"
             >

@@ -2,7 +2,6 @@
 import Button from "@/core/ui/components/button/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { FormSchema } from "../SignUpHacker.component";
 import { Input } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
@@ -13,13 +12,14 @@ import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Checkbox from "@/core/ui/components/checkbox/checkbox";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
+import { SignupHackerFormType } from "@/core/models/auth/register";
+import { usePostSignupHacker } from "@/feature/auth/query/signup";
 
 interface I_HackerStepTwoProps {
   onClickNext: () => void;
 }
 
 const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
@@ -29,20 +29,19 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
       checked: false,
     });
   const {
-    register,
     formState: { errors },
     setValue,
     getValues,
-  } = useFormContext<FormSchema>();
+  } = useFormContext<SignupHackerFormType>();
   const forms = getValues();
 
+  const { mutateAsync, isPending, isSuccess, isError } = usePostSignupHacker();
+
   const submitForm = () => {
-    setIsSubmit(true);
-    setTimeout(() => {
-      alert(JSON.stringify(forms, null, 2));
-      setIsSubmit(false);
+    if (Object.keys(errors).length > 0) return;
+    mutateAsync(forms).then(() => {
       onClickNext();
-    }, 2000);
+    });
   };
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,11 +134,12 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
           onClick={submitForm}
           disabled={
             validateIsFormFilled ||
-            isSubmit ||
+            isPending ||
+            isSuccess ||
             !isPolicyChecked ||
             !validatePasswordRegex
           }
-          isLoading={isSubmit}
+          isLoading={isPending}
         >
           Register Account
         </Button>

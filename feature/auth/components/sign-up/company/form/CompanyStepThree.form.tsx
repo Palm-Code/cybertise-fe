@@ -2,7 +2,6 @@
 import Button from "@/core/ui/components/button/button";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { FormSchema } from "../SignUpCompany.component";
 import { Checkbox, Input, Typography } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Link from "next/link";
+import { SignupCompanyFormType } from "@/core/models/auth/register";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
@@ -30,7 +30,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     formState: { errors },
     setValue,
     resetField,
-  } = useFormContext<FormSchema>();
+  } = useFormContext<SignupCompanyFormType>();
   const forms = getValues();
 
   const submitForm = () => {

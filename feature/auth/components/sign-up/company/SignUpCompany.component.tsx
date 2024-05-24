@@ -13,38 +13,23 @@ import CompanyStepOne from "./form/CompanyStepOne.form";
 import CompanyStepTwo from "./form/CompanyStepTwo.form";
 import CompanyStepThree from "./form/CompanyStepThree.form";
 import SuccessState from "../../success-state/SuccesState.component";
-
-export const signupFormSchema = z.object({
-  corporate_name: z.string().min(1, { message: "Corporate Name is required" }),
-  corporate_website: z
-    .string()
-    .min(1, { message: "Corporate Website is required" }),
-  address: z.string().email({ message: "Address is required" }),
-  address_line_2: z.string().email().optional(),
-  country: z.string().min(1, { message: "Country is required" }),
-  state: z.string().min(1, { message: "State is required" }),
-  city: z.string().min(1, { message: "City is required" }),
-  zip_code: z.string().min(1, { message: "Zip Code is required" }),
-  phone_number: z.string().min(1, { message: "Phone Number is required" }),
-  email: z.string().email({ message: "Email is required" }),
-  password: z.string().min(1, { message: "Password is required" }),
-});
-
-export type FormSchema = z.infer<typeof signupFormSchema>;
+import {
+  signupCompanyFormSchema,
+  SignupCompanyFormType,
+} from "@/core/models/auth/register";
 
 const SignUpCompany = () => {
-  const method = useForm<FormSchema>({
-    resolver: zodResolver(signupFormSchema),
+  const method = useForm<SignupCompanyFormType>({
+    resolver: zodResolver(signupCompanyFormSchema),
     defaultValues: {
-      corporate_name: "",
-      corporate_website: "",
+      name: "",
+      website: "",
       address: "",
-      address_line_2: "",
-      country: "",
+      address_2: "",
+      country_code: "",
       state: "",
       city: "",
-      zip_code: "",
-      phone_number: "",
+      zip: "",
       password: "",
     },
   });
