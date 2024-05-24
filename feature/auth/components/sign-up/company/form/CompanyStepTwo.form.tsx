@@ -3,10 +3,10 @@ import Button from "@/core/ui/components/button/button";
 import { Input } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { FormSchema } from "../SignUpCompany.component";
 import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
+import { SignupCompanyFormType } from "@/core/models/auth/register";
 
 interface I_CompanyStepTwoProps {
   onClickNext: () => void;
@@ -18,7 +18,7 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
     getValues,
     setValue,
     resetField,
-  } = useFormContext<FormSchema>();
+  } = useFormContext<SignupCompanyFormType>();
 
   const forms = getValues();
 
@@ -28,10 +28,10 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
 
   const validateIsFormFilled = isObjectEmpty({
     address: forms.address,
-    country: forms.country,
+    country: forms.country_code,
     state: forms.state,
     city: forms.city,
-    zip_code: forms.zip_code,
+    zip: forms.zip,
   });
 
   return (
@@ -51,15 +51,15 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             onChange={(e) =>
               setValue("address", e.target.value, { shouldValidate: true })
             }
-            isError={!!errors.corporate_name}
+            isError={!!errors.address}
           />
           <Input
             type="text"
             label="Address Line 2"
-            onClearInput={() => resetField("address_line_2")}
-            value={forms.address_line_2}
+            onClearInput={() => resetField("address_2")}
+            value={forms.address_2}
             onChange={(e) =>
-              setValue("address_line_2", e.target.value, {
+              setValue("address_2", e.target.value, {
                 shouldValidate: true,
               })
             }
@@ -68,12 +68,12 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
           <div className="grid w-full grid-cols-1 gap-7 md:grid-cols-2">
             <SelectDropdown
               label="Country"
-              value={forms.country}
+              value={forms.country_code}
               withIcon
               withSearch
               options={countryOptions}
               onValueChange={(v) =>
-                setValue("country", v, { shouldValidate: true })
+                setValue("country_code", v, { shouldValidate: true })
               }
             />
             <SelectDropdown
@@ -97,12 +97,12 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             <Input
               type="text"
               label="Zip Code"
-              onClearInput={() => resetField("zip_code")}
-              value={forms.zip_code}
+              onClearInput={() => resetField("zip")}
+              value={forms.zip}
               onChange={(e) =>
-                setValue("zip_code", e.target.value, { shouldValidate: true })
+                setValue("zip", e.target.value, { shouldValidate: true })
               }
-              isError={!!errors.zip_code}
+              isError={!!errors.zip}
             />
           </div>
         </div>

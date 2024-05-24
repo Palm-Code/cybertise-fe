@@ -8,26 +8,20 @@ import HackerStepOne from "./form/HackerStepOne.form";
 import HackerStepTwo from "./form/HackerStepTwo.form";
 import { useMultistepForm } from "@/utils/multi-step-form";
 import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Progress } from "@/core/ui/components/progress/progress";
 import SuccessState from "../../success-state/SuccesState.component";
-
-export const signupFormSchema = z.object({
-  username: z.string().min(1, { message: "Username is required" }),
-  country: z.string().min(1, { message: "Country is required" }),
-  email: z.string().email({ message: "Email is required" }),
-  password: z.string().min(1, { message: "Password is required" }),
-});
-
-export type FormSchema = z.infer<typeof signupFormSchema>;
+import {
+  signupHackerFormSchema,
+  SignupHackerFormType,
+} from "@/core/models/auth/register";
 
 const SignUpHacker = () => {
-  const method = useForm<FormSchema>({
-    resolver: zodResolver(signupFormSchema),
+  const method = useForm<SignupHackerFormType>({
+    resolver: zodResolver(signupHackerFormSchema),
     defaultValues: {
       username: "",
-      country: "",
+      country_code: "",
       email: "",
       password: "",
     },

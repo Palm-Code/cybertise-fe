@@ -2,12 +2,15 @@
 import Button from "@/core/ui/components/button/button";
 import { Input } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
-import { useForm, useFormContext } from "react-hook-form";
-import { FormSchema, signupFormSchema } from "../SignUpHacker.component";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormContext } from "react-hook-form";
 import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
+import { useGetCountry } from "@/core/hooks";
+import {
+  SignupCompanyFormType,
+  SignupHackerFormType,
+} from "@/core/models/auth/register";
 
 interface I_HackerStepOneProps {
   onClickNext: () => void;
@@ -15,13 +18,12 @@ interface I_HackerStepOneProps {
 
 const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
   const {
-    register,
     formState: { errors },
     getValues,
     setValue,
     resetField,
-  } = useFormContext<FormSchema>();
-
+  } = useFormContext<SignupHackerFormType>();
+  const countryList = useGetCountry();
   const forms = getValues();
 
   const onClickValidate = () => {
@@ -30,7 +32,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
 
   const validateIsFormFilled = isObjectEmpty({
     username: forms.username,
-    country: forms.country,
+    country: forms.country_code,
   });
 
   return (
@@ -54,12 +56,12 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
           />
           <SelectDropdown
             label="Country"
-            value={forms.country}
+            value={forms.country_code}
             withIcon
             withSearch
-            options={countryOptions}
+            options={countryList?.data || []}
             onValueChange={(v) =>
-              setValue("country", v, { shouldValidate: true })
+              setValue("country_code", v, { shouldValidate: true })
             }
           />
         </div>

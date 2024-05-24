@@ -7,28 +7,20 @@ import Typography, {
 } from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useState } from "react";
-import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
-import { login } from "@/service/server/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { MultiFactor, SuccessState } from "..";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import Cookies from "universal-cookie";
-
-const formShcema = z.object({
-  email: z.string().email().min(1, { message: "Email is required" }),
-  password: z.string(),
-});
-
-type FormSchema = z.infer<typeof formShcema>;
+import { FormLoginSchema } from "@/types/auth/sign-in";
+import { formLoginShcema } from "@/core/models/auth/login/post_login";
+import { usePostSignIn } from "../../query/signin";
 
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
-  const { push } = useRouter();
-  const [isSuccess, setIsSuccess] = useState<"2fa" | "email" | null>(null);
-  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+  const auth_2fa = useSearchParams().get("authenticate_2fa");
+  const auth_email = useSearchParams().get("authenticate_email");
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const {
     handleSubmit,
@@ -36,8 +28,8 @@ const SignInComponent = () => {
     getValues,
     setValue,
     resetField,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formShcema),
+  } = useForm<FormLoginSchema>({
+    resolver: zodResolver(formLoginShcema),
     defaultValues: {
       email: "",
       password: "",
@@ -45,20 +37,10 @@ const SignInComponent = () => {
   });
 
   const forms = getValues();
+  const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
-    setIsSuccess(null);
-    setLoadingSubmit(true);
-    try {
-      setTimeout(async () => {
-        const { user } = await login(data);
-        const cookies = new Cookies();
-        cookies.set("token", user.token, { path: "/" });
-        push(callbackUrl || "/dashboard");
-      }, 100);
-    } catch (error) {
-      setIsSuccess(null);
-    }
+  const onSubmit: SubmitHandler<FormLoginSchema> = async (data) => {
+    mutate(data);
   };
 
   const validateIsFormFilled = isObjectEmpty({
@@ -66,11 +48,11 @@ const SignInComponent = () => {
     password: forms.password,
   });
 
-  if (isSuccess === "email") {
+  if (auth_email) {
     return <SuccessState />;
   }
 
-  if (isSuccess === "2fa") {
+  if (auth_2fa) {
     return <MultiFactor />;
   }
 
@@ -84,10 +66,10 @@ const SignInComponent = () => {
           Sign In
         </Typography>
         <div className="_flexbox__col__center w-full gap-7">
-          {errors.email || errors.password ? (
+          {error?.status === 401 ? (
             <div className="w-full rounded-md bg-red-error/20 p-3.5">
               <Typography variant="p" affects="tiny">
-                Your email or password is incorrect.
+                Email and password does not match
               </Typography>
             </div>
           ) : null}
@@ -132,8 +114,8 @@ const SignInComponent = () => {
             type="submit"
             fullWidth
             variant="primary-hacker"
-            isLoading={loadingSubmit}
-            disabled={validateIsFormFilled || loadingSubmit}
+            isLoading={isPending}
+            disabled={validateIsFormFilled || isPending || isSuccess}
           >
             Sign In
           </Button>
@@ -164,10 +146,10 @@ const SignInComponent = () => {
             Sign In
           </Typography>
           <div className="_flexbox__col__center w-full gap-7">
-            {errors.email || errors.password ? (
+            {error?.status === 401 ? (
               <div className="w-full rounded-md bg-red-error/20 p-3.5">
                 <Typography variant="p" affects="tiny">
-                  Your email or password is incorrect.
+                  Email and password does not match
                 </Typography>
               </div>
             ) : null}
@@ -180,7 +162,7 @@ const SignInComponent = () => {
               onChange={(e) =>
                 setValue("email", e.target.value, { shouldValidate: true })
               }
-              // isError={!!errors}
+              isError={!!errors.email}
             />
             <div className="w-full space-y-1">
               <Input
@@ -192,7 +174,7 @@ const SignInComponent = () => {
                 onChange={(e) =>
                   setValue("password", e.target.value, { shouldValidate: true })
                 }
-                // isError={!!errors}
+                isError={!!errors.password}
               />
               <Link
                 href={"/auth/forgot-password"}
@@ -210,8 +192,8 @@ const SignInComponent = () => {
               type="submit"
               fullWidth
               variant="primary-hacker"
-              isLoading={loadingSubmit}
-              disabled={validateIsFormFilled || loadingSubmit}
+              isLoading={isPending}
+              disabled={validateIsFormFilled || isPending || isSuccess}
             >
               Sign In
             </Button>
