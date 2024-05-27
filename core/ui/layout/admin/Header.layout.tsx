@@ -28,7 +28,7 @@ const Header = () => {
           )}
         >
           <ThemeSwitcher />
-          <Avatar image={data?.avatar} />
+          <Avatar image={data?.avatar ?? "/favicon.png"} />
         </div>
       </Desktop>
     </>

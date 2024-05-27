@@ -1,17 +1,27 @@
+"use client";
 import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import { Locker } from "@/core/ui/icons";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import useTimer from "@/utils/timer";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
 }
 
 const SuccessState = (props: I_SuccesStateProps) => {
+  const initialDuration = 5 * 60 * 1000;
+  const { remainingTime, start, reset, getFormattedTime } =
+    useTimer(initialDuration);
   const searchparams = useSearchParams();
   const email = searchparams.get("authenticate_email");
+
+  useEffect(() => {
+    start();
+  }, []);
+
   return (
     <>
       <Mobile>
@@ -40,9 +50,15 @@ const SuccessState = (props: I_SuccesStateProps) => {
           <Typography variant="p" affects="small" align="center">
             It may take a minute to receive your code. <br /> Haven&apos;t
             received it?{" "}
-            <span className="cursor-pointer font-bold text-brand-emerald underline">
-              Resend
-            </span>
+            <button
+              type="button"
+              title="resend"
+              disabled={remainingTime > 0}
+              className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
+              onClick={() => reset()}
+            >
+              Resend ({getFormattedTime()})
+            </button>
           </Typography>
         </div>
       </Mobile>
@@ -72,9 +88,15 @@ const SuccessState = (props: I_SuccesStateProps) => {
           <Typography variant="p" affects="normal" align="center">
             It may take a minute to receive your code. <br /> Haven&apos;t
             received it?{" "}
-            <span className="cursor-pointer font-bold text-brand-emerald underline">
-              Resend
-            </span>
+            <button
+              type="button"
+              title="resend"
+              disabled={remainingTime > 0}
+              className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
+              onClick={() => reset()}
+            >
+              Resend ({getFormattedTime()})
+            </button>
           </Typography>
         </div>
       </Desktop>

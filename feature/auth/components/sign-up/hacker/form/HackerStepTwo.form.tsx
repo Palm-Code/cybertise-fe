@@ -35,7 +35,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   } = useFormContext<SignupHackerFormType>();
   const forms = getValues();
 
-  const { mutateAsync, isPending, isSuccess, isError } = usePostSignupHacker();
+  const { mutateAsync, isPending, isSuccess } = usePostSignupHacker();
 
   const submitForm = () => {
     if (Object.keys(errors).length > 0) return;
@@ -103,6 +103,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             isError={!!errors.email}
           />
           <PasswordInput
+            value={forms.password}
             label="Password"
             onChange={checkPassword}
             options={passwordValidationItems}

@@ -11,7 +11,6 @@ export const useGetUserData = () => {
   >({
     queryKey: ["getUserData"],
     queryFn: () => fetchGetUserData(),
-    placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
 

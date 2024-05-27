@@ -6,11 +6,10 @@ import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 
 export const usePostLogout = () => {
-  const [_, setCallbackUrl] = useLocalStorage("callbackUrl", "");
   const mutation = useMutation({
     mutationFn: fetchPostLogout,
     onSuccess(data) {
-      setCallbackUrl("");
+      localStorage.removeItem("callbackUrl");
       toast.success("Logout success", {
         position: "bottom-right",
       });

@@ -11,6 +11,7 @@ import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Link from "next/link";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
+import { usePostSignupCompany } from "@/feature/auth/query/signup";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
@@ -33,9 +34,13 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
   } = useFormContext<SignupCompanyFormType>();
   const forms = getValues();
 
+  const { mutateAsync, isPending, isSuccess } = usePostSignupCompany();
+
   const submitForm = () => {
-    alert(JSON.stringify(forms, null, 2));
-    onClickNext();
+    if (Object.keys(errors).length > 0) return;
+    mutateAsync(forms).then(() => {
+      onClickNext();
+    });
   };
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,8 +133,13 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
           fullWidth
           variant="primary-company"
           onClick={submitForm}
+          isLoading={isPending}
           disabled={
-            validateIsFormFilled || !validatePasswordRegex || !isPolicyChecked
+            validateIsFormFilled ||
+            !validatePasswordRegex ||
+            !isPolicyChecked ||
+            isPending ||
+            isSuccess
           }
         >
           Register Account

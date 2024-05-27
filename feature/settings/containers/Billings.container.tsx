@@ -66,9 +66,12 @@ const Billing = ({
                   Edit Billing Informations
                 </Typography>
               </div>
+            </Card>
+            <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
+              <CardEditBilling data={data} variant={variant} />
               <div className="_flexbox__row__center__start gap-6">
                 <Button
-                  variant={`tertiary-${variant}`}
+                  variant={`secondary-${variant}`}
                   onClick={() => handleClickEdit(false)}
                 >
                   Discard
@@ -83,7 +86,6 @@ const Billing = ({
                 </Button>
               </div>
             </Card>
-            <CardEditBilling data={data} variant={variant} />
           </div>
         </Desktop>
       </>
