@@ -4,6 +4,13 @@ import { Desktop } from "@/core/ui/layout";
 import { I_SecurityProps } from "@/feature/settings/containers/Security.container";
 import { RectangleEllipsis, X } from "lucide-react";
 import CardEditPassword from "./CardEditPassword";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  formResetPasswordShcema,
+  I_GetResetPasswordRequest,
+} from "@/core/models/auth/forgot-password";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePostResetPassword } from "@/feature/auth/query/password";
 
 interface I_CardLoginInfoProps extends I_SecurityProps {}
 
@@ -12,9 +19,20 @@ const CardLoginInfo = ({
   isEditing,
   handleClickEdit = () => {},
 }: I_CardLoginInfoProps) => {
+  const methods = useForm<I_GetResetPasswordRequest>({
+    resolver: zodResolver(formResetPasswordShcema),
+    defaultValues: {
+      old_password: "",
+      new_password: "",
+      logout_all: 0,
+    },
+  });
+
+  const { mutateAsync, isPending, isSuccess } = usePostResetPassword();
+
   if (isEditing)
     return (
-      <>
+      <FormProvider {...methods}>
         <Desktop>
           <div className="_flexbox__col__start__start gap-6">
             <Card
@@ -34,22 +52,40 @@ const CardLoginInfo = ({
                   Change Login Password
                 </Typography>
               </div>
+            </Card>
+            <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
+              <CardEditPassword />
               <div className="_flexbox__row__center__start gap-6">
                 <Button
-                  variant={`tertiary-${variant}`}
+                  variant={`secondary-${variant}`}
                   onClick={() => handleClickEdit(false)}
                 >
                   Discard
                 </Button>
-                <Button variant={`primary-${variant}`} onClick={() => {}}>
+                <Button
+                  disabled={
+                    isPending || isSuccess || !methods.getValues().is_match
+                  }
+                  isLoading={isPending}
+                  variant={`primary-${variant}`}
+                  onClick={() =>
+                    mutateAsync(methods.getValues())
+                      .then()
+                      .catch((err) => {
+                        methods.setError("root", err?.message, {
+                          shouldFocus: true,
+                        });
+                        console.log(err);
+                      })
+                  }
+                >
                   Save Changes
                 </Button>
               </div>
             </Card>
-            <CardEditPassword />
           </div>
         </Desktop>
-      </>
+      </FormProvider>
     );
 
   return (
@@ -64,7 +100,7 @@ const CardLoginInfo = ({
           <RectangleEllipsis className="mb-4 h-8 w-8 xl:mr-4" />
           Login password
         </Typography>
-        <Badge variant="default">Verified</Badge>
+        {/* <Badge variant="default">Verified</Badge> */}
       </div>
       <Typography
         variant="p"

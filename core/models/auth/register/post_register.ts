@@ -15,8 +15,8 @@ export const signupCompanyFormSchema = z.object({
   state: z.string().min(1, { message: "State is required" }),
   city: z.string().min(1, { message: "City is required" }),
   zip: z.string().min(1, { message: "Zip Code is required" }),
-  address: z.string().email({ message: "Address is required" }),
-  address_2: z.string().email().optional(),
+  address: z.string().min(1, { message: "Address is required" }),
+  address_2: z.string().optional(),
 });
 
 export type SignupHackerFormType = z.infer<typeof signupHackerFormSchema>;

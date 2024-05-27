@@ -71,7 +71,9 @@ const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
           <Typography variant="p" affects="large" align="center">
             If you are not redirected, please click this button
           </Typography>
-          <Button variant="default">Continue</Button>
+          <Button variant="default" onClick={() => mutate({ code })}>
+            Continue
+          </Button>
         </div>
       </Desktop>
     </>

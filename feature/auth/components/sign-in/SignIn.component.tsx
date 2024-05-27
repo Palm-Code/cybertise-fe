@@ -99,7 +99,7 @@ const SignInComponent = () => {
               isError={errors === null}
             />
             <Link
-              href={"/auth/forgot-password"}
+              href={"/forgot-password"}
               className={typographyVariants({
                 variant: "p",
                 affects: "tiny",
@@ -177,7 +177,7 @@ const SignInComponent = () => {
                 isError={!!errors.password}
               />
               <Link
-                href={"/auth/forgot-password"}
+                href={"/forgot-password"}
                 className={typographyVariants({
                   variant: "p",
                   affects: "tiny",

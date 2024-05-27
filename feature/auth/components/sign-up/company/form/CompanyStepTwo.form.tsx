@@ -7,12 +7,14 @@ import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
+import { useGetCountry } from "@/core/hooks";
 
 interface I_CompanyStepTwoProps {
   onClickNext: () => void;
 }
 
 const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
+  const countryList = useGetCountry();
   const {
     formState: { errors },
     getValues,
@@ -71,28 +73,30 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
               value={forms.country_code}
               withIcon
               withSearch
-              options={countryOptions}
+              options={countryList?.data || []}
               onValueChange={(v) =>
                 setValue("country_code", v, { shouldValidate: true })
               }
             />
-            <SelectDropdown
+            <Input
+              type="text"
               label="State"
+              onClearInput={() => resetField("state")}
               value={forms.state}
-              withSearch
-              options={countryOptions}
-              onValueChange={(v) =>
-                setValue("state", v, { shouldValidate: true })
+              onChange={(e) =>
+                setValue("state", e.target.value, { shouldValidate: true })
               }
+              isError={!!errors.state}
             />
-            <SelectDropdown
+            <Input
+              type="text"
               label="City"
+              onClearInput={() => resetField("city")}
               value={forms.city}
-              withSearch
-              options={countryOptions}
-              onValueChange={(v) =>
-                setValue("city", v, { shouldValidate: true })
+              onChange={(e) =>
+                setValue("city", e.target.value, { shouldValidate: true })
               }
+              isError={!!errors.city}
             />
             <Input
               type="text"

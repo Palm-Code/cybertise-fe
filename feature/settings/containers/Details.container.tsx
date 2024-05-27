@@ -85,6 +85,22 @@ const Details = ({
             <AnimationWrapper>
               <CardAbout isEditing variant={variant as Role} />
               <CardAccountDetails isEditing variant={variant as Role} />
+              <div className="_flexbox__row__center__start gap-6">
+                <Button
+                  variant={`secondary-${variant}`}
+                  onClick={() => handleClickEdit(false)}
+                >
+                  Discard
+                </Button>
+                <Button
+                  disabled={isPending || isSuccess}
+                  isLoading={isPending}
+                  variant={`primary-${variant}`}
+                  onClick={() => handleSubmitForm()}
+                >
+                  Save Changes
+                </Button>
+              </div>
             </AnimationWrapper>
           </div>
         </Desktop>

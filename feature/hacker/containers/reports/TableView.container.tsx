@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import {
+  Avatar,
   Badge,
   BaseTable,
   Indicator,
@@ -66,11 +67,9 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     >
                       <div className="_flexbox__col__start__start gap-4">
                         <div className="_flexbox__row__center__start gap-1">
-                          <Image
-                            src={item.company?.logo as string}
-                            alt={`${item.title} logo`}
-                            width={32}
-                            height={32}
+                          <Avatar
+                            image={item.company?.logo as string}
+                            className="h-8 w-8"
                           />
                           <Typography
                             variant="p"

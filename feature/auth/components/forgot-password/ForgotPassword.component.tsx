@@ -1,16 +1,18 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import Typography, {
-  typographyVariants,
-} from "@/core/ui/components/typography/typography";
+import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
-import { redirect, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { OTPInput, SlotProps } from "input-otp";
 import { RectangleEllipsis } from "lucide-react";
-import { Button, Input, PasswordInput } from "@/core/ui/components";
+import { Button, Checkbox, Input, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { passwordValidation } from "@/core/constants/common";
+import {
+  useGetRequestForgotPassword,
+  usePostForgotPassword,
+} from "../../query/password";
+import { validatePassword } from "@/utils/password-validation";
 
 interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -20,8 +22,51 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const searchParams = useSearchParams();
-  const token = searchParams.get("reset_password_token");
+  const token = searchParams.get("code");
   const [email, setEmail] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [logoutAll, setLogoutAll] = useState<0 | 1>(0);
+  const [confirmPassworText, setConfirmPassworText] =
+    useState<PasswordValidationItemsType>({
+      content: "",
+      checked: false,
+    });
+  const { mutate, isPending, isSuccess, error, isError } =
+    useGetRequestForgotPassword();
+  const {
+    mutate: mutateForgotPassword,
+    isPending: isPendingForgot,
+    isSuccess: isSuccessForgot,
+  } = usePostForgotPassword();
+
+  const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const newPassword = e.target.value;
+
+    const updatedValidationItems = validatePassword(
+      passwordValidationItems,
+      newPassword
+    );
+
+    setPasswordValidationItems(updatedValidationItems);
+    confirmPassworText.content && confirmPassworText.content !== newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
+      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+
+    setNewPassword(newPassword);
+  };
+
+  const passwordConfirmationCheck = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const passwordMatch = newPassword === e.target.value;
+    setConfirmPassworText({
+      ...confirmPassworText,
+      content: e.target.value,
+      checked: passwordMatch,
+    });
+  };
+
   return (
     <div
       className={cn(
@@ -42,23 +87,67 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           verification link.
         </Typography>
         <div className="flex w-full flex-col items-center justify-center gap-7">
-          {/* <Typography variant="p" affects="normal" className="text-center">
-            We have just sent you a verification link to reset the password to
-            <strong>joh****@example.com</strong>
-            and continue to reset the password.
-          </Typography> */}
-          <PasswordInput
-            withRegex
-            type="password"
-            label="New password"
-            options={passwordValidationItems}
-          />
-          <PasswordInput type="password" label="Confirm new password" />
-          <Input type="Email" label="Email" />
+          {!!token ? (
+            <>
+              <PasswordInput
+                withRegex
+                value={newPassword}
+                onChange={checkPassword}
+                label="New password"
+                options={passwordValidationItems}
+              />
+              <PasswordInput
+                value={confirmPassworText.content}
+                label="Confirm new password"
+                onChange={passwordConfirmationCheck}
+                isConfirmation={!!confirmPassworText.content}
+                check={confirmPassworText.checked}
+              />
+              <div className="_flexbox__row__center__start w-full gap-4">
+                <Checkbox
+                  checked={logoutAll === 1}
+                  onCheckedChange={() => setLogoutAll(logoutAll === 1 ? 0 : 1)}
+                />
+                <Typography variant="p" affects="normal" weight="bold">
+                  Logout from all devices?
+                </Typography>
+              </div>
+            </>
+          ) : isSuccess ? (
+            <Typography variant="p" affects="normal" className="text-center">
+              We have just sent you a verification link to reset the password to{" "}
+              <strong>{email}</strong> and continue to reset the password.
+            </Typography>
+          ) : (
+            <Input
+              type="Email"
+              label="Email"
+              value={email}
+              isError={isError}
+              errorMsg={error?.email[0]}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          )}
         </div>
       </div>
       <div className="_flexbox__col__center w-full gap-4">
-        <Button variant="default" fullWidth>
+        <Button
+          variant="default"
+          fullWidth
+          isLoading={isPending || isPendingForgot}
+          disabled={
+            isPending || isSuccess || isPendingForgot || isSuccessForgot
+          }
+          onClick={() =>
+            token
+              ? mutateForgotPassword({
+                  code: token,
+                  new_password: newPassword,
+                  logout_all: 1,
+                })
+              : mutate(email)
+          }
+        >
           Reset Password
         </Button>
         <Typography variant="p" affects="normal" align="center">
