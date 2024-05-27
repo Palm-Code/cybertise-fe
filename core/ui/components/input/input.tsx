@@ -27,6 +27,8 @@ export interface InputProps
   onChangeNumberValue?: OnValueChange;
   containerClassName?: string;
   isSelect?: boolean;
+  errorMsg?: string;
+  wrapperClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -51,6 +53,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChangeNumberValue,
       containerClassName,
       isSelect = false,
+      errorMsg,
+      wrapperClassName,
       ...props
     },
     ref
@@ -93,7 +97,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             isError && "border border-red-normal",
             transparentBg
               ? "bg-transparent"
-              : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90"
+              : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",
+            wrapperClassName
           )}
         >
           {prefixIcon}
@@ -205,6 +210,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {!!description && (
           <Typography variant="p" affects="tiny">
             {description}
+          </Typography>
+        )}
+        {!!errorMsg && (
+          <Typography variant="p" affects="tiny" className="!text-red-error">
+            {errorMsg}
           </Typography>
         )}
       </div>

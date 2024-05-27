@@ -9,8 +9,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Cookies from "universal-cookie";
+import { useReadLocalStorage } from "usehooks-ts";
 
 export const useGetAccessToken = () => {
+  const callbackUrl = useReadLocalStorage<string>("callbackUrl");
   const { push } = useRouter();
   const mutation = useMutation<
     I_GetAccessTokenSuccessResponse,
@@ -18,8 +20,8 @@ export const useGetAccessToken = () => {
     I_GetAccessTokenPayload
   >({
     mutationFn: fetchGetAccessToken,
-    onSuccess(data) {
-      authorize(data.data);
+    onSuccess: async (data) => {
+      await authorize(data.data);
       const cookies = new Cookies();
       cookies.set("token", data.data["access-token"], { path: "/" });
     },
@@ -32,6 +34,11 @@ export const useGetAccessToken = () => {
       }
     },
     onSettled() {
+      if (!!callbackUrl) {
+        window.location.href = callbackUrl;
+        localStorage.removeItem("callbackUrl");
+        return;
+      }
       push("/");
     },
   });

@@ -10,6 +10,7 @@ import { useProgramListParamStore } from "../../zustand/store/programs";
 import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 import { useGetRole } from "@/core/hooks";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 const VrpManagement = () => {
   const role = useGetRole();
@@ -53,8 +54,15 @@ const VrpManagement = () => {
           </Card>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
-          ) : (
+          ) : programList?.data?.length ? (
             <VRPCardList data={programList?.data} />
+          ) : (
+            <EmptyState
+              variant="company"
+              type="program"
+              buttonText="Add new VRP"
+              href={"/vrp-launchpad/create-vrp"}
+            />
           )}
           {role?.toLowerCase() === Role.company && (
             <Link
