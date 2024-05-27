@@ -30,7 +30,8 @@ const CardAccountDetails = ({
         <Desktop>
           <Card
             className={cn(
-              "_flexbox__col__start__start w-full gap-8 rounded-xl p-7.5"
+              "_flexbox__col__start__start w-full gap-8 rounded-xl p-7.5",
+              "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
             <Typography variant="h6" weight="bold" className="inline-flex">
@@ -40,6 +41,7 @@ const CardAccountDetails = ({
               <Input
                 type="email"
                 label="Registered Email"
+                wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.email}
                 onChange={(e) =>
                   setValue("email", e.target.value, {
@@ -55,6 +57,7 @@ const CardAccountDetails = ({
                 <Input
                   type="text"
                   label="Company Website"
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   value={forms.website}
                   onChange={(e) =>
                     setValue("website", e.target.value, {
@@ -72,6 +75,7 @@ const CardAccountDetails = ({
                 pattern="[0-9]*"
                 inputMode="numeric"
                 label="Phone Number"
+                wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.phone}
                 onChange={(e) =>
                   setValue("phone", e.target.value, {

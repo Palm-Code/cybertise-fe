@@ -20,6 +20,7 @@ export interface InputProps
   iconValue?: string;
   description?: string;
   transparentBg?: boolean;
+  wrapperClassName?: string;
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
@@ -39,6 +40,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
       iconValue,
       description,
       transparentBg = false,
+      wrapperClassName,
       ...props
     },
     ref
@@ -79,7 +81,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
             isError && "border border-red-normal",
             transparentBg
               ? "bg-transparent"
-              : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90"
+              : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",
+            wrapperClassName
           )}
         >
           {prefixIcon}

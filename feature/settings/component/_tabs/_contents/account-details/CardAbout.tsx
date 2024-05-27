@@ -78,7 +78,8 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
       <>
         <Card
           className={cn(
-            "_flexbox__col__start__start w-full gap-8 rounded-xl xl:p-7.5"
+            "_flexbox__col__start__start w-full gap-8 rounded-xl xl:p-7.5",
+            "bg-background-page-light dark:bg-background-page-dark"
           )}
         >
           <Typography
@@ -125,6 +126,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               label={`${variant} Name`}
               value={variant === "hacker" ? forms.username : forms.name}
               containerClassName="capitalize"
+              wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               onChange={(e) => {
                 setValue(
                   variant === "hacker" ? "username" : "name",
@@ -145,6 +147,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   type="text"
                   label="Address"
                   value={forms.address}
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
                     setValue("address", e.target.value, {
                       shouldValidate: true,
@@ -159,6 +162,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   type="text"
                   label="Address 2"
                   value={forms.address_2}
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
                     setValue("address_2", e.target.value, {
                       shouldValidate: true,
@@ -173,6 +177,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   <SelectDropdown
                     label="Country"
                     value={forms.country_code as string}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     options={countryOptions?.data || []}
                     withIcon
                     withSearch
@@ -184,6 +189,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                     type="text"
                     label="State"
                     value={forms.state}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
                       setValue("state", e.target.value, {
                         shouldValidate: true,
@@ -198,6 +204,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                     type="text"
                     label="Zip Code"
                     value={forms.zip}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
                       setValue("zip", e.target.value, {
                         shouldValidate: true,
@@ -215,6 +222,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             <SelectDropdown
               label="Country"
               value={forms.country_code as string}
+              wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               options={countryOptions?.data || []}
               withIcon
               withSearch
@@ -236,6 +244,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               <TextArea
                 label={`About ${variant}`}
                 value={forms.about}
+                wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 onChange={(e) =>
                   setValue("about", e.target.value, { shouldValidate: true })
                 }
@@ -327,7 +336,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
           <Typography
             variant="h6"
             weight="bold"
-            className="inline-flex items-center"
+            className="inline-flex items-center gap-4"
           >
             {icons(variant as Role)}
             {variant === "company" ? "Company Information" : "About You"}

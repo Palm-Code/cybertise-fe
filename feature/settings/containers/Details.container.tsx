@@ -65,42 +65,28 @@ const Details = ({
                   Edit {variant} Details
                 </Typography>
               </div>
-              <div className="_flexbox__row__center__start gap-6">
-                <Button
-                  variant={`tertiary-${variant}`}
-                  onClick={() => handleClickEdit(false)}
-                >
-                  Discard
-                </Button>
-                <Button
-                  disabled={isPending || isSuccess}
-                  isLoading={isPending}
-                  variant={`primary-${variant}`}
-                  onClick={() => handleSubmitForm()}
-                >
-                  Save Changes
-                </Button>
-              </div>
             </Card>
             <AnimationWrapper>
-              <CardAbout isEditing variant={variant as Role} />
-              <CardAccountDetails isEditing variant={variant as Role} />
-              <div className="_flexbox__row__center__start gap-6">
-                <Button
-                  variant={`secondary-${variant}`}
-                  onClick={() => handleClickEdit(false)}
-                >
-                  Discard
-                </Button>
-                <Button
-                  disabled={isPending || isSuccess}
-                  isLoading={isPending}
-                  variant={`primary-${variant}`}
-                  onClick={() => handleSubmitForm()}
-                >
-                  Save Changes
-                </Button>
-              </div>
+              <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
+                <CardAbout isEditing variant={variant as Role} />
+                <CardAccountDetails isEditing variant={variant as Role} />
+                <div className="_flexbox__row__center__start gap-6">
+                  <Button
+                    variant={`secondary-${variant}`}
+                    onClick={() => handleClickEdit(false)}
+                  >
+                    Discard
+                  </Button>
+                  <Button
+                    disabled={isPending || isSuccess}
+                    isLoading={isPending}
+                    variant={`primary-${variant}`}
+                    onClick={() => handleSubmitForm()}
+                  >
+                    Save Changes
+                  </Button>
+                </div>
+              </Card>
             </AnimationWrapper>
           </div>
         </Desktop>

@@ -40,10 +40,10 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
               variant={
                 data.asset_types_values[
                   index
-                ].label.toLowerCase() as keyof typeof badgeVariants
+                ].value.toLowerCase() as keyof typeof badgeVariants
               }
             >
-              {data.asset_types_values[index].value}
+              {data.asset_types_values[index].label}
             </Badge>
           </Card>
         ))}

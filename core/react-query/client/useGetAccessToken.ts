@@ -20,8 +20,8 @@ export const useGetAccessToken = () => {
     I_GetAccessTokenPayload
   >({
     mutationFn: fetchGetAccessToken,
-    onSuccess(data) {
-      authorize(data.data);
+    onSuccess: async (data) => {
+      await authorize(data.data);
       const cookies = new Cookies();
       cookies.set("token", data.data["access-token"], { path: "/" });
     },
@@ -34,7 +34,7 @@ export const useGetAccessToken = () => {
       }
     },
     onSettled() {
-      if (callbackUrl) {
+      if (!!callbackUrl) {
         window.location.href = callbackUrl;
         localStorage.removeItem("callbackUrl");
         return;
