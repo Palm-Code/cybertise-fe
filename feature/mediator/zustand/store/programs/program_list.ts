@@ -19,6 +19,9 @@ const initialState: State = {
       },
       include: "company,targetAssets",
       append: "asset_types,latest_updates",
+      filter: {
+        mediator: "1",
+      },
     },
   },
 };
