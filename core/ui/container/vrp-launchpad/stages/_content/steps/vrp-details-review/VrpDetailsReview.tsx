@@ -76,14 +76,17 @@ const VrpDetailsReview = ({
           <Button
             variant="primary-company"
             onClick={() =>
-              currentStep === "Published" && isLastStep
+              (currentStep === "Published" && isLastStep) ||
+              (currentStep === "Phase5" && isLastStep)
                 ? onClickRevise()
                 : onClickNext()
             }
             isLoading={isLoading}
             disabled={isLoading}
           >
-            {currentStep === "Phase5" ? "Publish" : "Send to Mediator"}
+            {currentStep === "Phase5" && !isLastStep
+              ? "Publish"
+              : "Send to Mediator"}
           </Button>
         ) : null
       ) : (
