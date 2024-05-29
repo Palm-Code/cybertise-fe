@@ -9,6 +9,7 @@ import {
 } from "@/core/ui/components";
 
 const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
+  console.log({ data });
   return (
     <>
       <Card
@@ -21,7 +22,7 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
         <Typography variant="h6" weight="bold">
           List of Target Assets
         </Typography>
-        {data.target_assets.map((_, index) => (
+        {data.target_assets.map((item, index) => (
           <Card
             className={cn(
               "rounded-md bg-neutral-light-100 xl:px-4.5 xl:py-0 dark:bg-neutral-dark-100",
@@ -32,18 +33,16 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
             <Input
               transparentBg
               label={`Asset ${index + 1}`}
-              value={_.content}
+              value={item.content}
               containerClassName="w-4/6"
               readOnly
             />
             <Badge
               variant={
-                data.asset_types_values[
-                  index
-                ].value.toLowerCase() as keyof typeof badgeVariants
+                item.asset_type.label.toLowerCase() as keyof typeof badgeVariants
               }
             >
-              {data.asset_types_values[index].label}
+              {item.asset_type.value}
             </Badge>
           </Card>
         ))}

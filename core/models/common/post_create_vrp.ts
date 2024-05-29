@@ -45,6 +45,10 @@ export const createVrpSchema = z.object({
     z.object({
       content: z.string().min(1, { message: "Content is required" }),
       asset_type_id: z.string().min(1, { message: "Asset type is required" }),
+      asset_type: z.object({
+        label: z.string().min(1, { message: "Label is required" }),
+        value: z.string().min(1, { message: "Value is required" }),
+      }),
     })
   ),
   asset_types_values: z.array(
