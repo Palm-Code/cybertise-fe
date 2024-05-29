@@ -14,6 +14,7 @@ import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { SignupHackerFormType } from "@/core/models/auth/register";
 import { usePostSignupHacker } from "@/feature/auth/query/signup";
+import { getBrowserAndOS } from "@/utils/device-type";
 
 interface I_HackerStepTwoProps {
   onClickNext: () => void;
@@ -39,7 +40,9 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
 
   const submitForm = () => {
     if (Object.keys(errors).length > 0) return;
-    mutateAsync(forms).then(() => {
+    const userAgent = navigator.userAgent;
+    const deviceType = getBrowserAndOS(userAgent);
+    mutateAsync({ ...forms, device_type: deviceType }).then(() => {
       onClickNext();
     });
   };

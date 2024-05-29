@@ -16,6 +16,7 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import { FormLoginSchema } from "@/types/auth/sign-in";
 import { formLoginShcema } from "@/core/models/auth/login/post_login";
 import { usePostSignIn } from "../../query/signin";
+import { getBrowserAndOS } from "@/utils/device-type";
 
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
@@ -40,7 +41,9 @@ const SignInComponent = () => {
   const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
 
   const onSubmit: SubmitHandler<FormLoginSchema> = async (data) => {
-    mutate(data);
+    const userAgent = navigator.userAgent;
+    const deviceType = getBrowserAndOS(userAgent);
+    mutate({ ...data, device_type: deviceType });
   };
 
   const validateIsFormFilled = isObjectEmpty({

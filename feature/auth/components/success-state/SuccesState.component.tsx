@@ -57,7 +57,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
               onClick={() => reset()}
             >
-              Resend ({getFormattedTime()})
+              Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>
           </Typography>
         </div>
@@ -92,10 +92,10 @@ const SuccessState = (props: I_SuccesStateProps) => {
               type="button"
               title="resend"
               disabled={remainingTime > 0}
-              className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
+              className="cursor-pointer font-bold text-brand-emerald underline disabled:cursor-not-allowed disabled:text-opacity-50"
               onClick={() => reset()}
             >
-              Resend ({getFormattedTime()})
+              Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>
           </Typography>
         </div>

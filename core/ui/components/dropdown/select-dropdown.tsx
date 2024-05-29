@@ -67,16 +67,21 @@ const SelectDropdown = ({
       </SelectTrigger>
       <SelectContent>
         {withSearch && (
-          <input
-            value={searchValue}
-            type="text"
-            placeholder="Search..."
-            className={cn(
-              "sticky top-0 z-10 bg-neutral-light-80 dark:bg-neutral-dark-80",
-              "flex w-full items-center justify-center rounded-md px-4 py-[18px] outline-none"
-            )}
-            onChange={onChangeSearch}
-          />
+          <>
+            <div className="sticky top-0 z-20 w-full bg-neutral-light-90 pb-2 dark:bg-neutral-dark-90">
+              <input
+                value={searchValue}
+                type="text"
+                placeholder="Search..."
+                className={cn(
+                  "bg-neutral-light-80 dark:bg-neutral-dark-80",
+                  "flex w-full items-center justify-center rounded-md px-4 py-[18px] outline-none"
+                )}
+                onChange={onChangeSearch}
+              />
+            </div>
+            <div className="sticky -top-2 z-10 h-2 w-full bg-neutral-light-90 dark:bg-neutral-dark-90"></div>
+          </>
         )}
         {optionsFilter.length! ? (
           optionsFilter.map((option) => (

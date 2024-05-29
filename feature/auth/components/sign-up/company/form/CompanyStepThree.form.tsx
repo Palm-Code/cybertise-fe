@@ -12,6 +12,7 @@ import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Link from "next/link";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
 import { usePostSignupCompany } from "@/feature/auth/query/signup";
+import { getBrowserAndOS } from "@/utils/device-type";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
@@ -38,7 +39,9 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
 
   const submitForm = () => {
     if (Object.keys(errors).length > 0) return;
-    mutateAsync(forms).then(() => {
+    const userAgent = navigator.userAgent;
+    const deviceType = getBrowserAndOS(userAgent);
+    mutateAsync({ ...forms, device_type: deviceType }).then(() => {
       onClickNext();
     });
   };

@@ -8,7 +8,7 @@ const useTimer = (initialDuration: number) => {
     timerRef.current = createTimer({
       initialDuration,
       onUpdate: (time) => setRemainingTime(time),
-      onComplete: () => alert("Time's up!"),
+      onComplete: () => setRemainingTime(0),
     });
 
     return () => {
