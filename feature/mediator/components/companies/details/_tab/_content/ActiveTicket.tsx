@@ -49,7 +49,6 @@ const ActiveTicket = ({ id }: { id: string }) => {
   const view =
     (useReadLocalStorage("view") as "table" | "card" | "grid") || "card";
 
-  if (!data) return <Loader variant="mediator" className="h-[50vh]" />;
   const viewsContainer = {
     table: (
       <DashboardTableView
@@ -78,6 +77,8 @@ const ActiveTicket = ({ id }: { id: string }) => {
     }
   }, [inView]);
 
+  if (!data) return <Loader variant="mediator" className="h-[50vh]" />;
+
   return (
     <>
       <Mobile>
@@ -104,11 +105,7 @@ const ActiveTicket = ({ id }: { id: string }) => {
               </div>
             </>
           ) : (
-            <EmptyState
-              variant="mediator"
-              type="ticket"
-              buttonText="See VRP Launchpad"
-            />
+            <EmptyState variant="mediator" type="ticket" />
           )}
         </div>
       </Mobile>
@@ -154,11 +151,7 @@ const ActiveTicket = ({ id }: { id: string }) => {
               />
             </>
           ) : (
-            <EmptyState
-              variant="mediator"
-              type="ticket"
-              buttonText="See VRP Launchpad"
-            />
+            <EmptyState variant="mediator" type="ticket" />
           )}
         </div>
       </Desktop>

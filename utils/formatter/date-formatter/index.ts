@@ -113,7 +113,15 @@ export function formatTimestamp(timestamp: string): string {
 
 export function getCurrentTime() {
   const now = new Date();
-  const hours = now.getHours().toString().padStart(2, "0");
-  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const hours = now.getUTCHours().toString().padStart(2, "0");
+  const minutes = now.getUTCMinutes().toString().padStart(2, "0");
   return hours + ":" + minutes;
+}
+export function getCurrentDate() {
+  const dateNow = new Date();
+  const year = dateNow.getUTCFullYear();
+  const month = (dateNow.getUTCMonth() + 1).toString().padStart(2, "0");
+  const day = dateNow.getUTCDate().toString().padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
 }

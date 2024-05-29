@@ -20,7 +20,7 @@ const SingleVrp = ({
   const [active, setActive] = useState<TabsItem>(TabsItem.rules);
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
-    rules: <RnP data={data?.company?.rules} />,
+    rules: <RnP data={data?.rules ?? null} />,
     scope: <Scope id={data?.id || ""} assetTypes={assetTypes} />,
     updates: <UpdateList data={data?.latest_updates} />,
     thanks: <Thanks data={data?.company?.thanks_message} />,

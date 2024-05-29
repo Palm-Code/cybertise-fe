@@ -10,12 +10,13 @@ import Typography from "../typography/typography";
 import { ArrowUpDown } from "lucide-react";
 import { Desktop, Mobile } from "../../layout";
 import { iconColor } from "@/core/constants/common";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_FilterDropdownProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   withIcon?: boolean;
 }
 

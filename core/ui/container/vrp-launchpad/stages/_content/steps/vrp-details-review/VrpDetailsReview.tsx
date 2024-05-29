@@ -39,7 +39,9 @@ const VrpDetailsReview = ({
         <Typography variant="h5" weight="bold">
           {isLastStep ? "VRP Details" : `Review ${forms.title}`}
         </Typography>
-        {isLastStep || currentStep === "Published" ? (
+        {isLastStep ||
+        currentStep === "Published" ||
+        currentStep === "Phase5" ? (
           <Button
             variant={`tertiary-${variant}`}
             prefixIcon={<FilePenLine />}
@@ -49,19 +51,18 @@ const VrpDetailsReview = ({
           </Button>
         ) : null}
       </div>
-      {currentStep === "Phase5" ||
-        (currentStep === "Published" && (
-          <div
-            className={cn(
-              "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4"
-            )}
-          >
-            <Typography variant="p" affects="normal" weight="semibold">
-              VRP {currentStep === "Published" ? "Published" : "Approved"}
-            </Typography>
-            <CheckCircle2 />
-          </div>
-        ))}
+      {(currentStep === "Phase5" || currentStep === "Published") && (
+        <div
+          className={cn(
+            "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4"
+          )}
+        >
+          <Typography variant="p" affects="normal" weight="semibold">
+            VRP {currentStep === "Published" ? "Published" : "Approved"}
+          </Typography>
+          <CheckCircle2 />
+        </div>
+      )}
       <VrpDescriptionCard data={forms} />
       <MonetaryAwardsCard data={forms} />
       {!!forms.rules && !!forms.policies && <RulesAndPolicies isReview />}

@@ -63,7 +63,8 @@ interface I_UpdateList {
 }
 
 const UpdateList = ({ data }: I_UpdateList) => {
-  if (!data) return <EmptyState type="update" variant="hacker" />;
+  if (!data || data?.length === 0)
+    return <EmptyState type="update" variant="hacker" />;
 
   return (
     <div className="_flexbox__col__start__start mt-4 w-full gap-8">

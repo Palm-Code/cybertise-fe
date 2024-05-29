@@ -30,7 +30,10 @@ import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
 import RulesAndPolicies from "../_content/steps/vrp-details-review/_card/RulesAndPolicies";
 import { usePostUpdateVrp } from "@/core/react-query/client/usePostUpdateVrp";
 import { Role } from "@/types/admin/sidebar";
-import { getCurrentTime } from "@/utils/formatter/date-formatter";
+import {
+  getCurrentDate,
+  getCurrentTime,
+} from "@/utils/formatter/date-formatter";
 
 interface I_VRPDetailsProps {
   variant: keyof typeof Role;
@@ -104,10 +107,7 @@ const VRPDetails = ({
                 variant={variant}
                 onClickRevise={() => onSubmitForm("Phase4")}
                 onClickNext={() => {
-                  method.setValue(
-                    "publish_date",
-                    new Date().toISOString().split("T")[0]
-                  );
+                  method.setValue("publish_date", getCurrentDate());
                   method.setValue("publish_time", getCurrentTime());
                   setOpenModal(true);
                 }}
@@ -183,6 +183,7 @@ const VRPDetails = ({
         {
           element: (
             <VrpDetailsReview
+              currentStep={currentStep}
               variant="company"
               assetTypes={options}
               isLoading={isPending}

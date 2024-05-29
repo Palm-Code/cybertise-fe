@@ -59,7 +59,7 @@ export default function ScopeTable({ data, columns, isLoading }: I_TableProps) {
                           affects="small"
                           weight="semibold"
                         >
-                          {item.asset_type_name}
+                          {item.content}
                         </Typography>
                       </div>
                     </TableData>

@@ -6,6 +6,7 @@ const ScopeCard = ({
   asset_type_name,
   asset_type,
   updated_at,
+  content,
 }: I_TargetAsset) => {
   return (
     <Card className="_flexbox__col__start__start gap-8">
@@ -19,7 +20,7 @@ const ScopeCard = ({
           Asset Name
         </Typography>
         <Typography variant="p" affects="small" weight="medium">
-          {asset_type_name}
+          {content}
         </Typography>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">

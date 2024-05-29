@@ -131,11 +131,11 @@ export const filterItems: MultiFilterType = {
   status: [
     { label: "All status", value: "all" },
     { label: "Open", value: "Open" },
-    { label: "Closed", value: "Closed" },
     { label: "In Review", value: "In Review" },
     { label: "Waiting for Payment", value: "Waiting for Payment" },
     { label: "Paid", value: "Paid" },
     { label: "Canceled", value: "Canceled" },
+    { label: "Closed", value: "Closed" },
   ],
   company_status: [
     { label: "All status", value: "all" },

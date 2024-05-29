@@ -12,7 +12,7 @@ export const usePostSignupCompany = () => {
     mutationFn: fetchPostRegisterCompany,
     onSuccess: (_, variables) => {
       router.replace(
-        `/auth/signup?type=hacker&authenticate_email=${variables.email}`
+        `/auth/signup?type=company&authenticate_email=${variables.email}`
       );
     },
   });

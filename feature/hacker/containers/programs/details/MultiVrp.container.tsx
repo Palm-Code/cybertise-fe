@@ -39,7 +39,7 @@ const MultiVrp = () => {
           />
         </div>
         {expand ? (
-          <RnPCard />
+          <RnPCard data={null} />
         ) : (
           <VRPCard onClickSeeDetails={() => setExpand(true)} />
         )}
@@ -66,7 +66,7 @@ const MultiVrp = () => {
           onValueChange={() => {}}
         />
         {expand ? (
-          <RnPCard />
+          <RnPCard data={null} />
         ) : (
           <VRPCard onClickSeeDetails={() => setExpand(true)} />
         )}

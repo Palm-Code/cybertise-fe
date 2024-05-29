@@ -6,7 +6,6 @@ import { MoveLeft, X } from "lucide-react";
 import Link from "next/link";
 import { useMultistepForm } from "@/utils/multi-step-form";
 import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Progress } from "@/core/ui/components/progress/progress";
 import CompanyStepOne from "./form/CompanyStepOne.form";
@@ -49,7 +48,7 @@ const SignUpCompany = () => {
       },
       {
         element: <SuccessState noPadding />,
-        key: "company-step-three",
+        key: "company-step-four",
       },
     ]);
 

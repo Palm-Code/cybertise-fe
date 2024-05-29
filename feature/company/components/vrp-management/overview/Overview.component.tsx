@@ -33,7 +33,7 @@ const Overview = ({ id }: { id: string }) => {
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
-    rules: <RnP data={programListDetails?.data?.company?.rules} />,
+    rules: <RnP data={programListDetails?.data?.rules || "-"} />,
     scope: <Scope id={id} assetTypes={assetTypes} />,
     updates: (
       <UpdateList

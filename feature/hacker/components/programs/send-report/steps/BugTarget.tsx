@@ -69,7 +69,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                   }}
                 >
                   <Typography variant="p" affects="normal">
-                    {item.asset_type_name}
+                    {item.content}
                   </Typography>
                   <Badge variant={item.asset_type.label as any}>
                     {item.asset_type.value}

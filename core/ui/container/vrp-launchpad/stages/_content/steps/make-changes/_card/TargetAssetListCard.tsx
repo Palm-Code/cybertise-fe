@@ -87,6 +87,7 @@ const TargetAssetListCard = ({
           >
             <Input
               label={"Asset " + (index + 1)}
+              disabled={!isEditingList[index]}
               placeholderText="Hostname or IP Address"
               value={v.content ?? "Hostname or IP Address"}
               className="bg-transparen w-full"
@@ -100,7 +101,6 @@ const TargetAssetListCard = ({
                 )
               }
               transparentBg
-              readOnly={!isEditingList[index]}
             />
             {isEditingList[index] ? (
               <AssetType

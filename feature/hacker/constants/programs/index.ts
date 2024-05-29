@@ -199,7 +199,7 @@ export const programsCardData: ProgramCardType[] = [
 
 export const tableColumns: I_TableColumns[] = [
   {
-    title: "Company Name",
+    title: "Program Name",
     align: "left",
     width: "w-3/12",
   },
