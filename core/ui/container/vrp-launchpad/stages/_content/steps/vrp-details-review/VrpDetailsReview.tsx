@@ -1,4 +1,4 @@
-import { Button, Typography } from "@/core/ui/components";
+import { Button, Card, Checkbox, Typography } from "@/core/ui/components";
 import VrpDescriptionCard from "./_card/VrpDescriptionCard";
 import MonetaryAwardsCard from "./_card/MonetaryAwardsCard";
 import TargetAssetListCard from "./_card/TargetAssetListCard";
@@ -10,6 +10,7 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import RulesAndPolicies from "./_card/RulesAndPolicies";
 import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
+import { useState } from "react";
 
 interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
@@ -33,6 +34,7 @@ const VrpDetailsReview = ({
 }: I_VrpDetailsReviewProps) => {
   const { getValues } = useFormContext<CreateVrpType>();
   const forms = getValues();
+  const [checked, setChecked] = useState<boolean>(false);
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
@@ -54,7 +56,7 @@ const VrpDetailsReview = ({
       {(currentStep === "Phase5" || currentStep === "Published") && (
         <div
           className={cn(
-            "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4"
+            "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4 !text-white"
           )}
         >
           <Typography variant="p" affects="normal" weight="semibold">
@@ -68,6 +70,26 @@ const VrpDetailsReview = ({
       {!!forms.rules && !!forms.policies && <RulesAndPolicies isReview />}
       <TargetAssetListCard data={forms} />
       <Notes data={forms.notes} />
+      {currentStep === "Phase5" && (
+        <Card
+          className={cn(
+            "_flexbox__row__start__start w-full gap-4",
+            "bg-background-page-light dark:bg-background-page-dark",
+            "xl:p-7.5"
+          )}
+        >
+          <Checkbox
+            variant="company"
+            checked={checked}
+            onCheckedChange={() => setChecked(!checked)}
+          />
+          <Typography variant="p" affects="default">
+            By clicking 'Submit Report', you agree to our Terms and Conditions
+            and acknowledge that you have read our Code of Conduct, Privacy
+            Policy and Disclosure Guidelines.
+          </Typography>
+        </Card>
+      )}
       {variant === "company" ? (
         currentStep === "Phase1" ||
         currentStep === "Phase3" ||
@@ -82,7 +104,7 @@ const VrpDetailsReview = ({
                 : onClickNext()
             }
             isLoading={isLoading}
-            disabled={isLoading}
+            disabled={isLoading || (currentStep === "Phase5" && !checked)}
           >
             {currentStep === "Phase5" && !isLastStep
               ? "Publish"

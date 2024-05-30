@@ -26,6 +26,7 @@ import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgra
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useGetTargetAsset } from "@/core/react-query/client";
 
 interface I_SendReportProps {
   id: string;
@@ -35,6 +36,7 @@ interface I_SendReportProps {
 }
 
 const SendReport = ({ id, defaultData }: I_SendReportProps) => {
+  const { data: targetAsset } = useGetTargetAsset();
   const { data } = useGetProgramDetails(
     {
       params: {
@@ -43,6 +45,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     },
     id
   );
+
   const [isAgreed, setIsAgreed] = useState<boolean>(false);
   const { mutateAsync, isPending, isSuccess } = usePostSendReports();
   const { data: vulnerabilityType } = useGetVulnerabilityType();
@@ -64,8 +67,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
       target_asset_id: "",
     },
   });
-  const forms = method.getValues();
-
+  const forms = method.watch();
   const disabledButton = useMemo(() => {
     const disabled: { [key: string]: boolean } = {
       0: false,
@@ -123,10 +125,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
         <Review
           defaultData={{
             assetType: defaultData?.assetType,
-            targetAssets: data?.data.target_assets,
+            targetAssets: targetAsset?.data,
             vulnerabilityType: vulnerabilityType,
           }}
-          data={method.getValues()}
+          data={forms}
         />
       ),
       key: "review",
@@ -134,8 +136,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
   ]);
 
   const onSubmitForm = () => {
-    const payload = method.getValues();
-    mutateAsync(payload);
+    mutateAsync(forms);
   };
 
   return (

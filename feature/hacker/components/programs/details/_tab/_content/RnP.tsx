@@ -10,9 +10,10 @@ const RnP = ({ data }: { data: string | null }) => {
           <Typography variant="p" affects="extralarge" weight="bold">
             Rules and policy
           </Typography>
-          <Typography variant="p" affects="normal">
-            {data}
-          </Typography>
+          <article
+            className="tiptap"
+            dangerouslySetInnerHTML={{ __html: data ?? "" }}
+          />
         </div>
       </Card>
     </AnimationWrapper>

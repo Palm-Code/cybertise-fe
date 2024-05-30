@@ -3,7 +3,11 @@ import { Badge, badgeVariants, Card, Typography } from "@/core/ui/components";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 
 interface I_BugTargetProps {
-  target_assets: string;
+  target_assets: {
+    label?: string;
+    value?: string;
+    content?: string;
+  };
   vulnerability_type: string;
   risk_level: number;
 }
@@ -31,9 +35,20 @@ const BugTargetCard = ({
         >
           Target Assets
         </Typography>
-        <Typography variant="p" affects="normal">
-          {target_assets}
-        </Typography>
+        <div className="_flexbox__row__start__start gap-4">
+          <Typography variant="p" affects="normal">
+            {target_assets.content}
+          </Typography>
+          <Badge
+            variant={
+              target_assets.value
+                ? (target_assets.value.toLowerCase() as keyof typeof badgeVariants)
+                : "default"
+            }
+          >
+            {target_assets.label}
+          </Badge>
+        </div>
       </div>
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography

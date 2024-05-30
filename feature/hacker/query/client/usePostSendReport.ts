@@ -3,6 +3,7 @@ import { I_GetErrorRes, I_PostTempFilesResponse } from "@/core/models/common";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { fetchPostReports } from "@/core/services/common/fetchPostReports";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const usePostSendReports = () => {
   const mutation = useMutation<
@@ -10,15 +11,16 @@ export const usePostSendReports = () => {
     I_GetErrorRes,
     SendReportRequestType
   >({
-    retry: 3,
     mutationFn: (payload) => {
       return fetchPostReports(payload);
     },
+    onError: (error) => {
+      toast.error("Failed to send report", {
+        position: "bottom-right",
+        duration: 2000,
+      });
+    },
   });
-
-  if (mutation.error) {
-    throw new Error(JSON.stringify(mutation.error));
-  }
 
   return mutation;
 };

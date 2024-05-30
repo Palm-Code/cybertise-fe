@@ -9,7 +9,6 @@ import {
 } from "@/core/ui/components";
 
 const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
-  console.log({ data });
   return (
     <>
       <Card

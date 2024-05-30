@@ -89,6 +89,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               placeholderText="Input url"
               className="bg-transparen w-full"
               transparentBg
+              value={forms.custom_ta_value}
               onChange={(e) => {
                 setValue("target_asset_id", undefined, {
                   shouldValidate: true,
@@ -105,7 +106,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                   ? (defaultData.assetType.find(
                       (item) => item.id === forms.custom_ta_asset_type_id
                     )?.value as string)
-                  : "url"
+                  : "default"
               }
               options={defaultData?.assetType?.slice(1) ?? []}
               onValueChange={(v) => {

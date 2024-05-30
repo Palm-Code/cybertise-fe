@@ -26,15 +26,34 @@ interface I_ReviewProps {
 }
 
 const Review = ({ data, defaultData }: I_ReviewProps) => {
-  if (data)
+  if (data && defaultData)
     return (
       <div className="_flexbox__col__start__start w-full gap-6 bg-transparent">
         <BugTargetCard
-          target_assets={
-            data?.target_asset_id && defaultData?.targetAssets
-              ? defaultData?.targetAssets[0]?.asset_type_name
-              : (data.custom_ta_value as string)
-          }
+          target_assets={{
+            label:
+              defaultData?.targetAssets && data?.target_asset_id
+                ? defaultData.targetAssets?.find(
+                    (item) => item.id === data?.target_asset_id
+                  )?.asset_type.value
+                : defaultData.assetType?.find(
+                    (item) => item.id === data?.custom_ta_asset_type_id
+                  )?.label,
+            value: defaultData?.targetAssets
+              ? data?.target_asset_id
+                ? defaultData.targetAssets?.find(
+                    (item) => item.id === data?.target_asset_id
+                  )?.asset_type.label
+                : defaultData.assetType?.find(
+                    (item) => item.id === data?.custom_ta_asset_type_id
+                  )?.value
+              : "default",
+            content:
+              data?.custom_ta_value ||
+              (defaultData?.targetAssets?.find(
+                (item) => item.id === data?.target_asset_id
+              )?.content as string),
+          }}
           vulnerability_type={
             defaultData?.vulnerabilityType?.find(
               (item) => item.id === data?.vulnerabiity_type_id

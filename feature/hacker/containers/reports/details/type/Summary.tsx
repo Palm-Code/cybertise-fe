@@ -14,13 +14,7 @@ const Summary = ({
   data: I_GetChatListItemSuccessResponse["data"][0];
 }) => {
   const { data: assetType } = useGetAssetType();
-  const { data: targetAsset } = useGetTargetAsset({
-    params: {
-      filter: {
-        id: data.chat_ticket?.target_asset_id,
-      },
-    },
-  });
+  const { data: targetAsset } = useGetTargetAsset();
   const { data: vulnerabilityType } = useGetVulnerabilityType();
 
   return (
