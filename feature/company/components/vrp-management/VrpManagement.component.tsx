@@ -64,14 +64,16 @@ const VrpManagement = () => {
               href={"/vrp-launchpad/create-vrp"}
             />
           )}
-          {role?.toLowerCase() === Role.company && (
-            <Link
-              href={"/vrp-launchpad/create-vrp"}
-              className="w-full rounded-md border border-white px-4 py-6 text-center"
-            >
-              + Add New VRP
-            </Link>
-          )}
+          {programList &&
+            role?.toLowerCase() === Role.company &&
+            programList?.data?.length > 0 && (
+              <Link
+                href={"/vrp-launchpad/create-vrp"}
+                className="w-full rounded-md border border-white px-4 py-6 text-center"
+              >
+                + Add New VRP
+              </Link>
+            )}
         </div>
       </Desktop>
       <ModalForbidden

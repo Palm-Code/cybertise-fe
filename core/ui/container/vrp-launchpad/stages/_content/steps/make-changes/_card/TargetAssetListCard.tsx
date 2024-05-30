@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { useGetAssetType } from "@/core/react-query/client";
 import { Button, Card, Input, Typography } from "@/core/ui/components";
@@ -29,7 +30,6 @@ const TargetAssetListCard = ({
 }: I_TargetAssetListCard<boolean>) => {
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
-  const [assetCount, setAssetCount] = useState(5);
   const [isEditingList, setIsEditingList] = useState<boolean[]>(
     Array(forms.target_assets.length).fill(false)
   );
@@ -107,24 +107,23 @@ const TargetAssetListCard = ({
                 label="Asset type"
                 value={forms.target_assets[index].asset_type_id}
                 onValueChange={(e) => {
-                  const oldValueAssetType = forms.asset_types_values;
                   const newAssetTypeValue = options.find(
                     (v) => v.id === e
-                  ) as CreateVrpType["asset_types_values"][0];
-                  setValue(
-                    "asset_types_values",
-                    [
-                      ...oldValueAssetType.filter((v, i) => i !== index),
-                      newAssetTypeValue,
-                    ],
-                    {
-                      shouldValidate: true,
-                    }
-                  );
+                  ) as I_GetAssetTypeSuccessResponse["data"][0];
                   setValue(
                     "target_assets",
                     forms.target_assets.map((v, i) =>
-                      i === index ? { ...v, asset_type_id: e } : v
+                      i === index
+                        ? {
+                            ...v,
+                            asset_type_id: e,
+                            asset_type: {
+                              ...v.asset_type,
+                              label: newAssetTypeValue.value,
+                              value: newAssetTypeValue.label,
+                            },
+                          }
+                        : v
                     ),
                     { shouldValidate: true }
                   );

@@ -5,7 +5,6 @@ export { default as ProgramsCardView } from "./programs/TicketView.container";
 export { default as ProgramsTableView } from "./programs/TableView.container";
 export { default as ProgramsGridView } from "./programs/GridView.container";
 export { default as SingleVrpContainer } from "./programs/details/SingleVrp.container";
-export { default as MultiVrpContainer } from "./programs/details/MultiVrp.container";
 export { default as ReportsCardView } from "./reports/TicketView.container";
 export { default as ReportsTableView } from "./reports/TableView.container";
 export { default as ReportsGridView } from "./reports/GridView.container";

@@ -8,17 +8,9 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        "mobile-app-ios":
-          "text-asset-text-ios bg-asset-background-ios/10 px-2.5 py-1",
-        blockchain:
-          "text-white bg-semantic-light-medium dark:bg-semantic-dark-medium px-2.5 py-1",
-        "mobile-app-android":
-          "text-asset-text-android bg-asset-background-android/10 px-2.5 py-1",
         default:
           "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         no: "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
-        domain:
-          "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
         hacker:
           "text-lime-badge bg-neutral-light-90 dark:bg-neutral-dark-90 px-2.5 py-0",
         company:
@@ -32,17 +24,26 @@ const badgeVariants = cva(
           "text-white bg-semantic-light-medium dark:bg-semantic-dark-medium px-2.5 py-1",
         low: "text-neutral-light-0 dark:text-neutral-dark-80 bg-semantic-light-low dark:bg-semantic-dark-low px-2.5 py-1",
         info: "text-white bg-semantic-light-info dark:bg-semantic-dark-info px-2.5 py-1",
-        others:
-          "text-semantic-light-info bg-semantic-light-info/10 dark:bg-semantic-dark-info/10 px-2.5 py-1",
-        "landing-page":
-          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
-        url: "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
-        windows:
-          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
-        website:
-          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
-        "ip-address":
-          "bg-asset-background-domain/10 text-asset-background-domain px-2.5 py-1",
+        infrastructure:
+          "!bg-asset-infrastructure/10 px-2.5 py-1 !text-asset-infrastructure",
+        webapplication:
+          "!bg-asset-webapplication/10 px-2.5 py-1 !text-asset-webapplication",
+        "software-pc":
+          "bg-asset-software-pc/10 px-2.5 py-1 !text-asset-software-pc",
+        mobileapp: "!bg-asset-mobileapp/10 px-2.5 py-1 !text-asset-mobileapp",
+        api: "!bg-asset-api/10 px-2.5 py-1 !text-asset-api",
+        ai: "!bg-asset-ai/10 px-2.5 py-1 !text-asset-ai",
+        blockchain:
+          "!bg-asset-blockchain/10 px-2.5 py-1 !text-asset-blockchain",
+        cryptography:
+          "!bg-asset-cryptography/10 px-2.5 py-1 !text-asset-cryptography",
+        gaming: "!bg-asset-gaming/10 px-2.5 py-1 !text-asset-gaming",
+        onlinecasino:
+          "!bg-asset-onlinecasino/10 px-2.5 py-1 !text-asset-onlinecasino",
+        "code-audit":
+          "!bg-asset-codeaudit/10 px-2.5 py-1 !text-asset-codeaudit",
+        other:
+          "bg-neutral-light-80 dark:bg-neutral-dark-80 text-neutral-light-0 dark:text-white px-2.5 py-1",
       },
     },
     defaultVariants: {

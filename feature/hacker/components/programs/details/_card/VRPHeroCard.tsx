@@ -12,7 +12,6 @@ import { useInView } from "react-intersection-observer";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 
 interface I_VRPHeroCard {
   data?: I_GetProgramDetailsSuccessResponse["data"];

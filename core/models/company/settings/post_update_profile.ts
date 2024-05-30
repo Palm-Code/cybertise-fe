@@ -11,7 +11,12 @@ export const updatePorfileSchema = z.object({
   city: z.string().min(1, { message: "City is required" }),
   state: z.string().min(1, { message: "State is required" }),
   zip: z.string().min(1, { message: "Zip is required" }),
-  phone: z.string().min(1, { message: "Phone is required" }),
+  phone: z
+    .string()
+    .min(1, { message: "Phone is required" })
+    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+      message: "Invalid phone number format",
+    }),
   about: z.string().min(1, { message: "About is required" }),
   want_news: z.number(),
   logo: z.string().optional(),
@@ -27,7 +32,12 @@ export const updatePorfileSchema = z.object({
 export const updateEmergencyContactSchema = z.object({
   emergency_contact_person: z.string().min(1, { message: "Name is required" }),
   emergency_email: z.string().email({ message: "Email is required" }),
-  emergency_phone: z.string().min(1, { message: "Phone is required" }),
+  emergency_phone: z
+    .string()
+    .min(1, { message: "Phone is required" })
+    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+      message: "Invalid phone number format",
+    }),
 });
 
 export type I_UpdateProfile = z.infer<typeof updatePorfileSchema>;

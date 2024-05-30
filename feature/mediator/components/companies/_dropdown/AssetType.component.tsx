@@ -26,6 +26,8 @@ const AssetType = ({
     (option) => option.value === value
   )?.label;
 
+  const inputValue = options.find((option) => option.value === value)?.value;
+
   return (
     <Select>
       <SelectTrigger className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0">
@@ -36,7 +38,11 @@ const AssetType = ({
         >
           {label}
         </Typography>
-        {inputValueLabel && <Badge variant={"url"}>{inputValueLabel}</Badge>}
+        {inputValueLabel && (
+          <Badge variant={inputValue as keyof typeof badgeVariants}>
+            {inputValueLabel}
+          </Badge>
+        )}
       </SelectTrigger>
       <SelectContent
         align="end"

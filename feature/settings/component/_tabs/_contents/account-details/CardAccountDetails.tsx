@@ -72,7 +72,7 @@ const CardAccountDetails = ({
                 />
               )}
               <Input
-                type="number"
+                type="tel"
                 pattern="[0-9]*"
                 inputMode="numeric"
                 label="Phone Number"
@@ -87,6 +87,7 @@ const CardAccountDetails = ({
                   setValue("phone", "", { shouldValidate: true });
                 }}
                 isError={!!errors.phone}
+                errorMsg={errors.phone?.message}
               />
             </div>
           </Card>

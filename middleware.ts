@@ -4,8 +4,10 @@ import withAuth from "./middlewares/withAuth";
 
 export async function mainMiddleware(request: NextRequest) {
   await updateSession(request);
-  const res = NextResponse.next();
-  return res;
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
+  }
+  return NextResponse.next();
 }
 
 export default withAuth(mainMiddleware, [

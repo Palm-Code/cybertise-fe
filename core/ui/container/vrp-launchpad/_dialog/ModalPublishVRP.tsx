@@ -5,11 +5,10 @@ import {
   BaseModal,
   Button,
   DatePicker,
-  Input,
   Typography,
 } from "@/core/ui/components";
-import { Calendar } from "@/core/ui/components/calendar/calendar";
 import TimePicker from "@/core/ui/components/timepicker/timepicker";
+import { getCurrentDate } from "@/utils/formatter/date-formatter";
 import { CircleDot } from "lucide-react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -128,10 +127,7 @@ const ModalPublishVRP = ({
                     <DatePicker
                       value={forms.publish_date as string}
                       onChangeValue={(e) => {
-                        setValue(
-                          "publish_date",
-                          e?.toISOString().split("T")[0]
-                        );
+                        setValue("publish_date", getCurrentDate(e));
                       }}
                     />
                     <TimePicker

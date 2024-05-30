@@ -16,7 +16,6 @@ import Brief from "../_content/steps/brief/Brief";
 import VrpDescriptionCard from "../_content/steps/make-changes/_card/VrpDescriptionCard";
 import MonetaryAwardCardList from "../_content/steps/make-changes/_card/MonetaryAwardsCard";
 import TargetAssetListCard from "../_content/steps/make-changes/_card/TargetAssetListCard";
-import ModalPublishVRP from "../../_dialog/ModalPublishVRP";
 import {
   createVrpSchema,
   CreateVrpType,
@@ -28,7 +27,6 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import { usePostCreateVrp } from "@/core/react-query/client/usePostCreateVrp";
 import { toast } from "sonner";
 import ModalSubmitVRP from "../../_dialog/ModalSubmitVRP";
-import RulesAndPolicies from "../_content/steps/vrp-details-review/_card/RulesAndPolicies";
 import { Role } from "@/types/admin/sidebar";
 
 interface I_VRPCreationProps {
