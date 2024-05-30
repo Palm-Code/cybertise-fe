@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { ChevronDown, Loader2, MoveLeft } from "lucide-react";
+import { ChevronDown, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
@@ -55,9 +55,23 @@ const ReportDetails = ({ id }: { id: string }) => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
   };
 
+  const [firstRender, setIsFirstRender] = useState<boolean>(true);
+
   useEffect(() => {
-    scrollView();
-  }, [description, data]);
+    if (firstRender) {
+      scrollView();
+    }
+
+    return () => {
+      setIsFirstRender(false);
+    };
+  }, [data, firstRender]);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   const sendMessage = async () => {
     await mutateAsync({
@@ -181,6 +195,9 @@ const ReportDetails = ({ id }: { id: string }) => {
               </Typography>
             </div>
           </div>
+          {isFetchingNextPage && (
+            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          )}
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
           </div>
@@ -284,6 +301,9 @@ const ReportDetails = ({ id }: { id: string }) => {
               </div>
             </AnimationWrapper>
           </div>
+          {isFetchingNextPage && (
+            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          )}
           <ChatBubble data={chatData ?? []} />
         </div>
         {ticketDetails.status !== "Closed" && (

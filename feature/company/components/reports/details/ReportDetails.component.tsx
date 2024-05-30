@@ -25,9 +25,9 @@ import {
 import { SendReportRequestType } from "@/core/models/common";
 import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
-import useLoadMore from "@/core/hooks/useLoadMore";
 import { useInView } from "react-intersection-observer";
 
+let firstRender = true;
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
@@ -48,9 +48,23 @@ const ReportDetails = ({ id }: { id: string }) => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
   };
 
+  const [firstRender, setIsFirstRender] = useState<boolean>(true);
+
   useEffect(() => {
-    scrollView();
-  }, [description, data]);
+    if (firstRender) {
+      scrollView();
+    }
+
+    return () => {
+      setIsFirstRender(false);
+    };
+  }, [data, firstRender]);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   const sendMessage = async () => {
     await mutateAsync({
@@ -140,8 +154,8 @@ const ReportDetails = ({ id }: { id: string }) => {
               to interact.
             </div>
           </div>
-          {isRefetching && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          {isFetchingNextPage && (
+            <Loader variant="company" width={12} height={12} className="h-12" />
           )}
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
@@ -199,8 +213,8 @@ const ReportDetails = ({ id }: { id: string }) => {
               ></div>
             </AnimationWrapper>
           </div>
-          {isRefetching && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+          {isFetchingNextPage && (
+            <Loader variant="company" width={12} height={12} className="h-12" />
           )}
           <ChatBubble data={chatData ?? []} />
         </div>

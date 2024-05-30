@@ -22,6 +22,7 @@ export const useGetChatListItem = (
             size: 30,
             number: pageParam.pageParam,
           },
+          include: "chatTicket",
           filter: {
             ...payload?.params?.filter,
             chat_ticket_id: id,

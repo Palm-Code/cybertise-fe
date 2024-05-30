@@ -2,11 +2,7 @@ import { I_TargetAsset } from "@/core/models/hacker/programs";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { Badge, Card, Typography } from "@/core/ui/components";
 
-const ScopeCard = ({
-  asset_type_name,
-  asset_type,
-  updated_at,
-}: I_TargetAsset) => {
+const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
   return (
     <Card className="_flexbox__col__start__start gap-8">
       <Badge variant={asset_type.label as any}>{asset_type.value}</Badge>
@@ -19,7 +15,7 @@ const ScopeCard = ({
           Asset Name
         </Typography>
         <Typography variant="p" affects="small" weight="medium">
-          {asset_type_name}
+          {content}
         </Typography>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">
