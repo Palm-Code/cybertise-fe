@@ -64,7 +64,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                       )}
                     >
                       <div className="_flexbox__col__start__start gap-4">
-                        <div className="grid grid-cols-[auto_1fr] gap-1">
+                        <div className="grid h-fit grid-cols-[auto_1fr] gap-1">
                           <div className="relative aspect-square w-8 overflow-hidden rounded-full">
                             <Image
                               src={item.company?.logo as string}
@@ -72,17 +72,23 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                               fill
                             />
                           </div>
-                          <Typography
-                            variant="p"
-                            affects="small"
-                            weight="semibold"
-                          >
-                            {item.company?.name}
-                          </Typography>
+                          <div className="_flexbox__col__start__between h-full w-full gap-1">
+                            <Typography
+                              variant="p"
+                              affects="small"
+                              weight="semibold"
+                            >
+                              {item.company?.name}
+                            </Typography>
+                            <Typography
+                              variant="p"
+                              affects="small"
+                              weight="normal"
+                            >
+                              #{item.code} - {item.title}
+                            </Typography>
+                          </div>
                         </div>
-                        <Typography variant="p" affects="small" weight="normal">
-                          #{item.code} - {item.title}
-                        </Typography>
                       </div>
                     </TableData>
                     <TableData

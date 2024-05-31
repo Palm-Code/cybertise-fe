@@ -45,6 +45,7 @@ const buttonVariants = cva(
           "border border-neutral-light-80 bg-transparent dark:border-neutral-dark-80 hover:bg-violet-normal dark:text-white text-neutral-light-0 hover:text-white",
         "ghost-hacker":
           "bg-transparent text-lime-normal-light dark:text-lime-normal-dark hover:text-lime-dark-light hover:dark:text-lime-dark-dark focus:text-lime-dark-light focus:dark:text-lime-dark-dark active:text-lime-darker-light active:dark:text-lime-darker-dark",
+        "ghost-default": "bg-transparent !text-white",
         "ghost-mediator":
           "bg-transparent text-violet-normal hover:text-violet-dark focus:text-violet-dark active:text-violet-darker",
         "ghost-company":

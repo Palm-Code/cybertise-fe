@@ -164,7 +164,9 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                     <Typography variant="h5" weight="bold">
                       Submit Report -{" "}
                       <Tooltip content={data?.data.title as string}>
-                        {data?.data.title.substring(0, 50)}...
+                        {data?.data && data?.data.title.length > 100
+                          ? `${data?.data.title.substring(0, 100)}...`
+                          : data?.data.title}
                       </Tooltip>
                     </Typography>
                   </div>

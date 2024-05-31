@@ -75,7 +75,7 @@ const Tiptap = ({
     editorProps: {
       attributes: {
         class: cn(
-          "w-full peer appearance-none max-w-none overflow-auto whitespace-pre-line",
+          "w-full peer leading-tight appearance-none max-w-none overflow-auto whitespace-pre-line",
           "flex flex-col justify-start outline-none",
           isChat
             ? "h-full mt-0 bg-transparent"
@@ -119,6 +119,7 @@ const Tiptap = ({
           {label}
         </label>
         <EditorContent
+          maxLength={5000}
           editor={editor}
           onKeyDown={(e) => {
             if (!description) return;
@@ -129,7 +130,7 @@ const Tiptap = ({
             }
           }}
           autoFocus
-          className="peer flex max-h-19 w-full max-w-full overflow-auto whitespace-pre-line"
+          className="peer flex max-h-20 w-full max-w-full overflow-auto whitespace-pre-line"
         />
         <Separator orientation="horizontal" />
         <div className="_flexbox__row__center__between w-full">

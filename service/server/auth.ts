@@ -4,7 +4,6 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "../../core/lib/config";
-import { FormLoginSchema } from "../../types/auth/sign-in";
 import { redirect } from "next/navigation";
 import { Role } from "@/types/admin/sidebar";
 import { I_GetAccessTokenSuccessResponse } from "@/core/models/auth/login/get_access_token";
@@ -36,7 +35,7 @@ export async function authorize(
   };
 
   // Create the session
-  const expires = new Date(Date.now() + 3600000 * 1000);
+  const expires = new Date(Date.now() + 360000000 * 1000);
   const session = await encrypt({ user, expires });
   cookies().set("session", session, { expires, httpOnly: true });
 
@@ -60,7 +59,7 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 3600000 * 1000);
+  parsed.expires = new Date(Date.now() + 360000000 * 1000);
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",

@@ -45,9 +45,5 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
     placeholderData: keepPreviousData,
   });
 
-  if (query.error || queryInfinity.error) {
-    throw new Error(JSON.stringify(query.error));
-  }
-
   return { queryDesktop: query, queryMobile: queryInfinity };
 };

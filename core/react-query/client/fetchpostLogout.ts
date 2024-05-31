@@ -3,7 +3,6 @@ import { fetchPostLogout } from "@/core/services/auth/logout";
 import { logout } from "@/service/server/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useLocalStorage } from "usehooks-ts";
 
 export const usePostLogout = () => {
   const mutation = useMutation({

@@ -3,6 +3,7 @@ import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profil
 import { Button, Card, Input, Typography } from "@/core/ui/components";
 import { ModalForbidden } from "@/core/ui/container";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { FilePenLine, UserPlus, X } from "lucide-react";
 import { useState } from "react";
 
@@ -25,6 +26,9 @@ const Staffs = ({
               "_flexbox__col__start__start gap-6 p-0"
             )}
           >
+            {data?.length === 0 && (
+              <EmptyState variant="company" titleText="No staff found" />
+            )}
             {data?.map((item, idx) => (
               <Card
                 className={cn(
@@ -96,6 +100,9 @@ const Staffs = ({
             <Typography variant="h6" weight="bold">
               Staff
             </Typography>
+            {data?.length === 0 && (
+              <EmptyState variant="company" titleText="No staff found" />
+            )}
             {data?.map((item, idx) => (
               <Card
                 className={cn(

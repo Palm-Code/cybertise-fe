@@ -99,7 +99,7 @@ export default function Table({
                               affects="small"
                               weight="normal"
                             >
-                              Reporeted{" "}
+                              reported{" "}
                               {formatDateToAgo(item.program?.created_at ?? "")}{" "}
                               ago
                             </Typography>

@@ -90,7 +90,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                               affects="small"
                               weight="normal"
                             >
-                              Reporeted{" "}
+                              reported{" "}
                               {formatDateToAgo(item.program?.created_at ?? "")}{" "}
                               ago
                             </Typography>

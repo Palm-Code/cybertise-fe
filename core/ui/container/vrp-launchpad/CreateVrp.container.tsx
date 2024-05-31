@@ -25,7 +25,7 @@ const CreateVrpLaunchpad = ({
       case "Phase3":
         return {
           currentSteps: 3,
-          element: <VRPDetails currentStep={"Phase3"} variant={variant} />,
+          element: <VRPDetails currentStep={currentStep} variant={variant} />,
         };
       case "Phase4":
         return {
@@ -35,6 +35,11 @@ const CreateVrpLaunchpad = ({
       case "Phase5":
         return {
           currentSteps: 5,
+          element: <Setup variant={variant} />,
+        };
+      case "published":
+        return {
+          currentSteps: 6,
           element: <Setup variant={variant} />,
         };
       default:

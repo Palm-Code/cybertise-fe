@@ -60,20 +60,36 @@ const Sender = ({
             )}
           </div>
           {data.has_link && (
-            <blockquote className="_flexbox__col__start__start w-full gap-4">
+            <Card
+              className={cn(
+                "grid h-fit w-full grid-cols-[auto_1fr] gap-4 rounded-lg xl:p-4",
+                "bg-background-main-light dark:bg-background-main-dark"
+              )}
+            >
               <Image
-                src={data?.og_image as string}
-                alt={data.og_title as string}
-                width={512}
-                height={512}
+                src={data.og_image || ""}
+                alt={data.og_title || ""}
+                width={120}
+                height={120}
+                className="!m-0 !aspect-square !w-24 !max-w-24 !rounded-lg object-cover"
               />
-              <Typography variant="p" affects="tiny" weight="medium">
-                {data.og_title}
-              </Typography>
-              <Typography variant="p" affects="tiny" weight="medium">
-                {data.og_description}
-              </Typography>
-            </blockquote>
+              <div className="_flexbox__row__start__between h-full w-full gap-4">
+                <div className="_flexbox__col__start__between h-full gap-2.5">
+                  <div>
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {data.og_title}
+                    </Typography>
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                      className="text-neutral-light-40 dark:text-neutral-dark-40"
+                    >
+                      {data.og_description}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+            </Card>
           )}
           {data.media && data.media.length > 0 && (
             <div

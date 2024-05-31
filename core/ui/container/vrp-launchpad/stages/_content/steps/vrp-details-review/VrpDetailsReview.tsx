@@ -3,7 +3,7 @@ import VrpDescriptionCard from "./_card/VrpDescriptionCard";
 import MonetaryAwardsCard from "./_card/MonetaryAwardsCard";
 import TargetAssetListCard from "./_card/TargetAssetListCard";
 import Notes from "./_card/Notes";
-import { CheckCircle2, FilePenLine } from "lucide-react";
+import { AlertCircle, CheckCircle2, FilePenLine, X } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { SortFilterType } from "@/types/admin/dashboard";
@@ -11,6 +11,7 @@ import RulesAndPolicies from "./_card/RulesAndPolicies";
 import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
@@ -32,6 +33,7 @@ const VrpDetailsReview = ({
   currentStep = "Phase1",
   onClickRevise = () => {},
 }: I_VrpDetailsReviewProps) => {
+  const { back } = useRouter();
   const { getValues } = useFormContext<CreateVrpType>();
   const forms = getValues();
   const [checked, setChecked] = useState<boolean>(false);
@@ -39,7 +41,11 @@ const VrpDetailsReview = ({
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
         <Typography variant="h5" weight="bold">
-          {isLastStep ? "VRP Details" : `Review ${forms.title}`}
+          {(isLastStep && variant === "mediator") ||
+          ((currentStep === "Published" || currentStep === "Phase5") &&
+            !isLastStep)
+            ? "VRP Details"
+            : `Review ${forms.title}`}
         </Typography>
         {isLastStep ||
         currentStep === "Published" ||
@@ -49,22 +55,46 @@ const VrpDetailsReview = ({
             prefixIcon={<FilePenLine />}
             onClick={onClickEdit}
           >
-            Edit Report
+            Edit Program Details
           </Button>
         ) : null}
       </div>
-      {(currentStep === "Phase5" || currentStep === "Published") && (
-        <div
-          className={cn(
-            "_flexbox__row__center__between w-full rounded-[10px] bg-emerald-normal p-4 !text-white"
-          )}
-        >
-          <Typography variant="p" affects="normal" weight="semibold">
-            VRP {currentStep === "Published" ? "Published" : "Approved"}
-          </Typography>
-          <CheckCircle2 />
-        </div>
-      )}
+      {(currentStep === "Phase5" || currentStep === "Published") &&
+        !isLastStep && (
+          <div
+            className={cn(
+              "_flexbox__row__center__between w-full rounded-[10px] !bg-emerald-normal p-4 !text-white"
+            )}
+          >
+            <Typography variant="p" affects="normal" weight="semibold">
+              VRP {currentStep === "Published" ? "Published" : "Approved"}
+            </Typography>
+            <CheckCircle2 />
+          </div>
+        )}
+      {(currentStep === "Phase5" || currentStep === "Published") &&
+        isLastStep && (
+          <div
+            className={cn(
+              "_flexbox__row__center__start  w-full gap-4 rounded-[10px]",
+              "bg-semantic-light-medium p-4 !text-white dark:bg-semantic-dark-medium"
+            )}
+          >
+            <AlertCircle />
+            <Typography variant="p" affects="normal">
+              Your VRP has been published. Sending to the Mediator will take the
+              VRP back to Mediator Revision
+            </Typography>
+            <Button
+              variant={`ghost-default`}
+              onClick={back}
+              prefixIcon={<X />}
+              className="ml-auto"
+            >
+              Discard Changes
+            </Button>
+          </div>
+        )}
       <VrpDescriptionCard data={forms} />
       <MonetaryAwardsCard data={forms} />
       {!!forms.rules && !!forms.policies && <RulesAndPolicies isReview />}

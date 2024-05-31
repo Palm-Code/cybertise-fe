@@ -67,6 +67,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   }, [inView]);
 
   const sendMessage = async () => {
+    if (!description) return;
     await mutateAsync({
       chat_ticket_id: id,
       sender_name: chatData && chatData[0].sender_name,
@@ -79,6 +80,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         setDescription("");
         setFiles(undefined);
         setOpenAttachment(false);
+        scrollView();
       })
       .catch((err) => {
         toast.error("Failed to send message");
