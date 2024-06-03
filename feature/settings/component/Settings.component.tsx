@@ -31,7 +31,7 @@ const Setting = ({
   initialData?: I_GetUserProfileSuccessResponse["data"];
 }) => {
   const [activeTab, setActiveTab] = useState<SettingItems>(
-    role === "company staff" ? SettingItems.notifications : SettingItems.details
+    SettingItems.details
   );
   const [activeState, setActiveState] = useState<SettingItems | null>(null);
   const [editing, setEditing] = useState<boolean>(false);

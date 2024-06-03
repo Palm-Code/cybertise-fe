@@ -14,7 +14,7 @@ import html from "highlight.js/lib/languages/xml";
 import typescript from "highlight.js/lib/languages/typescript";
 import { common, createLowlight } from "lowlight";
 import { cn } from "@/core/lib/utils";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Tooltip from "../tooltip/tooltip";
 import { Info, Paperclip, Send, X } from "lucide-react";
 import Typography from "../typography/typography";
@@ -124,9 +124,15 @@ const Tiptap = ({
           onKeyDown={(e) => {
             if (!description) return;
             if (e.key === "Enter" && e.shiftKey) {
-              e.preventDefault();
-              onClickSendMessage();
-              editor?.commands.clearContent();
+              if (description === "<p><br></p>") {
+                e.preventDefault();
+                editor?.commands.clearContent();
+                return;
+              } else {
+                e.preventDefault();
+                // onClickSendMessage();
+                editor?.commands.clearContent();
+              }
             }
           }}
           autoFocus
@@ -145,7 +151,7 @@ const Tiptap = ({
                 Send Attachment
               </Button>
               <Button
-                disabled={!description}
+                disabled={!description || description === "<p><br></p>"}
                 postFixIcon={<Send />}
                 variant={`primary-${variant}`}
                 onClick={() => {

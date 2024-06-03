@@ -1,17 +1,11 @@
 "use client";
 import { useState } from "react";
 import CompaniesDetailHeroCard from "./_card/CompaniesDetailHeroCard";
-import {
-  collaboratorCardData,
-  companyTabsItem,
-  vrpCompaniesCardsData,
-} from "@/feature/mediator/constants/vrp-launchpad";
+import { companyTabsItem } from "@/feature/mediator/constants/vrp-launchpad";
 import { companyTabsItemEnums } from "@/enums";
 import Tab from "./_tab/Tab";
 import VrpCardList from "./_card/VrpCard";
 import ActiveTicket from "./_tab/_content/ActiveTicket";
-import Collaborators from "./_tab/_content/Collaborators";
-import { tableTicketData } from "@/feature/mediator/constants/dashboard";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useCompaniesDetailParamsStore } from "@/feature/mediator/zustand/store/companies/companies_detail";

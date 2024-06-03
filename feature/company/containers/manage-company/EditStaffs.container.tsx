@@ -66,12 +66,7 @@ const EditStaffs = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
-          <EditNavBar
-            isLoading={isPending}
-            disabled={!forms.name || !forms.email || !forms.phone}
-            title={isEdit ? "Edit Staff" : "Add New Staff"}
-            onClickSave={() => handleSubmitForm()}
-          />
+          <EditNavBar title={isEdit ? "Edit Staff" : "Add New Staff"} />
           <Card
             className={cn(
               "rounded-xl xl:px-8 xl:py-12",
@@ -112,10 +107,10 @@ const EditStaffs = ({
                   isError={!!errors.email}
                 />
                 <Input
-                  type="number"
-                  label="Phone Number"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  type="tel"
+                  pattern="[0-9]*"
                   inputMode="numeric"
+                  label="Phone Number"
                   value={forms.phone}
                   onChange={(e) =>
                     setValue("phone", e.target.value, {
@@ -127,6 +122,25 @@ const EditStaffs = ({
                   }}
                   isError={!!errors.phone}
                 />
+              </div>
+              <div className="_flexbox__row__center gap-6">
+                <Button
+                  asLink
+                  href="/manage-company"
+                  variant="secondary-company"
+                >
+                  Discard
+                </Button>
+                <Button
+                  variant="primary-company"
+                  disabled={
+                    isPending || !forms.name || !forms.email || !forms.phone
+                  }
+                  isLoading={isPending}
+                  onClick={handleSubmitForm}
+                >
+                  Save Changes
+                </Button>
               </div>
             </div>
           </Card>

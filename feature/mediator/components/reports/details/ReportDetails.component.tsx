@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import {
   Badge,
+  Button,
   Card,
   Indicator,
   Loader,
@@ -29,6 +30,7 @@ import { filterItems } from "@/feature/hacker/constants/dashboard";
 import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
+import { ModalForbidden } from "@/core/ui/container";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
@@ -44,6 +46,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
     useState<boolean>(false);
+  const [openModalForbidden, setOpenModalForbidden] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
   const [files, setFiles] = useState<SendReportRequestType["files"]>();
@@ -157,7 +160,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             <div
               className={cn(
                 "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
-                "bg-neutral-light-70 dark:bg-neutral-dark-70"
+                "space-y-2 bg-neutral-light-70 dark:bg-neutral-dark-70"
               )}
             >
               <div className="_flexbox__row__center__between w-full">
@@ -172,13 +175,23 @@ const ReportDetails = ({ id }: { id: string }) => {
                   Ticket
                 </Typography>
                 {ticketDetails.ticket_type === "Hacker" ? (
-                  <Link
-                    href={`/reports/${ticketDetails.related_ticket_id}`}
-                    className="underline"
-                    replace
-                  >
-                    Go to Company Ticket
-                  </Link>
+                  ticketDetails.related_ticket_id ? (
+                    <Link
+                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      className="underline"
+                      replace
+                    >
+                      Go to Company Ticket
+                    </Link>
+                  ) : (
+                    <Button
+                      variant="ghost-default"
+                      className="p-0"
+                      onClick={() => setOpenModalForbidden(true)}
+                    >
+                      Create Company Ticket
+                    </Button>
+                  )
                 ) : (
                   <Link
                     href={`/reports/${ticketDetails.related_ticket_id}`}
@@ -201,6 +214,13 @@ const ReportDetails = ({ id }: { id: string }) => {
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
           </div>
+          <ModalForbidden
+            variant="mediator"
+            isOpen={openModalForbidden}
+            onClose={() => setOpenModalForbidden(false)}
+            title="Create Company Ticket"
+            subtitle="Create Company Ticket only available on Desktop"
+          />
         </div>
       </Mobile>
       <Desktop>
@@ -282,11 +302,17 @@ const ReportDetails = ({ id }: { id: string }) => {
                   </Typography>
                   {ticketDetails.ticket_type === "Hacker" ? (
                     <Link
-                      href={`/reports/${ticketDetails.related_ticket_id}`}
+                      href={
+                        ticketDetails.related_ticket_id
+                          ? `/reports/${ticketDetails.related_ticket_id}`
+                          : `/reports/new?ticket_id=${ticketDetails.id}`
+                      }
                       className="underline"
                       replace
                     >
-                      Go to Company Ticket
+                      {ticketDetails.related_ticket_id
+                        ? "Go to Company Ticket"
+                        : "Create Company Ticket"}
                     </Link>
                   ) : (
                     <Link

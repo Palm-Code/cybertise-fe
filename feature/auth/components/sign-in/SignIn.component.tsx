@@ -24,11 +24,10 @@ const SignInComponent = () => {
   const auth_email = useSearchParams().get("authenticate_email");
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const {
-    handleSubmit,
     formState: { errors },
-    getValues,
     setValue,
     resetField,
+    watch,
   } = useForm<FormLoginSchema>({
     resolver: zodResolver(formLoginShcema),
     defaultValues: {
@@ -37,13 +36,13 @@ const SignInComponent = () => {
     },
   });
 
-  const forms = getValues();
+  const forms = watch();
   const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
 
-  const onSubmit: SubmitHandler<FormLoginSchema> = async (data) => {
+  const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    mutate({ ...data, device_type: deviceType });
+    mutate({ ...forms, device_type: deviceType });
   };
 
   const validateIsFormFilled = isObjectEmpty({
@@ -60,10 +59,7 @@ const SignInComponent = () => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={cn("mx-auto w-full max-w-[467px] rounded-lg")}
-    >
+    <div className={cn("mx-auto w-full max-w-[467px] rounded-lg")}>
       <Mobile className="_flexbox__col__center gap-8 bg-transparent px-6">
         <Typography variant="h4" weight="bold">
           Sign In
@@ -76,6 +72,13 @@ const SignInComponent = () => {
               </Typography>
             </div>
           ) : null}
+          {error?.status === 422 ? (
+            <div className="w-full rounded-md bg-red-error/20 p-3.5">
+              <Typography variant="p" affects="tiny">
+                Email does not exist
+              </Typography>
+            </div>
+          ) : null}
           <Input
             type="email"
             label="Email"
@@ -85,7 +88,12 @@ const SignInComponent = () => {
             onChange={(e) =>
               setValue("email", e.target.value, { shouldValidate: true })
             }
-            isError={errors === null}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                onSubmitLogin();
+              }
+            }}
+            isError={!!error?.email || !!errors?.email}
           />
           <div className="w-full space-y-1">
             <Input
@@ -99,6 +107,11 @@ const SignInComponent = () => {
                   shouldValidate: true,
                 })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  onSubmitLogin();
+                }
+              }}
               isError={errors === null}
             />
             <Link
@@ -114,11 +127,11 @@ const SignInComponent = () => {
         </div>
         <div className="w-full space-y-1">
           <Button
-            type="submit"
             fullWidth
             variant="primary-hacker"
             isLoading={isPending}
             disabled={validateIsFormFilled || isPending || isSuccess}
+            onClick={onSubmitLogin}
           >
             Sign In
           </Button>
@@ -156,16 +169,28 @@ const SignInComponent = () => {
                 </Typography>
               </div>
             ) : null}
+            {error?.status === 422 ? (
+              <div className="w-full rounded-md bg-red-error/20 p-3.5">
+                <Typography variant="p" affects="tiny">
+                  Email does not exist
+                </Typography>
+              </div>
+            ) : null}
             <Input
               type="email"
               label="Email"
               placeholderText="Enter your email"
               onClearInput={() => resetField("email")}
               value={forms.email}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  onSubmitLogin();
+                }
+              }}
               onChange={(e) =>
                 setValue("email", e.target.value, { shouldValidate: true })
               }
-              isError={!!errors.email}
+              isError={!!error?.email || !!errors.email}
             />
             <div className="w-full space-y-1">
               <Input
@@ -177,6 +202,11 @@ const SignInComponent = () => {
                 onChange={(e) =>
                   setValue("password", e.target.value, { shouldValidate: true })
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    onSubmitLogin();
+                  }
+                }}
                 isError={!!errors.password}
               />
               <Link
@@ -192,11 +222,11 @@ const SignInComponent = () => {
           </div>
           <div className="w-full space-y-1">
             <Button
-              type="submit"
               fullWidth
               variant="primary-hacker"
               isLoading={isPending}
               disabled={validateIsFormFilled || isPending || isSuccess}
+              onClick={onSubmitLogin}
             >
               Sign In
             </Button>
@@ -209,7 +239,7 @@ const SignInComponent = () => {
           </div>
         </div>
       </Desktop>
-    </form>
+    </div>
   );
 };
 export default SignInComponent;

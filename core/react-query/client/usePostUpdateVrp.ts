@@ -24,7 +24,6 @@ export const usePostUpdateVrp = (id: string) => {
 
     onSuccess: (data) => {
       mutations.reset();
-      router.replace("/vrp-launchpad");
       toast.success("successfully updated VRP", {
         position: "bottom-right",
         duration: 3000,

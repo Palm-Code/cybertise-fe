@@ -19,12 +19,12 @@ interface I_HackerStepOneProps {
 const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
   const {
     formState: { errors },
-    getValues,
+    watch,
     setValue,
     resetField,
   } = useFormContext<SignupHackerFormType>();
   const countryList = useGetCountry();
-  const forms = getValues();
+  const forms = watch();
 
   const onClickValidate = () => {
     onClickNext();

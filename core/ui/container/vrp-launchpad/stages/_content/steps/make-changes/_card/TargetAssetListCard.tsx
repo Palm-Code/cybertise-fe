@@ -28,7 +28,11 @@ const TargetAssetListCard = ({
   onClickPrev,
   options,
 }: I_TargetAssetListCard<boolean>) => {
-  const { watch, setValue } = useFormContext<CreateVrpType>();
+  const {
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext<CreateVrpType>();
   const forms = watch();
   const [isEditingList, setIsEditingList] = useState<boolean[]>(
     Array(forms.target_assets.length).fill(false)
@@ -81,7 +85,11 @@ const TargetAssetListCard = ({
             className={cn(
               "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md xl:p-0 xl:px-4",
               "border border-transparent transition-colors duration-100",
-              "bg-neutral-light-100 dark:bg-neutral-dark-100"
+              "bg-neutral-light-100 dark:bg-neutral-dark-100",
+              !!errors?.target_assets?.[index]?.content ||
+                !!errors?.target_assets?.[index]?.asset_type_id
+                ? "border border-red-normal"
+                : ""
             )}
             key={`list-make-changes-target-assets-${index}`}
           >
@@ -132,6 +140,12 @@ const TargetAssetListCard = ({
               />
             ) : (
               <div className="_flexbox__row__center gap-4">
+                <AssetType
+                  label="Asset type"
+                  value={forms.target_assets[index].asset_type_id}
+                  options={options}
+                  disabled
+                />
                 <button
                   type="button"
                   title="Edit"

@@ -17,12 +17,12 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
   const countryList = useGetCountry();
   const {
     formState: { errors },
-    getValues,
+    watch,
     setValue,
     resetField,
   } = useFormContext<SignupCompanyFormType>();
 
-  const forms = getValues();
+  const forms = watch();
 
   const onClickValidate = () => {
     onClickNext();

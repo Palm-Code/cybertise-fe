@@ -14,9 +14,9 @@ export function DatePicker({
   value: string;
   onChangeValue: (value: Date | undefined) => void;
 }) {
-  const [date, setDate] = React.useState<Date | undefined>(
-    value ? new Date(value) : new Date()
-  );
+  const [date, setDate] = React.useState<Date | undefined>();
+
+  console.log(date);
 
   return (
     <Popover>
@@ -40,6 +40,7 @@ export function DatePicker({
           showOutsideDays
           selected={date}
           onSelect={(e) => {
+            console.log(e?.toUTCString());
             onChangeValue(e);
             setDate(e);
           }}

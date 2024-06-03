@@ -1,6 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
-import { Card, Input, Typography } from "@/core/ui/components";
+import { Button, Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import EditNavBar from "../../components/manage-company/_cards/EditNavBar";
@@ -45,12 +45,7 @@ const EditEmergencyContact = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
-          <EditNavBar
-            isLoading={isPending}
-            disabled={!forms.name || !forms.email || !forms.phone}
-            title="Edit Emergency Contact"
-            onClickSave={() => handleSubmitForm()}
-          />
+          <EditNavBar title="Edit Emergency Contact" />
           <Card
             className={cn(
               "rounded-xl xl:px-8 xl:py-12",
@@ -91,10 +86,10 @@ const EditEmergencyContact = ({
                   isError={!!errors.email}
                 />
                 <Input
-                  type="number"
-                  label="Phone Number"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  type="tel"
+                  pattern="[0-9]*"
                   inputMode="numeric"
+                  label="Phone Number"
                   value={forms.phone}
                   onChange={(e) =>
                     setValue("phone", e.target.value, {
@@ -106,6 +101,25 @@ const EditEmergencyContact = ({
                   }}
                   isError={!!errors.phone}
                 />
+              </div>
+              <div className="_flexbox__row__center gap-6">
+                <Button
+                  asLink
+                  href="/manage-company"
+                  variant="secondary-company"
+                >
+                  Discard
+                </Button>
+                <Button
+                  variant="primary-company"
+                  disabled={
+                    isPending || !forms.name || !forms.email || !forms.phone
+                  }
+                  isLoading={isPending}
+                  onClick={handleSubmitForm}
+                >
+                  Save Changes
+                </Button>
               </div>
             </div>
           </Card>

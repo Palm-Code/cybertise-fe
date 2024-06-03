@@ -20,6 +20,10 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
       return fetchPostUpdateProfile(payload);
     },
     onSuccess: (data) => {
+      !revalidate && router.back();
+      toast.success("Update profile successfully", {
+        position: "bottom-right",
+      });
       queryClient.invalidateQueries({
         queryKey: ["getUserProfile"],
       });
@@ -27,52 +31,26 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
         queryKey: ["getUserData"],
       });
     },
-  });
-
-  if (mutations.error) {
-    mutations.reset();
-    toast.error(mutations.error.message, {
-      position: "bottom-right",
-      action: {
-        label: "retry",
-        onClick: () => {
-          mutations.mutateAsync(mutations.variables as I_UpdateProfile);
-        },
-      },
-      cancel: {
-        label: "Close",
-        onClick: () => {
-          toast.dismiss();
-        },
-      },
-      duration: 3000,
-    });
-  }
-
-  if (mutations.isSuccess) {
-    if (revalidate) {
+    onError: (error) => {
       mutations.reset();
-    }
-    toast.success("Update profile successfully", {
-      position: "bottom-right",
-      cancel: {
-        label: "Close",
-        onClick: () => {
-          if (revalidate) return mutations.reset();
-          router.back();
+      toast.error(error.message, {
+        position: "bottom-right",
+        action: {
+          label: "retry",
+          onClick: () => {
+            mutations.mutateAsync(mutations.variables as I_UpdateProfile);
+          },
         },
-      },
-      duration: 3000,
-      onDismiss: () => {
-        if (revalidate) return mutations.reset();
-        router.back();
-      },
-      onAutoClose: () => {
-        if (revalidate) return mutations.reset();
-        router.back();
-      },
-    });
-  }
+        cancel: {
+          label: "Close",
+          onClick: () => {
+            toast.dismiss();
+          },
+        },
+        duration: 3000,
+      });
+    },
+  });
 
   return mutations;
 };

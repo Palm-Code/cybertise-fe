@@ -133,19 +133,19 @@ export const monetarySData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -155,19 +155,19 @@ export const monetarySData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -177,23 +177,24 @@ export const monetarySData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
 ];
+
 export const monetaryMData: PricingProps[] = [
   {
     tier: "Tier I",
@@ -201,19 +202,19 @@ export const monetaryMData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -223,19 +224,19 @@ export const monetaryMData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -245,23 +246,24 @@ export const monetaryMData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
 ];
+
 export const monetaryLData: PricingProps[] = [
   {
     tier: "Tier I",
@@ -269,19 +271,19 @@ export const monetaryLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -291,19 +293,19 @@ export const monetaryLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -313,23 +315,24 @@ export const monetaryLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
 ];
+
 export const monetaryXLData: PricingProps[] = [
   {
     tier: "Tier I",
@@ -337,19 +340,19 @@ export const monetaryXLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -359,19 +362,19 @@ export const monetaryXLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },
@@ -381,19 +384,19 @@ export const monetaryXLData: PricingProps[] = [
     list: [
       {
         label: "Low",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Medium",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "High",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
       {
         label: "Critical",
-        value: 200,
+        value: Math.floor(Math.random() * 401) + 100,
       },
     ],
   },

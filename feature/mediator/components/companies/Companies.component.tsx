@@ -1,5 +1,5 @@
 "use client";
-import { filterItems, filterView } from "@/core/constants/dashboard";
+import { filterSortBy, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
@@ -119,7 +119,7 @@ const Companies = () => {
               <FilterDropdown
                 variant="mediator"
                 value={payload?.params?.sort as string}
-                options={filterItems}
+                options={filterSortBy.alphabetical}
                 onValueChange={(v) => useClickSort(v, store)}
               />
             </div>
@@ -179,7 +179,7 @@ const Companies = () => {
               <FilterDropdown
                 variant="mediator"
                 value={payload?.params?.sort as string}
-                options={filterItems}
+                options={filterSortBy.alphabetical}
                 onValueChange={(v) => useClickSort(v, store)}
               />
             </div>

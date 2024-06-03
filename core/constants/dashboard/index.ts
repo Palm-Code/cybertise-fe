@@ -11,6 +11,30 @@ export const filterItems: SortFilterType[] = [
     value: "updated_at",
   },
 ];
+export const filterSortBy: {
+  [key in "timestamp" | "alphabetical"]: SortFilterType[];
+} = {
+  timestamp: [
+    {
+      label: "Latest update",
+      value: "-updated_at",
+    },
+    {
+      label: "Oldest",
+      value: "updated_at",
+    },
+  ],
+  alphabetical: [
+    {
+      label: "A-Z",
+      value: "name",
+    },
+    {
+      label: "Z-A",
+      value: "-name",
+    },
+  ],
+};
 
 export const filterView: OptionsType[] = [
   {

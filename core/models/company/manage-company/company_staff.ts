@@ -3,7 +3,12 @@ import { z } from "zod";
 export const createCompanyStaffSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Email is required" }),
-  phone: z.string().min(1, { message: "Phone is required" }),
+  phone: z
+    .string()
+    .min(1, { message: "Phone is required" })
+    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+      message: "Invalid phone number format",
+    }),
 });
 
 export type I_StaffRequestType = z.infer<typeof createCompanyStaffSchema>;

@@ -77,7 +77,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
       <div className="_flexbox__col__start w-full gap-1">
         <div
           className={cn(
-            "relative z-10 flex h-32 w-full items-center justify-center rounded-md",
+            "relative z-10 flex h-32 w-full items-start justify-start rounded-md",
             isError && "border border-red-normal",
             transparentBg
               ? "bg-transparent"
@@ -153,7 +153,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
             null}
           {onClearInput && !onClickRevealPassword && hasValue && (
             <X
-              className="h-6 w-6 cursor-pointer"
+              className="mt-2 h-6 w-6 cursor-pointer"
               onClick={() => {
                 setHasValue(false);
                 onClearInput();

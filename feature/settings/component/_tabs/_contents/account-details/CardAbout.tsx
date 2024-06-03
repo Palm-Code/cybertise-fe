@@ -117,6 +117,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 )}
               </div>
               <AvatarInput
+                title={variant === "company" ? "Change Logo" : "Change Image"}
                 variant={variant}
                 onChange={(e) => handleChangeAvatar(e)}
               />

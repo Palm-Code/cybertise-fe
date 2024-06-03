@@ -36,7 +36,7 @@ const VrpDetailsReview = ({
   const { back } = useRouter();
   const { getValues } = useFormContext<CreateVrpType>();
   const forms = getValues();
-  const [checked, setChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(isLastStep);
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
@@ -82,8 +82,9 @@ const VrpDetailsReview = ({
           >
             <AlertCircle />
             <Typography variant="p" affects="normal">
-              Your VRP has been published. Sending to the Mediator will take the
-              VRP back to Mediator Revision
+              Your VRP has been{" "}
+              {currentStep === "Published" ? "Published" : "Approved"}. Sending
+              to the Mediator will take the VRP back to Mediator Revision
             </Typography>
             <Button
               variant={`ghost-default`}
@@ -100,7 +101,7 @@ const VrpDetailsReview = ({
       {!!forms.rules && !!forms.policies && <RulesAndPolicies isReview />}
       <TargetAssetListCard data={forms} />
       <Notes data={forms.notes} />
-      {currentStep === "Phase5" && (
+      {currentStep === "Phase5" && variant === "company" && !isLastStep && (
         <Card
           className={cn(
             "_flexbox__row__start__start w-full gap-4",
@@ -150,7 +151,7 @@ const VrpDetailsReview = ({
                   ? "secondary-mediator"
                   : "primary-mediator"
               }
-              isLoading={isLoading}
+              isLoading={isLoading && !!forms.status}
               disabled={isLoading}
               onClick={
                 isLastStep && currentStep === "Phase4"
@@ -163,7 +164,7 @@ const VrpDetailsReview = ({
             {currentStep === "Phase4" && isLastStep && (
               <Button
                 variant="primary-mediator"
-                isLoading={isLoading}
+                isLoading={isLoading && !forms.status}
                 disabled={isLoading}
                 onClick={onClickNext}
               >

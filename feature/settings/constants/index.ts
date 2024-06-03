@@ -63,6 +63,10 @@ export const companySettingTabItems: SortFilterType[] = [
 
 export const companyStaffSettingTabItems: SortFilterType[] = [
   {
+    label: "Company Details",
+    value: "details",
+  },
+  {
     label: "Notifications",
     value: "notifications",
   },

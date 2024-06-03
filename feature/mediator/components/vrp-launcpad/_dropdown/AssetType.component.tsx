@@ -9,17 +9,19 @@ import { SortFilterType } from "@/types/admin/dashboard";
 import { Badge, Typography, badgeVariants } from "@/core/ui/components";
 
 interface I_AssetTypeProps {
-  onValueChange: (value: string) => void;
-  options: SortFilterType[];
+  onValueChange?: (value: string) => void;
+  options?: SortFilterType[];
   value: string;
   label?: string;
+  disabled?: boolean;
 }
 
 const AssetType = ({
-  onValueChange,
-  options,
+  onValueChange = () => {},
+  options = [],
   value,
   label = "Sort By",
+  disabled = false,
   ...props
 }: I_AssetTypeProps) => {
   const inputValueLabel = options.find((option) => option.id === value)?.label;
@@ -27,7 +29,10 @@ const AssetType = ({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger className="!w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0">
+      <SelectTrigger
+        disabled={disabled}
+        className="!w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0"
+      >
         <Typography
           variant="p"
           affects="small"

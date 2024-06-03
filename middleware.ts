@@ -5,7 +5,7 @@ import withAuth from "./middlewares/withAuth";
 export async function mainMiddleware(request: NextRequest) {
   await updateSession(request);
   if (request.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/auth/signin", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
   return NextResponse.next();
 }

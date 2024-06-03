@@ -16,6 +16,7 @@ export const fetchPostLogin = async (payload: FormLoginSchema) => {
       const errors: I_GetErrorResponse = {
         status: err?.response?.status,
         message: err?.response?.data?.message,
+        email: err?.response?.data?.email,
       };
       throw errors;
     });

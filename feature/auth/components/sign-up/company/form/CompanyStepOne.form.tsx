@@ -14,10 +14,10 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
   const {
     formState: { errors },
     setValue,
-    getValues,
+    watch,
     resetField,
   } = useFormContext<SignupCompanyFormType>();
-  const forms = getValues();
+  const forms = watch();
 
   const onClickValidate = () => {
     onClickNext();

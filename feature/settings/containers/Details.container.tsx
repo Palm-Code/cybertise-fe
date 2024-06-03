@@ -28,6 +28,7 @@ const Details = ({
 }: I_DetailsProps) => {
   const {
     getValues,
+    watch,
     formState: { errors },
   } = useFormContext<I_UpdateProfile>();
   const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile(true);

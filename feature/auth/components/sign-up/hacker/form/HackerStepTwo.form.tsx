@@ -32,9 +32,9 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   const {
     formState: { errors },
     setValue,
-    getValues,
+    watch,
   } = useFormContext<SignupHackerFormType>();
-  const forms = getValues();
+  const forms = watch();
 
   const { mutateAsync, isPending, isSuccess } = usePostSignupHacker();
 

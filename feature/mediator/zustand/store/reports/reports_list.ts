@@ -13,6 +13,9 @@ const initialState: State = {
   payload: {
     params: {
       sort: "-updated_at",
+      filter: {
+        ticket_type: "Hacker",
+      },
       page: {
         size: 10,
         number: 1,

@@ -28,12 +28,12 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
       checked: false,
     });
   const {
-    getValues,
+    watch,
     formState: { errors },
     setValue,
     resetField,
   } = useFormContext<SignupCompanyFormType>();
-  const forms = getValues();
+  const forms = watch();
 
   const { mutateAsync, isPending, isSuccess } = usePostSignupCompany();
 

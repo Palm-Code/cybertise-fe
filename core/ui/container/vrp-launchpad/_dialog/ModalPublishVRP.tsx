@@ -30,6 +30,8 @@ const ModalPublishVRP = ({
   const { setValue, watch } = useFormContext<CreateVrpType>();
   const forms = watch();
 
+  console.log(forms.publish_date);
+
   return (
     <BaseModal isOpen={isOpen}>
       <div
@@ -127,12 +129,14 @@ const ModalPublishVRP = ({
                     <DatePicker
                       value={forms.publish_date as string}
                       onChangeValue={(e) => {
-                        setValue("publish_date", getCurrentDate(e));
+                        setValue("publish_date", getCurrentDate(e), {
+                          shouldValidate: true,
+                        });
                       }}
                     />
                     <TimePicker
                       onValueChange={(e) => {
-                        setValue("publish_time", e);
+                        setValue("publish_time", e, { shouldValidate: true });
                       }}
                       value={forms.publish_time as string}
                     />

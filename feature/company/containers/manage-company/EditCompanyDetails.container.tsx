@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import {
   AvatarInput,
+  Button,
   Card,
   Input,
   Loader,
@@ -55,7 +56,7 @@ const EditCompnayDetails = ({
       logo: data?.image,
     },
   });
-  const { mutateAsync, isPending } = usePostUpdateProfile();
+  const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile();
   const { mutateAsync: mutate, isPending: isPendingUpload } =
     usePostTempFiles();
   const forms = watch();
@@ -87,222 +88,251 @@ const EditCompnayDetails = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
-          <EditNavBar
-            isLoading={isPending}
-            title="Edit Company Details"
-            onClickSave={() => handleSubmitForm()}
-          />
+          <EditNavBar title="Edit Company Details" />
           <Card
             className={cn(
-              "rounded-xl xl:px-8 xl:py-12",
-              "_flexbox__col__start__start w-full gap-8"
+              "_flexbox__col__start__start relative z-20 w-full gap-8 rounded-lg",
+              "bg-background-main-light px-6 py-8 xl:p-9 xl:px-6 xl:py-12 dark:bg-background-main-dark"
             )}
           >
-            <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
-                Company Information
-              </Typography>
-              <div className="_flexbox__col__start__start w-full gap-2.5">
-                <div className="_flexbox__row__center__between w-full">
-                  <div className="_flexbox__col__start__start gap-2.5">
-                    <Typography
-                      variant="p"
-                      affects="normal"
-                      className="text-neutral-light-40 dark:text-neutral-dark-40"
-                    >
-                      Company logo
-                    </Typography>
-                    <div className="relative h-12 w-12 overflow-hidden rounded-full">
-                      {isPendingUpload ? (
-                        <Loader
-                          width={15}
-                          height={15}
-                          variant="company"
-                          className="h-full w-full bg-neutral-light-90 dark:bg-neutral-dark-90"
-                          noText
-                        />
-                      ) : (
-                        <Image
-                          src={forms.logo as string}
-                          alt={data?.name as string}
-                          fill
-                          className="object-cover"
-                        />
-                      )}
+            <Card
+              className={cn(
+                "rounded-xl xl:px-8 xl:py-12",
+                "_flexbox__col__start__start w-full gap-8",
+                "bg-background-page-light dark:bg-background-page-dark"
+              )}
+            >
+              <div className="_flexbox__col__start__start w-full gap-6">
+                <Typography variant="h6" weight="bold">
+                  Company Information
+                </Typography>
+                <div className="_flexbox__col__start__start w-full gap-2.5">
+                  <div className="_flexbox__row__center__between w-full">
+                    <div className="_flexbox__col__start__start gap-2.5">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                        className="text-neutral-light-40 dark:text-neutral-dark-40"
+                      >
+                        Company logo
+                      </Typography>
+                      <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                        {isPendingUpload ? (
+                          <Loader
+                            width={15}
+                            height={15}
+                            variant="company"
+                            className="h-full w-full bg-neutral-light-90 dark:bg-neutral-dark-90"
+                            noText
+                          />
+                        ) : (
+                          <Image
+                            src={forms.logo as string}
+                            alt={data?.name as string}
+                            fill
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
                     </div>
+                    <AvatarInput
+                      variant="company"
+                      onChange={(e) => handleChangeAvatar(e)}
+                    />
                   </div>
-                  <AvatarInput
-                    variant="company"
-                    onChange={(e) => handleChangeAvatar(e)}
-                  />
-                </div>
-                <Input
-                  type="text"
-                  label="Company Name"
-                  value={forms.name}
-                  onChange={(e) =>
-                    setValue("name", e.target.value, {
-                      shouldValidate: true,
-                    })
-                  }
-                  onClearInput={() => {
-                    setValue("name", "", { shouldValidate: true });
-                  }}
-                  isError={!!errors.name}
-                />
-              </div>
-            </div>
-            <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
-                Company Address
-              </Typography>
-              <div className="_flexbox__col__start__start w-full gap-6">
-                <Input
-                  type="text"
-                  label="Address"
-                  value={forms.address}
-                  onChange={(e) =>
-                    setValue("address", e.target.value, {
-                      shouldValidate: true,
-                    })
-                  }
-                  onClearInput={() => {
-                    setValue("address", "", { shouldValidate: true });
-                  }}
-                  isError={!!errors.address}
-                />
-                <Input
-                  type="text"
-                  label="Address 2"
-                  value={forms.address_2}
-                  onChange={(e) =>
-                    setValue("address_2", e.target.value, {
-                      shouldValidate: true,
-                    })
-                  }
-                  onClearInput={() => {
-                    setValue("address_2", "", { shouldValidate: true });
-                  }}
-                  description="Optional"
-                />
-                <div className="grid w-full grid-cols-3 gap-6">
-                  <SelectDropdown
-                    label="Country"
-                    value={forms.country_code as string}
-                    options={countryOptions?.data || []}
-                    withIcon
-                    withSearch
-                    onValueChange={(e) => {
-                      setValue("country_code", e, { shouldValidate: true });
-                    }}
-                  />
                   <Input
                     type="text"
-                    label="State"
-                    value={forms.state}
+                    label="Company Name"
+                    value={forms.name}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
-                      setValue("state", e.target.value, {
+                      setValue("name", e.target.value, {
                         shouldValidate: true,
                       })
                     }
                     onClearInput={() => {
-                      setValue("state", "", { shouldValidate: true });
+                      setValue("name", "", { shouldValidate: true });
                     }}
-                    isError={!!errors.state}
+                    isError={!!errors.name}
                   />
+                </div>
+              </div>
+              <div className="_flexbox__col__start__start w-full gap-6">
+                <Typography variant="h6" weight="bold">
+                  Company Address
+                </Typography>
+                <div className="_flexbox__col__start__start w-full gap-6">
                   <Input
                     type="text"
-                    label="Zip Code"
-                    value={forms.zip}
+                    label="Address"
+                    value={forms.address}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
-                      setValue("zip", e.target.value, {
+                      setValue("address", e.target.value, {
                         shouldValidate: true,
                       })
                     }
                     onClearInput={() => {
-                      setValue("zip", "", { shouldValidate: true });
+                      setValue("address", "", { shouldValidate: true });
                     }}
-                    isError={!!errors.zip}
+                    isError={!!errors.address}
+                  />
+                  <Input
+                    type="text"
+                    label="Address 2"
+                    value={forms.address_2}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                    onChange={(e) =>
+                      setValue("address_2", e.target.value, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onClearInput={() => {
+                      setValue("address_2", "", { shouldValidate: true });
+                    }}
+                    description="Optional"
+                  />
+                  <div className="grid w-full grid-cols-3 gap-6">
+                    <SelectDropdown
+                      label="Country"
+                      value={forms.country_code as string}
+                      wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                      options={countryOptions?.data || []}
+                      withIcon
+                      withSearch
+                      onValueChange={(e) => {
+                        setValue("country_code", e, { shouldValidate: true });
+                      }}
+                    />
+                    <Input
+                      type="text"
+                      label="State"
+                      value={forms.state}
+                      wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                      onChange={(e) =>
+                        setValue("state", e.target.value, {
+                          shouldValidate: true,
+                        })
+                      }
+                      onClearInput={() => {
+                        setValue("state", "", { shouldValidate: true });
+                      }}
+                      isError={!!errors.state}
+                    />
+                    <Input
+                      type="text"
+                      label="Zip Code"
+                      value={forms.zip}
+                      wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                      onChange={(e) =>
+                        setValue("zip", e.target.value, {
+                          shouldValidate: true,
+                        })
+                      }
+                      onClearInput={() => {
+                        setValue("zip", "", { shouldValidate: true });
+                      }}
+                      isError={!!errors.zip}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="_flexbox__col__start__start w-full gap-6">
+                <Typography variant="h6" weight="bold">
+                  About Company
+                </Typography>
+                <div className="_flexbox__col__start__start w-full gap-6">
+                  <TextArea
+                    type="text"
+                    label="About Company"
+                    value={forms.about}
+                    wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                    onChange={(e) =>
+                      setValue("about", e.target.value, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onClearInput={() => {
+                      setValue("about", "", { shouldValidate: true });
+                    }}
+                    isError={!!errors.about}
                   />
                 </div>
               </div>
-            </div>
-            <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
-                About Company
-              </Typography>
+            </Card>
+            <Card
+              className={cn(
+                "rounded-xl xl:px-8 xl:py-12",
+                "_flexbox__col__start__start w-full gap-8",
+                "bg-background-page-light dark:bg-background-page-dark"
+              )}
+            >
               <div className="_flexbox__col__start__start w-full gap-6">
-                <TextArea
-                  type="text"
-                  label="About Company"
-                  value={forms.about}
+                <Typography variant="h6" weight="bold">
+                  Company Account Details
+                </Typography>
+                <Input
+                  type="email"
+                  label="Registered Email"
+                  value={forms.email}
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
-                    setValue("about", e.target.value, {
+                    setValue("email", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
+                  disabled
+                  onClearInput={() => {
+                    setValue("email", "", { shouldValidate: true });
+                  }}
+                  isError={!!errors.email}
+                />
+                <Input
+                  type="text"
+                  label="Company Website"
+                  value={forms.website}
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                  onChange={(e) =>
+                    setValue("website", e.target.value, {
                       shouldValidate: true,
                     })
                   }
                   onClearInput={() => {
-                    setValue("about", "", { shouldValidate: true });
+                    setValue("website", "", { shouldValidate: true });
                   }}
-                  isError={!!errors.about}
+                  isError={!!errors.website}
+                />
+                <Input
+                  type="tel"
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  label="Phone Number"
+                  value={forms.phone}
+                  wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
+                  onChange={(e) =>
+                    setValue("phone", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
+                  onClearInput={() => {
+                    setValue("phone", "", { shouldValidate: true });
+                  }}
+                  isError={!!errors.phone}
                 />
               </div>
-            </div>
-          </Card>
-          <Card
-            className={cn(
-              "rounded-xl xl:px-8 xl:py-12",
-              "_flexbox__col__start__start w-full gap-8"
-            )}
-          >
-            <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
-                Company Account Details
-              </Typography>
-              <Input
-                type="email"
-                label="Registered Email"
-                value={forms.email}
-                onChange={(e) =>
-                  setValue("email", e.target.value, {
-                    shouldValidate: true,
-                  })
-                }
-                onClearInput={() => {
-                  setValue("email", "", { shouldValidate: true });
-                }}
-                isError={!!errors.email}
-              />
-              <Input
-                type="text"
-                label="Company Website"
-                value={forms.website}
-                onChange={(e) =>
-                  setValue("website", e.target.value, {
-                    shouldValidate: true,
-                  })
-                }
-                onClearInput={() => {
-                  setValue("website", "", { shouldValidate: true });
-                }}
-                isError={!!errors.website}
-              />
-              <Input
-                type="number"
-                pattern="[0-9]*"
-                inputMode="numeric"
-                label="Phone Number"
-                value={forms.phone}
-                onChange={(e) =>
-                  setValue("phone", e.target.value, {
-                    shouldValidate: true,
-                  })
-                }
-                onClearInput={() => {
-                  setValue("phone", "", { shouldValidate: true });
-                }}
-                isError={!!errors.phone}
-              />
+            </Card>
+            <div className="_flexbox__row__center gap-6">
+              <Button asLink href="/manage-company" variant="secondary-company">
+                Discard
+              </Button>
+              <Button
+                variant="primary-company"
+                disabled={isPending || isSuccess || isPendingUpload}
+                isLoading={isPending}
+                onClick={handleSubmitForm}
+              >
+                Save Changes
+              </Button>
             </div>
           </Card>
         </div>
