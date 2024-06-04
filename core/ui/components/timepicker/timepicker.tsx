@@ -11,6 +11,14 @@ interface I_SelectDropdownProps {
 
 const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   const options = generateTimeOptions();
+  const currentTime = new Date();
+
+  const parseTime = (timeStr: string) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
+  };
 
   return (
     <Popover>
@@ -36,6 +44,8 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
         align="start"
       >
         {options.map((option, idx) => {
+          const optionTime = parseTime(option.value);
+          const isDisabled = optionTime < currentTime;
           return (
             <button
               key={`time-${idx}`}
@@ -46,11 +56,14 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
                 "bg-neutral-light-100 text-start dark:bg-neutral-dark-100",
                 "text-neutral-light-40 hover:bg-neutral-light-90 hover:text-sky-normal",
                 "dark:text-neutral-dark-40 dark:hover:bg-neutral-dark-90",
-                "_flexbox__row__center__between"
+                "_flexbox__row__center__between",
+                "disabled:cursor-not-allowed disabled:!opacity-50"
               )}
               onClick={() => {
+                if (isDisabled) return;
                 onValueChange(option.value);
               }}
+              disabled={isDisabled}
             >
               {option.label}
             </button>

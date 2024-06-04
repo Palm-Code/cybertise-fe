@@ -14,9 +14,12 @@ export function DatePicker({
   value: string;
   onChangeValue: (value: Date | undefined) => void;
 }) {
-  const [date, setDate] = React.useState<Date | undefined>();
+  const [date, setDate] = React.useState<Date | undefined>(
+    value ? new Date(value) : undefined
+  );
 
-  console.log(date);
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
 
   return (
     <Popover>
@@ -30,7 +33,7 @@ export function DatePicker({
             "_flexbox__row__center__between"
           )}
         >
-          {value ? format(value, "MM-dd-yyyy") : "Date"}
+          {date ? format(date, "yyyy-MM-dd") : "Date"}
           <ChevronDown />
         </button>
       </PopoverTrigger>
@@ -40,11 +43,10 @@ export function DatePicker({
           showOutsideDays
           selected={date}
           onSelect={(e) => {
-            console.log(e?.toUTCString());
             onChangeValue(e);
             setDate(e);
           }}
-          disabled={(date) => date < new Date()}
+          disabled={(date) => date < yesterday}
           initialFocus
         />
       </PopoverContent>

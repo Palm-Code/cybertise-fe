@@ -98,7 +98,7 @@ const EmptyState = ({
               </Typography>
               {!!buttonText && (
                 <Button
-                  variant="primary-company"
+                  variant={`primary-${variant}`}
                   className="w-full"
                   onClick={() => onClickButton()}
                 >

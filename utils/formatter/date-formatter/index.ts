@@ -125,3 +125,21 @@ export function getCurrentDate(date?: Date) {
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 }
+
+export function formatToUtcTimeString(time: string): string {
+  console.log(time);
+  const hours = parseInt(time.slice(0, 2), 10);
+  const minutes = parseInt(time.slice(3), 10);
+  const now = new Date();
+
+  const targetTime = new Date(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    hours,
+    minutes
+  );
+
+  const formattedTime = targetTime.toUTCString().slice(17, 22);
+  return formattedTime;
+}

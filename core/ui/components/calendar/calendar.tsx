@@ -51,7 +51,10 @@ function Calendar({
           "h-8 w-8 p-0 font-normal rounded-full hover:bg-sky-lighter dark:text-white text-neutral-900",
           "hover:text-white dark:hover:text-white"
         ),
-        day_today: cn("rounded-full w-8 h-8 p-0 !text-white", "bg-sky-lighter"),
+        day_today: cn(
+          "rounded-full w-8 h-8 p-0 !text-white",
+          "border border-sky-lighter"
+        ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: cn(

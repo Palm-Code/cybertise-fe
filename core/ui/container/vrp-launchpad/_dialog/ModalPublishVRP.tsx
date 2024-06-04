@@ -8,7 +8,11 @@ import {
   Typography,
 } from "@/core/ui/components";
 import TimePicker from "@/core/ui/components/timepicker/timepicker";
-import { getCurrentDate } from "@/utils/formatter/date-formatter";
+import {
+  formatToUtcTimeString,
+  getCurrentDate,
+} from "@/utils/formatter/date-formatter";
+import { format } from "date-fns";
 import { CircleDot } from "lucide-react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -28,9 +32,8 @@ const ModalPublishVRP = ({
 }: I_ModalPublishVRPProps) => {
   const [isPublishNow, setIsPublishNow] = useState<boolean>(true);
   const { setValue, watch } = useFormContext<CreateVrpType>();
+  const [unformattedTime, setUnformattedTime] = useState<string>("");
   const forms = watch();
-
-  console.log(forms.publish_date);
 
   return (
     <BaseModal isOpen={isOpen}>
@@ -48,7 +51,10 @@ const ModalPublishVRP = ({
             <button
               type="button"
               title="publish now"
-              onClick={() => setIsPublishNow(true)}
+              onClick={() => {
+                setIsPublishNow(true);
+                setValue("publish_date", getCurrentDate());
+              }}
               className={cn(
                 "_flexbox__row__start__start w-full gap-4 rounded-lg transition-colors",
                 "border-2  px-6 py-4 ",
@@ -129,16 +135,20 @@ const ModalPublishVRP = ({
                     <DatePicker
                       value={forms.publish_date as string}
                       onChangeValue={(e) => {
-                        setValue("publish_date", getCurrentDate(e), {
-                          shouldValidate: true,
-                        });
+                        if (e)
+                          setValue("publish_date", format(e, "yyyy-MM-dd"), {
+                            shouldValidate: true,
+                          });
                       }}
                     />
                     <TimePicker
                       onValueChange={(e) => {
-                        setValue("publish_time", e, { shouldValidate: true });
+                        setValue("publish_time", formatToUtcTimeString(e), {
+                          shouldValidate: true,
+                        });
+                        setUnformattedTime(e);
                       }}
-                      value={forms.publish_time as string}
+                      value={unformattedTime}
                     />
                   </div>
                 )}

@@ -59,7 +59,6 @@ const SelectDropdown = ({
         <Input
           iconValue={withIcon ? iconValue : undefined}
           readOnly
-          disabled
           value={inputValueLabel}
           isSelect
           {...props}
