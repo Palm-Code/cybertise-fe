@@ -48,9 +48,12 @@ const Authentication = ({
                   {menus[activeEditElement].title}
                 </Typography>
               </div>
+            </Card>
+            <Card className="_flexbox__col__start__start w-full gap-8">
+              {menus[activeEditElement].element}
               <div className="_flexbox__row__center__start gap-6">
                 <Button
-                  variant={`tertiary-${variant}`}
+                  variant={`secondary-${variant}`}
                   onClick={() => handleClickEdit(false)}
                 >
                   Discard
@@ -60,7 +63,6 @@ const Authentication = ({
                 </Button>
               </div>
             </Card>
-            {menus[activeEditElement].element}
           </div>
         </Desktop>
       </>

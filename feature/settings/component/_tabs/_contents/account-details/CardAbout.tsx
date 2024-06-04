@@ -219,7 +219,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 </div>
               </div>
             </div>
-          ) : variant !== "mediator" ? (
+          ) : variant !== "mediator" && variant !== "company staff" ? (
             <SelectDropdown
               label="Country"
               value={forms.country_code as string}
@@ -233,7 +233,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             />
           ) : null}
 
-          {variant !== "mediator" && (
+          {variant !== "mediator" && variant !== "company staff" && (
             <div className="_flexbox__col__start__start w-full gap-2.5">
               <Typography
                 variant="p"
@@ -296,7 +296,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             <Typography variant="p" affects="normal" className="col-span-1">
               {variant === "hacker" ? data?.username : data?.name}
             </Typography>
-            {variant !== "mediator" && (
+            {variant !== "mediator" && variant !== "company staff" && (
               <>
                 <Typography
                   variant="p"
@@ -311,7 +311,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               </>
             )}
           </div>
-          {variant !== "mediator" && (
+          {variant !== "mediator" && variant !== "company staff" && (
             <div className="_flexbox__col__start__start w-full gap-2.5">
               <Typography
                 variant="p"
@@ -365,7 +365,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 {variant === "hacker" ? data?.username : data?.name}
               </Typography>
             </div>
-            {variant !== "mediator" && (
+            {variant !== "mediator" && variant !== "company staff" && (
               <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
                   variant="p"
@@ -375,10 +375,12 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   Country
                 </Typography>
                 <div className="_flexbox__row__center__start gap-2.5">
-                  <Country
-                    icon={countryFlag?.icon}
-                    label={countryFlag?.label}
-                  />
+                  {!!countryFlag && (
+                    <Country
+                      icon={countryFlag?.icon}
+                      label={countryFlag?.label}
+                    />
+                  )}
                 </div>
               </div>
             )}
@@ -435,14 +437,14 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               </>
             )}
           </div>
-          {variant !== "mediator" && (
+          {variant !== "mediator" && variant !== "company staff" && (
             <div className="_flexbox__col__start__start w-full gap-2.5">
               <Typography
                 variant="p"
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About {variant == "company" ? "Company" : "Your Account"}
+                About {variant === "company" ? "Company" : "Your Account"}
               </Typography>
               <Typography variant="p" affects="normal">
                 {data?.about}

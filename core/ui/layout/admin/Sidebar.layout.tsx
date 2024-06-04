@@ -28,7 +28,7 @@ import {
 } from "../../components";
 import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
-import { usePostLogout } from "@/core/react-query/client";
+import { useGetUserData, usePostLogout } from "@/core/react-query/client";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -50,6 +50,7 @@ const Sidebar = ({ type }: SidebarProps) => {
   const menu = menuItems[type as keyof typeof menuItems];
 
   const { mutate } = usePostLogout();
+  const { data: user } = useGetUserData();
 
   return (
     <>
@@ -81,7 +82,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     Menu
                   </Typography>
                 </div>
-                <Avatar image="https://github.com/shadcn.png" />
+                <Avatar image={user?.avatar as string} />
               </div>
               <div className="_flexbox__col__center w-full gap-4 pr-5">
                 {menu.map((item, index) => (

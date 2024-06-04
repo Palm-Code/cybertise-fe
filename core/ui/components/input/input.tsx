@@ -95,6 +95,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "relative z-10 flex h-16 w-full items-center justify-center rounded-md",
             isError && "border border-red-normal",
+            props.disabled && "cursor-not-allowed !opacity-50",
             transparentBg
               ? "bg-transparent"
               : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",
@@ -136,7 +137,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               ) : (
                 <input
                   className={cn(
-                    "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0",
+                    "absolute my-auto h-7 w-full bg-transparent text-neutral-light-0 disabled:cursor-not-allowed",
                     "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
                     "focus:outline-none focus:ring-0 dark:text-white",
                     prefixIcon && "pl-4",

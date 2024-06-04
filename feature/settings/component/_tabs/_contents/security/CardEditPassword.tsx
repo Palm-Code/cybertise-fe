@@ -103,7 +103,6 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               label="New password"
               options={passwordValidationItems}
               onChange={checkPassword}
-              isError={!!errors?.root}
             />
             <PasswordInput
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"

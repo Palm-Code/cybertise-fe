@@ -41,7 +41,7 @@ const CardAccountDetails = ({
               <Input
                 type="email"
                 label="Registered Email"
-                disabled={variant === "mediator"}
+                disabled
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.email}
                 onChange={(e) =>

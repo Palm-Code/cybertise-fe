@@ -27,7 +27,6 @@ const Details = ({
   data,
 }: I_DetailsProps) => {
   const {
-    getValues,
     watch,
     formState: { errors },
   } = useFormContext<I_UpdateProfile>();
@@ -36,7 +35,7 @@ const Details = ({
 
   const handleSubmitForm = () => {
     if (Object.values(errors).length === 0) {
-      mutateAsync(getValues()).then(() => {
+      mutateAsync(watch()).then(() => {
         handleClickEdit(false);
       });
     } else {

@@ -10,7 +10,7 @@ const Country = ({
 }) => {
   return (
     <div className="grid grid-cols-[auto_1fr] place-items-center gap-1">
-      <Image src={icon as string} alt="country" width={24} height={16} />
+      <Image src={icon || ""} alt="country" width={24} height={16} />
       <Typography variant="p" affects="normal">
         {label}
       </Typography>

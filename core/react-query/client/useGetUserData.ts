@@ -2,7 +2,7 @@
 import { I_GetUserDataSuccessResponse } from "@/core/models/common";
 import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { fetchGetUserData } from "@/core/services/common";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export const useGetUserData = () => {
   const query = useQuery<

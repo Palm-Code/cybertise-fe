@@ -54,7 +54,7 @@ const CardLoginInfo = ({
               </div>
             </Card>
             <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
-              <CardEditPassword />
+              <CardEditPassword variant={variant} />
               <div className="_flexbox__row__center__start gap-6">
                 <Button
                   variant={`secondary-${variant}`}
@@ -63,19 +63,16 @@ const CardLoginInfo = ({
                   Discard
                 </Button>
                 <Button
-                  disabled={
-                    isPending || isSuccess || !methods.getValues().is_match
-                  }
+                  disabled={isPending || isSuccess || !methods.watch().is_match}
                   isLoading={isPending}
                   variant={`primary-${variant}`}
                   onClick={() =>
-                    mutateAsync(methods.getValues())
+                    mutateAsync(methods.watch())
                       .then()
                       .catch((err) => {
                         methods.setError("root", err?.message, {
                           shouldFocus: true,
                         });
-                        console.log(err);
                       })
                   }
                 >

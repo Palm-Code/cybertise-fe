@@ -18,7 +18,6 @@ export const usePostResetPassword = () => {
       });
       if (variables.logout_all === 1) {
         logout();
-        router.replace("/auth/signin");
         return;
       }
       router.replace("/settings");
