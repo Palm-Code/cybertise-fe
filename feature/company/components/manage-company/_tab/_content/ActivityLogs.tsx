@@ -1,12 +1,6 @@
 import { filterItems, filterSortBy } from "@/core/constants/dashboard";
 import { cn } from "@/core/lib/utils";
-import {
-  Card,
-  FilterDropdown,
-  Loader,
-  Separator,
-  Typography,
-} from "@/core/ui/components";
+import { Button, Card, FilterDropdown, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Circle, Dot } from "lucide-react";
@@ -16,11 +10,12 @@ import { useActivityLogParamStore } from "@/feature/company/zustand/store/manage
 import { useGetActivityLog } from "@/feature/company/query/client";
 import { format } from "date-fns";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
+import { formatTime } from "@/utils/formatter/date-formatter";
 
 const ActivityLogs = ({}: {}) => {
   const store = useActivityLogParamStore();
   const { data, isLoading, isFetching } = useGetActivityLog(store.payload);
-  console.log(store.payload);
+  const meta = data?.meta;
 
   return (
     <>
@@ -158,10 +153,7 @@ const ActivityLogs = ({}: {}) => {
                                   className="text-neutral-light-50 dark:text-neutral-dark-50"
                                 >
                                   {log.created_at
-                                    ? format(
-                                        new Date(log.created_at),
-                                        "dd-MM-y"
-                                      )
+                                    ? log.created_at.toString().split("T")[0]
                                     : ""}
                                 </Typography>
                                 <Dot className="text-brand-neutral dark:text-white" />
@@ -172,7 +164,7 @@ const ActivityLogs = ({}: {}) => {
                                   className="text-neutral-light-50 dark:text-neutral-dark-50"
                                 >
                                   {log.created_at
-                                    ? format(new Date(log.created_at), "h:mm a")
+                                    ? formatTime(log.created_at.toString())
                                     : ""}
                                 </Typography>
                               </div>
@@ -192,6 +184,44 @@ const ActivityLogs = ({}: {}) => {
                 buttonText=""
               />
             )}
+          </div>
+          <div className="_flexbox__row__center__end w-full gap-5">
+            <Button
+              variant="ghost-company"
+              className={cn(
+                "rounded-lg bg-background-page-light dark:bg-background-page-dark",
+                "px-2 py-2.5"
+              )}
+              onClick={() => {
+                store.setPayload({
+                  ...store?.payload,
+                  params: {
+                    page: meta?.current_page && meta?.current_page - 1,
+                  },
+                });
+              }}
+              disabled={meta?.current_page === 1}
+            >
+              Prev
+            </Button>
+            <Button
+              variant="ghost-company"
+              className={cn(
+                "rounded-lg bg-background-page-light dark:bg-background-page-dark",
+                "px-2 py-2.5"
+              )}
+              onClick={() => {
+                store.setPayload({
+                  ...store?.payload,
+                  params: {
+                    page: meta?.current_page && meta?.current_page + 1,
+                  },
+                });
+              }}
+              disabled={meta?.current_page === meta?.last_page}
+            >
+              Next
+            </Button>
           </div>
         </div>
       </Desktop>

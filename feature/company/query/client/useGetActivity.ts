@@ -13,6 +13,7 @@ export const useGetActivityLog = (payload: I_GetActivityParamsRequest) => {
       "getActivityLog",
       payload?.params?.page,
       payload?.params?.sort,
+      payload.params?.date_start,
       payload.params?.date_finish,
     ],
     queryFn: () => fetchGetActivityLog(payload),

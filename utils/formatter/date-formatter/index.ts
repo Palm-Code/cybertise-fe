@@ -1,3 +1,5 @@
+import { formatInTimeZone } from "date-fns-tz";
+
 export function formatDateToAgo(dateString: string): string {
   const date = new Date(dateString);
   //format date to En Us
@@ -127,7 +129,6 @@ export function getCurrentDate(date?: Date) {
 }
 
 export function formatToUtcTimeString(time: string): string {
-  console.log(time);
   const hours = parseInt(time.slice(0, 2), 10);
   const minutes = parseInt(time.slice(3), 10);
   const now = new Date();
@@ -141,5 +142,13 @@ export function formatToUtcTimeString(time: string): string {
   );
 
   const formattedTime = targetTime.toUTCString().slice(17, 22);
+  return formattedTime;
+}
+export function formatTime(dateString: string) {
+  const parts = dateString.split("T");
+  const timePart = parts[1];
+  const [hours, minutes] = timePart.split(":");
+  const formattedTime = `${hours}:${minutes}`;
+
   return formattedTime;
 }
