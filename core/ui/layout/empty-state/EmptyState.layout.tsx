@@ -4,6 +4,7 @@ import { Button, Typography } from "../../components";
 import Link from "next/link";
 import { buttonVariants } from "../../components/button/base-button";
 import { iconColor } from "@/core/constants/common";
+import { cn } from "@/core/lib/utils";
 
 interface I_EmptyStateProps {
   variant?: keyof typeof Role;
@@ -18,6 +19,7 @@ interface I_EmptyStateProps {
   titleText?: string;
   href?: string;
   onClickButton?: () => void;
+  className?: string;
 }
 
 const EmptyState = ({
@@ -27,6 +29,7 @@ const EmptyState = ({
   href = "/",
   titleText = "You're not Allowed Here",
   onClickButton = () => {},
+  className = "",
 }: I_EmptyStateProps) => {
   const iconsType = () => {
     switch (type) {
@@ -40,7 +43,7 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              You Have No Ticket Here
+              You Have Nothing Here
             </Typography>
             <Link
               className={buttonVariants({ variant: `primary-${variant}` })}
@@ -94,7 +97,7 @@ const EmptyState = ({
             <>
               <HackerLeaf />
               <Typography variant="p" affects="extralarge" weight="bold">
-                You have no update yet
+                You Have Nothing Here
               </Typography>
               {!!buttonText && (
                 <Button
@@ -152,7 +155,12 @@ const EmptyState = ({
   };
 
   return (
-    <div className="_flexbox__col__center mt-32 h-full w-full gap-12">
+    <div
+      className={cn(
+        "_flexbox__col__center mt-32 h-full w-full gap-12",
+        className
+      )}
+    >
       {iconsType()}
     </div>
   );

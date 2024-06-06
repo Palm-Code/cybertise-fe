@@ -12,3 +12,7 @@ export const generateTimeOptions = () => {
   }
   return options;
 };
+
+export const getTimezone = () => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone;
+};

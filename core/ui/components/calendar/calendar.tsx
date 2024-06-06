@@ -20,6 +20,7 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
+      showOutsideDays
       className={cn(
         "rounded-md bg-neutral-light-100 p-3 dark:bg-neutral-dark-100",
         className
@@ -52,19 +53,19 @@ function Calendar({
           "hover:text-white dark:hover:text-white"
         ),
         day_today: cn(
-          "rounded-full w-8 h-8 p-0 !text-white",
+          "rounded-full w-8 h-8 p-0 dark:!text-white !text-brand-neutral",
           "border border-sky-lighter"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: cn(
-          "rounded-full w-8 h-8 p-0 !text-white",
+          "rounded-full w-8 h-8 p-0 dark:text-white text-white",
           "bg-sky-lighter"
         ),
         day_outside: "!text-opacity-50",
         day_disabled: "!text-neutral-light-50 opacity-50",
         day_range_middle:
-          "aria-selected:bg-neutral-100 aria-selected:text-neutral-900 dark:aria-selected:bg-neutral-800 dark:aria-selected:text-neutral-50",
+          "!bg-sky-light/20 dark:!text-white !text-brand-neutral",
         day_hidden: "invisible",
         ...classNames,
       }}

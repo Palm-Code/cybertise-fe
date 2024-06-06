@@ -95,7 +95,7 @@ const EmergencyContacs = ({
           <Card
             className={cn(
               "rounded-[10px] bg-background-page-light dark:bg-background-page-dark",
-              "_flexbox__col__start__start gap-6 p-7.5"
+              "_flexbox__col__start__start gap-6 xl:p-7.5"
             )}
           >
             <div className="grid w-full grid-cols-2 gap-6">

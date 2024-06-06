@@ -34,7 +34,7 @@ const FilterDropdown = ({
 
   return (
     <>
-      <Mobile>
+      <Mobile className="w-fit">
         <Select onValueChange={onValueChange}>
           <SelectTrigger
             className="justify-start gap-2.5 !bg-white dark:!bg-neutral-dark-100"
@@ -69,7 +69,7 @@ const FilterDropdown = ({
           </SelectContent>
         </Select>
       </Mobile>
-      <Desktop>
+      <Desktop className="w-fit">
         <Select onValueChange={onValueChange}>
           <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
             <ArrowUpDown className={iconColor[variant]} />
