@@ -50,9 +50,9 @@ const ForgotPassword = (props: I_ForgotPassword) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content && confirmPassworText.content !== newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+    confirmPassworText.content &&
+      confirmPassworText.content === newPassword &&
+      setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setNewPassword(newPassword);
   };
@@ -132,11 +132,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 </Typography>
               ) : (
                 <Input
-                  type="Email"
+                  type="email"
                   label="Email"
                   value={email}
                   isError={isError}
-                  errorMsg={error?.email[0]}
+                  errorMsg={error?.message}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               )}
@@ -148,7 +148,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               fullWidth
               isLoading={isPending || isPendingForgot}
               disabled={
-                isPending || isSuccess || isPendingForgot || isSuccessForgot
+                isPending ||
+                isSuccess ||
+                isPendingForgot ||
+                isSuccessForgot ||
+                (token ? !newPassword || !confirmPassworText.checked : !email)
               }
               onClick={() =>
                 token
@@ -233,11 +237,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 </Typography>
               ) : (
                 <Input
-                  type="Email"
+                  type="email"
                   label="Email"
                   value={email}
                   isError={isError}
-                  errorMsg={error?.email[0]}
+                  errorMsg={error?.message}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               )}
@@ -249,7 +253,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               fullWidth
               isLoading={isPending || isPendingForgot}
               disabled={
-                isPending || isSuccess || isPendingForgot || isSuccessForgot
+                isPending ||
+                isSuccess ||
+                isPendingForgot ||
+                isSuccessForgot ||
+                (token ? !confirmPassworText.checked : !email)
               }
               onClick={() =>
                 token

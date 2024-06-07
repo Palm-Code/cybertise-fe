@@ -47,9 +47,9 @@ const SetPassword = (props: I_SetPassword) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content && confirmPassworText.content !== newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+    confirmPassworText.content &&
+      confirmPassworText.content === newPassword &&
+      setConfirmPassworText({ ...confirmPassworText, checked: false });
 
     setNewPassword(newPassword);
   };

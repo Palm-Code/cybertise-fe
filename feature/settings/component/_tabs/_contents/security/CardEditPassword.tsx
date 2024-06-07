@@ -45,9 +45,8 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content && confirmPassworText.content !== newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+    confirmPassworText.content && confirmPassworText.content === newPassword;
+    setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setValue("new_password", newPassword, { shouldValidate: true });
   };

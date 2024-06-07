@@ -56,9 +56,9 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content && confirmPassworText.content !== newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+    confirmPassworText.content &&
+      confirmPassworText.content === newPassword &&
+      setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setValue("password", newPassword, { shouldValidate: true });
   };
