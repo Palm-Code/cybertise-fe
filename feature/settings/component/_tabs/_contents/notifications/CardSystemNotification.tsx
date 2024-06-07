@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { Card, Switch, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { BellRing } from "lucide-react";
+import { toast } from "sonner";
 
 interface I_CardSystemNotificationProps {
   variant: keyof typeof Role;
@@ -24,7 +25,15 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
           <BellRing className="mr-4 h-8 w-8" />
           System Notification
         </Typography>
-        <Switch variant={variant} value={1} />
+        <Switch
+          variant={variant}
+          value={1}
+          onChange={() => {
+            toast.info("Yout can't disable system notification", {
+              position: "bottom-right",
+            });
+          }}
+        />
       </div>
       <Typography
         variant="p"
