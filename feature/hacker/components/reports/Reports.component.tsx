@@ -180,7 +180,7 @@ const Reports = () => {
               />
             </div>
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between gap-4">
             <DashboardFilter
               variant="hacker"
               store={store}

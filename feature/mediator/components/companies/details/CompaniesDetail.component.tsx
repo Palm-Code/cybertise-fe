@@ -42,7 +42,7 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     active_tickets: <ActiveTicket id={id} />,
     thanks: <Thanks data={companyDetails?.data.thanks_message} />,
     // collaborators: <Collaborators data={collaboratorCardData} />,
-    activity_logs: <EmptyState variant="mediator" type="under-construction" />,
+    // activity_logs: <EmptyState variant="mediator" type="under-construction" />,
   };
 
   if (isLoading || isFetching) return <VRPHeroLoading variant="mediator" />;

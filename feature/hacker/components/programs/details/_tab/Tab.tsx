@@ -17,7 +17,7 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
     <>
       <Mobile className="sticky top-10 z-50">
         <Card className="rounded-none px-8 py-6 pt-9 xl:rounded-2xl xl:rounded-b-none">
-          <div className="grid w-full grid-flow-col gap-[42px] overflow-x-auto md:w-fit xl:w-fit">
+          <div className="no-scrollbar grid w-full grid-flow-col gap-[42px] overflow-x-auto md:w-fit xl:w-fit">
             {items.map((item) => (
               <Typography
                 key={`item.value-${item.value}`}

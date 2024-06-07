@@ -10,6 +10,7 @@ import { FilterDrawer } from "../drawer/filter-drawer";
 import { useState } from "react";
 import { I_GetParamsPayload } from "@/core/models/common";
 import { iconColor } from "@/core/constants/common";
+import { cn } from "@/core/lib/utils";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
@@ -94,9 +95,19 @@ const DashboardFilter = ({
         </FilterDrawer>
       </Mobile>
       <Desktop className="w-fit">
-        <div className="_flexbox__row__center__start gap-2.5 rounded-lg bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100">
-          <Filter className={iconColor[variant]} />
-          <Separator orientation="vertical" className="h-6 w-0.5 text-white" />
+        <div
+          className={cn(
+            "_flexbox__row__center__start rounded-lg",
+            "bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100"
+          )}
+        >
+          <div className="_flexbox__row__center gap-2.5">
+            <Filter className={iconColor[variant]} />
+            <Separator
+              orientation="vertical"
+              className="h-6 w-0.5 text-white"
+            />
+          </div>
           <BaseDropdown
             label="Type"
             value={payload?.params?.filter?.["program.type"] || "all"}

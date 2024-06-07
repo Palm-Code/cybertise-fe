@@ -17,7 +17,7 @@ const Tab = ({ items, active, updates, onValueChange }: I_TabProps) => {
     <>
       <Mobile>
         <Card className="rounded-none p-6">
-          <div className="_flexbox__row__start__start gap-[42px] overflow-auto">
+          <div className="_flexbox__row__start__start no-scrollbar gap-[42px] overflow-auto">
             {items.map((item) => (
               <Typography
                 key={`item.value-${item.value}`}

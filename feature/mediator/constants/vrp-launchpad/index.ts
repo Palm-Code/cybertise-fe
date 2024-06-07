@@ -68,10 +68,10 @@ export const companyTabsItem: SortFilterType[] = [
   //   label: "Collaborators",
   //   value: "collaborators",
   // },
-  {
-    label: "Activity Logs",
-    value: "activity_logs",
-  },
+  // {
+  //   label: "Activity Logs",
+  //   value: "activity_logs",
+  // },
 ];
 export const manageCompanyTabsItem: SortFilterType[] = [
   {

@@ -298,11 +298,7 @@ const VRPLaunchpad = () => {
               />
             </>
           ) : (
-            <EmptyState
-              variant="mediator"
-              type="ticket"
-              buttonText="See VRP Launchpad"
-            />
+            <EmptyState variant="mediator" type="ticket" buttonText="" />
           )}
         </div>
       </Desktop>

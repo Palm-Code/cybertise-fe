@@ -10,7 +10,7 @@ export enum companyTabsItemEnums {
   active_tickets = "active_tickets",
   thanks = "thanks",
   // collaborators = "collaborators",
-  activity_logs = "activity_logs",
+  // activity_logs = "activity_logs",
 }
 
 export enum manageCompanyTabsItemEnums {

@@ -34,6 +34,7 @@ const Setup = ({
   initialData: initialValues,
 }: I_SetupProps) => {
   const { data: assetTypeOptions } = useGetAssetType();
+  console.log({ initialValues });
   const { mutateAsync, isPending, isSuccess } = usePostUpdateVrp(
     initialValues?.id!
   );

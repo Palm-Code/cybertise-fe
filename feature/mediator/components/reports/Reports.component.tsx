@@ -147,6 +147,7 @@ const Reports = () => {
               variant="mediator"
               type="ticket"
               buttonText="See VRP Launchpad"
+              href="/vrp-launchpad"
             />
           )}
         </div>
@@ -173,7 +174,7 @@ const Reports = () => {
               />
             </div>
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between gap-4">
             <DashboardFilter
               variant="mediator"
               store={store}
@@ -223,6 +224,7 @@ const Reports = () => {
               variant="mediator"
               type="ticket"
               buttonText="See VRP Launchpad"
+              href="/vrp-launchpad"
             />
           )}
         </div>

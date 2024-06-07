@@ -153,7 +153,8 @@ const Reports = () => {
             <EmptyState
               variant="company"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText="See my Programs"
+              href="/vrp-launchpad"
             />
           )}
         </div>
@@ -179,7 +180,7 @@ const Reports = () => {
               />
             </div>
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between gap-4">
             <DashboardFilter
               variant="company"
               store={store}
@@ -228,7 +229,8 @@ const Reports = () => {
             <EmptyState
               variant="company"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText="See my Programs"
+              href="/vrp-launchpad"
             />
           )}
         </div>

@@ -152,6 +152,7 @@ const Dashboard = () => {
               variant="mediator"
               type="ticket"
               buttonText="See VRP Launchpad"
+              href="/vrp-launchpad"
             />
           )}
         </div>
@@ -178,7 +179,7 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center justify-between gap-4">
             <DashboardFilter
               variant="mediator"
               onValueChange={(v, t) => submitChange(t, v)}
@@ -227,6 +228,7 @@ const Dashboard = () => {
             <EmptyState
               variant="mediator"
               type="ticket"
+              href="/vrp-launchpad"
               buttonText="See VRP Launchpad"
             />
           )}

@@ -25,7 +25,7 @@ interface I_EmptyStateProps {
 const EmptyState = ({
   variant = "hacker",
   type = "default",
-  buttonText = "See VRP Launchpad",
+  buttonText,
   href = "/",
   titleText = "You're not Allowed Here",
   onClickButton = () => {},
@@ -45,12 +45,14 @@ const EmptyState = ({
             >
               You Have Nothing Here
             </Typography>
-            <Link
-              className={buttonVariants({ variant: `primary-${variant}` })}
-              href={href}
-            >
-              {buttonText}
-            </Link>
+            {!!buttonText && (
+              <Link
+                className={buttonVariants({ variant: `primary-${variant}` })}
+                href={href}
+              >
+                {buttonText}
+              </Link>
+            )}
           </>
         );
       case "program":
@@ -64,14 +66,16 @@ const EmptyState = ({
                 weight="bold"
                 align={"center"}
               >
-                You have no any program yet
+                {titleText ?? "You have no any program yet"}
               </Typography>
-              <Link
-                className={buttonVariants({ variant: `primary-${variant}` })}
-                href={href}
-              >
-                {buttonText ?? "Add new program"}
-              </Link>
+              {!!buttonText && (
+                <Link
+                  className={buttonVariants({ variant: `primary-${variant}` })}
+                  href={href}
+                >
+                  {buttonText ?? "Add new program"}
+                </Link>
+              )}
             </>
           </>
         );

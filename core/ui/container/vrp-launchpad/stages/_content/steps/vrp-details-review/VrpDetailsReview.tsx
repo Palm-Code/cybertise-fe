@@ -48,8 +48,8 @@ const VrpDetailsReview = ({
             : `Review ${forms.title}`}
         </Typography>
         {isLastStep ||
-        currentStep === "Published" ||
-        currentStep === "Phase5" ? (
+        (currentStep === "Published" && variant === "company") ||
+        (currentStep === "Phase5" && variant === "company") ? (
           <Button
             variant={`tertiary-${variant}`}
             prefixIcon={<FilePenLine />}
@@ -143,7 +143,8 @@ const VrpDetailsReview = ({
           </Button>
         ) : null
       ) : (
-        currentStep !== "Phase5" && (
+        currentStep !== "Phase5" &&
+        currentStep !== "Published" && (
           <div className="_flexbox__row__start__start gap-4">
             <Button
               variant={

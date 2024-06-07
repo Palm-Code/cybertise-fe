@@ -37,7 +37,7 @@ const CreateVrpLaunchpad = ({
           currentSteps: 5,
           element: <Setup variant={variant} />,
         };
-      case "published":
+      case "Published":
         return {
           currentSteps: 6,
           element: <Setup variant={variant} />,

@@ -13,6 +13,7 @@ import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { useState } from "react";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 type I_VRPCardProps = {};
 
@@ -130,6 +131,15 @@ const VrpCardList = ({
 }: {
   data: I_GetProgramListSuccessResponse["data"];
 }) => {
+  if (!data || data?.length === 0)
+    return (
+      <EmptyState
+        type="program"
+        variant="mediator"
+        titleText="This company doesn't have any program yet"
+        buttonText=""
+      />
+    );
   return data.map((item, index) => <VRPCard key={index} {...item} />);
 };
 
