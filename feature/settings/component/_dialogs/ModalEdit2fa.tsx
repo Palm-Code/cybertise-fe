@@ -7,32 +7,33 @@ import InputOtp from "./steps/InputOtp";
 import { useGetEnableTwoFactor } from "@/core/react-query/client/useGetEnableTwoFactor";
 import { useState } from "react";
 import { useGetConfirmTwoFactor } from "@/core/react-query/client/useGetConfirmTwoFactor";
+import { useGetVerifyTwoFactor } from "@/core/react-query/client/useGetVerifyTwoFactor";
 
-export interface I_ModalSetup2faProps extends I_ModalProps {
+export interface I_ModalEdit2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
   isLoading?: boolean;
 }
 
-const ModalSetup2fa = ({
+const ModalEdit2fa = ({
   variant = "hacker",
   onClose = () => {},
   ...props
-}: I_ModalSetup2faProps) => {
-  const {
-    mutateAsync: mutateEnableTwoFactor,
-    isPending,
-    error,
-  } = useGetEnableTwoFactor();
+}: I_ModalEdit2faProps) => {
   const {
     mutateAsync: mutateConfirmTwoFactor,
     isPending: isPendingConfirm,
     isError,
   } = useGetConfirmTwoFactor();
+  const {
+    mutateAsync: mutateEnableTwoFactor,
+    isPending,
+    error,
+  } = useGetEnableTwoFactor();
   const [enableTwoFactorData, setEnableTwoFactorData] = useState<{
     qr: string;
     secret: string;
   } | null>(null);
-  const [activeState, setActiveState] = useState<string>("input-password");
+  const [activeState, setActiveState] = useState<string>("input-old-otp");
 
   const onClickVerifyEnableTwoFactor = async (password: string) => {
     await mutateEnableTwoFactor({ password: password }).then((res) => {
@@ -48,7 +49,6 @@ const ModalSetup2fa = ({
       }
     });
   };
-
   const onClickActivateTwoFactor = (otp: string) => {
     mutateConfirmTwoFactor({ code: otp }).then((res) => {
       if (res) {
@@ -60,7 +60,7 @@ const ModalSetup2fa = ({
   const state: {
     [key: string]: JSX.Element;
   } = {
-    "input-password": (
+    "input-old-otp": (
       <InputPassword
         error={error?.message}
         onClose={onClose}
@@ -97,4 +97,4 @@ const ModalSetup2fa = ({
     </BaseModal>
   );
 };
-export default ModalSetup2fa;
+export default ModalEdit2fa;

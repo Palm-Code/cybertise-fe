@@ -13,18 +13,22 @@ interface I_TicketDropDownProps {
   withIcon?: boolean;
   hackerId?: string;
   companyTicketId: string | null;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const TicketDropDown = ({
   withIcon,
   hackerId,
   companyTicketId,
+  open = false,
+  onOpenChange = () => {},
   ...props
 }: I_TicketDropDownProps) => {
   return (
     <>
       <Desktop className="w-fit">
-        <Select>
+        <Select open={open} onOpenChange={onOpenChange}>
           <SelectTrigger className="!bg-transparent !p-0">
             <ChevronRight />
           </SelectTrigger>

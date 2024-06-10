@@ -3,7 +3,7 @@ import Typography, { TypographyProps } from "../typography/typography";
 import Link, { LinkProps } from "next/link";
 import Indicator from "../indicator/indicator";
 
-type I_TableProps = React.HTMLAttributes<HTMLDivElement> & {
+type I_TableProps = React.HTMLAttributes<HTMLDivElement | HTMLButtonElement> & {
   children: React.ReactNode;
   className?: string;
   align?: TypographyProps["align"];
@@ -109,8 +109,11 @@ export const TableBodyRow = ({
   className,
   isClickable = false,
   hasNotification = false,
+  isButton = false,
   ...props
-}: I_TableProps) => {
+}: I_TableProps & {
+  isButton?: boolean;
+}) => {
   if (isClickable) {
     return (
       <Link
@@ -128,6 +131,26 @@ export const TableBodyRow = ({
       </Link>
     );
   }
+
+  if (isButton)
+    return (
+      <button
+        type="button"
+        className={cn(
+          "relative w-full rounded-2xl bg-background-main-light",
+          "px-9 py-6 dark:bg-background-main-dark",
+          "hover:bg-neutral-light-90 dark:hover:bg-neutral-dark-90",
+          className
+        )}
+        {...props}
+      >
+        {hasNotification && (
+          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+        )}
+        {children}
+      </button>
+    );
+
   return (
     <div
       className={cn(

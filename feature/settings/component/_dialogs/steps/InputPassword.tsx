@@ -9,10 +9,12 @@ import { useState } from "react";
 const InputPassword = ({
   variant = "hacker",
   isLoading = false,
+  error = "",
   onClickVerify = () => {},
   ...props
 }: I_ModalSetup2faProps & {
   onClickVerify?: (password: string) => void;
+  error?: string;
 }) => {
   const [password, setPassword] = useState("");
   return (
@@ -42,6 +44,8 @@ const InputPassword = ({
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">
         <PasswordInput
+          isError={!!error}
+          errorMsg={error}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           label="Password"

@@ -5,7 +5,6 @@ import {
   Badge,
   BaseTable,
   Indicator,
-  Pagination,
   TableBody,
   TableBodyRow,
   TableData,
@@ -19,9 +18,8 @@ import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
 import { I_TableColumns } from "@/interfaces";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import TicketDropDown from "../../components/reports/_dropdown/TicketDropdown";
 
 interface I_TableProps {
@@ -31,6 +29,7 @@ interface I_TableProps {
 }
 
 export default function Table({ data, columns, isLoading }: I_TableProps) {
+  const [openDropdown, setOpenDropdown] = useState(false);
   if (data)
     return (
       <AnimationWrapper>
@@ -60,6 +59,8 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                   <TableBodyRow
                     key={`table-row-${index}`}
                     hasNotification={!!item.has_new}
+                    isButton
+                    onClick={() => setOpenDropdown(!openDropdown)}
                   >
                     <TableRow>
                       <TableData
@@ -153,6 +154,8 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           ? formatDateToAgo(item.program?.updated_at)
                           : "-"}
                         <TicketDropDown
+                          open={openDropdown}
+                          onOpenChange={setOpenDropdown}
                           hackerId={
                             item.ticket_type === "Hacker"
                               ? item.id

@@ -4,9 +4,10 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "../../core/lib/config";
-import { redirect } from "next/navigation";
 import { Role } from "@/types/admin/sidebar";
 import { I_GetAccessTokenSuccessResponse } from "@/core/models/auth/login/get_access_token";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 const secretKey = SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
@@ -48,6 +49,7 @@ export async function logout() {
   } catch (error) {
     throw new Error("Failed to logout");
   } finally {
+    revalidatePath("/auth/signin");
     redirect("/auth/signin");
   }
 }

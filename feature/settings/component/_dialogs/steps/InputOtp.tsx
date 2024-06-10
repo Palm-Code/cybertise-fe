@@ -6,6 +6,7 @@ import { OTPInput, SlotProps } from "input-otp";
 import { useState } from "react";
 
 const InputOtp = ({
+  title = "Activate Your Authenticator",
   isLoading = false,
   variant = "hacker",
   onClickActivate = () => {},
@@ -14,6 +15,7 @@ const InputOtp = ({
 }: I_ModalSetup2faProps & {
   onClickActivate?: (otp: string) => void;
   isError?: boolean;
+  title?: string;
 }) => {
   const [otp, setOtp] = useState("");
   return (
@@ -33,7 +35,7 @@ const InputOtp = ({
           Cancel
         </Button>
         <Typography variant="h4" weight="semibold">
-          Activate Your Authenticator
+          {title}
         </Typography>
         <Typography variant="p" affects="normal" align="center">
           Please enter authenticator code from your verified Two-Factor

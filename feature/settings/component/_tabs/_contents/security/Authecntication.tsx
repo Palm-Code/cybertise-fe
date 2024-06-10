@@ -1,23 +1,21 @@
 import { cn } from "@/core/lib/utils";
 import { Badge, Button, Card, Typography } from "@/core/ui/components";
-import { Desktop } from "@/core/ui/layout";
 import { I_SecurityProps } from "@/feature/settings/containers/Security.container";
-import { AtSign, KeyRound, X } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { useState } from "react";
-import CardEditEmail from "./CardEditEmail";
 import ModalSetup2fa from "../../../_dialogs/ModalSetup2fa";
 import ModalUnbind2fa from "../../../_dialogs/ModalUnbind2fa";
 import ModalVerify2fa from "../../../_dialogs/ModalVerify2fa";
+import ModalEdit2fa from "../../../_dialogs/ModalEdit2fa";
 
 interface I_AuthenticationProps extends I_SecurityProps {}
 
 const Authentication = ({
   twoFactorEnabled,
   variant,
-  isEditing,
-  handleClickEdit = () => {},
 }: I_AuthenticationProps) => {
   const [openModalSetup2fa, setOpenModalSetup2fa] = useState(false);
+  const [openModalEdit2fa, setOpenModalEdit2fa] = useState(false);
   const [openModalDisable2fa, setOpenModalDisable2fa] = useState(false);
   const [openModalVerify2fa, setOpenModalVerify2fa] = useState(false);
 
@@ -52,7 +50,7 @@ const Authentication = ({
                 <Button
                   size="ghost"
                   variant={`ghost-${variant}`}
-                  onClick={() => handleClickEdit(true)}
+                  onClick={() => setOpenModalEdit2fa(true)}
                 >
                   Edit
                 </Button>
@@ -83,6 +81,11 @@ const Authentication = ({
           </div>
         </Card>
       </div>
+      <ModalEdit2fa
+        variant={variant}
+        isOpen={openModalEdit2fa}
+        onClose={() => setOpenModalEdit2fa(false)}
+      />
       <ModalSetup2fa
         variant={variant}
         isOpen={openModalSetup2fa}

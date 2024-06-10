@@ -6,7 +6,6 @@ import {
   Badge,
   BaseTable,
   Indicator,
-  Pagination,
   TableBody,
   TableBodyRow,
   TableData,
@@ -20,8 +19,6 @@ import { AnimationWrapper } from "@/core/ui/layout";
 import { I_TableColumns } from "@/interfaces";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
-import Image from "next/image";
-import { Suspense } from "react";
 
 interface I_TableProps {
   columns: I_TableColumns[];

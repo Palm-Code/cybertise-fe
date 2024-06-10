@@ -19,11 +19,11 @@ const ModalVerify2fa = ({
   ...props
 }: I_ModalVerify2faProps) => {
   const [otp, setOtp] = useState("");
-  const { mutateAsync: mutateDisableTwoFactor, isError } =
+  const { mutateAsync: mutateVerifyTwoFactor, isError } =
     useGetVerifyTwoFactor();
 
   const onClickVerifyTwoFactor = async (otp: string) => {
-    mutateDisableTwoFactor(otp).then((res) => {
+    mutateVerifyTwoFactor(otp).then((res) => {
       if (res) {
         setOtp("");
         onClose();

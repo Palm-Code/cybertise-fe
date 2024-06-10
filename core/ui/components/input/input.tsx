@@ -95,7 +95,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "relative z-10 flex h-16 w-full items-center justify-center rounded-md",
             isError && "border border-red-normal",
-            props.disabled && "cursor-not-allowed !opacity-50",
+            props.disabled && "cursor-not-allowed",
             transparentBg
               ? "bg-transparent"
               : "bg-neutral-light-90 px-4 dark:bg-neutral-dark-90",

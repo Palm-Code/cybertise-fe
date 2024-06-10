@@ -31,15 +31,9 @@ const AssetType = ({
     <Select onValueChange={onValueChange}>
       <SelectTrigger
         disabled={disabled}
-        className="!w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0"
+        withIcon
+        className="mx-auto !w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0"
       >
-        <Typography
-          variant="p"
-          affects="small"
-          className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
-        >
-          {label}
-        </Typography>
         {inputValueLabel && (
           <Badge variant={badgeValue as keyof typeof badgeVariants}>
             {inputValueLabel}
@@ -47,8 +41,8 @@ const AssetType = ({
         )}
       </SelectTrigger>
       <SelectContent
-        align="end"
-        sideOffset={-12}
+        align="center"
+        alignOffset={-12}
         className="!bg-background-main-light !p-6 !pr-11 dark:!bg-background-main-dark"
       >
         <Typography variant="p" affects="small">

@@ -24,8 +24,11 @@ const ModalUnbind2fa = ({
   ...props
 }: I_ModalUnbind2faProps) => {
   const [password, setPassword] = useState("");
-  const { mutateAsync: mutateDisableTwoFactor, isPending } =
-    useGetDisableTwoFactor();
+  const {
+    mutateAsync: mutateDisableTwoFactor,
+    isPending,
+    error,
+  } = useGetDisableTwoFactor();
 
   const onClickVerifyDisableTwoFactor = async (password: string) => {
     mutateDisableTwoFactor(password).then((res) => {
@@ -66,6 +69,8 @@ const ModalUnbind2fa = ({
         </div>
         <div className="_flexbox__col__start__start w-full gap-2">
           <PasswordInput
+            isError={!!error}
+            errorMsg={error?.message}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             label="Password"

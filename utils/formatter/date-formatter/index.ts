@@ -1,15 +1,13 @@
 import { formatInTimeZone } from "date-fns-tz";
 
 export function formatDateToAgo(dateString: string): string {
-  const date = new Date(dateString);
-  //format date to En Us
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+  const date = new Date(dateString + "Z");
+  const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
   const now = new Date();
-  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const localNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
+  const diffTime = Math.abs(localNow.getTime() - utcDate.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
   const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
@@ -27,15 +25,13 @@ export function formatDateToAgo(dateString: string): string {
 }
 
 export function formatDateToAgo2(dateString: string): string {
-  const date = new Date(dateString);
-  //format date to En Us
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+  const date = new Date(dateString + "Z");
+  const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
   const now = new Date();
-  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const localNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
+  const diffTime = Math.abs(localNow.getTime() - utcDate.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
   const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
