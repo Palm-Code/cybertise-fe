@@ -78,6 +78,7 @@ const Setting = ({
     ),
     [SettingItems.security]: (
       <Security
+        twoFactorEnabled={initialData?.two_factor}
         variant={role}
         isEditing={editing}
         handleClickEdit={setEditing}

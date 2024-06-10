@@ -32,6 +32,7 @@ interface I_UserData {
   about: string;
   email: string;
   want_news: number;
+  two_factor: boolean;
   image: string;
   company_status: string;
   company_reports_resolved: number;

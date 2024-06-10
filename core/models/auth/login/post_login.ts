@@ -10,6 +10,7 @@ export type FormLoginSchema = z.infer<typeof formLoginShcema>;
 export interface I_GetLoginResponse {
   message: string;
   "two-factor": boolean;
+  session_code: string;
 }
 
 export interface I_GetLoginSuccessResponse {

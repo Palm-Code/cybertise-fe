@@ -7,7 +7,7 @@ import Typography, {
 } from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { useSearchParams } from "next/navigation";
@@ -17,10 +17,11 @@ import { FormLoginSchema } from "@/types/auth/sign-in";
 import { formLoginShcema } from "@/core/models/auth/login/post_login";
 import { usePostSignIn } from "../../query/signin";
 import { getBrowserAndOS } from "@/utils/device-type";
+import { useGetAccessToken } from "@/core/react-query/client";
 
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
-  const auth_2fa = useSearchParams().get("authenticate_2fa");
+  const auth_2fa = useSearchParams().get("code");
   const auth_email = useSearchParams().get("authenticate_email");
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
   const {
@@ -38,11 +39,22 @@ const SignInComponent = () => {
 
   const forms = watch();
   const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
+  const { mutate: getAccessToken, isError } = useGetAccessToken();
 
   const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
     mutate({ ...forms, device_type: deviceType });
+  };
+
+  const onSubmitLogin2fa = async (v: string) => {
+    const userAgent = navigator.userAgent;
+    const deviceType = getBrowserAndOS(userAgent);
+    getAccessToken({
+      code: auth_2fa ?? "",
+      device_type: deviceType,
+      totp: v,
+    });
   };
 
   const validateIsFormFilled = isObjectEmpty({
@@ -55,7 +67,7 @@ const SignInComponent = () => {
   }
 
   if (auth_2fa) {
-    return <MultiFactor />;
+    return <MultiFactor isError={isError} onCompleteInput={onSubmitLogin2fa} />;
   }
 
   return (

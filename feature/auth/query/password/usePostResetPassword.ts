@@ -20,16 +20,16 @@ export const usePostResetPassword = () => {
         logout();
         return;
       }
-      router.replace("/settings");
+      window.location.reload();
     },
+    onError: (error) => {
+      mutation.reset();
+      toast.error(error.message, {
+        position: "bottom-right",
+      });
+    },
+    onSettled: () => {},
   });
-
-  if (mutation.error) {
-    mutation.reset();
-    toast.error(mutation.error.message, {
-      position: "bottom-right",
-    });
-  }
 
   return mutation;
 };

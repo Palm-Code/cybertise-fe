@@ -99,14 +99,14 @@ const Details = ({
           <Typography variant="h5" weight="bold">
             {variant === "company" ? "Company" : "Account"} Details
           </Typography>
-          <Button
+          {/* <Button
             variant={`tertiary-${variant}`}
             className="p-0"
             prefixIcon={<FilePenLine />}
             onClick={() => {
               setModalForbidden(true);
             }}
-          />
+          /> */}
         </div>
         <CardAbout data={data} variant={variant} />
         <CardAccountDetails data={data} variant={variant} />

@@ -2,6 +2,8 @@ import { Role } from "@/types/admin/sidebar";
 
 export interface I_GetAccessTokenPayload {
   code: string;
+  device_type?: string;
+  totp?: string;
 }
 
 export interface I_GetAccessTokenResponse {

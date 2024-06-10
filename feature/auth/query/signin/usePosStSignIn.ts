@@ -22,7 +22,7 @@ export const usePostSignIn = (callbackUrl: string | null) => {
       mutation.reset();
       callbackUrl && setCallbackUrl(callbackUrl);
       data.data["two-factor"]
-        ? replace(`/auth/signin?authenticate_2fa=${variables.email}`)
+        ? replace(`/auth/signin?code=${data.data.session_code}`)
         : replace(`/auth/signin?authenticate_email=${variables.email}`);
     },
     onError(error) {
