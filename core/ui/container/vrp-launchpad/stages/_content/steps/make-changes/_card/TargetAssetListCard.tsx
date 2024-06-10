@@ -3,10 +3,10 @@ import { cn } from "@/core/lib/utils";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { useGetAssetType } from "@/core/react-query/client";
-import { Button, Card, Input, Typography } from "@/core/ui/components";
+import { Badge, Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
 import { SortFilterType } from "@/types/admin/dashboard";
-import { FilePenLine, X } from "lucide-react";
+import { Check, FilePenLine, X } from "lucide-react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -80,39 +80,38 @@ const TargetAssetListCard = ({
         >
           List of Target Assets
         </Typography>
-        {forms.target_assets.map((v, index) => (
-          <Card
-            className={cn(
-              "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md xl:p-0 xl:px-4",
-              "border border-transparent transition-colors duration-100",
-              "bg-neutral-light-100 dark:bg-neutral-dark-100",
-              !!errors?.target_assets?.[index]?.content ||
-                !!errors?.target_assets?.[index]?.asset_type_id
-                ? "border border-red-normal"
-                : ""
-            )}
-            key={`list-make-changes-target-assets-${index}`}
-          >
-            <Input
-              label={"Asset " + (index + 1)}
-              disabled={!isEditingList[index]}
-              placeholderText="Hostname or IP Address"
-              value={v.content ?? "Hostname or IP Address"}
-              className="bg-transparen w-full"
-              onChange={(e) =>
-                setValue(
-                  "target_assets",
-                  forms.target_assets.map((v, i) =>
-                    i === index ? { ...v, content: e.target.value } : v
-                  ),
-                  { shouldValidate: true }
-                )
-              }
-              transparentBg
-            />
-            {isEditingList[index] ? (
+        {forms.target_assets.map((v, index) =>
+          isEditingList[index] ? (
+            <Card
+              className={cn(
+                "grid w-full grid-cols-3 gap-2 rounded-md xl:p-0 xl:px-4",
+                "border border-transparent transition-colors duration-100",
+                "bg-neutral-light-100 dark:bg-neutral-dark-100",
+                !!errors?.target_assets?.[index]?.content ||
+                  !!errors?.target_assets?.[index]?.asset_type_id
+                  ? "border border-red-normal"
+                  : ""
+              )}
+              key={`list-make-changes-target-assets-${index}`}
+            >
+              <Input
+                label={"Asset type " + (index + 1)}
+                disabled={!isEditingList[index]}
+                placeholderText="Hostname or IP Address"
+                value={v.content ?? "Hostname or IP Address"}
+                className="w-full bg-transparent"
+                onChange={(e) =>
+                  setValue(
+                    "target_assets",
+                    forms.target_assets.map((v, i) =>
+                      i === index ? { ...v, content: e.target.value } : v
+                    ),
+                    { shouldValidate: true }
+                  )
+                }
+                transparentBg
+              />
               <AssetType
-                label="Asset type"
                 value={forms.target_assets[index].asset_type_id}
                 onValueChange={(e) => {
                   const newAssetTypeValue = options.find(
@@ -138,43 +137,72 @@ const TargetAssetListCard = ({
                 }}
                 options={options}
               />
-            ) : (
-              <div className="_flexbox__row__center gap-4">
-                <AssetType
-                  label="Asset type"
-                  value={forms.target_assets[index].asset_type_id}
-                  options={options}
-                  disabled
-                />
-                <button
-                  type="button"
-                  title="Edit"
+              <div className="_flexbox__row__center ml-auto gap-4">
+                <Button
+                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
+                  prefixIcon={<X />}
+                  className="p-0"
                   onClick={() => handleEditClick(index)}
                 >
-                  <FilePenLine />
-                </button>
+                  Cancel
+                </Button>
+                <Button
+                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
+                  prefixIcon={<Check />}
+                  className="p-0"
+                  onClick={() => handleEditClick(index)}
+                >
+                  Save
+                </Button>
               </div>
-            )}
-            <button
-              type="button"
-              title="Delete"
-              onClick={() => {
-                setValue(
-                  "asset_types_values",
-                  forms.asset_types_values.filter((v, i) => i !== index),
-                  { shouldValidate: true }
-                );
-                setValue(
-                  "target_assets",
-                  forms.target_assets.filter((v, i) => i !== index),
-                  { shouldValidate: true }
-                );
-              }}
+            </Card>
+          ) : (
+            <Card
+              className={cn(
+                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md xl:px-4 xl:py-4",
+                "border border-transparent transition-colors duration-100",
+                "bg-neutral-light-80 dark:bg-neutral-dark-80"
+              )}
+              key={`target-assets-${index}`}
             >
-              <X />
-            </button>
-          </Card>
-        ))}
+              <div className="_flexbox__col__start__start w-full gap-2">
+                <Typography variant="p" affects="normal">
+                  {v.content}
+                </Typography>
+                <Badge variant={v.asset_type?.label as any}>
+                  {v.asset_type?.value}
+                </Badge>
+              </div>
+              <div className="_flexbox__row__center gap-4">
+                <Button
+                  type="button"
+                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
+                  onClick={() => handleEditClick(index)}
+                  className="p-0"
+                  prefixIcon={<FilePenLine />}
+                />
+                <Button
+                  type="button"
+                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
+                  onClick={() => {
+                    setValue(
+                      "asset_types_values",
+                      forms.asset_types_values.filter((v, i) => i !== index),
+                      { shouldValidate: true }
+                    );
+                    setValue(
+                      "target_assets",
+                      forms.target_assets.filter((v, i) => i !== index),
+                      { shouldValidate: true }
+                    );
+                  }}
+                  className="p-0"
+                  prefixIcon={<X />}
+                />
+              </div>
+            </Card>
+          )
+        )}
         <button
           title="Add"
           type="button"
