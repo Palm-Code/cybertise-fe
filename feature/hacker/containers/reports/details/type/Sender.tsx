@@ -14,8 +14,8 @@ import { formatTimestamp } from "@/utils/formatter/date-formatter";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 import { sanitize } from "@/utils/sanitize-input";
 import { motion } from "framer-motion";
-import { Download, Eye, File } from "lucide-react";
-import Image from "next/image";
+import { Download, Eye, File, Link as LinkUrl } from "lucide-react";
+import Link from "next/link";
 
 const Sender = ({
   data,
@@ -62,17 +62,33 @@ const Sender = ({
           {data.has_link && (
             <Card
               className={cn(
-                "grid h-fit w-full grid-cols-[auto_1fr] gap-4 rounded-lg xl:p-4",
+                "grid h-fit w-full gap-4 rounded-lg !p-4 md:grid-cols-[auto_1fr]",
                 "bg-background-main-light dark:bg-background-main-dark"
               )}
             >
-              <Image
-                src={data.og_image || ""}
-                alt={data.og_title || ""}
-                width={120}
-                height={120}
-                className="!m-0 !aspect-square !w-24 !max-w-24 !rounded-lg object-cover"
-              />
+              {data.og_image ? (
+                <img
+                  src={data.og_image || ""}
+                  alt={data.og_title || ""}
+                  width={120}
+                  height={120}
+                  className="!m-0 !aspect-square !w-24 !max-w-24 !rounded-lg object-cover"
+                />
+              ) : (
+                <div
+                  className={cn(
+                    "!m-0 !aspect-square !w-24 !max-w-24 !rounded-lg",
+                    "bg-neutral-light-80 dark:bg-neutral-dark-80",
+                    "_flexbox__col__center"
+                  )}
+                >
+                  <LinkUrl
+                    width={72}
+                    height={72}
+                    className="my-auto text-brand-neutral dark:text-white"
+                  />
+                </div>
+              )}
               <div className="_flexbox__row__start__between h-full w-full gap-4">
                 <div className="_flexbox__col__start__between h-full gap-2.5">
                   <div>
@@ -87,6 +103,9 @@ const Sender = ({
                       {data.og_description}
                     </Typography>
                   </div>
+                  <Link target="_blank" href={data.og_url || "#"}>
+                    {data.og_url}
+                  </Link>
                 </div>
               </div>
             </Card>

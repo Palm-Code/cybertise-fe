@@ -125,6 +125,8 @@ const Tiptap = ({
             if (!description) return;
             if (e.key === "Enter" && e.shiftKey) {
               e.preventDefault();
+              if (description === "<p><br></p>")
+                return editor?.commands.clearContent();
               onClickSendMessage();
               editor?.commands.clearContent();
             }

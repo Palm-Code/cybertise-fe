@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { MoveLeft } from "lucide-react";
+import { Ellipsis, MoveLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/hacker/containers";
@@ -18,6 +18,7 @@ import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/repor
 import { useRouter } from "next/navigation";
 import {
   useGetTicketDetails,
+  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
@@ -28,6 +29,7 @@ import { useInView } from "react-intersection-observer";
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
+  const { data: userData } = useGetUserData();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
   const { data, isError, fetchNextPage, isFetchingNextPage } =
@@ -66,8 +68,8 @@ const ReportDetails = ({ id }: { id: string }) => {
   const sendMessage = async () => {
     await mutateAsync({
       chat_ticket_id: id,
-      sender_name: chatData && chatData[0].sender_name,
-      sender_avatar: chatData && chatData[0].sender_avatar,
+      sender_name: userData?.name,
+      sender_avatar: userData?.avatar,
       content: description ?? undefined,
       attachments: attachments.length > 0 ? attachments : undefined,
     })

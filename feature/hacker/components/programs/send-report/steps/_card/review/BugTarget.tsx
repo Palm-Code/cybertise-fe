@@ -35,7 +35,7 @@ const BugTargetCard = ({
         >
           Target Assets
         </Typography>
-        <div className="_flexbox__row__start__start gap-4">
+        <div className="flex flex-wrap gap-4">
           <Typography variant="p" affects="normal">
             {target_assets.content}
           </Typography>

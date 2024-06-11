@@ -19,6 +19,7 @@ import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatLi
 import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
 import {
   useGetTicketDetails,
+  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
@@ -35,11 +36,11 @@ import { ModalForbidden } from "@/core/ui/container";
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
+  const { data: userData } = useGetUserData();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
   const { data, isError, isRefetching, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
-
   const { ref, inView } = useInView({ threshold: 0.5 });
   const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
@@ -79,8 +80,8 @@ const ReportDetails = ({ id }: { id: string }) => {
   const sendMessage = async () => {
     await mutateAsync({
       chat_ticket_id: id,
-      sender_name: chatData && chatData[0].sender_name,
-      sender_avatar: chatData && chatData[0].sender_avatar,
+      sender_name: `${userData?.name} (${userData?.role})`,
+      sender_avatar: userData?.avatar,
       content: description ?? undefined,
       attachments: attachments.length > 0 ? attachments : undefined,
     })

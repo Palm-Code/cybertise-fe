@@ -6,7 +6,6 @@ import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 
 const Update = ({ title, created_at, content }: I_LatestUpdates) => {
-  console.log({ created_at });
   return (
     <AnimationWrapper>
       <Mobile className="px-6">
@@ -64,7 +63,6 @@ interface I_UpdateList {
 }
 
 const UpdateList = ({ data }: I_UpdateList) => {
-  console.log({ data });
   if (!data || data?.length === 0)
     return <EmptyState type="update" variant="hacker" />;
 

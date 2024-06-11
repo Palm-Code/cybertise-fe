@@ -72,6 +72,7 @@ export interface I_Data {
   og_image?: string;
   og_title?: string;
   og_description?: string;
+  og_url?: string;
   created_at?: string;
   updated_at?: string;
   deleted_at?: string | null;

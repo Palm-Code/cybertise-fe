@@ -25,7 +25,7 @@ const System = ({
         />
       </div>
       <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:px-5">
-        <div className="_flexbox__row__center__start gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Typography variant="p" affects="small" weight="bold">
             SYSTEM: {data?.content}
           </Typography>

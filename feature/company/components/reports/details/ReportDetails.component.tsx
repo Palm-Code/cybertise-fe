@@ -20,6 +20,7 @@ import { useReportDetailsParamStore } from "@/feature/company/zustand/store/repo
 import { useRouter } from "next/navigation";
 import {
   useGetTicketDetails,
+  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
@@ -31,9 +32,10 @@ let firstRender = true;
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
+  const { data: userData } = useGetUserData();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError, isRefetching, isFetchingNextPage, fetchNextPage } =
+  const { data, isError, isFetchingNextPage, fetchNextPage } =
     useGetChatListItem(store.payload, id);
   const { ref, inView } = useInView({ threshold: 0.5 });
   const chatData = data?.pages.map((page) => page.data).flat();
@@ -70,8 +72,11 @@ const ReportDetails = ({ id }: { id: string }) => {
     if (!description) return;
     await mutateAsync({
       chat_ticket_id: id,
-      sender_name: chatData && chatData[0].sender_name,
-      sender_avatar: chatData && chatData[0].sender_avatar,
+      sender_name:
+        userData?.role.toLowerCase() === "company staff"
+          ? `${userData?.name} (${userData?.role})`
+          : userData?.name,
+      sender_avatar: userData?.avatar,
       content: description ?? undefined,
       attachments: attachments.length > 0 ? attachments : undefined,
     })
@@ -87,7 +92,7 @@ const ReportDetails = ({ id }: { id: string }) => {
       });
   };
 
-  if (isError || chatData?.length === 0) {
+  if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         No Chat Found

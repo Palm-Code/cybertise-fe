@@ -3,12 +3,14 @@ import Summary from "./type/Summary";
 import System from "./type/System";
 import Sender from "./type/Sender";
 import { useGetMutationState } from "@/core/react-query/client";
+import { useUserStore } from "@/core/zustands/user";
 
 const ChatBubble = ({
   data,
 }: {
   data: I_GetChatListItemSuccessResponse["data"];
 }) => {
+  const { data: userData } = useUserStore();
   const mutations = useGetMutationState();
 
   return (
