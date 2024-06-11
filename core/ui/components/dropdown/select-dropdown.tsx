@@ -49,7 +49,7 @@ const SelectDropdown = ({
     <Select onValueChange={onValueChange}>
       <SelectTrigger
         className={cn(
-          "pl-0 xl:p-0 xl:pr-3",
+          "!p-0 !pr-3 pl-0",
           props.transparentBg && "!bg-transparent",
           props.className,
           props.wrapperClassName
@@ -71,6 +71,7 @@ const SelectDropdown = ({
               <input
                 value={searchValue}
                 type="text"
+                autoFocus
                 placeholder="Search..."
                 className={cn(
                   "bg-neutral-light-80 dark:bg-neutral-dark-80",

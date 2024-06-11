@@ -30,7 +30,10 @@ const AssetType = ({
 
   return (
     <Select onValueChange={(v) => onValueChange(v)}>
-      <SelectTrigger className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0">
+      <SelectTrigger
+        withIcon
+        className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0"
+      >
         <Typography
           variant="p"
           affects="small"

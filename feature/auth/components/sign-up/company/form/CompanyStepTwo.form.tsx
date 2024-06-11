@@ -19,7 +19,6 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
     formState: { errors },
     watch,
     setValue,
-    resetField,
   } = useFormContext<SignupCompanyFormType>();
 
   const forms = watch();
@@ -48,7 +47,9 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
           <Input
             type="text"
             label="Address"
-            onClearInput={() => resetField("address")}
+            onClearInput={() =>
+              setValue("address", "", { shouldValidate: true })
+            }
             value={forms.address}
             onChange={(e) =>
               setValue("address", e.target.value, { shouldValidate: true })
@@ -58,7 +59,11 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
           <Input
             type="text"
             label="Address Line 2"
-            onClearInput={() => resetField("address_2")}
+            onClearInput={() =>
+              setValue("address_2", "", {
+                shouldValidate: true,
+              })
+            }
             value={forms.address_2}
             onChange={(e) =>
               setValue("address_2", e.target.value, {
@@ -81,7 +86,9 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             <Input
               type="text"
               label="State"
-              onClearInput={() => resetField("state")}
+              onClearInput={() =>
+                setValue("state", "", { shouldValidate: true })
+              }
               value={forms.state}
               onChange={(e) =>
                 setValue("state", e.target.value, { shouldValidate: true })
@@ -91,7 +98,9 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             <Input
               type="text"
               label="City"
-              onClearInput={() => resetField("city")}
+              onClearInput={() =>
+                setValue("city", "", { shouldValidate: true })
+              }
               value={forms.city}
               onChange={(e) =>
                 setValue("city", e.target.value, { shouldValidate: true })
@@ -101,7 +110,7 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             <Input
               type="text"
               label="Zip Code"
-              onClearInput={() => resetField("zip")}
+              onClearInput={() => setValue("zip", "", { shouldValidate: true })}
               value={forms.zip}
               onChange={(e) =>
                 setValue("zip", e.target.value, { shouldValidate: true })

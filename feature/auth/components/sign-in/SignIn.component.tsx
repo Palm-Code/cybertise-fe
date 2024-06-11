@@ -27,7 +27,6 @@ const SignInComponent = () => {
   const {
     formState: { errors },
     setValue,
-    resetField,
     watch,
   } = useForm<FormLoginSchema>({
     resolver: zodResolver(formLoginShcema),
@@ -96,7 +95,7 @@ const SignInComponent = () => {
             label="Email"
             value={forms.email}
             placeholderText="Enter your email"
-            onClearInput={() => resetField("email")}
+            onClearInput={() => setValue("email", "", { shouldValidate: true })}
             onChange={(e) =>
               setValue("email", e.target.value, { shouldValidate: true })
             }
@@ -192,7 +191,9 @@ const SignInComponent = () => {
               type="email"
               label="Email"
               placeholderText="Enter your email"
-              onClearInput={() => resetField("email")}
+              onClearInput={() =>
+                setValue("email", "", { shouldValidate: true })
+              }
               value={forms.email}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {

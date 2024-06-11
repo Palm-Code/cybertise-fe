@@ -15,7 +15,6 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
     formState: { errors },
     setValue,
     watch,
-    resetField,
   } = useFormContext<SignupCompanyFormType>();
   const forms = watch();
 
@@ -40,7 +39,7 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
           <Input
             type="text"
             label="Corporate Name"
-            onClearInput={() => resetField("name")}
+            onClearInput={() => setValue("name", "", { shouldValidate: true })}
             value={forms.name}
             onChange={(e) =>
               setValue("name", e.target.value, {
@@ -50,9 +49,11 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
             isError={!!errors.name}
           />
           <Input
-            type="text"
+            type="url"
             label="Corporate Website"
-            onClearInput={() => resetField("website")}
+            onClearInput={() =>
+              setValue("website", "", { shouldValidate: true })
+            }
             value={forms.website}
             onChange={(e) =>
               setValue("website", e.target.value, {

@@ -31,7 +31,6 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     watch,
     formState: { errors },
     setValue,
-    resetField,
   } = useFormContext<SignupCompanyFormType>();
   const forms = watch();
 
@@ -98,7 +97,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
           <Input
             type="email"
             label="Email"
-            onClearInput={() => resetField("email")}
+            onClearInput={() => setValue("email", "", { shouldValidate: true })}
             value={forms.email}
             onChange={(e) =>
               setValue("email", e.target.value, { shouldValidate: true })

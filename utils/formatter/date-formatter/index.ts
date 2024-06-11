@@ -25,7 +25,9 @@ export function formatDateToAgo(dateString: string): string {
 }
 
 export function formatDateToAgo2(dateString: string): string {
-  const date = new Date(dateString + "Z");
+  const date = new Date(
+    dateString.includes("Z") ? dateString : dateString + "Z"
+  );
   const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
 
   const now = new Date();

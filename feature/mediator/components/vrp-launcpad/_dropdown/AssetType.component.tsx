@@ -34,10 +34,18 @@ const AssetType = ({
         withIcon
         className="mx-auto !w-fit !justify-start gap-2  whitespace-nowrap !bg-transparent !p-0"
       >
-        {inputValueLabel && (
+        {inputValueLabel ? (
           <Badge variant={badgeValue as keyof typeof badgeVariants}>
             {inputValueLabel}
           </Badge>
+        ) : (
+          <Typography
+            variant="p"
+            affects="small"
+            className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
+          >
+            {label}
+          </Typography>
         )}
       </SelectTrigger>
       <SelectContent

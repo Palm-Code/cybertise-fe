@@ -2,7 +2,6 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
-import { useGetAssetType } from "@/core/react-query/client";
 import { Badge, Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
 import { SortFilterType } from "@/types/admin/dashboard";
@@ -49,6 +48,7 @@ const TargetAssetListCard = ({
   const handleAddAsset = () => {
     const oldTeargetAssets = forms.target_assets;
     setValue("target_assets", [...oldTeargetAssets, { ...initialValues }]);
+    handleEditClick(oldTeargetAssets.length);
   };
 
   const disabledButton =
@@ -84,7 +84,7 @@ const TargetAssetListCard = ({
           isEditingList[index] ? (
             <Card
               className={cn(
-                "grid w-full grid-cols-3 gap-2 rounded-md xl:p-0 xl:px-4",
+                "grid w-full grid-cols-3 gap-2 rounded-md xl:px-4 xl:py-4",
                 "border border-transparent transition-colors duration-100",
                 "bg-neutral-light-100 dark:bg-neutral-dark-100",
                 !!errors?.target_assets?.[index]?.content ||
@@ -97,6 +97,7 @@ const TargetAssetListCard = ({
               <Input
                 label={"Asset type " + (index + 1)}
                 disabled={!isEditingList[index]}
+                autoFocus
                 placeholderText="Hostname or IP Address"
                 value={v.content ?? "Hostname or IP Address"}
                 className="w-full bg-transparent"
@@ -112,6 +113,7 @@ const TargetAssetListCard = ({
                 transparentBg
               />
               <AssetType
+                label="Asset Type"
                 value={forms.target_assets[index].asset_type_id}
                 onValueChange={(e) => {
                   const newAssetTypeValue = options.find(
@@ -142,9 +144,25 @@ const TargetAssetListCard = ({
                   variant={`tertiary-${isCompany ? "company" : "mediator"}`}
                   prefixIcon={<X />}
                   className="p-0"
-                  onClick={() => handleEditClick(index)}
+                  onClick={() => {
+                    setValue(
+                      "asset_types_values",
+                      forms.asset_types_values
+                        .slice(0, index)
+                        .concat(forms.asset_types_values.slice(index + 1)),
+                      { shouldValidate: true }
+                    );
+                    setValue(
+                      "target_assets",
+                      forms.target_assets
+                        .slice(0, index)
+                        .concat(forms.target_assets.slice(index + 1)),
+                      { shouldValidate: true }
+                    );
+                    handleEditClick(index);
+                  }}
                 >
-                  Cancel
+                  Delete
                 </Button>
                 <Button
                   variant={`tertiary-${isCompany ? "company" : "mediator"}`}
@@ -180,24 +198,6 @@ const TargetAssetListCard = ({
                   onClick={() => handleEditClick(index)}
                   className="p-0"
                   prefixIcon={<FilePenLine />}
-                />
-                <Button
-                  type="button"
-                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
-                  onClick={() => {
-                    setValue(
-                      "asset_types_values",
-                      forms.asset_types_values.filter((v, i) => i !== index),
-                      { shouldValidate: true }
-                    );
-                    setValue(
-                      "target_assets",
-                      forms.target_assets.filter((v, i) => i !== index),
-                      { shouldValidate: true }
-                    );
-                  }}
-                  className="p-0"
-                  prefixIcon={<X />}
                 />
               </div>
             </Card>

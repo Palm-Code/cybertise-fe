@@ -151,7 +151,8 @@ const Dashboard = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText="See Programs"
+              href="/programs"
             />
           )}
         </div>
@@ -226,7 +227,8 @@ const Dashboard = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText="See Programs"
+              href="/programs"
             />
           )}
         </div>

@@ -21,7 +21,6 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
     formState: { errors },
     watch,
     setValue,
-    resetField,
   } = useFormContext<SignupHackerFormType>();
   const countryList = useGetCountry();
   const forms = watch();
@@ -47,7 +46,9 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
           <Input
             type="text"
             label="Username"
-            onClearInput={() => resetField("username")}
+            onClearInput={() =>
+              setValue("username", "", { shouldValidate: true })
+            }
             value={forms.username}
             onChange={(e) =>
               setValue("username", e.target.value, { shouldValidate: true })

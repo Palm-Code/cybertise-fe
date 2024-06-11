@@ -124,15 +124,9 @@ const Tiptap = ({
           onKeyDown={(e) => {
             if (!description) return;
             if (e.key === "Enter" && e.shiftKey) {
-              if (description === "<p><br></p>") {
-                e.preventDefault();
-                editor?.commands.clearContent();
-                return;
-              } else {
-                e.preventDefault();
-                // onClickSendMessage();
-                editor?.commands.clearContent();
-              }
+              e.preventDefault();
+              onClickSendMessage();
+              editor?.commands.clearContent();
             }
           }}
           autoFocus
