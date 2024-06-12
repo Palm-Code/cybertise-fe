@@ -96,15 +96,31 @@ const MonetaryAwardCardList = ({
   onClickPrev,
   variant = "company",
 }: PricingCardListProps) => {
-  const [activeCard, setActiveCard] = useState<string | null>(null);
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
+  const [activeCard, setActiveCard] = useState<string | null>(
+    forms.monetary_awards_level.split("-")[0] || null
+  );
 
-  const handleCardClick = (category: string) => {
+  const handleCardClick = (category: string, tier: string) => {
     const oldValue = forms.monetary_awards_level;
     setValue(
       "monetary_awards_level",
-      oldValue === category ? oldValue : category
+      oldValue === "custom" ? tier : oldValue === tier ? oldValue : tier
+    );
+    setActiveCard((prevActiveCard) =>
+      prevActiveCard === "custom"
+        ? category
+        : prevActiveCard === category
+          ? null
+          : category
+    );
+  };
+
+  const handleCardCustomClick = (category: string) => {
+    setValue(
+      "monetary_awards_level",
+      forms.monetary_awards_level === "custom" ? "" : category
     );
     setActiveCard((prevActiveCard) =>
       prevActiveCard === category ? null : category
@@ -137,23 +153,21 @@ const MonetaryAwardCardList = ({
               title={item.title}
               category={item.category}
               priceData={item.priceData}
-              activeCard={item.priceData.some(
-                (i) => i.category === forms.monetary_awards_level
-              )}
+              activeCard={item.category === activeCard}
               variant={variant}
               handleClickExpand={() =>
-                handleCardClick(item.priceData[0].category)
+                handleCardClick(
+                  item.category,
+                  forms.monetary_awards_level ?? item.priceData[0].category
+                )
               }
             />
           ))}
           <CustomPricing
             value={forms}
             setValue={setValue}
-            handleClickExpand={() => handleCardClick("custom")}
-            activeCard={
-              activeCard === "custom" ||
-              forms.monetary_awards_level === "custom"
-            }
+            handleClickExpand={() => handleCardCustomClick("custom")}
+            activeCard={forms.monetary_awards_level === "custom"}
           />
         </div>
       </div>

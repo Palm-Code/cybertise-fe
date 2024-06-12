@@ -3,7 +3,7 @@ import { useGetUserData } from "../react-query/client";
 import { logout } from "@/service/server/auth";
 
 export const useGetRole = () => {
-  const { data, isError, isSuccess } = useGetUserData();
+  const { data, isError, isSuccess } = useGetUserData(true);
   if (isSuccess) {
     return data.role.toLowerCase() as keyof typeof Role;
   }

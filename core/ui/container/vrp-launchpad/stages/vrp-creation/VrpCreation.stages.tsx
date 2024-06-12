@@ -40,7 +40,6 @@ const VRPCreation = ({
   initialValues,
   currentStep = "Phase1",
 }: I_VRPCreationProps) => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
   const { data: assetTypeOptions } = useGetAssetType();
   const options: SortFilterType[] =
     assetTypeOptions
