@@ -49,7 +49,7 @@ const Sidebar = ({ type }: SidebarProps) => {
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
 
-  const { mutate } = usePostLogout();
+  const { mutateAsync } = usePostLogout();
   const { data: user } = useGetUserData();
 
   return (
@@ -122,28 +122,22 @@ const Sidebar = ({ type }: SidebarProps) => {
                     Settings
                   </Typography>
                 </Link>
-                <form
-                  action={async () => {
-                    await logout();
-                  }}
-                  className="w-full"
+                <button
+                  type="submit"
+                  className={cn(
+                    "_flexbox__row__center__start h-16 w-full gap-4",
+                    "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+                    "border-l-2",
+                    `hover:${borderColor[type as keyof typeof borderColor]}`,
+                    "border-transparent bg-transparent font-normal dark:border-transparent"
+                  )}
+                  onClick={() => mutateAsync()}
                 >
-                  <button
-                    type="submit"
-                    className={cn(
-                      "_flexbox__row__center__start h-16 w-full gap-4",
-                      "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                      "border-l-2",
-                      `hover:${borderColor[type as keyof typeof borderColor]}`,
-                      "border-transparent bg-transparent font-normal dark:border-transparent"
-                    )}
-                  >
-                    <LogOut className="h-6 w-6" />
-                    <Typography variant="p" affects="normal">
-                      Logout
-                    </Typography>
-                  </button>
-                </form>
+                  <LogOut className="h-6 w-6" />
+                  <Typography variant="p" affects="normal">
+                    Logout
+                  </Typography>
+                </button>
               </div>
             </div>
             <div
@@ -217,28 +211,22 @@ const Sidebar = ({ type }: SidebarProps) => {
                 Settings
               </Typography>
             </Link>
-            <form
-              action={() => {
-                mutate();
-              }}
-              className="w-full"
+            <button
+              type="submit"
+              className={cn(
+                "_flexbox__row__center__start h-16 w-full gap-4",
+                "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
+                "border-l-2",
+                `hover:${borderColor[type as keyof typeof borderColor]}`,
+                "border-transparent bg-transparent font-normal dark:border-transparent"
+              )}
+              onClick={() => mutateAsync()}
             >
-              <button
-                type="submit"
-                className={cn(
-                  "_flexbox__row__center__start h-16 w-full gap-4",
-                  "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                  "border-l-2",
-                  `hover:${borderColor[type as keyof typeof borderColor]}`,
-                  "border-transparent bg-transparent font-normal dark:border-transparent"
-                )}
-              >
-                <LogOut className="h-6 w-6" />
-                <Typography variant="p" affects="normal">
-                  Logout
-                </Typography>
-              </button>
-            </form>
+              <LogOut className="h-6 w-6" />
+              <Typography variant="p" affects="normal">
+                Logout
+              </Typography>
+            </button>
           </div>
         </div>
       </Desktop>

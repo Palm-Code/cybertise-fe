@@ -2,7 +2,10 @@ import { I_LatestUpdates } from "@/core/models/hacker/programs";
 import { Card, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
+import {
+  formatDateToAgo2,
+  formatTimestamp,
+} from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 
 const Update = ({ title, created_at, content }: I_LatestUpdates) => {
@@ -20,7 +23,7 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
                 affects="small"
                 className="text-neutral-light-50 dark:text-neutral-dark-50"
               >
-                {formatDateToAgo2(created_at ?? "")}
+                {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
               </Typography>
             </div>
             <article
@@ -43,7 +46,7 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
                 affects="small"
                 className="text-neutral-light-50 dark:text-neutral-dark-50"
               >
-                {formatDateToAgo2(created_at ?? "")}
+                {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
               </Typography>
             </div>
             <article

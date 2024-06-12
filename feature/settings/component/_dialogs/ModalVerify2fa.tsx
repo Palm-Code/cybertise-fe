@@ -19,8 +19,11 @@ const ModalVerify2fa = ({
   ...props
 }: I_ModalVerify2faProps) => {
   const [otp, setOtp] = useState("");
-  const { mutateAsync: mutateVerifyTwoFactor, isError } =
-    useGetVerifyTwoFactor();
+  const {
+    mutateAsync: mutateVerifyTwoFactor,
+    isPending,
+    isError,
+  } = useGetVerifyTwoFactor();
 
   const onClickVerifyTwoFactor = async (otp: string) => {
     mutateVerifyTwoFactor(otp).then((res) => {
@@ -61,7 +64,9 @@ const ModalVerify2fa = ({
         </div>
         <div className="_flexbox__col__start__start w-full gap-2">
           <OTPInput
+            autoFocus
             maxLength={6}
+            disabled={isPending}
             onComplete={() => onClickVerifyTwoFactor(otp)}
             value={otp}
             onChange={setOtp}

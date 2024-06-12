@@ -5,32 +5,32 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Ticket",
     align: "left",
-    width: "w-[20%]",
+    width: "w-3/12",
   },
   {
     title: "Risk Level",
     align: "left",
-    width: "w-[180px]",
+    width: "w-2/12",
   },
   {
     title: "Vulnerability type (CWE)",
     align: "left",
-    width: "w-[220px]",
+    width: "w-3/12",
   },
   {
     title: "Rewards",
     align: "left",
-    width: "w-[80px]",
+    width: "w-1/12",
   },
   {
     title: "Status",
     align: "left",
-    width: "w-[120px]",
+    width: "w-2/12",
   },
   {
-    title: "Update",
+    title: "Last Update",
     align: "center",
-    width: "w-[80px]",
+    width: "w-1/12",
   },
 ];
 

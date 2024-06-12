@@ -49,7 +49,6 @@ export async function logout() {
   } catch (error) {
     throw new Error("Failed to logout");
   } finally {
-    revalidatePath("/auth/signin");
     redirect("/auth/signin");
   }
 }

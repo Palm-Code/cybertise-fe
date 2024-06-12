@@ -15,7 +15,7 @@ export const usePostLogout = () => {
       logout();
     },
     onError(error) {
-      toast.error("Logout error", {
+      toast.error(error.message, {
         position: "bottom-right",
       });
     },

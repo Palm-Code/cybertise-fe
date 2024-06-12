@@ -19,6 +19,7 @@ import Thanks from "./_tab/_content/Thanks";
 import { currentPhase } from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
 import { useGetRole } from "@/core/hooks";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 const Overview = ({ id }: { id: string }) => {
   const store = useProgramListParamStore();
@@ -41,7 +42,16 @@ const Overview = ({ id }: { id: string }) => {
         data={programListDetails?.data?.latest_updates || []}
       />
     ),
-    thanks: <Thanks data={programListDetails?.data?.company?.thanks_message} />,
+    thanks: programListDetails?.data?.company?.thanks_message ? (
+      <Thanks data={programListDetails?.data?.company?.thanks_message} />
+    ) : (
+      <EmptyState
+        titleText="You Have Nothing Here"
+        variant="company"
+        type="update"
+        buttonText=""
+      />
+    ),
   };
 
   if (isLoading || isFetching) return <Loader variant="company" />;

@@ -29,7 +29,16 @@ interface I_TableProps {
 }
 
 export default function Table({ data, columns, isLoading }: I_TableProps) {
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [boolArray, setBoolArray] = useState<boolean[]>([false]);
+
+  const toggleBoolean = (index: number): void => {
+    setBoolArray((prevArray) => {
+      const newArray = [...prevArray];
+      newArray[index] = !newArray[index];
+      return newArray;
+    });
+  };
+
   if (data)
     return (
       <AnimationWrapper>
@@ -60,7 +69,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     key={`table-row-${index}`}
                     hasNotification={!!item.has_new}
                     isButton
-                    onClick={() => setOpenDropdown(!openDropdown)}
+                    onClick={() => toggleBoolean(index)}
                   >
                     <TableRow>
                       <TableData
@@ -150,12 +159,12 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         )}
                         align={columns[4].align}
                       >
-                        {item.program?.updated_at
-                          ? formatDateToAgo(item.program?.updated_at)
+                        {item?.updated_at
+                          ? formatDateToAgo(item?.updated_at)
                           : "-"}
                         <TicketDropDown
-                          open={openDropdown}
-                          onOpenChange={setOpenDropdown}
+                          open={boolArray[index]}
+                          onOpenChange={() => toggleBoolean(index)}
                           hackerId={
                             item.ticket_type === "Hacker"
                               ? item.id

@@ -2,7 +2,10 @@ import { Card, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
-import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
+import {
+  formatDateToAgo2,
+  formatTimestamp,
+} from "@/utils/formatter/date-formatter";
 import { sanitize } from "@/utils/sanitize-input";
 import ModalAddUpdates from "../../_modals/ModalAddUpdates";
 import { useState } from "react";
@@ -22,9 +25,9 @@ const Update = ({ title, created_at, content }: I_Update) => {
             <Typography
               variant="p"
               affects="small"
-              className="!dark:text-neutral-dark-50 text-neutral-light-50"
+              className="text-neutral-light-50 dark:text-neutral-dark-50"
             >
-              {formatDateToAgo2(created_at ?? "")}
+              {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
             </Typography>
           </div>
           <article

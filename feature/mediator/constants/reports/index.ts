@@ -4,27 +4,27 @@ export const tableColumns: I_TableColumns[] = [
   {
     title: "Ticket",
     align: "left",
-    width: "w-1/4",
+    width: "w-3/12",
   },
   {
     title: "Risk Level",
     align: "center",
-    width: "w-[150px]",
+    width: "w-2/12",
   },
   {
     title: "Last Message",
     align: "left",
-    width: "w-[250px]",
+    width: "w-3/12",
   },
   {
     title: "Status",
     align: "left",
-    width: "w-[128px]",
+    width: "w-2/12",
   },
   {
     title: "Last Update",
     align: "right",
-    width: "w-[98px]",
+    width: "w-2/12",
   },
 ];
 

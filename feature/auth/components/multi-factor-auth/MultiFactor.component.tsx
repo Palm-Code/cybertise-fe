@@ -13,9 +13,15 @@ interface I_MultiFactorAuth extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
   onCompleteInput: (v: string) => void;
   isError?: boolean;
+  isLoading?: boolean;
 }
 
-const MultiFactorAuth = ({ isError, ...props }: I_MultiFactorAuth) => {
+const MultiFactorAuth = ({
+  isLoading = false,
+  isError,
+  ...props
+}: I_MultiFactorAuth) => {
+  console.log(isLoading);
   return (
     <>
       <Mobile>
@@ -40,10 +46,12 @@ const MultiFactorAuth = ({ isError, ...props }: I_MultiFactorAuth) => {
           </div>
           <div className="flex w-full items-center justify-center">
             <OTPInput
+              disabled={isLoading}
               maxLength={6}
               onComplete={(v: string) => {
                 props.onCompleteInput(v);
               }}
+              autoFocus
               containerClassName="group w-full flex items-center has-[:disabled]:opacity-30"
               render={({ slots }) => (
                 <>
@@ -94,6 +102,7 @@ const MultiFactorAuth = ({ isError, ...props }: I_MultiFactorAuth) => {
           </div>
           <div className="flex w-full items-center justify-center">
             <OTPInput
+              disabled={isLoading}
               maxLength={6}
               autoFocus
               onComplete={(v: string) => {
@@ -112,7 +121,7 @@ const MultiFactorAuth = ({ isError, ...props }: I_MultiFactorAuth) => {
             />
           </div>
           <Link
-            href="/auth/mfa?type=authenticator"
+            href="mailto:uQpKw@example.com"
             className={cn(
               typographyVariants({
                 variant: "p",

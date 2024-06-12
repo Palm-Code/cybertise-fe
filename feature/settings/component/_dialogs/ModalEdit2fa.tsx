@@ -7,7 +7,6 @@ import InputOtp from "./steps/InputOtp";
 import { useGetEnableTwoFactor } from "@/core/react-query/client/useGetEnableTwoFactor";
 import { useState } from "react";
 import { useGetConfirmTwoFactor } from "@/core/react-query/client/useGetConfirmTwoFactor";
-import { useGetVerifyTwoFactor } from "@/core/react-query/client/useGetVerifyTwoFactor";
 
 export interface I_ModalEdit2faProps extends I_ModalProps {
   variant?: keyof typeof Role;

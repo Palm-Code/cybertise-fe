@@ -135,8 +135,8 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         `text-${columns[4].align}`
                       )}
                     >
-                      {item.program?.updated_at
-                        ? formatDateToAgo(item.program?.updated_at)
+                      {item?.updated_at
+                        ? formatDateToAgo(item?.updated_at)
                         : "-"}
                     </TableData>
                   </TableRow>

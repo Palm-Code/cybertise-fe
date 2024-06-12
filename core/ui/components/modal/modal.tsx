@@ -19,9 +19,9 @@ const BaseModal = ({
 }: I_ModalProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(ref, () => {
-    onClose();
-  });
+  // useOnClickOutside(ref, () => {
+  //   onClose();
+  // });
 
   return (
     <AnimatePresence>
@@ -43,9 +43,10 @@ const BaseModal = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.2 }}
             className="w-full"
-            ref={ref}
           >
-            {children}
+            <div className="w-full" ref={ref}>
+              {children}
+            </div>
           </motion.div>
         </motion.div>
       )}

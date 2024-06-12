@@ -1,5 +1,3 @@
-import { formatInTimeZone } from "date-fns-tz";
-
 export function formatDateToAgo(dateString: string): string {
   const date = new Date(dateString + "Z");
   const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
@@ -8,12 +6,18 @@ export function formatDateToAgo(dateString: string): string {
   const localNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 
   const diffTime = Math.abs(localNow.getTime() - utcDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffSeconds = Math.ceil(diffTime / 1000);
+  const diffMinutes = Math.ceil(diffTime / (1000 * 60));
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
   const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
 
-  if (diffHours < 24) {
+  if (diffSeconds < 60) {
+    return `${diffSeconds}s`;
+  } else if (diffMinutes < 60) {
+    return `${diffMinutes}m`;
+  } else if (diffHours < 24) {
     return `${diffHours}h`;
   } else if (diffDays < 30) {
     return `${diffDays}d`;
@@ -34,12 +38,18 @@ export function formatDateToAgo2(dateString: string): string {
   const localNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 
   const diffTime = Math.abs(localNow.getTime() - utcDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffSeconds = Math.ceil(diffTime / 1000);
+  const diffMinutes = Math.ceil(diffTime / (1000 * 60));
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
   const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
 
-  if (diffHours < 24) {
+  if (diffSeconds < 60) {
+    return `${diffSeconds} second${diffSeconds > 1 ? "s" : ""} ago`;
+  } else if (diffMinutes < 60) {
+    return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
+  } else if (diffHours < 24) {
     return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
   } else if (diffDays < 30) {
     return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;

@@ -11,19 +11,18 @@ import {
   Tiptap,
   Typography,
 } from "@/core/ui/components";
+import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { usePostUpdates } from "@/feature/company/query/client/usePostUpdates";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-interface I_ModalAddUpdatesProps {
-  onClose: () => void;
-  isOpen: boolean;
+interface I_ModalAddUpdatesProps extends I_ModalProps {
   id: string;
 }
 
-const ModalAddUpdates = ({ isOpen, onClose, id }: I_ModalAddUpdatesProps) => {
+const ModalAddUpdates = ({ id, ...props }: I_ModalAddUpdatesProps) => {
   const {
     setValue,
     watch,
@@ -47,8 +46,11 @@ const ModalAddUpdates = ({ isOpen, onClose, id }: I_ModalAddUpdatesProps) => {
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
-      <Card
+    <BaseModal
+      {...props}
+      className="bg-background-page-light/90 backdrop-blur-sm dark:bg-background-page-dark/90"
+    >
+      <div
         className={cn(
           "_flexbox__col__start__start h-full w-full gap-6",
           "mx-auto max-w-3xl rounded-xl xl:px-8 xl:py-8",
@@ -60,7 +62,7 @@ const ModalAddUpdates = ({ isOpen, onClose, id }: I_ModalAddUpdatesProps) => {
             variant="tertiary-company"
             prefixIcon={<X />}
             className="p-0"
-            onClick={onClose}
+            onClick={props.onClose}
           />
           <Typography variant="h5" weight="bold">
             Add Updates
@@ -115,7 +117,7 @@ const ModalAddUpdates = ({ isOpen, onClose, id }: I_ModalAddUpdatesProps) => {
             Publish Update
           </Button>
         </Card>
-      </Card>
+      </div>
     </BaseModal>
   );
 };

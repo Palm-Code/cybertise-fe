@@ -45,6 +45,8 @@ const InputOtp = ({
       <div className="_flexbox__col__start__start w-full gap-2">
         <OTPInput
           autoFocus
+          ref={(input) => input?.focus()}
+          disabled={isLoading}
           maxLength={6}
           onComplete={() => onClickActivate(otp)}
           value={otp}

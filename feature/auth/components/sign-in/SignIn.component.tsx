@@ -38,8 +38,8 @@ const SignInComponent = () => {
   });
 
   const forms = watch();
-  const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
-  const { mutate: getAccessToken, isError } = useGetAccessToken();
+  const { mutate, error, isSuccess } = usePostSignIn(callbackUrl);
+  const { mutate: getAccessToken, isPending, isError } = useGetAccessToken();
   const { mutate: resendVerification } = usePostResendVerification();
 
   const onSubmitLogin = async () => {
@@ -77,7 +77,13 @@ const SignInComponent = () => {
   }
 
   if (auth_2fa) {
-    return <MultiFactor isError={isError} onCompleteInput={onSubmitLogin2fa} />;
+    return (
+      <MultiFactor
+        isLoading={isPending}
+        isError={isError}
+        onCompleteInput={onSubmitLogin2fa}
+      />
+    );
   }
 
   return (
