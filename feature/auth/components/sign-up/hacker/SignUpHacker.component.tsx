@@ -15,6 +15,7 @@ import {
   signupHackerFormSchema,
   SignupHackerFormType,
 } from "@/core/models/auth/register";
+import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
 
 const SignUpHacker = () => {
   const method = useForm<SignupHackerFormType>({
@@ -26,6 +27,7 @@ const SignUpHacker = () => {
       password: "",
     },
   });
+  const { mutate: resendVerification } = usePostResendVerification();
   const { step, next, back, isFirstStep, currentStepIndex, steps, isLastStep } =
     useMultistepForm([
       {
@@ -37,7 +39,17 @@ const SignUpHacker = () => {
         key: "hacker-step-two",
       },
       {
-        element: <SuccessState noPadding />,
+        element: (
+          <SuccessState
+            onClickResendVerification={() => {
+              resendVerification({
+                email: method.watch("email"),
+                action: "signup_verification",
+              });
+            }}
+            noPadding
+          />
+        ),
         key: "hacker-step-three",
       },
     ]);

@@ -34,7 +34,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
   } = useFormContext<SignupCompanyFormType>();
   const forms = watch();
 
-  const { mutateAsync, isPending, isSuccess } = usePostSignupCompany();
+  const { mutateAsync, isPending, isSuccess, error } = usePostSignupCompany();
 
   const submitForm = () => {
     if (Object.keys(errors).length > 0) return;
@@ -102,7 +102,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             onChange={(e) =>
               setValue("email", e.target.value, { shouldValidate: true })
             }
-            isError={!!errors.email}
+            isError={!!errors.email || error?.code === 422}
           />
           <PasswordInput
             label="Password"

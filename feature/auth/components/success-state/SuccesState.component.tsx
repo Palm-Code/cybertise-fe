@@ -9,18 +9,30 @@ import React, { useEffect } from "react";
 
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
+  onClickResendVerification: () => void;
 }
 
 const SuccessState = (props: I_SuccesStateProps) => {
-  const initialDuration = 5 * 60 * 1000;
-  const { remainingTime, start, reset, getFormattedTime } =
-    useTimer(initialDuration);
+  const [count, setCount] = React.useState(5);
+  const initialDuration = count * 60 * 1000;
+  const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
   const searchparams = useSearchParams();
   const email = searchparams.get("authenticate_email");
 
   useEffect(() => {
     start();
   }, []);
+
+  useEffect(() => {
+    if (remainingTime === 0) {
+      setCount(count + 5);
+    }
+  }, [remainingTime]);
+
+  const onClickResend = () => {
+    props.onClickResendVerification();
+    start();
+  };
 
   return (
     <>
@@ -55,7 +67,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
               title="resend"
               disabled={remainingTime > 0}
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
-              onClick={() => reset()}
+              onClick={onClickResend}
             >
               Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>
@@ -93,7 +105,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
               title="resend"
               disabled={remainingTime > 0}
               className="cursor-pointer font-bold text-brand-emerald underline disabled:cursor-not-allowed disabled:text-opacity-50"
-              onClick={() => reset()}
+              onClick={onClickResend}
             >
               Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>

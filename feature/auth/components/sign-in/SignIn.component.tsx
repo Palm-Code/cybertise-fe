@@ -18,6 +18,7 @@ import { formLoginShcema } from "@/core/models/auth/login/post_login";
 import { usePostSignIn } from "../../query/signin";
 import { getBrowserAndOS } from "@/utils/device-type";
 import { useGetAccessToken } from "@/core/react-query/client";
+import { usePostResendVerification } from "../../query/resend-verification";
 
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
@@ -39,6 +40,7 @@ const SignInComponent = () => {
   const forms = watch();
   const { mutate, isPending, error, isSuccess } = usePostSignIn(callbackUrl);
   const { mutate: getAccessToken, isError } = useGetAccessToken();
+  const { mutate: resendVerification } = usePostResendVerification();
 
   const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
@@ -62,7 +64,16 @@ const SignInComponent = () => {
   });
 
   if (auth_email) {
-    return <SuccessState />;
+    return (
+      <SuccessState
+        onClickResendVerification={() => {
+          resendVerification({
+            email: auth_email,
+            action: "login_verification",
+          });
+        }}
+      />
+    );
   }
 
   if (auth_2fa) {

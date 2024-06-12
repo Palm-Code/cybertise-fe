@@ -16,6 +16,7 @@ import {
   signupCompanyFormSchema,
   SignupCompanyFormType,
 } from "@/core/models/auth/register";
+import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
 
 const SignUpCompany = () => {
   const method = useForm<SignupCompanyFormType>({
@@ -32,6 +33,7 @@ const SignUpCompany = () => {
       password: "",
     },
   });
+  const { mutate: resendVerification } = usePostResendVerification();
   const { step, next, back, isFirstStep, currentStepIndex, steps, isLastStep } =
     useMultistepForm([
       {
@@ -47,7 +49,17 @@ const SignUpCompany = () => {
         key: "company-step-three",
       },
       {
-        element: <SuccessState noPadding />,
+        element: (
+          <SuccessState
+            onClickResendVerification={() =>
+              resendVerification({
+                email: method.watch("email"),
+                action: "signup_verification",
+              })
+            }
+            noPadding
+          />
+        ),
         key: "company-step-four",
       },
     ]);

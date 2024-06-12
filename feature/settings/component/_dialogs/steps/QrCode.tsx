@@ -1,9 +1,9 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Input, Tooltip, Typography } from "@/core/ui/components";
+import { Button, Input, Typography } from "@/core/ui/components";
 import { Copy, Info, KeyRound, X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { toast } from "sonner";
-import Image from "next/image";
+import { useState } from "react";
 
 const QrCode = ({
   data,
@@ -15,7 +15,9 @@ const QrCode = ({
   onClickAuthenticate?: () => void;
   data?: { qr: string; secret: string } | null;
 }) => {
+  const [copied, setCopied] = useState(false);
   const copyCode = () => {
+    setCopied(true);
     navigator.clipboard.writeText(data?.secret as string);
     toast.success("Copied to clipboard");
   };
@@ -44,17 +46,22 @@ const QrCode = ({
           to activate your 2FA.
         </Typography>
       </div>
-      <div className="_flexbox__col__start__start w-full gap-2">
-        {data && (
-          <img
-            src={data.qr}
-            alt="qr code"
-            width={200}
-            height={200}
-            className="mx-auto"
-          />
-        )}
-        <div className="grid w-full grid-cols-[auto_1fr] gap-4 p-4">
+      {data && (
+        <img
+          src={data.qr}
+          alt="qr code"
+          width={200}
+          height={200}
+          className="mx-auto rounded-[10px]"
+        />
+      )}
+      <div className="_flexbox__col__start__start w-full gap-1">
+        <div
+          className={cn(
+            "mb-3 grid w-full grid-cols-[auto_1fr] gap-4 rounded-lg p-4",
+            "bg-semantic-light-high dark:bg-semantic-dark-high"
+          )}
+        >
           <Info />
           <Typography variant="p" affects="normal">
             Key phrases are used to restore Authenticator in case of device loss
@@ -83,8 +90,12 @@ const QrCode = ({
             <Copy className="cursor-pointer" />
           </Button>
         </div>
+        <Typography variant="p" affects="tiny">
+          Please copy the key phrase to activate the Authenticate button
+        </Typography>
       </div>
       <Button
+        disabled={!copied}
         variant={`primary-${variant}`}
         fullWidth
         onClick={onClickAuthenticate}

@@ -3,7 +3,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, Checkbox, Input, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
@@ -14,6 +14,8 @@ import {
 } from "../../query/password";
 import { validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import useTimer from "@/utils/timer";
+import { usePostResendVerification } from "../../query/resend-verification";
 
 interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -22,6 +24,9 @@ interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
 const ForgotPassword = (props: I_ForgotPassword) => {
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
+  const [count, setCount] = React.useState(0.1);
+  const initialDuration = count * 60 * 1000;
+  const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
   const searchParams = useSearchParams();
   const token = searchParams.get("code");
   const [email, setEmail] = useState<string>("");
@@ -39,6 +44,26 @@ const ForgotPassword = (props: I_ForgotPassword) => {
     isPending: isPendingForgot,
     isSuccess: isSuccessForgot,
   } = usePostForgotPassword();
+
+  const { mutate: resendVerification } = usePostResendVerification();
+
+  useEffect(() => {
+    if (isSuccess) start();
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (remainingTime === 0) {
+      setCount(count + 5);
+    }
+  }, [remainingTime]);
+
+  const onClickResend = () => {
+    resendVerification({
+      email: email,
+      action: "forgot_password",
+    });
+    start();
+  };
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -149,7 +174,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               isLoading={isPending || isPendingForgot}
               disabled={
                 isPending ||
-                isSuccess ||
+                (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
                 (token ? !newPassword || !confirmPassworText.checked : !email)
@@ -164,10 +189,12 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   : mutate(email)
               }
             >
-              Reset Password
+              {isSuccess
+                ? `Resend Verification ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
+                : "Reset Password"}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Didn&apos;t have account yet?{" "}
+              Already remember your password?
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
                 Sign In
               </Link>
@@ -254,25 +281,29 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               isLoading={isPending || isPendingForgot}
               disabled={
                 isPending ||
-                isSuccess ||
+                (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
                 (token ? !confirmPassworText.checked : !email)
               }
-              onClick={() =>
-                token
-                  ? mutateForgotPassword({
-                      code: token,
-                      new_password: newPassword,
-                      logout_all: 1,
-                    })
-                  : mutate(email)
-              }
+              onClick={() => {
+                isSuccess
+                  ? onClickResend()
+                  : token
+                    ? mutateForgotPassword({
+                        code: token,
+                        new_password: newPassword,
+                        logout_all: 1,
+                      })
+                    : mutate(email);
+              }}
             >
-              Reset Password
+              {isSuccess
+                ? `Resend Verification ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
+                : "Reset Password"}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Didn&apos;t have account yet?{" "}
+              Already remember your password?
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
                 Sign In
               </Link>

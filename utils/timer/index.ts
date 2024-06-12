@@ -33,7 +33,7 @@ const useTimer = (initialDuration: number) => {
     if (timerRef.current) {
       return timerRef.current.getFormattedTime();
     }
-    return "00:00:00.000";
+    return "00:00";
   }, []);
 
   return {
