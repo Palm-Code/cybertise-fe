@@ -38,11 +38,11 @@ const SignInComponent = () => {
   });
 
   const forms = watch();
-  const { mutate, error, isSuccess } = usePostSignIn(callbackUrl);
+  const { mutate, error, isPending, isSuccess } = usePostSignIn(callbackUrl);
   const {
     mutate: getAccessToken,
-    isPending,
-    isSuccess: isSuccessGet,
+    isPending: isPendingGetToken,
+    isSuccess: isSuccessGetToken,
     isError,
   } = useGetAccessToken();
   const { mutate: resendVerification } = usePostResendVerification();
@@ -84,7 +84,7 @@ const SignInComponent = () => {
   if (auth_2fa) {
     return (
       <MultiFactor
-        isLoading={isPending || isSuccessGet}
+        isLoading={isPendingGetToken || isSuccessGetToken}
         isError={isError}
         onCompleteInput={onSubmitLogin2fa}
       />
@@ -162,7 +162,7 @@ const SignInComponent = () => {
           <Button
             fullWidth
             variant="primary-hacker"
-            isLoading={isPending}
+            isLoading={isPending || isSuccess}
             disabled={validateIsFormFilled || isPending || isSuccess}
             onClick={onSubmitLogin}
           >
@@ -259,7 +259,7 @@ const SignInComponent = () => {
             <Button
               fullWidth
               variant="primary-hacker"
-              isLoading={isPending}
+              isLoading={isPending || isSuccess}
               disabled={validateIsFormFilled || isPending || isSuccess}
               onClick={onSubmitLogin}
             >
