@@ -1,6 +1,7 @@
 "use client";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import { EmptState } from "@/core/ui/layout";
 import { TabsItem } from "@/enums";
 import Tab from "@/feature/hacker/components/programs/details/_tab/Tab";
 import RnP from "@/feature/hacker/components/programs/details/_tab/_content/RnP";
@@ -23,7 +24,16 @@ const SingleVrp = ({
     rules: <RnP data={data?.rules ?? null} />,
     scope: <Scope id={data?.id || ""} assetTypes={assetTypes} />,
     updates: <UpdateList data={data?.latest_updates} />,
-    thanks: <Thanks data={data?.company?.thanks_message} />,
+    thanks: data?.company?.thanks_message ? (
+      <Thanks data={data?.company?.thanks_message} />
+    ) : (
+      <EmptState
+        type="update"
+        variant="hacker"
+        buttonText=""
+        titleText="You Have No Thanks Message"
+      />
+    ),
   };
   return (
     <>

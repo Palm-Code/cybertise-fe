@@ -22,6 +22,7 @@ const ModalVerify2fa = ({
   const {
     mutateAsync: mutateVerifyTwoFactor,
     isPending,
+    isSuccess,
     isError,
   } = useGetVerifyTwoFactor();
 
@@ -66,14 +67,14 @@ const ModalVerify2fa = ({
           <OTPInput
             autoFocus
             maxLength={6}
-            disabled={isPending}
+            disabled={isPending || isSuccess}
             onComplete={() => onClickVerifyTwoFactor(otp)}
             value={otp}
             onChange={setOtp}
             containerClassName="group w-full flex items-center has-[:disabled]:opacity-30"
             render={({ slots }) => (
               <>
-                <div className="_flexbox__row__center__between w-full">
+                <div className="_flexbox__row__center w-full gap-1.5">
                   {slots.map((slot, idx) => (
                     <Slot isError={isError} key={`slot-${idx}`} {...slot} />
                   ))}

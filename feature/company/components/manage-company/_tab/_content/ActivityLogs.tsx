@@ -196,6 +196,7 @@ const ActivityLogs = ({}: {}) => {
                 store.setPayload({
                   ...store?.payload,
                   params: {
+                    ...store?.payload?.params,
                     page: meta?.current_page && meta?.current_page - 1,
                   },
                 });
@@ -214,6 +215,7 @@ const ActivityLogs = ({}: {}) => {
                 store.setPayload({
                   ...store?.payload,
                   params: {
+                    ...store?.payload?.params,
                     page: meta?.current_page && meta?.current_page + 1,
                   },
                 });

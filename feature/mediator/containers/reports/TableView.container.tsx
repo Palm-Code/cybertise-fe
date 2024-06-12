@@ -21,6 +21,7 @@ import { sanitize } from "@/utils/sanitize-input";
 import Image from "next/image";
 import { Suspense, useState } from "react";
 import TicketDropDown from "../../components/reports/_dropdown/TicketDropdown";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 
 interface I_TableProps {
   columns: I_TableColumns[];
@@ -79,7 +80,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         )}
                       >
                         <div className="_flexbox__col__start__start gap-4">
-                          <div className="grid grid-cols-[auto_1fr] gap-1">
+                          <div className="grid grid-cols-[auto_1fr] items-center gap-1">
                             <div className="relative aspect-square w-8 overflow-hidden rounded-full">
                               <Image
                                 src={item.company?.logo as string}
@@ -145,7 +146,9 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         <div className="_flexbox__row__center__start gap-3">
                           <Indicator
                             variant={
-                              item.status === "Open" ? "warning" : "clear"
+                              (item.status &&
+                                (item.status.toLowerCase() as keyof typeof indicatorVariants)) ||
+                              "warning"
                             }
                           >
                             {item.status}

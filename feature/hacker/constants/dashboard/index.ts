@@ -14,7 +14,7 @@ export const tableColumns: I_TableColumns[] = [
   },
   {
     title: "Vulnerability type (CWE)",
-    align: "left",
+    align: "center",
     width: "w-3/12",
   },
   {

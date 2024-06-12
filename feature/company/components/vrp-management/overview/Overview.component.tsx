@@ -46,7 +46,7 @@ const Overview = ({ id }: { id: string }) => {
       <Thanks data={programListDetails?.data?.company?.thanks_message} />
     ) : (
       <EmptyState
-        titleText="You Have Nothing Here"
+        titleText="You Have No Thanks Message"
         variant="company"
         type="update"
         buttonText=""

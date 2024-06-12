@@ -15,6 +15,7 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
+import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { TableLoadingList } from "@/core/ui/container";
 import { Hacker } from "@/core/ui/icons";
 import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
@@ -73,7 +74,7 @@ export default function Table({
                         )}
                       >
                         <div className="_flexbox__col__start__start gap-4">
-                          <div className="grid grid-cols-[auto_1fr] gap-1">
+                          <div className="itemas-center grid grid-cols-[auto_1fr] gap-1">
                             <div className="relative h-6 w-6 overflow-hidden rounded-full">
                               <Image
                                 src={item.company?.logo as string}
@@ -144,14 +145,13 @@ export default function Table({
                           `text-${columns[4].align}`
                         )}
                       >
-                        <div className="_flexbox__row__center__start gap-3">
-                          <Indicator
-                            variant={
-                              item.status === "Open" ? "warning" : "clear"
-                            }
-                          />
+                        <Indicator
+                          variant={
+                            item.status.toLowerCase() as keyof typeof indicatorVariants
+                          }
+                        >
                           {item.status}
-                        </div>
+                        </Indicator>
                       </TableData>
                       <TableData
                         className={cn(columns[5].width)}

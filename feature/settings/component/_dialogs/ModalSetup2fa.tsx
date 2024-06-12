@@ -26,6 +26,7 @@ const ModalSetup2fa = ({
   const {
     mutateAsync: mutateConfirmTwoFactor,
     isPending: isPendingConfirm,
+    isSuccess: isSuccessConfirm,
     isError,
   } = useGetConfirmTwoFactor();
   const [enableTwoFactorData, setEnableTwoFactorData] = useState<{
@@ -80,7 +81,7 @@ const ModalSetup2fa = ({
     "input-otp": (
       <InputOtp
         isError={isError}
-        isLoading={isPendingConfirm}
+        isLoading={isPendingConfirm || isSuccessConfirm}
         onClose={onClose}
         variant={variant}
         onClickActivate={onClickActivateTwoFactor}
