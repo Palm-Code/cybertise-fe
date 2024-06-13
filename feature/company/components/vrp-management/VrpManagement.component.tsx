@@ -31,8 +31,16 @@ const VrpManagement = () => {
           </Typography>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
-          ) : (
+          ) : programList && programList?.data?.length > 0 ? (
             <VRPCardList data={programList?.data} />
+          ) : (
+            <EmptyState
+              variant="company"
+              type="program"
+              titleText="You have no any program yet"
+              buttonText="Add new VRP"
+              href={"/vrp-launchpad/create-vrp"}
+            />
           )}
           {role?.toLowerCase() === Role.company && (
             <Button
@@ -54,12 +62,13 @@ const VrpManagement = () => {
           </Card>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
-          ) : programList?.data?.length ? (
+          ) : programList && programList?.data?.length ? (
             <VRPCardList data={programList?.data} />
           ) : (
             <EmptyState
               variant="company"
               type="program"
+              titleText="You have no any program yet"
               buttonText="Add new VRP"
               href={"/vrp-launchpad/create-vrp"}
             />

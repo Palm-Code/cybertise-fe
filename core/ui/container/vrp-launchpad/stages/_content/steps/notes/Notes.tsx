@@ -52,7 +52,7 @@ const Notes = ({
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
       <Typography variant="h5" weight="bold">
-        Change Notes
+        {`${currentSteps === "Phase1" ? "Notes" : "Change Notes"}`}
       </Typography>
       <Typography variant="p" affects="small">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -62,7 +62,7 @@ const Notes = ({
       </Typography>
       <Tiptap
         description={forms.notes}
-        label="Change Notes"
+        label={`${currentSteps === "Phase1" ? "Notes" : "Change Notes"}`}
         onChangeValue={(v) => setValue("notes", v)}
         onClearInput={() => setValue("notes", "")}
         variant={variant}

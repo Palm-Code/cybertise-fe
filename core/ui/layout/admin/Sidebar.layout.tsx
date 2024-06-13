@@ -16,7 +16,6 @@ import { cn } from "@/core/lib/utils";
 import { VrpManagement } from "../../icons";
 import { usePathname } from "next/navigation";
 import { borderColor, menuItems } from "@/core/constants/common";
-import { logout } from "@/service/server/auth";
 import { Desktop, Mobile } from "..";
 import {
   Avatar,
@@ -40,7 +39,9 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   reports: <Bug className="h-6 w-6" />,
   companies: <Building2 className="h-6 w-6" />,
   "vrp launchpad": <Bug className="h-6 w-6" />,
-  "vrp management": <VrpManagement className="h-6 w-6" />,
+  "vrp management": (
+    <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
+  ),
   "manage company": <Building2 className="h-6 w-6" />,
 };
 
@@ -188,7 +189,7 @@ const Sidebar = ({ type }: SidebarProps) => {
               ))}
             </div>
           </div>
-          <div
+          {/* <div
             className={cn(
               "_flexbox__col__center sticky bottom-[calc(64px+env(safe-area-inset-bottom))]",
               "w-full gap-4 pr-5"
@@ -227,7 +228,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                 Logout
               </Typography>
             </button>
-          </div>
+          </div> */}
         </div>
       </Desktop>
     </>

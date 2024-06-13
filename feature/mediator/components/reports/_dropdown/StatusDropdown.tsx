@@ -27,7 +27,7 @@ const StatusDropdown = ({
   withIcon,
   ...props
 }: I_StatusDropdownProps) => {
-  const slicedOptions = options.slice(1, options.length - 1);
+  const slicedOptions = options.slice(1);
 
   const inputValueLabel = slicedOptions.find(
     (option) => option.value === value

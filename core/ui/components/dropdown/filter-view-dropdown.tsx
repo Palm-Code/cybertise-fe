@@ -47,7 +47,7 @@ const FilterViewDropdown = ({
   };
 
   return (
-    <Select onValueChange={onValueChange}>
+    <Select onValueChange={onValueChange} defaultValue={view}>
       <SelectTrigger className="gap-2.5 !bg-white p-3 dark:!bg-neutral-dark-100">
         {icons(type, view)}
         <Typography

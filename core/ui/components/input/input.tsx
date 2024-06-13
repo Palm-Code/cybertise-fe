@@ -143,7 +143,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     prefixIcon && "pl-4",
                     iconValue ? "top-0 pl-5" : "-top-1.5 pl-0",
                     !label && "bottom-1 h-16",
-                    isSelect && "cursor-pointer"
+                    isSelect && "cursor-pointer",
+                    className
                     // props.type === "password" && hasValue
                     //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
                     //   : "text-base font-normal"

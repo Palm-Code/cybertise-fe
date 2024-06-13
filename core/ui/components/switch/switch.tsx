@@ -8,6 +8,7 @@ interface I_SwitchProps {
   onChange?: (v: 0 | 1) => void;
   variant?: keyof typeof Role;
   value?: number;
+  disabled?: boolean;
 }
 
 const colorSwitch: { [key in Role]: { active: string; inactive: string } } = {
@@ -34,6 +35,7 @@ const Switch = ({
   onChange,
   variant = "hacker",
   value = 0,
+  disabled = false,
 }: I_SwitchProps) => {
   const onClickSwitch = () => {
     if (onChange) {
@@ -42,26 +44,29 @@ const Switch = ({
   };
 
   return (
-    <div
+    <button
+      title="Switch"
+      type="button"
       className={cn(
-        "relative flex h-6 w-12 cursor-pointer items-center justify-between",
+        "relative flex h-6 w-12 cursor-pointer items-center justify-between focus:outline-0 focus:ring-0 disabled:opacity-30",
         "overflow-hidden rounded-full px-1.5 py-1 transition-all duration-200",
         value === 1
           ? colorSwitch[variant].active
           : "bg-neutral-light-80 dark:bg-neutral-dark-80",
+        disabled && "opacity-30",
         className
       )}
       onClick={onClickSwitch}
     >
       <div
         className={cn(
-          "aspect-square h-full rounded-full transition-all duration-200",
+          "aspect-square h-full rounded-full transition-all duration-200 ",
           value === 1
             ? "translate-x-5 bg-white"
             : `translate-x-0 ${colorSwitch[variant].inactive}`
         )}
       />
-    </div>
+    </button>
   );
 };
 export default Switch;

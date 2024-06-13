@@ -1,5 +1,9 @@
 "use client";
-import { filterItems, filterView } from "@/core/constants/dashboard";
+import {
+  filterItems,
+  filterSortBy,
+  filterView,
+} from "@/core/constants/dashboard";
 import {
   Button,
   FilterDropdown,
@@ -263,7 +267,7 @@ const VRPLaunchpad = () => {
               <FilterDropdown
                 variant="mediator"
                 value={payload?.params?.sort as string}
-                options={filterItems}
+                options={filterSortBy.timestamp}
                 onValueChange={(v) => useClickSort(v, store)}
               />
             </div>

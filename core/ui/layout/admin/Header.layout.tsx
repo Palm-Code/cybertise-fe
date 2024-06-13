@@ -1,13 +1,32 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import Avatar from "../../components/avatar/avatar";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
 import { Desktop, Mobile } from "..";
 import { Logo } from "../../icons";
-import { useGetUserData } from "@/core/react-query/client";
+import { useGetUserData, usePostLogout } from "@/core/react-query/client";
+import HeaderDropdown from "../../components/dropdown/header-dropdown";
+import { LogOut, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const { data } = useGetUserData();
+
+  const { mutateAsync } = usePostLogout();
+
+  const handleDropdownClicks = (value: string) => {
+    switch (value) {
+      case "settings":
+        router.push("/settings");
+        break;
+      case "logout":
+        mutateAsync();
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <Mobile>
@@ -28,7 +47,22 @@ const Header = () => {
           )}
         >
           <ThemeSwitcher />
-          <Avatar image={data?.avatar ?? "/favicon.png"} />
+          <HeaderDropdown
+            avatar={data?.avatar}
+            options={[
+              {
+                label: "Settings",
+                value: "settings",
+                icon: <Settings width={20} height={20} />,
+              },
+              {
+                label: "Logout",
+                value: "logout",
+                icon: <LogOut width={20} height={20} />,
+              },
+            ]}
+            onValueChange={(v) => handleDropdownClicks(v)}
+          />
         </div>
       </Desktop>
     </>

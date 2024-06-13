@@ -45,7 +45,7 @@ const VrpDetailsReview = ({
           ((currentStep === "Published" || currentStep === "Phase5") &&
             !isLastStep)
             ? "VRP Details"
-            : `Review ${forms.title}`}
+            : `Review`}
         </Typography>
         {isLastStep ||
         (currentStep === "Published" && variant === "company") ||

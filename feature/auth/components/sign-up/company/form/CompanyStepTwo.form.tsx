@@ -1,9 +1,8 @@
 "use client";
 import Button from "@/core/ui/components/button/button";
-import { Input } from "@/core/ui/components";
+import { Input, SelectDropdown } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import SelectDropdown from "@/core/ui/components/dropdown/select-dropdown";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { SignupCompanyFormType } from "@/core/models/auth/register";

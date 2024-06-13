@@ -61,7 +61,7 @@ const BaseDropdown = ({
         </div>
       </Mobile>
       <Desktop className="w-fit">
-        <Select onValueChange={onValueChange}>
+        <Select onValueChange={onValueChange} defaultValue={value}>
           <SelectTrigger
             withIcon
             className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent"

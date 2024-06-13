@@ -22,7 +22,14 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
   return (
     <>
       <Mobile>
-        <Card isClickable href={`/vrp-launchpad/overview/${id}`}>
+        <Card
+          isClickable
+          href={
+            status?.toLowerCase() === "published"
+              ? `/vrp-launchpad/${id}`
+              : `/vrp-launchpad/overview/${id}`
+          }
+        >
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="_flexbox__col__start__between w-full gap-4">
               <Typography variant="p" affects="large" weight="semibold">
@@ -67,7 +74,14 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
         </Card>
       </Mobile>
       <Desktop>
-        <Card isClickable href={`/vrp-launchpad/overview/${id}`}>
+        <Card
+          isClickable
+          href={
+            status?.toLowerCase() === "published"
+              ? `/vrp-launchpad/overview/${id}`
+              : `/vrp-launchpad/${id}`
+          }
+        >
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="p" affects="large" weight="semibold">

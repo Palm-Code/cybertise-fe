@@ -26,10 +26,11 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
           System Notification
         </Typography>
         <Switch
+          disabled
           variant={variant}
           value={1}
           onChange={() => {
-            toast.info("Yout can't disable system notification", {
+            toast.info("You can't disable system notification", {
               position: "bottom-right",
             });
           }}
