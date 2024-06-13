@@ -107,7 +107,7 @@ const Overview = ({ id }: { id: string }) => {
           onClose={() => setShowModalForbidden(false)}
           variant="company"
           title="Continue on Desktop"
-          subtitle="AddingVRP feature are currently only accessible on the desktop version of our website."
+          subtitle="Adding VRP feature are currently only accessible on the desktop version of our website."
         />
       </Mobile>
       <Desktop>

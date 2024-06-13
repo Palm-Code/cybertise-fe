@@ -78,7 +78,7 @@ const VrpManagement = () => {
             programList?.data?.length > 0 && (
               <Link
                 href={"/vrp-launchpad/create-vrp"}
-                className="w-full rounded-md border border-white px-4 py-6 text-center"
+                className="w-full rounded-md border border-brand-neutral px-4 py-6 text-center dark:border-white"
               >
                 + Add New VRP
               </Link>
@@ -90,7 +90,7 @@ const VrpManagement = () => {
         onClose={() => setShowModalForbidden(false)}
         variant="company"
         title="Continue on Desktop"
-        subtitle="AddingVRP feature are currently only accessible on the desktop version of our website."
+        subtitle="Adding VRP feature are currently only accessible on the desktop version of our website."
       />
     </AnimationWrapper>
   );

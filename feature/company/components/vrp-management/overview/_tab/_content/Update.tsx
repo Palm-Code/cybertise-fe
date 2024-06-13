@@ -90,7 +90,7 @@ const UpdateList = ({ data, id }: I_UpdateList) => {
           <button
             type="button"
             onClick={() => setOpenModal(true)}
-            className="w-full rounded-md border border-white px-4 py-6 text-center"
+            className="w-full rounded-md border border-brand-neutral px-4 py-6 text-center dark:border-white"
           >
             + Add New Update
           </button>
@@ -111,7 +111,7 @@ const UpdateList = ({ data, id }: I_UpdateList) => {
           <button
             type="button"
             onClick={() => setOpenModal(true)}
-            className="w-full rounded-md border border-white px-4 py-6 text-center"
+            className="w-full rounded-md border border-brand-neutral px-4 py-6 text-center dark:border-white"
           >
             + Add New Update
           </button>

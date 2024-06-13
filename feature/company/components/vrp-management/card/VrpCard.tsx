@@ -8,8 +8,10 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
+import { ModalForbidden } from "@/core/ui/container";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { useState } from "react";
 
 interface I_VRPCard {
   id?: string;
@@ -19,16 +21,19 @@ interface I_VRPCard {
 }
 
 const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
+  const [showModalForbidden, setShowModalForbidden] = useState(false);
   return (
     <>
       <Mobile>
         <Card
-          isClickable
+          isClickable={status?.toLowerCase() === "published"}
+          isButton={status?.toLowerCase() !== "published"}
           href={
             status?.toLowerCase() === "published"
-              ? `/vrp-launchpad/${id}`
-              : `/vrp-launchpad/overview/${id}`
+              ? `/vrp-launchpad/overview/${id}`
+              : `#`
           }
+          onClick={() => setShowModalForbidden(true)}
         >
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="_flexbox__col__start__between w-full gap-4">
@@ -72,6 +77,13 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
             </div>
           </div>
         </Card>
+        <ModalForbidden
+          isOpen={showModalForbidden}
+          onClose={() => setShowModalForbidden(false)}
+          variant="company"
+          title="Continue on Desktop"
+          subtitle="Only can be accessed for Published VRP"
+        />
       </Mobile>
       <Desktop>
         <Card
