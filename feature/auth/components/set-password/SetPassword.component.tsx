@@ -116,10 +116,10 @@ const SetPassword = (props: I_SetPassword) => {
                 })
               }
             >
-              Reset Password
+              Save Password
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Didn&apos;t have account yet?{" "}
+              Already have an account?
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
                 Sign In
               </Link>
@@ -179,7 +179,7 @@ const SetPassword = (props: I_SetPassword) => {
               Reset Password
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Didn&apos;t have account yet?{" "}
+              Already have an account?
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
                 Sign In
               </Link>
