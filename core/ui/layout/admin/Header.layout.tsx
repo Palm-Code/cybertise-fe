@@ -17,7 +17,7 @@ const Header = () => {
   const handleDropdownClicks = (value: string) => {
     switch (value) {
       case "settings":
-        router.push("/settings");
+        window.location.href = "/settings";
         break;
       case "logout":
         mutateAsync();

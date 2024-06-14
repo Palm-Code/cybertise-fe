@@ -5,6 +5,7 @@ import {
   Card,
   Input,
   SelectDropdown,
+  SelectDropdown2,
   Typography,
 } from "@/core/ui/components";
 import AssetType from "../../_dropdown/AssetType.component";
@@ -100,7 +101,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             <Input
               label="Other"
               placeholderText="Input url"
-              className="bg-transparen w-full"
+              className="w-full bg-transparent"
               transparentBg
               value={forms.custom_ta_value ?? ""}
               onChange={(e) => {
@@ -171,7 +172,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           </AnimatePresence>
         </div>
       </Card>
-      <SelectDropdown
+      <SelectDropdown2
         label="Vulnerability Type"
         value={
           defaultData?.vulnerabilityType?.find(
@@ -188,8 +189,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             shouldValidate: true,
           });
         }}
-        className="!h-auto cursor-pointer bg-neutral-light-90 px-4 py-4 pr-6 dark:bg-neutral-dark-90"
-        isError={!!errors.vulnerabiity_type_id}
+        isError={!forms.vulnerabiity_type_id}
       />
       <CsvssCalculator
         isManualRisk={manualRisk}

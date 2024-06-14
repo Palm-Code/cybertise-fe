@@ -5,6 +5,7 @@ import Toolbar from "./toolbar";
 import Underline from "@tiptap/extension-underline";
 import Document from "@tiptap/extension-document";
 import Link from "@tiptap/extension-link";
+import CharacterCount from "@tiptap/extension-character-count";
 import BulletList from "@tiptap/extension-bullet-list";
 import ListItem from "@tiptap/extension-list-item";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
@@ -39,6 +40,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   onClickSendAttachment?: () => void;
   onClickSendMessage?: () => void;
   isLoading?: boolean;
+  maxLength?: number;
 }
 
 const Tiptap = ({
@@ -52,6 +54,7 @@ const Tiptap = ({
   variant,
   onClickSendAttachment,
   onClickSendMessage = () => {},
+  maxLength = 5000,
   ...props
 }: I_TiptapProps) => {
   const [isFocus, setIsFocused] = useState<boolean>(false);
@@ -69,6 +72,12 @@ const Tiptap = ({
         openOnClick: true,
         autolink: true,
         validate: (href) => /^https?:\/\//.test(href),
+      }),
+      CharacterCount.configure({
+        limit: maxLength,
+      }),
+      CharacterCount.configure({
+        mode: "nodeSize",
       }),
     ],
     content: description,
@@ -212,7 +221,7 @@ const Tiptap = ({
         affects="tiny"
         className="txt-neutral-light-30 dark:text-neutral-dark-30"
       >
-        Maximum 200 Characters
+        Maximum 5000 Characters
       </Typography>
     </div>
   );

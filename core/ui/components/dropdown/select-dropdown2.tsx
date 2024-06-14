@@ -11,6 +11,7 @@ import Input, { InputProps } from "../input/input";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
+import { ChevronDown } from "lucide-react";
 
 interface I_SelectDropdownProps extends InputProps {
   onValueChange: (value: string) => void;
@@ -47,20 +48,14 @@ const SelectDropdown2 = ({
 
   return (
     <Select onValueChange={onValueChange}>
-      <SelectTrigger
-        className={cn(
-          "!p-0 !pr-3 pl-0",
-          props.transparentBg && "!bg-transparent",
-          props.className,
-          props.wrapperClassName
-        )}
-        withIcon
-      >
+      <SelectTrigger className={cn("!p-0")}>
         <Input
           iconValue={withIcon ? iconValue : undefined}
           readOnly
+          className="!bg-transparent"
           value={inputValueLabel}
           isSelect
+          suffixIcon={<ChevronDown />}
           {...props}
         />
       </SelectTrigger>
