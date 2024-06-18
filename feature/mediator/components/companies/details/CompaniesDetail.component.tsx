@@ -40,7 +40,11 @@ const CompaniesDetail = ({ id }: { id: string }) => {
   const tabs: { [key in companyTabsItemEnums]: JSX.Element } = {
     vulnerability_program: <VrpCardList data={programList?.data ?? []} />,
     active_tickets: <ActiveTicket id={id} />,
-    thanks: <Thanks data={companyDetails?.data.thanks_message} />,
+    thanks: companyDetails?.data.thanks_message ? (
+      <Thanks data={companyDetails?.data.thanks_message} />
+    ) : (
+      <EmptyState variant="mediator" type="update" className="mt-0" />
+    ),
     // collaborators: <Collaborators data={collaboratorCardData} />,
     // activity_logs: <EmptyState variant="mediator" type="under-construction" />,
   };

@@ -57,8 +57,8 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                 </div>
               </div>
               <Separator orientation="horizontal" />
-              <div className="grid h-fit gap-2">
-                <div className="grid h-full gap-2">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
                   <Typography
                     variant="p"
                     affects="small"
@@ -70,7 +70,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     {data.report_resolved}
                   </Typography>
                 </div>
-                <div className="grid h-full gap-2">
+                <div className="flex flex-col gap-2">
                   <Typography
                     variant="p"
                     affects="small"
@@ -82,7 +82,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     {data.program_count}
                   </Typography>
                 </div>
-                <div className="grid h-full gap-2">
+                <div className="flex flex-col gap-2">
                   <Typography
                     variant="p"
                     affects="small"
