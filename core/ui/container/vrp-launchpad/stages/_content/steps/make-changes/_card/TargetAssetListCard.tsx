@@ -53,7 +53,10 @@ const TargetAssetListCard = ({
 
   const disabledButton =
     forms.target_assets.length < 1 ||
-    forms.target_assets.some((v) => v.asset_type_id === "" || v.content === "");
+    forms.target_assets.some(
+      (v) => v.asset_type_id === "" || v.content === ""
+    ) ||
+    isEditingList.some((v) => v);
 
   return (
     <div className="_flexbox__col__start__start w-full gap-6">

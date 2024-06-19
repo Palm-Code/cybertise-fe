@@ -34,6 +34,8 @@ const VrpDetailsReview = ({
   onClickRevise = () => {},
 }: I_VrpDetailsReviewProps) => {
   const { back } = useRouter();
+  const [isLoadingBack, setIsLoadingBack] = useState<boolean>(false);
+  const [isLoadingApprove, setIsLoadingApprove] = useState<boolean>(false);
   const { getValues } = useFormContext<CreateVrpType>();
   const forms = getValues();
   const [checked, setChecked] = useState<boolean>(isLastStep);
@@ -152,11 +154,14 @@ const VrpDetailsReview = ({
                   ? "secondary-mediator"
                   : "primary-mediator"
               }
-              isLoading={isLoading && !!forms.status}
+              isLoading={currentStep === "Phase4" ? isLoadingBack : isLoading}
               disabled={isLoading}
               onClick={
                 isLastStep && currentStep === "Phase4"
-                  ? onClickRevise
+                  ? () => {
+                      onClickRevise();
+                      setIsLoadingBack(true);
+                    }
                   : onClickNext
               }
             >
@@ -165,9 +170,12 @@ const VrpDetailsReview = ({
             {currentStep === "Phase4" && isLastStep && (
               <Button
                 variant="primary-mediator"
-                isLoading={isLoading && !forms.status}
+                isLoading={isLoadingApprove}
                 disabled={isLoading}
-                onClick={onClickNext}
+                onClick={() => {
+                  onClickNext();
+                  setIsLoadingApprove(true);
+                }}
               >
                 Approve VRP
               </Button>

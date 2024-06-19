@@ -3,6 +3,7 @@ import { cn } from "@/core/lib/utils";
 import { generateTimeOptions } from "@/utils/time-options";
 import { ChevronDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../popopver/popover";
+import { formatToUtcTimeString } from "@/utils/formatter/date-formatter";
 
 interface I_SelectDropdownProps {
   onValueChange: (value: string) => void;
@@ -12,6 +13,7 @@ interface I_SelectDropdownProps {
 const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   const options = generateTimeOptions();
   const currentTime = new Date();
+  const defaultCurrentTime = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
 
   const parseTime = (timeStr: string) => {
     const [hours, minutes] = timeStr.split(":").map(Number);
@@ -32,7 +34,7 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
             "_flexbox__row__center__between"
           )}
         >
-          {value || "Time"}
+          {value || defaultCurrentTime}
           <ChevronDown />
         </button>
       </PopoverTrigger>
@@ -46,6 +48,7 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
         {options.map((option, idx) => {
           const optionTime = parseTime(option.value);
           const isDisabled = optionTime < currentTime;
+
           return (
             <button
               key={`time-${idx}`}
@@ -57,7 +60,9 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
                 "text-neutral-light-40 hover:bg-neutral-light-90 hover:text-sky-normal",
                 "dark:text-neutral-dark-40 dark:hover:bg-neutral-dark-90",
                 "_flexbox__row__center__between",
-                "disabled:cursor-not-allowed disabled:!opacity-50"
+                "disabled:cursor-not-allowed disabled:!opacity-50",
+                option.value.toString() === value &&
+                  "bg-neutral-light-90 text-sky-normal dark:bg-neutral-dark-90 dark:text-sky-normal"
               )}
               onClick={() => {
                 if (isDisabled) return;
