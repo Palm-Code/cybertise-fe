@@ -15,6 +15,7 @@ import { cn } from "@/core/lib/utils";
 import Input, { InputProps } from "../input/input";
 import { OptionsType } from "@/types/auth/sign-up";
 import Image from "next/image";
+import { useDebounceValue } from "usehooks-ts";
 
 interface I_SelectDropdownProps extends InputProps {
   onValueChange: (value: string) => void;
@@ -34,12 +35,10 @@ export default function SelectDropdown({
   ...props
 }: I_SelectDropdownProps) {
   const inputValueLabel = options.find(
-    (option) => option.value.toString().toLowerCase() === value
+    (option) => option.value === value
   )?.label;
 
-  const iconValue = options.find(
-    (option) => option.value.toString().toLowerCase() === value
-  )?.icon;
+  const iconValue = options.find((option) => option.value === value)?.icon;
 
   return (
     <Popover>
@@ -73,9 +72,14 @@ export default function SelectDropdown({
                 <CommandItem
                   className="relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
                   key={v.value}
-                  value={v.value as string}
+                  value={v.label as string}
                   onSelect={(currentValue) => {
-                    onValueChange(currentValue === value ? "" : currentValue);
+                    const values = options.find(
+                      (option) =>
+                        option.label.toLowerCase() ===
+                        currentValue.toLowerCase()
+                    )?.value as string;
+                    onValueChange(values === value ? "" : values);
                   }}
                 >
                   {withIcon && (
