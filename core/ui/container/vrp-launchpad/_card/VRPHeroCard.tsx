@@ -29,7 +29,7 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
           </Link>
           <div className="_flexbox__col__start__start gap-3">
             <Typography variant="h5" weight="bold">
-              {initialData?.title}
+              {initialData?.title || "Create New VRP"}
             </Typography>
             {variant === "mediator" && (
               <div className="_flexbox__row__start__start gap-6">

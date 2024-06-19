@@ -23,7 +23,7 @@ const VrpManagement = () => {
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   return (
-    <AnimationWrapper className="px-6 pb-28 pt-12 xl:px-0">
+    <AnimationWrapper className="space-y-0 px-6 pb-28 pt-12 xl:px-0">
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-10">
           <Typography variant="h4" weight="bold">

@@ -61,6 +61,7 @@ const VrpDescriptionCard = ({
         <div className="w-full">
           <TextArea
             label="VRP Description"
+            max={5000}
             value={forms.description}
             maxLength={150}
             onChange={(e) =>
@@ -72,7 +73,7 @@ const VrpDescriptionCard = ({
             affects="tiny"
             className="text-neutral-light-50 dark:text-neutral-dark-50"
           >
-            Maximum 150 words
+            Maximum 5000 characters
           </Typography>
         </div>
       </Card>

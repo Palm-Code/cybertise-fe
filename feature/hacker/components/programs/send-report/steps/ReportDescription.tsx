@@ -31,7 +31,7 @@ const ReportDescription = () => {
         affects="tiny"
         className="-mt-3 text-neutral-light-50 dark:text-neutral-dark-50"
       >
-        Maximum 200characters
+        Maximum 5000 characters
       </Typography>
     </div>
   );

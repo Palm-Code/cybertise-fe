@@ -84,7 +84,7 @@ const TargetAssetListCard = ({
           isEditingList[index] ? (
             <Card
               className={cn(
-                "grid w-full grid-cols-3 gap-2 rounded-md xl:px-4 xl:py-4",
+                "grid w-full grid-cols-3 gap-2 rounded-md xl:px-4 xl:py-3.5",
                 "border border-transparent transition-colors duration-100",
                 "bg-neutral-light-100 dark:bg-neutral-dark-100",
                 !!errors?.target_assets?.[index]?.content ||

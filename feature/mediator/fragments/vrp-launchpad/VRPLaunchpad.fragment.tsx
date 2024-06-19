@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { vrpCardsData } from "../../constants/vrp-launchpad";
 
 const VRPLaunchpad = dynamic(
   () =>
