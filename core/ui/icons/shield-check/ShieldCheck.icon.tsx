@@ -1,7 +1,7 @@
 import { I_Icons } from "@/interfaces";
 
 interface I_ShieldCheck extends I_Icons {
-  category: "S" | "M" | "L" | "XL";
+  category?: "S" | "M" | "L" | "XL";
 }
 
 const categoryColor: {
@@ -20,9 +20,10 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#00B59C" />
-        <stop offset="0.0001" stopColor="#B1B500" />
-        <stop offset="1" stopColor="#FDFF9C" />
+        <stop stopColor="#B50000" />
+        <stop offset="0.0001" stopColor="#B50000" />
+        <stop offset="1" stopColor="#FF9C9C" />
+        <stop offset="1" stopColor="#FF9C9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71293">
         <rect width="24" height="24" fill="white" />
@@ -37,9 +38,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#70B500" />
-        <stop offset="0.0001" stopColor="#7BB500" />
-        <stop offset="1" stopColor="#B6FF9C" />
+        <stop stopColor="#B55700" />
+        <stop offset="0.0001" stopColor="#B58200" />
+        <stop offset="1" stopColor="#FFAE9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71303">
         <rect width="24" height="24" fill="white" />
@@ -54,9 +55,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#B55700" />
-        <stop offset="0.0001" stopColor="#B58200" />
-        <stop offset="1" stopColor="#FFAE9C" />
+        <stop stopColor="#00B59C" />
+        <stop offset="0.0001" stopColor="#B1B500" />
+        <stop offset="1" stopColor="#FDFF9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71313">
         <rect width="24" height="24" fill="white" />
@@ -71,10 +72,9 @@ const categoryColor: {
         y2="-1.14441e-05"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#B50000" />
-        <stop offset="0.0001" stopColor="#B50000" />
-        <stop offset="1" stopColor="#FF9C9C" />
-        <stop offset="1" stopColor="#FF9C9C" />
+        <stop stopColor="#70B500" />
+        <stop offset="0.0001" stopColor="#7BB500" />
+        <stop offset="1" stopColor="#B6FF9C" />
       </linearGradient>
       <clipPath id="clip0_2071_71324">
         <rect width="24" height="24" fill="white" />
@@ -89,7 +89,7 @@ const categoryColor: {
   },
 };
 
-const ShieldCheck = ({ category, ...props }: I_ShieldCheck) => {
+const ShieldCheck = ({ category = "S", ...props }: I_ShieldCheck) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

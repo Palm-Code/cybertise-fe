@@ -25,6 +25,7 @@ const ProblemCausesCard = ({
           Summary
         </Typography>
         <article
+          className="tiptap"
           dangerouslySetInnerHTML={{ __html: sanitize(summary) }}
         ></article>
       </div>
@@ -37,6 +38,7 @@ const ProblemCausesCard = ({
           Proof of Concept
         </Typography>
         <article
+          className="tiptap"
           dangerouslySetInnerHTML={{ __html: sanitize(proof_of_concept) }}
         ></article>
       </div>

@@ -48,7 +48,7 @@ const DetailsVrpLaunchpad = ({
           currentSteps: 4,
           element: (
             <Setup
-              currentStep="Phase4"
+              currentStep={currentStep}
               initialData={initialData}
               variant={variant}
             />

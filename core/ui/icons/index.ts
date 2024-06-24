@@ -15,3 +15,4 @@ export { default as StepActive } from "./step/StepActive.icon";
 export { default as StepInactive } from "./step/StepInactive.icon";
 export { default as StepPassed } from "./step/StepPassed.icon";
 export { default as ShieldCheck } from "./shield-check/ShieldCheck.icon";
+export { default as S } from "./shield-check/S.icon";

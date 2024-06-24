@@ -117,9 +117,9 @@ const VrpDetailsReview = ({
             onCheckedChange={() => setChecked(!checked)}
           />
           <Typography variant="p" affects="default">
-            By clicking 'Submit Report', you agree to our Terms and Conditions
-            and acknowledge that you have read our Code of Conduct, Privacy
-            Policy and Disclosure Guidelines.
+            By clicking 'Publish', you agree to our Terms and Conditions and
+            acknowledge that you have read our Code of Conduct, Privacy Policy
+            and Disclosure Guidelines.
           </Typography>
         </Card>
       )}
