@@ -43,7 +43,8 @@ const MonetaryAwardsCard = ({
             activeCard ? "rotate-90" : "rotate-0"
           )}
         />
-        <div className="grid grid-cols-2 items-center gap-6">
+        <div className="grid grid-cols-[auto_1fr] items-center gap-6">
+          <ShieldCheck category={category} />
           <Typography
             variant="p"
             affects="large"
@@ -52,7 +53,6 @@ const MonetaryAwardsCard = ({
           >
             {title}
           </Typography>
-          <ShieldCheck category={category} />
         </div>
       </button>
       <AnimatePresence>

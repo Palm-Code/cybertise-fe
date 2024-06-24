@@ -10,7 +10,6 @@ const ChatBubble = ({
 }: {
   data: I_GetChatListItemSuccessResponse["data"];
 }) => {
-  const { data: userData } = useUserStore();
   const mutations = useGetMutationState();
 
   return (

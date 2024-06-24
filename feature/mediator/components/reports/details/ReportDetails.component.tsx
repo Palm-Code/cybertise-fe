@@ -334,17 +334,23 @@ const ReportDetails = ({ id }: { id: string }) => {
           <ChatBubble data={chatData ?? []} />
         </div>
         {ticketDetails.status !== "Closed" && (
-          <Tiptap
-            description={description}
-            onChangeValue={(v) => {
-              setDescription(v);
-            }}
-            variant="mediator"
-            isLoading={isPending}
-            isChat
-            onClickSendAttachment={() => setOpenAttachment(true)}
-            onClickSendMessage={sendMessage}
-          />
+          <div
+            className={cn(
+              "sticky bottom-0 z-50 bg-background-page-light pb-14 dark:bg-background-page-dark"
+            )}
+          >
+            <Tiptap
+              description={description}
+              onChangeValue={(v) => {
+                setDescription(v);
+              }}
+              variant="mediator"
+              isLoading={isPending}
+              isChat
+              onClickSendAttachment={() => setOpenAttachment(true)}
+              onClickSendMessage={sendMessage}
+            />
+          </div>
         )}
         <ModalSendAttachment
           files={files}
