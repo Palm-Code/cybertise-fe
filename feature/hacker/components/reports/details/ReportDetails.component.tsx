@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import {
   Badge,
+  Button,
   Card,
   Indicator,
   Loader,
@@ -9,7 +10,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
-import { Ellipsis, MoveLeft } from "lucide-react";
+import { ChevronDown, MoveLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ModalSendAttachment from "../_dialog/ModalSendAttachment";
 import { ChatBubble } from "@/feature/hacker/containers";
@@ -35,6 +36,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { data, isError, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
   const { ref, inView } = useInView({ threshold: 0.5 });
+  const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
   const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
@@ -149,6 +151,30 @@ const ReportDetails = ({ id }: { id: string }) => {
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
           </div>
+          <div ref={endChatRef}></div>
+          {!inViewEnd && (
+            <Button
+              variant="default"
+              className={cn(
+                "sticky bottom-12 z-50 mx-auto w-fit",
+                "left-1/2 -translate-x-1/3 transform md:-translate-x-1/2"
+              )}
+              prefixIcon={
+                <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
+              }
+              onClick={() => {
+                chatRef?.current?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutral-light-100 dark:text-neutral-dark-100"
+              >
+                Jump into last message
+              </Typography>
+            </Button>
+          )}
         </div>
       </Mobile>
       <Desktop>
@@ -207,7 +233,31 @@ const ReportDetails = ({ id }: { id: string }) => {
           )}
 
           <ChatBubble data={chatData ?? []} />
+          <div ref={endChatRef}></div>
         </div>
+        {!inViewEnd && (
+          <Button
+            variant="default"
+            className={cn(
+              "absolute bottom-52 z-50 mx-auto w-fit",
+              "left-1/2 transform"
+            )}
+            prefixIcon={
+              <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
+            }
+            onClick={() => {
+              chatRef?.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <Typography
+              variant="p"
+              affects="small"
+              className="text-neutral-light-100 dark:text-neutral-dark-100"
+            >
+              Jump into last message
+            </Typography>
+          </Button>
+        )}
         {ticketDetails.status !== "Closed" && (
           <div
             className={cn(
