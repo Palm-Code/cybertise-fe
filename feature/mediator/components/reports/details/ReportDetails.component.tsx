@@ -55,6 +55,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { mutateAsync, isPending } = usePostChatItem();
   const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
     usePostUpdateTicket(id);
+  const [isManualRisk, setIsManualRisk] = useState<boolean>(false);
 
   const scrollView = () => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
@@ -426,6 +427,8 @@ const ReportDetails = ({ id }: { id: string }) => {
           isLoading={isPending}
         />
         <ModalEditRiskLevel
+          isManualRisk={isManualRisk}
+          onChangeManualRisk={() => setIsManualRisk(!isManualRisk)}
           ticketId={id}
           value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}

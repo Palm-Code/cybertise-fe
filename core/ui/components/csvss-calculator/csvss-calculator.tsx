@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/core/lib/utils";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
@@ -20,6 +21,8 @@ import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
   onChangeManualRisk: () => void;
+  value?: number;
+  onValueChange?: (value: number) => void;
 }
 
 const initialValues = {
@@ -36,13 +39,12 @@ const initialValues = {
 const CsvssCalculator = ({
   isManualRisk,
   onChangeManualRisk,
+  value = 0,
+  onValueChange = () => {},
 }: I_CsvssCalculatorProps) => {
-  const { setValue, getValues } = useFormContext<SendReportRequestType>();
   const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
     initialValues
   );
-
-  const forms = getValues();
 
   const onClickCsvssCalculator = (key: string, value: string) => {
     const newValue = { ...metricsValue, [key]: value };
@@ -50,7 +52,7 @@ const CsvssCalculator = ({
       `CVSS:3.0/AV:${newValue.av}/AC:${newValue.ac}/PR:${newValue.pr}/UI:${newValue.ui}/S:${newValue.s}/C:${newValue.c}/I:${newValue.i}/A:${newValue.a}`
     );
     setMetricsValue(newValue);
-    setValue("risk_level", metValue.BaseScore(), { shouldValidate: true });
+    onValueChange(metValue.BaseScore());
   };
 
   return (
@@ -66,11 +68,11 @@ const CsvssCalculator = ({
         <div className="_flexbox__row__center__between w-full">
           <div className="_flexbox__row__center gap-4">
             <Checkbox
-              variant="hacker"
+              variant="mediator"
               checked={!isManualRisk}
               disabled={!isManualRisk}
               onCheckedChange={() => {
-                setValue("risk_level", 0, { shouldValidate: true });
+                onValueChange(0);
                 setMetricsValue(initialValues);
                 onChangeManualRisk();
               }}
@@ -84,9 +86,9 @@ const CsvssCalculator = ({
             </Typography>
           </div>
           {!isManualRisk && (
-            <Badge variant={riskLevelCalculator(forms.risk_level)}>
-              {forms.risk_level.toFixed(2)} (
-              {riskLevelCalculator(forms.risk_level)} Risk)
+            <Badge variant={riskLevelCalculator(value as number)}>
+              {value && value.toFixed(2)} (
+              {riskLevelCalculator(value as number)} Risk)
             </Badge>
           )}
         </div>
@@ -119,11 +121,11 @@ const CsvssCalculator = ({
                         key={`button-label-${index}`}
                         type="button"
                         className={cn(
-                          "w-fit whitespace-nowrap rounded-md border border-transparent  px-4 py-3",
-                          "hover:bg-lime-lighter-light/20 disabled:cursor-not-allowed dark:hover:bg-lime-lighter-dark/20",
-                          "hover:border-lime-normal-light dark:hover:border-lime-normal-dark",
+                          "w-fit whitespace-nowrap rounded-md border border-transparent",
+                          "px-4 py-3 disabled:cursor-not-allowed",
+                          "hover:border-violet-lighter hover:bg-violet-lighter/20",
                           label.value === metricsValue[item.key]
-                            ? "border-lime-normal-light bg-lime-lighter-light/20 dark:border-lime-normal-dark dark:bg-lime-lighter-dark/20"
+                            ? "border-violet-lighter bg-violet-lighter/20"
                             : "border border-transparent bg-neutral-light-100 dark:border-transparent dark:bg-neutral-dark-100"
                         )}
                         onClick={() => {
@@ -131,11 +133,7 @@ const CsvssCalculator = ({
                         }}
                         disabled={isManualRisk}
                       >
-                        <Typography
-                          variant="p"
-                          affects="small"
-                          className="text-neutral-light-40 dark:text-neutral-dark-40"
-                        >
+                        <Typography variant="p" affects="small">
                           {label.label}
                         </Typography>
                       </button>
