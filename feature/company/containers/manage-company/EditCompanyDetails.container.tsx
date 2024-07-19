@@ -130,6 +130,7 @@ const EditCompnayDetails = ({
                             src={forms.logo as string}
                             alt={data?.name as string}
                             fill
+                            sizes="100%"
                             className="object-cover"
                           />
                         )}

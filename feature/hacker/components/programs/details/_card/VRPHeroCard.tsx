@@ -39,6 +39,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       src={data.company?.logo as string}
                       alt={data.company?.name as string}
                       fill
+                      sizes="100%"
                       className="object-cover"
                     />
                   </div>
@@ -120,6 +121,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                     src={data.company?.logo as string}
                     alt={data.company?.name as string}
                     fill
+                    sizes="100%"
                     className="object-cover"
                   />
                 </div>
@@ -153,6 +155,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   src={data.company?.logo as string}
                   alt={data.company?.name as string}
                   fill
+                  sizes="100%"
                   className="object-cover"
                 />
               </div>

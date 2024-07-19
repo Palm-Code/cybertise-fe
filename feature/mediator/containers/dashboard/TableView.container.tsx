@@ -80,6 +80,7 @@ export default function Table({
                                 src={item.company?.logo as string}
                                 alt={`${item.title} logo`}
                                 fill
+                                sizes="100%"
                                 className="object-cover"
                               />
                             </div>

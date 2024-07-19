@@ -8,8 +8,10 @@ import {
   useInfiniteQuery,
   useQuery,
 } from "@tanstack/react-query";
+import { useMediaQuery } from "usehooks-ts";
 
 export const useGetCompanies = (payload?: I_GetParamsPayload) => {
+  const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
       "getcCompaniesMobile",
@@ -33,6 +35,7 @@ export const useGetCompanies = (payload?: I_GetParamsPayload) => {
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined;
     },
+    enabled: isMobileDevice,
   });
 
   const query = useQuery<I_GetCompaniesSuccessResponse, I_GetErrorResponse>({
@@ -44,6 +47,7 @@ export const useGetCompanies = (payload?: I_GetParamsPayload) => {
     ],
     queryFn: () => fetchGetCompanies(payload),
     placeholderData: keepPreviousData,
+    enabled: !isMobileDevice,
   });
 
   if (query.error) {

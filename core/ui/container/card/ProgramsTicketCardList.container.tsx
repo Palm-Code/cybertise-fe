@@ -27,6 +27,7 @@ const TicketCard = ({
                     src={props.company?.logo as string}
                     alt={`${props.id} logo`}
                     fill
+                    sizes="100%"
                   />
                 </div>
                 <div className="_flexbox__col__start ml-4 w-full max-w-xl gap-1">
@@ -91,6 +92,7 @@ const TicketCard = ({
                   src={props.company?.logo as string}
                   alt={`${props.id} logo`}
                   fill
+                  sizes="100%"
                 />
               </div>
             )}
@@ -107,6 +109,7 @@ const TicketCard = ({
                       src={props.company?.logo as string}
                       alt={`${props.id} logo`}
                       fill
+                      sizes="100%"
                     />
                   </div>
                 )}

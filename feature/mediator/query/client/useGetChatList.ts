@@ -8,8 +8,10 @@ import {
   useInfiniteQuery,
   useQuery,
 } from "@tanstack/react-query";
+import { useMediaQuery } from "usehooks-ts";
 
 export const useGetChatList = (payload?: I_GetParamsPayload) => {
+  const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
       "getChatListMobile",
@@ -32,6 +34,7 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined;
     },
+    enabled: isMobileDevice,
   });
 
   const query = useQuery<I_GetChatListSuccessResponse, I_GetErrorResponse>({
@@ -44,6 +47,7 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
     refetchOnMount: !!payload?.params?.filter?.company_id ? false : true,
     queryFn: () => fetchGetChatList(payload),
     placeholderData: keepPreviousData,
+    enabled: !isMobileDevice,
   });
 
   return { queryDesktop: query, queryMobile: queryInfinity };

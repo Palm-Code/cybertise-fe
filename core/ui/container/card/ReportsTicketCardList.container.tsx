@@ -45,6 +45,7 @@ const TicketCard = ({
                   src={props.company?.logo as string}
                   alt={`${props.title} logo`}
                   fill
+                  sizes="100%"
                   className="object-cover"
                 />
               </div>
@@ -181,6 +182,7 @@ const TicketCard = ({
                     src={props.company?.logo as string}
                     alt={`${props.title} logo`}
                     fill
+                    sizes="100%"
                     className="object-cover"
                   />
                 </div>

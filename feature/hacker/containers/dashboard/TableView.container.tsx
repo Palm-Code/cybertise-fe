@@ -70,6 +70,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                                 src={item.company?.logo as string}
                                 alt={`${item.id} logo`}
                                 fill
+                                sizes="100%"
                               />
                             </div>
                             <Typography

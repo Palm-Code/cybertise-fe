@@ -59,6 +59,7 @@ const CompanyDetails = ({
                     src={data?.image as string}
                     alt={data?.name as string}
                     fill
+                    sizes="100%"
                     className="object-cover"
                   />
                 </div>
@@ -242,6 +243,7 @@ const CompanyDetails = ({
                     src={data?.image as string}
                     alt={data?.name as string}
                     fill
+                    sizes="100%"
                     className="object-cover"
                   />
                 </div>

@@ -28,6 +28,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     src={data?.image as string}
                     alt={data?.name as string}
                     fill
+                    sizes="100%"
                     className="object-cover"
                   />
                 </div>
@@ -119,6 +120,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   src={data?.image as string}
                   alt={data?.name as string}
                   fill
+                  sizes="100%"
                   className="object-cover"
                 />
               </div>
@@ -146,6 +148,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                 src={data?.image as string}
                 alt={data?.name as string}
                 fill
+                sizes="100%"
                 className="object-cover"
               />
             </div>
