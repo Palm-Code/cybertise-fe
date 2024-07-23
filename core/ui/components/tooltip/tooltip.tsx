@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/utils";
 import {
   BaseTooltip,
   TooltipContent,
@@ -9,13 +10,22 @@ interface I_TooltipProps {
   children: React.ReactNode;
   content: string;
   fullwidth?: boolean;
+  className?: string;
 }
 
-const Tooltip = ({ children, content, fullwidth }: I_TooltipProps) => {
+const Tooltip = ({
+  className,
+  children,
+  content,
+  fullwidth,
+}: I_TooltipProps) => {
   return (
     <TooltipProvider>
       <BaseTooltip>
-        <TooltipTrigger disabled className={fullwidth ? "w-full" : ""}>
+        <TooltipTrigger
+          disabled
+          className={cn(fullwidth ? "w-full" : "", className)}
+        >
           {children}
         </TooltipTrigger>
         <TooltipContent>

@@ -8,6 +8,7 @@ export const useGetConfirmTwoFactor = () => {
   const mutation = useMutation({
     mutationFn: fetchGetConfirmTwoFactor,
     onSuccess: (data) => {
+      mutation.reset();
       queryClient.invalidateQueries({ queryKey: ["getUserProfile"] });
       toast.success("Successfully activated two factor", {
         position: "bottom-right",

@@ -4,6 +4,7 @@ import { Copy, Info, KeyRound, X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { toast } from "sonner";
 import { useState } from "react";
+import { buttonVariants } from "@/core/ui/components/button/base-button";
 
 const QrCode = ({
   data,
@@ -107,10 +108,9 @@ const QrCode = ({
         <Tooltip
           fullwidth
           content="Please copy the key phrase to activate the Authenticate button"
+          className={cn(buttonVariants({ variant: `primary-${variant}` }))}
         >
-          <Button disabled variant={`primary-${variant}`} fullWidth>
-            Authenticate
-          </Button>
+          Authenticate
         </Tooltip>
       )}
     </div>

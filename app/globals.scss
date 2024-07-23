@@ -17,6 +17,11 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: 0; /* Firefox */
   }
+
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none !important;
+  }
 }
 
 input:autofill,

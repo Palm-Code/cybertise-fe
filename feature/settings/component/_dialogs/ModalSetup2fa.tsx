@@ -54,6 +54,7 @@ const ModalSetup2fa = ({
     mutateConfirmTwoFactor({ code: otp }).then((res) => {
       if (res) {
         onClose();
+        setActiveState("input-password");
       }
     });
   };

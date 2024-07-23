@@ -83,8 +83,6 @@ const Dashboard = () => {
     }
   }, [inView]);
 
-  if (!dashboardData) return <Loader variant="mediator" />;
-
   const submitChange = (type: string, value: string) => {
     setPayload({
       ...payload,
@@ -97,6 +95,8 @@ const Dashboard = () => {
       },
     });
   };
+
+  if (!dashboardData) return <Loader variant="mediator" />;
 
   return (
     <>

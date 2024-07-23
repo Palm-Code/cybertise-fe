@@ -34,7 +34,7 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined;
     },
-    enabled: !isMobileDevice,
+    enabled: isMobileDevice,
   });
 
   const query = useQuery<I_GetChatListSuccessResponse, I_GetErrorResponse>({
@@ -46,7 +46,7 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
     ],
     queryFn: () => fetchGetChatList(payload),
     placeholderData: keepPreviousData,
-    enabled: isMobileDevice,
+    enabled: !isMobileDevice,
   });
 
   return { queryDesktop: query, queryMobile: queryInfinity };
