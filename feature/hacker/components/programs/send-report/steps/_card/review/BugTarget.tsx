@@ -75,7 +75,7 @@ const BugTargetCard = ({
             riskLevelCalculator(risk_level) as keyof typeof badgeVariants
           }
         >
-          {risk_level.toFixed(2)} | ({riskLevelCalculator(risk_level)} Risk)
+          {risk_level.toFixed(1)} | ({riskLevelCalculator(risk_level)} Risk)
         </Badge>
       </div>
     </Card>

@@ -127,7 +127,7 @@ const Review = ({ data, defaultData }: I_ReviewProps) => {
                         affects="tiny"
                         className="text-neutral-light-40 dark:text-neutral-dark-40"
                       >
-                        {(file.size / 1024).toFixed(2)}KB
+                        {(file.size / 1024).toFixed(1)}KB
                       </Typography>
                     </div>
                     <div className="_flexbox__row__center ml-auto gap-4">
@@ -204,7 +204,7 @@ const Review = ({ data, defaultData }: I_ReviewProps) => {
                         affects="tiny"
                         className="text-neutral-light-40 dark:text-neutral-dark-40"
                       >
-                        {(file.size / 1024).toFixed(2)}KB
+                        {(file.size / 1024).toFixed(1)}KB
                       </Typography>
                     </div>
                   </Card>

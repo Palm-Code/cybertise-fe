@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Input, Typography } from "@/core/ui/components";
+import { Button, Input, Tooltip, Typography } from "@/core/ui/components";
 import { Copy, Info, KeyRound, X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { toast } from "sonner";
@@ -94,14 +94,25 @@ const QrCode = ({
           Please copy the key phrase to activate the Authenticate button
         </Typography>
       </div>
-      <Button
-        disabled={!copied}
-        variant={`primary-${variant}`}
-        fullWidth
-        onClick={onClickAuthenticate}
-      >
-        Authenticate
-      </Button>
+      {copied ? (
+        <Button
+          disabled={!copied}
+          variant={`primary-${variant}`}
+          fullWidth
+          onClick={onClickAuthenticate}
+        >
+          Authenticate
+        </Button>
+      ) : (
+        <Tooltip
+          fullwidth
+          content="Please copy the key phrase to activate the Authenticate button"
+        >
+          <Button disabled variant={`primary-${variant}`} fullWidth>
+            Authenticate
+          </Button>
+        </Tooltip>
+      )}
     </div>
   );
 };

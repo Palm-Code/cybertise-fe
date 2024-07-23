@@ -15,7 +15,6 @@ import { cn } from "@/core/lib/utils";
 import Input, { InputProps } from "../input/input";
 import { OptionsType } from "@/types/auth/sign-up";
 import Image from "next/image";
-import { useDebounceValue } from "usehooks-ts";
 
 interface I_SelectDropdownProps extends InputProps {
   onValueChange: (value: string) => void;
@@ -48,7 +47,7 @@ export default function SelectDropdown({
           placeholder={props.label || " "}
           iconValue={withIcon ? iconValue : undefined}
           className={cn(
-            "placeholder:text-neutral-light-30 dark:placeholder:text-neutral-dark-30",
+            "-top-0.5 placeholder:text-neutral-light-30 dark:placeholder:text-neutral-dark-30",
             props.transparentBg && "!bg-transparent",
             props.className
           )}
@@ -60,7 +59,7 @@ export default function SelectDropdown({
         />
       </PopoverTrigger>
       <PopoverContent
-        className="overflow-auto bg-neutral-light-90 !p-0 dark:bg-neutral-dark-90"
+        className="max-w-80 overflow-auto bg-neutral-light-90 !p-0 md:max-w-full dark:bg-neutral-dark-90"
         align="start"
       >
         <Command className="flex flex-col gap-2 !bg-transparent">

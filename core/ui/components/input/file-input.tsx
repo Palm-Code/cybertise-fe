@@ -359,7 +359,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                         affects="tiny"
                         className="text-neutral-light-40 dark:text-neutral-dark-40"
                       >
-                        {(file.size / 1024).toFixed(2)}KB
+                        {(file.size / 1024).toFixed(1)}KB
                       </Typography>
                     </div>
                     <div className="_flexbox__row__center ml-auto gap-2">
@@ -428,9 +428,9 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                           affects="tiny"
                           className="text-neutral-light-40 dark:text-neutral-dark-40"
                         >
-                          {uploadProggress
-                            .filter((i) => i !== 100)
-                            [index]?.toFixed(2)}
+                          {Math.round(
+                            uploadProggress.filter((i) => i !== 100)[index]
+                          )}
                           %
                         </Typography>
                       </div>

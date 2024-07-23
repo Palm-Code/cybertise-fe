@@ -87,7 +87,7 @@ const CsvssCalculator = ({
           </div>
           {!isManualRisk && (
             <Badge variant={riskLevelCalculator(value as number)}>
-              {value && value.toFixed(2)} (
+              {value && value.toFixed(1)} (
               {riskLevelCalculator(value as number)} Risk)
             </Badge>
           )}

@@ -60,11 +60,10 @@ const Tiptap = ({
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
     extensions: [
-      StarterKit.configure(),
+      StarterKit.configure({
+        codeBlock: false,
+      }),
       Underline,
-      Document,
-      BulletList,
-      ListItem,
       CodeBlockLowlight.configure({
         lowlight,
       }),
@@ -75,8 +74,6 @@ const Tiptap = ({
       }),
       CharacterCount.configure({
         limit: maxLength,
-      }),
-      CharacterCount.configure({
         mode: "nodeSize",
       }),
     ],

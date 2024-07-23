@@ -130,5 +130,5 @@ export function calculateCSVSS(metricValues: MetricValues): number {
     (0.6 * impactCoefficient + 0.4 * exploitabilityCoefficient - 1.5) * 10;
 
   // Limit the output to a maximum of two decimal places
-  return parseFloat(baseScore.toFixed(2));
+  return parseFloat(baseScore.toFixed(1));
 }

@@ -113,7 +113,7 @@ const ModalEditRiskLevel = ({
                     ).toLowerCase() as keyof typeof badgeVariants
                   }
                 >
-                  {value.toFixed(2)} | {riskLevelCalculator(value)} Risk
+                  {value.toFixed(1)} | {riskLevelCalculator(value)} Risk
                 </Badge>
               )}
             </div>

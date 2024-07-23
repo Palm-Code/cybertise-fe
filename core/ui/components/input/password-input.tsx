@@ -26,7 +26,7 @@ const PasswordInput = (props: I_PasswordInputProps) => {
   });
 
   return (
-    <div className="_flexbox__col__start w-full gap-2 transition-all duration-100">
+    <div className="_flexbox__col__start relative w-full gap-2 transition-all duration-100">
       <Input
         ref={inputRef}
         type={showPassword ? "text" : "password"}
