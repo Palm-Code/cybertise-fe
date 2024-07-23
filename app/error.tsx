@@ -6,8 +6,8 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
   return (
     <div className="_flexbox__col__center relative min-h-screen gap-2.5 overflow-hidden bg-background-main-dark p-8">
       <Image
-        src="/cybertise-logo-dark.svg"
-        alt="cybertise logo"
+        src="/sparta-logo-dark.svg"
+        alt="sparta logo"
         width={211}
         height={78}
         className="absolute top-8 mx-auto"

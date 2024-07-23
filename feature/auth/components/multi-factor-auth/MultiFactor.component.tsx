@@ -11,7 +11,7 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 
 interface I_MultiFactorAuth extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
-  onCompleteInput: (v: string) => void;
+  onCompleteInput?: (v: string) => void;
   isError?: boolean;
   isLoading?: boolean;
 }
@@ -19,6 +19,7 @@ interface I_MultiFactorAuth extends React.HTMLAttributes<HTMLDivElement> {
 const MultiFactorAuth = ({
   isLoading = false,
   isError,
+  onCompleteInput = () => {},
   ...props
 }: I_MultiFactorAuth) => {
   return (
@@ -48,7 +49,7 @@ const MultiFactorAuth = ({
               disabled={isLoading}
               maxLength={6}
               onComplete={(v: string) => {
-                props.onCompleteInput(v);
+                onCompleteInput(v);
               }}
               autoFocus
               containerClassName="group w-full flex items-center has-[:disabled]:opacity-30"
@@ -105,7 +106,7 @@ const MultiFactorAuth = ({
               maxLength={6}
               autoFocus
               onComplete={(v: string) => {
-                props.onCompleteInput(v);
+                onCompleteInput(v);
               }}
               containerClassName="group w-full flex items-center has-[:disabled]:opacity-30"
               render={({ slots }) => (

@@ -41,7 +41,7 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
         affects="normal"
         className="text-neutral-light-40 dark:text-neutral-dark-40"
       >
-        System notifications will send you updates from Cybertise system
+        System notifications will send you updates from Sparta system
       </Typography>
     </Card>
   );
