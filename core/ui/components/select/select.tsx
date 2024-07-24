@@ -28,6 +28,7 @@ const SelectTrigger = React.forwardRef<
 >(({ className, withIcon, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
+    id={`${props.id}-select-trigger`}
     className={cn(
       "text-neutral-30 relative z-10 flex w-full items-center justify-between",
       "px-3 py-2 xl:p-3",
@@ -139,7 +140,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50",
+      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
       className
     )}
     {...props}

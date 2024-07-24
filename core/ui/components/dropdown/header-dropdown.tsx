@@ -8,6 +8,8 @@ import {
   SelectTrigger,
 } from "../select/select";
 import Typography from "../typography/typography";
+import Link from "next/link";
+import { Check } from "lucide-react";
 
 interface I_HeaderDropdownProps {
   options: {
@@ -22,28 +24,49 @@ interface I_HeaderDropdownProps {
 const HeaderDropdown = ({
   options,
   onValueChange,
-  avatar = "/favicon.png",
+  avatar = "",
 }: I_HeaderDropdownProps) => {
   const pathname = usePathname();
 
   return (
     <Desktop className="w-fit">
-      <Select onValueChange={onValueChange} defaultValue={pathname.slice(1)}>
-        <SelectTrigger className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent xl:p-0">
-          <Avatar image={avatar} />
+      <Select
+        name="header-options"
+        onValueChange={onValueChange}
+        defaultValue={pathname.slice(1)}
+      >
+        <SelectTrigger
+          name="header-options-trigger"
+          className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent xl:p-0"
+        >
+          <Avatar image={avatar} initials={""} />
         </SelectTrigger>
         <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
           {options.length! ? (
-            options.map((option) => (
-              <SelectItem
-                key={option.value}
-                value={option.value as string}
-                className="flex items-center gap-3"
-              >
-                {option.icon && option.icon}
-                {option.label}
-              </SelectItem>
-            ))
+            options.map((option) =>
+              option.value === "settings" ? (
+                <Link
+                  key={option.value}
+                  href={`/${option.value}`}
+                  className="flex items-center gap-3 rounded py-1.5 pl-2 hover:bg-neutral-100 hover:dark:bg-neutral-800"
+                >
+                  {option.icon}
+                  {option.label}
+                  {pathname === `/settings` && (
+                    <Check className="h-3.5 w-3.5" />
+                  )}
+                </Link>
+              ) : (
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                  className="flex items-center gap-3"
+                >
+                  {option.icon && option.icon}
+                  {option.label}
+                </SelectItem>
+              )
+            )
           ) : (
             <SelectItem value="no items" disabled>
               No options

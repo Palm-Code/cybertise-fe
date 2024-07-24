@@ -9,7 +9,7 @@ export const fetchGetAssetType = async () => {
       asset_types: "id,value",
       page: {
         number: 1,
-        size: 10,
+        size: 30,
       },
     },
   };

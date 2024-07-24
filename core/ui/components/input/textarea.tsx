@@ -101,6 +101,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
                 />
               )}
               <textarea
+                id={`${props.id ?? label}`}
                 className={cn(
                   "absolute my-auto h-fit w-full bg-transparent text-neutral-light-0",
                   "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
@@ -121,7 +122,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
               />
               {!!label && (
                 <label
-                  htmlFor={props.name}
+                  htmlFor={`${props.id ?? label}`}
                   className={cn(
                     "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
                     "left-4 start-0 top-5 -z-10 origin-[0] scale-75 peer-focus:start-0",

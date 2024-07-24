@@ -18,6 +18,10 @@ export const passwordValidation: PasswordValidationItemsType[] = [
     content: "At least 1 uppercase",
     checked: false,
   },
+  {
+    content: "At least 1 special character",
+    checked: false,
+  },
 ];
 
 export const menuItems: MenuItemType = {

@@ -13,6 +13,10 @@ import { Button, Card, Tooltip, Typography } from "@/core/ui/components";
 import { Download, Eye, File } from "lucide-react";
 import { cn } from "@/core/lib/utils";
 import { fileDownload } from "@/utils/file-download";
+import {
+  useGetAssetTypeDetails,
+  useGetTargetAssetDetails,
+} from "@/core/react-query/client";
 
 interface I_ReviewProps {
   defaultData?: {
@@ -26,6 +30,14 @@ interface I_ReviewProps {
 }
 
 const Review = ({ data, defaultData }: I_ReviewProps) => {
+  const { data: asset_type } = useGetAssetTypeDetails(
+    data?.custom_ta_asset_type_id as string
+  );
+
+  const { data: target_asset } = useGetTargetAssetDetails(
+    data?.target_asset_id as string
+  );
+
   if (data && defaultData)
     return (
       <div className="_flexbox__col__start__start w-full gap-6 bg-transparent">
@@ -33,26 +45,14 @@ const Review = ({ data, defaultData }: I_ReviewProps) => {
           target_assets={{
             label:
               defaultData?.targetAssets && data?.target_asset_id
-                ? defaultData.targetAssets?.find(
-                    (item) => item.id === data?.target_asset_id
-                  )?.asset_type.value
-                : defaultData.assetType?.find(
-                    (item) => item.id === data?.custom_ta_asset_type_id
-                  )?.label,
+                ? target_asset?.asset_type.value
+                : asset_type?.value,
             value: defaultData?.targetAssets
               ? data?.target_asset_id
-                ? defaultData.targetAssets?.find(
-                    (item) => item.id === data?.target_asset_id
-                  )?.asset_type.label
-                : defaultData.assetType?.find(
-                    (item) => item.id === data?.custom_ta_asset_type_id
-                  )?.value
+                ? target_asset?.asset_type.label
+                : asset_type?.label
               : "default",
-            content:
-              data?.custom_ta_value ||
-              (defaultData?.targetAssets?.find(
-                (item) => item.id === data?.target_asset_id
-              )?.content as string),
+            content: data?.custom_ta_value || target_asset?.content,
           }}
           vulnerability_type={
             defaultData?.vulnerabilityType?.find(

@@ -27,6 +27,7 @@ import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnera
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useGetTargetAsset } from "@/core/react-query/client";
+import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 
 interface I_SendReportProps {
   id: string;
@@ -125,7 +126,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
         <Review
           defaultData={{
             assetType: defaultData?.assetType,
-            targetAssets: targetAsset?.data,
+            targetAssets: data?.data.target_assets,
             vulnerabilityType: vulnerabilityType,
           }}
           data={forms}
@@ -155,12 +156,16 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               )}
             >
               <Card className="rounded-2xl rounded-b-none xl:px-8 xl:py-6">
-                <div className={cn("inline-flex items-center gap-5")}>
+                <div
+                  className={cn("grid grid-cols-[auto_1fr] items-center gap-5")}
+                >
                   <X
                     onClick={() => setOpenModal(true)}
                     className="cursor-pointer"
                   />
-                  <div>
+                  {!data?.data ? (
+                    <Skeleton className="w-48" />
+                  ) : (
                     <Typography variant="h5" weight="bold">
                       Submit Report -{" "}
                       <Tooltip content={data?.data.title as string}>
@@ -169,7 +174,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                           : data?.data.title}
                       </Tooltip>
                     </Typography>
-                  </div>
+                  )}
                 </div>
               </Card>
               <AnimationWrapper key={steps[currentStepIndex].key}>

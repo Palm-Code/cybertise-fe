@@ -107,6 +107,8 @@ const Dashboard = () => {
               Open Ticket
             </Typography>
             <SearchInput
+              isMobile
+              id="search-hacker"
               value={payload?.params?.search}
               variant="hacker"
               placeholder="Try “#21231” or “Company name”"
@@ -165,6 +167,7 @@ const Dashboard = () => {
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
+                id="search-hacker"
                 variant="hacker"
                 placeholder="Try “#21231” or “Company name”"
                 value={payload?.params?.search}

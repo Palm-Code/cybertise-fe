@@ -124,6 +124,8 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
                 Programs
               </Typography>
               <SearchInput
+                isMobile
+                id="program-search-hacker"
                 value={payload?.params?.search}
                 variant="hacker"
                 placeholder="Search for programs"
@@ -194,6 +196,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               Search around 400+ programs
             </Typography>
             <SearchInput
+              id="program-search-hacker"
               variant="hacker"
               placeholder="Search for programs"
               value={payload.params?.search}

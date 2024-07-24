@@ -81,7 +81,13 @@ export const TableHead = ({
       className={cn("w-full", textAlign[align as string], className)}
       {...props}
     >
-      <Typography variant="p" affects="normal" weight="semibold" align={align}>
+      <Typography
+        variant="p"
+        affects="normal"
+        weight="semibold"
+        align={align}
+        className="whitespace-nowrap"
+      >
         {children}
       </Typography>
     </div>

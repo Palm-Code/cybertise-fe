@@ -62,6 +62,7 @@ const Card = ({
         "relative z-20 w-full rounded-lg bg-background-main-light px-6 py-8 xl:p-9 dark:bg-background-main-dark",
         className
       )}
+      onClick={onClick}
     >
       {children}
     </div>

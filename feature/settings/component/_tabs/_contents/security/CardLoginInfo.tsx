@@ -63,7 +63,12 @@ const CardLoginInfo = ({
                   Discard
                 </Button>
                 <Button
-                  disabled={isPending || isSuccess || !methods.watch().is_match}
+                  disabled={
+                    isPending ||
+                    isSuccess ||
+                    !methods.watch().is_match ||
+                    !methods.watch().isValidated
+                  }
                   isLoading={isPending}
                   variant={`primary-${variant}`}
                   onClick={() =>

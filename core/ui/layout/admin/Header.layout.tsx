@@ -6,19 +6,17 @@ import { Logo } from "../../icons";
 import { useGetUserData, usePostLogout } from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
 import { LogOut, Settings } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Skeleton } from "../../components/skeleton/skeleton";
 
 const Header = () => {
-  const router = useRouter();
-  const { data } = useGetUserData();
+  const { data, isLoading } = useGetUserData();
 
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {
     switch (value) {
       case "settings":
-        window.location.href = "/settings";
-        break;
+        return null;
       case "logout":
         mutateAsync();
         break;
@@ -47,22 +45,26 @@ const Header = () => {
           )}
         >
           <ThemeSwitcher />
-          <HeaderDropdown
-            avatar={data?.avatar}
-            options={[
-              {
-                label: "Settings",
-                value: "settings",
-                icon: <Settings width={20} height={20} />,
-              },
-              {
-                label: "Logout",
-                value: "logout",
-                icon: <LogOut width={20} height={20} />,
-              },
-            ]}
-            onValueChange={(v) => handleDropdownClicks(v)}
-          />
+          {!isLoading ? (
+            <HeaderDropdown
+              avatar={data?.avatar}
+              options={[
+                {
+                  label: "Settings",
+                  value: "settings",
+                  icon: <Settings width={20} height={20} />,
+                },
+                {
+                  label: "Logout",
+                  value: "logout",
+                  icon: <LogOut width={20} height={20} />,
+                },
+              ]}
+              onValueChange={(v) => handleDropdownClicks(v)}
+            />
+          ) : (
+            <Skeleton className="h-9 w-9 rounded-full" />
+          )}
         </div>
       </Desktop>
     </>

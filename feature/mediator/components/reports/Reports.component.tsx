@@ -107,6 +107,8 @@ const Reports = () => {
               Reports
             </Typography>
             <SearchInput
+              isMobile
+              id="search-reports-mediator"
               value={payload?.params?.search}
               variant="mediator"
               placeholder="Search for programs"
@@ -160,6 +162,7 @@ const Reports = () => {
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
+                id="search-reports-mediator"
                 value={payload?.params?.search}
                 variant="mediator"
                 placeholder="Search for programs"

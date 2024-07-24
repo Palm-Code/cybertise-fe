@@ -1,5 +1,7 @@
 export * from "./useGetAssetType";
+export * from "./useGetAssetTypeDetails";
 export * from "./useGetTargetAsset";
+export * from "./useGetTargetAssetDetails";
 export * from "./useGetVulnerabilityType";
 export * from "./usePostTempFiles";
 export * from "./usePostChatItem";

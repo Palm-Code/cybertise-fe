@@ -114,6 +114,8 @@ const Reports = () => {
                 Reports
               </Typography>
               <SearchInput
+                isMobile
+                id="reports-search-hacker"
                 value={payload?.params?.search}
                 variant="hacker"
                 placeholder="Search for programs"
@@ -167,6 +169,7 @@ const Reports = () => {
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
+                id="reports-search-hacker"
                 variant="hacker"
                 placeholder="Try “#21231” or “Company name”"
                 value={payload?.params?.search}

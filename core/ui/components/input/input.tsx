@@ -150,7 +150,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     //   ? "text-3xl font-extrabold !leading-none placeholder:text-base placeholder:font-normal"
                     //   : "text-base font-normal"
                   )}
-                  value={value}
+                  id={`${props.id ?? label}`}
+                  value={value ?? ""}
                   placeholder={isFocused ? placeholderText : " "}
                   onChange={onChangeValue}
                   onFocus={handleFocus}
@@ -164,7 +165,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
               {!!label && (
                 <label
-                  htmlFor={props.name}
+                  htmlFor={`${props.id ?? label}`}
                   className={cn(
                     "absolute transform text-sm text-neutral-light-30 duration-300 md:text-base dark:text-neutral-dark-30",
                     "start-0 top-6 -z-10 origin-[0] scale-75 px-5 peer-focus:start-0 md:top-6",

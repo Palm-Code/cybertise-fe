@@ -11,6 +11,7 @@ export const formResetPasswordShcema = z.object({
   new_password: z.string().min(1, { message: "New password is required" }),
   logout_all: z.number(),
   is_match: z.boolean(),
+  isValidated: z.boolean(),
 });
 
 export type I_GetResetPasswordRequest = z.infer<typeof formResetPasswordShcema>;

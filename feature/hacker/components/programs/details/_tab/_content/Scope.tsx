@@ -54,6 +54,7 @@ const Scope = ({
         <div className="_flexbox__col__start__start w-full gap-8">
           <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
             <SearchInput
+              id="scope-search-hacker"
               variant="hacker"
               placeholder="Search for assets"
               value={payload.params?.search}

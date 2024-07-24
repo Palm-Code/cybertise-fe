@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import "./globals.scss";
-import { cn } from "@/core/lib/utils";
 import NextTopLoader from "nextjs-toploader";
+import { Inter } from "@/public/fonts/inter";
+import type { Metadata } from "next";
+import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
-import { Inter } from "@/public/fonts/inter";
 
 export const metadata: Metadata = {
   title: {
@@ -36,11 +36,15 @@ export default async function RootLayout({
         className={cn(
           Inter.className,
           "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
-          session && "overflow-hidden"
+          session ? "overflow-hidden" : ""
         )}
       >
         <NextTopLoader
-          color={colors[session?.user.role as Role] ?? "#BAFF00"}
+          color={
+            colors[session?.user.role as Role]
+              ? colors[session?.user.role as Role]
+              : "#BAFF00"
+          }
           showSpinner={false}
         />
         <ReactQueryProvider>

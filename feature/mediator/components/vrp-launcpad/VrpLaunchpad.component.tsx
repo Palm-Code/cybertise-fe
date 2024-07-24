@@ -111,6 +111,8 @@ const VRPLaunchpad = () => {
               VRP Launchpad
             </Typography>
             <SearchInput
+              isMobile
+              id="search-vrp-launchpad-mediator"
               value={payload?.params?.search}
               variant="mediator"
               placeholder="Try “#21231” or “Company name”"
@@ -245,6 +247,7 @@ const VRPLaunchpad = () => {
               Search VRP Launchpad
             </Typography>
             <SearchInput
+              id="search-vrp-launchpad-mediator"
               variant="mediator"
               placeholder="Try “#21231” or “Company name”"
               value={payload?.params?.search}

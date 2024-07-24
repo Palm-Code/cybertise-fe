@@ -10,13 +10,18 @@ import { useOnClickOutside } from "usehooks-ts";
 
 interface I_PasswordInputProps extends InputProps {
   check?: boolean;
-  title?: string;
   withRegex?: boolean;
   isConfirmation?: boolean;
   options?: PasswordValidationItemsType[];
 }
 
-const PasswordInput = (props: I_PasswordInputProps) => {
+const PasswordInput = ({
+  check = false,
+  withRegex = false,
+  isConfirmation = false,
+  options = [],
+  ...props
+}: I_PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -33,9 +38,10 @@ const PasswordInput = (props: I_PasswordInputProps) => {
         onClickRevealPassword={() => setShowPassword(!showPassword)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        id={`${withRegex ? "with-regex" : "without-regex"}-${isConfirmation ? "confirmation" : "password"}`}
         {...props}
       />
-      {props.withRegex && (
+      {withRegex && (
         <AnimatePresence>
           {isFocused && (
             <motion.div
@@ -45,8 +51,8 @@ const PasswordInput = (props: I_PasswordInputProps) => {
               transition={{ duration: 0.2 }}
               className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90"
             >
-              {props.options?.length! &&
-                props.options.map((item, index) => (
+              {options?.length! &&
+                options.map((item, index) => (
                   <Typography
                     key={`item-${index}`}
                     variant="p"
@@ -61,16 +67,14 @@ const PasswordInput = (props: I_PasswordInputProps) => {
           )}
         </AnimatePresence>
       )}
-      {props.isConfirmation && (
+      {isConfirmation && (
         <Typography
           variant="p"
           affects="tiny"
           align="left"
-          className={cn(
-            props.check ? "!text-emerald-normal" : "!text-red-error"
-          )}
+          className={cn(check ? "!text-emerald-normal" : "!text-red-error")}
         >
-          {props.check ? "Password Matched" : "Password doesn't match"}
+          {check ? "Password Matched" : "Password doesn't match"}
         </Typography>
       )}
     </div>

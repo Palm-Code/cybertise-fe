@@ -25,6 +25,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [count, setCount] = React.useState(0.1);
+  const [validated, setValidated] = useState(false);
   const initialDuration = count * 60 * 1000;
   const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
   const searchParams = useSearchParams();
@@ -75,10 +76,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content &&
-      confirmPassworText.content === newPassword &&
-      setConfirmPassworText({ ...confirmPassworText, checked: true });
-
+    confirmPassworText.content && confirmPassworText.content === newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: true })
+      : setConfirmPassworText({ ...confirmPassworText, checked: false });
+    const isValidated = updatedValidationItems.every((item) => item.checked);
+    setValidated(isValidated);
     setNewPassword(newPassword);
   };
 
@@ -135,6 +137,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   />
                   <div className="_flexbox__row__center__start w-full gap-4">
                     <Checkbox
+                      name="logout-all-checkbox-mobile"
                       checked={logoutAll === 1}
                       onCheckedChange={() =>
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
@@ -242,6 +245,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   />
                   <div className="_flexbox__row__center__start w-full gap-4">
                     <Checkbox
+                      name="logout-all-checkbox"
                       checked={logoutAll === 1}
                       onCheckedChange={() =>
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
@@ -284,7 +288,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
-                (token ? !confirmPassworText.checked : !email)
+                (token ? !confirmPassworText.checked || !validated : !email)
               }
               onClick={() => {
                 isSuccess

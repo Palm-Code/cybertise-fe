@@ -17,6 +17,12 @@ export function validatePassword(
     if (item.content === "At least 1 uppercase") {
       return { ...item, checked: /[A-Z]/.test(newPassword) };
     }
+    if (item.content === "At least 1 special character") {
+      return {
+        ...item,
+        checked: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newPassword),
+      };
+    }
     return item;
   });
 

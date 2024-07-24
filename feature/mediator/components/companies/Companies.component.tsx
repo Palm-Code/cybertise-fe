@@ -102,6 +102,8 @@ const Companies = () => {
               Companies
             </Typography>
             <SearchInput
+              isMobile
+              id="search-companies"
               value={payload?.params?.search}
               variant="mediator"
               placeholder="Try search company name"
@@ -156,6 +158,7 @@ const Companies = () => {
               Search Company
             </Typography>
             <SearchInput
+              id="search-companies"
               variant="mediator"
               placeholder="Try search company name"
               value={payload.params?.search}

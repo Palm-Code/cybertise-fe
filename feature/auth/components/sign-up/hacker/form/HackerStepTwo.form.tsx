@@ -57,9 +57,9 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content &&
-      confirmPassworText.content === newPassword &&
-      setConfirmPassworText({ ...confirmPassworText, checked: true });
+    confirmPassworText.content && confirmPassworText.content === newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: true })
+      : setConfirmPassworText({ ...confirmPassworText, checked: false });
 
     setValue("password", newPassword, { shouldValidate: true });
   };

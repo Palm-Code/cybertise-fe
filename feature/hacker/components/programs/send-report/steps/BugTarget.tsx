@@ -83,7 +83,6 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               ))}
           </div>
           <Card
-            isButton
             className={cn(
               "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-2xl xl:px-6 xl:py-0",
               "border border-transparent transition-colors duration-100",

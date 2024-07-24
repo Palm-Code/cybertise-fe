@@ -54,6 +54,7 @@ const ModalDeleteStaff = ({
         <Input
           value={staffName}
           aria-label="Delete Staff"
+          id="delete_staff"
           type="text"
           onChange={(e) => setStaffName(e.target.value)}
           isError={staffName !== name}

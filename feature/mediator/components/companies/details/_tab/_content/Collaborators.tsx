@@ -80,6 +80,7 @@ const Collaborators = ({ data }: { data: CollaboratorCardDataType[] }) => {
               </Button>
             </div>
             <SearchInput
+              id="search-collaborators"
               variant="mediator"
               placeholder="Try search company name"
             />

@@ -7,6 +7,10 @@
   src: url("../public/fonts/jetbrains-mono/JetBrainsMono-Regular.woff");
 }
 
+body {
+  @apply transition-colors duration-200;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
@@ -22,40 +26,36 @@
   input::-ms-clear {
     display: none !important;
   }
-}
 
-input:autofill,
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus,
-input:-internal-autofill-selected {
-  background: transparent !important;
-}
+  input:autofill,
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  input:-internal-autofill-selected {
+    background: transparent !important;
+  }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-/* Firefox */
-input[type="number"] {
-  -webkit-moz-appearance: textfield;
+  /* Firefox */
+  input[type="number"] {
+    -webkit-moz-appearance: textfield;
+  }
 }
 
 button {
   @apply transition-colors duration-200 focus:outline-none active:outline-none;
-}
-
-body {
-  @apply transition-colors duration-200;
 }
 
 ._flexbox__col__center {
