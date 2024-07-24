@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    paths-ignore: ['*.md']
+  pull_request:
+    branches: 
+      - '**'
+jobs:
+  dep-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Set up node 
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+  build:
+    needs: [dep-check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Set up node 
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
