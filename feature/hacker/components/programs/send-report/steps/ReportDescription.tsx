@@ -1,4 +1,5 @@
 import { Input, TextArea, Typography } from "@/core/ui/components";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const ReportDescription = () => {
@@ -7,6 +8,7 @@ const ReportDescription = () => {
     getValues,
     formState: { errors },
   } = useFormContext();
+  const [characterCount, setCharacterCount] = useState(0);
   return (
     <div className="_flexbox__col__start__start w-full gap-4">
       <Input
@@ -21,9 +23,10 @@ const ReportDescription = () => {
       <TextArea
         label="Short Description"
         value={getValues("description")}
-        onChange={(e) =>
-          setValue("description", e.target.value, { shouldValidate: true })
-        }
+        onChange={(e) => {
+          setValue("description", e.target.value, { shouldValidate: true });
+          setCharacterCount(e.target.value.length);
+        }}
         isError={!!errors.description}
       />
       <Typography
@@ -31,7 +34,7 @@ const ReportDescription = () => {
         affects="tiny"
         className="-mt-3 text-neutral-light-50 dark:text-neutral-dark-50"
       >
-        Maximum 5000 characters
+        Remaining Characters: {5000 - characterCount} / 5000
       </Typography>
     </div>
   );

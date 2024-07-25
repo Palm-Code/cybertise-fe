@@ -233,7 +233,8 @@ const Tiptap = ({
         affects="tiny"
         className="text-neutral-light-30 dark:text-neutral-dark-30"
       >
-        Maximum 5000 Characters
+        Remaining Characters:{" "}
+        {maxLength - editor?.storage.characterCount.characters()} / 5000
       </Typography>
     </div>
   );

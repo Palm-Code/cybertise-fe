@@ -8,6 +8,7 @@ import {
   TextArea,
   Typography,
 } from "@/core/ui/components";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface I_VrpDescriptionCard<T extends boolean> {
@@ -22,6 +23,7 @@ const VrpDescriptionCard = ({
   onClickPrev,
 }: I_VrpDescriptionCard<boolean>) => {
   const { watch, setValue } = useFormContext<CreateVrpType>();
+  const [characterCount, setCharacterCount] = useState(0);
   const forms = watch();
 
   return (
@@ -63,17 +65,18 @@ const VrpDescriptionCard = ({
             label="VRP Description"
             max={5000}
             value={forms.description}
-            maxLength={150}
-            onChange={(e) =>
-              setValue("description", e.target.value, { shouldValidate: true })
-            }
+            maxLength={5000}
+            onChange={(e) => {
+              setValue("description", e.target.value, { shouldValidate: true });
+              setCharacterCount(e.target.value.length);
+            }}
           />
           <Typography
             variant="p"
             affects="tiny"
             className="text-neutral-light-50 dark:text-neutral-dark-50"
           >
-            Maximum 5000 characters
+            Remaining Characters: {5000 - characterCount} / 5000
           </Typography>
         </div>
       </Card>
