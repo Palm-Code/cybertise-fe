@@ -13,7 +13,7 @@ const ChatBubble = ({
   const mutations = useGetMutationState();
 
   return (
-    <div className="flex h-fit w-full flex-col-reverse items-start justify-start gap-6 xl:pb-28">
+    <div className="flex h-fit w-full flex-col-reverse items-start justify-start gap-6">
       {mutations?.map((item, idx) => (
         <Sender data={item} key={`sender-mutation-${idx}`} isLoading />
       ))}

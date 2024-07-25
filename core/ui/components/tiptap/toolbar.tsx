@@ -51,7 +51,7 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
     <div
       className={cn(
         "grid h-fit w-full max-w-full grid-flow-col",
-        "place-content-start content-start gap-3 rounded-b-xl"
+        "place-content-start content-start gap-2 rounded-b-xl"
       )}
     >
       <Toggle

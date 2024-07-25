@@ -47,6 +47,8 @@ const MultiFactorAuth = ({
           <div className="flex w-full items-center justify-center">
             <OTPInput
               disabled={isLoading}
+              id={`otp-signin-mobile`}
+              name={`otp-signin-mobile`}
               maxLength={6}
               onComplete={(v: string) => {
                 onCompleteInput(v);
@@ -104,6 +106,8 @@ const MultiFactorAuth = ({
             <OTPInput
               disabled={isLoading}
               maxLength={6}
+              id={`otp-signin`}
+              name={`otp-signin`}
               autoFocus
               onComplete={(v: string) => {
                 onCompleteInput(v);

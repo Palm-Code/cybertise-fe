@@ -48,6 +48,7 @@ const InputOtp = ({
           ref={(input) => input?.focus()}
           disabled={isLoading}
           id={`otp-${title}`}
+          name={`otp-${title}`}
           maxLength={6}
           onComplete={() => onClickActivate(otp)}
           value={otp}

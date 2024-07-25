@@ -392,10 +392,26 @@ button {
       font-weight: 700;
     }
   }
+
+  p {
+    @apply break-all;
+  }
+}
+
+article {
+  @apply break-all;
 }
 
 .stroke-text {
   color: transparent;
   -webkit-text-fill-color: #000; /* Will override color (regardless of order) */
   -webkit-text-stroke: 3px #fff;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  @apply break-all text-sm text-neutral-light-40 dark:text-neutral-dark-40;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

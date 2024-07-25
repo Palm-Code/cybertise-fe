@@ -67,6 +67,8 @@ const ModalVerify2fa = ({
           <OTPInput
             autoFocus
             maxLength={6}
+            id={`otp-verify-2fa`}
+            name={`otp-verify-2fa`}
             disabled={isPending || isSuccess}
             onComplete={() => onClickVerifyTwoFactor(otp)}
             value={otp}

@@ -10,7 +10,7 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onSubmitSearch?: () => void;
   disabledButton?: boolean;
   loadingSubmit?: boolean;
-  id: string;
+  id?: string;
   isMobile?: boolean;
 }
 
@@ -23,7 +23,7 @@ const ModalSearch = ({
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   value: string | number | readonly string[];
   variant?: "hacker" | "company" | "mediator";
-  id: string;
+  id?: string;
 }) => {
   return (
     <BaseModal

@@ -1,13 +1,11 @@
 "use client";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, PureEditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./toolbar";
 import Underline from "@tiptap/extension-underline";
-import Document from "@tiptap/extension-document";
+import Placeholder from "@tiptap/extension-placeholder";
 import Link from "@tiptap/extension-link";
 import CharacterCount from "@tiptap/extension-character-count";
-import BulletList from "@tiptap/extension-bullet-list";
-import ListItem from "@tiptap/extension-list-item";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import javascript from "highlight.js/lib/languages/javascript";
 import css from "highlight.js/lib/languages/css";
@@ -41,6 +39,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   onClickSendMessage?: () => void;
   isLoading?: boolean;
   maxLength?: number;
+  placeholder?: string;
 }
 
 const Tiptap = ({
@@ -55,6 +54,7 @@ const Tiptap = ({
   onClickSendAttachment,
   onClickSendMessage = () => {},
   maxLength = 5000,
+  placeholder = "",
   ...props
 }: I_TiptapProps) => {
   const [isFocus, setIsFocused] = useState<boolean>(false);
@@ -64,6 +64,9 @@ const Tiptap = ({
         codeBlock: false,
       }),
       Underline,
+      Placeholder.configure({
+        placeholder: placeholder,
+      }),
       CodeBlockLowlight.configure({
         lowlight,
       }),
@@ -74,7 +77,7 @@ const Tiptap = ({
       }),
       CharacterCount.configure({
         limit: maxLength,
-        mode: "nodeSize",
+        mode: "textSize",
       }),
     ],
     content: description,
@@ -107,23 +110,23 @@ const Tiptap = ({
     return (
       <div
         className={cn(
-          "sticky bottom-16 z-50 w-full rounded-3xl p-5 shadow-bubble",
-          "_flexbox__col__start__start gap-3",
-          "border border-neutral-light-80 bg-neutral-light-100",
-          "dark:border-neutral-dark-80 dark:bg-neutral-dark-100",
+          "sticky bottom-16 z-50 w-full",
+          "_flexbox__col__start__start rounded-t-md",
           props.className
         )}
       >
-        <label
-          htmlFor="description"
-          className={cn(
-            "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
-            "left-4 z-20 origin-[0] scale-75 peer-focus:start-0",
-            isFocus || !!description ? "top-0.5" : "top-4"
-          )}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor="description"
+            className={cn(
+              "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
+              "left-3 z-20 origin-[0] scale-75 peer-focus:start-0",
+              isFocus || !!description ? "top-0.5" : "top-4"
+            )}
+          >
+            {label}
+          </label>
+        )}
         <EditorContent
           maxLength={5000}
           editor={editor}
@@ -138,10 +141,23 @@ const Tiptap = ({
             }
           }}
           autoFocus
-          className="peer flex max-h-20 w-full max-w-full overflow-auto whitespace-pre-line"
+          className={cn(
+            "peer flex h-32 w-full max-w-full overflow-auto whitespace-pre-line",
+            "bg-background-main-light dark:bg-background-main-dark",
+            "rounded-md rounded-b-none p-3 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+            label ? "pt-6" : "pt-3"
+          )}
         />
         <Separator orientation="horizontal" />
-        <div className="_flexbox__row__center__between w-full">
+        <div
+          className={cn(
+            "_flexbox__row__center__between w-full rounded-md p-3",
+            "mt-3",
+            label
+              ? "bg-background-page-light dark:bg-background-page-dark"
+              : "bg-neutral-light-100 dark:bg-neutral-dark-100"
+          )}
+        >
           <Toolbar editor={editor} />
           {!!onClickSendAttachment && !!onClickSendMessage && (
             <div className="_flexbox__row__center gap-4">
@@ -195,7 +211,6 @@ const Tiptap = ({
               editor={editor}
               className="peer flex h-44 w-full max-w-full overflow-auto whitespace-pre-line"
             />
-
             <Toolbar editor={editor} />
           </div>
           {withTooltip && !description ? (
@@ -216,7 +231,7 @@ const Tiptap = ({
       <Typography
         variant="p"
         affects="tiny"
-        className="txt-neutral-light-30 dark:text-neutral-dark-30"
+        className="text-neutral-light-30 dark:text-neutral-dark-30"
       >
         Maximum 5000 Characters
       </Typography>

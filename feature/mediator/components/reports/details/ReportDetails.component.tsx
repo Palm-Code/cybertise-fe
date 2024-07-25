@@ -366,7 +366,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute bottom-52 z-50 mx-auto w-fit",
+              "absolute bottom-72 z-50 mx-auto w-fit",
               "left-1/2 transform"
             )}
             prefixIcon={
@@ -388,7 +388,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         {ticketDetails.status !== "Closed" && (
           <div
             className={cn(
-              "sticky bottom-0 z-50 bg-background-page-light pb-14 dark:bg-background-page-dark"
+              "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"
             )}
           >
             <Tiptap
