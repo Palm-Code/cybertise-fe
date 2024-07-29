@@ -27,30 +27,33 @@ const PasswordInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useOnClickOutside(inputRef, () => {
-    setIsFocused(false);
+    if (options.every((item) => item.checked)) {
+      setIsFocused(false);
+    }
   });
 
   return (
-    <div className="_flexbox__col__start relative w-full gap-2 transition-all duration-100">
+    <div className="_flexbox__col__start relative w-full">
       <Input
         ref={inputRef}
         type={showPassword ? "text" : "password"}
         onClickRevealPassword={() => setShowPassword(!showPassword)}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        // onBlur={() => setIsFocused(false)}
         id={`${withRegex ? "with-regex" : "without-regex"}-${isConfirmation ? "confirmation" : "password"}`}
         {...props}
       />
-      {withRegex && (
-        <AnimatePresence>
-          {isFocused && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90"
-            >
+      <AnimatePresence>
+        {isFocused && withRegex && (
+          <motion.div
+            key="options"
+            initial={{ height: 0, marginTop: "0px", opacity: 0 }}
+            animate={{ height: "auto", marginTop: "8px", opacity: 1 }}
+            exit={{ height: 0, marginTop: "0px", opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
+          >
+            <div className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90">
               {options?.length! &&
                 options.map((item, index) => (
                   <Typography
@@ -63,10 +66,10 @@ const PasswordInput = ({
                     {item.content}
                   </Typography>
                 ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {isConfirmation && (
         <Typography
           variant="p"
