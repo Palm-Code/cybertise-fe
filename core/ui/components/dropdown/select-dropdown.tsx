@@ -82,6 +82,7 @@ export default function SelectDropdown({
                     onValueChange(values === value ? "" : values);
                     setIsOpen(false);
                   }}
+                  disabled={v.value === value}
                 >
                   {withIcon && (
                     <Image
