@@ -84,7 +84,7 @@ const Setting = ({
         handleClickEdit={setEditing}
       />
     ),
-    [SettingItems.data_privacy]: <DataPrivacy />,
+    [SettingItems.data_privacy]: <DataPrivacy variant={role} />,
   };
 
   return (

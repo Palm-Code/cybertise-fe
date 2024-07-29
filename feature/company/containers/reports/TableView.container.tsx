@@ -122,6 +122,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                               : item.last_message
                           ),
                         }}
+                        className="*:break-all"
                       ></div>
                     </TableData>
                     <TableData

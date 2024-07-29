@@ -4,8 +4,13 @@ import CardNews from "../component/_tabs/_contents/notifications/CardNews";
 import CardPrivacyPolicy from "../component/_tabs/_contents/data-privacy/CardPrivacyPolicy";
 import CardFaq from "../component/_tabs/_contents/data-privacy/CardFaq";
 import CardDeactivateAccount from "../component/_tabs/_contents/data-privacy/CardDeactivateAccount";
+import { Role } from "@/types/admin/sidebar";
 
-const DataPrivacy = () => {
+interface I_DataPrivacyProps {
+  variant?: keyof typeof Role;
+}
+
+const DataPrivacy = ({ variant }: I_DataPrivacyProps) => {
   return (
     <div className="_flexbox__col__start__start gap-6">
       <div className="_flexbox__row__center__between w-full">
@@ -19,7 +24,7 @@ const DataPrivacy = () => {
         <Typography variant="h6" weight="bold">
           Account
         </Typography>
-        <CardDeactivateAccount />
+        <CardDeactivateAccount variant={variant} />
       </div>
     </div>
   );

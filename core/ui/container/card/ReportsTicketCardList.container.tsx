@@ -79,6 +79,7 @@ const TicketCard = ({
                     : props.last_message
                 ),
               }}
+              className="*:break-all"
             ></div>
             <div
               className={cn(
@@ -217,6 +218,7 @@ const TicketCard = ({
                     : props.last_message
                 ),
               }}
+              className="*:break-all"
             ></div>
             <div
               className={cn(

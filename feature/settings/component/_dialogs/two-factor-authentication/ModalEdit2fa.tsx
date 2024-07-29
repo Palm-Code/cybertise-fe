@@ -1,12 +1,12 @@
 import { BaseModal } from "@/core/ui/components";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { Role } from "@/types/admin/sidebar";
-import InputPassword from "./steps/InputPassword";
-import QrCode from "./steps/QrCode";
-import InputOtp from "./steps/InputOtp";
 import { useGetEnableTwoFactor } from "@/core/react-query/client/useGetEnableTwoFactor";
 import { useState } from "react";
 import { useGetConfirmTwoFactor } from "@/core/react-query/client/useGetConfirmTwoFactor";
+import QrCode from "./steps/QrCode";
+import InputPassword from "./steps/InputPassword";
+import InputOtp from "./steps/InputOtp";
 
 export interface I_ModalEdit2faProps extends I_ModalProps {
   variant?: keyof typeof Role;

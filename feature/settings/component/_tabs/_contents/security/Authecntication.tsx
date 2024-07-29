@@ -3,10 +3,10 @@ import { Badge, Button, Card, Typography } from "@/core/ui/components";
 import { I_SecurityProps } from "@/feature/settings/containers/Security.container";
 import { KeyRound } from "lucide-react";
 import { useState } from "react";
-import ModalSetup2fa from "../../../_dialogs/ModalSetup2fa";
-import ModalUnbind2fa from "../../../_dialogs/ModalUnbind2fa";
-import ModalVerify2fa from "../../../_dialogs/ModalVerify2fa";
-import ModalEdit2fa from "../../../_dialogs/ModalEdit2fa";
+import ModalEdit2fa from "../../../_dialogs/two-factor-authentication/ModalEdit2fa";
+import ModalSetup2fa from "../../../_dialogs/two-factor-authentication/ModalSetup2fa";
+import ModalUnbind2fa from "../../../_dialogs/two-factor-authentication/ModalUnbind2fa";
+import ModalVerify2fa from "../../../_dialogs/two-factor-authentication/ModalVerify2fa";
 
 interface I_AuthenticationProps extends I_SecurityProps {}
 

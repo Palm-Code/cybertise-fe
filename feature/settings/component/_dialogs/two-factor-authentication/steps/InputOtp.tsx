@@ -37,7 +37,12 @@ const InputOtp = ({
         <Typography variant="h4" weight="semibold">
           {title}
         </Typography>
-        <Typography variant="p" affects="normal" align="center">
+        <Typography
+          variant="p"
+          affects="normal"
+          align="center"
+          className="text-neutral-light-50 dark:text-neutral-dark-50"
+        >
           Please enter authenticator code from your verified Two-Factor
           Authenticator app.
         </Typography>

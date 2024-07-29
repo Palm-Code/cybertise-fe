@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { SECRET_KEY } from "../../core/lib/config";
 import { Role } from "@/types/admin/sidebar";
 import { I_GetAccessTokenSuccessResponse } from "@/core/models/auth/login/get_access_token";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const secretKey = SECRET_KEY;
@@ -50,6 +49,14 @@ export async function logout() {
     throw new Error("Failed to logout");
   } finally {
     redirect("/auth/signin");
+  }
+}
+export async function logoutwithoutrevalidate() {
+  try {
+    cookies().set("session", "", { expires: new Date(0) });
+    cookies().set("token", "", { expires: new Date(0) });
+  } catch (error) {
+    throw new Error("Failed to logout");
   }
 }
 

@@ -42,7 +42,12 @@ const QrCode = ({
         <Typography variant="h4" weight="semibold">
           Setup Authenticator
         </Typography>
-        <Typography variant="p" affects="normal" align="center">
+        <Typography
+          variant="p"
+          affects="normal"
+          align="center"
+          className="text-neutral-light-50 dark:text-neutral-dark-50"
+        >
           Scan or Copy the &apos;key code&apos; below to your authenticator app
           to activate your 2FA.
         </Typography>

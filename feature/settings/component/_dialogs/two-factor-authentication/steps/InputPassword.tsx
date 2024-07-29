@@ -37,7 +37,12 @@ const InputPassword = ({
         <Typography variant="h4" weight="semibold">
           Setup Authenticator
         </Typography>
-        <Typography variant="p" affects="normal" align="center">
+        <Typography
+          variant="p"
+          affects="normal"
+          align="center"
+          className="text-neutral-light-50 dark:text-neutral-dark-50"
+        >
           Protecting your account is our top priority. Please confirm your
           activity by entering your login password.
         </Typography>

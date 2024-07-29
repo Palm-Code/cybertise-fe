@@ -5,8 +5,9 @@ import { X } from "lucide-react";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { OTPInput } from "input-otp";
-import { Slot } from "./steps/InputOtp";
+
 import { useGetVerifyTwoFactor } from "@/core/react-query/client/useGetVerifyTwoFactor";
+import { Slot } from "./steps/InputOtp";
 
 export interface I_ModalVerify2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
