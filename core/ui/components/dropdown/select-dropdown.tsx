@@ -33,6 +33,7 @@ export default function SelectDropdown({
   withSearch = false,
   ...props
 }: I_SelectDropdownProps) {
+  const [isOpen, setIsOpen] = React.useState(false);
   const inputValueLabel = options.find(
     (option) => option.value === value
   )?.label;
@@ -40,7 +41,7 @@ export default function SelectDropdown({
   const iconValue = options.find((option) => option.value === value)?.icon;
 
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger className={cn("_flexbox__row__center__between w-full")}>
         <Input
           label={inputValueLabel ? props.label : undefined}
@@ -79,6 +80,7 @@ export default function SelectDropdown({
                         currentValue.toLowerCase()
                     )?.value as string;
                     onValueChange(values === value ? "" : values);
+                    setIsOpen(false);
                   }}
                 >
                   {withIcon && (
