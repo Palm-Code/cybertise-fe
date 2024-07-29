@@ -159,9 +159,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 "sticky bottom-12 z-50 mx-auto w-fit",
                 "left-1/2 -translate-x-1/3 transform md:-translate-x-1/2"
               )}
-              prefixIcon={
-                <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-              }
+              prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
               onClick={() => {
                 chatRef?.current?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -169,7 +167,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               <Typography
                 variant="p"
                 affects="small"
-                className="text-neutral-light-100 dark:text-neutral-dark-100"
+                className="!text-neutral-dark-100"
               >
                 Jump into last message
               </Typography>
@@ -242,9 +240,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               "absolute bottom-72 z-50 mx-auto w-fit",
               "left-1/2 transform"
             )}
-            prefixIcon={
-              <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-            }
+            prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
               chatRef?.current?.scrollIntoView({ behavior: "smooth" });
             }}
@@ -252,7 +248,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Typography
               variant="p"
               affects="small"
-              className="text-neutral-light-100 dark:text-neutral-dark-100"
+              className="!text-neutral-dark-100"
             >
               Jump into last message
             </Typography>

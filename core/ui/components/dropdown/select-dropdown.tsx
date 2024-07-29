@@ -90,7 +90,7 @@ export default function SelectDropdown({
                       alt={v.label}
                       width={24}
                       height={16}
-                      className="object-cover"
+                      className="h-4 w-6 object-contain"
                     />
                   )}
                   {v.label}
