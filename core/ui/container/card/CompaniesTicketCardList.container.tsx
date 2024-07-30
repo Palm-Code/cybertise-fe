@@ -85,9 +85,9 @@ const TicketCard = ({
           </div>
         </Card>
       </Mobile>
-      <Desktop>
-        <Card isClickable href={`/companies/${props.id}`}>
-          <div className="_flexbox__row__start w-full gap-9">
+      <Desktop className="h-full min-h-[210px]">
+        <Card isClickable href={`/companies/${props.id}`} className="h-full">
+          <div className="_flexbox__row__start h-full w-full gap-9">
             {!isGridCard && (
               <Avatar image={props.logo} className="h-12 w-12" initials="C" />
             )}
