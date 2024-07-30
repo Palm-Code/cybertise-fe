@@ -70,7 +70,13 @@ export default function SelectDropdown({
             <CommandGroup>
               {options.map((v) => (
                 <CommandItem
-                  className="relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
+                  className={cn(
+                    "relative flex w-full cursor-default select-none items-center gap-3",
+                    "rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer",
+                    "focus:bg-neutral-100 focus:text-neutral-900",
+                    "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                    "dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
+                  )}
                   key={v.value}
                   value={v.label as string}
                   onSelect={(currentValue) => {

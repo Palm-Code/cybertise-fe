@@ -171,7 +171,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           </AnimatePresence>
         </div>
       </Card>
-      <SelectDropdown2
+      <SelectDropdown
         label="Vulnerability Type"
         value={
           defaultData?.vulnerabilityType?.find(
