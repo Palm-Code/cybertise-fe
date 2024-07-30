@@ -20,6 +20,7 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
       return fetchPostUpdateProfile(payload);
     },
     onSuccess: (data) => {
+      mutations.reset();
       !revalidate && router.back();
       toast.success("Update profile successfully", {
         position: "bottom-right",

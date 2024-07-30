@@ -27,7 +27,7 @@ const NewCompanyReport = () => {
     isLoading,
     isFetching,
     isError,
-  } = useGetChatListItem(store.payload, id as string);
+  } = useGetChatListItem(store.payload, id as string, true);
 
   const { mutate, isPending, isSuccess } = usePostCreateCompanyTicket();
   const initialData =
