@@ -163,9 +163,9 @@ const Sidebar = ({ type }: SidebarProps) => {
           )}
         >
           <div className="_flexbox__col__start w-full gap-8">
-            <div className="px-12 py-3">
+            <Link href="/dashboard" className="px-12 py-3">
               <Logo className="h-[68px] w-[182px]" />
-            </div>
+            </Link>
             <div className="_flexbox__col__center w-full gap-4 pr-5">
               {menu.map((item, index) => (
                 <Link

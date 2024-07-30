@@ -7,6 +7,7 @@ import { useGetUserData, usePostLogout } from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
 import { LogOut, Settings } from "lucide-react";
 import { Skeleton } from "../../components/skeleton/skeleton";
+import Link from "next/link";
 
 const Header = () => {
   const { data, isLoading } = useGetUserData();
@@ -34,7 +35,9 @@ const Header = () => {
             "_flexbox__row__center gap-8"
           )}
         >
-          <Logo className="h-[32px] w-[85px]" />
+          <Link href="/dashboard">
+            <Logo className="h-[32px] w-[85px]" />
+          </Link>
         </div>
       </Mobile>
       <Desktop>
