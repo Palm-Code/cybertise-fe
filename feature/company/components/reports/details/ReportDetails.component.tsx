@@ -94,6 +94,12 @@ const ReportDetails = ({ id }: { id: string }) => {
       });
   };
 
+  const isHiddenChatBox =
+    (ticketDetails &&
+      (ticketDetails.status.toLowerCase() === "closed" ||
+        ticketDetails.status.toLowerCase() === "canceled")) ||
+    false;
+
   if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
@@ -174,12 +180,11 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Button
               variant="default"
               className={cn(
-                "sticky bottom-12 z-50 mx-auto w-fit",
-                "left-1/2 -translate-x-1/3 transform md:-translate-x-1/2"
+                "fixed z-50 mx-auto w-fit",
+                "left-1/2 -translate-x-1/2 transform",
+                isHiddenChatBox ? "bottom-4" : "bottom-12"
               )}
-              prefixIcon={
-                <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-              }
+              prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
               onClick={() => {
                 chatRef?.current?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -187,7 +192,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               <Typography
                 variant="p"
                 affects="small"
-                className="text-neutral-light-100 dark:text-neutral-dark-100"
+                className="!text-neutral-dark-100"
               >
                 Jump into last message
               </Typography>
@@ -256,12 +261,11 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute bottom-72 z-50 mx-auto w-fit",
-              "left-1/2 transform"
+              "absolute z-50 mx-auto w-fit",
+              "left-1/2 transform",
+              isHiddenChatBox ? "bottom-12" : "bottom-72"
             )}
-            prefixIcon={
-              <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-            }
+            prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
               chatRef?.current?.scrollIntoView({ behavior: "smooth" });
             }}
@@ -269,13 +273,13 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Typography
               variant="p"
               affects="small"
-              className="text-neutral-light-100 dark:text-neutral-dark-100"
+              className="!text-neutral-dark-100"
             >
               Jump into last message
             </Typography>
           </Button>
         )}
-        {ticketDetails.status !== "Closed" && (
+        {!isHiddenChatBox && (
           <div
             className={cn(
               "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"

@@ -77,8 +77,7 @@ const ActiveTicket = ({ id }: { id: string }) => {
     }
   }, [inView]);
 
-  if (!data || !ticketData)
-    return <Loader variant="mediator" className="h-[50vh]" />;
+  if (!ticketData) return <Loader variant="mediator" className="h-[50vh]" />;
 
   return (
     <>

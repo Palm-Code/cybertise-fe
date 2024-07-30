@@ -5,7 +5,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const useGetChatListItem = (
   payload?: I_GetParamsPayload,
-  id?: string
+  id?: string,
+  disableRefetch: boolean = false
 ) => {
   const query = useInfiniteQuery({
     queryKey: [
@@ -35,7 +36,7 @@ export const useGetChatListItem = (
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined,
     refetchOnMount: true,
-    refetchInterval: 10000,
+    refetchInterval: disableRefetch ? 0 : 10000,
   });
 
   if (query.error) {

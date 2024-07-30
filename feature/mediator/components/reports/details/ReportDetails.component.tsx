@@ -98,7 +98,11 @@ const ReportDetails = ({ id }: { id: string }) => {
       });
   };
 
-  console.log(inViewEnd);
+  const isHiddenChatBox =
+    (ticketDetails &&
+      (ticketDetails.status.toLowerCase() === "closed" ||
+        ticketDetails.status.toLowerCase() === "canceled")) ||
+    false;
 
   if (isError || isErrorTicket || chatData?.length === 0) {
     return (
@@ -140,7 +144,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 />
                 <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
-                    {ticketDetails.title}
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                   <Badge
                     variant={
@@ -162,56 +166,60 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Indicator>
               </div>
             </Card>
-            <div
-              className={cn(
-                "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
-                "space-y-2 bg-neutral-light-70 dark:bg-neutral-dark-70"
-              )}
-            >
-              <div className="_flexbox__row__center__between w-full">
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="text-violet-light dark:text-violet-light"
-                >
-                  {ticketDetails.ticket_type === "Hacker"
-                    ? "Hacker"
-                    : "Company"}{" "}
-                  Ticket
-                </Typography>
-                {ticketDetails.ticket_type === "Hacker" ? (
-                  ticketDetails.related_ticket_id ? (
+            {isHiddenChatBox &&
+            ticketDetails.ticket_type.toLowerCase() === "hacker" &&
+            !ticketDetails.related_ticket_id ? null : (
+              <div
+                className={cn(
+                  "sticky top-[8.15rem] z-30 w-full rounded-b-xl px-6 py-2",
+                  "space-y-2 bg-neutral-light-70 dark:bg-neutral-dark-70"
+                )}
+              >
+                <div className="_flexbox__row__center__between w-full">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="text-violet-light dark:text-violet-light"
+                  >
+                    {ticketDetails.ticket_type === "Hacker"
+                      ? "Hacker"
+                      : "Company"}{" "}
+                    Ticket
+                  </Typography>
+                  {ticketDetails.ticket_type === "Hacker" ? (
+                    ticketDetails.related_ticket_id ? (
+                      <Link
+                        href={`/reports/${ticketDetails.related_ticket_id}`}
+                        className="underline"
+                        replace
+                      >
+                        Go to Company Ticket
+                      </Link>
+                    ) : (
+                      <Button
+                        variant="ghost-default"
+                        className="p-0"
+                        onClick={() => setOpenModalForbidden(true)}
+                      >
+                        Create Company Ticket
+                      </Button>
+                    )
+                  ) : (
                     <Link
                       href={`/reports/${ticketDetails.related_ticket_id}`}
                       className="underline"
                       replace
                     >
-                      Go to Company Ticket
+                      Go to Hacker Ticket
                     </Link>
-                  ) : (
-                    <Button
-                      variant="ghost-default"
-                      className="p-0"
-                      onClick={() => setOpenModalForbidden(true)}
-                    >
-                      Create Company Ticket
-                    </Button>
-                  )
-                ) : (
-                  <Link
-                    href={`/reports/${ticketDetails.related_ticket_id}`}
-                    className="underline"
-                    replace
-                  >
-                    Go to Hacker Ticket
-                  </Link>
-                )}
+                  )}
+                </div>
+                <Typography variant="p" affects="small">
+                  This chat is read only on this device. Please access using
+                  desktop to interact.
+                </Typography>
               </div>
-              <Typography variant="p" affects="small">
-                This chat is read only on this device. Please access using
-                desktop to interact.
-              </Typography>
-            </div>
+            )}
           </div>
           {isFetchingNextPage && (
             <Loader variant="hacker" width={12} height={12} className="h-12" />
@@ -224,12 +232,11 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Button
               variant="default"
               className={cn(
-                "sticky bottom-12 z-50 mx-auto w-fit",
-                "left-1/2 -translate-x-1/3 transform md:-translate-x-1/2"
+                "fixed z-50 mx-auto w-fit",
+                "left-1/2 -translate-x-1/2 transform",
+                isHiddenChatBox ? "bottom-4" : "bottom-12"
               )}
-              prefixIcon={
-                <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-              }
+              prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
               onClick={() => {
                 chatRef?.current?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -237,7 +244,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               <Typography
                 variant="p"
                 affects="small"
-                className="text-neutral-light-100 dark:text-neutral-dark-100"
+                className="!text-neutral-dark-100"
               >
                 Jump into last message
               </Typography>
@@ -274,7 +281,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   className="cursor-pointer"
                 />
                 <Typography variant="h5" weight="bold">
-                  {ticketDetails.title}
+                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
                 </Typography>
                 <div className="_flexbox__row__center gap-2.5">
                   <Badge
@@ -312,48 +319,52 @@ const ReportDetails = ({ id }: { id: string }) => {
               </div>
             </Card>
             <AnimationWrapper>
-              <div
-                className={cn(
-                  "sticky top-[8.15rem] z-30 w-full rounded-[10px] p-4",
-                  "mb-4 bg-neutral-light-80 dark:bg-neutral-dark-80"
-                )}
-              >
-                <div className="_flexbox__row__center__between w-full">
-                  <Typography
-                    variant="p"
-                    affects="small"
-                    className="text-violet-light dark:text-violet-light"
-                  >
-                    {ticketDetails.ticket_type === "Hacker"
-                      ? "Hacker"
-                      : "Company"}{" "}
-                    Ticket
-                  </Typography>
-                  {ticketDetails.ticket_type === "Hacker" ? (
-                    <Link
-                      href={
-                        ticketDetails.related_ticket_id
-                          ? `/reports/${ticketDetails.related_ticket_id}`
-                          : `/reports/new?ticket_id=${ticketDetails.id}`
-                      }
-                      className="underline"
-                      replace
-                    >
-                      {ticketDetails.related_ticket_id
-                        ? "Go to Company Ticket"
-                        : "Create Company Ticket"}
-                    </Link>
-                  ) : (
-                    <Link
-                      href={`/reports/${ticketDetails.related_ticket_id}`}
-                      className="underline"
-                      replace
-                    >
-                      Go to Hacker Ticket
-                    </Link>
+              {isHiddenChatBox &&
+              ticketDetails.ticket_type.toLowerCase() === "hacker" &&
+              !ticketDetails.related_ticket_id ? null : (
+                <div
+                  className={cn(
+                    "sticky top-[8.15rem] z-30 w-full rounded-[10px] p-4",
+                    "mb-4 bg-neutral-light-80 dark:bg-neutral-dark-80"
                   )}
+                >
+                  <div className="_flexbox__row__center__between w-full">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="text-violet-light dark:text-violet-light"
+                    >
+                      {ticketDetails.ticket_type === "Hacker"
+                        ? "Hacker"
+                        : "Company"}{" "}
+                      Ticket
+                    </Typography>
+                    {ticketDetails.ticket_type === "Hacker" ? (
+                      <Link
+                        href={
+                          ticketDetails.related_ticket_id
+                            ? `/reports/${ticketDetails.related_ticket_id}`
+                            : `/reports/new?ticket_id=${ticketDetails.id}`
+                        }
+                        className="underline"
+                        replace
+                      >
+                        {ticketDetails.related_ticket_id
+                          ? "Go to Company Ticket"
+                          : "Create Company Ticket"}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={`/reports/${ticketDetails.related_ticket_id}`}
+                        className="underline"
+                        replace
+                      >
+                        Go to Hacker Ticket
+                      </Link>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </AnimationWrapper>
           </div>
           {isFetchingNextPage && (
@@ -366,12 +377,11 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute bottom-72 z-50 mx-auto w-fit",
-              "left-1/2 transform"
+              "absolute z-50 mx-auto w-fit",
+              "left-1/2 transform",
+              isHiddenChatBox ? "bottom-12" : "bottom-72"
             )}
-            prefixIcon={
-              <ChevronDown className="text-neutral-light-100 dark:text-neutral-dark-100" />
-            }
+            prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
               chatRef?.current?.scrollIntoView({ behavior: "smooth" });
             }}
@@ -379,13 +389,13 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Typography
               variant="p"
               affects="small"
-              className="text-neutral-light-100 dark:text-neutral-dark-100"
+              className="!text-neutral-dark-100"
             >
               Jump into last message
             </Typography>
           </Button>
         )}
-        {ticketDetails.status !== "Closed" && (
+        {!isHiddenChatBox && (
           <div
             className={cn(
               "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"

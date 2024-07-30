@@ -168,21 +168,16 @@ const SignInComponent = () => {
           >
             Sign In
           </Button>
+          <Typography variant="p" affects="normal" align="center">
+            Didn&apos;t have account yet?{" "}
+            <Link
+              href={"/auth/signup"}
+              className="ml-2 font-semibold text-lime-normal-light dark:text-lime-normal-dark"
+            >
+              Sign Up
+            </Link>
+          </Typography>
         </div>
-        <Typography
-          variant="p"
-          affects="normal"
-          align="center"
-          className="absolute bottom-8"
-        >
-          Didn&apos;t have account yet?{" "}
-          <Link
-            href={"/auth/signup"}
-            className="ml-2 font-semibold text-lime-normal-light dark:text-lime-normal-dark"
-          >
-            Sign Up
-          </Link>
-        </Typography>
       </Mobile>
       <Desktop>
         <div
