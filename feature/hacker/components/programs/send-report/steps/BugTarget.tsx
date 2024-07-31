@@ -21,6 +21,7 @@ import {
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface I_BugTargetProps {
   defaultData?: {
@@ -31,13 +32,14 @@ interface I_BugTargetProps {
 }
 
 const BugTarget = ({ defaultData }: I_BugTargetProps) => {
+  const queryClient = useQueryClient();
   const {
     setValue,
     getValues,
     formState: { errors },
   } = useFormContext<SendReportRequestType>();
   const forms = getValues();
-  const [manualRisk, setManualRisk] = useState<boolean>(true);
+  const [manualRisk, setManualRisk] = useState<boolean>(false);
   const [other, setOther] = useState<boolean>(false);
 
   return (
@@ -70,6 +72,10 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     });
                     setValue("target_asset_id", item.id, {
                       shouldValidate: true,
+                    });
+                    queryClient.invalidateQueries({
+                      queryKey: ["getTargetAssetDetails"],
+                      refetchType: "active",
                     });
                   }}
                 >
@@ -131,6 +137,9 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                   defaultData?.assetType?.find((item) => item.value === v)?.id,
                   { shouldValidate: true }
                 );
+                queryClient.invalidateQueries({
+                  queryKey: ["getAssetTypeDetails"],
+                });
               }}
             />
           </Card>

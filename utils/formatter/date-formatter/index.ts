@@ -127,12 +127,16 @@ export function getCurrentTime() {
   const minutes = now.getUTCMinutes().toString().padStart(2, "0");
   return hours + ":" + minutes;
 }
-export function getCurrentDate(date?: Date) {
+export function getCurrentDate(date?: Date, format?: string) {
   const dateNow = date ?? new Date();
   const year = dateNow.getUTCFullYear();
   const month = (dateNow.getUTCMonth() + 1).toString().padStart(2, "0");
   const day = dateNow.getUTCDate().toString().padStart(2, "0");
-  const formattedDate = `${year}-${month}-${day}`;
+  const formats: { [key: string]: string } = {
+    "yyyy-MM-dd": `${year}-${month}-${day}`,
+    "MM dd yyyy": `${month} ${day} ${year}`,
+  };
+  const formattedDate = formats[format ?? "yyyy-MM-dd"];
   return formattedDate;
 }
 

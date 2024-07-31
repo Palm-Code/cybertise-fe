@@ -92,6 +92,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         setDescription("");
         setFiles(undefined);
         setOpenAttachment(false);
+        chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
         toast.error("Failed to send message");
@@ -225,7 +226,10 @@ const ReportDetails = ({ id }: { id: string }) => {
             <Loader variant="hacker" width={12} height={12} className="h-12" />
           )}
           <div className="px-6 py-8">
-            <ChatBubble data={chatData ?? []} />
+            <ChatBubble
+              ticket_type={ticketDetails.ticket_type}
+              data={chatData ?? []}
+            />
           </div>
           <div ref={endChatRef}></div>
           {!inViewEnd && (
@@ -370,7 +374,10 @@ const ReportDetails = ({ id }: { id: string }) => {
           {isFetchingNextPage && (
             <Loader variant="hacker" width={12} height={12} className="h-12" />
           )}
-          <ChatBubble data={chatData ?? []} />
+          <ChatBubble
+            ticket_type={ticketDetails.ticket_type}
+            data={chatData ?? []}
+          />
           <div ref={endChatRef}></div>
         </div>
         {!inViewEnd && (

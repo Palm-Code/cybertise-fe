@@ -12,7 +12,13 @@ const Country = ({
   return (
     <div className="grid grid-cols-[auto_1fr] place-items-center gap-1">
       {icon ? (
-        <Image src={icon || ""} alt="country" width={24} height={16} />
+        <Image
+          src={icon || ""}
+          alt="country"
+          width={24}
+          height={16}
+          className="h-4 w-6 object-contain"
+        />
       ) : (
         <Loader className="animate-spin" width={24} height={24} />
       )}

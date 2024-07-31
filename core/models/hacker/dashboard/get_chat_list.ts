@@ -22,7 +22,7 @@ export interface I_GetChatListSuccessResponse {
     title: string;
     description: string;
     risk_level: number;
-    ticket_type: string;
+    ticket_type: "Hacker" | "Company";
     related_ticket_id: string | null;
     vulnerability_type_id: string;
     status: string;

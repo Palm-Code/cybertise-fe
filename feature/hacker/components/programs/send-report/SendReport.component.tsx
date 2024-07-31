@@ -37,7 +37,6 @@ interface I_SendReportProps {
 }
 
 const SendReport = ({ id, defaultData }: I_SendReportProps) => {
-  const { data: targetAsset } = useGetTargetAsset();
   const { data } = useGetProgramDetails(
     {
       params: {
@@ -74,7 +73,6 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
       0: false,
       1:
         !forms.vulnerabiity_type_id ||
-        forms.risk_level === 0 ||
         (!forms.custom_ta_asset_type_id &&
           !forms.target_asset_id &&
           !forms.custom_ta_value),
@@ -86,6 +84,49 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     return disabled;
   }, [forms]);
 
+  const stepsComponents = useMemo(
+    () => [
+      {
+        element: <Brief />,
+        key: "brief",
+      },
+      {
+        element: (
+          <BugTarget
+            defaultData={{
+              assetType: defaultData?.assetType,
+              targetAssets: data?.data.target_assets,
+              vulnerabilityType: vulnerabilityType,
+            }}
+          />
+        ),
+        key: "bugTarget",
+      },
+      {
+        element: <ReportDescription />,
+        key: "reportDescription",
+      },
+      {
+        element: <ProblemCauses />,
+        key: "problemCauses",
+      },
+      {
+        element: (
+          <Review
+            defaultData={{
+              assetType: defaultData?.assetType,
+              targetAssets: data?.data.target_assets,
+              vulnerabilityType: vulnerabilityType,
+            }}
+            data={forms}
+          />
+        ),
+        key: "review",
+      },
+    ],
+    [data, vulnerabilityType, defaultData, forms]
+  );
+
   const {
     step,
     steps,
@@ -96,45 +137,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     next,
     back,
     containerRef,
-  } = useMultistepForm([
-    {
-      element: <Brief />,
-      key: "brief",
-    },
-    {
-      element: (
-        <BugTarget
-          defaultData={{
-            assetType: defaultData?.assetType,
-            targetAssets: data?.data.target_assets,
-            vulnerabilityType: vulnerabilityType,
-          }}
-        />
-      ),
-      key: "bugTarget",
-    },
-    {
-      element: <ReportDescription />,
-      key: "reportDescription",
-    },
-    {
-      element: <ProblemCauses />,
-      key: "problemCauses",
-    },
-    {
-      element: (
-        <Review
-          defaultData={{
-            assetType: defaultData?.assetType,
-            targetAssets: data?.data.target_assets,
-            vulnerabilityType: vulnerabilityType,
-          }}
-          data={forms}
-        />
-      ),
-      key: "review",
-    },
-  ]);
+  } = useMultistepForm(stepsComponents);
 
   const onSubmitForm = () => {
     mutateAsync(forms);

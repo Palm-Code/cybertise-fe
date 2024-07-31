@@ -19,6 +19,7 @@ import { usePostSignIn } from "../../query/signin";
 import { getBrowserAndOS } from "@/utils/device-type";
 import { useGetAccessToken } from "@/core/react-query/client";
 import { usePostResendVerification } from "../../query/resend-verification";
+import { ReactivateAccount } from "../reactivate-account";
 
 const SignInComponent = () => {
   const callbackUrl = useSearchParams().get("callbackUrl");
@@ -38,7 +39,8 @@ const SignInComponent = () => {
   });
 
   const forms = watch();
-  const { mutate, error, isPending, isSuccess } = usePostSignIn(callbackUrl);
+  const { mutateAsync, data, error, isPending, isSuccess } =
+    usePostSignIn(callbackUrl);
   const {
     mutate: getAccessToken,
     isPending: isPendingGetToken,
@@ -46,11 +48,24 @@ const SignInComponent = () => {
     isError,
   } = useGetAccessToken();
   const { mutate: resendVerification } = usePostResendVerification();
+  const [activeData, setActiveData] = useState<any>({
+    deactivated_at: undefined,
+    destroyed_at: undefined,
+    session_code: "",
+  });
 
   const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    mutate({ ...forms, device_type: deviceType });
+    await mutateAsync({ ...forms, device_type: deviceType }).then((res) => {
+      if (res?.data.deactivated_at) {
+        setActiveData({
+          deactivated_at: res?.data.deactivated_at as Date,
+          destroyed_at: res?.data.destroyed_at as Date,
+          session_code: res?.data.session_code as string,
+        });
+      }
+    });
   };
 
   const onSubmitLogin2fa = async (v: string) => {
@@ -67,6 +82,10 @@ const SignInComponent = () => {
     email: forms.email,
     password: forms.password,
   });
+
+  if (activeData.deactivated_at || activeData.destroyed_at) {
+    return <ReactivateAccount data={activeData} />;
+  }
 
   if (auth_email) {
     return (

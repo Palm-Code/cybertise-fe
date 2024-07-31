@@ -156,7 +156,8 @@ const Reports = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              href="/programs"
+              buttonText="See Programs"
             />
           )}
         </div>
@@ -232,7 +233,8 @@ const Reports = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              href="/programs"
+              buttonText="See Programs"
             />
           )}
         </div>

@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   Separator,
+  Tiptap,
   Tooltip,
   Typography,
 } from "@/core/ui/components";
@@ -49,11 +50,9 @@ const Sender = ({
             {data.sender_name}{" "}
           </Typography>
           <div className="_flexbox__row__center__start gap-2">
-            <article
-              dangerouslySetInnerHTML={{
-                __html: sanitize(data?.content as string),
-              }}
-            ></article>
+            <article>
+              <Tiptap showing description={sanitize(data?.content as string)} />
+            </article>
             {data?.badge && (
               <Badge variant={riskLevelCalculator(data.badge)}>
                 {`${data.badge} | ${riskLevelCalculator(data.badge)}`}

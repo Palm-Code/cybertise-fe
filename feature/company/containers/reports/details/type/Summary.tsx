@@ -34,9 +34,7 @@ const Summary = ({
       </div>
       <div className="_flexbox__col__start__start min-h-96 w-full gap-6 pb-12 xl:px-5">
         <Typography variant="p" affects="small" weight="bold">
-          {data.sender_name}{" "}
-          <span className="font-normal text-sky-normal">reported a bug</span> to
-          [{data.chat_ticket?.company_name}]
+          A vulnerability was reported to [{data.chat_ticket?.company_name}]
         </Typography>
         <Review
           data={data.chat_ticket}

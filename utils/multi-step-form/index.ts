@@ -1,5 +1,5 @@
 "use client";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState, useCallback } from "react";
 
 export function useMultistepForm(
   steps: { key: string; element: ReactElement }[]
@@ -13,23 +13,23 @@ export function useMultistepForm(
     }
   }, [steps[currentStepIndex].key]);
 
-  function next() {
+  const next = useCallback(() => {
     setCurrentStepIndex((i) => {
       if (i >= steps.length - 1) return i;
       return i + 1;
     });
-  }
+  }, [steps.length]);
 
-  function back() {
+  const back = useCallback(() => {
     setCurrentStepIndex((i) => {
       if (i <= 0) return i;
       return i - 1;
     });
-  }
+  }, []);
 
-  function goTo(index: number) {
+  const goTo = useCallback((index: number) => {
     setCurrentStepIndex(index);
-  }
+  }, []);
 
   return {
     currentStepIndex,

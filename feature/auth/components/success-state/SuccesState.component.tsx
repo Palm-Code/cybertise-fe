@@ -9,10 +9,14 @@ import React, { useEffect } from "react";
 
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
-  onClickResendVerification: () => void;
+  onClickResendVerification?: () => void;
 }
 
-const SuccessState = (props: I_SuccesStateProps) => {
+const SuccessState = ({
+  noPadding = false,
+  onClickResendVerification = () => {},
+  ...props
+}: I_SuccesStateProps) => {
   const [count, setCount] = React.useState(5);
   const initialDuration = count * 60 * 1000;
   const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
@@ -30,7 +34,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
   }, [remainingTime]);
 
   const onClickResend = () => {
-    props.onClickResendVerification();
+    onClickResendVerification();
     start();
   };
 
@@ -41,7 +45,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
           className={cn(
             "mx-auto w-full max-w-[553px] rounded-lg ",
             "_flexbox__col__center gap-28",
-            props.noPadding ? "p-0" : "px-10 py-20",
+            noPadding ? "p-0" : "px-10 py-20",
             props.className
           )}
           {...props}
@@ -60,8 +64,9 @@ const SuccessState = (props: I_SuccesStateProps) => {
             </Typography>
           </div>
           <Typography variant="p" affects="small" align="center">
-            It may take a minute to receive your code. <br /> Haven&apos;t
-            received it?{" "}
+            We have sent an email to the given address, in case it was not yet
+            registered. It may take a minute to receive your code. <br />{" "}
+            Haven&apos;t received it?{" "}
             <button
               type="button"
               title="resend"
@@ -79,7 +84,7 @@ const SuccessState = (props: I_SuccesStateProps) => {
           className={cn(
             "mx-auto w-full max-w-[553px] rounded-lg bg-background-main-light dark:bg-background-main-dark",
             "_flexbox__col__center gap-28",
-            props.noPadding ? "p-0" : "px-10 py-20",
+            noPadding ? "p-0" : "px-10 py-20",
             props.className
           )}
           {...props}
@@ -98,8 +103,9 @@ const SuccessState = (props: I_SuccesStateProps) => {
             </Typography>
           </div>
           <Typography variant="p" affects="normal" align="center">
-            It may take a minute to receive your code. <br /> Haven&apos;t
-            received it?{" "}
+            We have sent an email to the given address, in case it was not yet
+            registered. It may take a minute to receive your code. <br />{" "}
+            Haven&apos;t received it?{" "}
             <button
               type="button"
               title="resend"

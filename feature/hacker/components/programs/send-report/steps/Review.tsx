@@ -9,7 +9,13 @@ import {
   I_Media,
 } from "@/core/models/common";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
-import { Button, Card, Tooltip, Typography } from "@/core/ui/components";
+import {
+  Button,
+  Card,
+  Loader,
+  Tooltip,
+  Typography,
+} from "@/core/ui/components";
 import { Download, Eye, File } from "lucide-react";
 import { cn } from "@/core/lib/utils";
 import { fileDownload } from "@/utils/file-download";
@@ -17,6 +23,7 @@ import {
   useGetAssetTypeDetails,
   useGetTargetAssetDetails,
 } from "@/core/react-query/client";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_ReviewProps {
   defaultData?: {
@@ -27,16 +34,18 @@ interface I_ReviewProps {
   data?: SendReportRequestType & {
     media?: I_Media[];
   };
+  variant?: keyof typeof Role;
 }
 
-const Review = ({ data, defaultData }: I_ReviewProps) => {
-  const { data: asset_type } = useGetAssetTypeDetails(
-    data?.custom_ta_asset_type_id as string
-  );
+const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
+  const { data: asset_type, isLoading: assetTypeLoading } =
+    useGetAssetTypeDetails(data?.custom_ta_asset_type_id as string);
 
-  const { data: target_asset } = useGetTargetAssetDetails(
-    data?.target_asset_id as string
-  );
+  const { data: target_asset, isLoading: targetAssetLoading } =
+    useGetTargetAssetDetails(data?.target_asset_id as string);
+
+  if (assetTypeLoading || targetAssetLoading)
+    return <Loader variant={variant} />;
 
   if (data && defaultData)
     return (

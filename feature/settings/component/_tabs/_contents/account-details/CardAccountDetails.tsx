@@ -5,6 +5,7 @@ import { Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { Role } from "@/types/admin/sidebar";
 import { UserRound } from "lucide-react";
+import Link from "next/link";
 import { useFormContext } from "react-hook-form";
 
 interface I_CardAccountDetailsProps {
@@ -130,9 +131,20 @@ const CardAccountDetails = ({
                     Company Website
                   </Typography>
                 </div>
-                <Typography variant="p" affects="normal" className="col-span-1">
+                <Link
+                  target="_blank"
+                  href={
+                    data?.website
+                      ? data?.website.startsWith("http") ||
+                        data?.website.startsWith("https")
+                        ? data?.website
+                        : "https://" + data?.website
+                      : "#"
+                  }
+                  className="col-span-1"
+                >
                   {data?.website}
-                </Typography>
+                </Link>
               </>
             )}
             <div className="_flexbox__row__center__between w-full gap-2.5">
@@ -183,9 +195,20 @@ const CardAccountDetails = ({
                 >
                   Company Website
                 </Typography>
-                <Typography variant="p" affects="normal" className="col-span-1">
+                <Link
+                  target="_blank"
+                  href={
+                    data?.website
+                      ? data?.website.startsWith("http") ||
+                        data?.website.startsWith("https")
+                        ? data?.website
+                        : "https://" + data?.website
+                      : "#"
+                  }
+                  className="col-span-1"
+                >
                   {data?.website}
-                </Typography>
+                </Link>
               </div>
             )}
             <div className="_flexbox__col__start__start gap-2.5">
