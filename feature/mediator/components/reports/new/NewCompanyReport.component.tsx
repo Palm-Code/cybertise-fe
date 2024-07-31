@@ -138,7 +138,10 @@ const NewCompanyReport = () => {
                         className="w-full overflow-hidden"
                       >
                         <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
-                          <Summary data={initialChatTicket} />
+                          <Summary
+                            ticket_type="Hacker"
+                            data={initialChatTicket}
+                          />
                         </Card>
                       </motion.div>
                     )}
