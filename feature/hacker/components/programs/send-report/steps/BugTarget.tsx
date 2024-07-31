@@ -39,7 +39,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
     formState: { errors },
   } = useFormContext<SendReportRequestType>();
   const forms = getValues();
-  const [manualRisk, setManualRisk] = useState<boolean>(true);
+  const [manualRisk, setManualRisk] = useState<boolean>(false);
   const [other, setOther] = useState<boolean>(false);
 
   return (

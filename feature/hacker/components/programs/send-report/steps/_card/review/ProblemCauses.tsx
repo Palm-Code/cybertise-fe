@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
 interface I_ProblemCausesProps {
@@ -24,10 +24,9 @@ const ProblemCausesCard = ({
         >
           Summary
         </Typography>
-        <article
-          className="tiptap"
-          dangerouslySetInnerHTML={{ __html: sanitize(summary) }}
-        ></article>
+        <article>
+          <Tiptap description={sanitize(summary)} showing />
+        </article>
       </div>
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography
@@ -37,10 +36,9 @@ const ProblemCausesCard = ({
         >
           Proof of Concept
         </Typography>
-        <article
-          className="tiptap"
-          dangerouslySetInnerHTML={{ __html: sanitize(proof_of_concept) }}
-        ></article>
+        <article>
+          <Tiptap description={sanitize(proof_of_concept)} showing />
+        </article>
       </div>
     </>
   );

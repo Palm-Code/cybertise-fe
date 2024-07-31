@@ -6,8 +6,10 @@ import { useGetMutationState } from "@/core/react-query/client";
 
 const ChatBubble = ({
   data,
+  ticket_type = "Hacker",
 }: {
   data: I_GetChatListItemSuccessResponse["data"];
+  ticket_type?: "Hacker" | "Company";
 }) => {
   const mutations = useGetMutationState();
 
@@ -19,7 +21,13 @@ const ChatBubble = ({
       {data &&
         data.map((item, idx) => {
           if (item.sender === "Summary")
-            return <Summary data={item} key={`summary-${idx}`} />;
+            return (
+              <Summary
+                ticket_type={ticket_type}
+                data={item}
+                key={`summary-${idx}`}
+              />
+            );
           else if (item.sender === "Systems")
             return <System data={item} key={`User-${idx}`} />;
           else return <Sender data={item} key={`sender-${idx}`} />;

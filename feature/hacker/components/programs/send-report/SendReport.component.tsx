@@ -82,7 +82,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     };
 
     return disabled;
-  }, []);
+  }, [forms]);
 
   const stepsComponents = useMemo(
     () => [
@@ -124,7 +124,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
         key: "review",
       },
     ],
-    []
+    [data, vulnerabilityType, defaultData, forms]
   );
 
   const {

@@ -80,6 +80,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         setDescription("");
         setFiles(undefined);
         setOpenAttachment(false);
+        chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
         toast.error("Failed to send message");

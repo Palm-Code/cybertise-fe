@@ -29,36 +29,39 @@ lowlight.register({ typescript });
 
 interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   description: string;
-  onChangeValue: (value: string) => void;
+  onChangeValue?: (value: string) => void;
   label?: string;
   withTooltip?: boolean;
   onClearInput?: () => void;
   isChat?: boolean;
-  variant: keyof typeof Role;
+  variant?: keyof typeof Role;
   onClickSendAttachment?: () => void;
   onClickSendMessage?: () => void;
   isLoading?: boolean;
   maxLength?: number;
   placeholder?: string;
+  showing?: boolean;
 }
 
 const Tiptap = ({
   description,
-  onChangeValue,
+  onChangeValue = () => {},
   label,
   withTooltip,
   isChat = false,
   isLoading = false,
   onClearInput = () => {},
-  variant,
+  variant = "hacker",
   onClickSendAttachment,
   onClickSendMessage = () => {},
   maxLength = 5000,
   placeholder = "",
+  showing = false,
   ...props
 }: I_TiptapProps) => {
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
+    editable: !showing,
     extensions: [
       StarterKit.configure({
         codeBlock: false,
@@ -86,7 +89,7 @@ const Tiptap = ({
         class: cn(
           "w-full peer leading-tight appearance-none max-w-none overflow-auto whitespace-pre-line",
           "flex flex-col justify-start outline-none",
-          isChat
+          isChat || showing
             ? "h-full mt-0 bg-transparent"
             : "mt-4 bg-neutral-light-90 dark:bg-neutral-dark-90"
         ),
@@ -105,6 +108,18 @@ const Tiptap = ({
       setIsFocused(false);
     },
   });
+
+  if (showing) {
+    return (
+      <EditorContent
+        editor={editor}
+        value={description}
+        readOnly
+        disabled
+        contentEditable={false}
+      />
+    );
+  }
 
   if (isChat) {
     return (
