@@ -20,12 +20,14 @@ const DataPrivacy = ({ variant }: I_DataPrivacyProps) => {
       </div>
       <CardPrivacyPolicy />
       <CardFaq />
-      <div className="_flexbox__col__start__start w-full gap-6">
-        <Typography variant="h6" weight="bold">
-          Account
-        </Typography>
-        <CardDeactivateAccount variant={variant} />
-      </div>
+      {variant === "hacker" && (
+        <div className="_flexbox__col__start__start w-full gap-6">
+          <Typography variant="h6" weight="bold">
+            Account
+          </Typography>
+          <CardDeactivateAccount variant={variant} />
+        </div>
+      )}
     </div>
   );
 };

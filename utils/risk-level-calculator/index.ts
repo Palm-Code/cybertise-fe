@@ -8,6 +8,6 @@ export const riskLevelCalculator = (risk: number) => {
   } else if (risk >= 9) {
     return "critical";
   } else {
-    return "no";
+    return "no risk";
   }
 };

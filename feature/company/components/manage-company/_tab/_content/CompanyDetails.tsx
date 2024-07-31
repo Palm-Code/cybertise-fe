@@ -178,7 +178,16 @@ const CompanyDetails = ({
                 >
                   Company Website
                 </Typography>
-                <Link href={data?.website || "#"}>
+                <Link
+                  href={
+                    data?.website
+                      ? data?.website.startsWith("http") ||
+                        data?.website.startsWith("https")
+                        ? data?.website
+                        : "https://" + data?.website
+                      : "#"
+                  }
+                >
                   <Typography variant="p" affects="normal">
                     {data?.website}
                   </Typography>
@@ -362,7 +371,16 @@ const CompanyDetails = ({
                 >
                   Company Website
                 </Typography>
-                <Link href={data?.website || "#"}>
+                <Link
+                  href={
+                    data?.website
+                      ? data?.website.startsWith("http") ||
+                        data?.website.startsWith("https")
+                        ? data?.website
+                        : "https://" + data?.website
+                      : "#"
+                  }
+                >
                   <Typography variant="p" affects="normal">
                     {data?.website}
                   </Typography>

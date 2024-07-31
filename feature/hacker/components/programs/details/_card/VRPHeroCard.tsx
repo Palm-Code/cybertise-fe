@@ -89,7 +89,12 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   Company Website
                 </Typography>
                 <Link
-                  href={data.company?.website ?? "#"}
+                  href={
+                    data?.company?.website.startsWith("http") ||
+                    data?.company?.website.startsWith("https")
+                      ? data?.company?.website
+                      : "https://" + data?.company?.website || "#"
+                  }
                   target="_blank"
                   className={cn(
                     typographyVariants({ variant: "p", affects: "small" })
@@ -225,7 +230,12 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       Company Website
                     </Typography>
                     <Link
-                      href={data.company?.website ?? "#"}
+                      href={
+                        data?.company?.website.startsWith("http") ||
+                        data?.company?.website.startsWith("https")
+                          ? data?.company?.website
+                          : "https://" + data?.company?.website || "#"
+                      }
                       target="_blank"
                       className={cn(
                         typographyVariants({ variant: "p", affects: "small" }),

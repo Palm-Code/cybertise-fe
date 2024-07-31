@@ -23,7 +23,9 @@ export const usePostSignIn = (callbackUrl: string | null) => {
       callbackUrl && setCallbackUrl(callbackUrl);
       data.data["two-factor"]
         ? replace(`/auth/signin?code=${data.data.session_code}`)
-        : replace(`/auth/signin?authenticate_email=${variables.email}`);
+        : data.data.deactivated_at
+          ? null
+          : replace(`/auth/signin?authenticate_email=${variables.email}`);
     },
     onError(error) {
       return error;

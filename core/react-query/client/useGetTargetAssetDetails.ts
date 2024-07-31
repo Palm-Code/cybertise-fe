@@ -1,5 +1,4 @@
 "use client";
-import { I_GetParamsPayload } from "@/core/models/common";
 import { I_GetTargetAssetSuccessResponse } from "@/core/models/common/get_target_asset";
 import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { fetchGetTargetAssetDetails } from "@/core/services/common";

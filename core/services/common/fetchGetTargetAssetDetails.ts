@@ -1,7 +1,5 @@
 import { AxiosResponse } from "axios";
-import { I_GetParamsPayload } from "@/core/models/common";
 import axiosInterceptorInstance from "../interceptor/axiosInterceptor";
-import { I_GetTargetAssetSuccessResponse } from "@/core/models/common/get_target_asset";
 import { getTargetAssetDetailAPIURL } from "@/core/routes/common";
 
 export const fetchGetTargetAssetDetails = async (id: string) => {

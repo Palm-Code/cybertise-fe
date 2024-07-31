@@ -91,7 +91,14 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     Company Website
                   </Typography>
                   <Link
-                    href={data.website ?? "#"}
+                    href={
+                      data?.website
+                        ? data?.website.startsWith("http") ||
+                          data?.website.startsWith("https")
+                          ? data?.website
+                          : "https://" + data?.website
+                        : "#"
+                    }
                     target="_blank"
                     className={cn(
                       typographyVariants({ variant: "p", affects: "small" }),
@@ -195,7 +202,12 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                       Company Website
                     </Typography>
                     <Link
-                      href={data.website ?? "#"}
+                      href={
+                        data?.website.startsWith("http") ||
+                        data?.website.startsWith("https")
+                          ? data?.website
+                          : "https://" + data?.website || "#"
+                      }
                       target="_blank"
                       className={cn(
                         typographyVariants({ variant: "p", affects: "small" }),
