@@ -14,7 +14,7 @@ export const updatePorfileSchema = z.object({
   phone: z
     .string()
     .min(1, { message: "Phone is required" })
-    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+    .regex(/^\d{1,25}$/, {
       message: "Invalid phone number format",
     }),
   about: z.string().min(1, { message: "About is required" }),
@@ -35,7 +35,7 @@ export const updateEmergencyContactSchema = z.object({
   emergency_phone: z
     .string()
     .min(1, { message: "Phone is required" })
-    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+    .regex(/^\d{1,25}$/, {
       message: "Invalid phone number format",
     }),
 });

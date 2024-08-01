@@ -12,7 +12,7 @@ interface I_ModalSubmitVRPProps {
 
 const ModalSubmitVRP = ({
   isOpen,
-  titleText = "We have sent your report to the Mediator for review",
+  titleText = "We have sent your VRP draft to the Mediator for review",
   variant = "company",
 }: I_ModalSubmitVRPProps) => {
   return (

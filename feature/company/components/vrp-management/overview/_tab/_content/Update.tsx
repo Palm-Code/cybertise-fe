@@ -1,4 +1,4 @@
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { UpdateType } from "@/types/admin/programs";
@@ -30,12 +30,9 @@ const Update = ({ title, created_at, content }: I_Update) => {
               {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
             </Typography>
           </div>
-          <article
-            className="tiptap"
-            dangerouslySetInnerHTML={{
-              __html: sanitize(content ?? ""),
-            }}
-          ></article>
+          <article>
+            <Tiptap showing description={sanitize(content as string)} />
+          </article>
         </div>
       </Card>
     </AnimationWrapper>

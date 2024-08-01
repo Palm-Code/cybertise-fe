@@ -6,7 +6,10 @@ export const createCompanyStaffSchema = z.object({
   phone: z
     .string()
     .min(1, { message: "Phone is required" })
-    .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, {
+    .max(25, {
+      message: "Phone is too long",
+    })
+    .regex(/^\d{1,25}$/, {
       message: "Invalid phone number format",
     }),
 });

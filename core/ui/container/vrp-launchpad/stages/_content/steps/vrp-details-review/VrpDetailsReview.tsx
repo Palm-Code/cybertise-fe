@@ -43,11 +43,12 @@ const VrpDetailsReview = ({
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
         <Typography variant="h5" weight="bold">
-          {(isLastStep && variant === "mediator") ||
-          ((currentStep === "Published" || currentStep === "Phase5") &&
-            !isLastStep)
+          {(currentStep === "Published" || currentStep === "Phase5") &&
+          !isLastStep
             ? "VRP Details"
-            : `Review`}
+            : variant === "mediator" && !isLastStep
+              ? "Review VRP Details"
+              : `Review`}
         </Typography>
         {isLastStep ||
         (currentStep === "Published" && variant === "company") ||
@@ -82,12 +83,15 @@ const VrpDetailsReview = ({
               "bg-semantic-light-medium p-4 !text-white dark:bg-semantic-dark-medium"
             )}
           >
-            <AlertCircle />
-            <Typography variant="p" affects="normal">
-              Your VRP has been{" "}
-              {currentStep === "Published" ? "Published" : "Approved"}. Sending
-              to the Mediator will take the VRP back to Mediator Revision
-            </Typography>
+            <div className="grid grid-cols-[auto_1fr] items-center gap-4">
+              <AlertCircle />
+              <Typography variant="p" affects="normal">
+                Your VRP has been{" "}
+                {currentStep === "Published" ? "Published" : "Approved"}.
+                Sending to the Mediator will take the VRP back to Mediator
+                Revision
+              </Typography>
+            </div>
             <Button
               variant={`ghost-default`}
               onClick={back}
@@ -115,8 +119,9 @@ const VrpDetailsReview = ({
             variant="company"
             checked={checked}
             onCheckedChange={() => setChecked(!checked)}
+            className="mt-1"
           />
-          <Typography variant="p" affects="default">
+          <Typography variant="p" affects="normal">
             By clicking 'Publish', you agree to our Terms and Conditions and
             acknowledge that you have read our Code of Conduct, Privacy Policy
             and Disclosure Guidelines.

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
-
 import { cn } from "@/core/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { buttonVariants } from "../button/base-button";
@@ -21,6 +20,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays
+      weekStartsOn={1}
       className={cn(
         "rounded-md bg-neutral-light-100 p-3 dark:bg-neutral-dark-100",
         className

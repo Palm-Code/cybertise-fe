@@ -99,12 +99,11 @@ export const vrpInformations = {
   ],
   publish: [
     {
-      label: "VRP Details",
+      label: "Publish",
       value: 1,
     },
-
     {
-      label: "Rules & Policies",
+      label: "VRP Details",
       value: 2,
     },
     {
@@ -116,12 +115,16 @@ export const vrpInformations = {
       value: 4,
     },
     {
-      label: "Notes",
+      label: "Rules & Policies",
       value: 5,
     },
     {
-      label: "Review",
+      label: "Notes",
       value: 6,
+    },
+    {
+      label: "Review",
+      value: 7,
     },
   ],
 };

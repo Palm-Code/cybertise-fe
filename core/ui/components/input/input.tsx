@@ -143,7 +143,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     "inset-0 mt-0.5 h-full focus:outline-none focus:ring-0 dark:text-white",
                     prefixIcon && "pl-4",
                     iconValue ? "mt-2.5 pl-11" : "px-4",
-                    !label && "bottom-1",
+                    !label && "!mt-0 !pt-0",
                     isSelect && "cursor-pointer",
                     isSelect && (!value || !!iconValue) ? "pt-0" : "pt-4",
                     className

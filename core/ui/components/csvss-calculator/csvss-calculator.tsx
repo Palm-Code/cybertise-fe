@@ -14,7 +14,6 @@ import {
 } from "@/enums";
 import { csvss_calculator } from "@/feature/hacker/constants/programs";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import { CVSS30 } from "@pandatix/js-cvss";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 

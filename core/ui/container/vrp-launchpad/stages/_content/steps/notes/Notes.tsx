@@ -35,11 +35,9 @@ const Notes = ({
             "xl:p-7.5"
           )}
         >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sanitize(forms.notes ?? ""),
-            }}
-          ></div>
+          <article>
+            <Tiptap showing description={sanitize(forms.notes ?? "")} />
+          </article>
           {variant === "company" && (
             <Button variant="primary-company" onClick={onClickNext}>
               Next

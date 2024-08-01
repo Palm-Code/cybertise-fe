@@ -101,7 +101,11 @@ const Staffs = ({
               Staff
             </Typography>
             {data?.length === 0 && (
-              <EmptyState variant="company" titleText="No staff found" />
+              <EmptyState
+                variant="company"
+                titleText="No staff found"
+                className="mt-0"
+              />
             )}
             {data?.map((item, idx) => (
               <Card

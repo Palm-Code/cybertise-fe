@@ -160,10 +160,10 @@ const VRPDetails = ({
           ),
           key: "target-asset",
         },
-        currentStep === "Phase3" && {
+        currentStep !== "Phase1" && {
           element: (
             <RulesAndPolicies
-              variant="company"
+              variant={variant}
               onClickPrev={() => back()}
               onClickNext={() => next()}
             />

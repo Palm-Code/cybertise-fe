@@ -101,8 +101,12 @@ const TicketCard = ({
           onClose={() => setShowModal(false)}
         />
       </Mobile>
-      <Desktop>
-        <Card isClickable href={`/vrp-launchpad/${props.id}`}>
+      <Desktop className="h-full">
+        <Card
+          isClickable
+          href={`/vrp-launchpad/${props.id}`}
+          className="h-full"
+        >
           <div className="_flexbox__row__start w-full gap-9">
             {!isGridCard && (
               <Avatar

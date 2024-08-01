@@ -2,11 +2,12 @@
 import { cn } from "@/core/lib/utils";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
+import { Role } from "@/types/admin/sidebar";
 import { sanitize } from "@/utils/sanitize-input";
 import { useFormContext } from "react-hook-form";
 
 interface IRulesAndPoliciesProps {
-  variant?: "mediator" | "company";
+  variant?: keyof typeof Role;
   onClickNext?: () => void;
   onClickPrev?: () => void;
   currentSteps?: string;
@@ -42,11 +43,9 @@ const RulesAndPolicies = ({
           >
             Rules
           </Typography>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sanitize(forms.rules ?? ""),
-            }}
-          ></div>
+          <article>
+            <Tiptap showing description={sanitize(forms.rules ?? "")} />
+          </article>
         </div>
         <div className="__flexbox__col__start__start w-full gap-2.5">
           <Typography
@@ -56,11 +55,9 @@ const RulesAndPolicies = ({
           >
             Policies
           </Typography>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sanitize(forms.policies ?? ""),
-            }}
-          ></div>
+          <article>
+            <Tiptap showing description={sanitize(forms.policies ?? "")} />
+          </article>
         </div>
       </Card>
     );
