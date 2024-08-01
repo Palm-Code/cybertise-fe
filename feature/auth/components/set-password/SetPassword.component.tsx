@@ -47,9 +47,9 @@ const SetPassword = (props: I_SetPassword) => {
     );
 
     setPasswordValidationItems(updatedValidationItems);
-    confirmPassworText.content &&
-      confirmPassworText.content === newPassword &&
-      setConfirmPassworText({ ...confirmPassworText, checked: false });
+    confirmPassworText.content && confirmPassworText.content === newPassword
+      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
+      : setConfirmPassworText({ ...confirmPassworText, checked: true });
 
     setNewPassword(newPassword);
   };
@@ -105,7 +105,12 @@ const SetPassword = (props: I_SetPassword) => {
               fullWidth
               isLoading={isPending || isPendingForgot}
               disabled={
-                isPending || isSuccess || isPendingForgot || isSuccessForgot
+                isPending ||
+                isSuccess ||
+                isPendingForgot ||
+                isSuccessForgot ||
+                !confirmPassworText.checked ||
+                passwordValidationItems.every((item) => !item.checked)
               }
               onClick={() =>
                 token &&
@@ -165,7 +170,12 @@ const SetPassword = (props: I_SetPassword) => {
               fullWidth
               isLoading={isPending || isPendingForgot}
               disabled={
-                isPending || isSuccess || isPendingForgot || isSuccessForgot
+                isPending ||
+                isSuccess ||
+                isPendingForgot ||
+                isSuccessForgot ||
+                !confirmPassworText.checked ||
+                passwordValidationItems.every((item) => !item.checked)
               }
               onClick={() =>
                 token &&

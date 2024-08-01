@@ -1,6 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
-import { Badge, Card, Typography } from "@/core/ui/components";
+import { Badge, Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
 const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
@@ -45,11 +45,9 @@ const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
         >
           Description
         </Typography>
-        <article
-          dangerouslySetInnerHTML={{
-            __html: sanitize(data.description ?? ""),
-          }}
-        ></article>
+        <article>
+          <Tiptap showing description={sanitize(data?.description as string)} />
+        </article>
       </div>
     </Card>
   );

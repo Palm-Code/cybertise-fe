@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
 const Notes = ({ data }: { data?: string }) => {
@@ -14,11 +14,9 @@ const Notes = ({ data }: { data?: string }) => {
       <Typography variant="h6" weight="bold">
         Notes
       </Typography>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: sanitize(data ?? ""),
-        }}
-      ></div>
+      <article className="*:break-all">
+        <Tiptap showing description={sanitize(data ?? "")} />
+      </article>
     </Card>
   );
 };

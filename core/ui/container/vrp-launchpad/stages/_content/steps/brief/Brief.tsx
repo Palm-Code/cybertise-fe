@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Button, Card, Typography } from "@/core/ui/components";
+import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
 
 interface IBriefProps {
@@ -19,13 +19,14 @@ const Brief = ({ onClickNext }: IBriefProps) => {
           "p-7.5"
         )}
       >
-        <div
-          dangerouslySetInnerHTML={{
-            __html: sanitize(
+        <article className="*:break-all">
+          <Tiptap
+            showing
+            description={sanitize(
               "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. </p><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis. </p>"
-            ),
-          }}
-        ></div>
+            )}
+          />
+        </article>
         <Button variant="primary-company" onClick={onClickNext}>
           Next
         </Button>

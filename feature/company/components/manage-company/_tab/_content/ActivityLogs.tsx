@@ -1,6 +1,12 @@
 import { filterItems, filterSortBy } from "@/core/constants/dashboard";
 import { cn } from "@/core/lib/utils";
-import { Button, Card, FilterDropdown, Typography } from "@/core/ui/components";
+import {
+  Button,
+  Card,
+  FilterDropdown,
+  Tiptap,
+  Typography,
+} from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Circle, Dot } from "lucide-react";
@@ -138,11 +144,12 @@ const ActivityLogs = ({}: {}) => {
                                     "w-full bg-neutral-light-90 xl:p-7.5 dark:bg-neutral-dark-90"
                                   )}
                                 >
-                                  <div
-                                    dangerouslySetInnerHTML={{
-                                      __html: sanitize(log.description),
-                                    }}
-                                  ></div>
+                                  <article>
+                                    <Tiptap
+                                      showing
+                                      description={sanitize(log.description)}
+                                    />
+                                  </article>
                                 </Card>
                               )}
                               <div className="_flexbox__row__center__start w-full gap-2">

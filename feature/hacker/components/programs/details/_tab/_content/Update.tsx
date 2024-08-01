@@ -1,5 +1,5 @@
 import { I_LatestUpdates } from "@/core/models/hacker/programs";
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import {
@@ -26,11 +26,9 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
                 {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
               </Typography>
             </div>
-            <article
-              dangerouslySetInnerHTML={{
-                __html: sanitize(content ?? ""),
-              }}
-            ></article>
+            <article>
+              <Tiptap showing description={sanitize(content as string)} />
+            </article>
           </div>
         </Card>
       </Mobile>
@@ -49,11 +47,9 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
                 {`${formatTimestamp(created_at ?? "")} (${formatDateToAgo2(created_at ?? "")})`}
               </Typography>
             </div>
-            <article
-              dangerouslySetInnerHTML={{
-                __html: sanitize(content ?? ""),
-              }}
-            ></article>
+            <article>
+              <Tiptap showing description={sanitize(content as string)} />
+            </article>
           </div>
         </Card>
       </Desktop>

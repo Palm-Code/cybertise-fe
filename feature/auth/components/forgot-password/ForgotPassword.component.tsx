@@ -24,7 +24,7 @@ interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
 const ForgotPassword = (props: I_ForgotPassword) => {
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
-  const [count, setCount] = React.useState(0.1);
+  const [count, setCount] = React.useState(5);
   const [validated, setValidated] = useState(false);
   const initialDuration = count * 60 * 1000;
   const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);

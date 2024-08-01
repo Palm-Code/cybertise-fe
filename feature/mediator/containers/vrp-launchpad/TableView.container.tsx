@@ -15,7 +15,6 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { I_TableColumns } from "@/interfaces";
-import Image from "next/image";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { TableLoadingList } from "@/core/ui/container";

@@ -31,6 +31,7 @@ export const usePostUpdateVrp = (id: string) => {
       queryClient.invalidateQueries({
         queryKey: ["getProgramListDetails"],
       });
+      router.push("/vrp-launchpad");
     },
   });
 

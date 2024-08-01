@@ -109,6 +109,7 @@ const EditStaffs = ({
                 <Input
                   type="tel"
                   pattern="[0-9]*"
+                  maxLength={25}
                   inputMode="numeric"
                   label="Phone Number"
                   value={forms.phone}
@@ -121,6 +122,7 @@ const EditStaffs = ({
                     setValue("phone", "", { shouldValidate: true });
                   }}
                   isError={!!errors.phone}
+                  errorMsg={errors.phone?.message}
                 />
               </div>
               <div className="_flexbox__row__center gap-6">

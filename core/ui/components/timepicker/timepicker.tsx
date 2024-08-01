@@ -13,7 +13,7 @@ interface I_SelectDropdownProps {
 const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   const options = generateTimeOptions();
   const currentTime = new Date();
-  const defaultCurrentTime = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+  const defaultCurrentTime = `${currentTime.getHours()}:${currentTime.getMinutes().toFixed(0).padStart(2, "0")}`;
 
   const parseTime = (timeStr: string) => {
     const [hours, minutes] = timeStr.split(":").map(Number);
@@ -65,10 +65,10 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
                   "bg-neutral-light-90 text-sky-normal dark:bg-neutral-dark-90 dark:text-sky-normal"
               )}
               onClick={() => {
-                if (isDisabled) return;
+                // if (isDisabled) return;
                 onValueChange(option.value);
               }}
-              disabled={isDisabled}
+              // disabled={isDisabled}
             >
               {option.label}
             </button>

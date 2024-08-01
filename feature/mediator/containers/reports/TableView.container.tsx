@@ -11,6 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Tiptap,
   Typography,
 } from "@/core/ui/components";
 import { TableLoadingList } from "@/core/ui/container";
@@ -128,16 +129,16 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           `text-${columns[2].align}`
                         )}
                       >
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: sanitize(
+                        <article className="*:break-all">
+                          <Tiptap
+                            showing
+                            description={sanitize(
                               item.last_message.length > 50
                                 ? item.last_message.substring(0, 50) + "..."
                                 : item.last_message
-                            ),
-                          }}
-                          className="*:break-all"
-                        ></div>
+                            )}
+                          />
+                        </article>
                       </TableData>
                       <TableData
                         className={cn(

@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Badge, Button, Card, Indicator, Typography } from "../../components";
+import {
+  Badge,
+  Button,
+  Card,
+  Indicator,
+  Tiptap,
+  Typography,
+} from "../../components";
 import { cn } from "@/core/lib/utils";
 import { Suspense, useState } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
@@ -71,16 +78,16 @@ const TicketCard = ({
                 </Typography>
               </div>
             </div>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: sanitize(
+            <article className="*:break-all">
+              <Tiptap
+                showing
+                description={sanitize(
                   props.last_message.length > 50
                     ? props.last_message.substring(0, 50) + "..."
                     : props.last_message
-                ),
-              }}
-              className="*:break-all"
-            ></div>
+                )}
+              />
+            </article>
             <div
               className={cn(
                 "w-full gap-6",
@@ -210,16 +217,16 @@ const TicketCard = ({
                 {formatDateToAgo(props?.updated_at ?? "")}
               </Typography>
             </div>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: sanitize(
+            <article className="*:break-all">
+              <Tiptap
+                showing
+                description={sanitize(
                   props.last_message.length > 50
                     ? props.last_message.substring(0, 50) + "..."
                     : props.last_message
-                ),
-              }}
-              className="*:break-all"
-            ></div>
+                )}
+              />
+            </article>
             <div
               className={cn(
                 "w-full gap-6",

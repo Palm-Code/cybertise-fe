@@ -1,5 +1,6 @@
-import { Card, Typography } from "@/core/ui/components";
+import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { AnimationWrapper } from "@/core/ui/layout";
+import { sanitize } from "@/utils/sanitize-input";
 
 const RnP = ({ data }: { data: string | null }) => {
   return (
@@ -9,10 +10,9 @@ const RnP = ({ data }: { data: string | null }) => {
           <Typography variant="p" affects="extralarge" weight="bold">
             Rules and policy
           </Typography>
-          <article
-            className="tiptap"
-            dangerouslySetInnerHTML={{ __html: data ?? "" }}
-          ></article>
+          <article>
+            <Tiptap showing description={sanitize(data as string)} />
+          </article>
         </div>
       </Card>
     </AnimationWrapper>
