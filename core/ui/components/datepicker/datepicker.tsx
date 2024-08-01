@@ -17,12 +17,13 @@ export function DatePicker({
   const [date, setDate] = React.useState<Date | undefined>(
     value ? new Date(value) : undefined
   );
+  const [openDropdown, setOpenDropdown] = React.useState(false);
 
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
 
   return (
-    <Popover>
+    <Popover open={openDropdown} onOpenChange={setOpenDropdown}>
       <PopoverTrigger asChild>
         <button
           type="button"
@@ -45,6 +46,7 @@ export function DatePicker({
           onSelect={(e) => {
             onChangeValue(e);
             setDate(e);
+            setOpenDropdown(false);
           }}
           disabled={(date) => date < yesterday}
           initialFocus
