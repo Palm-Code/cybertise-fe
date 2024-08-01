@@ -265,19 +265,19 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
           dragActive && "bg-neutral-light-70 dark:bg-neutral-dark-70"
         )}
       >
-        <div className="_flexbox__col__start__start h-full w-full gap-10 p-6 pb-12">
+        <div
+          className="_flexbox__col__start__start h-full w-full gap-10 p-6 pb-12"
+          onDragEnter={handleDrag}
+          onDragLeave={handleDrag}
+          onDragOver={handleDrag}
+          onDrop={handleDrop}
+        >
           {noInput ? (
             <label
               htmlFor="dropzone-file"
               className="_flexbox__col__start__start h-full w-full gap-10"
             >
-              <div
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
-                className="_flexbox__col__center m-auto mb-0 cursor-pointer gap-2.5"
-              >
+              <div className="_flexbox__col__center m-auto mb-0 cursor-pointer gap-2.5">
                 <UploadCloud width={32} height={32} />
                 <Typography variant="h6" weight="bold">
                   Drag & Drop
