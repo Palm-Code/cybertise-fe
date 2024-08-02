@@ -25,7 +25,6 @@ const PricingCard = ({
   const checked = value === category;
   return (
     <Card
-      isButton
       className={cn(
         "rounded-[10px]  xl:px-4 xl:py-7.5 ",
         "_flexbox__col__start__start w-full gap-6 border",
