@@ -14,6 +14,7 @@ export const ShieldCheck = ({ category }: { category: string }) => {
       alt={`badge-category-${category}`}
       width={18}
       height={24}
+      className="h-6 w-4.5"
     />
   );
 };

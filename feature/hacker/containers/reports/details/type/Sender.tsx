@@ -5,15 +5,14 @@ import {
   Badge,
   Button,
   Card,
+  Markdown,
   Separator,
-  Tiptap,
   Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { fileDownload } from "@/utils/file-download";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
-import { sanitize } from "@/utils/sanitize-input";
 import { motion } from "framer-motion";
 import { Download, Eye, File, Link as LinkUrl } from "lucide-react";
 import Link from "next/link";
@@ -49,9 +48,7 @@ const Sender = ({
             {data.sender_name}{" "}
           </Typography>
           <div className="_flexbox__row__center__start gap-2">
-            <article>
-              <Tiptap showing description={sanitize(data?.content as string)} />
-            </article>
+            <Markdown content={data.content || ""} />
             {data?.badge && (
               <Badge variant={riskLevelCalculator(data.badge)}>
                 {riskLevelCalculator(data.badge)}

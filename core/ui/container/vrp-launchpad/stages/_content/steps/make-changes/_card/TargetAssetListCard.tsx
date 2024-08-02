@@ -6,7 +6,7 @@ import { Badge, Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Check, FilePenLine, X } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface I_TargetAssetListCard<T extends boolean> {
@@ -57,6 +57,13 @@ const TargetAssetListCard = ({
       (v) => v.asset_type_id === "" || v.content === ""
     ) ||
     isEditingList.some((v) => v);
+
+  const disabledSave = useMemo(() => {
+    if (forms.target_assets.length < 1) return true;
+    return forms.target_assets.some(
+      (v) => v.asset_type_id === "" || v.content === ""
+    );
+  }, [forms]);
 
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
@@ -172,6 +179,7 @@ const TargetAssetListCard = ({
                   prefixIcon={<Check />}
                   className="p-0"
                   onClick={() => handleEditClick(index)}
+                  disabled={disabledSave}
                 >
                   Save
                 </Button>

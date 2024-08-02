@@ -7,6 +7,7 @@ import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
+import "highlight.js/styles/default.css";
 
 export const metadata: Metadata = {
   title: {

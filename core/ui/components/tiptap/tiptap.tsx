@@ -20,6 +20,7 @@ import Typography from "../typography/typography";
 import Button from "../button/button";
 import Separator from "../separator/separator";
 import { Role } from "@/types/admin/sidebar";
+import "highlight.js/styles/atom-one-dark.css";
 
 const lowlight = createLowlight(common);
 lowlight.register({ html });
@@ -111,12 +112,10 @@ const Tiptap = ({
 
   if (showing) {
     return (
-      <EditorContent
+      <PureEditorContent
         editor={editor}
+        defaultValue={description}
         value={description}
-        readOnly
-        disabled
-        contentEditable={false}
       />
     );
   }
