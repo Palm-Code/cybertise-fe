@@ -87,7 +87,6 @@ const ReportDetails = ({ id }: { id: string }) => {
         setDescription("");
         setFiles(undefined);
         setOpenAttachment(false);
-        chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
         toast.error("Failed to send message");
@@ -137,7 +136,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Link>
                 <div className="_flexbox__col__start__start gap-4">
                   <Typography variant="h5" weight="bold">
-                    {ticketDetails?.title}
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                   <Badge
                     variant={
@@ -222,7 +221,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   onClick={back}
                 />
                 <Typography variant="h5" weight="bold">
-                  {ticketDetails.title}
+                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
                 </Typography>
                 <Badge
                   variant={

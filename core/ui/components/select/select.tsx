@@ -102,17 +102,17 @@ const SelectContent = React.forwardRef<
         position={position}
         {...props}
       >
-        {!noArrow && <SelectScrollUpButton />}
-        <SelectPrimitive.Viewport
+        {/* {!noArrow && <SelectScrollUpButton />} */}
+        <SelectPrimitive.SelectGroup
           className={cn(
             "p-1.5",
             position === "popper" &&
-              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+              "h-full max-h-44 w-full min-w-[var(--radix-select-trigger-width)] overflow-y-auto"
           )}
         >
           {children}
-        </SelectPrimitive.Viewport>
-        {!noArrow && <SelectScrollDownButton />}
+        </SelectPrimitive.SelectGroup>
+        {/* {!noArrow && <SelectScrollDownButton />} */}
       </SelectPrimitive.Content>
     </SelectPrimitive.Portal>
   )
