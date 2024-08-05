@@ -188,29 +188,34 @@ const TargetAssetListCard = ({
           ) : (
             <Card
               className={cn(
-                "_flexbox__row__center__between w-full cursor-pointer gap-2 rounded-md xl:px-4 xl:py-4",
+                "grid w-full grid-cols-3 gap-2 rounded-md xl:px-4 xl:py-3.5",
                 "border border-transparent transition-colors duration-100",
                 "bg-neutral-light-80 dark:bg-neutral-dark-80"
               )}
               key={`target-assets-${index}`}
             >
-              <div className="_flexbox__col__start__start w-full gap-2">
-                <Typography variant="p" affects="normal">
-                  {v.content}
-                </Typography>
-                <Badge variant={v.asset_type?.label as any}>
-                  {v.asset_type?.value}
-                </Badge>
-              </div>
-              <div className="_flexbox__row__center gap-4">
-                <Button
-                  type="button"
-                  variant={`tertiary-${isCompany ? "company" : "mediator"}`}
-                  onClick={() => handleEditClick(index)}
-                  className="p-0"
-                  prefixIcon={<FilePenLine />}
-                />
-              </div>
+              <Input
+                label={"Asset type " + (index + 1)}
+                disabled
+                autoFocus
+                placeholderText="Hostname or IP Address"
+                value={v.content ?? "Hostname or IP Address"}
+                className="w-full bg-transparent"
+                transparentBg
+              />
+              <Badge
+                variant={v.asset_type?.label as any}
+                className="m-auto h-fit w-fit"
+              >
+                {v.asset_type?.value}
+              </Badge>
+              <Button
+                type="button"
+                variant={`tertiary-${isCompany ? "company" : "mediator"}`}
+                onClick={() => handleEditClick(index)}
+                className="ml-auto p-0"
+                prefixIcon={<FilePenLine />}
+              />
             </Card>
           )
         )}
@@ -225,7 +230,7 @@ const TargetAssetListCard = ({
         >
           + Add New Assets
         </button>
-        {disabledButton && (
+        {isEditingList.some((v) => v) && (
           <Typography
             variant="p"
             affects="tiny"

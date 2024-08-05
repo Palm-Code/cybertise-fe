@@ -26,12 +26,12 @@ const PricingCard = ({
   return (
     <Card
       className={cn(
-        "rounded-[10px]  xl:px-4 xl:py-7.5 ",
+        "cursor-pointer rounded-[10px] xl:px-4 xl:py-7.5",
         "_flexbox__col__start__start w-full gap-6 border",
         checked ? borderColor[variant] : "border-transparent",
         checked
           ? "bg-background-main-light dark:bg-background-main-dark"
-          : "bg-neutral-light-90 dark:bg-neutral-dark-90"
+          : "bg-neutral-light-90 hover:bg-background-main-light dark:bg-neutral-dark-90 hover:dark:bg-background-main-dark"
       )}
       onClick={() => onClickCard(list, category)}
     >

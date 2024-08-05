@@ -29,7 +29,7 @@ const AssetType = ({
   const badgeVariants = options.find((option) => option.value === value)?.value;
 
   return (
-    <Select onValueChange={(v) => onValueChange(v)}>
+    <Select value={value} onValueChange={onValueChange} {...props}>
       <SelectTrigger
         withIcon
         className="!w-fit !justify-start gap-2 whitespace-nowrap text-nowrap !bg-transparent !p-0"

@@ -64,6 +64,7 @@ export const sendReportFormSchema = z.object({
         size: z.number(),
         file_id: z.string().optional(),
         error: z.boolean().optional(),
+        mime_type: z.string().optional(),
       })
     )
     .optional(),

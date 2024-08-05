@@ -73,34 +73,69 @@ const RulesAndPolicies = ({
         tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi
         tristique senectus et netus et malesuada fames ac turpis.
       </Typography>
-      <Tiptap
-        description={forms.rules as string}
-        label="Rules"
-        onChangeValue={(v) => setValue("rules", v)}
-        onClearInput={() => setValue("rules", "")}
-        variant={variant}
-        withTooltip
-      />
-      <Tiptap
-        description={forms.policies as string}
-        label="Policies"
-        onChangeValue={(v) => setValue("policies", v)}
-        onClearInput={() => setValue("policies", "")}
-        variant={variant}
-        withTooltip
-      />
-      <div className="_flexbox__row__center gap-8">
-        <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
-          Previous
-        </Button>
-        <Button
-          variant={`primary-${variant}`}
-          disabled={!forms.rules || !forms.policies}
-          onClick={onClickNext}
-        >
-          Next
-        </Button>
-      </div>
+      {variant === "mediator" ? (
+        <>
+          <Tiptap
+            description={forms.rules as string}
+            label="Rules"
+            onChangeValue={(v) => setValue("rules", v)}
+            onClearInput={() => setValue("rules", "")}
+            variant={variant}
+            withTooltip
+          />
+          <Tiptap
+            description={forms.policies as string}
+            label="Policies"
+            onChangeValue={(v) => setValue("policies", v)}
+            onClearInput={() => setValue("policies", "")}
+            variant={variant}
+            withTooltip
+          />
+        </>
+      ) : (
+        <>
+          <div className="__flexbox__col__start__start w-full gap-2.5">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="text-neutral-light-40 dark:text-neutral-dark-40"
+            >
+              Rules
+            </Typography>
+            <article>
+              <Tiptap
+                showing
+                description={sanitize(forms.rules ?? "")}
+                className="h-44 rounded-md bg-neutral-light-90 p-4 dark:bg-neutral-dark-90"
+              />
+            </article>
+          </div>
+          <div className="__flexbox__col__start__start w-full gap-2.5">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="text-neutral-light-40 dark:text-neutral-dark-40"
+            >
+              Policies
+            </Typography>
+            <article>
+              <Tiptap
+                showing
+                description={sanitize(forms.policies ?? "")}
+                className="h-44 rounded-md bg-neutral-light-90 p-4 dark:bg-neutral-dark-90"
+              />
+            </article>
+          </div>
+          <div className="_flexbox__row__center gap-8">
+            <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
+              Previous
+            </Button>
+            <Button variant={`primary-${variant}`} onClick={onClickNext}>
+              Next
+            </Button>
+          </div>
+        </>
+      )}
     </Card>
   );
 };

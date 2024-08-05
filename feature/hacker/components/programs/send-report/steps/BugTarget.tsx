@@ -75,7 +75,6 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     });
                     queryClient.invalidateQueries({
                       queryKey: ["getTargetAssetDetails"],
-                      refetchType: "active",
                     });
                   }}
                 >
@@ -129,6 +128,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               }
               options={defaultData?.assetType?.slice(1) ?? []}
               onValueChange={(v) => {
+                setOther(true);
                 setValue("target_asset_id", undefined, {
                   shouldValidate: true,
                 });

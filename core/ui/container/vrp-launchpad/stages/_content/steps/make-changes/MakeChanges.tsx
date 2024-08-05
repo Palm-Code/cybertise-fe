@@ -8,6 +8,7 @@ import { AnimationWrapper } from "@/core/ui/layout";
 import MonetaryAwardCardList from "./_card/MonetaryAwardsCard";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Role } from "@/types/admin/sidebar";
+import RulesAndPolicies from "../vrp-details-review/_card/RulesAndPolicies";
 
 interface I_MakeChangesProps {
   onClickNext: () => void;
@@ -28,6 +29,7 @@ const MakeChanges = ({
     <VrpDescriptionCard />,
     <MonetaryAwardCardList variant={variant} data={monetaryAwardData} />,
     <TargetAssetListCard options={options} />,
+    <RulesAndPolicies variant={variant} />,
   ];
 
   const handleActiveElement = (index: number) => {

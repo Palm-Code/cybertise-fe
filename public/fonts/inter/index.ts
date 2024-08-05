@@ -48,4 +48,5 @@ export const Inter = localFont({
       style: "normal",
     },
   ],
+  preload: false,
 });

@@ -150,20 +150,25 @@ const Sender = ({
                     </Typography>
                   </div>
                   <div className="_flexbox__row__center ml-auto gap-4">
-                    <Button
-                      asLink
-                      href={file.original_url}
-                      target="_blank"
-                      variant="ghost-hacker"
-                      className="p-0"
-                      prefixIcon={<Eye className="h-6 w-6" />}
-                    />
-                    <Button
-                      variant="ghost-hacker"
-                      className="p-0"
-                      onClick={() => fileDownload(file.original_url, file.name)}
-                      prefixIcon={<Download className="h-6 w-6" />}
-                    />
+                    {file.mime_type.includes("image") ? (
+                      <Button
+                        asLink
+                        href={file.original_url}
+                        target="_blank"
+                        variant="ghost-hacker"
+                        className="p-0"
+                        prefixIcon={<Eye className="h-6 w-6" />}
+                      />
+                    ) : (
+                      <Button
+                        variant="ghost-hacker"
+                        className="p-0"
+                        onClick={() =>
+                          fileDownload(file.original_url, file.name)
+                        }
+                        prefixIcon={<Download className="h-6 w-6" />}
+                      />
+                    )}
                   </div>
                 </Card>
               ))}

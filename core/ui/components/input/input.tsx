@@ -123,7 +123,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   value={value as number}
                   className={cn(
                     "absolute my-auto w-full bg-transparent text-neutral-light-0 disabled:cursor-not-allowed",
-                    "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+                    "peer appearance-none px-4 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
                     "inset-0 mt-0.5 h-20 focus:outline-none focus:ring-0 dark:text-white"
                   )}
                   placeholder={isFocused ? placeholderText : " "}

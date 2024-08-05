@@ -37,6 +37,7 @@ export interface FileWithUrl {
   name: string;
   url: string;
   size: number;
+  mime_type: string;
   file_id?: string;
   error?: boolean;
 }

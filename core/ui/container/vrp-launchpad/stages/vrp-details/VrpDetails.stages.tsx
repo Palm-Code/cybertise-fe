@@ -164,7 +164,6 @@ const VRPDetails = ({
           element: (
             <RulesAndPolicies
               variant={variant}
-              isReview={variant !== "mediator"}
               onClickPrev={() => back()}
               onClickNext={() => next()}
             />
