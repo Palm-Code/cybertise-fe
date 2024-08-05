@@ -121,7 +121,7 @@ const SetPassword = (props: I_SetPassword) => {
                 })
               }
             >
-              Save Password
+              Set Password
             </Button>
             <Typography variant="p" affects="normal" align="center">
               Already have an account?
@@ -186,7 +186,7 @@ const SetPassword = (props: I_SetPassword) => {
                 })
               }
             >
-              Reset Password
+              Set Password
             </Button>
             <Typography variant="p" affects="normal" align="center">
               Already have an account?

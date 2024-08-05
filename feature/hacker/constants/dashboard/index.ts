@@ -118,6 +118,7 @@ export const tableTicketData: I_TableTicketData[] = [
 export const filterItems: MultiFilterType = {
   risk_level: [
     { label: "All level", value: "all" },
+    { label: "No Risk", value: "no risk" },
     { label: "Low", value: "low" },
     { label: "Medium", value: "medium" },
     { label: "High", value: "high" },

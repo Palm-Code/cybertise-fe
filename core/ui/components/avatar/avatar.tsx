@@ -10,7 +10,7 @@ interface I_AvatarProps
 const Avatar = ({ image, initials, ...props }: I_AvatarProps) => {
   return (
     <BaseAvatar {...props}>
-      <AvatarImage src={image} alt={initials} />
+      <AvatarImage src={image} alt={""} />
       <AvatarFallback>{initials}</AvatarFallback>
     </BaseAvatar>
   );

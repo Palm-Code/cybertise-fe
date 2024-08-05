@@ -26,8 +26,17 @@ import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgra
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { useGetTargetAsset } from "@/core/react-query/client";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
+import {
+  AttackComplexity,
+  AttackVector,
+  Availability,
+  Confidentiality,
+  Integrity,
+  PrivilegesRequired,
+  Scope,
+  UserInteraction,
+} from "@/enums";
 
 interface I_SendReportProps {
   id: string;

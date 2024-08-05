@@ -225,6 +225,15 @@ const TargetAssetListCard = ({
         >
           + Add New Assets
         </button>
+        {disabledButton && (
+          <Typography
+            variant="p"
+            affects="tiny"
+            className="text-semantic-light-critical dark:text-semantic-dark-critical"
+          >
+            You have unsaved assets, please save these first before continuing.
+          </Typography>
+        )}
       </Card>
       {isCompany && (
         <div className="_flexbox__row__center gap-8">

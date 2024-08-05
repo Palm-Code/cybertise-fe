@@ -55,7 +55,9 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { mutateAsync, isPending } = usePostChatItem();
   const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
     usePostUpdateTicket(id);
-  const [isManualRisk, setIsManualRisk] = useState<boolean>(false);
+  const [isManualRisk, setIsManualRisk] = useState<boolean>(
+    !ticketDetails?.cvss_string
+  );
 
   const scrollView = () => {
     chatRef?.current?.scrollIntoView({ behavior: "instant" });
@@ -287,7 +289,11 @@ const ReportDetails = ({ id }: { id: string }) => {
                 <Typography variant="h5" weight="bold">
                   {`#${ticketDetails.code}: ${ticketDetails.title}`}
                 </Typography>
-                <div className="_flexbox__row__center gap-2.5">
+                <button
+                  type="button"
+                  className="_flexbox__row__center gap-2.5"
+                  onClick={() => setOpenModalSetRiskLevel(true)}
+                >
                   <Badge
                     variant={
                       ticketDetails.risk_level_category.toLowerCase() as any
@@ -296,11 +302,8 @@ const ReportDetails = ({ id }: { id: string }) => {
                   >
                     {`${ticketDetails.risk_level} | ${ticketDetails.risk_level_category}`}
                   </Badge>
-                  <ChevronDown
-                    className="cursor-pointer"
-                    onClick={() => setOpenModalSetRiskLevel(true)}
-                  />
-                </div>
+                  <ChevronDown />
+                </button>
               </div>
               <div className="_flexbox__row__center gap-3">
                 {isPendingUpdate && !isRefetching ? (
@@ -447,6 +450,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           isManualRisk={isManualRisk}
           onChangeManualRisk={() => setIsManualRisk(!isManualRisk)}
           ticketId={id}
+          cvss_string={ticketDetails.cvss_string}
           value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}
           onClose={() => setOpenModalSetRiskLevel(false)}

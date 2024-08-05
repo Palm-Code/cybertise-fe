@@ -67,6 +67,7 @@ export const sendReportFormSchema = z.object({
       })
     )
     .optional(),
+  cvss_string: z.string().optional(),
 });
 
 export type SendReportRequestType = z.infer<typeof sendReportFormSchema>;
