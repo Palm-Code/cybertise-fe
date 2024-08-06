@@ -365,3 +365,28 @@ article {
   height: 0;
   pointer-events: none;
 }
+
+.legal h1 {
+  @apply text-6xl;
+}
+
+.legal p {
+  @apply mb-3.5;
+}
+
+.legal ul {
+  @apply mb-3.5;
+}
+
+.legal li {
+  @apply mb-2.5;
+}
+
+.legal a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.legal a:hover {
+  text-decoration: underline;
+}

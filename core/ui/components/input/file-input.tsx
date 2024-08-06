@@ -15,6 +15,7 @@ import { I_PostTempFilesResponse } from "@/core/models/common";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { backgroundColor, iconColor } from "@/core/constants/common";
 import Button from "../button/button";
+import { useGetDownloadFiles } from "@/core/react-query/client";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -40,6 +41,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [input, setInput] = useState<FileWithUrl[]>([]);
     const [errorFiles, setErrorFiles] = useState<string[]>([]);
+    const { mutate, isPending } = useGetDownloadFiles();
 
     useEffect(() => {
       if (fileValues && fileValues.length > 0) {
@@ -81,7 +83,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               return;
             }
             const url = URL.createObjectURL(file);
-            newFiles.push({ name, url, size, mime_type: type });
+            newFiles.push({ name, url, size });
             addFilesToState(newFiles);
             const formData = new FormData();
             formData.append("file", file);
@@ -105,10 +107,11 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 const files = [
                   {
                     name: name,
-                    url: res.data.data.file,
+                    uuid: res.data.data.media[0].uuid,
+                    url: res.data.data.media[0].original_url,
                     size: size,
                     file_id: res.data.data.id,
-                    mime_type: type,
+                    mime_type: res.data.data.media[0].mime_type,
                   },
                 ];
                 onFileSelected(res.data.data.id, files);
@@ -184,10 +187,12 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                   toast.success("File uploaded successfully", {
                     position: "bottom-right",
                   });
+
                   const files = [
                     {
                       name: name,
-                      url: res.data.data.file,
+                      uuid: res.data.data.media[0].uuid,
+                      url: res.data.data.media[0].original_url,
                       size: size,
                       file_id: res.data.data.id,
                       mime_type: file.type,
@@ -219,8 +224,6 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
         }
       }
     };
-
-    console.log({ fileValues });
 
     const addFilesToState = (files: FileWithUrl[]) => {
       setInput([...input, ...files]);
@@ -371,20 +374,27 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                     <div className="_flexbox__row__center ml-auto gap-2">
                       {file.mime_type?.includes("image") ? (
                         <Button
+                          type="button"
                           asLink
                           href={file.url}
                           target="_blank"
-                          variant="ghost-hacker"
+                          variant={`ghost-${variant}`}
                           className="p-0"
                           prefixIcon={<Eye className="h-6 w-6" />}
                         />
                       ) : (
                         <Button
-                          target="_blank"
-                          variant="ghost-hacker"
+                          type="button"
+                          variant={`ghost-${variant}`}
+                          disabled={isPending}
                           className="p-0"
                           prefixIcon={<Download className="h-6 w-6" />}
-                          onClick={() => onFileDownload(file.url, file.name)}
+                          onClick={() =>
+                            mutate({
+                              id: file.uuid as string,
+                              filename: file.name,
+                            })
+                          }
                         />
                       )}
                       <X

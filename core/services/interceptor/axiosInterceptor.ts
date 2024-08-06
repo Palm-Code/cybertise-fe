@@ -7,6 +7,7 @@ const axiosInterceptorInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     "ngrok-skip-browser-warning": true,
+    "Content-Type": "application/json",
   },
 });
 

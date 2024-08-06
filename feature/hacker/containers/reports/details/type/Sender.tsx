@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
+import { useGetDownloadFiles } from "@/core/react-query/client";
 import {
   Avatar,
   Badge,
@@ -10,7 +11,6 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
-import { fileDownload } from "@/utils/file-download";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 import { motion } from "framer-motion";
@@ -24,6 +24,7 @@ const Sender = ({
   data?: I_GetChatListItemSuccessResponse["data"][0];
   isLoading?: boolean;
 }) => {
+  const { mutate, isPending } = useGetDownloadFiles();
   if (data)
     return (
       <motion.div
@@ -162,9 +163,13 @@ const Sender = ({
                     ) : (
                       <Button
                         variant="ghost-hacker"
+                        disabled={isPending}
                         className="p-0"
                         onClick={() =>
-                          fileDownload(file.original_url, file.name)
+                          mutate({
+                            id: file.uuid,
+                            filename: file.file_name,
+                          })
                         }
                         prefixIcon={<Download className="h-6 w-6" />}
                       />

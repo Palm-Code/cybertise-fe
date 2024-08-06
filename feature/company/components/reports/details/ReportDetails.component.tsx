@@ -71,7 +71,6 @@ const ReportDetails = ({ id }: { id: string }) => {
   }, [inView]);
 
   const sendMessage = async () => {
-    if (!description) return;
     await mutateAsync({
       chat_ticket_id: id,
       sender_name:
