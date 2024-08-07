@@ -5,16 +5,18 @@ import { useFormContext } from "react-hook-form";
 const ReportDescription = () => {
   const {
     setValue,
-    getValues,
+    watch,
     formState: { errors },
   } = useFormContext();
-  const [characterCount, setCharacterCount] = useState(0);
+  const [characterCount, setCharacterCount] = useState(
+    watch("description").length || 0
+  );
   return (
     <div className="_flexbox__col__start__start w-full gap-4">
       <Input
         type="text"
         label="Title"
-        value={getValues("title")}
+        value={watch("title")}
         onChange={(e) =>
           setValue("title", e.target.value, { shouldValidate: true })
         }
@@ -22,7 +24,7 @@ const ReportDescription = () => {
       />
       <TextArea
         label="Short Description"
-        value={getValues("description")}
+        value={watch("description")}
         onChange={(e) => {
           setValue("description", e.target.value, { shouldValidate: true });
           setCharacterCount(e.target.value.length);

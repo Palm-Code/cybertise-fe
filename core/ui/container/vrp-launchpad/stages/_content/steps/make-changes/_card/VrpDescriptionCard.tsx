@@ -23,8 +23,10 @@ const VrpDescriptionCard = ({
   onClickPrev,
 }: I_VrpDescriptionCard<boolean>) => {
   const { watch, setValue } = useFormContext<CreateVrpType>();
-  const [characterCount, setCharacterCount] = useState(0);
   const forms = watch();
+  const [characterCount, setCharacterCount] = useState(
+    forms.description?.length || 0
+  );
 
   return (
     <>
@@ -65,6 +67,7 @@ const VrpDescriptionCard = ({
             label="VRP Description"
             max={5000}
             value={forms.description}
+            defaultValue={forms.description}
             maxLength={5000}
             onChange={(e) => {
               setValue("description", e.target.value, { shouldValidate: true });
