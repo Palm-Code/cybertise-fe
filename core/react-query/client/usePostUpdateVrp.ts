@@ -21,7 +21,6 @@ export const usePostUpdateVrp = (id: string) => {
     mutationFn: (payload) => {
       return fetchPostUpdateVrp(payload, id);
     },
-
     onSuccess: (data) => {
       mutations.reset();
       toast.success("successfully updated VRP", {
@@ -33,12 +32,13 @@ export const usePostUpdateVrp = (id: string) => {
       });
       router.push("/vrp-launchpad");
     },
+    onError: (error) => {
+      mutations.reset();
+      toast.error(error.message, {
+        position: "bottom-right",
+      });
+    },
   });
-
-  if (mutations.isError) {
-    mutations.reset();
-    toast.error("Failed to send VRP");
-  }
 
   return mutations;
 };
