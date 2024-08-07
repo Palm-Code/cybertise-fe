@@ -1,18 +1,22 @@
+"use client";
 import { cn } from "@/core/lib/utils";
-import { Typography } from "@/core/ui/components";
-import { sanitize } from "@/utils/sanitize-input";
+import { SearchInput, Typography } from "@/core/ui/components";
 import { format } from "date-fns";
 import React from "react";
 import { Navbar } from "../../navbar";
 import Image from "next/image";
+import { AccordionList } from "./Accordion";
 
-export const Legal = ({
+export const FaqLayout = ({
   data,
 }: {
   data: {
     title: string;
     date_published: Date;
-    content: string;
+    content: {
+      question: string;
+      answer: string;
+    }[];
   };
 }) => {
   return (
@@ -29,7 +33,12 @@ export const Legal = ({
             />
           </div>
           <div className="relative z-20 my-auto flex flex-col gap-2">
-            <Typography variant="h1" align="center" weight="bold">
+            <Typography
+              variant="h1"
+              align="center"
+              weight="bold"
+              className="!text-white"
+            >
               {data.title}
             </Typography>
             <Typography
@@ -42,10 +51,12 @@ export const Legal = ({
             </Typography>
           </div>
         </div>
-        <article
-          dangerouslySetInnerHTML={{ __html: sanitize(data.content) }}
-          className="legal mx-auto my-12 max-w-[804px] p-6"
-        ></article>
+        <div className="mx-auto my-6 w-full max-w-[804px] space-y-6 p-6">
+          <div className="w-full py-8">
+            <SearchInput variant="hacker" placeholder="Search your question" />
+          </div>
+          <AccordionList data={data.content} />
+        </div>
       </main>
     </>
   );
