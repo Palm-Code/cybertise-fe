@@ -311,7 +311,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 ref={ref}
                 multiple
                 onChange={handleChange}
-                accept="image/jpeg, image/jpg, image/png, application/pdf"
+                accept="*/*"
                 id="dropzone-file"
                 type="file"
                 className="hidden"
@@ -520,7 +520,6 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               >
                 + Upload more files
                 <input
-                  {...props}
                   ref={ref}
                   multiple
                   onChange={handleChange}
@@ -528,6 +527,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                   id="dropzone-file"
                   type="file"
                   className="hidden"
+                  {...props}
                 />
               </label>
             </div>

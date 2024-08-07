@@ -157,7 +157,9 @@ const ModalEditRiskLevel = ({
                   <Slider
                     defaultValue={[0]}
                     value={[value]}
-                    onValueChange={(v) => setValue(v[0] as number)}
+                    onValueChange={(v) => {
+                      setValue(v[0] as number);
+                    }}
                     max={10}
                     step={0.1}
                     className="col-span-11 w-full"
@@ -169,7 +171,7 @@ const ModalEditRiskLevel = ({
           <Button
             variant="primary-mediator"
             className="w-full"
-            disabled={value === 0 || isPending || isSuccess}
+            disabled={isPending || isSuccess}
             isLoading={isPending}
             onClick={() => {
               mutateAsync(`risk_level=${value}`).then(() => {

@@ -37,8 +37,11 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
-  const { data: ticketDetails, isError: isErrorTicket } =
-    useGetTicketDetails(id);
+  const {
+    data: ticketDetails,
+    isError: isErrorTicket,
+    isLoading,
+  } = useGetTicketDetails(id);
   const { data, isError, isRefetching, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
   const { ref, inView } = useInView({ threshold: 0.5 });
@@ -115,7 +118,7 @@ const ReportDetails = ({ id }: { id: string }) => {
     );
   }
 
-  if (!data?.pages || !ticketDetails)
+  if (!data?.pages || !ticketDetails || isLoading)
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader variant="mediator" />
@@ -292,7 +295,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                 <button
                   type="button"
                   className="_flexbox__row__center gap-2.5"
-                  onClick={() => setOpenModalSetRiskLevel(true)}
+                  onClick={() => {
+                    setOpenModalSetRiskLevel(true);
+                    setIsManualRisk(!ticketDetails.cvss_string);
+                  }}
                 >
                   <Badge
                     variant={
@@ -416,6 +422,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               onChangeValue={(v) => {
                 setDescription(v);
               }}
+              placeholder="Write your message..."
               variant="mediator"
               isLoading={isPending}
               isChat
