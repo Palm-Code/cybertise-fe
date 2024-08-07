@@ -261,7 +261,7 @@ const TicketCard = ({
                   className={cn(
                     "w-full max-w-xl gap-3",
                     isGridCard
-                      ? "_flexbox__row__center__between"
+                      ? "flex flex-wrap justify-between"
                       : "_flexbox__row__end__end"
                   )}
                 >
@@ -271,7 +271,7 @@ const TicketCard = ({
                     postFixIcon={<ChevronRight />}
                     asLink
                     href={`/reports/${props.ticket_type === "Hacker" ? props.id : props.related_ticket_id}`}
-                    fullWidth
+                    // fullWidth
                   >
                     Hacker Ticket
                   </Button>
@@ -280,7 +280,7 @@ const TicketCard = ({
                       variant="tertiary-company"
                       prefixIcon={!isGridCard && <Building2 />}
                       postFixIcon={<ChevronRight />}
-                      fullWidth
+                      // fullWidth
                       asLink
                       href={`/reports/${props.ticket_type === "Company" ? props.id : props.related_ticket_id}`}
                     >
@@ -291,7 +291,7 @@ const TicketCard = ({
                       variant="primary-company"
                       prefixIcon={!isGridCard && <Building2 />}
                       postFixIcon={<ChevronRight />}
-                      fullWidth
+                      // fullWidth
                       asLink
                       href={`/reports/new?ticket_id=${props.id}`}
                     >

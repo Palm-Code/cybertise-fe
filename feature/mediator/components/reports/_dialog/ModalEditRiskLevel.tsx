@@ -39,6 +39,8 @@ const ModalEditRiskLevel = ({
   const [value, setValue] = useState<number>(defaultValue);
   const { mutateAsync, isPending, isSuccess } = usePostUpdateTicket(ticketId);
 
+  console.log({ cvss_string });
+
   const onCloseModal = () => {
     onClose();
     setValue(defaultValue);

@@ -43,6 +43,8 @@ const CsvssCalculator = ({
     forms.cvss_string ? JSON.parse(forms.cvss_string) : initialValues
   );
 
+  console.log(forms.cvss_string);
+
   const onClickCsvssCalculator = (key: string, value: string) => {
     const newValue = { ...metricsValue, [key]: value };
     const metValue = new CVSS30(

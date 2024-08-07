@@ -36,8 +36,8 @@ export default async function RootLayout({
       <body
         className={cn(
           Inter.className,
-          "hyphens-auto bg-background-page-light dark:bg-background-page-dark"
-          // session ? "overflow-hidden" : ""
+          "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
+          session ? "overflow-hidden" : ""
         )}
       >
         <NextTopLoader
