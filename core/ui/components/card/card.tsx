@@ -9,6 +9,7 @@ interface I_CardProps {
   isButton?: boolean;
   onClick?: () => void;
   disabled?: boolean;
+  target?: string;
 }
 const Card = ({
   children,
@@ -18,6 +19,7 @@ const Card = ({
   isButton = false,
   onClick,
   disabled = false,
+  target = "_self",
   ...props
 }: I_CardProps) => {
   if (isClickable) {
@@ -30,6 +32,7 @@ const Card = ({
           className
         )}
         href={href ?? "#"}
+        target={target}
         {...props}
       >
         {children}

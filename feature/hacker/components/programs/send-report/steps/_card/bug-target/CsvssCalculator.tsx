@@ -38,11 +38,10 @@ const CsvssCalculator = ({
   onChangeManualRisk,
 }: I_CsvssCalculatorProps) => {
   const { setValue, getValues } = useFormContext<SendReportRequestType>();
-  const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
-    initialValues
-  );
-
   const forms = getValues();
+  const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
+    forms.cvss_string ? JSON.parse(forms.cvss_string) : initialValues
+  );
 
   const onClickCsvssCalculator = (key: string, value: string) => {
     const newValue = { ...metricsValue, [key]: value };
@@ -50,6 +49,7 @@ const CsvssCalculator = ({
       `CVSS:3.0/AV:${newValue.av}/AC:${newValue.ac}/PR:${newValue.pr}/UI:${newValue.ui}/S:${newValue.s}/C:${newValue.c}/I:${newValue.i}/A:${newValue.a}`
     );
     setMetricsValue(newValue);
+    setValue("cvss_string", JSON.stringify(newValue), { shouldValidate: true });
     setValue("risk_level", metValue.BaseScore(), { shouldValidate: true });
   };
 
@@ -86,7 +86,7 @@ const CsvssCalculator = ({
           {!isManualRisk && (
             <Badge variant={riskLevelCalculator(forms.risk_level)}>
               {forms.risk_level.toFixed(1)} (
-              {riskLevelCalculator(forms.risk_level)} Risk)
+              {riskLevelCalculator(forms.risk_level)})
             </Badge>
           )}
         </div>

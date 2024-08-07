@@ -116,6 +116,7 @@ const Tiptap = ({
         editor={editor}
         defaultValue={description}
         value={description}
+        className={props.className}
       />
     );
   }

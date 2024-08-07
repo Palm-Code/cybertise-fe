@@ -12,6 +12,7 @@ import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
@@ -122,8 +123,18 @@ const VrpDetailsReview = ({
             className="mt-1"
           />
           <Typography variant="p" affects="normal">
-            By clicking 'Publish', you agree to our Terms and Conditions and
-            acknowledge that you have read our Code of Conduct, Privacy Policy
+            By clicking 'Publish', you agree to our
+            <Link
+              href="/terms-and-conditions"
+              target="_blank"
+              className="underline"
+            >
+              Terms and Conditions and
+            </Link>
+            acknowledge that you have read our Code of Conduct,{" "}
+            <Link href="/policy" target="_blank" className="underline">
+              Privacy Policy
+            </Link>
             and Disclosure Guidelines.
           </Typography>
         </Card>

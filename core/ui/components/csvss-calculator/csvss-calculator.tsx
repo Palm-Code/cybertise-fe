@@ -21,7 +21,8 @@ export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
   onChangeManualRisk: () => void;
   value?: number;
-  onValueChange?: (value: number) => void;
+  onValueChange?: (value: number, cvss_string: string | null) => void;
+  cvss_string: string | null;
 }
 
 const initialValues = {
@@ -40,9 +41,10 @@ const CsvssCalculator = ({
   onChangeManualRisk,
   value = 0,
   onValueChange = () => {},
+  cvss_string = null,
 }: I_CsvssCalculatorProps) => {
   const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
-    initialValues
+    cvss_string ? JSON.parse(cvss_string) : initialValues
   );
 
   const onClickCsvssCalculator = (key: string, value: string) => {
@@ -51,7 +53,7 @@ const CsvssCalculator = ({
       `CVSS:3.0/AV:${newValue.av}/AC:${newValue.ac}/PR:${newValue.pr}/UI:${newValue.ui}/S:${newValue.s}/C:${newValue.c}/I:${newValue.i}/A:${newValue.a}`
     );
     setMetricsValue(newValue);
-    onValueChange(metValue.BaseScore());
+    onValueChange(metValue.BaseScore(), JSON.stringify(newValue));
   };
 
   return (
@@ -71,7 +73,7 @@ const CsvssCalculator = ({
               checked={!isManualRisk}
               disabled={!isManualRisk}
               onCheckedChange={() => {
-                onValueChange(0);
+                onValueChange(0, null);
                 setMetricsValue(initialValues);
                 onChangeManualRisk();
               }}
@@ -87,7 +89,7 @@ const CsvssCalculator = ({
           {!isManualRisk && (
             <Badge variant={riskLevelCalculator(value as number)}>
               {value && value.toFixed(1)} (
-              {riskLevelCalculator(value as number)} Risk)
+              {riskLevelCalculator(value as number)})
             </Badge>
           )}
         </div>

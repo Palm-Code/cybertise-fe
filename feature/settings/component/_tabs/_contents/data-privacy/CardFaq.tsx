@@ -6,7 +6,7 @@ const CardFaq = () => {
   return (
     <Card
       isClickable
-      href={"#"}
+      href={"/faq"}
       className={cn(
         "_flexbox__col__start__start w-full gap-3 rounded-xl px-4 py-8 xl:p-7.5",
         "xl:bg-neutral-light-100 xl:dark:bg-neutral-dark-100"

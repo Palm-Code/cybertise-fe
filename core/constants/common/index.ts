@@ -130,3 +130,106 @@ export const currentPhase: { [key: string]: string } = {
   phase4: "Mediator Revision",
   phase5: "Publish",
 };
+
+export const termsandconditions = {
+  title: "Terms & Conditions",
+  date_published: new Date(),
+  content: `<h2>1. Introduction</h2>
+    <p>Welcome to Our Website! These Terms and Conditions govern your use of our website. By accessing or using our website, you agree to comply with and be bound by these Terms and Conditions.</p>
+
+    <h2>2. Use of the Website</h2>
+    <ul>
+      <li>You may use the website for lawful purposes only.</li>
+      <li>You agree not to use the website in any way that may harm or disrupt the website.</li>
+    </ul>
+
+    <h2>3. Intellectual Property</h2>
+    <p>The content, layout, design, data, databases, and graphics on this website are protected by intellectual property rights and are owned by us or our licensors.</p>
+
+    <h2>4. Limitation of Liability</h2>
+    <p>We are not liable for any damages or losses that may occur as a result of using our website. We make no guarantees about the availability or accuracy of the content on the website.</p>
+
+    <h2>5. Changes to Terms</h2>
+    <p>We reserve the right to modify these Terms and Conditions at any time. Changes will be posted on this page with an updated date.</p>
+Term
+    <h2>6. Contact Us</h2>
+    <p>If you have any questions about these Terms and Conditions, please contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>`,
+};
+export const policy = {
+  title: "Privacy Policy",
+  date_published: new Date(),
+  content: `<h2>1. Introduction</h2>
+    <p>Welcome to Our Website! These Terms and Conditions govern your use of our website. By accessing or using our website, you agree to comply with and be bound by these Terms and Conditions.</p>
+
+    <h2>2. Use of the Website</h2>
+    <ul>
+      <li>You may use the website for lawful purposes only.</li>
+      <li>You agree not to use the website in any way that may harm or disrupt the website.</li>
+    </ul>
+
+    <h2>3. Intellectual Property</h2>
+    <p>The content, layout, design, data, databases, and graphics on this website are protected by intellectual property rights and are owned by us or our licensors.</p>
+
+    <h2>4. Limitation of Liability</h2>
+    <p>We are not liable for any damages or losses that may occur as a result of using our website. We make no guarantees about the availability or accuracy of the content on the website.</p>
+
+    <h2>5. Changes to Terms</h2>
+    <p>We reserve the right to modify these Terms and Conditions at any time. Changes will be posted on this page with an updated date.</p>
+
+    <h2>6. Contact Us</h2>
+    <p>If you have any questions about these Terms and Conditions, please contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>`,
+};
+
+export const faqs = [
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+];
+
+export const faqData = {
+  title: "Frequently Asked Questions",
+  date_published: new Date(),
+  content: faqs,
+};

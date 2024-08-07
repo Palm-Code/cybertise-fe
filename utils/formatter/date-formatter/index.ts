@@ -135,6 +135,7 @@ export function getCurrentDate(date?: Date, format?: string) {
   const formats: { [key: string]: string } = {
     "yyyy-MM-dd": `${year}-${month}-${day}`,
     "MM dd yyyy": `${month} ${day} ${year}`,
+    "MM, dd yyyy": `${month}, ${day} ${year}`,
   };
   const formattedDate = formats[format ?? "yyyy-MM-dd"];
   return formattedDate;

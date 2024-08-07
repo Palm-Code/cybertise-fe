@@ -75,7 +75,6 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     });
                     queryClient.invalidateQueries({
                       queryKey: ["getTargetAssetDetails"],
-                      refetchType: "active",
                     });
                   }}
                 >
@@ -129,6 +128,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               }
               options={defaultData?.assetType?.slice(1) ?? []}
               onValueChange={(v) => {
+                setOther(true);
                 setValue("target_asset_id", undefined, {
                   shouldValidate: true,
                 });
@@ -201,11 +201,19 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
       />
       <CsvssCalculator
         isManualRisk={manualRisk}
-        onChangeManualRisk={() => setManualRisk(!manualRisk)}
+        onChangeManualRisk={() => {
+          setValue("cvss_string", undefined, { shouldValidate: true });
+          setValue("risk_level", 0, { shouldValidate: true });
+          setManualRisk(!manualRisk);
+        }}
       />
       <ManualRiskLevel
         isManualRisk={manualRisk}
-        onChangeManualRisk={() => setManualRisk(!manualRisk)}
+        onChangeManualRisk={() => {
+          setValue("cvss_string", undefined, { shouldValidate: true });
+          setValue("risk_level", 0, { shouldValidate: true });
+          setManualRisk(!manualRisk);
+        }}
       />
     </>
   );

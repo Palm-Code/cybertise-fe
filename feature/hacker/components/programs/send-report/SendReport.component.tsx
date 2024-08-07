@@ -26,8 +26,18 @@ import { useGetProgramDetails } from "@/feature/hacker/query/client/useGetProgra
 import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnerabilityType";
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { useGetTargetAsset } from "@/core/react-query/client";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
+import {
+  AttackComplexity,
+  AttackVector,
+  Availability,
+  Confidentiality,
+  Integrity,
+  PrivilegesRequired,
+  Scope,
+  UserInteraction,
+} from "@/enums";
+import Link from "next/link";
 
 interface I_SendReportProps {
   id: string;
@@ -249,8 +259,22 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                               />
                               <Typography variant="p" affects="normal">
                                 By clicking 'Submit Report', you agree to our
-                                Terms and Conditions and acknowledge that you
-                                have read our Code of Conduct, Privacy Policy
+                                <Link
+                                  href="/terms-and-conditions"
+                                  target="_blank"
+                                  className="underline"
+                                >
+                                  Terms and Conditions and
+                                </Link>{" "}
+                                and acknowledge that you have read our Code of
+                                Conduct,{" "}
+                                <Link
+                                  href="/policy"
+                                  target="_blank"
+                                  className="underline"
+                                >
+                                  Privacy Policy
+                                </Link>
                                 and Disclosure Guidelines.
                               </Typography>
                             </Card>

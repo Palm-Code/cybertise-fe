@@ -17,3 +17,4 @@ export const getUserProfileAPIURL = () => "/api/my_profile";
 export const postUpdateProfileAPIURL = () => "/api/my_profile?_method=PATCH";
 export const getCountryListAPIURL = () => "/api/countries";
 export const getUserDataAPIURL = () => "/api/me";
+export const getDownloadFileAPIURL = (id: string) => `/api/download/${id}`;

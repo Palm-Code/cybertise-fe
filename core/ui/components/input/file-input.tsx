@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Ban, Download, File, UploadCloud, X } from "lucide-react";
+import { Ban, Download, Eye, File, UploadCloud, X } from "lucide-react";
 import Typography from "../typography/typography";
 import { ChangeEvent, DragEvent, forwardRef, useEffect, useState } from "react";
 import { FileWithUrl } from "@/interfaces";
@@ -14,6 +14,8 @@ import { AxiosResponse } from "axios";
 import { I_PostTempFilesResponse } from "@/core/models/common";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { backgroundColor, iconColor } from "@/core/constants/common";
+import Button from "../button/button";
+import { useGetDownloadFiles } from "@/core/react-query/client";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -39,6 +41,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [input, setInput] = useState<FileWithUrl[]>([]);
     const [errorFiles, setErrorFiles] = useState<string[]>([]);
+    const { mutate, isPending } = useGetDownloadFiles();
 
     useEffect(() => {
       if (fileValues && fileValues.length > 0) {
@@ -71,7 +74,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
           const newFiles: FileWithUrl[] = [];
           for (let i = 0; i < e.target.files.length; i++) {
             const file = e.target.files[i];
-            const { name, size } = file;
+            const { name, size, type } = file;
             //max file 50MB
             if (size > 5e7) {
               toast.error("File size should be less than 50MB", {
@@ -104,9 +107,11 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 const files = [
                   {
                     name: name,
-                    url: url,
+                    uuid: res.data.data.media[0].uuid,
+                    url: res.data.data.media[0].original_url,
                     size: size,
                     file_id: res.data.data.id,
+                    mime_type: res.data.data.media[0].mime_type,
                   },
                 ];
                 onFileSelected(res.data.data.id, files);
@@ -154,7 +159,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               const file = e.dataTransfer.files[i];
               const { name, size } = file;
               const url = URL.createObjectURL(file);
-              newFiles.push({ name, url, size });
+              newFiles.push({ name, url, size, mime_type: file.type });
               //less than 50MB
               if (size > 5e7) {
                 toast.error("File size should be less than 50MB", {
@@ -182,12 +187,15 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                   toast.success("File uploaded successfully", {
                     position: "bottom-right",
                   });
+
                   const files = [
                     {
                       name: name,
-                      url: url,
+                      uuid: res.data.data.media[0].uuid,
+                      url: res.data.data.media[0].original_url,
                       size: size,
                       file_id: res.data.data.id,
+                      mime_type: file.type,
                     },
                   ];
                   onFileSelected(res.data.data.id, files);
@@ -237,6 +245,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
       //downloaad file from url
       const link = document.createElement("a");
       link.href = url;
+      link.setAttribute("target", "_blank");
       link.download = url.substring(url.lastIndexOf("/") + 1);
       link.setAttribute(
         "download",
@@ -363,12 +372,31 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                       </Typography>
                     </div>
                     <div className="_flexbox__row__center ml-auto gap-2">
-                      <Download
-                        width={16}
-                        height={16}
-                        className="cursor-pointer hover:scale-105"
-                        onClick={() => onFileDownload(file.url, file.name)}
-                      />
+                      {file.mime_type?.includes("image") ? (
+                        <Button
+                          type="button"
+                          asLink
+                          href={file.url}
+                          target="_blank"
+                          variant={`ghost-${variant}`}
+                          className="p-0"
+                          prefixIcon={<Eye className="h-6 w-6" />}
+                        />
+                      ) : (
+                        <Button
+                          type="button"
+                          variant={`ghost-${variant}`}
+                          disabled={isPending}
+                          className="p-0"
+                          prefixIcon={<Download className="h-6 w-6" />}
+                          onClick={() =>
+                            mutate({
+                              id: file.uuid as string,
+                              filename: file.name,
+                            })
+                          }
+                        />
+                      )}
                       <X
                         className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
                         width={16}

@@ -20,7 +20,9 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
           Monetary Awards
         </Typography>
         <div className="grid grid-cols-[auto_1fr] gap-4">
-          <ShieldCheck category={category as "S" | "M" | "L" | "XL"} />
+          {data.monetary_awards_level !== "custom" && (
+            <ShieldCheck category={category as "S" | "M" | "L" | "XL"} />
+          )}
           <Typography variant="p" affects="normal">
             Category{" "}
             {data.monetary_awards_level === "custom" ? "Custom" : category}

@@ -1,6 +1,7 @@
 import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
+import { useGetDownloadFiles } from "@/core/react-query/client";
 import {
   Avatar,
   Badge,
@@ -8,11 +9,9 @@ import {
   Card,
   Markdown,
   Separator,
-  Tiptap,
   Tooltip,
   Typography,
 } from "@/core/ui/components";
-import { fileDownload } from "@/utils/file-download";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 import { motion } from "framer-motion";
@@ -26,6 +25,7 @@ const Sender = ({
   data?: I_GetChatListItemSuccessResponse["data"][0];
   isLoading?: boolean;
 }) => {
+  const { mutate, isPending } = useGetDownloadFiles();
   if (data)
     return (
       <motion.div
@@ -155,20 +155,29 @@ const Sender = ({
                     </Typography>
                   </div>
                   <div className="_flexbox__row__center ml-auto gap-4">
-                    <Button
-                      asLink
-                      href={file.original_url}
-                      target="_blank"
-                      variant="ghost-company"
-                      className="p-0"
-                      prefixIcon={<Eye className="h-6 w-6" />}
-                    />
-                    <Button
-                      variant="ghost-company"
-                      className="p-0"
-                      onClick={() => fileDownload(file.original_url, file.name)}
-                      prefixIcon={<Download className="h-6 w-6" />}
-                    />
+                    {file.mime_type.includes("image") ? (
+                      <Button
+                        asLink
+                        href={file.original_url}
+                        target="_blank"
+                        variant="ghost-company"
+                        className="p-0"
+                        prefixIcon={<Eye className="h-6 w-6" />}
+                      />
+                    ) : (
+                      <Button
+                        variant="ghost-company"
+                        disabled={isPending}
+                        className="p-0"
+                        onClick={() =>
+                          mutate({
+                            id: file.uuid,
+                            filename: file.file_name,
+                          })
+                        }
+                        prefixIcon={<Download className="h-6 w-6" />}
+                      />
+                    )}
                   </div>
                 </Card>
               ))}

@@ -15,12 +15,13 @@ import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/rep
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NewCompanyReport = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("ticket_id");
   const store = useReportDetailsParamStore();
+  const chatRef = useRef<HTMLDivElement>(null);
 
   const {
     data: chatData,
@@ -33,17 +34,17 @@ const NewCompanyReport = () => {
   const initialData =
     chatData && chatData.pages.flatMap((item) => item.data.map((item) => item));
 
-  const initialChatTicket = initialData?.find(
-    (item) => item.sender === "Summary"
-  ) as I_Data;
-
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<string | null>("chat");
 
   const handleCardClick = (category: string) => {
     setActiveCard((prevActiveCard) =>
       prevActiveCard === category ? null : category
     );
   };
+
+  useEffect(() => {
+    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+  }, [initialData]);
 
   if (isLoading || isFetching) return <Loader variant="mediator" />;
 
@@ -102,9 +103,9 @@ const NewCompanyReport = () => {
                 )}
               >
                 <Typography variant="h5" weight="bold">
-                  {chatData?.pages[0].data[0].chat_ticket?.title}
+                  {`#${chatData?.pages[0].data[0].chat_ticket?.code}: ${chatData?.pages[0].data[0].chat_ticket?.title}`}
                 </Typography>
-                <div className="w-full">
+                {/* <div className="w-full">
                   <Card
                     isButton
                     className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100"
@@ -146,12 +147,17 @@ const NewCompanyReport = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </div> */}
                 <div className="w-full">
                   <Card
                     isButton
                     className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100"
-                    onClick={() => handleCardClick("chat")}
+                    onClick={() => {
+                      handleCardClick("chat");
+                      chatRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
                   >
                     <div
                       className={cn(
@@ -182,6 +188,7 @@ const NewCompanyReport = () => {
                       >
                         <Card className="_flexbox__col__start__start max-h-96 overflow-auto rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
                           <ChatBubble data={initialData ?? []} />
+                          <div ref={chatRef}></div>
                         </Card>
                       </motion.div>
                     )}

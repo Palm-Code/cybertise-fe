@@ -57,7 +57,7 @@ const ManualRiskLevel = ({
             }
           >
             {forms.risk_level.toFixed(1)} |{" "}
-            {riskLevelCalculator(forms.risk_level)} Risk
+            {riskLevelCalculator(forms.risk_level)}
           </Badge>
         )}
       </div>

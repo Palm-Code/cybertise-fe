@@ -297,7 +297,9 @@ button {
 
   ul,
   ol {
-    padding: 0 1rem;
+    list-style-position: outside;
+    padding: 0 1.5rem;
+    margin-left: 1.5em;
   }
 
   ol {
@@ -362,4 +364,35 @@ article {
   float: left;
   height: 0;
   pointer-events: none;
+}
+
+.legal h1 {
+  @apply text-6xl;
+}
+
+.legal p,
+ul,
+li {
+  @apply text-neutral-light-50 dark:text-neutral-dark-50;
+}
+
+.legal p {
+  @apply mb-3.5;
+}
+
+.legal ul {
+  @apply mb-3.5;
+}
+
+.legal li {
+  @apply mb-2.5;
+}
+
+.legal a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.legal a:hover {
+  text-decoration: underline;
 }

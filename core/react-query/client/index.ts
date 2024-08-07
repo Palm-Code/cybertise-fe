@@ -14,3 +14,4 @@ export * from "./useGetTicketDetails";
 export * from "./useGetAccessToken";
 export * from "./fetchpostLogout";
 export * from "./usePostSelfDeactivatedAccount";
+export * from "./useGetDownloadFiles";

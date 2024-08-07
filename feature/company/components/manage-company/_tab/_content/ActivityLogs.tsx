@@ -120,7 +120,7 @@ const ActivityLogs = ({}: {}) => {
                                 height={20}
                                 className="h-5 w-5 stroke-[4px] text-neutral-light-30 dark:text-neutral-dark-30"
                               />
-                              <div className="mx-auto min-h-4 border-l border-dashed border-brand-neutral dark:border-white" />
+                              <div className="mx-auto min-h-4 border-l border-dashed border-neutral-light-50 dark:border-neutral-dark-50" />
                             </div>
                             <div
                               className={cn(

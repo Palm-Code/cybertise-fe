@@ -24,6 +24,7 @@ interface I_ModalEditRiskLevelProps extends I_CsvssCalculatorProps {
   onClose: () => void;
   ticketId: string;
   value: number;
+  cvss_string: string | null;
 }
 
 const ModalEditRiskLevel = ({
@@ -32,14 +33,24 @@ const ModalEditRiskLevel = ({
   ticketId,
   value: defaultValue,
   isManualRisk,
+  cvss_string,
   onChangeManualRisk,
 }: I_ModalEditRiskLevelProps) => {
   const [value, setValue] = useState<number>(defaultValue);
-
   const { mutateAsync, isPending, isSuccess } = usePostUpdateTicket(ticketId);
 
+  const onCloseModal = () => {
+    onClose();
+    setValue(defaultValue);
+  };
+
+  const onChangeType = () => {
+    onChangeManualRisk();
+    setValue(0);
+  };
+
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal isOpen={isOpen} onClose={onCloseModal}>
       <div
         className={cn(
           "mx-auto max-h-[80vh] w-full max-w-4xl overflow-auto rounded-xl px-8 py-12",
@@ -52,7 +63,7 @@ const ModalEditRiskLevel = ({
             variant="tertiary-mediator"
             className="p-0"
             prefixIcon={<X />}
-            onClick={onClose}
+            onClick={onCloseModal}
           />
           <Typography variant="h5" weight="bold">
             Update Risk Level
@@ -80,8 +91,9 @@ const ModalEditRiskLevel = ({
           <CsvssCalculator
             value={value}
             isManualRisk={isManualRisk}
-            onChangeManualRisk={onChangeManualRisk}
+            onChangeManualRisk={onChangeType}
             onValueChange={setValue}
+            cvss_string={cvss_string}
           />
           <Card
             className={cn(
@@ -95,7 +107,7 @@ const ModalEditRiskLevel = ({
                   variant="mediator"
                   checked={isManualRisk}
                   disabled={isManualRisk}
-                  onCheckedChange={onChangeManualRisk}
+                  onCheckedChange={onChangeType}
                 />
                 <Typography
                   variant="p"
@@ -113,7 +125,7 @@ const ModalEditRiskLevel = ({
                     ).toLowerCase() as keyof typeof badgeVariants
                   }
                 >
-                  {value.toFixed(1)} | {riskLevelCalculator(value)} Risk
+                  {value.toFixed(1)} | {riskLevelCalculator(value)}
                 </Badge>
               )}
             </div>
