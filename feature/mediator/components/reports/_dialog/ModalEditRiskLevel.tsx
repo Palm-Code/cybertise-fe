@@ -18,13 +18,14 @@ import { riskLevelCalculator } from "@/utils/risk-level-calculator";
 import CsvssCalculator, {
   I_CsvssCalculatorProps,
 } from "@/core/ui/components/csvss-calculator/csvss-calculator";
+import { initialCvssValues } from "@/core/constants/progrmas/cvss";
 
 interface I_ModalEditRiskLevelProps extends I_CsvssCalculatorProps {
   isOpen: boolean;
   onClose: () => void;
   ticketId: string;
   value: number;
-  cvss_string: string | null;
+  cvss: string | null;
 }
 
 const ModalEditRiskLevel = ({
@@ -33,15 +34,19 @@ const ModalEditRiskLevel = ({
   ticketId,
   value: defaultValue,
   isManualRisk,
-  cvss_string,
+  cvss: cvss_string,
   onChangeManualRisk,
 }: I_ModalEditRiskLevelProps) => {
   const [value, setValue] = useState<number>(defaultValue);
+  const [cvss, setCvss] = useState<{ [key: string]: string }>(
+    cvss_string ? JSON.parse(cvss_string) : initialCvssValues
+  );
   const { mutateAsync, isPending, isSuccess } = usePostUpdateTicket(ticketId);
 
   const onCloseModal = () => {
     onClose();
     setValue(defaultValue);
+    setCvss(cvss_string ? JSON.parse(cvss_string) : initialCvssValues);
   };
 
   const onChangeType = () => {
@@ -92,8 +97,11 @@ const ModalEditRiskLevel = ({
             value={value}
             isManualRisk={isManualRisk}
             onChangeManualRisk={onChangeType}
-            onValueChange={setValue}
-            cvss_string={cvss_string}
+            onValueChange={(v, c) => {
+              setValue(v);
+              setCvss(c);
+            }}
+            cvss_string={cvss}
           />
           <Card
             className={cn(
@@ -175,7 +183,7 @@ const ModalEditRiskLevel = ({
             isLoading={isPending}
             onClick={() => {
               mutateAsync(
-                `risk_level=${value}${!isManualRisk ? `&cvss_string=${cvss_string}` : "&cvss_string=null"}`
+                `risk_level=${value}${!isManualRisk ? `&cvss_string=${JSON.stringify(cvss)}` : `&cvss_string=`}`
               ).then(() => {
                 onClose();
               });

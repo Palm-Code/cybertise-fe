@@ -32,7 +32,7 @@ const VrpManagement = () => {
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : programList && programList?.data?.length > 0 ? (
-            <VRPCardList data={programList?.data} />
+            <VRPCardList data={programList?.data} variant={role} />
           ) : (
             <EmptyState
               variant="company"
@@ -63,7 +63,7 @@ const VrpManagement = () => {
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : programList && programList?.data?.length ? (
-            <VRPCardList data={programList?.data} />
+            <VRPCardList data={programList?.data} variant={role} />
           ) : (
             <EmptyState
               variant="company"

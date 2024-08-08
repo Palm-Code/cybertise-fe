@@ -18,13 +18,16 @@ export const useGetProgramDetails = (
       payload?.params?.page,
       payload?.params?.filter,
     ],
-    queryFn: () => fetchGetProgramDetails(payload, id as string),
+    queryFn: () =>
+      fetchGetProgramDetails(payload, id as string).then((res) => {
+        if (res.data.status !== "Published") {
+          window.location.href = "/vrp-launchpad";
+        }
+        return res;
+      }),
     placeholderData: keepPreviousData,
+    throwOnError: true,
   });
-
-  if (query.error) {
-    throw new Error(JSON.stringify(query.error));
-  }
 
   return query;
 };

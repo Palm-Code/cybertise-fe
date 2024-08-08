@@ -11,6 +11,7 @@ import {
 import { ModalForbidden } from "@/core/ui/container";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { Role } from "@/types/admin/sidebar";
 import { useState } from "react";
 
 interface I_VRPCard {
@@ -18,10 +19,12 @@ interface I_VRPCard {
   title?: string;
   status?: string;
   asset_types?: SortFilterType[];
+  variant?: keyof typeof Role;
 }
 
-const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
+const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
   const [showModalForbidden, setShowModalForbidden] = useState(false);
+
   return (
     <>
       <Mobile>
@@ -87,7 +90,17 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
       </Mobile>
       <Desktop>
         <Card
-          isClickable
+          isClickable={
+            variant === "company" || status?.toLowerCase() === "published"
+          }
+          isButton={
+            status?.toLowerCase() !== "published" && variant !== "company"
+          }
+          onClick={() =>
+            status?.toLowerCase() !== "published" &&
+            variant !== "company" &&
+            setShowModalForbidden(true)
+          }
           href={
             status?.toLowerCase() === "published"
               ? `/vrp-launchpad/overview/${id}`
@@ -142,6 +155,13 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
             </div>
           </div>
         </Card>
+        <ModalForbidden
+          isOpen={showModalForbidden}
+          onClose={() => setShowModalForbidden(false)}
+          variant="company"
+          title="Not Published"
+          subtitle="Only can be accessed for Published VRP"
+        />
       </Desktop>
     </>
   );
@@ -149,11 +169,13 @@ const VRPCard = ({ id, title, status, asset_types }: I_VRPCard) => {
 
 interface I_VRPCardList {
   data?: I_GetProgramListSuccessResponse["data"];
+  variant?: keyof typeof Role;
 }
 
-const VRPCardList = ({ data }: I_VRPCardList) => {
+const VRPCardList = ({ data, variant }: I_VRPCardList) => {
+  console.log(variant);
   return data?.map((item) => {
-    return <VRPCard key={item?.id} {...item} />;
+    return <VRPCard key={item?.id} variant={variant} {...item} />;
   });
 };
 

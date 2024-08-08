@@ -1,50 +1,32 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { Badge, Card, Checkbox, Typography } from "@/core/ui/components";
-import {
-  AttackComplexity,
-  AttackVector,
-  Availability,
-  Confidentiality,
-  Integrity,
-  PrivilegesRequired,
-  Scope,
-  UserInteraction,
-} from "@/enums";
 import { csvss_calculator } from "@/feature/hacker/constants/programs";
 import { useState } from "react";
 import { CVSS30 } from "@pandatix/js-cvss";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
+import { initialCvssValues } from "@/core/constants/progrmas/cvss";
 
 export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
   onChangeManualRisk: () => void;
   value?: number;
-  onValueChange?: (value: number, cvss_string: string | null) => void;
-  cvss_string: string | null;
+  onValueChange?: (
+    value: number,
+    cvss_string: { [key: string]: string }
+  ) => void;
+  cvss_string?: { [key: string]: string };
 }
-
-const initialValues = {
-  av: AttackVector.NETWORK,
-  ac: AttackComplexity.LOW,
-  pr: PrivilegesRequired.NONE,
-  ui: UserInteraction.NONE,
-  s: Scope.UNCHANGED,
-  c: Confidentiality.NONE,
-  i: Integrity.NONE,
-  a: Availability.NONE,
-};
 
 const CsvssCalculator = ({
   isManualRisk,
   onChangeManualRisk,
   value = 0,
   onValueChange = () => {},
-  cvss_string = null,
+  cvss_string = initialCvssValues,
 }: I_CsvssCalculatorProps) => {
   const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
-    cvss_string ? JSON.parse(cvss_string) : initialValues
+    cvss_string
   );
 
   const onClickCsvssCalculator = (key: string, value: string) => {
@@ -53,7 +35,7 @@ const CsvssCalculator = ({
       `CVSS:3.0/AV:${newValue.av}/AC:${newValue.ac}/PR:${newValue.pr}/UI:${newValue.ui}/S:${newValue.s}/C:${newValue.c}/I:${newValue.i}/A:${newValue.a}`
     );
     setMetricsValue(newValue);
-    onValueChange(metValue.BaseScore(), JSON.stringify(newValue));
+    onValueChange(metValue.BaseScore(), newValue);
   };
 
   return (
@@ -73,8 +55,8 @@ const CsvssCalculator = ({
               checked={!isManualRisk}
               disabled={!isManualRisk}
               onCheckedChange={() => {
-                onValueChange(0, null);
-                setMetricsValue(initialValues);
+                onValueChange(0, initialCvssValues);
+                setMetricsValue(initialCvssValues);
                 onChangeManualRisk();
               }}
             />

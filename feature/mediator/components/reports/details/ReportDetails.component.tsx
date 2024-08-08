@@ -457,7 +457,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           isManualRisk={isManualRisk}
           onChangeManualRisk={() => setIsManualRisk(!isManualRisk)}
           ticketId={id}
-          cvss_string={ticketDetails.cvss_string}
+          cvss={ticketDetails.cvss_string}
           value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}
           onClose={() => setOpenModalSetRiskLevel(false)}
