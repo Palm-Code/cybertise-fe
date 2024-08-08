@@ -204,8 +204,8 @@ export const tableColumns: I_TableColumns[] = [
     width: "w-3/12",
   },
   {
-    title: "VRP Type",
-    align: "center",
+    title: "Program Title",
+    align: "left",
     width: "w-2/12",
   },
   {

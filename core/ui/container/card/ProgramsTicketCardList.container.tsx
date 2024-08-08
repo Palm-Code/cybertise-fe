@@ -5,6 +5,8 @@ import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "../../layout";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
+import { Dot } from "lucide-react";
+import { ShieldCheck } from "../../icons";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -31,8 +33,8 @@ const TicketCard = ({
                   />
                 </div>
                 <div className="_flexbox__col__start ml-4 w-full max-w-xl gap-1">
-                  <Typography variant="p" affects="normal">
-                    {props.title}
+                  <Typography variant="p" affects="normal" weight="bold">
+                    {props.company?.name}
                   </Typography>
                 </div>
                 <Typography
@@ -102,9 +104,14 @@ const TicketCard = ({
                 isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__start__between w-full">
+              <div
+                className={cn(
+                  "grid w-full",
+                  isGridCard ? "grid-cols-[auto_1fr]" : "grid-cols-1"
+                )}
+              >
                 {isGridCard && (
-                  <div className="relative mr-4 aspect-square w-19 overflow-hidden rounded-full">
+                  <div className="relative mr-4 aspect-square w-12 overflow-hidden rounded-full">
                     <Image
                       src={props.company?.logo as string}
                       alt={`${props.id} logo`}
@@ -113,28 +120,48 @@ const TicketCard = ({
                     />
                   </div>
                 )}
-                <div className="_flexbox__col__start w-full max-w-xl gap-1">
-                  <Typography variant="p" affects="normal">
-                    {props.title}
-                  </Typography>
-                  <div className="_flexbox__row__center gap-4">
+                <div className="grid w-full place-items-start gap-4">
+                  <div className="_flexbox__row__center__between w-full gap-1">
+                    <Typography variant="p" affects="normal" weight="bold">
+                      {props.company?.name}
+                    </Typography>
+                    <div className="grid grid-cols-[18px_1fr] gap-4">
+                      <Tooltip
+                        content={props.monetary_awards_level.split("-")[0]}
+                      >
+                        <ShieldCheck
+                          category={props.monetary_awards_level.split("-")[0]}
+                        />
+                      </Tooltip>
+                      <Typography
+                        variant="p"
+                        affects="large"
+                        weight="bold"
+                        className="whitespace-nowrap text-nowrap"
+                      >
+                        {currencyFormatters.NumberToEUR(
+                          props.company?.lowest_bounty ?? 0
+                        )}{" "}
+                        -{" "}
+                        {currencyFormatters.NumberToEUR(
+                          props.company?.highest_bounty ?? 0
+                        )}
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className="_flexbox__row__center gap-2">
                     <Badge variant="default">{props.type}</Badge>
+                    <Dot />
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                      className="text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      {props.title}
+                    </Typography>
                   </div>
                 </div>
-                <Typography
-                  variant="p"
-                  affects="large"
-                  weight="bold"
-                  className="whitespace-nowrap text-nowrap"
-                >
-                  {currencyFormatters.NumberToEUR(
-                    props.company?.lowest_bounty ?? 0
-                  )}{" "}
-                  -{" "}
-                  {currencyFormatters.NumberToEUR(
-                    props.company?.highest_bounty ?? 0
-                  )}
-                </Typography>
               </div>
               <div className="_flexbox__row__center__between w-full">
                 <div className="_flexbox__col__start gap-2.5">

@@ -8,6 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { I_TableColumns } from "@/interfaces";
@@ -16,6 +17,7 @@ import Image from "next/image";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { TableLoadingList } from "@/core/ui/container";
+import { ShieldCheck } from "@/core/ui/icons";
 
 interface I_TableProps {
   columns: I_TableColumns[];
@@ -63,21 +65,31 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           sizes="100%"
                         />
                       </div>
-                      <Typography
-                        variant="p"
-                        affects="small"
-                        weight="semibold"
-                        className="w-[calc(100%-36px)]"
-                      >
-                        {item.title}
-                      </Typography>
+                      <div className="grid gap-2">
+                        <Typography
+                          variant="p"
+                          affects="small"
+                          weight="semibold"
+                        >
+                          {item.company?.name}
+                        </Typography>
+                        <Badge variant="default" className="w-fit">
+                          {item.type}
+                        </Badge>
+                      </div>
                     </div>
                   </TableData>
                   <TableData
                     className={cn(columns[1].width)}
                     align={columns[1].align}
                   >
-                    <Badge variant="default">{item.type}</Badge>
+                    <Tooltip content={item.title}>
+                      <Typography variant="p" affects="small" weight="semibold">
+                        {item.title.length > 20
+                          ? `${item.title.substring(0, 20)}...`
+                          : item.title}
+                      </Typography>
+                    </Tooltip>
                   </TableData>
                   <TableData
                     className={cn(columns[2].width, `text-${columns[2].align}`)}
@@ -101,19 +113,28 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                   <TableData
                     className={cn(columns[3].width, `text-${columns[3].align}`)}
                   >
-                    <Typography
-                      variant="p"
-                      affects="normal"
-                      className="whitespace-nowrap text-nowrap"
-                    >
-                      {currencyFormatters.NumberToEUR(
-                        item.company?.lowest_bounty ?? 0
-                      )}{" "}
-                      -{" "}
-                      {currencyFormatters.NumberToEUR(
-                        item.company?.highest_bounty ?? 0
-                      )}
-                    </Typography>
+                    <div className="grid grid-cols-[18px_1fr] gap-4">
+                      <Tooltip
+                        content={item.monetary_awards_level.split("-")[0]}
+                      >
+                        <ShieldCheck
+                          category={item.monetary_awards_level.split("-")[0]}
+                        />
+                      </Tooltip>
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                        className="whitespace-nowrap text-nowrap"
+                      >
+                        {currencyFormatters.NumberToEUR(
+                          item.company?.lowest_bounty ?? 0
+                        )}{" "}
+                        -{" "}
+                        {currencyFormatters.NumberToEUR(
+                          item.company?.highest_bounty ?? 0
+                        )}
+                      </Typography>
+                    </div>
                   </TableData>
                 </TableRow>
               </TableBodyRow>
