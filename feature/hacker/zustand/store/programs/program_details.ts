@@ -12,7 +12,7 @@ export type Actions = {
 const initialState: State = {
   payload: {
     params: {
-      include: "company,targetAssets",
+      include: "company,targetAssets,targetAssetsCount",
       append: "asset_types,latest_updates",
     },
   },
