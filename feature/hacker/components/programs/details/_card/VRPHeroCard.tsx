@@ -62,10 +62,10 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   affects="small"
                   className="text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Reports Resolved
+                  Number of Assets
                 </Typography>
                 <Typography variant="p" affects="small" weight="medium">
-                  {data.company?.report_resolved}
+                  {data.target_assets_count}
                 </Typography>
               </div>
               <div className="_flexbox__col__start__start w-full gap-2">
@@ -201,10 +201,10 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Reports resolved
+                      Number of Assets
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
-                      {data.company?.report_resolved ?? 0}
+                      {data.target_assets_count ?? 0}
                     </Typography>
                   </div>
                   <Separator orientation="vertical" />

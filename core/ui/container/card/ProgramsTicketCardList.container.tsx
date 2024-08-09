@@ -23,37 +23,26 @@ const TicketCard = ({
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full", "gap-8")}>
               <Badge variant="default">{props.type}</Badge>
-              <div className="_flexbox__row__center__between w-full">
-                <div className="relative aspect-square w-19 overflow-hidden rounded-full">
-                  <Image
-                    src={props.company?.logo as string}
-                    alt={`${props.id} logo`}
-                    fill
-                    sizes="100%"
-                  />
+              <div className="_flexbox__col__start w-full gap-4">
+                <div className="grid w-full grid-cols-[auto_1fr] gap-4">
+                  <div className="relative aspect-square w-8 overflow-hidden rounded-full">
+                    <Image
+                      src={props.company?.logo as string}
+                      alt={`${props.id} logo`}
+                      fill
+                      sizes="100%"
+                    />
+                  </div>
+                  <div className="_flexbox__col__start w-full gap-4">
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {props.company?.name}
+                    </Typography>
+                  </div>
                 </div>
-                <div className="_flexbox__col__start ml-4 w-full max-w-xl gap-1">
-                  <Typography variant="p" affects="normal" weight="bold">
-                    {props.company?.name}
-                  </Typography>
-                </div>
-                <Typography
-                  variant="p"
-                  affects="normal"
-                  weight="bold"
-                  className="whitespace-nowrap text-nowrap"
-                >
-                  {currencyFormatters.NumberToEUR(
-                    props.company?.lowest_bounty ?? 0
-                  )}{" "}
-                  -{" "}
-                  {currencyFormatters.NumberToEUR(
-                    props.company?.highest_bounty ?? 0
-                  )}
+                <Typography variant="p" affects="small" weight="semibold">
+                  {props.title}
                 </Typography>
-              </div>
-              <Separator orientation="horizontal" />
-              <div className="_flexbox__row__center__between w-full">
+                <Separator orientation="horizontal" />
                 <div className="_flexbox__col__start gap-2.5">
                   <Typography
                     variant="p"
@@ -78,6 +67,34 @@ const TicketCard = ({
                         +{props.asset_types?.length - 3} more
                       </Badge>
                     )}
+                  </div>
+                </div>
+                <div className="_flexbox__col__start gap-2">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="text-neutral-light-30 dark:text-neutral-dark-30"
+                  >
+                    Rewards
+                  </Typography>
+                  <div className="grid grid-cols-[18px_1fr] gap-2">
+                    <ShieldCheck
+                      category={props.monetary_awards_level.split("-")[0]}
+                    />
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                      className="whitespace-nowrap text-nowrap"
+                    >
+                      {currencyFormatters.NumberToEUR(
+                        props.company?.lowest_bounty ?? 0
+                      )}{" "}
+                      -{" "}
+                      {currencyFormatters.NumberToEUR(
+                        props.company?.highest_bounty ?? 0
+                      )}
+                    </Typography>
                   </div>
                 </div>
               </div>

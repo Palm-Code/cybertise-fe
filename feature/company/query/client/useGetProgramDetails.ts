@@ -1,4 +1,5 @@
 "use client";
+import { useGetRole } from "@/core/hooks";
 import { I_GetParamsPayload } from "@/core/models/common";
 import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
@@ -9,6 +10,7 @@ export const useGetProgramDetails = (
   payload?: I_GetParamsPayload,
   id?: string
 ) => {
+  const role = useGetRole();
   const query = useQuery<
     I_GetProgramDetailsSuccessResponse,
     I_GetErrorResponse
@@ -20,7 +22,7 @@ export const useGetProgramDetails = (
     ],
     queryFn: () =>
       fetchGetProgramDetails(payload, id as string).then((res) => {
-        if (res.data.status !== "Published") {
+        if (res.data.status !== "Published" && role === "company staff") {
           window.location.href = "/vrp-launchpad";
         }
         return res;

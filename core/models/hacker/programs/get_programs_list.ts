@@ -48,6 +48,7 @@ export interface I_GetProgramListSuccessResponse {
     monetary_awards_medium: number;
     monetary_awards_low: number;
     monetary_awards_critical: number;
+    target_assets_count: number;
     rules: string | null;
     policies: string | null;
     company_id: string;
