@@ -112,7 +112,12 @@ const SignInComponent = () => {
 
   return (
     <div className={cn("mx-auto w-full max-w-[467px] rounded-lg")}>
-      <Mobile className="_flexbox__col__center gap-8 bg-transparent px-6">
+      <div
+        className={cn(
+          "_flexbox__col__center gap-8 rounded-lg xl:gap-12",
+          "bg-transparent px-6 xl:bg-background-main-light xl:px-10 xl:py-20 xl:dark:bg-background-main-dark"
+        )}
+      >
         <Typography variant="h4" weight="bold">
           Sign In
         </Typography>
@@ -134,37 +139,35 @@ const SignInComponent = () => {
           <Input
             type="email"
             label="Email"
-            value={forms.email}
             placeholderText="Enter your email"
             onClearInput={() => setValue("email", "", { shouldValidate: true })}
-            onChange={(e) =>
-              setValue("email", e.target.value, { shouldValidate: true })
-            }
+            value={forms.email}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 onSubmitLogin();
               }
             }}
-            isError={!!error?.email || !!errors?.email}
+            onChange={(e) =>
+              setValue("email", e.target.value, { shouldValidate: true })
+            }
+            isError={!!error?.email || !!errors.email}
           />
           <div className="w-full space-y-1">
             <Input
               type={revealPassword ? "text" : "password"}
               label="Password"
               placeholderText="Enter your password"
-              value={forms.password}
               onClickRevealPassword={() => setRevealPassword(!revealPassword)}
+              value={forms.password}
               onChange={(e) =>
-                setValue("password", e.target.value, {
-                  shouldValidate: true,
-                })
+                setValue("password", e.target.value, { shouldValidate: true })
               }
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   onSubmitLogin();
                 }
               }}
-              isError={errors === null}
+              isError={!!errors.password}
             />
             <Link
               href={"/forgot-password"}
@@ -189,105 +192,12 @@ const SignInComponent = () => {
           </Button>
           <Typography variant="p" affects="normal" align="center">
             Didn&apos;t have account yet?{" "}
-            <Link
-              href={"/auth/signup"}
-              className="ml-2 font-semibold text-lime-normal-light dark:text-lime-normal-dark"
-            >
+            <Link href={"/auth/signup"} className="ml-2 font-semibold">
               Sign Up
             </Link>
           </Typography>
         </div>
-      </Mobile>
-      <Desktop>
-        <div
-          className={cn(
-            "_flexbox__col__center gap-12 rounded-lg",
-            "bg-background-main-light px-10 py-20 dark:bg-background-main-dark"
-          )}
-        >
-          <Typography variant="h4" weight="bold">
-            Sign In
-          </Typography>
-          <div className="_flexbox__col__center w-full gap-7">
-            {error?.status === 401 ? (
-              <div className="w-full rounded-md bg-red-error/20 p-3.5">
-                <Typography variant="p" affects="tiny">
-                  Email and password does not match
-                </Typography>
-              </div>
-            ) : null}
-            {error?.status === 422 ? (
-              <div className="w-full rounded-md bg-red-error/20 p-3.5">
-                <Typography variant="p" affects="tiny">
-                  Email does not exist
-                </Typography>
-              </div>
-            ) : null}
-            <Input
-              type="email"
-              label="Email"
-              placeholderText="Enter your email"
-              onClearInput={() =>
-                setValue("email", "", { shouldValidate: true })
-              }
-              value={forms.email}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  onSubmitLogin();
-                }
-              }}
-              onChange={(e) =>
-                setValue("email", e.target.value, { shouldValidate: true })
-              }
-              isError={!!error?.email || !!errors.email}
-            />
-            <div className="w-full space-y-1">
-              <Input
-                type={revealPassword ? "text" : "password"}
-                label="Password"
-                placeholderText="Enter your password"
-                onClickRevealPassword={() => setRevealPassword(!revealPassword)}
-                value={forms.password}
-                onChange={(e) =>
-                  setValue("password", e.target.value, { shouldValidate: true })
-                }
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    onSubmitLogin();
-                  }
-                }}
-                isError={!!errors.password}
-              />
-              <Link
-                href={"/forgot-password"}
-                className={typographyVariants({
-                  variant: "p",
-                  affects: "tiny",
-                })}
-              >
-                Forgot your password?
-              </Link>
-            </div>
-          </div>
-          <div className="w-full space-y-1">
-            <Button
-              fullWidth
-              variant="primary-hacker"
-              isLoading={isPending || isSuccess}
-              disabled={validateIsFormFilled || isPending || isSuccess}
-              onClick={onSubmitLogin}
-            >
-              Sign In
-            </Button>
-            <Typography variant="p" affects="normal" align="center">
-              Didn&apos;t have account yet?{" "}
-              <Link href={"/auth/signup"} className="ml-2 font-semibold">
-                Sign Up
-              </Link>
-            </Typography>
-          </div>
-        </div>
-      </Desktop>
+      </div>
     </div>
   );
 };

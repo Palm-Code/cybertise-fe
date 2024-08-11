@@ -27,16 +27,6 @@ import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnera
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
-import {
-  AttackComplexity,
-  AttackVector,
-  Availability,
-  Confidentiality,
-  Integrity,
-  PrivilegesRequired,
-  Scope,
-  UserInteraction,
-} from "@/enums";
 import Link from "next/link";
 
 interface I_SendReportProps {
@@ -155,10 +145,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
 
   return (
     <>
-      <Mobile>
+      <div className="xl:hidden">
         <EmptyState variant="hacker" />
-      </Mobile>
-      <Desktop>
+      </div>
+      <div className="hidden w-full xl:block">
         <FormProvider {...method}>
           <div ref={containerRef}></div>
           <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
@@ -193,7 +183,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               <AnimationWrapper key={steps[currentStepIndex].key}>
                 <div
                   className={cn(
-                    "sticky top-[8.15rem] z-30 h-4 w-[calc(80%-1.6rem)] rounded-t-xl",
+                    "sticky top-[8.15rem] z-30 h-4 w-[calc(100%-235px)] rounded-t-xl",
                     isLastStep
                       ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
                       : "bg-background-main-light pt-0 dark:bg-background-main-dark"
@@ -201,8 +191,8 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                 ></div>
               </AnimationWrapper>
             </div>
-            <div className="_flexbox__row__start__start relative h-full w-full gap-8">
-              <div className="h-full w-[80%] overflow-y-auto">
+            <div className="relative grid h-full w-full grid-cols-[1fr_203px] gap-8">
+              <div className="h-full overflow-y-auto">
                 <AnimationWrapper key={steps[currentStepIndex].key}>
                   <Card
                     className={cn(
@@ -304,7 +294,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               </div>
               <div
                 className={cn(
-                  "sticky top-[8.8rem] z-40 -mt-12 w-[20%] rounded-xl",
+                  "sticky top-[8.8rem] z-40 -mt-12 h-fit w-full rounded-xl",
                   isLastStep
                     ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
                     : "bg-background-main-light dark:bg-background-main-dark"
@@ -323,7 +313,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
           onClose={() => setOpenModal(false)}
         />
         <ModalSuccessSubmit isOpen={isSuccess} />
-      </Desktop>
+      </div>
     </>
   );
 };
