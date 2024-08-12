@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { useSearchParams } from "next/navigation";
 import { MultiFactor, SuccessState } from "..";
-import { Desktop, Mobile } from "@/core/ui/layout";
 import { FormLoginSchema } from "@/types/auth/sign-in";
 import { formLoginShcema } from "@/core/models/auth/login/post_login";
 import { usePostSignIn } from "../../query/signin";
@@ -39,7 +38,7 @@ const SignInComponent = () => {
   });
 
   const forms = watch();
-  const { mutateAsync, data, error, isPending, isSuccess } =
+  const { mutateAsync, error, isPending, isSuccess } =
     usePostSignIn(callbackUrl);
   const {
     mutate: getAccessToken,

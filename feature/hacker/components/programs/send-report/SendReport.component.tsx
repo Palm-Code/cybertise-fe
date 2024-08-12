@@ -11,7 +11,7 @@ import ReportDescription from "./steps/ReportDescription";
 import ProblemCauses from "./steps/ProblemCauses";
 import Review from "./steps/Review";
 import { informations } from "@/feature/hacker/constants/programs";
-import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
+import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMemo, useState } from "react";
 import ModalCloseSendReport from "../_dialog/ModalCloseSendReport";

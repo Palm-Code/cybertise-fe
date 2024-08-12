@@ -222,16 +222,16 @@ const VRPDetails = ({
               variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
             )}
           >
-            <div className="w-[calc(80%-1.6rem) h-6 bg-background-page-light dark:bg-background-page-dark"></div>
+            <div className="h-6 w-[calc(100%-235px)] bg-background-page-light dark:bg-background-page-dark"></div>
             <div
               className={cn(
-                "h-4 w-[calc(80%-1.6rem)] rounded-t-xl",
+                "h-4 w-[calc(100%-235px)] rounded-t-xl",
                 "bg-background-main-light pt-0 dark:bg-background-main-dark"
               )}
             ></div>
           </AnimationWrapper>
-          <div className="_flexbox__row__start__start relative h-full w-full gap-8">
-            <div className="h-full w-[80%] overflow-y-auto">
+          <div className="relative grid h-full w-full grid-cols-[1fr_203px] gap-8">
+            <div className="h-full w-full overflow-y-auto">
               <AnimationWrapper key={steps[currentStepIndex].key}>
                 <Card
                   className={cn(
@@ -245,7 +245,7 @@ const VRPDetails = ({
             </div>
             <div
               className={cn(
-                "sticky z-40 -mt-4 w-[20%] rounded-xl",
+                "sticky z-40 -mt-4 h-fit w-full rounded-xl",
                 "bg-background-main-light dark:bg-background-main-dark",
                 variant === "mediator" ? "top-[19rem]" : "top-[17.5rem]"
               )}

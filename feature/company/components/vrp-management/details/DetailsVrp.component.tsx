@@ -25,10 +25,10 @@ const DetailsVRP = ({
 
   return (
     <>
-      <Mobile>
+      <div className="wrapper__mobile">
         <EmptyState variant={variant} type="default" />
-      </Mobile>
-      <Desktop>
+      </div>
+      <div className="wrapper__desktop">
         <div className="_flexbox__col__start__start relative w-full pb-28">
           <DetailsVRPLaunchpad
             initialData={detailsVrpData?.data}
@@ -36,7 +36,7 @@ const DetailsVRP = ({
             currentStep={detailsVrpData?.data.status}
           />
         </div>
-      </Desktop>
+      </div>
     </>
   );
 };

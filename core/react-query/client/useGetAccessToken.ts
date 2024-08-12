@@ -32,6 +32,7 @@ export const useGetAccessToken = () => {
     onError(error) {
       toast.error(error.message, {
         position: "bottom-right",
+        duration: 2000,
       });
     },
     onSettled(data, error, variables) {
