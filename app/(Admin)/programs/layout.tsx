@@ -1,5 +1,5 @@
 import { cn } from "@/core/lib/utils";
-import { Desktop, Header, Mobile, Sidebar } from "@/core/ui/layout";
+import { Header, Sidebar } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { getSession } from "@/service/server/session";
 import { UserType } from "@/types/auth/sign-up";
@@ -25,7 +25,7 @@ export default async function Dashboardlayout({
 
   return (
     <>
-      <Mobile>
+      <div className="w-full xl:hidden">
         <div className="h-dvh w-full overflow-hidden">
           <Sidebar type={session?.user.role} />
           <div className="_flexbox__col__start__start h-full w-full">
@@ -41,8 +41,8 @@ export default async function Dashboardlayout({
             </div>
           </div>
         </div>
-      </Mobile>
-      <Desktop>
+      </div>
+      <div className="hidden w-full xl:block">
         <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
           <Sidebar type={session?.user.role} />
           <div className="_flexbox__col__start__start h-full w-full">
@@ -58,7 +58,7 @@ export default async function Dashboardlayout({
             </div>
           </div>
         </div>
-      </Desktop>
+      </div>
     </>
   );
 }

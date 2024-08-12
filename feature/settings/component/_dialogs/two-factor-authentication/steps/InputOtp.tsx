@@ -3,7 +3,7 @@ import { Button, Typography } from "@/core/ui/components";
 import { X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { OTPInput, SlotProps } from "input-otp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const InputOtp = ({
   title = "Activate Your Authenticator",
@@ -18,6 +18,13 @@ const InputOtp = ({
   title?: string;
 }) => {
   const [otp, setOtp] = useState("");
+
+  useEffect(() => {
+    if (isError) {
+      setOtp("");
+    }
+  }, [isError]);
+
   return (
     <div
       className={cn(

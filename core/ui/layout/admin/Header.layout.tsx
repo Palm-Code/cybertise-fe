@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <Mobile>
+      <div className="w-full xl:hidden">
         <div
           className={cn(
             "w-full bg-background-main-light px-6 py-3.5 dark:bg-background-main-dark",
@@ -39,8 +39,8 @@ const Header = () => {
             <Logo className="h-[32px] w-[85px]" />
           </Link>
         </div>
-      </Mobile>
-      <Desktop>
+      </div>
+      <div className="hidden w-full xl:block">
         <div
           className={cn(
             "w-full bg-background-main-light px-12 py-6 dark:bg-background-main-dark",
@@ -69,7 +69,7 @@ const Header = () => {
             <Skeleton className="h-9 w-9 rounded-full" />
           )}
         </div>
-      </Desktop>
+      </div>
     </>
   );
 };

@@ -405,3 +405,15 @@ li {
 .legal a:hover {
   text-decoration: underline;
 }
+
+.wrapper__mobile {
+  @apply w-full xl:hidden;
+}
+
+.wrapper__desktop {
+  @apply hidden w-full xl:block;
+}
+
+.auto__phrase {
+  word-break: auto-phrase;
+}

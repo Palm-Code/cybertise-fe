@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 export const typographyVariants = cva(
-  "text-xl text-neutral-90 dark:text-white transition-all duration-200",
+  "text-xl text-neutral-90 dark:text-white transition-all duration-200 auto__phrase",
   {
     variants: {
       variant: {

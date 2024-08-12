@@ -55,7 +55,7 @@ const Sidebar = ({ type }: SidebarProps) => {
 
   return (
     <>
-      <Mobile>
+      <div className="w-full xl:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <button
@@ -154,8 +154,8 @@ const Sidebar = ({ type }: SidebarProps) => {
             </div>
           </SheetContent>
         </Sheet>
-      </Mobile>
-      <Desktop className="h-full">
+      </div>
+      <div className="hidden h-full w-full xl:block">
         <div
           className={cn(
             "_flexbox__col__between relative h-full max-h-screen",
@@ -230,7 +230,7 @@ const Sidebar = ({ type }: SidebarProps) => {
             </button>
           </div> */}
         </div>
-      </Desktop>
+      </div>
     </>
   );
 };

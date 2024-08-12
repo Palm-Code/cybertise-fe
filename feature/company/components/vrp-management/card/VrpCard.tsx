@@ -173,7 +173,6 @@ interface I_VRPCardList {
 }
 
 const VRPCardList = ({ data, variant }: I_VRPCardList) => {
-  console.log(variant);
   return data?.map((item) => {
     return <VRPCard key={item?.id} variant={variant} {...item} />;
   });

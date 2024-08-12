@@ -112,7 +112,7 @@ const VRPLaunchpad = () => {
             </Typography>
             <SearchInput
               isMobile
-              id="search-vrp-launchpad-mediator"
+              id="search-vrp-launchpad-mediator-mobile"
               value={payload?.params?.search}
               variant="mediator"
               placeholder="Try “#21231” or “Company name”"

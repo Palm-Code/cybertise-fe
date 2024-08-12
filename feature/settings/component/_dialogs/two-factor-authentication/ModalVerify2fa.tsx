@@ -3,7 +3,7 @@ import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { Role } from "@/types/admin/sidebar";
 import { X } from "lucide-react";
 import { cn } from "@/core/lib/utils";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { OTPInput } from "input-otp";
 
 import { useGetVerifyTwoFactor } from "@/core/react-query/client/useGetVerifyTwoFactor";
@@ -20,6 +20,7 @@ const ModalVerify2fa = ({
   ...props
 }: I_ModalVerify2faProps) => {
   const [otp, setOtp] = useState("");
+  const otpRef = useRef<HTMLInputElement>(null);
   const {
     mutateAsync: mutateVerifyTwoFactor,
     isPending,
@@ -28,12 +29,16 @@ const ModalVerify2fa = ({
   } = useGetVerifyTwoFactor();
 
   const onClickVerifyTwoFactor = async (otp: string) => {
-    mutateVerifyTwoFactor(otp).then((res) => {
-      if (res) {
+    mutateVerifyTwoFactor(otp)
+      .then((res) => {
+        if (res) {
+          setOtp("");
+          onClose();
+        }
+      })
+      .catch((err) => {
         setOtp("");
-        onClose();
-      }
-    });
+      });
   };
 
   return (
@@ -66,6 +71,7 @@ const ModalVerify2fa = ({
         </div>
         <div className="_flexbox__col__start__start w-full gap-2">
           <OTPInput
+            ref={(input) => input?.focus()}
             autoFocus
             maxLength={6}
             id={`otp-verify-2fa`}

@@ -9,10 +9,16 @@ const DesktopLayout = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const isMobileDevice = useMediaQuery("(max-width: 1279px)");
-  if (isMobileDevice) return null;
+  const isDesktop = useMediaQuery("(min-width: 1280px)");
+
+  if (!isDesktop) return null;
   return (
-    <div className={cn("hidden h-fit w-full xl:block", className)}>
+    <div
+      className={cn(
+        "invisible hidden h-fit w-full xl:visible xl:block",
+        className
+      )}
+    >
       {children}
     </div>
   );
