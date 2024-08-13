@@ -39,9 +39,17 @@ const TicketCard = ({
                     </Typography>
                   </div>
                 </div>
-                <Typography variant="p" affects="small" weight="semibold">
-                  {props.title}
-                </Typography>
+                {props.title.length > 50 ? (
+                  <Tooltip content={props.title}>
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {props.title.substring(0, 50) + "..."}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography variant="p" affects="small" weight="semibold">
+                    {props.title}
+                  </Typography>
+                )}
                 <Separator orientation="horizontal" />
                 <div className="_flexbox__col__start gap-2.5">
                   <Typography
@@ -169,14 +177,27 @@ const TicketCard = ({
                   <div className="_flexbox__row__center gap-2">
                     <Badge variant="default">{props.type}</Badge>
                     <Dot />
-                    <Typography
-                      variant="p"
-                      affects="small"
-                      weight="semibold"
-                      className="text-neutral-light-30 dark:text-neutral-dark-30"
-                    >
-                      {props.title}
-                    </Typography>
+                    {props.title.length > 50 ? (
+                      <Tooltip content={props.title}>
+                        <Typography
+                          variant="p"
+                          affects="small"
+                          weight="semibold"
+                          className="text-neutral-light-30 dark:text-neutral-dark-30"
+                        >
+                          {props.title.substring(0, 50) + "..."}
+                        </Typography>
+                      </Tooltip>
+                    ) : (
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                        className="text-neutral-light-30 dark:text-neutral-dark-30"
+                      >
+                        {props.title}
+                      </Typography>
+                    )}
                   </div>
                 </div>
               </div>

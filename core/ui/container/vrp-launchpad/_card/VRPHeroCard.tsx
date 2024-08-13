@@ -1,7 +1,13 @@
 import { currentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
-import { Avatar, Card, Indicator, Typography } from "@/core/ui/components";
+import {
+  Avatar,
+  Card,
+  Indicator,
+  Tooltip,
+  Typography,
+} from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Role } from "@/types/admin/sidebar";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
@@ -28,9 +34,13 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
             <MoveLeft className="cursor-pointer" />
           </Link>
           <div className="_flexbox__col__start__start gap-3">
-            <Typography variant="h5" weight="bold">
-              {initialData?.title || "Create New VRP"}
-            </Typography>
+            <Tooltip content={initialData?.title || ""}>
+              <Typography variant="h5" weight={"bold"}>
+                {initialData?.title && initialData?.title?.length > 100
+                  ? initialData?.title?.substring(0, 100) + "..."
+                  : initialData?.title}
+              </Typography>
+            </Tooltip>
             {variant === "mediator" && (
               <div className="_flexbox__row__start__start gap-6">
                 <div className="_flexbox__row__start__start gap-2">

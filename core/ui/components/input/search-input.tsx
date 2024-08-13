@@ -29,6 +29,7 @@ const ModalSearch = ({
     <BaseModal
       isOpen={props.isOpen}
       onClose={() => props.onClose()}
+      closeable
       className="top-12 z-30 !justify-start bg-background-main-light p-6 dark:bg-background-main-dark"
     >
       <div

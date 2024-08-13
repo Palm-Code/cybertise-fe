@@ -61,6 +61,7 @@ const VrpDescriptionCard = ({
           onChange={(e) =>
             setValue("title", e.target.value, { shouldValidate: true })
           }
+          maxLength={255}
         />
         <div className="w-full">
           <TextArea

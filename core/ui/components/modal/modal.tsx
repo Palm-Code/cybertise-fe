@@ -9,6 +9,7 @@ export interface I_ModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   className?: string;
+  closeable?: boolean;
 }
 
 const BaseModal = ({
@@ -16,12 +17,14 @@ const BaseModal = ({
   isOpen = false,
   className,
   onClose = () => {},
+  closeable = false,
 }: I_ModalProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // useOnClickOutside(ref, () => {
-  //   onClose();
-  // });
+  useOnClickOutside(ref, () => {
+    if (!closeable) return;
+    onClose();
+  });
 
   return (
     <AnimatePresence>

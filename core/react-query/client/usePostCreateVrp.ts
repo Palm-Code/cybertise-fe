@@ -18,11 +18,11 @@ export const usePostCreateVrp = () => {
     mutationFn: (payload) => {
       return fetchPostCreateVrp(payload);
     },
+    onError: (error) => {
+      mutations.reset();
+      toast.error(error.message);
+    },
   });
-
-  if (mutations.isError) {
-    toast.error("Failed to send VRP");
-  }
 
   return mutations;
 };

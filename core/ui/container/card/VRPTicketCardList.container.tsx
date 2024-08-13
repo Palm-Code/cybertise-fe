@@ -7,6 +7,7 @@ import {
   Card,
   Indicator,
   Separator,
+  Tooltip,
   Typography,
 } from "../../components";
 import { cn } from "@/core/lib/utils";
@@ -52,9 +53,17 @@ const TicketCard = ({
                     initials="C"
                   />
                   <div className="_flexbox__col__start w-full max-w-xl gap-1">
-                    <Typography variant="p" affects="normal">
-                      {props.title}
-                    </Typography>
+                    {props.title.length > 50 ? (
+                      <Tooltip content={props.title}>
+                        <Typography variant="p" affects="normal">
+                          {props.title.substring(0, 50) + "..."}
+                        </Typography>
+                      </Tooltip>
+                    ) : (
+                      <Typography variant="p" affects="normal">
+                        {props.title}
+                      </Typography>
+                    )}
                     <Typography variant="p" affects="tiny" weight="light">
                       {props.company?.name}
                     </Typography>
@@ -130,9 +139,17 @@ const TicketCard = ({
                   />
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-2">
-                  <Typography variant="p" affects="normal">
-                    {props.title}
-                  </Typography>
+                  {props.title.length > 50 ? (
+                    <Tooltip content={props.title}>
+                      <Typography variant="p" affects="normal">
+                        {props.title.substring(0, 50) + "..."}
+                      </Typography>
+                    </Tooltip>
+                  ) : (
+                    <Typography variant="p" affects="normal">
+                      {props.title}
+                    </Typography>
+                  )}
                   <div className="_flexbox__row__center gap-4">
                     <Badge variant="default">{props.type}</Badge>
                     <Typography variant="p" affects="tiny">

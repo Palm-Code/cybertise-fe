@@ -15,7 +15,8 @@ export const usePostSendReports = () => {
       return fetchPostReports(payload);
     },
     onError: (error) => {
-      toast.error("Failed to send report", {
+      mutation.reset();
+      toast.error(error.message, {
         position: "bottom-right",
         duration: 2000,
       });

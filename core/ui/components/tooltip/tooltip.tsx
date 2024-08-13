@@ -21,14 +21,14 @@ const Tooltip = ({
 }: I_TooltipProps) => {
   return (
     <TooltipProvider>
-      <BaseTooltip>
+      <BaseTooltip delayDuration={0}>
         <TooltipTrigger
           disabled
           className={cn(fullwidth ? "w-full" : "", className)}
         >
           {children}
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className="max-w-xs">
           <p>{content}</p>
         </TooltipContent>
       </BaseTooltip>

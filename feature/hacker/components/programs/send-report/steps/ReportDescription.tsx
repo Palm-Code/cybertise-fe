@@ -21,6 +21,7 @@ const ReportDescription = () => {
           setValue("title", e.target.value, { shouldValidate: true })
         }
         isError={!!errors.title}
+        maxLength={255}
       />
       <TextArea
         label="Short Description"
@@ -30,6 +31,7 @@ const ReportDescription = () => {
           setCharacterCount(e.target.value.length);
         }}
         isError={!!errors.description}
+        maxLength={5000}
       />
       <Typography
         variant="p"

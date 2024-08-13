@@ -21,6 +21,7 @@ import { cn } from "@/core/lib/utils";
 import { fileDownload } from "@/utils/file-download";
 import {
   useGetAssetTypeDetails,
+  useGetDownloadFiles,
   useGetTargetAssetDetails,
 } from "@/core/react-query/client";
 import { Role } from "@/types/admin/sidebar";
@@ -43,6 +44,8 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
 
   const { data: target_asset, isLoading: targetAssetLoading } =
     useGetTargetAssetDetails(data?.target_asset_id as string);
+
+  const { mutate, isPending } = useGetDownloadFiles();
 
   if (assetTypeLoading || targetAssetLoading)
     return <Loader variant={variant} />;
@@ -140,22 +143,29 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
                       </Typography>
                     </div>
                     <div className="_flexbox__row__center ml-auto gap-4">
-                      <Button
-                        asLink
-                        href={file.original_url}
-                        target="_blank"
-                        variant="ghost-hacker"
-                        className="p-0"
-                        prefixIcon={<Eye className="h-6 w-6" />}
-                      />
-                      <Button
-                        variant="ghost-hacker"
-                        className="p-0"
-                        onClick={() =>
-                          fileDownload(file.original_url, file.collection_name)
-                        }
-                        prefixIcon={<Download className="h-6 w-6" />}
-                      />
+                      {file.mime_type.includes("image") ? (
+                        <Button
+                          asLink
+                          href={file.original_url}
+                          target="_blank"
+                          variant="ghost-hacker"
+                          className="p-0"
+                          prefixIcon={<Eye className="h-6 w-6" />}
+                        />
+                      ) : (
+                        <Button
+                          variant="ghost-hacker"
+                          disabled={isPending}
+                          className="p-0"
+                          onClick={() =>
+                            mutate({
+                              id: file.uuid,
+                              filename: file.file_name,
+                            })
+                          }
+                          prefixIcon={<Download className="h-6 w-6" />}
+                        />
+                      )}
                     </div>
                   </Card>
                 ))}

@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
   Tiptap,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { TableLoadingList } from "@/core/ui/container";
@@ -82,13 +83,26 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                             >
                               {item.company?.name}
                             </Typography>
-                            <Typography
-                              variant="p"
-                              affects="small"
-                              weight="normal"
-                            >
-                              #{item.code} - {item.title}
-                            </Typography>
+                            {item.title.length > 100 ? (
+                              <Tooltip content={item.title}>
+                                <Typography
+                                  variant="p"
+                                  affects="small"
+                                  weight="normal"
+                                >
+                                  #{item.code} -{" "}
+                                  {item.title.substring(0, 100) + "..."}
+                                </Typography>
+                              </Tooltip>
+                            ) : (
+                              <Typography
+                                variant="p"
+                                affects="small"
+                                weight="normal"
+                              >
+                                #{item.code} - {item.title}
+                              </Typography>
+                            )}
                           </div>
                         </div>
                       </div>

@@ -30,7 +30,6 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
       <Mobile>
         <Card
           isClickable={status?.toLowerCase() === "published"}
-          isButton={status?.toLowerCase() !== "published"}
           href={
             status?.toLowerCase() === "published"
               ? `/vrp-launchpad/overview/${id}`
@@ -40,9 +39,13 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
         >
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="_flexbox__col__start__between w-full gap-4">
-              <Typography variant="p" affects="large" weight="semibold">
-                {title}
-              </Typography>
+              <Tooltip content={title || ""}>
+                <Typography variant="p" affects="large" weight="semibold">
+                  {title && title?.length > 25
+                    ? title?.substring(0, 25) + "..."
+                    : title}
+                </Typography>
+              </Tooltip>
               <Indicator
                 variant={
                   status?.toLowerCase().includes("phase") ? "open" : "clear"
@@ -93,9 +96,6 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
           isClickable={
             variant === "company" || status?.toLowerCase() === "published"
           }
-          isButton={
-            status?.toLowerCase() !== "published" && variant !== "company"
-          }
           onClick={() =>
             status?.toLowerCase() !== "published" &&
             variant !== "company" &&
@@ -109,9 +109,13 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
         >
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">
-              <Typography variant="p" affects="large" weight="semibold">
-                {title}
-              </Typography>
+              <Tooltip content={title || ""}>
+                <Typography variant="p" affects="large" weight="semibold">
+                  {title && title?.length > 50
+                    ? title?.substring(0, 50) + "..."
+                    : title}
+                </Typography>
+              </Tooltip>
               <Indicator
                 variant={
                   status?.toLowerCase().includes("phase") ? "open" : "clear"

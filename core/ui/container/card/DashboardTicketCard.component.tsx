@@ -4,6 +4,7 @@ import {
   Card,
   Indicator,
   Separator,
+  Tooltip,
   Typography,
 } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
@@ -54,9 +55,18 @@ const TicketCard = ({
                   />
                 </div>
                 <div className="_flexbox__col__start ml-6 w-full gap-1">
-                  <Typography variant="p" affects="small">
-                    #{props.code} <br /> {props.title}
-                  </Typography>
+                  {props.title.length > 50 ? (
+                    <Tooltip content={props.title}>
+                      <Typography variant="p" affects="small">
+                        #{props.code} <br />{" "}
+                        {props.title.substring(0, 50) + "..."}
+                      </Typography>
+                    </Tooltip>
+                  ) : (
+                    <Typography variant="p" affects="small">
+                      #{props.code} <br /> {props.title}
+                    </Typography>
+                  )}
                 </div>
                 <Typography
                   variant="p"
@@ -154,9 +164,17 @@ const TicketCard = ({
                   </div>
                 )}
                 <div className="_flexbox__col__start w-full gap-1">
-                  <Typography variant="p" affects="normal">
-                    #{props.code} - {props.title}
-                  </Typography>
+                  {props.title.length > 50 ? (
+                    <Tooltip content={props.title}>
+                      <Typography variant="p" affects="normal">
+                        #{props.code} - {props.title.substring(0, 50) + "..."}
+                      </Typography>
+                    </Tooltip>
+                  ) : (
+                    <Typography variant="p" affects="normal">
+                      #{props.code} - {props.title}
+                    </Typography>
+                  )}
                   <div className="_flexbox__row__center gap-4">
                     <Badge variant="default">{props.program?.type}</Badge>
                     <Typography

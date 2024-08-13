@@ -6,6 +6,7 @@ import {
   Card,
   Indicator,
   Tiptap,
+  Tooltip,
   Typography,
 } from "../../components";
 import { cn } from "@/core/lib/utils";
@@ -69,13 +70,25 @@ const TicketCard = ({
                 {props.company?.name}
               </Typography>
               <div className="_flexbox__row__center gap-4">
-                <Typography
-                  variant="p"
-                  affects="small"
-                  className="!text-neutral-light-30 dark:!text-neutral-dark-30"
-                >
-                  #{props.code} - {props.title}
-                </Typography>
+                {props.title.length > 50 ? (
+                  <Tooltip content={props.title}>
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="!text-neutral-light-30 dark:!text-neutral-dark-30"
+                    >
+                      #{props.code} - {props.title.substring(0, 50) + "..."}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="!text-neutral-light-30 dark:!text-neutral-dark-30"
+                  >
+                    #{props.code} - {props.title}
+                  </Typography>
+                )}
               </div>
             </div>
             <article className="*:break-all">
@@ -195,9 +208,17 @@ const TicketCard = ({
                   />
                 </div>
                 <div className="_flexbox__col__start w-full gap-1">
-                  <Typography variant="p" affects="large" weight="semibold">
-                    #{props.code} - {props.title}
-                  </Typography>
+                  {props.title.length > 50 ? (
+                    <Tooltip content={props.title}>
+                      <Typography variant="p" affects="large" weight="semibold">
+                        #{props.code} - {props.title.substring(0, 50) + "..."}
+                      </Typography>
+                    </Tooltip>
+                  ) : (
+                    <Typography variant="p" affects="large" weight="semibold">
+                      #{props.code} - {props.title}
+                    </Typography>
+                  )}
                   <div className="_flexbox__row__center gap-4">
                     <Typography
                       variant="p"

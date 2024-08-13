@@ -25,37 +25,18 @@ export default async function Dashboardlayout({
 
   return (
     <>
-      <div className="w-full xl:hidden">
-        <div className="h-dvh w-full overflow-hidden">
-          <Sidebar type={session?.user.role} />
-          <div className="_flexbox__col__start__start h-full w-full">
-            <Header />
-            <div
-              className={cn(
-                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-                "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
-                "p-0"
-              )}
-            >
-              {child[session?.user.role]}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="hidden w-full xl:block">
-        <div className="grid h-screen w-full grid-cols-[auto_1fr] overflow-hidden">
-          <Sidebar type={session?.user.role} />
-          <div className="_flexbox__col__start__start h-full w-full">
-            <Header />
-            <div
-              className={cn(
-                "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-                "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
-                "p-0"
-              )}
-            >
-              {child[session?.user.role]}
-            </div>
+      <div className="h-dvh w-full overflow-hidden xl:grid xl:h-screen xl:grid-cols-[auto_1fr]">
+        <Sidebar type={session?.user.role} />
+        <div className="_flexbox__col__start__start h-full w-full">
+          <Header />
+          <div
+            className={cn(
+              "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
+              "pt-0 xl:pb-28 xl:pl-14 xl:pr-12",
+              "p-0"
+            )}
+          >
+            {child[session?.user.role]}
           </div>
         </div>
       </div>
