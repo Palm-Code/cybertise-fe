@@ -7,6 +7,7 @@ import {
   Indicator,
   Loader,
   Tiptap,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
@@ -289,9 +290,20 @@ const ReportDetails = ({ id }: { id: string }) => {
                   onClick={back}
                   className="cursor-pointer"
                 />
-                <Typography variant="h5" weight="bold">
-                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
-                </Typography>
+                {ticketDetails.title.length > 25 ? (
+                  <Tooltip content={ticketDetails.title}>
+                    <Typography variant="h5" weight="bold">
+                      {`#${ticketDetails.code}: ${ticketDetails.title.substring(
+                        0,
+                        25
+                      )}...`}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography variant="h5" weight="bold">
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
+                  </Typography>
+                )}
                 <button
                   type="button"
                   className="_flexbox__row__center gap-2.5"

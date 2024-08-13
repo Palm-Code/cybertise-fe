@@ -11,13 +11,13 @@ const ChatBubble = ({
   data: I_GetChatListItemSuccessResponse["data"];
   ticket_type?: "Hacker" | "Company";
 }) => {
-  const mutations = useGetMutationState();
+  // const mutations = useGetMutationState();
 
   return (
-    <div className="flex h-fit w-full flex-col-reverse items-start justify-start gap-6">
-      {mutations?.map((item, idx) => (
+    <div className="flex h-fit w-full flex-col-reverse items-start justify-start gap-6 pb-4">
+      {/* {mutations?.map((item, idx) => (
         <Sender data={item} key={`sender-mutation-${idx}`} isLoading />
-      ))}
+      ))} */}
       {data &&
         data.map((item, idx) => {
           if (item.sender === "Summary")

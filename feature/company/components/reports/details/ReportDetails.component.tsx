@@ -8,6 +8,7 @@ import {
   Indicator,
   Loader,
   Tiptap,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
@@ -219,9 +220,20 @@ const ReportDetails = ({ id }: { id: string }) => {
                   className="cursor-pointer"
                   onClick={back}
                 />
-                <Typography variant="h5" weight="bold">
-                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
-                </Typography>
+                {ticketDetails.title.length > 25 ? (
+                  <Tooltip content={ticketDetails.title}>
+                    <Typography variant="h5" weight="bold">
+                      {`#${ticketDetails.code}: ${ticketDetails.title.substring(
+                        0,
+                        25
+                      )}...`}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography variant="h5" weight="bold">
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
+                  </Typography>
+                )}
                 <Badge
                   variant={
                     ticketDetails.risk_level_category.toLowerCase() as keyof typeof badgeVariants

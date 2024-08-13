@@ -7,6 +7,7 @@ import {
   Indicator,
   Loader,
   Tiptap,
+  Tooltip,
   Typography,
 } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
@@ -27,13 +28,14 @@ import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
 
+let firstRender = true;
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isError, fetchNextPage, isFetchingNextPage } =
+  const { data, isSuccess, isError, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
   const { ref, inView } = useInView({ threshold: 0.5 });
   const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
@@ -46,20 +48,17 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { mutateAsync, isPending } = usePostChatItem();
 
   const scrollView = () => {
-    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    setTimeout(() => {
+      chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    }, 1000);
   };
 
-  const [firstRender, setIsFirstRender] = useState<boolean>(true);
-
-  useEffect(() => {
+  if (isSuccess) {
     if (firstRender) {
+      firstRender = false;
       scrollView();
     }
-
-    return () => {
-      setIsFirstRender(false);
-    };
-  }, [data, firstRender]);
+  }
 
   useEffect(() => {
     if (inView) {
@@ -120,9 +119,20 @@ const ReportDetails = ({ id }: { id: string }) => {
               )}
             >
               <div className="_flexbox__col__start__start gap-4">
-                <Typography variant="h5" weight="bold">
-                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
-                </Typography>
+                {ticketDetails.title.length > 25 ? (
+                  <Tooltip content={ticketDetails.title}>
+                    <Typography variant="h5" weight="bold">
+                      {`#${ticketDetails.code}: ${ticketDetails.title.substring(
+                        0,
+                        25
+                      )}...`}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography variant="h5" weight="bold">
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
+                  </Typography>
+                )}
                 <Badge
                   variant={
                     ticketDetails.risk_level_category.toLowerCase() as any
@@ -204,9 +214,20 @@ const ReportDetails = ({ id }: { id: string }) => {
                   className="cursor-pointer"
                   onClick={back}
                 />
-                <Typography variant="h5" weight="bold">
-                  {`#${ticketDetails.code}: ${ticketDetails.title}`}
-                </Typography>
+                {ticketDetails.title.length > 25 ? (
+                  <Tooltip content={ticketDetails.title}>
+                    <Typography variant="h5" weight="bold">
+                      {`#${ticketDetails.code}: ${ticketDetails.title.substring(
+                        0,
+                        25
+                      )}...`}
+                    </Typography>
+                  </Tooltip>
+                ) : (
+                  <Typography variant="h5" weight="bold">
+                    {`#${ticketDetails.code}: ${ticketDetails.title}`}
+                  </Typography>
+                )}
                 <Badge
                   variant={
                     ticketDetails.risk_level_category.toLowerCase() as any

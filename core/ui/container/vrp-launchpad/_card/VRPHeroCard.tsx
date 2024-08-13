@@ -36,8 +36,8 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
           <div className="_flexbox__col__start__start gap-3">
             <Tooltip content={initialData?.title || ""}>
               <Typography variant="h5" weight={"bold"}>
-                {initialData?.title && initialData?.title?.length > 100
-                  ? initialData?.title?.substring(0, 100) + "..."
+                {initialData?.title && initialData?.title?.length > 50
+                  ? initialData?.title?.substring(0, 50) + "..."
                   : initialData?.title}
               </Typography>
             </Tooltip>

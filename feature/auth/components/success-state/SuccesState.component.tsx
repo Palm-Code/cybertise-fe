@@ -55,7 +55,12 @@ const SuccessState = ({
             <Typography variant="h4" weight="semibold">
               Authenticate Your Account
             </Typography>
-            <Typography variant="p" affects="small" align="center">
+            <Typography
+              variant="p"
+              affects="small"
+              align="center"
+              className="auto__phrase"
+            >
               Protecting your account is our top priority. Please confirm your
               activity by clicking the magic sent to your email:
             </Typography>
