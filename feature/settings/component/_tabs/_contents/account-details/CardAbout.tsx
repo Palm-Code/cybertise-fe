@@ -66,8 +66,8 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       const url = URL.createObjectURL(file);
-      setValue("logo", url, { shouldValidate: true });
       mutate(file).then((data) => {
+        setValue("logo", url, { shouldValidate: true });
         setValue("attachment_id", data?.data?.id, { shouldValidate: true });
       });
     }

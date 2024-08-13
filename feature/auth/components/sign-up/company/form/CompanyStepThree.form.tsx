@@ -126,7 +126,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             />
             <Typography variant="p" affects="normal">
               I have read and accepted the all sites{" "}
-              <Link href={"/privacy-policy"} className="underline">
+              <Link target="_blank" href={"/policy"} className="underline">
                 Policies
               </Link>
             </Typography>

@@ -35,8 +35,8 @@ export const useGetChatListItem = (
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined,
     refetchOnMount: true,
+    refetchOnWindowFocus: true,
     refetchInterval: 10000,
-    staleTime: 6 * 1000 * 60,
   });
 
   if (query.error) {

@@ -13,18 +13,21 @@ export const usePostTempFiles = () => {
       formData.append("content", payload.name);
       return fetchPostTempFiles(formData);
     },
+    onError: (error) => {
+      mutation.reset();
+      toast.error(error.message, {
+        position: "bottom-right",
+        action: {
+          label: "retry",
+          onClick: () => {
+            mutation.mutate(mutation.variables as File);
+          },
+        },
+      });
+    },
   });
 
   if (mutation.isError) {
-    toast.error(mutation.error.message, {
-      position: "bottom-right",
-      action: {
-        label: "retry",
-        onClick: () => {
-          mutation.mutate(mutation.variables);
-        },
-      },
-    });
   }
 
   return mutation;

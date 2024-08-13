@@ -15,6 +15,8 @@ export const useGetTicketDetails = (id: string) => {
     refetchInterval: 10000,
     staleTime: 6 * 60 * 1000,
     refetchIntervalInBackground: true,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   if (query.error) {
