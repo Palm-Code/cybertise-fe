@@ -29,7 +29,12 @@ export const Legal = ({
             />
           </div>
           <div className="relative z-20 my-auto flex flex-col gap-2">
-            <Typography variant="h1" align="center" weight="bold">
+            <Typography
+              variant="h1"
+              align="center"
+              weight="bold"
+              className="!text-white"
+            >
               {data.title}
             </Typography>
             <Typography

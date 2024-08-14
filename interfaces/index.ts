@@ -36,6 +36,7 @@ export interface I_TableReportTicketData {
 export interface FileWithUrl {
   name: string;
   url: string;
+  uuid?: string;
   size: number;
   mime_type?: string;
   file_id?: string;

@@ -79,6 +79,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
             if (size > 5e7) {
               toast.error("File size should be less than 50MB", {
                 position: "bottom-right",
+                duration: 1000,
               });
               return;
             }
@@ -103,6 +104,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               .then((res: AxiosResponse<I_PostTempFilesResponse>) => {
                 toast.success("File uploaded successfully", {
                   position: "bottom-right",
+                  duration: 1000,
                 });
                 const files = [
                   {
@@ -124,6 +126,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               .catch((err) => {
                 toast.error("Error uploading file", {
                   position: "bottom-right",
+                  duration: 1000,
                 });
                 setErrorFiles((prev) => {
                   return [...prev, name];
@@ -137,6 +140,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
       } catch (error) {
         toast.error("Error uploading file", {
           position: "bottom-right",
+          duration: 1000,
         });
       }
     };
@@ -164,6 +168,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               if (size > 5e7) {
                 toast.error("File size should be less than 50MB", {
                   position: "bottom-right",
+                  duration: 1000,
                 });
                 return;
               }
@@ -186,6 +191,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 .then((res: AxiosResponse<I_PostTempFilesResponse>) => {
                   toast.success("File uploaded successfully", {
                     position: "bottom-right",
+                    duration: 1000,
                   });
 
                   const files = [
@@ -208,6 +214,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 .catch((err) => {
                   toast.error("Error uploading file", {
                     position: "bottom-right",
+                    duration: 1000,
                   });
                   setErrorFiles((prev) => {
                     return [...prev, name];

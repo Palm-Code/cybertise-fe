@@ -4,6 +4,7 @@ import {
   Badge,
   Button,
   Card,
+  FileInput,
   Indicator,
   Loader,
   Tiptap,
@@ -44,7 +45,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
-  const [files, setFiles] = useState<SendReportRequestType["files"]>();
+  const [files, setFiles] = useState<SendReportRequestType["files"]>([]);
   const { mutateAsync, isPending } = usePostChatItem();
 
   const scrollView = () => {
@@ -304,29 +305,43 @@ const ReportDetails = ({ id }: { id: string }) => {
             />
           </div>
         )}
-        <ModalSendAttachment
-          files={files}
-          onChangeFiles={(v) => {
-            setFiles(v);
-          }}
-          description={description}
-          isOpen={openAttachment}
-          onClose={() => {
-            setFiles(undefined);
-            setAttachments([]);
-            setOpenAttachment(false);
-          }}
-          onChangeAttachment={(v) => {
-            setAttachments(v);
-          }}
-          attachment={attachments}
-          onChangeValue={(v) => {
-            setDescription(v);
-          }}
-          onClickSendAttachment={sendMessage}
-          isLoading={isPending}
-        />
       </Desktop>
+      <ModalSendAttachment
+        files={files}
+        onChangeFiles={(v, type) => {
+          if (type === "put") {
+            setFiles((prev) => [...(prev ?? []), ...(v ?? [])]);
+            return;
+          }
+          if (type === "delete") {
+            setFiles(v);
+            return;
+          }
+        }}
+        onChangeAttachment={(v, type) => {
+          if (type === "put") {
+            setAttachments((prev) => [...(prev ?? []), v]);
+            return;
+          }
+          if (type === "delete") {
+            setAttachments((prev) => prev?.filter((file) => file !== v));
+            return;
+          }
+        }}
+        description={description}
+        isOpen={openAttachment}
+        onClose={() => {
+          setFiles(undefined);
+          setAttachments([]);
+          setOpenAttachment(false);
+        }}
+        attachment={attachments}
+        onChangeValue={(v) => {
+          setDescription(v);
+        }}
+        onClickSendAttachment={sendMessage}
+        isLoading={isPending}
+      />
       <div ref={chatRef}></div>
     </>
   );

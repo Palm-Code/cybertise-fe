@@ -445,8 +445,25 @@ const ReportDetails = ({ id }: { id: string }) => {
         )}
         <ModalSendAttachment
           files={files}
-          onChangeFiles={(v) => {
-            setFiles(v);
+          onChangeFiles={(v, type) => {
+            if (type === "put") {
+              setFiles((prev) => [...(prev ?? []), ...(v ?? [])]);
+              return;
+            }
+            if (type === "delete") {
+              setFiles(v);
+              return;
+            }
+          }}
+          onChangeAttachment={(v, type) => {
+            if (type === "put") {
+              setAttachments((prev) => [...(prev ?? []), v]);
+              return;
+            }
+            if (type === "delete") {
+              setAttachments((prev) => prev?.filter((file) => file !== v));
+              return;
+            }
           }}
           description={description}
           isOpen={openAttachment}
@@ -454,9 +471,6 @@ const ReportDetails = ({ id }: { id: string }) => {
             setFiles(undefined);
             setAttachments([]);
             setOpenAttachment(false);
-          }}
-          onChangeAttachment={(v) => {
-            setAttachments(v);
           }}
           attachment={attachments}
           onChangeValue={(v) => {

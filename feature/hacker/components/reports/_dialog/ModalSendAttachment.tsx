@@ -14,10 +14,10 @@ interface I_ModalSendAttachmentProps {
   onClickSendAttachment: () => void;
   description?: string;
   attachment?: string[];
-  onChangeAttachment: (v: string[]) => void;
   onChangeValue: (v: string) => void;
   files?: FileWithUrl[];
-  onChangeFiles: (v?: FileWithUrl[]) => void;
+  onChangeAttachment: (v: string, type?: "put" | "delete") => void;
+  onChangeFiles: (v?: FileWithUrl[], type?: "put" | "delete") => void;
   isLoading?: boolean;
 }
 
@@ -30,19 +30,21 @@ const ModalSendAttachment = ({
   onChangeAttachment,
   onChangeValue,
   files,
-  onChangeFiles,
+  onChangeFiles = () => {},
   isLoading,
 }: I_ModalSendAttachmentProps) => {
   const onFileSelected = (v: string, file: FileWithUrl[]) => {
-    const newFilesValue = [...(files ? files : []), ...file];
-    onChangeAttachment([...(attachment ?? []), v]);
-    onChangeFiles(newFilesValue);
+    onChangeAttachment(v, "put");
+    onChangeFiles(file, "put");
   };
 
   const onFileRemoved = (v?: string) => {
     if (!v) return;
-    onChangeFiles(files?.filter((file) => file.file_id !== v));
-    onChangeAttachment(attachment?.filter((file) => file !== v) ?? []);
+    onChangeFiles(
+      files?.filter((file) => file.file_id !== v),
+      "delete"
+    );
+    onChangeAttachment(v, "delete");
   };
 
   return (
@@ -67,7 +69,7 @@ const ModalSendAttachment = ({
             <FileInput
               fileValues={files}
               onFileRemoved={onFileRemoved}
-              onFileSelected={(v, file) => onFileSelected(v, file)}
+              onFileSelected={onFileSelected}
             />
             <Tiptap
               description={description ?? ""}
