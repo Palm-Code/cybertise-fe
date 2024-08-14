@@ -1,6 +1,7 @@
 export type NavbarType = {
   title: string;
   path: string;
+  key: string;
 };
 
 export enum Role {

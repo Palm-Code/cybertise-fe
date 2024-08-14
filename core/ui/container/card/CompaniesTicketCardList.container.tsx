@@ -61,16 +61,16 @@ const TicketCard = ({
                         ?.map((item, idx) => (
                           <Badge
                             key={`asset_types-${idx}`}
-                            variant={item.value as keyof typeof badgeVariants}
+                            variant={item.label as keyof typeof badgeVariants}
                           >
-                            {item.label}
+                            {item.value}
                           </Badge>
                         ))
                         .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
                       <Tooltip
                         content={props.asset_types
-                          .map((item) => item.label)
+                          .map((item) => item.value)
                           .join(", ")}
                       >
                         <Badge variant="default">

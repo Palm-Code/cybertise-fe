@@ -29,64 +29,78 @@ export const menuItems: MenuItemType = {
     {
       title: "Dashboard",
       path: "/dashboard",
+      key: "getChatList",
     },
     {
       title: "Programs",
       path: "/programs",
+      key: "getProgramList",
     },
     {
       title: "Reports",
       path: "/reports",
+      key: "getChatList",
     },
   ],
   mediator: [
     {
       title: "Dashboard",
       path: "/dashboard",
+      key: "getChatList",
     },
     {
       title: "VRP Launchpad",
       path: "/vrp-launchpad",
+      key: "getProgramList",
     },
     {
       title: "Companies",
       path: "/companies",
+      key: "getCompanyList",
     },
     {
       title: "Reports",
       path: "/reports",
+      key: "getChatList",
     },
   ],
   company: [
     {
       title: "Dashboard",
       path: "/dashboard",
+      key: "getChatList",
     },
     {
       title: "Reports",
       path: "/reports",
+      key: "getChatList",
     },
     {
       title: "VRP Management",
       path: "/vrp-launchpad",
+      key: "getProgramList",
     },
     {
       title: "Manage Company",
       path: "/manage-company",
+      key: "getUserProfile",
     },
   ],
   "company staff": [
     {
       title: "Dashboard",
       path: "/dashboard",
+      key: "getChatList",
     },
     {
       title: "Reports",
       path: "/reports",
+      key: "getChatList",
     },
     {
       title: "VRP Management",
       path: "/vrp-launchpad",
+      key: "getProgramList",
     },
   ],
 };

@@ -24,16 +24,16 @@ const SingleVrp = ({
     rules: <RnP data={data?.rules ?? null} />,
     scope: <Scope id={data?.id || ""} assetTypes={assetTypes} />,
     updates: <UpdateList data={data?.latest_updates} />,
-    thanks: data?.company?.thanks_message ? (
-      <Thanks data={data?.company?.thanks_message} />
-    ) : (
-      <EmptState
-        type="update"
-        variant="hacker"
-        buttonText=""
-        titleText="You Have No Thanks Message"
-      />
-    ),
+    // thanks: data?.company?.thanks_message ? (
+    //   <Thanks data={data?.company?.thanks_message} />
+    // ) : (
+    //   <EmptState
+    //     type="update"
+    //     variant="hacker"
+    //     buttonText=""
+    //     titleText="You Have No Thanks Message"
+    //   />
+    // ),
   };
   return (
     <>

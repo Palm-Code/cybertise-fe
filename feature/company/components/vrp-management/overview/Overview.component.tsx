@@ -42,16 +42,16 @@ const Overview = ({ id }: { id: string }) => {
         data={programListDetails?.data?.latest_updates || []}
       />
     ),
-    thanks: programListDetails?.data?.company?.thanks_message ? (
-      <Thanks data={programListDetails?.data?.company?.thanks_message} />
-    ) : (
-      <EmptyState
-        titleText="You Have No Thanks Message"
-        variant="company"
-        type="update"
-        buttonText=""
-      />
-    ),
+    // thanks: programListDetails?.data?.company?.thanks_message ? (
+    //   <Thanks data={programListDetails?.data?.company?.thanks_message} />
+    // ) : (
+    //   <EmptyState
+    //     titleText="You Have No Thanks Message"
+    //     variant="company"
+    //     type="update"
+    //     buttonText=""
+    //   />
+    // ),
   };
 
   if (isLoading || isFetching) return <Loader variant="company" />;

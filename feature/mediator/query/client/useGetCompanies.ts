@@ -14,8 +14,7 @@ export const useGetCompanies = (payload?: I_GetParamsPayload) => {
   const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
-      "getcCompaniesMobile",
-      payload?.params?.page,
+      "getCompanyList",
       payload?.params?.filter,
       payload?.params?.sort,
     ],
@@ -40,7 +39,7 @@ export const useGetCompanies = (payload?: I_GetParamsPayload) => {
 
   const query = useQuery<I_GetCompaniesSuccessResponse, I_GetErrorResponse>({
     queryKey: [
-      "getcCompanies",
+      "getCompanyList",
       payload?.params?.page,
       payload?.params?.filter,
       payload?.params?.sort,

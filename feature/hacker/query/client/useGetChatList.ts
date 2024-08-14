@@ -13,11 +13,7 @@ import { useMediaQuery } from "usehooks-ts";
 export const useGetChatList = (payload?: I_GetParamsPayload) => {
   const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
-    queryKey: [
-      "getChatListMobile",
-      payload?.params?.filter,
-      payload?.params?.sort,
-    ],
+    queryKey: ["getChatList", payload?.params?.filter, payload?.params?.sort],
     queryFn: (pageParam) =>
       fetchGetChatList({
         params: {
@@ -35,6 +31,8 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
         : undefined;
     },
     enabled: isMobileDevice,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
   });
 
   const query = useQuery<I_GetChatListSuccessResponse, I_GetErrorResponse>({
@@ -47,6 +45,8 @@ export const useGetChatList = (payload?: I_GetParamsPayload) => {
     queryFn: () => fetchGetChatList(payload),
     placeholderData: keepPreviousData,
     enabled: !isMobileDevice,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   return { queryDesktop: query, queryMobile: queryInfinity };

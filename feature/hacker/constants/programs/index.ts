@@ -250,10 +250,10 @@ export const programDetailTabItems: SortFilterType[] = [
     label: "Updates",
     value: "updates",
   },
-  {
-    label: "Thanks",
-    value: "thanks",
-  },
+  // {
+  //   label: "Thanks",
+  //   value: "thanks",
+  // },
 ];
 
 export const programDetailTabMultipleItems: SortFilterType[] = [

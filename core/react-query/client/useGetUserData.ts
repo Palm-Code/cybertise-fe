@@ -11,7 +11,7 @@ export const useGetUserData = (refetch?: boolean) => {
   >({
     queryKey: ["getUserData"],
     queryFn: () => fetchGetUserData(),
-    refetchOnMount: refetch,
+    refetchOnMount: refetch || false,
   });
 
   if (query.error) {

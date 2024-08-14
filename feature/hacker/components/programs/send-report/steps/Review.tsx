@@ -18,7 +18,6 @@ import {
 } from "@/core/ui/components";
 import { Download, Eye, File } from "lucide-react";
 import { cn } from "@/core/lib/utils";
-import { fileDownload } from "@/utils/file-download";
 import {
   useGetAssetTypeDetails,
   useGetDownloadFiles,
@@ -50,20 +49,17 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
   if (assetTypeLoading || targetAssetLoading)
     return <Loader variant={variant} />;
 
-  if (data && defaultData)
+  if (data)
     return (
       <div className="_flexbox__col__start__start w-full gap-6 bg-transparent">
         <BugTargetCard
           target_assets={{
-            label:
-              defaultData?.targetAssets && data?.target_asset_id
-                ? target_asset?.asset_type.value
-                : asset_type?.value,
-            value: defaultData?.targetAssets
-              ? data?.target_asset_id
-                ? target_asset?.asset_type.label
-                : asset_type?.label
-              : "default",
+            label: data?.target_asset_id
+              ? target_asset?.asset_type.value
+              : asset_type?.value,
+            value: data?.target_asset_id
+              ? target_asset?.asset_type.label
+              : asset_type?.label,
             content: data?.custom_ta_value || target_asset?.content,
           }}
           vulnerability_type={

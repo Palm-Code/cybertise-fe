@@ -15,16 +15,7 @@ const Summary = ({
   data: I_GetChatListItemSuccessResponse["data"][0];
   ticket_type: "Hacker" | "Company";
 }) => {
-  const { data: assetType } = useGetAssetType();
-  const { data: targetAsset } = useGetTargetAsset({
-    params: {
-      filter: {
-        id: data.chat_ticket?.target_asset_id,
-      },
-    },
-  });
   const { data: vulnerabilityType } = useGetVulnerabilityType();
-
   return (
     <div className="grid max-h-full w-full grid-cols-[auto_1fr] place-items-start content-start gap-3">
       <div className="_flexbox__col__center__start h-full w-fit gap-3">
@@ -48,9 +39,7 @@ const Summary = ({
         <Review
           data={data.chat_ticket}
           defaultData={{
-            assetType: assetType ?? [],
-            targetAssets: targetAsset?.data ?? [],
-            vulnerabilityType: vulnerabilityType ?? [],
+            vulnerabilityType: vulnerabilityType,
           }}
         />
         <Typography

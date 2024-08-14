@@ -29,14 +29,13 @@ import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
 
-let firstRender = true;
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
-  const { data, isSuccess, isError, fetchNextPage, isFetchingNextPage } =
+  const { data, isError, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
   const { ref, inView } = useInView({ threshold: 0.5 });
   const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
@@ -51,15 +50,14 @@ const ReportDetails = ({ id }: { id: string }) => {
   const scrollView = () => {
     setTimeout(() => {
       chatRef?.current?.scrollIntoView({ behavior: "instant" });
-    }, 1000);
+    }, 100);
   };
 
-  if (isSuccess) {
-    if (firstRender) {
-      firstRender = false;
+  useEffect(() => {
+    if (data?.pages.length === 1) {
       scrollView();
     }
-  }
+  }, [data]);
 
   useEffect(() => {
     if (inView) {

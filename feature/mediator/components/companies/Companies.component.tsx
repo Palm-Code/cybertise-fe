@@ -69,7 +69,12 @@ const Companies = () => {
         isLoading={isLoading || isFetching}
       />
     ),
-    grid: <CompaniesGridView data={companyData?.data} />,
+    grid: (
+      <CompaniesGridView
+        data={companyData?.data}
+        isLoading={isLoading || isFetching}
+      />
+    ),
   };
 
   useEffect(() => {

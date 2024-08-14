@@ -64,20 +64,16 @@ const ReportDetails = ({ id }: { id: string }) => {
   );
 
   const scrollView = () => {
-    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    setTimeout(() => {
+      chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    }, 100);
   };
 
-  const [firstRender, setIsFirstRender] = useState<boolean>(true);
-
   useEffect(() => {
-    if (firstRender) {
+    if (data?.pages.length === 1) {
       scrollView();
     }
-
-    return () => {
-      setIsFirstRender(false);
-    };
-  }, [data, firstRender]);
+  }, [data]);
 
   useEffect(() => {
     if (inView) {

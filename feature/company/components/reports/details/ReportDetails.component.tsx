@@ -30,7 +30,6 @@ import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
 
-let firstRender = true;
 const ReportDetails = ({ id }: { id: string }) => {
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
@@ -50,20 +49,16 @@ const ReportDetails = ({ id }: { id: string }) => {
   const { mutateAsync, isPending } = usePostChatItem();
 
   const scrollView = () => {
-    chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    setTimeout(() => {
+      chatRef?.current?.scrollIntoView({ behavior: "instant" });
+    }, 100);
   };
 
-  const [firstRender, setIsFirstRender] = useState<boolean>(true);
-
   useEffect(() => {
-    if (firstRender) {
+    if (data?.pages.length === 1) {
       scrollView();
     }
-
-    return () => {
-      setIsFirstRender(false);
-    };
-  }, [data, firstRender]);
+  }, [data]);
 
   useEffect(() => {
     if (inView) {

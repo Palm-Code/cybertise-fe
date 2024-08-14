@@ -14,9 +14,8 @@ import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
 import { VrpManagement } from "../../icons";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { borderColor, menuItems } from "@/core/constants/common";
-import { Desktop, Mobile } from "..";
 import {
   Avatar,
   Sheet,
@@ -28,6 +27,7 @@ import {
 import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
 import { useGetUserData, usePostLogout } from "@/core/react-query/client";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -46,6 +46,7 @@ const iconsObject: { [key: string]: React.ReactNode } = {
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
+  const queryClient = useQueryClient();
   const { theme } = useTheme();
   const pathname = usePathname();
   const menu = menuItems[type as keyof typeof menuItems];
@@ -99,6 +100,15 @@ const Sidebar = ({ type }: SidebarProps) => {
                         ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
                         : "border-transparent bg-transparent font-normal dark:border-transparent"
                     )}
+                    onClick={(e) => {
+                      if (item.path === pathname) {
+                        e.preventDefault();
+                        queryClient.invalidateQueries({
+                          queryKey: [item.key],
+                        });
+                        return;
+                      }
+                    }}
                   >
                     {iconsObject[item.title.toLowerCase()]}
                     <Typography variant="p" affects="normal">
@@ -163,7 +173,7 @@ const Sidebar = ({ type }: SidebarProps) => {
           )}
         >
           <div className="_flexbox__col__start w-full gap-8">
-            <Link href="/dashboard" className="px-12 py-3">
+            <Link href="/dashboard" prefetch replace className="px-12 py-3">
               <Logo className="h-[68px] w-[182px]" />
             </Link>
             <div className="_flexbox__col__center w-full gap-4 pr-5">
@@ -171,6 +181,8 @@ const Sidebar = ({ type }: SidebarProps) => {
                 <Link
                   key={`navbar-item-${index}`}
                   href={item.path}
+                  replace
+                  prefetch
                   className={cn(
                     "_flexbox__row__center__start h-16 w-full gap-4",
                     "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
@@ -180,6 +192,15 @@ const Sidebar = ({ type }: SidebarProps) => {
                       ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
                       : "border-transparent bg-transparent font-normal dark:border-transparent"
                   )}
+                  onClick={(e) => {
+                    if (item.path === pathname) {
+                      e.preventDefault();
+                      queryClient.invalidateQueries({
+                        queryKey: [item.key],
+                      });
+                      return;
+                    }
+                  }}
                 >
                   {iconsObject[item.title.toLowerCase()]}
                   <Typography variant="p" affects="normal">

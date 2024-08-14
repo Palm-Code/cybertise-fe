@@ -16,7 +16,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
   const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
-      "getProgramListMobile",
+      "getProgramList",
       payload?.params?.filter,
       payload?.params?.sort,
     ],

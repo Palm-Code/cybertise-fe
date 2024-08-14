@@ -60,10 +60,10 @@ export const companyTabsItem: SortFilterType[] = [
     label: "Active Tickets",
     value: "active_tickets",
   },
-  {
-    label: "Thanks",
-    value: "thanks",
-  },
+  // {
+  //   label: "Thanks",
+  //   value: "thanks",
+  // },
   // {
   //   label: "Collaborators",
   //   value: "collaborators",
