@@ -26,6 +26,11 @@ export const useGetAccessToken = () => {
       const cookies = new Cookies();
       cookies.set("token", data.data["access-token"], { path: "/" });
       if (!!variables.totp) {
+        if (!!callbackUrl) {
+          window.location.href = callbackUrl;
+          localStorage.removeItem("callbackUrl");
+          return;
+        }
         push("/");
       }
     },
