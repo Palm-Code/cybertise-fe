@@ -15,6 +15,7 @@ interface I_ChatTicket {
   related_ticket_id: string | null;
   target_asset_id: string;
   vulnerabiity_type_id: string;
+  custom_vulnerability: string;
   risk_level: number;
   ticket_type: string;
   status: string;

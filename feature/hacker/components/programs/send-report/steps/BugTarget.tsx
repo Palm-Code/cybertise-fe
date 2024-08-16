@@ -41,6 +41,8 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
   const forms = getValues();
   const [manualRisk, setManualRisk] = useState<boolean>(false);
   const [other, setOther] = useState<boolean>(false);
+  const [isOtherVulnerabilityType, setIsOtherVulnerabilityType] =
+    useState<boolean>(false);
 
   return (
     <>
@@ -189,11 +191,13 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
         <SelectDropdown
           label="Vulnerability Type"
           value={
-            (forms.vulnerabiity_type_id &&
-              (defaultData?.vulnerabilityType?.find(
-                (item) => item.id === forms.vulnerabiity_type_id
-              )?.value as string)) ||
-            "other"
+            isOtherVulnerabilityType
+              ? "other"
+              : (forms.vulnerabiity_type_id &&
+                  (defaultData?.vulnerabilityType?.find(
+                    (item) => item.id === forms.vulnerabiity_type_id
+                  )?.value as string)) ||
+                ""
           }
           options={defaultData?.vulnerabilityType ?? []}
           onValueChange={(v) => {
@@ -201,6 +205,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               setValue("vulnerabiity_type_id", null, {
                 shouldValidate: true,
               });
+              setIsOtherVulnerabilityType(true);
               return;
             }
             const vulnerability_type_id = defaultData?.vulnerabilityType?.find(
@@ -216,7 +221,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           wrapperClassName="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100"
           isError={!forms.vulnerabiity_type_id}
         />
-        {!forms.vulnerabiity_type_id && (
+        {isOtherVulnerabilityType && (
           <Input
             type="text"
             label="Custom Type"

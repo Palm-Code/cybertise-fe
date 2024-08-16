@@ -5,7 +5,6 @@ import { Button, Card, Loader } from "@/core/ui/components";
 import Typography, {
   typographyVariants,
 } from "@/core/ui/components/typography/typography";
-import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { ChatBubble } from "@/feature/mediator/containers";
 import Summary from "@/feature/mediator/containers/reports/details/type/Summary";
@@ -34,12 +33,21 @@ const NewCompanyReport = () => {
   const initialData =
     chatData && chatData.pages.flatMap((item) => item.data.map((item) => item));
 
-  const [activeCard, setActiveCard] = useState<string | null>("chat");
+  const initialChatTicket = initialData?.filter(
+    (item) => item.sender === "Summary"
+  ) as I_Data[];
+  const [activeInitialCard, setActiveInitialCard] = useState<boolean>(true);
+  const [activeChatCard, setActiveChatCard] = useState<boolean>(false);
 
-  const handleCardClick = (category: string) => {
-    setActiveCard((prevActiveCard) =>
-      prevActiveCard === category ? null : category
-    );
+  const handleCardClick = (category: "initial" | "chat") => {
+    switch (category) {
+      case "initial":
+        setActiveInitialCard(!activeInitialCard);
+        break;
+      case "chat":
+        setActiveChatCard(!activeChatCard);
+        break;
+    }
   };
 
   useEffect(() => {
@@ -59,10 +67,10 @@ const NewCompanyReport = () => {
 
   return (
     <>
-      <Mobile>
+      <div className="wrapper__mobile">
         <EmptyState variant="mediator" type="default" />
-      </Mobile>
-      <Desktop>
+      </div>
+      <div className="wrapper__desktop">
         <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <div
             className={cn(
@@ -105,7 +113,7 @@ const NewCompanyReport = () => {
                 <Typography variant="h5" weight="bold">
                   {`#${chatData?.pages[0].data[0].chat_ticket?.code}: ${chatData?.pages[0].data[0].chat_ticket?.title}`}
                 </Typography>
-                {/* <div className="w-full">
+                <div className="w-full">
                   <Card
                     isButton
                     className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100"
@@ -123,13 +131,13 @@ const NewCompanyReport = () => {
                       <ChevronDown
                         className={cn(
                           "cursor-pointer transition-transform duration-300",
-                          activeCard === "initial" ? "rotate-180" : "rotate-0"
+                          activeInitialCard ? "rotate-180" : "rotate-0"
                         )}
                       />
                     </div>
                   </Card>
                   <AnimatePresence>
-                    {activeCard === "initial" && (
+                    {activeInitialCard && (
                       <motion.div
                         key="content"
                         initial={{ height: 0, marginTop: "0px" }}
@@ -141,13 +149,13 @@ const NewCompanyReport = () => {
                         <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
                           <Summary
                             ticket_type="Hacker"
-                            data={initialChatTicket}
+                            data={initialChatTicket[0]}
                           />
                         </Card>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div> */}
+                </div>
                 <div className="w-full">
                   <Card
                     isButton
@@ -171,13 +179,13 @@ const NewCompanyReport = () => {
                       <ChevronDown
                         className={cn(
                           "cursor-pointer transition-transform duration-300",
-                          activeCard === "chat" ? "rotate-180" : "rotate-0"
+                          activeChatCard ? "rotate-180" : "rotate-0"
                         )}
                       />
                     </div>
                   </Card>
                   <AnimatePresence>
-                    {activeCard === "chat" && (
+                    {activeChatCard && (
                       <motion.div
                         key="content"
                         initial={{ height: 0, marginTop: "0px" }}
@@ -206,7 +214,7 @@ const NewCompanyReport = () => {
             </div>
           </div>
         </div>
-      </Desktop>
+      </div>
     </>
   );
 };
