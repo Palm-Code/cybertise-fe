@@ -66,6 +66,7 @@ export interface I_GetProgramListSuccessResponse {
 }
 
 export interface I_GetErrorResponse {
+  code: number;
   message: string;
   documentation: string;
 }

@@ -180,25 +180,58 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           </AnimatePresence>
         </div>
       </Card>
-      <SelectDropdown
-        label="Vulnerability Type"
-        value={
-          defaultData?.vulnerabilityType?.find(
-            (item) => item.id === forms.vulnerabiity_type_id
-          )?.value as string
-        }
-        options={defaultData?.vulnerabilityType ?? []}
-        onValueChange={(v) => {
-          const vulnerability_type_id = defaultData?.vulnerabilityType?.find(
-            (item) => item.value === v
-          )?.id;
-
-          setValue("vulnerabiity_type_id", vulnerability_type_id as string, {
-            shouldValidate: true,
-          });
-        }}
-        isError={!forms.vulnerabiity_type_id}
-      />
+      <Card
+        className={cn(
+          "rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90",
+          "_flexbox__col__start__start gap-4"
+        )}
+      >
+        <SelectDropdown
+          label="Vulnerability Type"
+          value={
+            (forms.vulnerabiity_type_id &&
+              (defaultData?.vulnerabilityType?.find(
+                (item) => item.id === forms.vulnerabiity_type_id
+              )?.value as string)) ||
+            "other"
+          }
+          options={defaultData?.vulnerabilityType ?? []}
+          onValueChange={(v) => {
+            if (v === "other") {
+              setValue("vulnerabiity_type_id", null, {
+                shouldValidate: true,
+              });
+              return;
+            }
+            const vulnerability_type_id = defaultData?.vulnerabilityType?.find(
+              (item) => item.value === v
+            )?.id;
+            setValue("vulnerabiity_type_id", vulnerability_type_id as string, {
+              shouldValidate: true,
+            });
+            setValue("custom_vulnerability", null, {
+              shouldValidate: true,
+            });
+          }}
+          wrapperClassName="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100"
+          isError={!forms.vulnerabiity_type_id}
+        />
+        {!forms.vulnerabiity_type_id && (
+          <Input
+            type="text"
+            label="Custom Type"
+            placeholderText="Enter your vulnerability type"
+            value={forms.custom_vulnerability || ""}
+            onChange={(e) =>
+              setValue("custom_vulnerability", e.target.value, {
+                shouldValidate: true,
+              })
+            }
+            maxLength={255}
+            wrapperClassName="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100"
+          />
+        )}
+      </Card>
       <CsvssCalculator
         isManualRisk={manualRisk}
         onChangeManualRisk={() => {

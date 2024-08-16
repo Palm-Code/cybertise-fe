@@ -39,22 +39,18 @@ export const sendReportFormSchema = z.object({
     })
     .min(1, { message: "Target asset is required" })
     .optional(),
-  vulnerabiity_type_id: z
-    .string({
-      required_error: "Vulnerability type is required",
-      invalid_type_error: "Vulnerability type is required",
-    })
-    .min(1, { message: "Vulnerability type is required" }),
+  vulnerabiity_type_id: z.string().nullable(),
   risk_level: z
     .number({
       required_error: "Risk level is required",
       invalid_type_error: "Risk level is required",
     })
     .min(1, { message: "Risk level is required" }),
+  custom_vulnerability: z.string().nullable(),
   ticket_type: z.string().min(1, { message: "Ticket type is required" }),
   program_id: z.string().optional(),
   attachments: z.array(z.string()).optional(),
-  custom_ta_asset_type_id: z.string().optional(),
+  custom_ta_asset_type_id: z.string().nullable().optional(),
   custom_ta_value: z.string().optional(),
   files: z
     .array(

@@ -139,7 +139,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <input
                   className={cn(
                     "absolute my-auto w-full bg-transparent text-neutral-light-0 disabled:cursor-not-allowed",
-                    "peer appearance-none placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+                    "peer appearance-none placeholder:mt-1 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
                     "inset-0 mt-0.5 h-full focus:outline-none focus:ring-0 dark:text-white",
                     prefixIcon && "pl-4",
                     iconValue ? "mt-2.5 pl-11" : "px-4",

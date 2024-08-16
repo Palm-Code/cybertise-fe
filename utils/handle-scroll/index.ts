@@ -3,9 +3,7 @@ export const handleClickScroll = (
   duration: number,
   offset: number = 0
 ) => {
-  console.log("triggered");
   const element = document.getElementById(value.toLowerCase());
-  console.log(element);
   if (element) {
     const start = window.pageYOffset;
     const target = element.getBoundingClientRect().top - offset;

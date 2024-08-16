@@ -63,9 +63,10 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
             content: data?.custom_ta_value || target_asset?.content,
           }}
           vulnerability_type={
-            defaultData?.vulnerabilityType?.find(
+            data.custom_vulnerability ||
+            (defaultData?.vulnerabilityType?.find(
               (item) => item.id === data?.vulnerabiity_type_id
-            )?.label as string
+            )?.label as string)
           }
           risk_level={data?.risk_level}
         />

@@ -63,8 +63,9 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
       description: "",
       impact: "",
       poc: "",
-      vulnerabiity_type_id: "",
+      vulnerabiity_type_id: undefined,
       target_asset_id: "",
+      custom_vulnerability: undefined,
     },
   });
   const forms = method.watch();
@@ -72,7 +73,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     const disabled: { [key: string]: boolean } = {
       0: false,
       1:
-        !forms.vulnerabiity_type_id ||
+        (!forms.vulnerabiity_type_id && !forms.custom_vulnerability) ||
         (!forms.custom_ta_asset_type_id &&
           !forms.target_asset_id &&
           !forms.custom_ta_value),
