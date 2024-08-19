@@ -308,6 +308,7 @@ const EditCompnayDetails = ({
                   pattern="[0-9]*"
                   inputMode="numeric"
                   label="Phone Number"
+                  maxLength={25}
                   value={forms.phone}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
