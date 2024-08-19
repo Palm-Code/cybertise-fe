@@ -23,10 +23,10 @@ export const Accordion = ({
       <button
         type="button"
         title={question}
-        className="flex w-full items-center justify-between p-6 xl:p-7.5"
+        className="flex w-full items-center justify-between p-6"
         onClick={() => setCollapsed(!collapsed)}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography variant="p" affects="normal" weight="bold">
           {question}
         </Typography>
         <ChevronDown
@@ -47,6 +47,7 @@ export const Accordion = ({
           >
             <Typography
               variant="p"
+              affects={"small"}
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
               {answer}

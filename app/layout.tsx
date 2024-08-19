@@ -8,6 +8,7 @@ import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
 import "highlight.js/styles/default.css";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +24,20 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
+  const requestHeaders = headers().get("x-url");
+
+  const includedArray = [
+    "/auth",
+    "/authorize",
+    "/forgot-password",
+    "/set-password",
+    "/faq",
+    "/policy",
+    "/terms-and-conditions",
+  ];
+  const containsIncludedPath = includedArray.some((path) =>
+    requestHeaders?.includes(path)
+  );
 
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
@@ -37,7 +52,7 @@ export default async function RootLayout({
         className={cn(
           Inter.className,
           "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
-          session ? "overflow-hidden" : ""
+          !containsIncludedPath ? "overflow-hidden" : ""
         )}
       >
         <NextTopLoader
