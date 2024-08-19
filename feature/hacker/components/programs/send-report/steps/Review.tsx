@@ -24,6 +24,7 @@ import {
   useGetTargetAssetDetails,
 } from "@/core/react-query/client";
 import { Role } from "@/types/admin/sidebar";
+import { iconColor } from "@/core/constants/common";
 
 interface I_ReviewProps {
   defaultData?: {
@@ -35,9 +36,15 @@ interface I_ReviewProps {
     media?: I_Media[];
   };
   variant?: keyof typeof Role;
+  isCompanyTicketPreview?: boolean;
 }
 
-const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
+const Review = ({
+  data,
+  defaultData,
+  isCompanyTicketPreview = false,
+  variant = "hacker",
+}: I_ReviewProps) => {
   const { data: asset_type, isLoading: assetTypeLoading } =
     useGetAssetTypeDetails(data?.custom_ta_asset_type_id as string);
 
@@ -49,6 +56,29 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
   if (assetTypeLoading || targetAssetLoading)
     return <Loader variant={variant} />;
 
+  if (isCompanyTicketPreview && data) {
+    return (
+      <BugTargetCard
+        isNewCompanyTicket
+        target_assets={{
+          label: data?.target_asset_id
+            ? target_asset?.asset_type.value
+            : asset_type?.value,
+          value: data?.target_asset_id
+            ? target_asset?.asset_type.label
+            : asset_type?.label,
+          content: data?.custom_ta_value || target_asset?.content,
+        }}
+        vulnerability_type={
+          data.custom_vulnerability ||
+          (defaultData?.vulnerabilityType?.find(
+            (item) => item.id === data?.vulnerabiity_type_id
+          )?.label as string)
+        }
+        risk_level={data?.risk_level}
+      />
+    );
+  }
   if (data)
     return (
       <div className="_flexbox__col__start__start w-full gap-6 bg-transparent">
@@ -110,7 +140,10 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
+                        className={cn(
+                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                          iconColor[variant]
+                        )}
                       />
                     </div>
                     <div
@@ -147,7 +180,11 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
                           target="_blank"
                           variant="ghost-hacker"
                           className="p-0"
-                          prefixIcon={<Eye className="h-6 w-6" />}
+                          prefixIcon={
+                            <Eye
+                              className={cn("h-6 w-6", iconColor[variant])}
+                            />
+                          }
                         />
                       ) : (
                         <Button
@@ -160,7 +197,11 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
                               filename: file.file_name,
                             })
                           }
-                          prefixIcon={<Download className="h-6 w-6" />}
+                          prefixIcon={
+                            <Download
+                              className={cn("h-6 w-6", iconColor[variant])}
+                            />
+                          }
                         />
                       )}
                     </div>
@@ -195,7 +236,10 @@ const Review = ({ data, defaultData, variant = "hacker" }: I_ReviewProps) => {
                       <File
                         width={40}
                         height={40}
-                        className="h-10 w-10 rounded-full bg-neutral-light-90 p-2 text-lime-normal-light dark:bg-neutral-dark-90 dark:text-lime-normal-dark"
+                        className={cn(
+                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                          iconColor[variant]
+                        )}
                       />
                     </div>
                     <div

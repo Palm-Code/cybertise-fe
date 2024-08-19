@@ -2,20 +2,21 @@
 import {
   I_GetChatListItemSuccessResponse,
   I_GetErrorRes,
+  SendReportRequestType,
 } from "@/core/models/common";
 import { fetchPostCreateCompanyTicket } from "@/core/services/mediator/reports/fetchPostCreateCompanyTicket";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const usePostCreateCompanyTicket = () => {
+export const usePostCreateCompanyTicket = (id: string) => {
   const mutation = useMutation<
     I_GetChatListItemSuccessResponse,
     I_GetErrorRes,
-    string
+    SendReportRequestType
   >({
     retry: 3,
     mutationFn: (payload) => {
-      return fetchPostCreateCompanyTicket(payload);
+      return fetchPostCreateCompanyTicket(payload, id);
     },
     onSuccess: () => {
       toast.success("Successfully create company ticket", {
@@ -42,7 +43,7 @@ export const usePostCreateCompanyTicket = () => {
       action: {
         label: "retry",
         onClick: () => {
-          mutation.mutateAsync(mutation.variables as string);
+          mutation.mutateAsync(mutation.variables);
         },
       },
       cancel: {

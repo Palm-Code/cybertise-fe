@@ -42,6 +42,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   maxLength?: number;
   placeholder?: string;
   showing?: boolean;
+  isError?: boolean;
 }
 
 const Tiptap = ({
@@ -58,6 +59,7 @@ const Tiptap = ({
   maxLength = 5000,
   placeholder = "",
   showing = false,
+  isError = false,
   ...props
 }: I_TiptapProps) => {
   const [isFocus, setIsFocused] = useState<boolean>(false);
@@ -131,8 +133,7 @@ const Tiptap = ({
         )}
       >
         {label && (
-          <label
-            htmlFor="description"
+          <p
             className={cn(
               "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
               "left-3 z-20 origin-[0] scale-75 peer-focus:start-0",
@@ -140,7 +141,7 @@ const Tiptap = ({
             )}
           >
             {label}
-          </label>
+          </p>
         )}
         <EditorContent
           maxLength={5000}
@@ -204,8 +205,7 @@ const Tiptap = ({
   return (
     <div className="w-full">
       <div className={cn("relative w-full")}>
-        <label
-          htmlFor="description"
+        <p
           className={cn(
             "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
             "left-4 z-20 origin-[0] scale-75 peer-focus:start-0",
@@ -213,11 +213,12 @@ const Tiptap = ({
           )}
         >
           {label}
-        </label>
+        </p>
         <div
           className={cn(
             "_flexbox__row__start__start w-full gap-4 bg-neutral-light-90 dark:bg-neutral-dark-90",
-            "rounded-md p-4",
+            "rounded-md border p-4",
+            isError ? "!border-red-normal" : "!border-transparent",
             props.className
           )}
         >
