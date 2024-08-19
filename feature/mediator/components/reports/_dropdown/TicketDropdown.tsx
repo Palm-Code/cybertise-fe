@@ -15,6 +15,7 @@ interface I_TicketDropDownProps {
   companyTicketId: string | null;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  status: string;
 }
 
 const TicketDropDown = ({
@@ -22,9 +23,13 @@ const TicketDropDown = ({
   hackerId,
   companyTicketId,
   open = false,
+  status,
   onOpenChange = () => {},
   ...props
 }: I_TicketDropDownProps) => {
+  console.log(
+    status.toLowerCase() === "canceled" || status.toLowerCase() === "closed"
+  );
   return (
     <>
       <Desktop className="w-fit">
@@ -56,7 +61,8 @@ const TicketDropDown = ({
               >
                 Company Ticket
               </Button>
-            ) : (
+            ) : status.toLowerCase() === "canceled" ||
+              status.toLowerCase() === "closed" ? null : (
               <Button
                 asLink
                 href={`/reports/new?ticket_id=${hackerId}`}

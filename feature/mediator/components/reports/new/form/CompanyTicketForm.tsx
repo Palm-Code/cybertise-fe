@@ -133,7 +133,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                       )}
                     >
                       <Typography variant="p" affects="normal">
-                        Hacker Ticket: Initial
+                        Company Ticket: Initial
                       </Typography>
                       <ChevronDown
                         className={cn(

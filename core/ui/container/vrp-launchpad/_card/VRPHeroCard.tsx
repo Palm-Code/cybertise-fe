@@ -34,11 +34,13 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
             <MoveLeft className="cursor-pointer" />
           </Link>
           <div className="_flexbox__col__start__start gap-3">
-            <Tooltip content={initialData?.title || ""}>
+            <Tooltip content={initialData?.title || "Create VRP"}>
               <Typography variant="h5" weight={"bold"}>
-                {initialData?.title && initialData?.title?.length > 50
-                  ? initialData?.title?.substring(0, 50) + "..."
-                  : initialData?.title}
+                {initialData?.title
+                  ? initialData?.title?.length > 50
+                    ? initialData?.title?.substring(0, 50) + "..."
+                    : initialData?.title
+                  : "Create VRP"}
               </Typography>
             </Tooltip>
             {variant === "mediator" && (

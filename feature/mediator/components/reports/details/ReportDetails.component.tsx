@@ -303,6 +303,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 <button
                   type="button"
                   className="_flexbox__row__center gap-2.5"
+                  disabled={isHiddenChatBox}
                   onClick={() => {
                     setOpenModalSetRiskLevel(true);
                     setIsManualRisk(!ticketDetails.cvss_string);

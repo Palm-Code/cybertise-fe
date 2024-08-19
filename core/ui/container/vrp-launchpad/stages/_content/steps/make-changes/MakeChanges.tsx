@@ -28,7 +28,21 @@ const MakeChanges = ({
   const element: Array<React.ReactNode> = [
     <VrpDescriptionCard />,
     <MonetaryAwardCardList variant={variant} data={monetaryAwardData} />,
-    <TargetAssetListCard options={options} />,
+    <TargetAssetListCard
+      options={options}
+      onClickPrev={() => {
+        if (activeElement === 0) {
+          return onClickPrev();
+        }
+        handleActiveElement(activeElement - 1);
+      }}
+      onClickNext={() => {
+        if (activeElement > element.length - 2) {
+          return onClickNext();
+        }
+        handleActiveElement(activeElement + 1);
+      }}
+    />,
     <RulesAndPolicies variant={variant} />,
   ];
 
@@ -40,30 +54,32 @@ const MakeChanges = ({
     <AnimationWrapper key={activeElement}>
       <div className="_flexbox__col__start__start w-full gap-6">
         {element[activeElement]}
-        <div className="_flexbox__row__center gap-8">
-          <Button
-            variant={`secondary-${variant}`}
-            onClick={() => {
-              if (activeElement === 0) {
-                return onClickPrev();
-              }
-              handleActiveElement(activeElement - 1);
-            }}
-          >
-            Previous
-          </Button>
-          <Button
-            variant={`primary-${variant}`}
-            onClick={() => {
-              if (activeElement > element.length - 2) {
-                return onClickNext();
-              }
-              handleActiveElement(activeElement + 1);
-            }}
-          >
-            Next
-          </Button>
-        </div>
+        {activeElement !== 2 && (
+          <div className="_flexbox__row__center gap-8">
+            <Button
+              variant={`secondary-${variant}`}
+              onClick={() => {
+                if (activeElement === 0) {
+                  return onClickPrev();
+                }
+                handleActiveElement(activeElement - 1);
+              }}
+            >
+              Previous
+            </Button>
+            <Button
+              variant={`primary-${variant}`}
+              onClick={() => {
+                if (activeElement > element.length - 2) {
+                  return onClickNext();
+                }
+                handleActiveElement(activeElement + 1);
+              }}
+            >
+              Next
+            </Button>
+          </div>
+        )}
       </div>
     </AnimationWrapper>
   );
