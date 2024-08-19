@@ -38,6 +38,7 @@ const Summary = ({
         </Typography>
         <Review
           data={data.chat_ticket}
+          variant="company"
           defaultData={{
             assetType: assetType ?? [],
             targetAssets: targetAsset?.data ?? [],
