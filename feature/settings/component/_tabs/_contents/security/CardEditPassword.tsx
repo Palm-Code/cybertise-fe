@@ -51,6 +51,8 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
     const isValidated = updatedValidationItems.every(
       (validationItem) => validationItem.checked
     );
+    const isMatch = newPassword === confirmPassworText.content;
+    setValue("is_match", isMatch, { shouldValidate: true });
     setValue("isValidated", isValidated, { shouldValidate: true });
     setValue("new_password", newPassword, { shouldValidate: true });
   };
@@ -103,6 +105,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
             <PasswordInput
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               withRegex
+              value={forms.new_password}
               label="New password"
               options={passwordValidationItems}
               onChange={checkPassword}

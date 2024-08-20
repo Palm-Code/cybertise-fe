@@ -20,6 +20,7 @@ interface SelectTriggerProps
 interface SelectContentProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {
   noArrow?: boolean;
+  groupClassName?: string;
 }
 
 const SelectTrigger = React.forwardRef<
@@ -87,7 +88,14 @@ const SelectContent = React.forwardRef<
   SelectContentProps
 >(
   (
-    { className, children, position = "popper", noArrow = false, ...props },
+    {
+      className,
+      groupClassName,
+      children,
+      position = "popper",
+      noArrow = false,
+      ...props
+    },
     ref
   ) => (
     <SelectPrimitive.Portal>
@@ -107,7 +115,8 @@ const SelectContent = React.forwardRef<
           className={cn(
             "p-1.5",
             position === "popper" &&
-              "h-full max-h-44 w-full min-w-[var(--radix-select-trigger-width)] overflow-y-auto"
+              "h-full max-h-44 w-full min-w-[var(--radix-select-trigger-width)] overflow-y-auto",
+            groupClassName
           )}
         >
           {children}
