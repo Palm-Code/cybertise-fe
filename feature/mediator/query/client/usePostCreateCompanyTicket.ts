@@ -20,7 +20,7 @@ export const usePostCreateCompanyTicket = () => {
     onSuccess: () => {
       toast.success("Successfully create company ticket", {
         position: "bottom-right",
-        duration: 3000,
+        duration: 2000,
         action: {
           label: "Back to Reports",
           onClick: () => (window.location.href = "/reports"),

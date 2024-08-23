@@ -20,8 +20,8 @@ interface I_ChatTicket {
   ticket_type: string;
   status: string;
   has_new: number;
-  custom_ta_value: any;
-  custom_ta_asset_type_id: any;
+  custom_ta_value: string;
+  custom_ta_asset_type_id: string;
   bounty: number;
   created_at: string;
   updated_at: string;
