@@ -307,7 +307,8 @@ const TicketCard = ({
                     >
                       Company Ticket
                     </Button>
-                  ) : (
+                  ) : props.status.toLowerCase() === "canceled" ||
+                    props.status.toLowerCase() === "closed" ? null : (
                     <Button
                       variant="primary-company"
                       prefixIcon={!isGridCard && <Building2 />}

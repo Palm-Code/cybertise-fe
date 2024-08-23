@@ -123,18 +123,18 @@ const VrpDetailsReview = ({
             className="mt-1"
           />
           <Typography variant="p" affects="normal">
-            By clicking 'Publish', you agree to our
+            By clicking 'Publish', you agree to our{" "}
             <Link
               href="/terms-and-conditions"
               target="_blank"
               className="underline"
             >
-              Terms and Conditions and
-            </Link>
-            acknowledge that you have read our Code of Conduct,{" "}
+              Terms and Conditions
+            </Link>{" "}
+            and acknowledge that you have read our Code of Conduct,{" "}
             <Link href="/policy" target="_blank" className="underline">
               Privacy Policy
-            </Link>
+            </Link>{" "}
             and Disclosure Guidelines.
           </Typography>
         </Card>

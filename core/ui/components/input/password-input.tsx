@@ -53,14 +53,14 @@ const PasswordInput = ({
             transition={{ duration: 0.3 }}
             className="w-full"
           >
-            <div className="grid w-full grid-cols-2 content-between gap-y-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90">
+            <div className="grid w-full grid-cols-1 items-start gap-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] min-[435px]:grid-cols-2 dark:bg-neutral-dark-90">
               {options?.length! &&
                 options.map((item, index) => (
                   <Typography
                     key={`item-${index}`}
                     variant="p"
                     affects="small"
-                    className="inline-flex items-center gap-2"
+                    className="grid grid-cols-[auto_1fr] items-start gap-2.5"
                   >
                     <ValidationCheck check={item.checked} />
                     {item.content}

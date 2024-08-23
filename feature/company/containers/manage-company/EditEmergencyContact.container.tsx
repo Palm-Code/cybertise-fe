@@ -89,7 +89,7 @@ const EditEmergencyContact = ({
                   type="tel"
                   pattern="[0-9]*"
                   inputMode="numeric"
-                  label="Phone Number"
+                  maxLength={25}
                   value={forms.phone}
                   onChange={(e) =>
                     setValue("phone", e.target.value, {

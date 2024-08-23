@@ -28,6 +28,7 @@ interface I_ChatTicket {
   deleted_at: string | null;
   risk_level_category: string;
   last_message: string;
+  media: I_Media[];
   user: {
     id: string;
     name: string;

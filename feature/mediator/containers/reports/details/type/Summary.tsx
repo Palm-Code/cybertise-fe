@@ -1,9 +1,5 @@
 import { I_GetChatListItemSuccessResponse } from "@/core/models/common";
-import {
-  useGetAssetType,
-  useGetTargetAsset,
-  useGetVulnerabilityType,
-} from "@/core/react-query/client";
+import { useGetVulnerabilityType } from "@/core/react-query/client";
 import { Avatar, Separator, Typography } from "@/core/ui/components";
 import Review from "@/feature/hacker/components/programs/send-report/steps/Review";
 import { formatTimestamp } from "@/utils/formatter/date-formatter";
@@ -39,6 +35,7 @@ const Summary = ({
           )}
           <Review
             data={data.chat_ticket}
+            variant="mediator"
             defaultData={{
               vulnerabilityType: vulnerabilityType,
             }}

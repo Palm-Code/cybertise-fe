@@ -53,6 +53,7 @@ const InputPassword = ({
           errorMsg={error}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && onClickVerify(password)}
           label="Password"
         />
         <Link

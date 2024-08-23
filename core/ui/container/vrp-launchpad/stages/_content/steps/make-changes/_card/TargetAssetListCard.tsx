@@ -240,20 +240,21 @@ const TargetAssetListCard = ({
           </Typography>
         )}
       </Card>
-      {isCompany && (
-        <div className="_flexbox__row__center gap-8">
-          <Button variant="secondary-company" onClick={onClickPrev}>
-            Previous
-          </Button>
-          <Button
-            variant="primary-company"
-            disabled={disabledButton}
-            onClick={onClickNext}
-          >
-            Next
-          </Button>
-        </div>
-      )}
+      <div className="_flexbox__row__center gap-8">
+        <Button
+          variant={`secondary-${isCompany ? "company" : "mediator"}`}
+          onClick={onClickPrev}
+        >
+          Previous
+        </Button>
+        <Button
+          variant={`primary-${isCompany ? "company" : "mediator"}`}
+          disabled={disabledButton}
+          onClick={onClickNext}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

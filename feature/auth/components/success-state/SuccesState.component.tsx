@@ -68,7 +68,12 @@ const SuccessState = ({
               {email}
             </Typography>
           </div>
-          <Typography variant="p" affects="small" align="center">
+          <Typography
+            variant="p"
+            affects="small"
+            align="center"
+            className="auto__phrase"
+          >
             We have sent an email to the given address, in case it was not yet
             registered. It may take a minute to receive your code. <br />{" "}
             Haven&apos;t received it?{" "}
@@ -99,7 +104,12 @@ const SuccessState = ({
             <Typography variant="h4" weight="bold">
               Authenticate Your Account
             </Typography>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+              className="auto__phrase"
+            >
               Protecting your account is our top priority. Please confirm your
               activity by clicking the magic sent to your email:
             </Typography>
@@ -107,7 +117,12 @@ const SuccessState = ({
               {email}
             </Typography>
           </div>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+            className="auto__phrase"
+          >
             We have sent an email to the given address, in case it was not yet
             registered. It may take a minute to receive your code. <br />{" "}
             Haven&apos;t received it?{" "}

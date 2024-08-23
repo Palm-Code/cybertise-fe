@@ -77,6 +77,7 @@ const CardAccountDetails = ({
                 pattern="[0-9]*"
                 inputMode="numeric"
                 label="Phone Number"
+                maxLength={25}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.phone}
                 onChange={(e) =>

@@ -249,23 +249,23 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                                 onCheckedChange={() => setIsAgreed(!isAgreed)}
                               />
                               <Typography variant="p" affects="normal">
-                                By clicking 'Submit Report', you agree to our
+                                By clicking 'Submit Report', you agree to our{" "}
                                 <Link
                                   href="/terms-and-conditions"
                                   target="_blank"
                                   className="underline"
                                 >
-                                  Terms and Conditions and
+                                  Terms and Conditions
                                 </Link>{" "}
-                                and acknowledge that you have read our Code of
-                                Conduct,{" "}
+                                and and acknowledge that you have read our Code
+                                of Conduct,{" "}
                                 <Link
                                   href="/policy"
                                   target="_blank"
                                   className="underline"
                                 >
                                   Privacy Policy
-                                </Link>
+                                </Link>{" "}
                                 and Disclosure Guidelines.
                               </Typography>
                             </Card>

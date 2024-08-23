@@ -169,6 +169,7 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           ? formatDateToAgo(item?.updated_at)
                           : "-"}
                         <TicketDropDown
+                          status={item.status}
                           open={boolArray[index]}
                           onOpenChange={() => toggleBoolean(index)}
                           hackerId={

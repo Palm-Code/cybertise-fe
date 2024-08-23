@@ -10,12 +10,14 @@ interface I_BugTargetProps {
   };
   vulnerability_type: string;
   risk_level: number;
+  isNewCompanyTicket?: boolean;
 }
 
 const BugTargetCard = ({
   target_assets,
   vulnerability_type,
   risk_level,
+  isNewCompanyTicket = false,
 }: I_BugTargetProps) => {
   return (
     <Card
@@ -24,9 +26,11 @@ const BugTargetCard = ({
         "_flexbox__col__start__start w-full gap-6"
       )}
     >
-      <Typography variant="h6" weight="bold">
-        Bug Target
-      </Typography>
+      {!isNewCompanyTicket && (
+        <Typography variant="h6" weight="bold">
+          Bug Target
+        </Typography>
+      )}
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography
           variant="p"

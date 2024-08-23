@@ -47,7 +47,11 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
           <ChevronDown />
         </div>
       </SelectTrigger>
-      <SelectContent noArrow className="max-h-fit">
+      <SelectContent
+        noArrow
+        className="h-full max-h-full"
+        groupClassName="!max-h-full"
+      >
         <div className="_flexbox__col__start__start w-full">
           <Calendar
             defaultMonth={date?.from}
