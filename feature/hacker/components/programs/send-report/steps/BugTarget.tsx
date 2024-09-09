@@ -6,6 +6,7 @@ import {
   Input,
   SelectDropdown,
   SelectDropdown2,
+  SelectGroupDropdown,
   Typography,
 } from "@/core/ui/components";
 import AssetType from "../../_dropdown/AssetType.component";
@@ -16,6 +17,7 @@ import { useFormContext } from "react-hook-form";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import {
   I_GetAssetTypeSuccessResponse,
+  I_GetGroupVulnerabilityTypeSuccessResponse,
   I_GetVulnerabilityTypeSuccessResponse,
 } from "@/core/models/common";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
@@ -188,8 +190,9 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           "_flexbox__col__start__start gap-4"
         )}
       >
-        <SelectDropdown
+        <SelectGroupDropdown
           label="Vulnerability Type"
+          withSearch
           value={
             isOtherVulnerabilityType
               ? "other"
@@ -208,6 +211,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               setIsOtherVulnerabilityType(true);
               return;
             }
+            setIsOtherVulnerabilityType(false);
             const vulnerability_type_id = defaultData?.vulnerabilityType?.find(
               (item) => item.value === v
             )?.id;

@@ -1,4 +1,5 @@
 export * from "./fetchGetVulnerabilityType";
+export * from "./fetchGetGroupVulnerabilityType";
 export * from "./fetchGetChatListItem";
 export * from "./fetchGetTargetAsset";
 export * from "./fetchGetTargetAssetDetails";

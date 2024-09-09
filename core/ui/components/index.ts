@@ -6,6 +6,7 @@ export { default as PasswordInput } from "./input/password-input";
 export { default as SearchInput } from "./input/search-input";
 export { default as Checkbox } from "./checkbox/checkbox";
 export { default as SelectDropdown } from "./dropdown/select-dropdown";
+export { default as SelectGroupDropdown } from "./dropdown/select-group-dropdown";
 export { default as SelectDropdown2 } from "./dropdown/select-dropdown2";
 export { default as FilterDropdown } from "./dropdown/filter-dropdown";
 export { default as FilterViewDropdown } from "./dropdown/filter-view-dropdown";

@@ -1,4 +1,6 @@
 export const getVulnerabiltyTypeAPIURL = () => "/api/vulnerabiity_types";
+export const getGroupVulnerabilityTypeAPIURL = () =>
+  "/api/grouped_vulnerability";
 export const getAssetTypeAPIURL = () => "/api/asset_types";
 export const getAssetTypeDetailAPIURL = (id: string) =>
   `/api/asset_types/${id}`;
