@@ -204,7 +204,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
           }
           options={defaultData?.vulnerabilityType ?? []}
           onValueChange={(v) => {
-            if (v === "other") {
+            if (v.toLowerCase() === "other") {
               setValue("vulnerabiity_type_id", null, {
                 shouldValidate: true,
               });

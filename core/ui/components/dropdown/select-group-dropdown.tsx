@@ -81,8 +81,11 @@ export default function SelectGroupDropdown({
           <CommandList>
             <CommandEmpty>No data found</CommandEmpty>
             <CommandGroup>
-              {Array.from(Object.entries(groupedData)).map((_, idx) => (
-                <div key={idx} className="_flexbox__col__start__start px-4">
+              {Array.from(Object.entries(groupedData)).map((item, idx) => (
+                <div
+                  key={`group-${idx}`}
+                  className="_flexbox__col__start__start px-4"
+                >
                   <div
                     className={cn(
                       "relative flex w-full select-none items-center gap-3",
