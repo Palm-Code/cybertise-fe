@@ -29,8 +29,10 @@ import {
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const Dashboard = () => {
+  const t = useTranslations("DashboardHacker");
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const {
@@ -104,14 +106,14 @@ const Dashboard = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-8">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="semibold" className="mr-auto">
-              Open Ticket
+              {t("title")}
             </Typography>
             <SearchInput
               isMobile
               id="search-hacker"
               value={payload?.params?.search}
               variant="hacker"
-              placeholder="Try “#21231” or “Company name”"
+              placeholder={t("placeholder_search")}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
@@ -163,13 +165,13 @@ const Dashboard = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
                 id="search-hacker"
                 variant="hacker"
-                placeholder="Try “#21231” or “Company name”"
+                placeholder={t("placeholder_search")}
                 value={payload?.params?.search}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, refetch)
