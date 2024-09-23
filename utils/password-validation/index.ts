@@ -5,19 +5,19 @@ export function validatePassword(
   newPassword: string
 ) {
   const updatedValidationItems = value.map((item) => {
-    if (item.content === "Atleast 8 characters") {
+    if (item.type === "characters") {
       return { ...item, checked: newPassword.length >= 8 };
     }
-    if (item.content === "At least 1 numerical") {
+    if (item.type === "numerical") {
       return { ...item, checked: /[0-9]/.test(newPassword) };
     }
-    if (item.content === "At least 1 lowercase") {
+    if (item.type === "lowercase") {
       return { ...item, checked: /[a-z]/.test(newPassword) };
     }
-    if (item.content === "At least 1 uppercase") {
+    if (item.type === "uppercase") {
       return { ...item, checked: /[A-Z]/.test(newPassword) };
     }
-    if (item.content === "At least 1 special character") {
+    if (item.type === "special_character") {
       return {
         ...item,
         checked: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newPassword),

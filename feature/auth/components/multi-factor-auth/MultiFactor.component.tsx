@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { OTPInput, SlotProps } from "input-otp";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useTranslations } from "next-intl";
 
 interface I_MultiFactorAuth extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -22,6 +23,7 @@ const MultiFactorAuth = ({
   onCompleteInput = () => {},
   ...props
 }: I_MultiFactorAuth) => {
+  const t = useTranslations("AuthenticateOtp");
   const [otp, setOtp] = useState("");
   useEffect(() => {
     if (isError) setOtp("");
@@ -41,11 +43,10 @@ const MultiFactorAuth = ({
         <div className="_flexbox__col__center w-full gap-6">
           <Locker2 />
           <Typography variant="h4" weight="bold">
-            Authenticate Your Account
+            {t("title")}
           </Typography>
           <Typography variant="p" affects="normal" className="text-center">
-            Protecting your account is our top priority. Please confirm your
-            activity by entering code from your authenticator app
+            {t("description")}
           </Typography>
         </div>
         <div className="flex w-full items-center justify-center">
@@ -87,7 +88,7 @@ const MultiFactorAuth = ({
             "!text-emerald-normal underline"
           )}
         >
-          Authenticator code not works?
+          {t("authenticator_error")}
         </Link>
       </div>
     </>

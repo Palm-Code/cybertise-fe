@@ -17,8 +17,10 @@ import {
   SignupCompanyFormType,
 } from "@/core/models/auth/register";
 import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
+import { useTranslations } from "next-intl";
 
 const SignUpCompany = () => {
+  const t = useTranslations("SignUp.company");
   const method = useForm<SignupCompanyFormType>({
     resolver: zodResolver(signupCompanyFormSchema),
     defaultValues: {
@@ -86,7 +88,7 @@ const SignUpCompany = () => {
                 )}
               >
                 <X width={24} height={24} />
-                Cancel Sign Up
+                {t("cancel_button")}
               </Link>
             ) : isLastStep ? null : (
               <button
@@ -97,7 +99,7 @@ const SignUpCompany = () => {
                 onClick={() => back()}
               >
                 <MoveLeft width={24} height={24} />
-                Back
+                {t("back_button")}
               </button>
             )}
             {step}

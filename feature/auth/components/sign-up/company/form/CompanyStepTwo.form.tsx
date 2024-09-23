@@ -7,12 +7,14 @@ import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
 import { useGetCountry } from "@/core/hooks";
+import { useTranslations } from "next-intl";
 
 interface I_CompanyStepTwoProps {
   onClickNext: () => void;
 }
 
 const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
+  const t = useTranslations("SignUp.company");
   const countryList = useGetCountry();
   const {
     formState: { errors },
@@ -38,14 +40,15 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
     <StepWrapper
       currentSteps={2}
       totalSteps={3}
-      title="Company Sign Up"
-      subtitle="Correspondency Details"
+      title={t("title")}
+      subtitle={t("subtitle_2")}
     >
       <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
         <div className="_flexbox__col__center w-full gap-7">
           <Input
             type="text"
-            label="Address"
+            label={t("label_address")}
+            placeholderText={t("placeholder_address")}
             onClearInput={() =>
               setValue("address", "", { shouldValidate: true })
             }
@@ -57,7 +60,8 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
           />
           <Input
             type="text"
-            label="Address Line 2"
+            label={t("label_address_2")}
+            placeholderText={t("placeholder_address_2")}
             onClearInput={() =>
               setValue("address_2", "", {
                 shouldValidate: true,
@@ -69,11 +73,11 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
                 shouldValidate: true,
               })
             }
-            description="Optional"
+            description={t("label_optional")}
           />
           <div className="grid w-full grid-cols-1 gap-7 md:grid-cols-2">
             <SelectDropdown
-              label="Country"
+              label={t("label_country")}
               value={forms.country_code}
               withIcon
               withSearch
@@ -84,7 +88,8 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             />
             <Input
               type="text"
-              label="State"
+              label={t("label_state")}
+              placeholderText={t("placeholder_state")}
               onClearInput={() =>
                 setValue("state", "", { shouldValidate: true })
               }
@@ -96,7 +101,8 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             />
             <Input
               type="text"
-              label="City"
+              label={t("label_city")}
+              placeholderText={t("placeholder_city")}
               onClearInput={() =>
                 setValue("city", "", { shouldValidate: true })
               }
@@ -108,7 +114,8 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
             />
             <Input
               type="text"
-              label="Zip Code"
+              label={t("label_zip")}
+              placeholderText={t("placeholder_zip")}
               onClearInput={() => setValue("zip", "", { shouldValidate: true })}
               value={forms.zip}
               onChange={(e) =>
@@ -124,7 +131,7 @@ const CompanyStepTwo = ({ onClickNext }: I_CompanyStepTwoProps) => {
           disabled={validateIsFormFilled}
           variant="primary-company"
         >
-          Next
+          {t("next_button")}
         </Button>
       </div>
     </StepWrapper>

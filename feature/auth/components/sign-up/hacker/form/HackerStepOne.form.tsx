@@ -10,12 +10,14 @@ import {
   SignupCompanyFormType,
   SignupHackerFormType,
 } from "@/core/models/auth/register";
+import { useTranslations } from "next-intl";
 
 interface I_HackerStepOneProps {
   onClickNext: () => void;
 }
 
 const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
+  const t = useTranslations("SignUp.hacker");
   const {
     formState: { errors },
     watch,
@@ -37,14 +39,15 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
     <StepWrapper
       currentSteps={1}
       totalSteps={2}
-      title="Hacker Sign Up"
-      subtitle="Hacker Details"
+      title={t("title")}
+      subtitle={t("subtitle")}
     >
       <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
         <div className="_flexbox__col__center w-full gap-7">
           <Input
             type="text"
-            label="Username"
+            label={t("label_username")}
+            placeholderText={t("placeholder_username")}
             onClearInput={() =>
               setValue("username", "", { shouldValidate: true })
             }
@@ -55,7 +58,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
             isError={!!errors.username}
           />
           <SelectDropdown
-            label="Country"
+            label={t("label_country")}
             value={forms.country_code}
             withIcon
             withSearch
@@ -71,7 +74,7 @@ const HackerStepOne = ({ onClickNext }: I_HackerStepOneProps) => {
           onClick={onClickValidate}
           disabled={validateIsFormFilled}
         >
-          Next
+          {t("next_button")}
         </Button>
       </div>
     </StepWrapper>

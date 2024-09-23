@@ -7,6 +7,13 @@ export type OptionsType = {
 export type PasswordValidationItemsType = {
   content: string;
   checked: boolean;
+  type:
+    | "characters"
+    | "numerical"
+    | "lowercase"
+    | "uppercase"
+    | "special_character"
+    | null;
 };
 
 export type UserType = {

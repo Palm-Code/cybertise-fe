@@ -8,6 +8,7 @@ import { format, parseISO } from "date-fns";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { usePostReactivateAccount } from "../../query/reactivate-account";
+import { useTranslations } from "next-intl";
 
 interface I_ReactivateAccountProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,6 +28,7 @@ export const ReactivateAccount = ({
   onClickCancel = () => {},
   ...props
 }: I_ReactivateAccountProps) => {
+  const t = useTranslations("Reactivate");
   const { mutate, isPending, isSuccess } = usePostReactivateAccount();
   const onClickReactivate = () => {
     mutate(data.session_code);
@@ -47,7 +49,7 @@ export const ReactivateAccount = ({
           <div className="_flexbox__col__center w-full gap-6">
             <Locker className="h-12 w-12" />
             <Typography variant="h4" weight="semibold">
-              Reactivate Account
+              {t("title")}
             </Typography>
             <Typography
               variant="p"
@@ -55,7 +57,7 @@ export const ReactivateAccount = ({
               align="center"
               className="text-neutral-light-50 dark:text-neutral-dark-50"
             >
-              You deactivated your account on{" "}
+              {t("description")}{" "}
               {format(parseISO(data.deactivated_at.toString()), "MMMM dd yyyy")}
               .
             </Typography>
@@ -66,22 +68,18 @@ export const ReactivateAccount = ({
                 align="left"
                 className="mr-auto"
               >
-                What else you should know?
+                {t("content_title")}
               </Typography>
               <ul className="flex list-inside list-disc flex-col gap-4 text-start text-neutral-light-50 dark:text-neutral-dark-50">
                 <li>
-                  On{" "}
-                  {format(
-                    parseISO(data.destroyed_at.toString()),
-                    "MMMM dd yyyy"
-                  )}
-                  , your account will no longer possible to be restored if it
-                  was accidentally or wrongfully deactivated.
+                  {t("content_lists_1", {
+                    date: format(
+                      parseISO(data.destroyed_at.toString()),
+                      "MMMM dd yyyy"
+                    ),
+                  })}
                 </li>
-                <li>
-                  By clicking “Yes, reactivate”, you will halt the deactivation
-                  process and reactivate your account.
-                </li>
+                <li>{t("content_lists_2")}</li>
               </ul>
             </div>
             <div className="_flexbox__col__center mt-6 w-full gap-6">
@@ -92,13 +90,13 @@ export const ReactivateAccount = ({
                 onClick={onClickReactivate}
                 fullWidth
               >
-                Yes, Reactivate
+                {t("submit_button")}
               </Button>
               <Button
                 variant="ghost-default"
                 onClick={() => window.location.replace("/")}
               >
-                Cancel
+                {t("cancel_button")}
               </Button>
             </div>
           </div>
@@ -117,7 +115,7 @@ export const ReactivateAccount = ({
           <div className="_flexbox__col__center w-full gap-6">
             <Locker />
             <Typography variant="h4" weight="bold">
-              Reactivate Account
+              {t("title")}
             </Typography>
             <Typography
               variant="p"
@@ -125,7 +123,7 @@ export const ReactivateAccount = ({
               align="center"
               className="text-neutral-light-50 dark:text-neutral-dark-50"
             >
-              You deactivated your account on{" "}
+              {t("description")}{" "}
               {format(parseISO(data.deactivated_at.toString()), "MMMM dd yyyy")}
               .
             </Typography>
@@ -136,22 +134,18 @@ export const ReactivateAccount = ({
                 align="left"
                 className="mr-auto"
               >
-                What else you should know?
+                {t("content_title")}
               </Typography>
               <ul className="flex list-inside list-disc flex-col gap-4 text-start text-neutral-light-50 dark:text-neutral-dark-50">
                 <li>
-                  On{" "}
-                  {format(
-                    parseISO(data.destroyed_at.toString()),
-                    "MMMM dd yyyy"
-                  )}
-                  , your account will no longer possible to be restored if it
-                  was accidentally or wrongfully deactivated.
+                  {t("content_lists_1", {
+                    date: format(
+                      parseISO(data.destroyed_at.toString()),
+                      "MMMM dd yyyy"
+                    ),
+                  })}
                 </li>
-                <li>
-                  By clicking “Yes, reactivate”, you will halt the deactivation
-                  process and reactivate your account.
-                </li>
+                <li>{t("content_lists_2")}</li>
               </ul>
             </div>
             <div className="_flexbox__col__center mt-6 w-full gap-6">
@@ -162,13 +156,13 @@ export const ReactivateAccount = ({
                 onClick={onClickReactivate}
                 fullWidth
               >
-                Yes, Reactivate
+                {t("submit_button")}
               </Button>
               <Button
                 variant="ghost-default"
                 onClick={() => window.location.replace("/")}
               >
-                Cancel
+                {t("cancel_button")}
               </Button>
             </div>
           </div>

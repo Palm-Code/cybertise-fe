@@ -5,7 +5,6 @@ import { useFormContext } from "react-hook-form";
 import { Checkbox, Input, Typography } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
-import { passwordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
@@ -13,18 +12,23 @@ import Link from "next/link";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
 import { usePostSignupCompany } from "@/feature/auth/query/signup";
 import { getBrowserAndOS } from "@/utils/device-type";
+import { useTranslations } from "next-intl";
+import { usePasswordValidation } from "@/core/constants/common";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
 }
 
 const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
+  const t = useTranslations("SignUp.company");
   const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
+  const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
       content: "",
+      type: null,
       checked: false,
     });
   const {
@@ -89,14 +93,15 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     <StepWrapper
       currentSteps={3}
       totalSteps={3}
-      title="Company Sign Up"
-      subtitle="Account Setup"
+      title={t("title")}
+      subtitle={t("subtitle_3")}
     >
       <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
         <div className="_flexbox__col__center w-full gap-7">
           <Input
             type="email"
-            label="Email"
+            label={t("label_email")}
+            placeholderText={t("placeholder_email")}
             onClearInput={() => setValue("email", "", { shouldValidate: true })}
             value={forms.email}
             onChange={(e) =>
@@ -105,15 +110,17 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             isError={!!errors.email || error?.code === 422}
           />
           <PasswordInput
+            label={t("label_password")}
+            placeholderText={t("placeholder_password")}
             value={forms.password}
-            label="Password"
             onChange={checkPassword}
             options={passwordValidationItems}
             withRegex
           />
           <PasswordInput
+            label={t("label_confirm_password")}
+            placeholderText={t("placeholder_confirm_password")}
             value={confirmPassworText.content}
-            label="Confirm Password"
             onChange={passwordConfirmationCheck}
             isConfirmation={!!confirmPassworText.content}
             check={confirmPassworText.checked}
@@ -125,9 +132,9 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
               onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
             />
             <Typography variant="p" affects="normal">
-              I have read and accepted the all sites{" "}
+              {t("legal")}{" "}
               <Link target="_blank" href={"/policy"} className="underline">
-                Policies
+                {t("link")}
               </Link>
             </Typography>
           </div>
@@ -145,7 +152,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             isSuccess
           }
         >
-          Register Account
+          {t("submit_button")}
         </Button>
       </div>
     </StepWrapper>

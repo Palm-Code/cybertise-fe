@@ -1,5 +1,40 @@
 import { MenuItemType, Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
+import { useTranslations } from "next-intl";
+
+export const usePasswordValidation = () => {
+  const t = useTranslations("PasswordInput.reqex");
+
+  const passwordValidation: PasswordValidationItemsType[] = [
+    {
+      type: "characters",
+      content: t("characters"),
+      checked: false,
+    },
+    {
+      type: "numerical",
+      content: t("numerical"),
+      checked: false,
+    },
+    {
+      type: "lowercase",
+      content: t("lowercase"),
+      checked: false,
+    },
+    {
+      type: "uppercase",
+      content: t("uppercase"),
+      checked: false,
+    },
+    {
+      type: "special_character",
+      content: t("special_character"),
+      checked: false,
+    },
+  ];
+
+  return passwordValidation;
+};
 
 export const passwordValidation: PasswordValidationItemsType[] = [
   {
