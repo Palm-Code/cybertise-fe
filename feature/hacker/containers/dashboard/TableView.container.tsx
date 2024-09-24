@@ -18,6 +18,7 @@ import { AnimationWrapper, TableLoader } from "@/core/ui/layout";
 import { I_TableColumns } from "@/interfaces";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Suspense } from "react";
 
@@ -28,6 +29,7 @@ interface I_TableProps {
 }
 
 export default function Table({ data, columns, isLoading }: I_TableProps) {
+  const t = useTranslations("Ticket");
   if (data)
     return (
       <AnimationWrapper>
@@ -91,8 +93,9 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                               affects="small"
                               weight="normal"
                             >
-                              reported {formatDateToAgo(item?.created_at ?? "")}{" "}
-                              ago
+                              {t("last_reported", {
+                                date: formatDateToAgo(item?.created_at ?? ""),
+                              })}
                             </Typography>
                           </div>
                         </div>

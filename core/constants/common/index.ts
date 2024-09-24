@@ -36,28 +36,104 @@ export const usePasswordValidation = () => {
   return passwordValidation;
 };
 
-export const passwordValidation: PasswordValidationItemsType[] = [
-  {
-    content: "Atleast 8 characters",
-    checked: false,
-  },
-  {
-    content: "At least 1 numerical",
-    checked: false,
-  },
-  {
-    content: "At least 1 lowercase",
-    checked: false,
-  },
-  {
-    content: "At least 1 uppercase",
-    checked: false,
-  },
-  {
-    content: "At least 1 special character",
-    checked: false,
-  },
-];
+export const useMenuItems = () => {
+  const t = useTranslations("Sidebar");
+
+  return {
+    hacker: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "programs",
+        title: t("programs"),
+        path: "/programs",
+        key: "getProgramList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+    ],
+    company: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_management",
+        title: t("vrp_management"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+      {
+        id: "manage_company",
+        title: t("manage_company"),
+        path: "/manage-company",
+        key: "getUserProfile",
+      },
+    ],
+    "company staff": [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_management",
+        title: t("vrp_management"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+    ],
+    mediator: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_launchpad",
+        title: t("vrp_launchpad"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+      {
+        id: "companies",
+        title: t("companies"),
+        path: "/companies",
+        key: "getCompanyList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+    ],
+  };
+};
 
 export const menuItems: MenuItemType = {
   hacker: [

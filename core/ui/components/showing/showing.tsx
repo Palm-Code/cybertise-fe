@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Button from "../button/button";
 import Typography from "../typography/typography";
+import { useTranslations } from "next-intl";
 
 interface ShowingProps {
   variant?: "hacker" | "company" | "mediator";
@@ -16,10 +17,11 @@ const Showing = ({
   onClickShow = () => {},
   active = 10,
 }: ShowingProps) => {
+  const t = useTranslations("Pagination");
   return (
     <div className="_flexbox__col__start__start gap-2.5">
       <Typography variant="p" affects="small">
-        Showing in page
+        {t("show")}
       </Typography>
       <div className="_flexbox__row__center gap-1.5">
         {showingCount.map((item, index) => (

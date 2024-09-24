@@ -1,6 +1,8 @@
 {
     "DashboardHacker": {
         "title": "Open Tickets",
-        "placeholder_search": "Try “#21231” or “Company name”"
+        "placeholder_search": "Try “#21231” or “Company name”",
+        "search_result": "Show result for",
+        "see_programs": "See Programs"
     }
 }

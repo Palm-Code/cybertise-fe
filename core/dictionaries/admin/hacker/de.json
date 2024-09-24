@@ -1,6 +1,8 @@
 {
-    "DashboardHacker": {
-        "title": "Offene Tickets",
-        "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
-    }
+  "DashboardHacker": {
+    "title": "Offene Tickets",
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
+    "search_result": "Ergebnis anzeigen für",
+    "see_programs": "Siehe Programme"
+  }
 }

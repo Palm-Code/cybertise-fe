@@ -8,7 +8,6 @@ import {
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
-import { tableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
@@ -30,10 +29,12 @@ import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadi
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useGetTableColumns } from "../../constants/dashboard";
 
 const Dashboard = () => {
   const t = useTranslations("DashboardHacker");
   const store = useChatListParamStore();
+  const tableColumns = useGetTableColumns();
   const { payload, setPayload } = store;
   const {
     queryDesktop: {
@@ -135,7 +136,7 @@ const Dashboard = () => {
           </div>
           {!!payload?.params?.search && (
             <Typography variant="p" affects="small">
-              Show result for "{payload?.params?.search}"
+              {t("search_result")} "{payload?.params?.search}"
             </Typography>
           )}
           {!data && <ChatListCardLoadingList isGridCard />}
@@ -155,7 +156,7 @@ const Dashboard = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See Programs"
+              buttonText={t("see_programs")}
               href="/programs"
             />
           )}
@@ -232,7 +233,7 @@ const Dashboard = () => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See Programs"
+              buttonText={t("see_programs")}
               href="/programs"
             />
           )}

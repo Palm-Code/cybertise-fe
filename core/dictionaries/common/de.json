@@ -2,5 +2,34 @@
   "Common": {
     "search": "Suche...",
     "search_not_found": "Keine Ergebnisse gefunden"
+  },
+  "Sidebar": {
+    "dashboard": "Armaturenbrett",
+    "programs": "Programme",
+    "reports": "Berichte",
+    "vrp_launchpad": "VRP-Launchpad",
+    "companies": "Unternehmen",
+    "menu": "Speisekarte",
+    "logout": "Abmelden",
+    "settings": "Einstellungen",
+    "mode": "Modus"
+  },
+  "Filter": {
+    "type": "Typ",
+    "risk_level": "Risikostufe",
+    "status": "Status"
+  },
+  "Ticket": {
+    "last_reported": "Zuletzt gemeldet vor {date}",
+    "ticket": "Ticket",
+    "risk_level": "Risikostufe",
+    "vulnerability_type": "Schwachstellentyp (CWE)",
+    "rewards": "Belohnungen",
+    "status": "Status",
+    "last_update": "Letztes Update"
+  },
+  "Pagination": {
+    "show": "Wird auf der Seite angezeigt",
+    "page": "Seite"
   }
 }

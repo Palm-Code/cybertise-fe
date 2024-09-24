@@ -1,5 +1,44 @@
 import { I_TableColumns, I_TableTicketData } from "@/interfaces";
 import { MultiFilterType } from "@/types/admin/dashboard";
+import { useTranslations } from "next-intl";
+
+export const useGetTableColumns = () => {
+  const t = useTranslations("Ticket");
+  const tableColumns: I_TableColumns[] = [
+    {
+      title: t("ticket"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("risk_level"),
+      align: "left",
+      width: "w-2/12",
+    },
+    {
+      title: t("vulnerability_type"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("rewards"),
+      align: "left",
+      width: "w-1/12",
+    },
+    {
+      title: t("status"),
+      align: "left",
+      width: "w-2/12",
+    },
+    {
+      title: t("last_update"),
+      align: "center",
+      width: "w-1/12",
+    },
+  ];
+
+  return tableColumns;
+};
 
 export const tableColumns: I_TableColumns[] = [
   {

@@ -23,6 +23,7 @@ const ModalSearch = ({
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   value: string | number | readonly string[];
   variant?: "hacker" | "company" | "mediator";
+  placeholder?: string;
   id?: string;
 }) => {
   return (
@@ -44,7 +45,7 @@ const ModalSearch = ({
           id={`${props.id}-mobile`}
           title="search"
           type="text"
-          placeholder="Search"
+          placeholder={props.placeholder}
           pattern=""
           enterKeyHint="search"
           className="w-full bg-transparent p-2 outline-none"
@@ -85,6 +86,7 @@ const SearchInput = ({
           isOpen={open}
           onClose={() => setOpen(false)}
           onChange={onChange}
+          placeholder={props.placeholder}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setOpen(false);

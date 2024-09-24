@@ -2,5 +2,36 @@
     "Common": {
         "search": "Search...",
         "search_not_found": "No results found"
+    },
+    "Sidebar": {
+        "menu": "Menu",
+        "dashboard": "Dashboard",
+        "programs": "Programs",
+        "reports": "Reports",
+        "companies": "Companies",
+        "vrp_launchpad": "VRP Launchpad",
+        "vrp_management": "VRP Management",
+        "manage_company": "Manage Company",
+        "settings": "Settings",
+        "logout": "Logout",
+        "mode": "Mode"
+    },
+    "Filter": {
+        "type": "Type",
+        "risk_level": "Risk Level",
+        "status": "Status"
+    },
+    "Ticket": {
+        "ticket": "Ticket",
+        "risk_level": "Risk Level",
+        "vulnerability_type": "Vulnerability Type (CWE)",
+        "rewards": "Rewards",
+        "status": "Status",
+        "last_update": "Last Update",
+        "last_reported": "Last Reported {date} ago"
+    },
+    "Pagination": {
+        "page": "Page",
+        "show": "Showing in page"
     }
 }
