@@ -1,7 +1,8 @@
 {
   "Common": {
     "search": "Suche...",
-    "search_not_found": "Keine Ergebnisse gefunden"
+    "search_not_found": "Keine Ergebnisse gefunden",
+    "submit_search": "Suchen"
   },
   "Sidebar": {
     "dashboard": "Armaturenbrett",
@@ -17,7 +18,10 @@
   "Filter": {
     "type": "Typ",
     "risk_level": "Risikostufe",
-    "status": "Status"
+    "status": "Status",
+    "asset_type": "Asset-Typ",
+    "submit_filter": "Filter anwenden",
+    "title": "Filter"
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",
@@ -26,10 +30,25 @@
     "vulnerability_type": "Schwachstellentyp (CWE)",
     "rewards": "Belohnungen",
     "status": "Status",
-    "last_update": "Letztes Update"
+    "last_update": "Letztes Update",
+    "last_message": "Letzte Nachricht"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
     "page": "Seite"
+  },
+  "Programs": {
+    "program_name": "Programmname",
+    "program_title": "Programmtitel",
+    "asset_type": "Asset-Typ",
+    "bounty": "Kopfgeld",
+    "asset_type_available": "Asset-Typ verfügbar",
+    "rewards": "Belohnungen"
+  },
+  "EmptyState": {
+    "you_have_nothing_here": "Du hast hier nichts",
+    "under_construction": "Im Bau",
+    "back_button": "Zurück",
+    "target_assets_not_found": "Ziel-Assets nicht gefunden"
   }
 }

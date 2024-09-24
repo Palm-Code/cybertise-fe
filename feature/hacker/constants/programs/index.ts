@@ -7,6 +7,7 @@ import {
   SendReportStepsType,
   UpdateType,
 } from "@/types/admin/programs";
+import { useTranslations } from "next-intl";
 
 export const programsCardData: ProgramCardType[] = [
   {
@@ -196,6 +197,34 @@ export const programsCardData: ProgramCardType[] = [
     currency: "USD",
   },
 ];
+
+export const useGetTableColumns = () => {
+  const t = useTranslations("Programs");
+  const tableColumns: I_TableColumns[] = [
+    {
+      title: t("program_name"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("program_title"),
+      align: "left",
+      width: "w-2/12",
+    },
+    {
+      title: t("asset_type"),
+      align: "left",
+      width: "w-5/12",
+    },
+    {
+      title: t("bounty"),
+      align: "left",
+      width: "w-2/12",
+    },
+  ];
+
+  return tableColumns;
+};
 
 export const tableColumns: I_TableColumns[] = [
   {

@@ -4,5 +4,15 @@
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
     "search_result": "Ergebnis anzeigen für",
     "see_programs": "Siehe Programme"
+  },
+  "ProgramsHacker": {
+    "title": "Bug-Bounty-Programme",
+    "search_title": "Durchsuchen Sie rund 400 Programme",
+    "placeholder_search": "Nach Programmen suchen",
+    "see_programs": "Siehe VRP Launchpad"
+  },
+  "ReportsHacker": {
+    "title": "Berichte",
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
   }
 }

@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import Button from "../button/button";
 import { useState } from "react";
 import BaseModal from "../modal/modal";
+import { useTranslations } from "next-intl";
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: "hacker" | "company" | "mediator";
@@ -68,6 +69,7 @@ const SearchInput = ({
   isMobile = false,
   ...props
 }: SearchInputProps) => {
+  const t = useTranslations("Common");
   const [open, setOpen] = useState(false);
   if (isMobile)
     return (
@@ -120,7 +122,7 @@ const SearchInput = ({
           disabled={disabledButton}
           isLoading={loadingSubmit}
         >
-          Search
+          {t("submit_search")}
         </Button>
       </div>
     </>

@@ -2,6 +2,21 @@
     "DashboardHacker": {
         "title": "Open Tickets",
         "placeholder_search": "Try “#21231” or “Company name”",
+        "submit_search": "Search",
+        "search_result": "Show result for",
+        "see_programs": "See Programs"
+    },
+    "ProgramsHacker": {
+        "title": "Bug Bounty Programs",
+        "placeholder_search": "Search for programs",
+        "search_title": "Search around 400+ programs",
+        "search_result": "Show result for",
+        "see_programs": "See VRP Launchpad"
+    },
+    "ReportsHacker": {
+        "title": "Reports",
+        "placeholder_search": "Try “#21231” or “Company name”",
+        "submit_search": "Search",
         "search_result": "Show result for",
         "see_programs": "See Programs"
     }

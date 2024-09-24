@@ -6,6 +6,7 @@ import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface IProgramsFilterDropdownProps {
@@ -21,6 +22,7 @@ const ProgramsFilterDropdown = ({
   assetTypeOptions = [],
   onValueChange = () => {},
 }: IProgramsFilterDropdownProps) => {
+  const t = useTranslations("Filter");
   const { payload, setPayload } = store;
   const [tempPayload, setTempPayload] = useState<I_GetParamsPayload>(payload);
 
@@ -33,7 +35,7 @@ const ProgramsFilterDropdown = ({
         >
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
-              label="Type"
+              label={t("type")}
               value={tempPayload?.params?.filter?.["type"] || "all"}
               options={filterItems.type}
               onValueChange={(v) => {
@@ -51,7 +53,7 @@ const ProgramsFilterDropdown = ({
             />
             <Separator />
             <BaseDropdown
-              label="Asset Type"
+              label={t("asset_type")}
               value={
                 (assetTypeOptions?.find(
                   (item) =>
@@ -81,13 +83,13 @@ const ProgramsFilterDropdown = ({
       <Desktop className="w-fit">
         <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
           <BaseDropdown
-            label="Scope"
+            label={t("type")}
             value={payload?.params?.filter?.type as string}
             options={filterItems.type}
             onValueChange={(v) => onValueChange(v, "type")}
           />
           <BaseDropdown
-            label="Asset type"
+            label={t("asset_type")}
             value={
               assetTypeOptions?.find(
                 (item) => item.id === payload?.params?.filter?.has_asset_type

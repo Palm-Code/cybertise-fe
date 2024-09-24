@@ -1,7 +1,8 @@
 {
     "Common": {
         "search": "Search...",
-        "search_not_found": "No results found"
+        "search_not_found": "No results found",
+        "submit_search": "Search"
     },
     "Sidebar": {
         "menu": "Menu",
@@ -17,9 +18,12 @@
         "mode": "Mode"
     },
     "Filter": {
+        "title": "Filter",
+        "submit_filter": "Apply Filter",
         "type": "Type",
         "risk_level": "Risk Level",
-        "status": "Status"
+        "status": "Status",
+        "asset_type": "Asset Type"
     },
     "Ticket": {
         "ticket": "Ticket",
@@ -28,10 +32,25 @@
         "rewards": "Rewards",
         "status": "Status",
         "last_update": "Last Update",
-        "last_reported": "Last Reported {date} ago"
+        "last_reported": "Last Reported {date} ago",
+        "last_message": "Last Message"
+    },
+    "Programs": {
+        "program_name": "Program Name",
+        "program_title": "Program Title",
+        "asset_type": "Asset Type",
+        "asset_type_available": "Asset Type Available",
+        "rewards": "Rewards",
+        "bounty": "Bounty"
     },
     "Pagination": {
         "page": "Page",
         "show": "Showing in page"
+    },
+    "EmptyState": {
+        "you_have_nothing_here": "You have nothing here",
+        "under_construction": "Under Construction",
+        "back_button": "Back",
+        "target_assets_not_found": "Target assets not found"
     }
 }
