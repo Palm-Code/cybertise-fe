@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { FileWithUrl } from "@/interfaces";
+import { useTranslations } from "next-intl";
 
 interface I_ModalSendAttachmentProps {
   isOpen: boolean;
@@ -33,6 +34,7 @@ const ModalSendAttachment = ({
   onChangeFiles,
   isLoading = false,
 }: I_ModalSendAttachmentProps) => {
+  const t = useTranslations("TextEditor");
   const onFileSelected = (v: string, file: FileWithUrl[]) => {
     onChangeAttachment(v, "put");
     onChangeFiles(file, "put");
@@ -58,7 +60,7 @@ const ModalSendAttachment = ({
       >
         <div className="_flexbox__col__start__start w-full gap-6">
           <Typography variant="h5" weight="bold">
-            Upload Attachment
+            {t("title_upload_attachment")}
           </Typography>
           <div
             className={cn(
@@ -84,7 +86,7 @@ const ModalSendAttachment = ({
         </div>
         <div className="_flexbox__row__start__start gap-8">
           <Button variant="secondary-company" fullWidth onClick={onClose}>
-            Cancel
+            {t("button_cancel")}
           </Button>
           <Button
             variant="primary-company"
@@ -96,7 +98,7 @@ const ModalSendAttachment = ({
               // onClose();
             }}
           >
-            Send Attachment
+            {t("button_send_attachment")}
           </Button>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { Pagination, SearchInput } from "@/core/ui/components";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import ProgramDetailScopeDropdown from "../../../_dropdown/ProgramDetailScope.component";
 import ScopeTable from "../../../_table/ScopeTable.component";
-import { scopeTableColumns } from "@/feature/hacker/constants/programs";
+import { useGetScopeTableColumns } from "@/feature/hacker/constants/programs";
 import ScopeCardList from "../../_card/ScopeCardList";
 import { useState } from "react";
 import {
@@ -16,6 +16,7 @@ import {
   useSubmitSearch,
 } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useTranslations } from "next-intl";
 
 const Scope = ({
   id,
@@ -24,6 +25,8 @@ const Scope = ({
   id: string;
   assetTypes?: I_GetAssetTypeSuccessResponse["data"];
 }) => {
+  const t = useTranslations("ProgramDetailsHacker.scope");
+  const scopeTableColumns = useGetScopeTableColumns();
   const [payload, setPayload] = useState<I_GetParamsPayload>({
     params: {
       page: {
@@ -56,7 +59,7 @@ const Scope = ({
             <SearchInput
               id="scope-search-hacker"
               variant="hacker"
-              placeholder="Search for assets"
+              placeholder={t("placeholder_search")}
               value={payload.params?.search}
               onChange={(e) =>
                 useOnchangeSearch(
@@ -71,6 +74,7 @@ const Scope = ({
               }
             />
             <ProgramDetailScopeDropdown
+              label={t("asset_type")}
               options={assetTypes}
               payload={payload}
               onValueChange={(v) =>

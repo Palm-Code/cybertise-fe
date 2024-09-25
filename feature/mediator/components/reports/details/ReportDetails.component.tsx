@@ -33,8 +33,10 @@ import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { ModalForbidden } from "@/core/ui/container";
+import { useTranslations } from "next-intl";
 
 const ReportDetails = ({ id }: { id: string }) => {
+  const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
@@ -252,7 +254,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 affects="small"
                 className="!text-neutral-dark-100"
               >
-                Jump into last message
+                {t("jump_to_last_message")}
               </Typography>
             </Button>
           )}
@@ -416,7 +418,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               affects="small"
               className="!text-neutral-dark-100"
             >
-              Jump into last message
+              {t("jump_to_last_message")}
             </Typography>
           </Button>
         )}

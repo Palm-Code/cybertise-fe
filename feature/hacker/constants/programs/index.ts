@@ -248,6 +248,29 @@ export const tableColumns: I_TableColumns[] = [
     width: "w-2/12",
   },
 ];
+
+export const useGetScopeTableColumns = () => {
+  const t = useTranslations("ProgramDetailsHacker.scope");
+
+  return [
+    {
+      title: t("asset_name"),
+      align: "left",
+      width: "w-4/12",
+    },
+    {
+      title: t("type"),
+      align: "center",
+      width: "w-4/12",
+    },
+    {
+      title: t("update"),
+      align: "left",
+      width: "w-4/12",
+    },
+  ] as I_TableColumns[];
+};
+
 export const scopeTableColumns: I_TableColumns[] = [
   {
     title: "Asset Name",
@@ -265,6 +288,33 @@ export const scopeTableColumns: I_TableColumns[] = [
     width: "w-4/12",
   },
 ];
+
+export const useGetProgramDetailsTabItems = () => {
+  const t = useTranslations("ProgramDetailsHacker.tabs");
+
+  return [
+    {
+      label: t("rules_and_policy"),
+      value: "rules",
+    },
+    {
+      label: t("scope"),
+      value: "scope",
+    },
+    {
+      label: t("updates"),
+      value: "updates",
+    },
+    // {
+    //   label: "Thanks",
+    //   value: "thanks",
+    // },
+    // {
+    //   label: "Updates",
+    //   value: "updates",
+    // },
+  ];
+};
 
 export const programDetailTabItems: SortFilterType[] = [
   {
@@ -363,6 +413,38 @@ export const updates: UpdateType[] = [
     `,
   },
 ];
+
+export const useGetInformations = () => {
+  const t = useTranslations("SendReportHacker.information");
+
+  return [
+    {
+      label: t("brief.label"),
+      description: null,
+      value: 1,
+    },
+    {
+      label: t("bug_target.label"),
+      description: t("bug_target.description"),
+      value: 2,
+    },
+    {
+      label: t("report_description.label"),
+      description: t("report_description.description"),
+      value: 3,
+    },
+    {
+      label: t("problem_causes.label"),
+      description: t("problem_causes.description"),
+      value: 4,
+    },
+    {
+      label: t("review.label"),
+      description: null,
+      value: 5,
+    },
+  ] as SendReportStepsType[];
+};
 
 export const informations: SendReportStepsType[] = [
   {

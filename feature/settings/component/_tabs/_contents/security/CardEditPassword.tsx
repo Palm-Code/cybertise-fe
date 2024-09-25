@@ -1,5 +1,5 @@
 "use client";
-import { passwordValidation } from "@/core/constants/common";
+import { usePasswordValidation } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetResetPasswordRequest } from "@/core/models/auth/forgot-password";
 import {
@@ -27,10 +27,12 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
     formState: { errors },
   } = useFormContext<I_GetResetPasswordRequest>();
   const forms = watch();
+  const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
+      type: null,
       content: "",
       checked: false,
     });

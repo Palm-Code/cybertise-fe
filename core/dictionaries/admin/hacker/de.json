@@ -14,5 +14,95 @@
   "ReportsHacker": {
     "title": "Berichte",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
+  },
+  "ProgramDetailsHacker": {
+    "number_of_assets": "Anzahl der Vermögenswerte",
+    "bounty_program": "Kopfgeldprogramm",
+    "company_website": "Unternehmenswebsite",
+    "send_report_button": "Bericht senden",
+    "tabs": {
+      "rules_and_policy": "Regeln & Politik",
+      "scope": "Umfang",
+      "updates": "Aktualisierungen"
+    },
+    "scope": {
+      "placeholder_search": "Nach Vermögenswerten suchen",
+      "asset_type": "Asset-Typ",
+      "asset_name": "Asset-Name",
+      "type": "Typ",
+      "update": "Aktualisieren"
+    }
+  },
+  "SendReportHacker": {
+    "information": {
+      "title": "Information",
+      "brief": {
+        "label": "Knapp",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nBis zu einem gewissen Grad ist es uns gelungen, unsere Arbeit zu erledigen, bevor wir sie von einer Kommode aus übernehmen. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fgiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      },
+      "bug_target": {
+        "label": "Bug-Ziel",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nBis zu einem gewissen Grad ist es uns gelungen, unsere Arbeit zu erledigen, ohne dass wir sie von der entsprechenden Kommode übernehmen müssen. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fgiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      },
+      "report_description": {
+        "label": "Berichtsbeschreibung",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nBis zu einem gewissen Grad ist es uns gelungen, unsere Arbeit zu erledigen, bevor wir sie von einer Kommode aus übernehmen. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fgiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      },
+      "problem_causes": {
+        "label": "Problem und Ursachen",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nBis zu einem gewissen Grad ist es uns gelungen, unsere Arbeit zu erledigen, ohne dass wir sie von der entsprechenden Kommode übernehmen müssen. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fgiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      },
+      "review": {
+        "label": "Rezension",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nBis zu einem gewissen Grad ist es uns gelungen, unsere Arbeit zu erledigen, bevor wir sie von einer Kommode aus übernehmen. \nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fgiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    },
+    "title": "Bericht einreichen",
+    "button_edit_report": "Bericht bearbeiten",
+    "button_previous": "Vorherige",
+    "button_submit": "Bericht senden",
+    "button_next": "Nächste",
+    "footer": "<p>Indem Sie auf „Bericht senden“ klicken, stimmen Sie unseren <a href='/terms-and-conditions' target='_blank' >Allgemeinen Geschäftsbedingungen</a> zu und bestätigen, dass Sie unseren Verhaltenskodex gelesen haben \n, <a href='/policy' target='_blank' >Datenschutzerklärung</a> und <a href='/policy' target='_blank' >Offenlegungsrichtlinien</a>.</p>",
+    "bug_target": {
+      "target_assets": "Zielvermögen",
+      "other": "Andere",
+      "input_url": "Eingabe-URL",
+      "asset_type": "Asset-Typ",
+      "hostname": "Geben Sie den Hostnamen oder die IP-Adresse des Ziel-Assets ein",
+      "select_asset_type": "Wählen Sie den Asset-Typ aus",
+      "vulnerability_type": "Art der Schwachstelle",
+      "custom_type": "Benutzerdefinierter Typ",
+      "custom_type_description": "Geben Sie Ihren Schwachstellentyp ein",
+      "label_manual_risk_level": "Legen Sie die Risikostufe manuell fest",
+      "label_cvss_calculator": "CVSS-Rechner"
+    },
+    "report_description": {
+      "title": "Titel",
+      "description": "Kurzbeschreibung",
+      "remaining_characters": "Verbleibende Charaktere"
+    },
+    "problem_causes": {
+      "impact": "Auswirkungen",
+      "proof_of_concept": "Proof of Concept"
+    },
+    "reviews": {
+      "bug_target": {
+        "title": "Bug-Ziel",
+        "target_assets": "Zielvermögen",
+        "vulnerability_type": "Art der Schwachstelle",
+        "risk_level": "Risikostufe"
+      },
+      "report_description": {
+        "title": "Titel",
+        "header_title": "Berichtsbeschreibung",
+        "description": "Kurzbeschreibung"
+      },
+      "problem_causes": {
+        "header_title": "Problem und Ursachen",
+        "impact": "Auswirkungen",
+        "proof_of_concept": "Proof of Concept",
+        "attachment": "Anhänge"
+      }
+    }
   }
 }

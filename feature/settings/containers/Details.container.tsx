@@ -12,6 +12,7 @@ import { useFormContext } from "react-hook-form";
 import { I_UpdateProfile } from "@/core/models/company/settings";
 import { usePostUpdateProfile } from "@/core/react-query/client";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface I_DetailsProps {
   variant: keyof typeof Role;
@@ -26,6 +27,7 @@ const Details = ({
   handleClickEdit,
   data,
 }: I_DetailsProps) => {
+  const t = useTranslations("Settings.details");
   const {
     watch,
     formState: { errors },
@@ -62,7 +64,9 @@ const Details = ({
                   onClick={() => handleClickEdit(false)}
                 />
                 <Typography variant="h5" weight="bold" className="capitalize">
-                  Edit {variant} Details
+                  {t("button_edit_account", {
+                    role: variant === "company" ? t("company") : variant,
+                  })}
                 </Typography>
               </div>
             </Card>
@@ -75,7 +79,7 @@ const Details = ({
                     variant={`secondary-${variant}`}
                     onClick={() => handleClickEdit(false)}
                   >
-                    Discard
+                    {t("button_discard")}
                   </Button>
                   <Button
                     disabled={isPending || isSuccess}
@@ -83,7 +87,7 @@ const Details = ({
                     variant={`primary-${variant}`}
                     onClick={() => handleSubmitForm()}
                   >
-                    Save Changes
+                    {t("button_save")}
                   </Button>
                 </div>
               </Card>
@@ -97,7 +101,9 @@ const Details = ({
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between mb-6 w-full">
           <Typography variant="h5" weight="bold">
-            {variant === "company" ? "Company" : "Account"} Details
+            {t("account_details", {
+              role: variant === "company" ? t("company") : t("account"),
+            })}
           </Typography>
           {/* <Button
             variant={`tertiary-${variant}`}
@@ -122,14 +128,18 @@ const Details = ({
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Account Details
+              {t("account_details", {
+                role: variant === "company" ? t("company") : t("account"),
+              })}
             </Typography>
             <Button
               variant={`tertiary-${variant}`}
               prefixIcon={<FilePenLine />}
               onClick={() => handleClickEdit(true)}
             >
-              Edit Account Details
+              {t("button_edit_account", {
+                role: variant === "company" ? t("company") : t("account"),
+              })}
             </Button>
           </div>
           <CardAbout data={data} variant={variant} />

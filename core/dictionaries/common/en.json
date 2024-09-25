@@ -52,5 +52,71 @@
         "under_construction": "Under Construction",
         "back_button": "Back",
         "target_assets_not_found": "Target assets not found"
+    },
+    "SuccesState": {
+        "send_report": {
+            "title": "Your Report Submited!",
+            "description": "We have sent your report to the Mediator for review. You can access your Hacker ticket directly on the dashboard or report menu.",
+            "button_back": "Back to Dasboard",
+            "button_reports": "Go to my Reports"
+        },
+        "close_send_report": {
+            "title": "Cancel Submit Report?",
+            "description": "You will loose all the information you have entered for the related reports.",
+            "button_keep_it": "Keep It",
+            "button_yes_cancel_report": "Yes, Cancel report"
+        }
+    },
+    "TextEditor": {
+        "title_upload_attachment": "Upload Attachment",
+        "remaining_characters": "Remaining Characters",
+        "button_send_attachment": "Send Attachment",
+        "button_send_message": "Send",
+        "placeholder_chat": "Write your message...",
+        "button_cancel": "Cancel"
+    },
+    "FileInput": {
+        "drag_and_drop": "Drag & Drop",
+        "select_files": "or Select files from device",
+        "max_50mb": "max. 50MB",
+        "uploading": "Uploading",
+        "upload_more": "+ Upload more files"
+    },
+    "ChatReports": {
+        "jump_to_last_message": "Jump into last message"
+    },
+    "Loading": {
+        "loading_data": "Getting data..."
+    },
+    "Settings": {
+        "details": {
+            "account": "Account",
+            "company": "Company",
+            "about": "About {role}",
+            "company_information": "Company Information",
+            "account_details": "{role} Details",
+            "button_edit_account": "Edit {role} Details",
+            "about_you": "About You",
+            "label_avatar": "{role} Avatar",
+            "label_logo": "Company Logo",
+            "logo": "Logo",
+            "image": "Image",
+            "label_change_image": "Change {role}",
+            "label_name": "{role} Name",
+            "label_country": "Country",
+            "label_about_your_account": "About your {role}",
+            "label_email": "Registered Email",
+            "label_phone": "Phone Number",
+            "button_discard": "Discard",
+            "button_save": "Save Changes",
+            "company_address": "Company Address",
+            "address": "Address",
+            "address_2": "Address 2",
+            "optional": "Optional",
+            "state": "State",
+            "zip": "Zip Code",
+            "country": "Country",
+            "company_website": "Company Website"
+        }
     }
 }

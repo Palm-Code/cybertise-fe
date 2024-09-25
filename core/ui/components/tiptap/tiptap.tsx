@@ -21,6 +21,7 @@ import Button from "../button/button";
 import Separator from "../separator/separator";
 import { Role } from "@/types/admin/sidebar";
 import "highlight.js/styles/atom-one-dark.css";
+import { useTranslations } from "next-intl";
 
 const lowlight = createLowlight(common);
 lowlight.register({ html });
@@ -62,6 +63,7 @@ const Tiptap = ({
   isError = false,
   ...props
 }: I_TiptapProps) => {
+  const t = useTranslations("TextEditor");
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
     editable: !showing,
@@ -71,7 +73,7 @@ const Tiptap = ({
       }),
       Underline,
       Placeholder.configure({
-        placeholder: placeholder,
+        placeholder: isChat ? t("placeholder_chat") : placeholder,
       }),
       CodeBlockLowlight.configure({
         lowlight,
@@ -137,7 +139,7 @@ const Tiptap = ({
             className={cn(
               "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
               "left-3 z-20 origin-[0] scale-75 peer-focus:start-0",
-              isFocus || !!description ? "top-0.5" : "top-4"
+              "top-0.5"
             )}
           >
             {label}
@@ -182,7 +184,7 @@ const Tiptap = ({
                 variant={`tertiary-${variant}`}
                 onClick={onClickSendAttachment}
               >
-                Send Attachment
+                {t("button_send_attachment")}
               </Button>
               <Button
                 disabled={!description || description === "<p><br></p>"}
@@ -193,7 +195,7 @@ const Tiptap = ({
                   editor?.commands.clearContent();
                 }}
               >
-                Send
+                {t("button_send_message")}
               </Button>
             </div>
           )}
@@ -249,7 +251,7 @@ const Tiptap = ({
         affects="tiny"
         className="text-neutral-light-30 dark:text-neutral-dark-30"
       >
-        Remaining Characters:{" "}
+        {t("remaining_characters")}:{" "}
         {maxLength - editor?.storage.characterCount.characters()} / 5000
       </Typography>
     </div>

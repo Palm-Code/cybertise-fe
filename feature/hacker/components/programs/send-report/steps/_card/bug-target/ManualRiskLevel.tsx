@@ -12,11 +12,13 @@ import { motion } from "framer-motion";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { useFormContext } from "react-hook-form";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
+import { useTranslations } from "next-intl";
 
 const ManualRiskLevel = ({
   isManualRisk,
   onChangeManualRisk,
 }: I_CsvssCalculatorProps) => {
+  const t = useTranslations("SendReportHacker.bug_target");
   const {
     setValue,
     getValues,
@@ -45,7 +47,7 @@ const ManualRiskLevel = ({
             affects="normal"
             className="text-neutral-light-40 dark:text-neutral-dark-40"
           >
-            Set Risk Level Manually
+            {t("label_manual_risk_level")}
           </Typography>
         </div>
         {isManualRisk && (

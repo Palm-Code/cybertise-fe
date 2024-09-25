@@ -16,6 +16,7 @@ import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { backgroundColor, iconColor } from "@/core/constants/common";
 import Button from "../button/button";
 import { useGetDownloadFiles } from "@/core/react-query/client";
+import { useTranslations } from "next-intl";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -37,6 +38,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    const t = useTranslations("FileInput");
     const [uploadProggress, setUploadProggress] = useState<number[]>([]);
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [input, setInput] = useState<FileWithUrl[]>([]);
@@ -296,14 +298,14 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               <div className="_flexbox__col__center m-auto mb-0 cursor-pointer gap-2.5">
                 <UploadCloud width={32} height={32} />
                 <Typography variant="h6" weight="bold">
-                  Drag & Drop
+                  {t("drag_and_drop")}
                 </Typography>
                 <Typography
                   variant="p"
                   affects="small"
                   className="text-neutral-light-60 dark:text-neutral-dark-60"
                 >
-                  or select files from device
+                  {t("select_files")}
                 </Typography>
               </div>
               <Typography
@@ -311,7 +313,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 affects="small"
                 className="m-auto mt-0 text-neutral-light-60 dark:text-neutral-dark-60"
               >
-                max. 50MB
+                {t("max_50mb")}
               </Typography>
               <input
                 {...props}
@@ -456,7 +458,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                           affects="tiny"
                           className="text-neutral-light-40 dark:text-neutral-dark-40"
                         >
-                          Uploading
+                          {t("uploading")}
                         </Typography>
                         <Typography
                           variant="p"
@@ -525,7 +527,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 htmlFor="dropzone-file"
                 className={cn("cursor-pointer underline", iconColor[variant])}
               >
-                + Upload more files
+                {t("upload_more")}
                 <input
                   ref={ref}
                   multiple

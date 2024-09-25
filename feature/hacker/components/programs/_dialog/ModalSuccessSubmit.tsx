@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Typography } from "@/core/ui/components";
 import { buttonVariants } from "@/core/ui/components/button/base-button";
 import { CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface I_ModalSuccessSubmitProps {
@@ -9,11 +10,12 @@ interface I_ModalSuccessSubmitProps {
 }
 
 const ModalSuccessSubmit = ({ isOpen }: I_ModalSuccessSubmitProps) => {
+  const t = useTranslations("SuccesState.send_report");
   return (
     <BaseModal isOpen={isOpen}>
       <div
         className={cn(
-          "relative mx-auto w-fit max-w-[602px] rounded-lg p-20",
+          "relative mx-auto w-fit max-w-screen-md rounded-lg p-20",
           "_flexbox__col__start__start gap-12",
           "bg-background-main-light dark:bg-background-main-dark"
         )}
@@ -21,31 +23,33 @@ const ModalSuccessSubmit = ({ isOpen }: I_ModalSuccessSubmitProps) => {
         <div className="_flexbox__col__center w-full gap-6">
           <CheckCircle className="h-16 w-16 text-semantic-light-success dark:text-semantic-dark-success" />
           <Typography variant="h5" weight="bold">
-            Your Report Submited!
+            {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" className="mt-2">
-            We have sent your report to the Mediator for review. You can access
-            your Hacker ticket directly on the dashboard or report menu.
+          <Typography
+            variant="p"
+            affects="normal"
+            className="mt-2"
+            align="center"
+          >
+            {t("description")}
           </Typography>
         </div>
-        <div className="flex w-full items-center gap-6">
+        <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-6">
           <Link
             href="/dashboard"
             className={buttonVariants({
               variant: "secondary-hacker",
-              className: "w-full",
             })}
           >
-            Back to Dasboard
+            {t("button_back")}
           </Link>
           <Link
             href="/reports"
             className={buttonVariants({
               variant: "primary-hacker",
-              className: "w-full",
             })}
           >
-            Go to my Reports
+            {t("button_reports")}
           </Link>
         </div>
       </div>

@@ -50,5 +50,70 @@
     "under_construction": "Im Bau",
     "back_button": "Zurück",
     "target_assets_not_found": "Ziel-Assets nicht gefunden"
+  },
+  "SuccesState": {
+    "send_report": {
+      "title": "Ihr Bericht wurde eingereicht!",
+      "description": "Wir haben Ihren Bericht zur Prüfung an den Mediator gesendet. \nSie können direkt im Dashboard oder Berichtsmenü auf Ihr Hacker-Ticket zugreifen.",
+      "button_back": "Zurück zum Dashboard",
+      "button_reports": "Gehen Sie zu meinen Berichten"
+    },
+    "close_send_report": {
+      "title": "Bericht abbrechen abbrechen?",
+      "description": "Dabei gehen alle Informationen verloren, die Sie für die entsprechenden Berichte eingegeben haben.",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_report": "Ja, Bericht abbrechen"
+    }
+  },
+  "TextEditor": {
+    "remaining_characters": "Verbleibende Charaktere",
+    "button_send_attachment": "Anhang senden",
+    "button_send_message": "Schicken",
+    "placeholder_chat": "Schreiben Sie Ihre Nachricht...",
+    "button_cancel": "Stornieren",
+    "title_upload_attachment": "Anhang hochladen"
+  },
+  "FileInput": {
+    "drag_and_drop": "Ziehen",
+    "select_files": "oder Dateien vom Gerät auswählen",
+    "max_50mb": "max. \n50 MB",
+    "uploading": "Hochladen",
+    "upload_more": "Laden Sie weitere Dateien hoch"
+  },
+  "ChatReports": {
+    "jump_to_last_message": "Zur letzten Nachricht springen"
+  },
+  "Loading": {
+    "loading_data": "Daten abrufen..."
+  },
+  "Settings": {
+    "details": {
+      "account_details": "{role} Details",
+      "company": "Unternehmen",
+      "account": "Konto",
+      "button_edit_account": "Bearbeiten Sie die {role}-Details",
+      "button_discard": "Verwerfen",
+      "button_save": "Änderungen speichern",
+      "company_information": "Unternehmensinformationen",
+      "about_you": "Über Dich",
+      "label_logo": "Firmenlogo",
+      "label_avatar": "{role} Avatar",
+      "image": "Bild",
+      "logo": "Logo",
+      "label_change_image": "{role} ändern",
+      "label_name": "{role} Name",
+      "company_address": "Firmenadresse",
+      "address": "Adresse",
+      "address_2": "Adresse 2",
+      "optional": "Optional",
+      "country": "Land",
+      "state": "Zustand",
+      "zip": "PLZ",
+      "label_about_your_account": "Über Ihr Konto",
+      "about": "Über {role}",
+      "label_email": "Registrierte E-Mail",
+      "company_website": "Unternehmenswebsite",
+      "label_phone": "Telefonnummer"
+    }
   }
 }

@@ -12,12 +12,14 @@ import { useInView } from "react-intersection-observer";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { useTranslations } from "next-intl";
 
 interface I_VRPHeroCard {
   data?: I_GetProgramDetailsSuccessResponse["data"];
 }
 
 const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
+  const t = useTranslations("ProgramDetailsHacker");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.1 });
 
@@ -62,7 +64,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   affects="small"
                   className="text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Number of Assets
+                  {t("number_of_assets")}
                 </Typography>
                 <Typography variant="p" affects="small" weight="medium">
                   {data.target_assets_count}
@@ -74,7 +76,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   affects="small"
                   className="text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Bounty Program
+                  {t("bounty_program")}
                 </Typography>
                 <Typography variant="p" affects="small" weight="medium">
                   {`${currencyFormatters.NumberToEUR(data.company?.lowest_bounty ?? 0)} - ${currencyFormatters.NumberToEUR(data.company?.highest_bounty ?? 0)}`}
@@ -86,7 +88,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                   affects="small"
                   className="text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Company Website
+                  {t("company_website")}
                 </Typography>
                 <Link
                   href={
@@ -109,7 +111,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                 prefixIcon={<Send />}
                 onClick={() => setIsModalOpen(true)}
               >
-                Send Report
+                {t("send_report_button")}
               </Button>
             </div>
           </Card>
@@ -135,7 +137,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                 </Typography>
               </div>
               <button
-                title="Send Report"
+                title={t("send_report_button")}
                 type="button"
                 className={cn(
                   buttonVariants({ variant: "primary-hacker" }),
@@ -191,7 +193,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                     )}
                   >
                     <Send className="mr-2.5" />
-                    Send Report
+                    {t("send_report_button")}
                   </Link>
                 </div>
                 <div className="grid h-fit max-h-12 grid-flow-col gap-12">
@@ -201,7 +203,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Number of Assets
+                      {t("number_of_assets")}
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
                       {data.target_assets_count ?? 0}
@@ -214,7 +216,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Bounty Program
+                      {t("bounty_program")}
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
                       {`${currencyFormatters.NumberToEUR(data.company?.lowest_bounty ?? 0)} - ${currencyFormatters.NumberToEUR(data.company?.highest_bounty ?? 0)}`}
@@ -227,7 +229,7 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Company Website
+                      {t("company_website")}
                     </Typography>
                     <Link
                       href={

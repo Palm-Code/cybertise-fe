@@ -20,6 +20,7 @@ import { Desktop, Mobile } from "@/core/ui/layout";
 import { Role } from "@/types/admin/sidebar";
 import { OptionsType } from "@/types/auth/sign-up";
 import { Building2, UserRound } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -45,6 +46,7 @@ const icons = (variant: keyof typeof Role) => {
 };
 
 const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
+  const t = useTranslations("Settings.details");
   const {
     watch,
     setValue,
@@ -88,7 +90,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             className="inline-flex items-center gap-4"
           >
             {icons(variant as Role)}
-            {variant === "company" ? "Company Information" : "About You"}
+            {variant === "company" ? t("company_information") : t("about_you")}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
             <div className="_flexbox__row__center__between w-full">
@@ -98,7 +100,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   affects="normal"
                   className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
+                  {`${variant === "company" ? t("label_logo") : t("label_avatar", { role: variant })}`}
                 </Typography>
                 {isPendingUpload ? (
                   <Loader
@@ -117,14 +119,18 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 )}
               </div>
               <AvatarInput
-                title={variant === "company" ? "Change Logo" : "Change Image"}
+                title={t("label_change_image", {
+                  role: variant === "company" ? t("logo") : t("image"),
+                })}
                 variant={variant}
                 onChange={(e) => handleChangeAvatar(e)}
               />
             </div>
             <Input
               type="text"
-              label={`${variant} Name`}
+              label={t("label_name", {
+                role: variant,
+              })}
               value={variant === "hacker" ? forms.username : forms.name}
               containerClassName="capitalize"
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
@@ -141,12 +147,12 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
           {variant == "company" ? (
             <div className="_flexbox__col__start__start w-full gap-6">
               <Typography variant="h6" weight="bold">
-                Company Address
+                {t("company_address")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-6">
                 <Input
                   type="text"
-                  label="Address"
+                  label={t("address")}
                   value={forms.address}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
@@ -161,7 +167,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 />
                 <Input
                   type="text"
-                  label="Address 2"
+                  label={t("address_2")}
                   value={forms.address_2}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
@@ -172,11 +178,11 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   onClearInput={() => {
                     setValue("address_2", "", { shouldValidate: true });
                   }}
-                  description="Optional"
+                  description={t("optional")}
                 />
                 <div className="grid w-full grid-cols-3 gap-6">
                   <SelectDropdown
-                    label="Country"
+                    label={t("country")}
                     value={forms.country_code as string}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     options={countryOptions?.data || []}
@@ -188,7 +194,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   />
                   <Input
                     type="text"
-                    label="State"
+                    label={t("state")}
                     value={forms.state}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -203,7 +209,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   />
                   <Input
                     type="text"
-                    label="Zip Code"
+                    label={t("zip")}
                     value={forms.zip}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -221,7 +227,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             </div>
           ) : variant !== "mediator" && variant !== "company staff" ? (
             <SelectDropdown
-              label="Country"
+              label={t("country")}
               value={forms.country_code as string}
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               options={countryOptions?.data || []}
@@ -240,10 +246,14 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About {`${variant == "company" ? "Company" : "Your Account"}`}
+                {t("label_about_your_account", {
+                  role: variant === "company" ? t("company") : t("account"),
+                })}
               </Typography>
               <TextArea
-                label={`About ${variant}`}
+                label={t("about", {
+                  role: variant === "company" ? t("company") : variant,
+                })}
                 value={forms.about}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 onChange={(e) =>
@@ -275,7 +285,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             className="inline-flex items-center gap-4"
           >
             {icons(variant as Role)}
-            {variant === "company" ? "Company Information" : "About You"}
+            {variant === "company" ? t("company_information") : t("about_you")}
           </Typography>
           <div className="_flexbox__col__start__start gap-6">
             <Typography
@@ -283,7 +293,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               affects="normal"
               className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
+              {`${variant === "company" ? t("logo") : t("label_avatar", { role: variant })}`}
             </Typography>
             <Avatar image={data?.image} initials="" className="h-12 w-12" />
             <Typography
@@ -291,7 +301,9 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               affects="normal"
               className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {`${variant} Name`}
+              {t("label_name", {
+                role: variant,
+              })}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {variant === "hacker" ? data?.username : data?.name}
@@ -303,7 +315,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   affects="normal"
                   className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Country
+                  {t("country")}
                 </Typography>
                 <div className="_flexbox__row__center__start gap-2.5">
                   <Country icon={countryFlag.icon} label={countryFlag?.label} />
@@ -340,7 +352,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             className="inline-flex items-center gap-4"
           >
             {icons(variant as Role)}
-            {variant === "company" ? "Company Information" : "About You"}
+            {variant === "company" ? t("company_information") : t("about_you")}
           </Typography>
           <div className="grid w-full grid-cols-3 items-start gap-6">
             <div className="_flexbox__col__start__start gap-2.5">
@@ -349,7 +361,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 affects="normal"
                 className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                {`${variant} ${variant === "company" ? "Logo" : "Avatar"}`}
+                {`${variant === "company" ? t("logo") : t("label_avatar", { role: variant })}`}
               </Typography>
               <Avatar image={data?.image} initials="C" className="h-12 w-12" />
             </div>
@@ -359,7 +371,9 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 affects="normal"
                 className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                {`${variant} Name`}
+                {t("label_name", {
+                  role: variant,
+                })}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">
                 {variant === "hacker" ? data?.username : data?.name}
@@ -372,7 +386,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   affects="normal"
                   className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Country
+                  {t("country")}
                 </Typography>
                 <div className="_flexbox__row__center__start gap-2.5">
                   {!!countryFlag && (
@@ -392,7 +406,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    Address
+                    {t("address")}
                   </Typography>
                   <Typography
                     variant="p"
@@ -408,7 +422,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    State
+                    {t("state")}
                   </Typography>
                   <Typography
                     variant="p"
@@ -424,7 +438,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                     affects="normal"
                     className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    Zip Code
+                    {t("zip")}
                   </Typography>
                   <Typography
                     variant="p"
@@ -444,7 +458,9 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About {variant === "company" ? "Company" : "Your Account"}
+                {t("label_about_your_account", {
+                  role: variant === "company" ? t("company") : t("account"),
+                })}
               </Typography>
               <Typography variant="p" affects="normal">
                 {data?.about}

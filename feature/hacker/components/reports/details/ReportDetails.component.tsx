@@ -28,8 +28,10 @@ import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
+import { useTranslations } from "next-intl";
 
 const ReportDetails = ({ id }: { id: string }) => {
+  const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
@@ -186,7 +188,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 affects="small"
                 className="!text-neutral-dark-100"
               >
-                Jump into last message
+                {t("jump_to_last_message")}
               </Typography>
             </Button>
           )}
@@ -279,7 +281,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               affects="small"
               className="!text-neutral-dark-100"
             >
-              Jump into last message
+              {t("jump_to_last_message")}
             </Typography>
           </Button>
         )}

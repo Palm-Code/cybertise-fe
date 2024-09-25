@@ -417,3 +417,11 @@ li {
 .auto__phrase {
   word-break: auto-phrase;
 }
+
+.legal_cta {
+  & > p {
+    & > a {
+      @apply font-semibold underline;
+    }
+  }
+}
