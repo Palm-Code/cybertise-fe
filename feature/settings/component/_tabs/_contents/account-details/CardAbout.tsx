@@ -39,7 +39,7 @@ const icons = (variant: keyof typeof Role) => {
     case "company staff":
       return <Building2 className="h-8 w-8" />;
     case "mediator":
-      return <UserRound className="mr-4 h-8 w-8" />;
+      return <UserRound className="h-8 w-8" />;
     default:
       return <HackerIcon className="h-8 w-8" />;
   }
@@ -330,7 +330,9 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About {variant == "company" ? "Company" : "Your Account"}
+                {t("label_about_your_account", {
+                  role: variant === "company" ? t("company") : t("account"),
+                })}
               </Typography>
               <Typography variant="p" affects="normal">
                 {data?.about}

@@ -1,3 +1,4 @@
+import { useCurrentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { Card, Separator, Typography } from "@/core/ui/components";
 import { StepActive, StepInactive, StepPassed } from "@/core/ui/icons";
@@ -27,18 +28,18 @@ const currentStatus: {
   },
 };
 
-const STEPS: string[] = [
-  "VRP Details",
-  "Setup Phase",
-  "Company Revision",
-  "Mediator Revision",
-  "Publish",
-];
-
 const IndicatorSteps = ({
   variant = "mediator",
   currentSteps,
 }: I_IndicatorStepsProps) => {
+  const steps = useCurrentPhase();
+  const STEPS: string[] = [
+    steps.phase1,
+    steps.phase2,
+    steps.phase3,
+    steps.phase4,
+    steps.phase5,
+  ];
   const stepsIcon = (idx: number, style: string, className: string) => {
     if (idx < currentSteps - 1) {
       return <StepPassed className={cn(style, className)} />;

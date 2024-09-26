@@ -247,6 +247,15 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
                     onChange={passwordConfirmationCheck}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" &&
+                      token &&
+                      mutateForgotPassword({
+                        code: token,
+                        new_password: newPassword,
+                        logout_all: logoutAll,
+                      })
+                    }
                     isConfirmation={!!confirmPassworText.content}
                     check={confirmPassworText.checked}
                   />
@@ -282,6 +291,12 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   isError={isError}
                   errorMsg={error?.message}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      mutate(email);
+                    }
+                  }}
                 />
               )}
             </div>

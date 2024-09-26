@@ -248,6 +248,20 @@ export const fillColor: { [key in Role]: string } = {
   hacker: "fill-lime-normal",
 };
 
+export const useCurrentPhase = () => {
+  const t = useTranslations("VRPLaunchpad.steps");
+
+  const currentPhase: { [key: string]: string } = {
+    phase1: t("vrp_details"),
+    phase2: t("setup"),
+    phase3: t("company_revision"),
+    phase4: t("mediator_revision"),
+    phase5: t("publish"),
+  };
+
+  return currentPhase;
+};
+
 export const currentPhase: { [key: string]: string } = {
   phase1: "VRP Details",
   phase2: "Setup Phase",

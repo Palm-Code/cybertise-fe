@@ -8,7 +8,7 @@ import {
   SearchInput,
 } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
-import { tableColumns } from "../../constants/dashboard";
+import { useGetTableColumns } from "../../constants/dashboard";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
 import DashboardFilter from "@/core/ui/components/dropdown/dashboard-filter-drowpdown";
@@ -29,8 +29,11 @@ import {
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const Dashboard = () => {
+  const t = useTranslations("DashboardMediator");
+  const tableColumns = useGetTableColumns();
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const {
@@ -104,14 +107,14 @@ const Dashboard = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              {t("title")}
             </Typography>
             <SearchInput
               isMobile
               id="search-dashboard-mediator"
               value={payload?.params?.search}
               variant="mediator"
-              placeholder="Try “#21231” or “Company name”"
+              placeholder={t("placeholder_search")}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
@@ -153,7 +156,7 @@ const Dashboard = () => {
             <EmptyState
               variant="mediator"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText={t("see_programs")}
               href="/vrp-launchpad"
             />
           )}
@@ -163,13 +166,13 @@ const Dashboard = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Open Ticket
+              {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
                 id="search-dashboard-mediator"
                 variant="mediator"
-                placeholder="Try “#21231” or “Company name”"
+                placeholder={t("placeholder_search")}
                 value={payload?.params?.search}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, refetch)
@@ -232,7 +235,7 @@ const Dashboard = () => {
               variant="mediator"
               type="ticket"
               href="/vrp-launchpad"
-              buttonText="See VRP Launchpad"
+              buttonText={t("see_programs")}
             />
           )}
         </div>

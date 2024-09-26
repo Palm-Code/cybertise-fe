@@ -51,7 +51,7 @@ const FilterDropdown = ({
               affects="small"
               className="whitespace-nowrap text-nowrap"
             >
-              {inputValueLabel || "Sort By"}
+              {inputValueLabel}
             </Typography>
             <div></div>
           </SelectTrigger>
@@ -79,7 +79,7 @@ const FilterDropdown = ({
               affects="small"
               className="whitespace-nowrap text-nowrap"
             >
-              {inputValueLabel || "Sort By"}
+              {inputValueLabel}
             </Typography>
           </SelectTrigger>
           <SelectContent className="!bg-white dark:!bg-neutral-dark-100">

@@ -8,6 +8,7 @@ import {
   TextArea,
   Typography,
 } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -22,6 +23,7 @@ const VrpDescriptionCard = ({
   onClickNext,
   onClickPrev,
 }: I_VrpDescriptionCard<boolean>) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details");
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
   const [characterCount, setCharacterCount] = useState(
@@ -31,7 +33,7 @@ const VrpDescriptionCard = ({
   return (
     <>
       <Typography variant="h5" weight="bold">
-        VRP Details
+        {t("details")}
       </Typography>
       <Card
         className={cn(
@@ -41,10 +43,10 @@ const VrpDescriptionCard = ({
         )}
       >
         <Typography variant="h6" weight="bold">
-          VRP Description
+          {t("vrp_description.header_title")}
         </Typography>
         <SelectDropdown
-          label="VRP Type"
+          label={t("vrp_description.type")}
           value={forms.type}
           options={[
             { label: "Public", value: "Public" },
@@ -56,7 +58,7 @@ const VrpDescriptionCard = ({
         />
         <Input
           type="text"
-          label="VRP Title"
+          label={t("vrp_description.title")}
           value={forms.title}
           onChange={(e) =>
             setValue("title", e.target.value, { shouldValidate: true })
@@ -65,7 +67,7 @@ const VrpDescriptionCard = ({
         />
         <div className="w-full">
           <TextArea
-            label="VRP Description"
+            label={t("vrp_description.description")}
             max={5000}
             value={forms.description}
             defaultValue={forms.description}
@@ -80,21 +82,22 @@ const VrpDescriptionCard = ({
             affects="tiny"
             className="text-neutral-light-50 dark:text-neutral-dark-50"
           >
-            Remaining Characters: {5000 - characterCount} / 5000
+            {t("vrp_description.remaining_characters")}: {5000 - characterCount}{" "}
+            / 5000
           </Typography>
         </div>
       </Card>
       {isCompany && (
         <div className="_flexbox__row__center gap-8">
           <Button variant="secondary-company" onClick={onClickPrev}>
-            Previous
+            {t("button_previous")}
           </Button>
           <Button
             variant="primary-company"
             disabled={!forms.type || !forms.title || !forms.description}
             onClick={onClickNext}
           >
-            Next
+            {t("button_next")}
           </Button>
         </div>
       )}

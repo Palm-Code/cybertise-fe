@@ -13,6 +13,7 @@ import { cn } from "@/core/lib/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface I_VrpDetailsReviewProps {
   onClickNext?: () => void;
@@ -34,6 +35,7 @@ const VrpDetailsReview = ({
   currentStep = "Phase1",
   onClickRevise = () => {},
 }: I_VrpDetailsReviewProps) => {
+  const t = useTranslations("VRPLaunchpad.phase");
   const { back } = useRouter();
   const [isLoadingBack, setIsLoadingBack] = useState<boolean>(false);
   const [isLoadingApprove, setIsLoadingApprove] = useState<boolean>(false);
@@ -46,10 +48,10 @@ const VrpDetailsReview = ({
         <Typography variant="h5" weight="bold">
           {(currentStep === "Published" || currentStep === "Phase5") &&
           !isLastStep
-            ? "VRP Details"
+            ? t("vrp_details.details")
             : variant === "mediator" && !isLastStep
-              ? "Review VRP Details"
-              : `Review`}
+              ? t("setup.review_vrp")
+              : t("vrp_details.review")}
         </Typography>
         {isLastStep ||
         (currentStep === "Published" && variant === "company") ||
@@ -59,7 +61,7 @@ const VrpDetailsReview = ({
             prefixIcon={<FilePenLine />}
             onClick={onClickEdit}
           >
-            Edit Program Details
+            {t("vrp_details.button_edit")}
           </Button>
         ) : null}
       </div>
@@ -71,7 +73,12 @@ const VrpDetailsReview = ({
             )}
           >
             <Typography variant="p" affects="normal" weight="semibold">
-              VRP {currentStep === "Published" ? "Published" : "Approved"}
+              {t("vrp_details.status", {
+                status:
+                  currentStep === "Published"
+                    ? t("vrp_details.published")
+                    : t("vrp_details.approved"),
+              })}
             </Typography>
             <CheckCircle2 />
           </div>
@@ -87,10 +94,12 @@ const VrpDetailsReview = ({
             <div className="grid grid-cols-[auto_1fr] items-center gap-4">
               <AlertCircle />
               <Typography variant="p" affects="normal">
-                Your VRP has been{" "}
-                {currentStep === "Published" ? "Published" : "Approved"}.
-                Sending to the Mediator will take the VRP back to Mediator
-                Revision
+                {t("vrp_details.alert", {
+                  v:
+                    currentStep === "Published"
+                      ? t("vrp_details.published")
+                      : t("vrp_details.approved"),
+                })}
               </Typography>
             </div>
             <Button
@@ -99,7 +108,7 @@ const VrpDetailsReview = ({
               prefixIcon={<X />}
               className="ml-auto"
             >
-              Discard Changes
+              {t("vrp_details.button_discard")}
             </Button>
           </div>
         )}
@@ -122,21 +131,9 @@ const VrpDetailsReview = ({
             onCheckedChange={() => setChecked(!checked)}
             className="mt-1"
           />
-          <Typography variant="p" affects="normal">
-            By clicking 'Publish', you agree to our{" "}
-            <Link
-              href="/terms-and-conditions"
-              target="_blank"
-              className="underline"
-            >
-              Terms and Conditions
-            </Link>{" "}
-            and acknowledge that you have read our Code of Conduct,{" "}
-            <Link href="/policy" target="_blank" className="underline">
-              Privacy Policy
-            </Link>{" "}
-            and Disclosure Guidelines.
-          </Typography>
+          <div
+            dangerouslySetInnerHTML={{ __html: t.raw("vrp_details.footer") }}
+          />
         </Card>
       )}
       {variant === "company" ? (
@@ -156,8 +153,8 @@ const VrpDetailsReview = ({
             disabled={isLoading || (currentStep === "Phase5" && !checked)}
           >
             {currentStep === "Phase5" && !isLastStep
-              ? "Publish"
-              : "Send to Mediator"}
+              ? t("vrp_details.label_publish")
+              : t("vrp_details.label_send_to_mediator")}
           </Button>
         ) : null
       ) : (
@@ -181,7 +178,9 @@ const VrpDetailsReview = ({
                   : onClickNext
               }
             >
-              {isLastStep ? "Send Revision to Company" : "Next"}
+              {isLastStep
+                ? t("vrp_details.label_send_to_company")
+                : t("vrp_details.button_next")}
             </Button>
             {currentStep === "Phase4" && isLastStep && (
               <Button
@@ -193,7 +192,7 @@ const VrpDetailsReview = ({
                   setIsLoadingApprove(true);
                 }}
               >
-                Approve VRP
+                {t("vrp_details.button_approve")}
               </Button>
             )}
           </div>

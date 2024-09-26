@@ -186,10 +186,12 @@ const ReportDetails = ({ id }: { id: string }) => {
                     affects="small"
                     className="text-violet-light dark:text-violet-light"
                   >
-                    {ticketDetails.ticket_type === "Hacker"
-                      ? "Hacker"
-                      : "Company"}{" "}
-                    Ticket
+                    {t("ticket_type", {
+                      role:
+                        ticketDetails.ticket_type === "Hacker"
+                          ? t("hacker")
+                          : t("company"),
+                    })}
                   </Typography>
                   {ticketDetails.ticket_type === "Hacker" ? (
                     ticketDetails.related_ticket_id ? (
@@ -198,7 +200,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                         className="underline"
                         replace
                       >
-                        Go to Company Ticket
+                        {t("go_to", { role: t("company") })}
                       </Link>
                     ) : (
                       <Button
@@ -206,7 +208,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                         className="p-0"
                         onClick={() => setOpenModalForbidden(true)}
                       >
-                        Create Company Ticket
+                        {t("create_company_ticket")}
                       </Button>
                     )
                   ) : (
@@ -215,13 +217,12 @@ const ReportDetails = ({ id }: { id: string }) => {
                       className="underline"
                       replace
                     >
-                      Go to Hacker Ticket
+                      {t("go_to", { role: t("hacker") })}
                     </Link>
                   )}
                 </div>
                 <Typography variant="p" affects="small">
-                  This chat is read only on this device. Please access using
-                  desktop to interact.
+                  {t("chat_alert")}
                 </Typography>
               </div>
             )}
@@ -358,10 +359,12 @@ const ReportDetails = ({ id }: { id: string }) => {
                       affects="small"
                       className="text-violet-light dark:text-violet-light"
                     >
-                      {ticketDetails.ticket_type === "Hacker"
-                        ? "Hacker"
-                        : "Company"}{" "}
-                      Ticket
+                      {t("ticket_type", {
+                        role:
+                          ticketDetails.ticket_type === "Hacker"
+                            ? t("hacker")
+                            : t("company"),
+                      })}
                     </Typography>
                     {ticketDetails.ticket_type === "Hacker" ? (
                       <Link
@@ -374,8 +377,8 @@ const ReportDetails = ({ id }: { id: string }) => {
                         replace
                       >
                         {ticketDetails.related_ticket_id
-                          ? "Go to Company Ticket"
-                          : "Create Company Ticket"}
+                          ? t("go_to", { role: t("company") })
+                          : t("create_company_ticket")}
                       </Link>
                     ) : (
                       <Link
@@ -383,7 +386,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                         className="underline"
                         replace
                       >
-                        Go to Hacker Ticket
+                        {t("go_to", { role: t("hacker") })}
                       </Link>
                     )}
                   </div>

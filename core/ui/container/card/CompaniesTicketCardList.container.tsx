@@ -13,6 +13,7 @@ import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "../../layout";
 import { I_GetCompaniesSuccessResponse } from "@/core/models/mediator/companies/get_companies";
 import { indicatorVariants } from "../../components/indicator/indicator";
+import { useTranslations } from "next-intl";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -22,6 +23,7 @@ const TicketCard = ({
   isGridCard,
   ...props
 }: I_TicketCardProps & I_GetCompaniesSuccessResponse["data"][0]) => {
+  const t = useTranslations("Programs");
   return (
     <>
       <Mobile>
@@ -53,7 +55,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Asset type available
+                    {t("asset_type_available")}
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types &&
@@ -127,7 +129,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Asset type available
+                    {t("asset_type_available")}
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types &&

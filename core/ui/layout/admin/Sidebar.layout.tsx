@@ -39,8 +39,8 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   programs: <TextSearch className="h-6 w-6" />,
   reports: <Bug className="h-6 w-6" />,
   companies: <Building2 className="h-6 w-6" />,
-  "vrp launchpad": <Bug className="h-6 w-6" />,
-  "vrp management": (
+  vrp_launchpad: <Bug className="h-6 w-6" />,
+  vrp_management: (
     <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
   ),
   "manage company": <Building2 className="h-6 w-6" />,

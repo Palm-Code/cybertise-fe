@@ -27,6 +27,7 @@
     },
     "Ticket": {
         "ticket": "Ticket",
+        "ticket_type": "Ticket Type",
         "risk_level": "Risk Level",
         "vulnerability_type": "Vulnerability Type (CWE)",
         "rewards": "Rewards",
@@ -83,7 +84,13 @@
         "upload_more": "+ Upload more files"
     },
     "ChatReports": {
-        "jump_to_last_message": "Jump into last message"
+        "jump_to_last_message": "Jump into last message",
+        "go_to": "Go to {role} Ticket",
+        "company": "Company",
+        "ticket_type": "{role} Ticket",
+        "hacker": "Hacker",
+        "create_company_ticket": "Create Company Ticket",
+        "chat_alert": "This chat is read only on this device. Please access using desktop to interact."
     },
     "Loading": {
         "loading_data": "Getting data..."
@@ -249,5 +256,10 @@
                 }
             }
         }
+    },
+    "Companies": {
+        "company_name": "Company Name",
+        "asset_type": "Asset Type",
+        "status": "Status"
     }
 }

@@ -5,6 +5,7 @@ import {
   VRPCardType,
   VRPCompaniesCardType,
 } from "@/types/admin/vrp-launchpad";
+import { useTranslations } from "next-intl";
 
 export const tableColumns: I_TableColumns[] = [
   {
@@ -33,6 +34,28 @@ export const tableColumns: I_TableColumns[] = [
     width: "w-1/6",
   },
 ];
+
+export const useCompanyTableColumns = () => {
+  const t = useTranslations("Companies");
+  return [
+    {
+      title: t("company_name"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("asset_type"),
+      align: "left",
+      width: "w-5/12",
+    },
+    {
+      title: t("status"),
+      align: "left",
+      width: "w-2/12",
+    },
+  ] as I_TableColumns[];
+};
+
 export const companiesTableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
@@ -50,6 +73,32 @@ export const companiesTableColumns: I_TableColumns[] = [
     width: "w-2/12",
   },
 ];
+
+export const useCompanyTabsItem = () => {
+  const t = useTranslations("CompanyDetailsMediator.tabs");
+  return [
+    {
+      label: t("vulnerability_program"),
+      value: "vulnerability_program",
+    },
+    {
+      label: t("active_tickets"),
+      value: "active_tickets",
+    },
+    // {
+    //   label: "Thanks",
+    //   value: "thanks",
+    // },
+    // {
+    //   label: "Collaborators",
+    //   value: "collaborators",
+    // },
+    // {
+    //   label: "Activity Logs",
+    //   value: "activity_logs",
+    // },
+  ];
+};
 
 export const companyTabsItem: SortFilterType[] = [
   {

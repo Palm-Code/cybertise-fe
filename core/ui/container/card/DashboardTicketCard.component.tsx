@@ -153,7 +153,7 @@ const TicketCard = ({
                 isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__start__between w-full gap-4">
+              <div className="_flexbox__row__start__start w-full gap-4">
                 {isGridCard && (
                   <div className="relative aspect-square w-12 overflow-hidden rounded-full">
                     <Image
@@ -164,7 +164,12 @@ const TicketCard = ({
                     />
                   </div>
                 )}
-                <div className="_flexbox__col__start w-full gap-1">
+                <div
+                  className={cn(
+                    "_flexbox__col__start gap-1",
+                    isGridCard && "max-w-[240px]"
+                  )}
+                >
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
                       <Typography variant="p" affects="normal">
@@ -189,16 +194,17 @@ const TicketCard = ({
                     </Typography>
                   </div>
                 </div>
-                <div className="_flexbox__row__start__start gap-8">
+                <div className="_flexbox__row__start__start ml-auto gap-2">
                   {isMediator && (
-                    <Badge variant={"default"}>
+                    <Badge
+                      variant={"default"}
+                      className="grid grid-cols-[auto_1fr] items-center gap-1"
+                    >
                       {props.ticket_type === "Hacker" ? (
-                        <Hacker
-                          className={cn(iconColor.hacker, "mr-1 h-4 w-4")}
-                        />
+                        <Hacker className={cn(iconColor.hacker, "h-4 w-4")} />
                       ) : (
                         <Building2
-                          className={cn(iconColor.company, "mr-1 h-4 w-4")}
+                          className={cn(iconColor.company, "h-4 w-4")}
                         />
                       )}
                       {props.ticket_type}

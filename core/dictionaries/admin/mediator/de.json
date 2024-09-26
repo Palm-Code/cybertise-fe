@@ -1,0 +1,165 @@
+{
+  "DashboardMediator": {
+    "title": "Offene Tickets",
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
+    "see_programs": "Siehe VRP Launchpad"
+  },
+  "ProgramsMediator": {
+    "title": "VRP-Launchpad",
+    "placeholder_search": "Nach Programmen suchen",
+    "button_all": "Alle",
+    "button_phase_2": "Phase 2",
+    "button_phase_4": "Phase 4",
+    "search_title": "Suchen Sie nach VRP Launchpad",
+    "see_programs": "Siehe VRP Launchpad"
+  },
+  "CompaniesMediator": {
+    "title": "Unternehmen",
+    "not_found": "Keine Firmen gefunden",
+    "search_title": "Suchen Sie nach Unternehmen",
+    "placeholder_search": "Versuchen Sie, nach dem Firmennamen zu suchen"
+  },
+  "ReportsMediator": {
+    "title": "Berichte",
+    "placeholder_search": "Nach Programmen suchen",
+    "submit_search": "Search",
+    "search_result": "Show result for",
+    "see_programs": "Siehe VRP Launchpad"
+  },
+  "VRPLaunchpad": {
+    "company": "Unternehmen",
+    "last_update": "Letztes Update",
+    "steps": {
+      "vrp_details": "VRP-Details",
+      "setup": "Setup-Phase",
+      "company_revision": "Unternehmensrevision",
+      "mediator_revision": "Revision des Mediators",
+      "publish": "Veröffentlichen"
+    },
+    "phase": {
+      "vrp_details": {
+        "brief": "Knapp",
+        "details": "VRP-Details",
+        "setup": "Richten Sie Geldprämien ein",
+        "initial_scope": "Richten Sie den anfänglichen Umfang ein",
+        "notes": "Notizen",
+        "review": "Rezension",
+        "button_edit": "Programmdetails bearbeiten",
+        "status": "VRP {status}",
+        "button_discard": "Änderungen verwerfen",
+        "footer": "<p>Indem Sie auf „Veröffentlichen“ klicken, stimmen Sie unseren <a href='/terms-and-conditions' target='_blank' >Allgemeinen Geschäftsbedingungen</a> zu und bestätigen, dass Sie unsere <a href=' gelesen haben. \n/policy' target='_blank' >Datenschutzerklärung</a> und <a href='/policy' target='_blank' >Offenlegungsrichtlinien</a>.</p>",
+        "label_publish": "Veröffentlichen",
+        "label_send_to_mediator": "An Mediator senden",
+        "label_send_to_company": "Überarbeitung an das Unternehmen senden",
+        "button_next": "Nächste",
+        "button_approve": "VRP genehmigen",
+        "published": "Veröffentlicht",
+        "approved": "Genehmigt",
+        "vrp_description": {
+          "header_title": "VRP-Beschreibung",
+          "type": "VRP-Typ",
+          "title": "Titel",
+          "description": "Beschreibung",
+          "remaining_characters": "Verbleibende Charaktere"
+        },
+        "monetary_awards": {
+          "header_title": "Geldpreise",
+          "category": "Kategorie",
+          "custom": "Brauch"
+        },
+        "rules_and_policies": {
+          "header_title": "Regeln und Richtlinien",
+          "rules": "Regeln",
+          "policies": "Richtlinien",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nFringilla ut morbi tincidunt augue interdum velit. \nAliquet eget sit amet tellus. \nMorbi tristique senectus et netus et malesuada famouses ac turpis.",
+          "buttpn_previous": "Vorherige",
+          "button_next": "Nächste"
+        },
+        "target_assets": {
+          "header_title": "Liste der Zielvermögenswerte",
+          "asset": "Vermögenswert",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nFringilla ut morbi tincidunt augue interdum velit. \nAliquet eget sit amet tellus. \nMorbi tristique senectus et netus et malesuada famouses ac turpis.",
+          "hostname": "Hostname oder IP-Adresse",
+          "asset_type": "Asset-Typ",
+          "delete_button": "Löschen",
+          "save_button": "Speichern",
+          "button_add_new": "+ Neue Assets hinzufügen",
+          "alert": "Sie verfügen über nicht gespeicherte Vermögenswerte. Bitte speichern Sie diese zunächst, bevor Sie fortfahren.",
+          "button_previous": "Vorherige"
+        },
+        "button_previous": "Vorherige"
+      },
+      "setup": {
+        "review_vrp": "Überprüfen Sie die VRP-Details",
+        "make_changes": "Nehmen Sie Änderungen vor",
+        "notes": "Notizen",
+        "review": "Rezension",
+        "button_previous": "Vorherige",
+        "button_next": "Nächste",
+        "notes_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nFringilla ut morbi tincidunt augue interdum velit. \nAliquet eget sit amet tellus. \nMorbi tristique senectus et netus et malesuada famouses ac turpis.",
+        "change_notes": "Notizen ändern"
+      },
+      "company_revision": {
+        "notes": "Notizen",
+        "details": "VRP-Details",
+        "monetary_awards": "Geldpreise",
+        "initial_scope": "Umfang",
+        "rules_policies": "Regeln & Richtlinien",
+        "review": "Rezension"
+      },
+      "mediator_revision": {
+        "review_vrp": "Überprüfen Sie die VRP-Details",
+        "setup_monetary_awards": "Richten Sie Geldprämien ein",
+        "setup_initial_scope": "Richten Sie den anfänglichen Umfang ein",
+        "notes": "Notizen",
+        "review": "Rezension"
+      },
+      "publish": {
+        "publish": "Veröffentlichen",
+        "details": "VRP-Details",
+        "monetary_awards": "Geldpreise",
+        "initial_scope": "Umfang",
+        "rules_policies": "Regeln & Richtlinien",
+        "notes": "Notizen",
+        "review": "Rezension"
+      }
+    }
+  },
+  "Companies": {
+    "company_name": "Name der Firma",
+    "asset_type": "Asset-Typ",
+    "status": "Status"
+  },
+  "CompanyDetailsMediator": {
+    "reports_resolved": "Berichte gelöst",
+    "bounty_program": "Kopfgeldprogramm",
+    "company_website": "Unternehmenswebsite",
+    "tabs": {
+      "vulnerability_program": "Schwachstellenprogramm",
+      "active_tickets": "Aktive Tickets"
+    }
+  },
+  "CreateCompanyTicket": {
+    "title": "Firmenticket erstellen",
+    "company_ticket": {
+      "title": "Firmenticket: Initial",
+      "alert": "Alle hier aufgeführten Informationen basieren auf dem ersten Ticket des Hacker-Berichts.",
+      "ticket_details": {
+        "title": "Ticketdetails",
+        "ticket_title": "Titel",
+        "short_description": "Kurzbeschreibung"
+      },
+      "problem_causes": {
+        "title": "Problem und Ursachen",
+        "impact": "Auswirkungen",
+        "proof_of_concept": "Proof of Concept",
+        "attachment": "Anhänge"
+      },
+      "bug_target": {
+        "title": "Bug-Ziel"
+      }
+    },
+    "hacker_ticket": "Hacker-Ticket: Chat",
+    "button_create": "Firmenticket erstellen"
+  }
+}

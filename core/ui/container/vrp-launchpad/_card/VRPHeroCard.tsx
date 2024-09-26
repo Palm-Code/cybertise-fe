@@ -1,4 +1,4 @@
-import { currentPhase } from "@/core/constants/common";
+import { useCurrentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import {
@@ -12,6 +12,7 @@ import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Role } from "@/types/admin/sidebar";
 import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { MoveLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface I_VRPHeroCard {
@@ -21,6 +22,8 @@ interface I_VRPHeroCard {
 }
 
 const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
+  const t = useTranslations("VRPLaunchpad");
+  const currentPhase = useCurrentPhase();
   return (
     <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
       <div className="_flexbox__col__start__start gap-3">
@@ -51,7 +54,7 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
                     affects="normal"
                     className="text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    Company:
+                    {t("company")}:
                   </Typography>
                   <div
                     className={cn(
@@ -73,7 +76,7 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
                     affects="normal"
                     className="text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    Last Update:
+                    {t("last_update")}:
                   </Typography>
                   <div
                     className={cn(

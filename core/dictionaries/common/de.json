@@ -13,7 +13,8 @@
     "menu": "Speisekarte",
     "logout": "Abmelden",
     "settings": "Einstellungen",
-    "mode": "Modus"
+    "mode": "Modus",
+    "vrp_management": "VRP-Management"
   },
   "Filter": {
     "type": "Typ",
@@ -31,7 +32,8 @@
     "rewards": "Belohnungen",
     "status": "Status",
     "last_update": "Letztes Update",
-    "last_message": "Letzte Nachricht"
+    "last_message": "Letzte Nachricht",
+    "ticket_type": "Tickettyp"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -81,7 +83,13 @@
     "upload_more": "Laden Sie weitere Dateien hoch"
   },
   "ChatReports": {
-    "jump_to_last_message": "Zur letzten Nachricht springen"
+    "jump_to_last_message": "Zur letzten Nachricht springen",
+    "create_company_ticket": "Firmenticket erstellen",
+    "company": "Unternehmen",
+    "go_to": "Gehen Sie zu {role} Ticket",
+    "hacker": "Hacker",
+    "chat_alert": "Dieser Chat ist auf diesem Gerät schreibgeschützt. \nBitte greifen Sie über den Desktop zu, um zu interagieren.",
+    "ticket_type": "{role} Ticket"
   },
   "Loading": {
     "loading_data": "Daten abrufen..."

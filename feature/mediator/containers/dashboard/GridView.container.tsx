@@ -13,7 +13,7 @@ const GridView = ({
 }) => {
   return (
     <AnimationWrapper>
-      <div className="z-10 grid h-full w-full gap-4 md:h-fit md:grid-cols-2 md:gap-10">
+      <div className="z-10 grid h-full w-full gap-4 md:h-fit md:grid-cols-2 md:gap-6">
         {isLoading ? (
           <ChatListCardLoadingList />
         ) : (

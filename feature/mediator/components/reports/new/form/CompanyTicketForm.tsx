@@ -28,6 +28,7 @@ import { usePostCreateCompanyTicket } from "@/feature/mediator/query/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Download, Eye, File, Info, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -37,6 +38,7 @@ interface I_CompanyTicketFormProps {
 }
 
 const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
+  const t = useTranslations("CreateCompanyTicket");
   const [activeInitialCard, setActiveInitialCard] = useState<boolean>(true);
   const [activeChatCard, setActiveChatCard] = useState<boolean>(false);
   const { mutate, isPending, isSuccess } = usePostCreateCompanyTicket(id);
@@ -99,7 +101,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                   prefixIcon={<X />}
                   className="p-0"
                 />
-                Create Company Ticket
+                {t("title")}
               </div>
             </Card>
             <div
@@ -133,7 +135,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                       )}
                     >
                       <Typography variant="p" affects="normal">
-                        Company Ticket: Initial
+                        {t("company_ticket.title")}
                       </Typography>
                       <ChevronDown
                         className={cn(
@@ -157,17 +159,18 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                           <div className="grid w-full grid-cols-[auto_1fr] gap-4 rounded-md bg-neutral-light-90 p-4 dark:bg-neutral-dark-90">
                             <Info />
                             <Typography variant="p" affects="normal">
-                              All information here are prefilled based on
-                              initial ticket from Hacker report.
+                              {t("company_ticket.alert")}
                             </Typography>
                           </div>
                           <div className="_flexbox__col__start__start w-full gap-4">
                             <Typography variant="h6" weight="bold">
-                              Ticket Details
+                              {t("company_ticket.ticket_details.title")}
                             </Typography>
                             <Input
                               type="text"
-                              label="Title"
+                              label={t(
+                                "company_ticket.ticket_details.ticket_title"
+                              )}
                               defaultValue={forms.title}
                               value={forms.title}
                               onChange={(e) => {
@@ -179,7 +182,9 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                               maxLength={255}
                             />
                             <TextArea
-                              label="Short Description"
+                              label={t(
+                                "company_ticket.ticket_details.short_description"
+                              )}
                               defaultValue={forms.description}
                               value={forms.description}
                               onChange={(e) => {
@@ -198,11 +203,11 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                           <Separator orientation="horizontal" />
                           <div className="_flexbox__col__start__start w-full gap-4">
                             <Typography variant="h6" weight="bold">
-                              Problem and Causes
+                              {t("company_ticket.problem_causes.title")}
                             </Typography>
                             <Tiptap
                               description={forms.impact}
-                              label="Impact"
+                              label={t("company_ticket.problem_causes.impact")}
                               onChangeValue={(v) =>
                                 methods.setValue("impact", v, {
                                   shouldValidate: true,
@@ -217,7 +222,9 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                             />
                             <Tiptap
                               description={forms.poc}
-                              label="Proof of Concept"
+                              label={t(
+                                "company_ticket.problem_causes.proof_of_concept"
+                              )}
                               onChangeValue={(v) =>
                                 methods.setValue("poc", v, {
                                   shouldValidate: true,
@@ -236,7 +243,9 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                                     affects="normal"
                                     className="text-neutral-light-40 dark:text-neutral-dark-40"
                                   >
-                                    Attachments
+                                    {t(
+                                      "company_ticket.problem_causes.attachment"
+                                    )}
                                   </Typography>
                                   <div
                                     className={cn(
@@ -345,7 +354,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                           <Separator orientation="horizontal" />
                           <div className="_flexbox__col__start__start w-full gap-4">
                             <Typography variant="h6" weight="bold">
-                              Bug Target
+                              {t("company_ticket.bug_target.title")}
                             </Typography>
                             <Review
                               data={initialPreviewData.chat_ticket}
@@ -379,7 +388,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                       )}
                     >
                       <Typography variant="p" affects="normal">
-                        Hacker Ticket: Chat
+                        {t("hacker_ticket")}
                       </Typography>
                       <ChevronDown
                         className={cn(
@@ -420,7 +429,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                   }
                   onClick={() => mutate(forms)}
                 >
-                  Create Company Ticket
+                  {t("button_create")}
                 </Button>
               </Card>
             </div>

@@ -6,7 +6,7 @@ import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import Information from "../_content/informations/Informations";
-import { vrpInformations } from "@/core/constants/vrp-launchpad";
+import { useVrpInformations } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
 import MakeChanges from "../_content/steps/make-changes/MakeChanges";
 import Notes from "../_content/steps/notes/Notes";
@@ -33,6 +33,7 @@ const Setup = ({
   currentStep,
   initialData: initialValues,
 }: I_SetupProps) => {
+  const vrpInformations = useVrpInformations();
   const { data: assetTypeOptions } = useGetAssetType();
   const { mutateAsync, isPending, isSuccess } = usePostUpdateVrp(
     initialValues?.id!
@@ -92,7 +93,11 @@ const Setup = ({
       },
       {
         element: (
-          <Notes onClickNext={() => next()} onClickPrev={() => back()} />
+          <Notes
+            currentSteps={currentStep}
+            onClickNext={() => next()}
+            onClickPrev={() => back()}
+          />
         ),
         key: "notes",
       },

@@ -54,7 +54,7 @@ const AssetType = ({
         className="!bg-background-main-light !p-6 !pr-11 dark:!bg-background-main-dark"
       >
         <Typography variant="p" affects="small">
-          Asset Type
+          {label}
         </Typography>
         <div className="mt-4 flex w-fit max-w-[360px] flex-wrap gap-x-2 gap-y-4">
           {options.length! ? (
