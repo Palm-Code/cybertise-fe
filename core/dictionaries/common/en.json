@@ -89,6 +89,14 @@
         "loading_data": "Getting data..."
     },
     "Settings": {
+        "title": "Settings",
+        "tabs": {
+            "details": "{role} Details",
+            "billings": "Billings",
+            "notifications": "Notifications",
+            "security": "Security",
+            "data_privacy": "Data & Privacy"
+        },
         "details": {
             "account": "Account",
             "company": "Company",
@@ -117,6 +125,129 @@
             "zip": "Zip Code",
             "country": "Country",
             "company_website": "Company Website"
+        },
+        "billings": {
+            "title": "Billings",
+            "button_edit_billing": "Edit Billing Setting",
+            "edit_billing_information": "Edit Billing Information",
+            "payment_information": "Payment Information",
+            "bank_name": "Bank Name",
+            "account_number": "Account Number",
+            "holder_name": "Holder Name",
+            "vat": "VAT",
+            "iban": "IBAN",
+            "bic": "BIC",
+            "button_save": "Save Changes",
+            "button_discard": "Discard"
+        },
+        "notifications": {
+            "title": "Notifications",
+            "system_notification": "System Notification",
+            "system_notification_description": "System notifications will send you updates from Sparta system",
+            "news": "News",
+            "news_description": "News notifications will send you updates from others"
+        },
+        "security": {
+            "title": "Security",
+            "login_info": {
+                "title": "Login Information",
+                "login_password": "Login Password",
+                "login_password_description": "The login password helps guarantee account and communication security.",
+                "button_edit_password": "Change Password",
+                "change_login_password": "Change Login Password",
+                "button_discard": "Discard",
+                "button_save": "Save Changes",
+                "current_password": "Confirm Current Password",
+                "label_current_password": "Current Password",
+                "placeholder_current_password": "Enter your current password",
+                "new_password": "New Password",
+                "label_new_password": "New Password",
+                "placeholder_new_password": "Enter your new password",
+                "label_confirm_new_password": "Confirm New Password",
+                "placeholder_confirm_new_password": "Confirm your new password",
+                "logout_all": "Logout from All Devices (Optional)",
+                "logout_all_description": "Logging out from all devices ensures that any potentially compromised sessions are terminated immediately. This is especially important if you suspect your account was accessed without your permission.",
+                "logout_all_check": "By selecting this option, you will be logged out from all devices currently signed into your account, including phones, tablets, and computers. You will need to log back in on each device using your new password"
+            },
+            "two_factor_authentication": {
+                "title": "Two Factor Authentication",
+                "label_2fa": "Authenticator",
+                "label_2fa_description": "Authenticator codes help guarantee account security.",
+                "badge": {
+                    "connected": "Connected",
+                    "not_connected": "Not Connected"
+                },
+                "button_connect_2fa": "Connect Authenticator",
+                "button_unbind_2fa": "Unbind Authenticator",
+                "button_edit_2fa": "Edit",
+                "button_verify_2fa": "Verification",
+                "setup_2fa": {
+                    "title": "Setup Authenticator",
+                    "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
+                    "button_cancel": "Cancel",
+                    "label_password": "Password",
+                    "placeholder_password": "Enter your password",
+                    "forgot_password": "Forgot your password?",
+                    "button_verify": "Verify",
+                    "description_2": "Scan or Copy the 'key code' below to your authenticator app to activate your 2FA.",
+                    "key_phrase": "Key phrases are used to restore Authenticator in case of device loss or change - make sure to secure key phrases before setting up authenticator app.",
+                    "label_key_phrase": "Key Phrases",
+                    "important_note": "Please copy the key phrase to activate the Authenticate button",
+                    "button_authenticate": "Authenticate",
+                    "title_2": "Activate Your Authenticator",
+                    "description_3": "Please enter authenticator code from your verified Two-Factor Authenticator app."
+                },
+                "unbind_2fa": {
+                    "title": "Unbind Authenticator",
+                    "description": "Please enter authenticator code from your verified Two-Factor Authenticator app.",
+                    "label_password": "Password",
+                    "placeholder_password": "Enter your password",
+                    "forgot_password": "Forgot your password?",
+                    "button_cancel": "Cancel",
+                    "button_unbind": "Unbind"
+                },
+                "verify_2fa": {
+                    "title": "Verify Your Authenticator",
+                    "button_cancel": "Cancel",
+                    "description": "Please enter authenticator code from your verified Two-Factor Authenticator app."
+                }
+            }
+        },
+        "data_privacy": {
+            "title": "Data & Privacy",
+            "privacy_policy": {
+                "title": "Privacy Policy",
+                "description": "Please read the Privacy Policy carefully."
+            },
+            "faq": {
+                "title": "FAQ",
+                "description": "Frequently Asked Questions"
+            },
+            "title_2": "Account",
+            "deactivate_account": {
+                "title": "Deactivate Your Account",
+                "description": "Find out how you can deactivate your account",
+                "information": {
+                    "title": "Deactivate Account",
+                    "description": "You're about to start the process of deactivating your Sparta account. Your username, and public profile will no longer be viewable on the platform after 30 days of activation.",
+                    "additional_information": {
+                        "title": "What else you should know?",
+                        "information_1": "You can restore you Sparta account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.",
+                        "information_2": "If you just want to use your current username or email address with a different Sparta account, change them instead of deactivate your account"
+                    },
+                    "button_cancel": "Cancel",
+                    "button_deactivate": "Deactivate my Account"
+                },
+                "confirmation": {
+                    "title": "Confirm Deactivation",
+                    "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
+                    "label_password": "Password",
+                    "placeholder_password": "Enter your password",
+                    "forgot_password": "Forgot your password?",
+                    "button_cancel": "Cancel",
+                    "button_deactivate": "Confirm Account Deactivation"
+                }
+            }
         }
     }
 }

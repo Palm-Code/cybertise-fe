@@ -5,6 +5,7 @@ import { KeyRound, X } from "lucide-react";
 import Link from "next/link";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const InputPassword = ({
   variant = "hacker",
@@ -16,6 +17,9 @@ const InputPassword = ({
   onClickVerify?: (password: string) => void;
   error?: string;
 }) => {
+  const t = useTranslations(
+    "Settings.security.two_factor_authentication.setup_2fa"
+  );
   const [password, setPassword] = useState("");
   return (
     <div
@@ -31,11 +35,11 @@ const InputPassword = ({
           onClick={props.onClose}
           className="mr-auto p-0"
         >
-          Cancel
+          {t("button_cancel")}
         </Button>
         <KeyRound className="h-16 w-16" />
         <Typography variant="h4" weight="semibold">
-          Setup Authenticator
+          {t("title")}
         </Typography>
         <Typography
           variant="p"
@@ -43,18 +47,18 @@ const InputPassword = ({
           align="center"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          Protecting your account is our top priority. Please confirm your
-          activity by entering your login password.
+          {t("description")}
         </Typography>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">
         <PasswordInput
+          label={t("label_password")}
+          placeholderText={t("label_password")}
           isError={!!error}
           errorMsg={error}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && onClickVerify(password)}
-          label="Password"
         />
         <Link
           href="/forgot-password"
@@ -66,7 +70,7 @@ const InputPassword = ({
             })
           )}
         >
-          Forgot Password ?
+          {t("forgot_password")}
         </Link>
       </div>
       <Button
@@ -76,7 +80,7 @@ const InputPassword = ({
         fullWidth
         onClick={() => onClickVerify(password)}
       >
-        Verify
+        {t("button_verify")}
       </Button>
     </div>
   );

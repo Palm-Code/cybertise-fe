@@ -3,21 +3,24 @@ import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profil
 import { Card, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { Banknote } from "lucide-react";
-
-const menus: string[] = [
-  "Bank Name",
-  "Account Number",
-  "Holder Name",
-  "VAT",
-  "IBAN",
-  "BIC",
-];
+import { useTranslations } from "next-intl";
 
 interface I_CardBillingProps {
   data?: I_GetUserProfileSuccessResponse["data"];
 }
 
 const CardBilling = ({ data }: I_CardBillingProps) => {
+  const t = useTranslations("Settings.billings");
+
+  const menus = [
+    t("bank_name"),
+    t("account_number"),
+    t("holder_name"),
+    t("vat"),
+    t("iban"),
+    t("bic"),
+  ];
+
   return (
     <>
       <Mobile>
@@ -28,7 +31,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
         >
           <Typography variant="h5" weight="bold" className="inline-flex">
             <Banknote className="mr-4 h-8 w-8" />
-            Payment Information
+            {t("payment_information")}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
             <Typography
@@ -36,7 +39,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[0]}
+              {t("bank_name")}
             </Typography>
 
             <Typography variant="p" affects="normal" className="col-span-1">
@@ -47,7 +50,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[1]}
+              {t("account_number")}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {data?.account_number || "-"}
@@ -57,7 +60,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[2]}
+              {t("holder_name")}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {data?.holder_name || "-"}
@@ -69,7 +72,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[3]}
+              {t("vat")}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {data?.vat || "-"}
@@ -79,7 +82,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[4]}
+              {t("iban")}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {data?.iban || "-"}
@@ -89,7 +92,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               affects="normal"
               className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              {menus[5]}
+              {t("bic")}
             </Typography>
             <Typography variant="p" affects="normal" className="col-span-1">
               {data?.bic || "-"}
@@ -106,7 +109,7 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
         >
           <Typography variant="h6" weight="bold" className="inline-flex">
             <Banknote className="mr-4 h-8 w-8" />
-            Payment Information
+            {t("payment_information")}
           </Typography>
           <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
             {menus.slice(0, 3).map((menu) => (

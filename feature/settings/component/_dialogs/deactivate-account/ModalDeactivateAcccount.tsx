@@ -21,6 +21,7 @@ const ModalDeactivateAccount = ({
     mutateAsync: mutateDeactivatedAccount,
     isPending: isPendingConfirm,
     isSuccess: isSuccessConfirm,
+    variables,
   } = usePostSelfDeactivatedAccount();
   const [activeState, setActiveState] = useState<string>("information");
 

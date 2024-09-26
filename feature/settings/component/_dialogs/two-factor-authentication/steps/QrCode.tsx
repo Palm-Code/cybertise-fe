@@ -5,6 +5,7 @@ import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { toast } from "sonner";
 import { useState } from "react";
 import { buttonVariants } from "@/core/ui/components/button/base-button";
+import { useTranslations } from "next-intl";
 
 const QrCode = ({
   data,
@@ -16,6 +17,10 @@ const QrCode = ({
   onClickAuthenticate?: () => void;
   data?: { qr: string; secret: string } | null;
 }) => {
+  const t = useTranslations(
+    "Settings.security.two_factor_authentication.setup_2fa"
+  );
+
   const [copied, setCopied] = useState(false);
   const copyCode = () => {
     setCopied(true);
@@ -36,11 +41,11 @@ const QrCode = ({
           onClick={props.onClose}
           className="mr-auto p-0"
         >
-          Cancel
+          {t("button_cancel")}
         </Button>
         <KeyRound className="h-16 w-16" />
         <Typography variant="h4" weight="semibold">
-          Setup Authenticator
+          {t("title")}
         </Typography>
         <Typography
           variant="p"
@@ -48,8 +53,7 @@ const QrCode = ({
           align="center"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          Scan or Copy the &apos;key code&apos; below to your authenticator app
-          to activate your 2FA.
+          {t("description_2")}
         </Typography>
       </div>
       {data && (
@@ -70,9 +74,7 @@ const QrCode = ({
         >
           <Info />
           <Typography variant="p" affects="normal">
-            Key phrases are used to restore Authenticator in case of device loss
-            or change - make sure to secure key phrases before setting up
-            authenticator app.
+            {t("key_phrase")}
           </Typography>
         </div>
         <div
@@ -84,7 +86,7 @@ const QrCode = ({
           <Input
             transparentBg
             type="text"
-            label="Key Phrase"
+            label={t("label_key_phrase")}
             readOnly
             value={data?.secret}
           />
@@ -97,7 +99,7 @@ const QrCode = ({
           </Button>
         </div>
         <Typography variant="p" affects="tiny">
-          Please copy the key phrase to activate the Authenticate button
+          {t("important_note")}
         </Typography>
       </div>
       {copied ? (
@@ -107,15 +109,15 @@ const QrCode = ({
           fullWidth
           onClick={onClickAuthenticate}
         >
-          Authenticate
+          {t("button_authenticate")}
         </Button>
       ) : (
         <Tooltip
           fullwidth
-          content="Please copy the key phrase to activate the Authenticate button"
+          content={t("important_note")}
           className={cn(buttonVariants({ variant: `primary-${variant}` }))}
         >
-          Authenticate
+          {t("button_authenticate")}
         </Tooltip>
       )}
     </div>

@@ -7,6 +7,7 @@ import ModalEdit2fa from "../../../_dialogs/two-factor-authentication/ModalEdit2
 import ModalSetup2fa from "../../../_dialogs/two-factor-authentication/ModalSetup2fa";
 import ModalUnbind2fa from "../../../_dialogs/two-factor-authentication/ModalUnbind2fa";
 import ModalVerify2fa from "../../../_dialogs/two-factor-authentication/ModalVerify2fa";
+import { useTranslations } from "next-intl";
 
 interface I_AuthenticationProps extends I_SecurityProps {}
 
@@ -14,6 +15,7 @@ const Authentication = ({
   twoFactorEnabled,
   variant,
 }: I_AuthenticationProps) => {
+  const t = useTranslations("Settings.security.two_factor_authentication");
   const [openModalSetup2fa, setOpenModalSetup2fa] = useState(false);
   const [openModalEdit2fa, setOpenModalEdit2fa] = useState(false);
   const [openModalDisable2fa, setOpenModalDisable2fa] = useState(false);
@@ -31,10 +33,12 @@ const Authentication = ({
           <div className="_flexbox__row__start__between w-full">
             <Typography variant="h6" weight="bold" className="xl:inline-flex">
               <KeyRound className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
-              Authenticator
+              {t("label_2fa")}
             </Typography>
             <Badge variant="default">
-              {twoFactorEnabled ? "Connected" : "Not Connected"}
+              {twoFactorEnabled
+                ? t("badge.connected")
+                : t("badge.not_connected")}
             </Badge>
           </div>
           <Typography
@@ -42,7 +46,7 @@ const Authentication = ({
             affects="normal"
             className="text-neutral-light-40 dark:text-neutral-dark-40"
           >
-            Authenticator codes help guarantee account security.
+            {t("label_2fa_description")}
           </Typography>
           <div className="_flexbox__row__center__start mt-3 gap-6">
             {twoFactorEnabled ? (
@@ -52,21 +56,21 @@ const Authentication = ({
                   variant={`ghost-${variant}`}
                   onClick={() => setOpenModalEdit2fa(true)}
                 >
-                  Edit
+                  {t("button_edit_2fa")}
                 </Button>
                 <Button
                   size="ghost"
                   variant={`ghost-${variant}`}
                   onClick={() => setOpenModalDisable2fa(true)}
                 >
-                  Unbind
+                  {t("button_unbind_2fa")}
                 </Button>
                 <Button
                   size="ghost"
                   variant={`ghost-${variant}`}
                   onClick={() => setOpenModalVerify2fa(true)}
                 >
-                  Verification
+                  {t("button_verify_2fa")}
                 </Button>
               </>
             ) : (
@@ -75,7 +79,7 @@ const Authentication = ({
                 variant={`ghost-${variant}`}
                 onClick={() => setOpenModalSetup2fa(true)}
               >
-                Connect Authenticator
+                {t("button_connect_2fa")}
               </Button>
             )}
           </div>

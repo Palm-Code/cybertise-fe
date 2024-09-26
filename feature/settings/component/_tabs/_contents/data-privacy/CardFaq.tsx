@@ -1,8 +1,10 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { ChevronRight, CircleHelp, FileKey2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const CardFaq = () => {
+  const t = useTranslations("Settings.data_privacy.faq");
   return (
     <Card
       isClickable
@@ -16,7 +18,7 @@ const CardFaq = () => {
       <div className="_flexbox__row__start__between w-full">
         <Typography variant="h6" weight="bold" className="xl:inline-flex">
           <CircleHelp className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
-          FAQ
+          {t("title")}
         </Typography>
         <ChevronRight className="hidden xl:block" />
       </div>
@@ -25,7 +27,7 @@ const CardFaq = () => {
         affects="normal"
         className="text-neutral-light-40 dark:text-neutral-dark-40"
       >
-        Frequently Asked Question
+        {t("description")}
       </Typography>
     </Card>
   );

@@ -8,6 +8,7 @@ import { OTPInput } from "input-otp";
 
 import { useGetVerifyTwoFactor } from "@/core/react-query/client/useGetVerifyTwoFactor";
 import { Slot } from "./steps/InputOtp";
+import { useTranslations } from "next-intl";
 
 export interface I_ModalVerify2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
@@ -19,8 +20,10 @@ const ModalVerify2fa = ({
   onClose = () => {},
   ...props
 }: I_ModalVerify2faProps) => {
+  const t = useTranslations(
+    "Settings.security.two_factor_authentication.verify_2fa"
+  );
   const [otp, setOtp] = useState("");
-  const otpRef = useRef<HTMLInputElement>(null);
   const {
     mutateAsync: mutateVerifyTwoFactor,
     isPending,
@@ -59,14 +62,13 @@ const ModalVerify2fa = ({
             onClick={onClose}
             className="mr-auto p-0"
           >
-            Cancel
+            {t("button_cancel")}
           </Button>
           <Typography variant="h4" weight="semibold" align="center">
-            Verify Your Authenticator
+            {t("title")}
           </Typography>
           <Typography variant="p" affects="normal" align="center">
-            Please enter authenticator code from your verified Two-Factor
-            Authenticator app.
+            {t("description")}
           </Typography>
         </div>
         <div className="_flexbox__col__start__start w-full gap-2">

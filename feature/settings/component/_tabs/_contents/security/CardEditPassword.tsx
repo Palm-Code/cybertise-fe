@@ -13,6 +13,7 @@ import { Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { CircleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -21,6 +22,7 @@ interface I_CardEditPasswordProps {
 }
 
 const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
+  const t = useTranslations("Settings.security.login_info");
   const {
     setValue,
     watch,
@@ -81,7 +83,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
             )}
           >
             <Typography variant="h6" weight="bold">
-              Confirm Current Password
+              {t("current_password")}
             </Typography>
             <PasswordInput
               value={forms.old_password}
@@ -92,7 +94,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               }
               isError={!!errors?.root}
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
-              label="Current password"
+              label={t("label_current_password")}
             />
           </Card>
           <Card
@@ -102,19 +104,19 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
             )}
           >
             <Typography variant="h6" weight="bold">
-              New Password
+              {t("new_password")}
             </Typography>
             <PasswordInput
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               withRegex
               value={forms.new_password}
-              label="New password"
+              label={t("label_new_password")}
               options={passwordValidationItems}
               onChange={checkPassword}
             />
             <PasswordInput
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
-              label="Confirm new password"
+              label={t("label_confirm_new_password")}
               value={confirmPassworText.content}
               onChange={passwordConfirmationCheck}
               isConfirmation={!!confirmPassworText.content}
@@ -128,7 +130,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
             )}
           >
             <Typography variant="h6" weight="bold">
-              Logout from all devices (optional)
+              {t("logout_all")}
             </Typography>
             <Card
               className={cn(
@@ -143,10 +145,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
                 affects="small"
                 className="text-neutral-light-10 dark:text-neutral-dark-10"
               >
-                Logging out from all devices ensures that any potentially
-                compromised sessions are terminated immediately. This is
-                especially important if you suspect your account was accessed
-                without your permission.
+                {t("logout_all_description")}
               </Typography>
             </Card>
             <div className="_flexbox__row__start__start w-full gap-4">
@@ -160,10 +159,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
                 }
               />
               <Typography variant="p" affects="small" className="leading-none">
-                By selecting this option, you will be logged out from all
-                devices currently signed into your account, including phones,
-                tablets, and computers. You will need to log back in on each
-                device using your new password
+                {t("logout_all_check")}
               </Typography>
             </div>
           </Card>

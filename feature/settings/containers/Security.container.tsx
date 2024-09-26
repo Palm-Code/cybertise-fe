@@ -6,6 +6,7 @@ import { Role } from "@/types/admin/sidebar";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { KeyRound } from "lucide-react";
 import { cn } from "@/core/lib/utils";
+import { useTranslations } from "next-intl";
 
 export interface I_SecurityProps {
   variant: keyof typeof Role;
@@ -20,11 +21,12 @@ const Security = ({
   isEditing,
   handleClickEdit = () => {},
 }: I_SecurityProps) => {
+  const t = useTranslations("Settings.security");
   const [activeEditElement, setActiveEditElement] = useState(0);
 
   const menus: { title: string; element: JSX.Element }[] = [
     {
-      title: "Login info",
+      title: t("login_info.title"),
       element: (
         <CardLogin
           variant={variant}
@@ -37,7 +39,7 @@ const Security = ({
       ),
     },
     {
-      title: "Two-Factor Authentication",
+      title: t("two_factor_authentication.title"),
       element: (
         <Authentication
           twoFactorEnabled={twoFactorEnabled}
@@ -60,12 +62,12 @@ const Security = ({
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="xl:_flexbox__row__center__between hidden w-full">
             <Typography variant="h5" weight="bold">
-              Security
+              {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6">
             <Typography variant="h6" weight="bold">
-              Two-Factor Authentication
+              {t("two_factor_authentication.title")}
             </Typography>
 
             <Card
@@ -81,7 +83,7 @@ const Security = ({
                   className="xl:inline-flex"
                 >
                   <KeyRound className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
-                  Authenticator
+                  {t("two_factor_authentication.label_2fa")}
                 </Typography>
                 <Badge variant="default">
                   {twoFactorEnabled ? "Connected" : "Not Connected"}
@@ -92,7 +94,7 @@ const Security = ({
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Authenticator codes help guarantee account security.
+                {t("two_factor_authentication.label_2fa_description")}
               </Typography>
             </Card>
           </div>
@@ -102,7 +104,7 @@ const Security = ({
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="xl:_flexbox__row__center__between hidden w-full">
             <Typography variant="h5" weight="bold">
-              Security
+              {t("title")}
             </Typography>
           </div>
           {menus.map((menu, idx) => (

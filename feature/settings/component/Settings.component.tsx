@@ -15,7 +15,12 @@ import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { I_SettingsFragmentProps } from "../fragments/Settings.fragment";
 import { ChevronRight, MoveLeft } from "lucide-react";
 import { motion } from "framer-motion";
-import { settingTabItems } from "../constants";
+import {
+  useCompanySettingTabItems,
+  useCompanyStaffSettingTabItems,
+  useHackerSettingTabItems,
+  useMediatorSettingTabItems,
+} from "../constants";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   I_UpdateProfile,
@@ -23,6 +28,9 @@ import {
 } from "@/core/models/company/settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
+import { Role } from "@/types/admin/sidebar";
+import { SortFilterType } from "@/types/admin/dashboard";
+import { useTranslations } from "next-intl";
 
 const Setting = ({
   role,
@@ -30,6 +38,13 @@ const Setting = ({
 }: I_SettingsFragmentProps & {
   initialData?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const t = useTranslations("Settings");
+  const settingTabItems: { [key in Role]: SortFilterType[] } = {
+    [Role.hacker]: useHackerSettingTabItems(),
+    [Role.mediator]: useMediatorSettingTabItems(),
+    [Role.company]: useCompanySettingTabItems(),
+    [Role["company staff"]]: useCompanyStaffSettingTabItems(),
+  };
   const [activeTab, setActiveTab] = useState<SettingItems>(
     SettingItems.details
   );
@@ -93,7 +108,7 @@ const Setting = ({
         {activeState === null ? (
           <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
             <Typography variant="h4" weight="bold">
-              Settings
+              {t("title")}
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-4">
               {settingTabItems[role].map((item, idx) => (
@@ -126,7 +141,7 @@ const Setting = ({
               )}
             >
               <Typography variant="p" affects="small">
-                Settings
+                {t("title")}
               </Typography>
               <Typography
                 variant="h4"
@@ -146,7 +161,7 @@ const Setting = ({
       <Desktop>
         <div className="_flexbox__col__start__start gap-10 pt-12">
           <Typography variant="h4" weight="bold">
-            Settings
+            {t("title")}
           </Typography>
           {!editing && (
             <Tab

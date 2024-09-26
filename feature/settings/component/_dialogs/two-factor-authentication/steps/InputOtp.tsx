@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../ModalSetup2fa";
 import { OTPInput, SlotProps } from "input-otp";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const InputOtp = ({
   title = "Activate Your Authenticator",
@@ -17,6 +18,9 @@ const InputOtp = ({
   isError?: boolean;
   title?: string;
 }) => {
+  const t = useTranslations(
+    "Settings.security.two_factor_authentication.setup_2fa"
+  );
   const [otp, setOtp] = useState("");
 
   useEffect(() => {
@@ -39,10 +43,10 @@ const InputOtp = ({
           onClick={props.onClose}
           className="mr-auto p-0"
         >
-          Cancel
+          {t("button_cancel")}
         </Button>
-        <Typography variant="h4" weight="semibold">
-          {title}
+        <Typography variant="h4" weight="semibold" align="center">
+          {t("title_2")}
         </Typography>
         <Typography
           variant="p"
@@ -50,8 +54,7 @@ const InputOtp = ({
           align="center"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          Please enter authenticator code from your verified Two-Factor
-          Authenticator app.
+          {t("description")}
         </Typography>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">

@@ -5,6 +5,7 @@ import { I_ModalSetup2faProps } from "../../two-factor-authentication/ModalSetup
 import { useState } from "react";
 import Link from "next/link";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
+import { useTranslations } from "next-intl";
 
 const Confirmation = ({
   variant = "hacker",
@@ -18,6 +19,9 @@ const Confirmation = ({
   error?: string;
   disabled?: boolean;
 }) => {
+  const t = useTranslations(
+    "Settings.data_privacy.deactivate_account.confirmation"
+  );
   const [password, setPassword] = useState("");
   return (
     <div
@@ -33,11 +37,11 @@ const Confirmation = ({
           onClick={props.onClose}
           className="mr-auto p-0"
         >
-          Cancel
+          {t("button_cancel")}
         </Button>
         <OctagonX className="mx-auto h-16 w-16" />
         <Typography variant="h4" weight="semibold" align="center">
-          Confirm Deactivation
+          {t("title")}
         </Typography>
         <Typography
           variant="p"
@@ -45,17 +49,17 @@ const Confirmation = ({
           align="center"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          Protecting your account is our top priority. Please confirm your
-          activity by entering your login password.
+          {t("description")}
         </Typography>
       </div>
       <div className="_flexbox__col__start__start w-full gap-2">
         <PasswordInput
+          label={t("label_password")}
+          placeholderText={t("placeholder_password")}
           isError={!!error}
           errorMsg={error}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          label="Password"
         />
         <Link
           href="/forgot-password"
@@ -67,18 +71,18 @@ const Confirmation = ({
             })
           )}
         >
-          Forgot Password ?
+          {t("forgot_password")}
         </Link>
       </div>
       <Button
         isLoading={isLoading}
-        disabled={disabled}
+        disabled={!password || disabled}
         variant="alert"
         fullWidth
         onClick={() => onClickVerify(password)}
         className="bg-semantic-light-critical text-white dark:bg-semantic-dark-critical dark:text-white"
       >
-        Confirm Account Deactivation
+        {t("button_deactivate")}
       </Button>
     </div>
   );
