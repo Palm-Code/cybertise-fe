@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import {
   AlignJustify,
   Bug,
@@ -43,7 +44,7 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   vrp_management: (
     <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
   ),
-  "manage company": <Building2 className="h-6 w-6" />,
+  manage_company: <Building2 className="h-6 w-6" />,
 };
 
 const Sidebar = ({ type }: SidebarProps) => {

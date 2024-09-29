@@ -1,0 +1,17 @@
+{
+  "DashboardCompany": {
+    "title": "Offene Tickets",
+    "see_programs": "Siehe VRP Launchpad",
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
+  },
+  "ReportsCompany": {
+    "title": "Berichte",
+    "placeholder_search": "Nach Programmen suchen",
+    "see_programs": "Siehe VRP Launchpad"
+  },
+  "VRPManagement": {
+    "button_add_new": "Neues VRP hinzufügen",
+    "not_found": "Sie haben noch kein Programm",
+    "title": "VRP-Management"
+  }
+}

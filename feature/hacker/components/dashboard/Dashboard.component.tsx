@@ -30,6 +30,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useGetTableColumns } from "../../constants/dashboard";
+import React from "react";
 
 const Dashboard = () => {
   const t = useTranslations("DashboardHacker");

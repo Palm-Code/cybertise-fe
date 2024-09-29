@@ -1,0 +1,32 @@
+{
+    "DashboardCompany": {
+        "title": "Open Tickets",
+        "placeholder_search": "Try “#21231” or “Company name”",
+        "submit_search": "Search",
+        "search_result": "Show result for",
+        "see_programs": "See VRP Launchpad"
+    },
+    "ProgramsCompany": {
+        "title": "VRP Launchpad",
+        "placeholder_search": "Search for programs",
+        "search_title": "Search VRP Launchpad",
+        "search_result": "Show result for",
+        "see_programs": "See VRP Launchpad",
+        "button_all": "All",
+        "button_phase_2": "Phase 2",
+        "button_phase_4": "Phase 4"
+    },
+    "ReportsCompany": {
+        "title": "Reports",
+        "placeholder_search": "Search for programs",
+        "submit_search": "Search",
+        "search_result": "Show result for",
+        "see_programs": "See VRP Launchpad"
+    },
+    "VRPManagement": {
+        "title": "VRP Management",
+        "placeholder_search": "Search for programs",
+        "button_add_new": "Add new VRP",
+        "not_found": "You have no any program yet"
+    }
+}

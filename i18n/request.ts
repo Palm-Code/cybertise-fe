@@ -13,12 +13,17 @@ export default getRequestConfig(async () => {
       .default,
     ...(await import(`../core/dictionaries/admin/mediator/${locale}.json`))
       .default,
+    ...(await import(`../core/dictionaries/admin/company/${locale}.json`))
+      .default,
+    ...(await import(`../core/dictionaries/admin/company/${locale}.json`))
+      .default,
   };
   const defaultMessages = {
     ...(await import(`../core/dictionaries/auth/en.json`)).default,
     ...(await import(`../core/dictionaries/common/en.json`)).default,
     ...(await import(`../core/dictionaries/admin/hacker/en.json`)).default,
     ...(await import(`../core/dictionaries/admin/mediator/en.json`)).default,
+    ...(await import(`../core/dictionaries/admin/company/en.json`)).default,
   };
   const messages = deepmerge(defaultMessages, userMessages);
 
