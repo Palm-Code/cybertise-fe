@@ -12,6 +12,87 @@
   "VRPManagement": {
     "button_add_new": "Neues VRP hinzufügen",
     "not_found": "Sie haben noch kein Programm",
-    "title": "VRP-Management"
+    "title": "VRP-Management",
+    "forbidden_description": "Das Hinzufügen der VRP-Funktion ist derzeit nur auf der Desktop-Version unserer Website möglich.",
+    "forbidden_title": "Fahren Sie auf dem Desktop fort"
+  },
+  "ManageCompany": {
+    "reports_resolved": "Berichte gelöst",
+    "bounty_program": "Kopfgeldprogramm",
+    "company_website": "Unternehmenswebsite",
+    "tabs": {
+      "company_details": "Firmendetails",
+      "staffs": "Mitarbeiter",
+      "activity_logs": "Aktivitätsprotokolle",
+      "emergency_contact": "Notfallkontakt"
+    },
+    "CompanyStaff": {
+      "not_found": "Kein Personal gefunden",
+      "title": "Mitarbeiter des Unternehmens",
+      "forbidden": {
+        "add_new": "„Neues Personal hinzufügen“ ist derzeit nur auf dem Desktop verfügbar"
+      },
+      "staff": "Personal",
+      "button_add_new": "Neues Personal hinzufügen",
+      "add_new_staff": {
+        "header_title": {
+          "add": "Neues Personal hinzufügen",
+          "edit": "Personal bearbeiten"
+        },
+        "title": "Details zum Mitarbeiterkonto",
+        "name": "Name des Personals",
+        "email": "Arbeits-E-Mail",
+        "phone": "Telefonnummer",
+        "button_discard": "Verwerfen",
+        "button_save": "Änderungen speichern"
+      },
+      "delete_staff": {
+        "modal": {
+          "title": "Stab löschen",
+          "description": "Geben Sie zur Bestätigung <strong></strong> zum Löschen in das Feld unten ein",
+          "button_delete": "Löschen Sie dieses Personal"
+        },
+        "title": "Stab löschen",
+        "description": {
+          "delete": "Deaktiviert die Anmeldeinformationen des Mitarbeiters und verhindert so den weiteren Zugriff auf Unternehmenssysteme und -daten.",
+          "deactivate": "Deaktivierte Konten können bei Bedarf reaktiviert werden, was einen reibungsloseren Offboarding-Prozess ermöglicht.",
+          "completely": "Entfernt das Profil des Mitarbeiters und die zugehörigen Daten nach 30 Tagen vollständig aus dem System."
+        },
+        "button_delete": "Stab löschen"
+      }
+    },
+    "EmergencyContact": {
+      "title": "Notfallkontakt",
+      "contact_person": "Ansprechpartner",
+      "email": "E-Mail",
+      "phone": "Telefonnummer",
+      "forbidden": {
+        "title": "Vom Desktop aus bearbeiten",
+        "subtitle": "Notfallkontakte können derzeit nur auf der Desktop-Version unserer Website bearbeitet werden."
+      },
+      "button_edit": "Notfallkontakt bearbeiten",
+      "edit": {
+        "title": "Notfallkontakt bearbeiten",
+        "header_title": "Notfallkontakt bearbeiten",
+        "contact_person": "Ansprechpartner",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "button_discard": "Verwerfen",
+        "button_save": "Änderungen speichern"
+      }
+    },
+    "ActivityLogs": {
+      "forbidden": {
+        "title": "Aktivitätsprotokolle sind nur auf dem Desktop verfügbar"
+      },
+      "title": "Aktivitätsprotokolle"
+    }
+  },
+  "Filter": {
+    "date_range": {
+      "title": "Datumsbereich",
+      "button_clear": "Klar",
+      "button_apply": "Anwenden"
+    }
   }
 }

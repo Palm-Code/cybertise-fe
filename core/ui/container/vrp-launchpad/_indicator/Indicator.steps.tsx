@@ -3,6 +3,7 @@ import { cn } from "@/core/lib/utils";
 import { Card, Separator, Typography } from "@/core/ui/components";
 import { StepActive, StepInactive, StepPassed } from "@/core/ui/icons";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 interface I_IndicatorStepsProps {
   variant?: keyof typeof Role;
@@ -32,6 +33,7 @@ const IndicatorSteps = ({
   variant = "mediator",
   currentSteps,
 }: I_IndicatorStepsProps) => {
+  const t = useTranslations("VRPLaunchpad");
   const steps = useCurrentPhase();
   const STEPS: string[] = [
     steps.phase1,
@@ -102,7 +104,7 @@ const IndicatorSteps = ({
                 {index < 5 && (
                   <div className="_flexbox__col__center relative">
                     <Typography variant="p" affects="small" weight="semibold">
-                      Step {index + 1}
+                      {t("steps.title")} {index + 1}
                     </Typography>
                     <Typography variant="p" affects="small">
                       {STEPS[index]}

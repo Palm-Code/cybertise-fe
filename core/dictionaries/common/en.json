@@ -23,7 +23,12 @@
         "type": "Type",
         "risk_level": "Risk Level",
         "status": "Status",
-        "asset_type": "Asset Type"
+        "asset_type": "Asset Type",
+        "date_range": {
+            "title": "Date Range",
+            "button_apply": "Apply",
+            "button_clear": "Clear"
+        }
     },
     "Ticket": {
         "ticket": "Ticket",
@@ -42,7 +47,12 @@
         "asset_type": "Asset Type",
         "asset_type_available": "Asset Type Available",
         "rewards": "Rewards",
-        "bounty": "Bounty"
+        "bounty": "Bounty",
+        "forbidden": {
+            "title": "Continue on Desktop",
+            "title_vrp": "Not Published",
+            "description_vrp": "Only can be accessed for Published VRP"
+        }
     },
     "Pagination": {
         "page": "Page",
@@ -74,7 +84,8 @@
         "button_send_attachment": "Send Attachment",
         "button_send_message": "Send",
         "placeholder_chat": "Write your message...",
-        "button_cancel": "Cancel"
+        "button_cancel": "Cancel",
+        "label_caption": "Write a caption"
     },
     "FileInput": {
         "drag_and_drop": "Drag & Drop",
@@ -105,11 +116,12 @@
             "data_privacy": "Data & Privacy"
         },
         "details": {
+            "title": "{role} Details",
             "account": "Account",
             "company": "Company",
             "about": "About {role}",
             "company_information": "Company Information",
-            "account_details": "{role} Details",
+            "account_details": "{role} Account Details",
             "button_edit_account": "Edit {role} Details",
             "about_you": "About You",
             "label_avatar": "{role} Avatar",

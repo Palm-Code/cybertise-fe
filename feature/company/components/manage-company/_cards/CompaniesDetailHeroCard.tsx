@@ -4,6 +4,7 @@ import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profil
 import { Card, Indicator, Separator, Typography } from "@/core/ui/components";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
@@ -13,6 +14,7 @@ interface I_CompaniesDetailHeroCard {
 }
 
 const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
+  const t = useTranslations("ManageCompany");
   const { ref, inView } = useInView({ threshold: 0.1 });
   return (
     <>
@@ -21,7 +23,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
           className={cn("rounded-none", inView ? "opacity-100" : "opacity-0")}
         >
           <div className="_flexbox__col__start__start w-full gap-4" ref={ref}>
-            <div className="_flexbox__row__start__between w-full">
+            <div className="grid w-full grid-cols-[1fr_auto] items-start gap-4">
               <div className="_flexbox__col__start__start gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
@@ -67,7 +69,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   affects="small"
                   className="!text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Reports resolved
+                  {t("reports_resolved")}
                 </Typography>
                 <Typography variant="p" affects="small" weight="semibold">
                   {data?.company_reports_resolved}
@@ -79,7 +81,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   affects="small"
                   className="!text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Bounty Program
+                  {t("bounty_program")}
                 </Typography>
                 <Typography variant="p" affects="small" weight="semibold">
                   {data?.company_program_count}
@@ -91,7 +93,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   affects="small"
                   className="!text-neutral-light-30 dark:text-neutral-dark-30"
                 >
-                  Company Website
+                  {t("company_website")}
                 </Typography>
                 <Link
                   href={
@@ -160,7 +162,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
               />
             </div>
             <div className="_flexbox__col__start__start w-full gap-12">
-              <div className="_flexbox__row__start__between w-full">
+              <div className="grid w-full grid-cols-[1fr_auto] items-start gap-9">
                 <div className="_flexbox__col__start__start gap-9">
                   <div className="_flexbox__col__start__start gap-2">
                     <Typography
@@ -196,7 +198,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Reports resolved
+                    {t("reports_resolved")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {data?.company_reports_resolved}
@@ -209,7 +211,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Bounty Program
+                    {t("bounty_program")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {data?.company_program_count}
@@ -222,7 +224,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Company Website
+                    {t("company_website")}
                   </Typography>
                   <Link
                     href={

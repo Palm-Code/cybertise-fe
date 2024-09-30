@@ -3,7 +3,7 @@ import { useState } from "react";
 import CompaniesDetailHeroCard from "./_cards/CompaniesDetailHeroCard";
 import { manageCompanyTabsItemEnums } from "@/enums";
 import Tab from "./_tab/Tab";
-import { manageCompanyTabsItem } from "../../constants/manage-company";
+import { useManageCompanyTabsItem } from "../../constants/manage-company";
 import CompanyDetails from "./_tab/_content/CompanyDetails";
 import Staffs from "./_tab/_content/Staffs";
 import EmergencyContacs from "./_tab/_content/EmergencyContacs";
@@ -23,6 +23,7 @@ const ManageCompany = () => {
   const searchParams = useSearchParams();
   const state = searchParams.get("edit") as manageCompanyTabsItemEnums &
     editStaff;
+  const manageCompanyTabsItem = useManageCompanyTabsItem();
   const { data: companyData, isLoading, isFetching } = useGetUserProfile();
   const [active, setActive] = useState<manageCompanyTabsItemEnums>(
     manageCompanyTabsItemEnums.company_details

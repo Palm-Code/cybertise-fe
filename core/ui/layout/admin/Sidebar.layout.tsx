@@ -96,7 +96,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     key={`navbar-item-${index}`}
                     href={item.path}
                     className={cn(
-                      "_flexbox__row__center__start h-16 w-full gap-4",
+                      "grid h-16 w-full grid-cols-[auto_1fr] items-center gap-4",
                       "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
                       "border-l-2",
                       `hover:${borderColor[type as keyof typeof borderColor]}`,

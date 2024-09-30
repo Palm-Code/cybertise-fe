@@ -76,7 +76,7 @@ const ModalSendAttachment = ({
             />
             <Tiptap
               description={description ?? ""}
-              label="Write a caption"
+              label={t("label_caption")}
               variant="mediator"
               isChat
               className="pb-12 shadow-none"

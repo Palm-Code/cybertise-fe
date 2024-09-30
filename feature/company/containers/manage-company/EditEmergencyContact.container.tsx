@@ -11,12 +11,14 @@ import {
   createCompanyStaffSchema,
   I_StaffRequestType,
 } from "@/core/models/company/manage-company";
+import { useTranslations } from "next-intl";
 
 const EditEmergencyContact = ({
   data,
 }: {
   data?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const t = useTranslations("ManageCompany.EmergencyContact.edit");
   const {
     watch,
     setValue,
@@ -45,7 +47,7 @@ const EditEmergencyContact = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
-          <EditNavBar title="Edit Emergency Contact" />
+          <EditNavBar title={t("header_title")} />
           <Card
             className={cn(
               "rounded-xl xl:px-8 xl:py-12",
@@ -54,12 +56,12 @@ const EditEmergencyContact = ({
           >
             <div className="_flexbox__col__start__start w-full gap-6">
               <Typography variant="h6" weight="bold">
-                Emergency Contact Details
+                {t("title")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-2.5">
                 <Input
                   type="text"
-                  label="Contact Person"
+                  label={t("contact_person")}
                   value={forms.name}
                   onChange={(e) =>
                     setValue("name", e.target.value, {
@@ -73,7 +75,7 @@ const EditEmergencyContact = ({
                 />
                 <Input
                   type="email"
-                  label="Email"
+                  label={t("email")}
                   value={forms.email}
                   onChange={(e) =>
                     setValue("email", e.target.value, {
@@ -89,6 +91,7 @@ const EditEmergencyContact = ({
                   type="tel"
                   pattern="[0-9]*"
                   inputMode="numeric"
+                  label={t("phone")}
                   maxLength={25}
                   value={forms.phone}
                   onChange={(e) =>
@@ -108,7 +111,7 @@ const EditEmergencyContact = ({
                   href="/manage-company"
                   variant="secondary-company"
                 >
-                  Discard
+                  {t("button_discard")}
                 </Button>
                 <Button
                   variant="primary-company"
@@ -118,7 +121,7 @@ const EditEmergencyContact = ({
                   isLoading={isPending}
                   onClick={handleSubmitForm}
                 >
-                  Save Changes
+                  {t("button_save")}
                 </Button>
               </div>
             </div>

@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Input, Typography } from "@/core/ui/components";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface I_ModalDeleteStaffProps {
@@ -19,6 +20,7 @@ const ModalDeleteStaff = ({
   handleDeleteStaff,
   isLoading = false,
 }: I_ModalDeleteStaffProps) => {
+  const t = useTranslations("ManageCompany.CompanyStaff.delete_staff.modal");
   const [staffName, setStaffName] = useState<string>("");
   return (
     <BaseModal isOpen={isOpen} onClose={onClose}>
@@ -39,7 +41,7 @@ const ModalDeleteStaff = ({
             }}
           />
           <Typography variant="h5" weight="bold">
-            Delete Staff
+            {t("title")}
           </Typography>
           <Typography
             variant="p"
@@ -47,8 +49,9 @@ const ModalDeleteStaff = ({
             className="mt-2"
             align={"center"}
           >
-            To Confirm, Type <strong className="select-none">"{name}"</strong>{" "}
-            to delete in the box below
+            {t.rich("description", {
+              strong: () => <strong className="select-none">{name}</strong>,
+            })}
           </Typography>
         </div>
         <Input
@@ -67,7 +70,7 @@ const ModalDeleteStaff = ({
             fullWidth
             onClick={handleDeleteStaff}
           >
-            Delete this staff
+            {t("button_delete")}
           </Button>
         </div>
       </div>

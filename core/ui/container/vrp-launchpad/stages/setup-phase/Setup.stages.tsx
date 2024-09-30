@@ -4,7 +4,6 @@ import { Card } from "@/core/ui/components";
 import { useMultistepForm } from "@/utils/multi-step-form";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
 import Information from "../_content/informations/Informations";
 import { useVrpInformations } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";

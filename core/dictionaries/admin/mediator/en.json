@@ -35,6 +35,7 @@
         "company": "Company",
         "last_update": "Last Update",
         "steps": {
+            "title": "Step",
             "vrp_details": "VRP Details",
             "setup": "Setup Phase",
             "company_revision": "Company Revision",
@@ -43,6 +44,7 @@
         },
         "phase": {
             "vrp_details": {
+                "title": "Create VRP",
                 "brief": "Brief",
                 "details": "VRP Details",
                 "setup": "Setup Monetary Awards",

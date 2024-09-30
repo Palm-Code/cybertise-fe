@@ -34,7 +34,8 @@
       "setup": "Setup-Phase",
       "company_revision": "Unternehmensrevision",
       "mediator_revision": "Revision des Mediators",
-      "publish": "Veröffentlichen"
+      "publish": "Veröffentlichen",
+      "title": "Schritt"
     },
     "phase": {
       "vrp_details": {
@@ -87,7 +88,8 @@
           "alert": "Sie verfügen über nicht gespeicherte Vermögenswerte. Bitte speichern Sie diese zunächst, bevor Sie fortfahren.",
           "button_previous": "Vorherige"
         },
-        "button_previous": "Vorherige"
+        "button_previous": "Vorherige",
+        "title": "VRP erstellen"
       },
       "setup": {
         "review_vrp": "Überprüfen Sie die VRP-Details",

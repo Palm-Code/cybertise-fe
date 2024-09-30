@@ -17,8 +17,10 @@ import { useGetActivityLog } from "@/feature/company/query/client";
 import { format } from "date-fns";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 import { formatTime } from "@/utils/formatter/date-formatter";
+import { useTranslations } from "next-intl";
 
 const ActivityLogs = ({}: {}) => {
+  const t = useTranslations("ManageCompany.ActivityLogs");
   const store = useActivityLogParamStore();
   const { data, isLoading, isFetching } = useGetActivityLog(store.payload);
   const meta = data?.meta;
@@ -28,7 +30,7 @@ const ActivityLogs = ({}: {}) => {
       <Mobile>
         <EmptyState
           variant="company"
-          titleText="Activity Logs only available in desktop"
+          titleText={t("forbidden.title")}
           buttonText=""
         />
       </Mobile>
@@ -36,7 +38,7 @@ const ActivityLogs = ({}: {}) => {
         <div className="_flexbox__col__start__start gap-12">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Activity Logs
+              {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__row__center__between w-full gap-4">

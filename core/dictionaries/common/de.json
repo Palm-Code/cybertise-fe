@@ -14,7 +14,8 @@
     "logout": "Abmelden",
     "settings": "Einstellungen",
     "mode": "Modus",
-    "vrp_management": "VRP-Management"
+    "vrp_management": "VRP-Management",
+    "manage_company": "Unternehmen verwalten"
   },
   "Filter": {
     "type": "Typ",
@@ -45,7 +46,12 @@
     "asset_type": "Asset-Typ",
     "bounty": "Kopfgeld",
     "asset_type_available": "Asset-Typ verfügbar",
-    "rewards": "Belohnungen"
+    "rewards": "Belohnungen",
+    "forbidden": {
+      "description_vrp": "Der Zugriff ist nur für veröffentlichte VRP möglich",
+      "title": "Fahren Sie auf dem Desktop fort",
+      "title_vrp": "Nicht veröffentlicht"
+    }
   },
   "EmptyState": {
     "you_have_nothing_here": "Du hast hier nichts",
@@ -73,7 +79,8 @@
     "button_send_message": "Schicken",
     "placeholder_chat": "Schreiben Sie Ihre Nachricht...",
     "button_cancel": "Stornieren",
-    "title_upload_attachment": "Anhang hochladen"
+    "title_upload_attachment": "Anhang hochladen",
+    "label_caption": "Schreiben Sie eine Bildunterschrift"
   },
   "FileInput": {
     "drag_and_drop": "Ziehen",
@@ -96,7 +103,7 @@
   },
   "Settings": {
     "details": {
-      "account_details": "{role} Details",
+      "account_details": "{role} Kontodetails",
       "company": "Unternehmen",
       "account": "Konto",
       "button_edit_account": "Bearbeiten Sie die {role}-Details",
@@ -121,7 +128,8 @@
       "about": "Über {role}",
       "label_email": "Registrierte E-Mail",
       "company_website": "Unternehmenswebsite",
-      "label_phone": "Telefonnummer"
+      "label_phone": "Telefonnummer",
+      "title": "{role} Details"
     },
     "billings": {
       "edit_billing_information": "Rechnungsinformationen bearbeiten",

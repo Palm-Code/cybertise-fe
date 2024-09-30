@@ -50,7 +50,7 @@ const VrpManagement = () => {
               fullWidth
               onClick={() => setShowModalForbidden(true)}
             >
-              {"+" + t("button_add_new")}
+              {"+ " + t("button_add_new")}
             </Button>
           )}
         </div>
@@ -82,7 +82,7 @@ const VrpManagement = () => {
                 href={"/vrp-launchpad/create-vrp"}
                 className="w-full rounded-md border border-brand-neutral px-4 py-6 text-center dark:border-white"
               >
-                {"+" + t("button_add_new")}
+                {"+ " + t("button_add_new")}
               </Link>
             )}
         </div>
@@ -91,8 +91,8 @@ const VrpManagement = () => {
         isOpen={showModalForbidden}
         onClose={() => setShowModalForbidden(false)}
         variant="company"
-        title="Continue on Desktop"
-        subtitle="Adding VRP feature are currently only accessible on the desktop version of our website."
+        title={t("forbidden_title")}
+        subtitle={t("forbidden_description")}
       />
     </AnimationWrapper>
   );
