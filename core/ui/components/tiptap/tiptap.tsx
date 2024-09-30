@@ -4,6 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./toolbar";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
+import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import CharacterCount from "@tiptap/extension-character-count";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
@@ -74,6 +75,9 @@ const Tiptap = ({
       Underline,
       Placeholder.configure({
         placeholder: isChat ? t("placeholder_chat") : placeholder,
+      }),
+      Image.configure({
+        inline: true,
       }),
       CodeBlockLowlight.configure({
         lowlight,
@@ -160,11 +164,15 @@ const Tiptap = ({
           }}
           autoFocus
           className={cn(
-            "peer flex h-32 w-full max-w-full overflow-auto whitespace-pre-line",
+            "peer flex max-h-[33vh] min-h-32 w-full max-w-full overflow-auto whitespace-pre-line",
             "bg-background-main-light dark:bg-background-main-dark",
-            "rounded-md rounded-b-none p-3 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
+            "cursor-text rounded-md rounded-b-none p-3 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
             label ? "pt-6" : "pt-3"
           )}
+          onClick={(e) => {
+            e.stopPropagation();
+            editor?.commands.focus();
+          }}
         />
         <Separator orientation="horizontal" />
         <div

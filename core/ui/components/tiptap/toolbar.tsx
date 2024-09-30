@@ -1,6 +1,7 @@
 import { type Editor } from "@tiptap/react";
 import {
   Bold,
+  Image,
   Italic,
   Link,
   List,
@@ -46,6 +47,15 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
       .setLink({ href: url })
       .run();
   }, [editor]);
+
+  const addImage = useCallback(() => {
+    const url = window.prompt("Image URL");
+
+    if (url) {
+      editor?.chain().focus().setImage({ src: url }).run();
+    }
+  }, [editor]);
+
   if (!editor) return <Skeleton className="grid h-8 w-1/2" />;
   return (
     <div
@@ -124,6 +134,17 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
         onPressedChange={setLink}
       >
         <Link />
+      </Toggle>
+      <Separator
+        orientation="vertical"
+        className="space-x-1 !bg-neutral-dark-100 dark:!bg-white"
+      />
+      <Toggle
+        size="sm"
+        pressed={editor.isActive("image")}
+        onPressedChange={addImage}
+      >
+        <Image />
       </Toggle>
     </div>
   );
