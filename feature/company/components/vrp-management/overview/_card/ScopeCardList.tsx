@@ -1,8 +1,10 @@
 import { I_TargetAsset } from "@/core/models/hacker/programs";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { Badge, Card, Typography } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 
 const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
+  const t = useTranslations("VRPManagement.overview.scope");
   return (
     <Card className="_flexbox__col__start__start gap-8">
       <Badge variant={asset_type.label as any}>{asset_type.value}</Badge>
@@ -12,7 +14,7 @@ const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
           affects="small"
           className="text-neutral-light-30 dark:text-neutral-dark-30"
         >
-          Asset Name
+          {t("asset_name")}
         </Typography>
         <Typography variant="p" affects="small" weight="medium">
           {content}
@@ -24,7 +26,7 @@ const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
           affects="small"
           className="text-neutral-light-30 dark:text-neutral-dark-30"
         >
-          Last Update
+          {t("update")}
         </Typography>
         <Typography variant="p" affects="small" weight="medium">
           {updated_at && updated_at.toString().split("T")[0]}

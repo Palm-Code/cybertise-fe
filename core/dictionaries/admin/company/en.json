@@ -29,7 +29,25 @@
         "button_add_new": "Add new VRP",
         "not_found": "You have no any program yet",
         "forbidden_title": "Continue on Desktop",
-        "forbidden_description": "Adding VRP feature are currently only accessible on the desktop version of our website."
+        "forbidden_description": "Adding VRP feature are currently only accessible on the desktop version of our website.",
+        "overview": {
+            "tabs": {
+                "rules": "Rule & Policy",
+                "scope": "Scope",
+                "updates": "Updates"
+            },
+            "scope": {
+                "placeholder_search": "Search for asset",
+                "asset_name": "Asset Name",
+                "update": "Last Update",
+                "type": "Type"
+            },
+            "button_edit": "Edit VRP",
+            "forbidden": {
+                "title": "Continue on Desktop",
+                "subtitle": "Adding VRP feature are currently only accessible on the desktop version of our website."
+            }
+        }
     },
     "ManageCompany": {
         "reports_resolved": "Reports Resolved",

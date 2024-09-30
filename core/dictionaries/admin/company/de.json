@@ -14,7 +14,25 @@
     "not_found": "Sie haben noch kein Programm",
     "title": "VRP-Management",
     "forbidden_description": "Das Hinzufügen der VRP-Funktion ist derzeit nur auf der Desktop-Version unserer Website möglich.",
-    "forbidden_title": "Fahren Sie auf dem Desktop fort"
+    "forbidden_title": "Fahren Sie auf dem Desktop fort",
+    "overview": {
+      "tabs": {
+        "rules": "Regel & Politik",
+        "scope": "Umfang",
+        "updates": "Aktualisierungen"
+      },
+      "scope": {
+        "placeholder_search": "Nach Asset suchen",
+        "asset_name": "Asset-Name",
+        "type": "Typ",
+        "update": "Letztes Update"
+      },
+      "button_edit": "VRP bearbeiten",
+      "forbidden": {
+        "title": "Fahren Sie auf dem Desktop fort",
+        "subtitle": "Das Hinzufügen der VRP-Funktion ist derzeit nur auf der Desktop-Version unserer Website möglich."
+      }
+    }
   },
   "ManageCompany": {
     "reports_resolved": "Berichte gelöst",
@@ -86,13 +104,6 @@
         "title": "Aktivitätsprotokolle sind nur auf dem Desktop verfügbar"
       },
       "title": "Aktivitätsprotokolle"
-    }
-  },
-  "Filter": {
-    "date_range": {
-      "title": "Datumsbereich",
-      "button_clear": "Klar",
-      "button_apply": "Anwenden"
     }
   }
 }

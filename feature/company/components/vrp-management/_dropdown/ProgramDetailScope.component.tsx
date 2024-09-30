@@ -1,6 +1,7 @@
 import { I_GetParamsPayload } from "@/core/models/common";
 import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { useTranslations } from "next-intl";
 
 interface IProgramDetailScopeDropdownProps {
   variant?: "hacker" | "company" | "mediator";
@@ -15,10 +16,11 @@ const ProgramDetailScopeDropdown = ({
   options = [],
   onValueChange = () => {},
 }: IProgramDetailScopeDropdownProps) => {
+  const t = useTranslations("Filter");
   return (
     <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
       <BaseDropdown
-        label="Asset type"
+        label={t("asset_type")}
         value={
           payload?.params?.filter?.asset_type_id
             ? (options.find(

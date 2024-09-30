@@ -2,7 +2,8 @@
   "Common": {
     "search": "Suche...",
     "search_not_found": "Keine Ergebnisse gefunden",
-    "submit_search": "Suchen"
+    "submit_search": "Suchen",
+    "button_back": "Zurück"
   },
   "Sidebar": {
     "dashboard": "Armaturenbrett",
@@ -23,7 +24,12 @@
     "status": "Status",
     "asset_type": "Asset-Typ",
     "submit_filter": "Filter anwenden",
-    "title": "Filter"
+    "title": "Filter",
+    "date_range": {
+      "title": "Datumsbereich",
+      "button_clear": "Klar",
+      "button_apply": "Anwenden"
+    }
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",

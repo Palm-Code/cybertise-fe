@@ -2,7 +2,8 @@
     "Common": {
         "search": "Search...",
         "search_not_found": "No results found",
-        "submit_search": "Search"
+        "submit_search": "Search",
+        "button_back": "Back"
     },
     "Sidebar": {
         "menu": "Menu",

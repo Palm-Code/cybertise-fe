@@ -161,8 +161,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 "bg-neutral-light-70 dark:bg-neutral-dark-70"
               )}
             >
-              This chat is read only on this device. Please access using desktop
-              to interact.
+              {t("chat_alert")}
             </div>
           </div>
           {isFetchingNextPage && (
