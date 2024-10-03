@@ -1,0 +1,9 @@
+{
+  "i18n-ally.localesPaths": [
+    "core/dictionaries/**/*",
+    "core/dictionaries/admin/hacker/",
+    "core/dictionaries/admin/mediator/",
+    "core/dictionaries/admin/company/"
+  ],
+  "i18n-ally.keystyle": "nested"
+}

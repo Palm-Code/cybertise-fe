@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { NumericFormat } from "react-number-format";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { UseFormSetValue } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
 interface CustomPricingProps {
   handleClickExpand: () => void;
@@ -21,6 +22,7 @@ const CustomPricing = ({
   value,
   setValue,
 }: CustomPricingProps) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details.monetary_awards");
   return (
     <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:p-8 dark:bg-neutral-dark-100">
       <button
@@ -36,7 +38,7 @@ const CustomPricing = ({
           )}
         />
         <Typography variant="p" affects="large" weight="semibold">
-          Custom
+          {t("custom")}
         </Typography>
       </button>
       <AnimatePresence>

@@ -1,6 +1,7 @@
 import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Typography } from "@/core/ui/components";
 import { XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 interface I_ModalCloseSendReportProps {
@@ -12,6 +13,7 @@ const ModalCloseSendReport = ({
   isOpen,
   onClose,
 }: I_ModalCloseSendReportProps) => {
+  const t = useTranslations("SuccesState.close_send_report");
   const router = useRouter();
   return (
     <BaseModal isOpen={isOpen} onClose={onClose}>
@@ -25,23 +27,22 @@ const ModalCloseSendReport = ({
         <div className="_flexbox__col__start__start w-full gap-6">
           <XCircle className="h-16 w-16 text-semantic-light-critical dark:text-semantic-dark-critical" />
           <Typography variant="h5" weight="bold">
-            Cancel Submit Report?{" "}
+            {t("title")}
           </Typography>
           <Typography variant="p" affects="normal" className="mt-2">
-            You will loose all the information you have entered for the related
-            reports.
+            {t("description")}
           </Typography>
         </div>
         <div className="flex w-full items-center gap-6">
           <Button variant="secondary-hacker" fullWidth onClick={onClose}>
-            Keep It
+            {t("button_keep_it")}
           </Button>
           <Button
             variant="primary-hacker"
             fullWidth
             onClick={() => router.back()}
           >
-            Yes, Cancel report
+            {t("button_yes_cancel_report")}
           </Button>
         </div>
       </div>

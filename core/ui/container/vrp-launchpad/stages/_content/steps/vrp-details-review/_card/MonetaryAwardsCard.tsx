@@ -3,8 +3,10 @@ import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Card, Typography } from "@/core/ui/components";
 import { ShieldCheck } from "@/core/ui/icons";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { useTranslations } from "next-intl";
 
 const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details.monetary_awards");
   const category = data?.monetary_awards_level?.split("-")[0] || "custom";
 
   return (
@@ -17,14 +19,14 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
         )}
       >
         <Typography variant="h6" weight="bold">
-          Monetary Awards
+          {t("header_title")}
         </Typography>
         <div className="grid grid-cols-[auto_1fr] gap-4">
           {data.monetary_awards_level !== "custom" && (
             <ShieldCheck category={category as "S" | "M" | "L" | "XL"} />
           )}
           <Typography variant="p" affects="normal">
-            Category{" "}
+            {t("category")}{" "}
             {data.monetary_awards_level === "custom" ? "Custom" : category}
           </Typography>
         </div>

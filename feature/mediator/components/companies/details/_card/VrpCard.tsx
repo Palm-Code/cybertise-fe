@@ -14,6 +14,7 @@ import { useState } from "react";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useTranslations } from "next-intl";
 
 type I_VRPCardProps = {};
 
@@ -23,6 +24,7 @@ const VRPCard = ({
   asset_types,
   status,
 }: I_VRPCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
+  const t = useTranslations("Programs");
   const [showModal, setShowModal] = useState(false);
   return (
     <AnimationWrapper>
@@ -47,7 +49,7 @@ const VRPCard = ({
             <div className="_flexbox__row__center__between w-full">
               <div className="_flexbox__col__start__start gap-2.5">
                 <Typography variant="p" affects="small">
-                  Assets type available
+                  {t("asset_type_available")}
                 </Typography>
                 <div className="flex flex-wrap items-center gap-4">
                   {asset_types &&
@@ -92,7 +94,7 @@ const VRPCard = ({
             <div className="_flexbox__row__center__between w-full">
               <div className="_flexbox__col__start__start gap-2.5">
                 <Typography variant="p" affects="small">
-                  Assets type available
+                  {t("asset_type_available")}
                 </Typography>
                 <div className="grid grid-flow-col gap-4">
                   {asset_types &&
@@ -132,14 +134,7 @@ const VrpCardList = ({
   data: I_GetProgramListSuccessResponse["data"];
 }) => {
   if (!data || data?.length === 0)
-    return (
-      <EmptyState
-        type="program"
-        variant="mediator"
-        titleText="This company doesn't have any program yet"
-        buttonText=""
-      />
-    );
+    return <EmptyState type="program" variant="mediator" buttonText="" />;
   return data.map((item, index) => <VRPCard key={index} {...item} />);
 };
 

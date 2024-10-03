@@ -7,6 +7,7 @@ import {
 import { Actions, State } from "@/feature/company/zustand/store/manage-company";
 import { addDays, format } from "date-fns";
 import { CalendarDays, ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
 
@@ -15,6 +16,7 @@ interface IFilterDateRangeProps {
 }
 
 const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
+  const t = useTranslations("Filter.date_range");
   const { payload, setPayload } = store;
   const [openDropdown, setOpenDropdown] = useState(false);
   const [date, setDate] = useState<DateRange | undefined>({
@@ -41,7 +43,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
                 format(date.from, "dd/MM/y")
               )
             ) : (
-              <span>Date Range</span>
+              <span>{t("title")}</span>
             )}
           </Typography>
           <ChevronDown />
@@ -79,7 +81,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
                   setOpenDropdown(false);
                 }}
               >
-                Clear
+                {t("button_clear")}
               </Button>
               <Button
                 variant="primary-company"
@@ -100,7 +102,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
                 }}
                 disabled={!date?.from || !date?.to}
               >
-                Apply
+                {t("button_apply")}
               </Button>
             </div>
           </div>

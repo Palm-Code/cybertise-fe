@@ -5,12 +5,14 @@ import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
+import { useTranslations } from "next-intl";
 
 interface I_CompanyStepOneProps {
   onClickNext: () => void;
 }
 
 const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
+  const t = useTranslations("SignUp.company");
   const {
     formState: { errors },
     setValue,
@@ -31,14 +33,15 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
     <StepWrapper
       currentSteps={1}
       totalSteps={3}
-      title="Company Sign Up"
-      subtitle="Company Details"
+      title={t("title")}
+      subtitle={t("subtitle")}
     >
       <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
         <div className="_flexbox__col__center w-full gap-7">
           <Input
             type="text"
-            label="Corporate Name"
+            label={t("label_company_name")}
+            placeholderText={t("placeholder_company_name")}
             onClearInput={() => setValue("name", "", { shouldValidate: true })}
             value={forms.name}
             onChange={(e) =>
@@ -50,7 +53,8 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
           />
           <Input
             type="url"
-            label="Corporate Website"
+            label={t("label_website")}
+            placeholderText={t("placeholder_website")}
             onClearInput={() =>
               setValue("website", "", { shouldValidate: true })
             }
@@ -69,7 +73,7 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
           disabled={validateIsFormFilled}
           variant="primary-company"
         >
-          Next
+          {t("next_button")}
         </Button>
       </div>
     </StepWrapper>

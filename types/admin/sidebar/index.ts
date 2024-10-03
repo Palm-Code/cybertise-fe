@@ -2,6 +2,7 @@ export type NavbarType = {
   title: string;
   path: string;
   key: string;
+  id?: string;
 };
 
 export enum Role {

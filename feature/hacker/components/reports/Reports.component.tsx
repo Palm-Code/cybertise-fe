@@ -16,7 +16,7 @@ import {
   ReportsGridView,
   ReportsTableView,
 } from "../../containers";
-import { tableColumns } from "../../constants/reports";
+import { useGetTableColumns } from "../../constants/reports";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { useGetChatList } from "../../query/client";
@@ -30,9 +30,12 @@ import {
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const Reports = () => {
+  const t = useTranslations("ReportsHacker");
   const store = useReportListStore();
+  const tableColumns = useGetTableColumns();
   const { payload, setPayload } = store;
   const {
     queryDesktop: {
@@ -111,14 +114,14 @@ const Reports = () => {
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
-                Reports
+                {t("title")}
               </Typography>
               <SearchInput
                 isMobile
                 id="reports-search-hacker"
                 value={payload?.params?.search}
                 variant="hacker"
-                placeholder="Search for programs"
+                placeholder={t("placeholder_search")}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, mobileRefetch)
                 }
@@ -157,7 +160,7 @@ const Reports = () => {
               variant="hacker"
               type="ticket"
               href="/programs"
-              buttonText="See Programs"
+              buttonText={t("see_programs")}
             />
           )}
         </div>
@@ -166,13 +169,13 @@ const Reports = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Reports
+              {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
                 id="reports-search-hacker"
                 variant="hacker"
-                placeholder="Try “#21231” or “Company name”"
+                placeholder={t("placeholder_search")}
                 value={payload?.params?.search}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, refetch)
@@ -234,7 +237,7 @@ const Reports = () => {
               variant="hacker"
               type="ticket"
               href="/programs"
-              buttonText="See Programs"
+              buttonText={t("see_programs")}
             />
           )}
         </div>

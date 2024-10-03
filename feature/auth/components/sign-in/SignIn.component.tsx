@@ -19,8 +19,10 @@ import { getBrowserAndOS } from "@/utils/device-type";
 import { useGetAccessToken } from "@/core/react-query/client";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { ReactivateAccount } from "../reactivate-account";
+import { useTranslations } from "next-intl";
 
 const SignInComponent = () => {
+  const t = useTranslations("SignIn");
   const callbackUrl = useSearchParams().get("callbackUrl");
   const auth_2fa = useSearchParams().get("code");
   const auth_email = useSearchParams().get("authenticate_email");
@@ -118,27 +120,27 @@ const SignInComponent = () => {
         )}
       >
         <Typography variant="h4" weight="bold">
-          Sign In
+          {t("title")}
         </Typography>
         <div className="_flexbox__col__center w-full gap-7">
           {error?.status === 401 ? (
             <div className="w-full rounded-md bg-red-error/20 p-3.5">
               <Typography variant="p" affects="tiny">
-                Email and password does not match
+                {t("error.missmatch")}
               </Typography>
             </div>
           ) : null}
           {error?.status === 422 ? (
             <div className="w-full rounded-md bg-red-error/20 p-3.5">
               <Typography variant="p" affects="tiny">
-                Email does not exist
+                {t("error.not_found")}
               </Typography>
             </div>
           ) : null}
           <Input
             type="email"
-            label="Email"
-            placeholderText="Enter your email"
+            label={t("email")}
+            placeholderText={t("email_placeholder")}
             onClearInput={() => setValue("email", "", { shouldValidate: true })}
             value={forms.email}
             onKeyDown={(e) => {
@@ -154,8 +156,8 @@ const SignInComponent = () => {
           <div className="w-full space-y-1">
             <Input
               type={revealPassword ? "text" : "password"}
-              label="Password"
-              placeholderText="Enter your password"
+              label={t("password")}
+              placeholderText={t("password_placeholder")}
               onClickRevealPassword={() => setRevealPassword(!revealPassword)}
               value={forms.password}
               onChange={(e) =>
@@ -175,7 +177,7 @@ const SignInComponent = () => {
                 affects: "tiny",
               })}
             >
-              Forgot your password?
+              {t("forgot_password")}
             </Link>
           </div>
         </div>
@@ -187,12 +189,12 @@ const SignInComponent = () => {
             disabled={validateIsFormFilled || isPending || isSuccess}
             onClick={onSubmitLogin}
           >
-            Sign In
+            {t("sign_in_button")}
           </Button>
           <Typography variant="p" affects="normal" align="center">
-            Didn&apos;t have account yet?{" "}
+            {t("not_have_account")}{" "}
             <Link href={"/auth/signup"} className="ml-2 font-semibold">
-              Sign Up
+              {t("sign_up")}
             </Link>
           </Typography>
         </div>

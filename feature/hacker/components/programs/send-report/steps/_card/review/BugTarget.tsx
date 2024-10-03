@@ -1,6 +1,7 @@
 import { cn } from "@/core/lib/utils";
 import { Badge, badgeVariants, Card, Typography } from "@/core/ui/components";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
+import { useTranslations } from "next-intl";
 
 interface I_BugTargetProps {
   target_assets: {
@@ -19,6 +20,7 @@ const BugTargetCard = ({
   risk_level,
   isNewCompanyTicket = false,
 }: I_BugTargetProps) => {
+  const t = useTranslations("SendReportHacker.reviews");
   return (
     <Card
       className={cn(
@@ -28,7 +30,7 @@ const BugTargetCard = ({
     >
       {!isNewCompanyTicket && (
         <Typography variant="h6" weight="bold">
-          Bug Target
+          {t("bug_target.title")}
         </Typography>
       )}
       <div className="_flexbox__col__start__start gap-2.5">
@@ -37,7 +39,7 @@ const BugTargetCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Target Assets
+          {t("bug_target.target_assets")}
         </Typography>
         <div className="flex flex-wrap gap-4">
           <Typography variant="p" affects="normal">
@@ -60,7 +62,7 @@ const BugTargetCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Vulnerability Type
+          {t("bug_target.vulnerability_type")}
         </Typography>
         <Typography variant="p" affects="normal">
           {vulnerability_type}
@@ -72,7 +74,7 @@ const BugTargetCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Risk Level
+          {t("bug_target.risk_level")}
         </Typography>
         <Badge
           variant={

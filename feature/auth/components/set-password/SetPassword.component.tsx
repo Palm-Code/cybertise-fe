@@ -7,19 +7,20 @@ import React, { useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { passwordValidation } from "@/core/constants/common";
 import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
 } from "../../query/password";
 import { validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { usePasswordValidation } from "@/core/constants/common";
 
 interface I_SetPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
 }
 
 const SetPassword = (props: I_SetPassword) => {
+  const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const searchParams = useSearchParams();
@@ -27,6 +28,7 @@ const SetPassword = (props: I_SetPassword) => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
+      type: null,
       content: "",
       checked: false,
     });

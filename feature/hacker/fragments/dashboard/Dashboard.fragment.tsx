@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { tableTicketData } from "../../constants/dashboard";
 
 const Dashboard = dynamic(
   () => import("@/feature/hacker/components/dashboard/Dashboard.component"),

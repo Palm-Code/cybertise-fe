@@ -1,15 +1,17 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
-import { Company, Hacker } from "@/core/ui/icons";
+import { Hacker } from "@/core/ui/icons";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import SignUpHacker from "./hacker/SignUpHacker.component";
 import SignUpCompany from "./company/SignUpCompany.component";
 import { Building2 } from "lucide-react";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useTranslations } from "next-intl";
 
 const SignUpType = () => {
+  const t = useTranslations("SignUp");
   const searchParams = useSearchParams();
 
   if (searchParams.get("type") === "hacker") {
@@ -31,7 +33,7 @@ const SignUpType = () => {
         >
           <div className="_flexbox__col__center w-full gap-8">
             <Typography variant="h5" weight="semibold" align="center">
-              Please Choose What Type of Account That You Want to Create
+              {t("title")}
             </Typography>
             <div className="flex w-full flex-col gap-7">
               <Link
@@ -48,7 +50,7 @@ const SignUpType = () => {
                   weight="bold"
                   className="group-hover:text-brand-neutral"
                 >
-                  Hackers
+                  {t("hacker_type")}
                 </Typography>
               </Link>
               <Link
@@ -59,9 +61,13 @@ const SignUpType = () => {
                   "gap-4 rounded-lg duration-100 hover:bg-sky-light active:bg-sky-lighter"
                 )}
               >
-                <Building2 />
-                <Typography variant="h6" weight="bold">
-                  Company
+                <Building2 className="size-8 group-hover:text-brand-neutral" />
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                  className="group-hover:text-brand-neutral"
+                >
+                  {t("company_type")}
                 </Typography>
               </Link>
             </div>
@@ -73,9 +79,9 @@ const SignUpType = () => {
           className="absolute bottom-8"
           align="center"
         >
-          Already have an account?{" "}
+          {t("footer")}{" "}
           <Link href="/auth/signin" className="ml-2 font-semibold underline">
-            Sign In
+            {t("link")}
           </Link>
         </Typography>
       </Mobile>
@@ -88,7 +94,7 @@ const SignUpType = () => {
         >
           <div className="_flexbox__col__center w-full gap-12">
             <Typography variant="h4" weight="bold" align="center">
-              Please Choose What Type of Account That You Want to Create
+              {t("title")}
             </Typography>
             <div className="grid w-full grid-cols-2 gap-7">
               <Link
@@ -105,7 +111,7 @@ const SignUpType = () => {
                   weight="bold"
                   className="group-hover:text-brand-neutral"
                 >
-                  Hackers
+                  {t("hacker_type")}
                 </Typography>
               </Link>
               <Link
@@ -116,21 +122,21 @@ const SignUpType = () => {
                   "gap-6 rounded-lg duration-100 hover:bg-sky-light active:bg-sky-lighter"
                 )}
               >
-                <Building2 className="group-hover:text-brand-neutral" />
+                <Building2 className="size-8 group-hover:text-brand-neutral" />
                 <Typography
                   variant="h6"
                   weight="bold"
                   className="group-hover:text-brand-neutral"
                 >
-                  Company
+                  {t("company_type")}
                 </Typography>
               </Link>
             </div>
           </div>
           <Typography variant="p" affects="normal">
-            Already have an account?{" "}
+            {t("footer")}{" "}
             <Link href="/auth/signin" className="ml-2 font-semibold underline">
-              Sign In
+              {t("link")}
             </Link>
           </Typography>
         </div>

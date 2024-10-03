@@ -8,10 +8,7 @@ import {
   Typography,
 } from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
-import {
-  formatDateToAgo,
-  formatDateToAgo2,
-} from "@/utils/formatter/date-formatter";
+import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { cn } from "@/core/lib/utils";
 import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
@@ -19,6 +16,7 @@ import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get
 import { Hacker } from "../../icons";
 import { iconColor } from "@/core/constants/common";
 import { Building2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -30,6 +28,7 @@ const TicketCard = ({
   isMediator = false,
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
+  const t = useTranslations("Ticket");
   return (
     <>
       <Mobile>
@@ -84,7 +83,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Vulnerability type (CWE)
+                    {t("vulnerability_type")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {props.vulnerabiity_type?.label}
@@ -97,7 +96,7 @@ const TicketCard = ({
                       affects="small"
                       className="text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Risk Level
+                      {t("risk_level")}
                     </Typography>
                     <Badge
                       variant={props.risk_level_category.toLowerCase() as any}
@@ -111,7 +110,7 @@ const TicketCard = ({
                       affects="small"
                       className="text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Rewards
+                      {t("rewards")}
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
                       {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
@@ -123,7 +122,9 @@ const TicketCard = ({
                   affects="small"
                   className="text-neutral-light-20 dark:text-neutral-dark-20"
                 >
-                  Reported {formatDateToAgo2(props?.created_at ?? "")}
+                  {t("last_reported", {
+                    date: formatDateToAgo(props?.created_at ?? ""),
+                  })}
                 </Typography>
               </div>
             </div>
@@ -152,7 +153,7 @@ const TicketCard = ({
                 isGridCard ? "w-full gap-8" : "w-[calc(100%-84px)] gap-12"
               )}
             >
-              <div className="_flexbox__row__start__between w-full gap-4">
+              <div className="_flexbox__row__start__start w-full gap-4">
                 {isGridCard && (
                   <div className="relative aspect-square w-12 overflow-hidden rounded-full">
                     <Image
@@ -163,7 +164,12 @@ const TicketCard = ({
                     />
                   </div>
                 )}
-                <div className="_flexbox__col__start w-full gap-1">
+                <div
+                  className={cn(
+                    "_flexbox__col__start gap-1",
+                    isGridCard && "max-w-[240px]"
+                  )}
+                >
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
                       <Typography variant="p" affects="normal">
@@ -182,20 +188,23 @@ const TicketCard = ({
                       affects="small"
                       className="!text-neutral-light-20 dark:!text-neutral-dark-20"
                     >
-                      Reported {formatDateToAgo2(props?.created_at ?? "")}
+                      {t("last_reported", {
+                        date: formatDateToAgo(props?.created_at ?? ""),
+                      })}
                     </Typography>
                   </div>
                 </div>
-                <div className="_flexbox__row__start__start gap-8">
+                <div className="_flexbox__row__start__start ml-auto gap-2">
                   {isMediator && (
-                    <Badge variant={"default"}>
+                    <Badge
+                      variant={"default"}
+                      className="grid grid-cols-[auto_1fr] items-center gap-1"
+                    >
                       {props.ticket_type === "Hacker" ? (
-                        <Hacker
-                          className={cn(iconColor.hacker, "mr-1 h-4 w-4")}
-                        />
+                        <Hacker className={cn(iconColor.hacker, "h-4 w-4")} />
                       ) : (
                         <Building2
-                          className={cn(iconColor.company, "mr-1 h-4 w-4")}
+                          className={cn(iconColor.company, "h-4 w-4")}
                         />
                       )}
                       {props.ticket_type}
@@ -224,7 +233,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Vulnerability type (CWE)
+                    {t("vulnerability_type")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {props.vulnerabiity_type?.label}
@@ -236,7 +245,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Risk Level
+                    {t("risk_level")}
                   </Typography>
                   <Badge
                     variant={props.risk_level_category.toLowerCase() as any}
@@ -250,7 +259,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Rewards
+                    {t("rewards")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
@@ -263,7 +272,7 @@ const TicketCard = ({
                       affects="small"
                       className="text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Status
+                      {t("status")}
                     </Typography>
                     <Indicator
                       variant={
@@ -282,7 +291,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Status
+                    {t("status")}
                   </Typography>
                   <Indicator
                     variant={

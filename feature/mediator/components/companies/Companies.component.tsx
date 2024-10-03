@@ -10,7 +10,7 @@ import {
 import Typography from "@/core/ui/components/typography/typography";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
-import { companiesTableColumns } from "../../constants/vrp-launchpad";
+import { useCompanyTableColumns } from "../../constants/vrp-launchpad";
 import {
   CompaniesCardView,
   CompaniesGridView,
@@ -29,8 +29,11 @@ import CompaniesFilter from "@/core/ui/components/dropdown/companies-filter-drop
 import { VRPCardLoadingList } from "@/core/ui/container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const Companies = () => {
+  const t = useTranslations("CompaniesMediator");
+  const companiesTableColumns = useCompanyTableColumns();
   const store = useCompaniesParamsStore();
   const { payload, setPayload } = store;
   const {
@@ -104,14 +107,14 @@ const Companies = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 px-6 py-8">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Companies
+              {t("title")}
             </Typography>
             <SearchInput
               isMobile
               id="search-companies"
               value={payload?.params?.search}
               variant="mediator"
-              placeholder="Try search company name"
+              placeholder={t("placeholder_search")}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
@@ -146,7 +149,7 @@ const Companies = () => {
             <EmptyState
               variant="mediator"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              titleText={t("not_found")}
             />
           )}
         </div>
@@ -155,17 +158,17 @@ const Companies = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Companies
+              {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
             <Typography variant="h6" weight="bold">
-              Search Company
+              {t("search_title")}
             </Typography>
             <SearchInput
               id="search-companies"
               variant="mediator"
-              placeholder="Try search company name"
+              placeholder={t("placeholder_search")}
               value={payload.params?.search}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, refetchCompanyList)
@@ -225,7 +228,7 @@ const Companies = () => {
             <EmptyState
               variant="mediator"
               type="default"
-              titleText="No Companies Found"
+              titleText={t("not_found")}
             />
           )}
         </div>

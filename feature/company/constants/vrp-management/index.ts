@@ -1,6 +1,7 @@
 import { I_TableColumns } from "@/interfaces";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { UpdateType } from "@/types/admin/programs";
+import { useTranslations } from "next-intl";
 
 export const vrpData = [
   {
@@ -47,6 +48,29 @@ export const vrpData = [
   },
 ];
 
+export const useScopeTableColumns = () => {
+  const t = useTranslations("VRPManagement.overview.scope");
+  const scopeTableColumns: I_TableColumns[] = [
+    {
+      title: t("asset_name"),
+      align: "left",
+      width: "w-4/12",
+    },
+    {
+      title: t("type"),
+      align: "left",
+      width: "w-4/12",
+    },
+    {
+      title: t("update"),
+      align: "left",
+      width: "w-4/12",
+    },
+  ];
+
+  return scopeTableColumns;
+};
+
 export const scopeTableColumns: I_TableColumns[] = [
   {
     title: "Asset Name",
@@ -64,6 +88,26 @@ export const scopeTableColumns: I_TableColumns[] = [
     width: "w-4/12",
   },
 ];
+
+export const useProgramDetailTabsItem = () => {
+  const t = useTranslations("VRPManagement.overview");
+
+  const programDetailTabsItem: SortFilterType[] = [
+    {
+      label: t("tabs.rules"),
+      value: "rules",
+    },
+    {
+      label: t("tabs.scope"),
+      value: "scope",
+    },
+    {
+      label: t("tabs.updates"),
+      value: "updates",
+    },
+  ];
+  return programDetailTabsItem;
+};
 
 export const programDetailTabItems: SortFilterType[] = [
   {

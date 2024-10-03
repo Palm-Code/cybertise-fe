@@ -1,8 +1,10 @@
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { FileInput, Tiptap } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 const ProblemCauses = () => {
+  const t = useTranslations("SendReportHacker.problem_causes");
   const {
     setValue,
     watch,
@@ -13,7 +15,7 @@ const ProblemCauses = () => {
     <div className="_flexbox__col__start__start w-full gap-8">
       <Tiptap
         description={watch("impact")}
-        label="Impact"
+        label={t("impact")}
         onChangeValue={(v) => setValue("impact", v, { shouldValidate: true })}
         onClearInput={() => setValue("impact", "", { shouldValidate: true })}
         variant="hacker"
@@ -21,7 +23,7 @@ const ProblemCauses = () => {
       />
       <Tiptap
         description={watch("poc")}
-        label="Proof of Concept"
+        label={t("proof_of_concept")}
         onChangeValue={(v) => setValue("poc", v, { shouldValidate: true })}
         onClearInput={() => setValue("poc", "", { shouldValidate: true })}
         variant="hacker"

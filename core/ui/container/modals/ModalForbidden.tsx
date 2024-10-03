@@ -3,6 +3,7 @@ import { cn } from "@/core/lib/utils";
 import { BaseModal, Button, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { MonitorSmartphone } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface I_ModalForbidddenProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const ModalForbiddden = ({
   title = "Report fom Desktop",
   subtitle = "Vulnerability Reports are currently only accessible on the desktop version of our website.",
 }: I_ModalForbidddenProps) => {
+  const t = useTranslations("Common");
   return (
     <BaseModal
       isOpen={isOpen}
@@ -36,7 +38,7 @@ const ModalForbiddden = ({
           </Typography>
         </div>
         <Button variant={`secondary-${variant}`} fullWidth onClick={onClose}>
-          Back
+          {t("button_back")}
         </Button>
       </div>
     </BaseModal>

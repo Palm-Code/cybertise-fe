@@ -4,7 +4,7 @@ import { Button, Card, Indicator, Typography } from "@/core/ui/components";
 import { FilePenLine, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import Tab from "./_tab/Tab";
-import { programDetailTabItems } from "@/feature/company/constants/vrp-management";
+import { useProgramDetailTabsItem } from "@/feature/company/constants/vrp-management";
 import { useState } from "react";
 import { TabsItem } from "@/enums";
 import RnP from "./_tab/_content/RnP";
@@ -19,9 +19,11 @@ import Thanks from "./_tab/_content/Thanks";
 import { currentPhase } from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
 import { useGetRole } from "@/core/hooks";
-import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useTranslations } from "next-intl";
 
 const Overview = ({ id }: { id: string }) => {
+  const t = useTranslations("VRPManagement.overview");
+  const programDetailTabsItem = useProgramDetailTabsItem();
   const store = useProgramListParamStore();
   const role = useGetRole();
   const { data: assetTypes } = useGetAssetType();
@@ -91,11 +93,11 @@ const Overview = ({ id }: { id: string }) => {
               prefixIcon={<FilePenLine />}
               onClick={() => setShowModalForbidden(true)}
             >
-              Edit VRP
+              {t("button_edit")}
             </Button>
           </Card>
           <Tab
-            items={programDetailTabItems}
+            items={programDetailTabsItem}
             active={active}
             onValueChange={(v) => setActive(TabsItem[v])}
             updates={programListDetails?.data?.latest_updates?.length || 0}
@@ -106,8 +108,8 @@ const Overview = ({ id }: { id: string }) => {
           isOpen={showModalForbidden}
           onClose={() => setShowModalForbidden(false)}
           variant="company"
-          title="Continue on Desktop"
-          subtitle="Adding VRP feature are currently only accessible on the desktop version of our website."
+          title={t("forbidden.title")}
+          subtitle={t("forbidden.subtitle")}
         />
       </Mobile>
       <Desktop>
@@ -137,7 +139,7 @@ const Overview = ({ id }: { id: string }) => {
                 prefixIcon={<FilePenLine />}
                 href={`/vrp-launchpad/${id}`}
               >
-                Edit VRP
+                {t("button_edit")}
               </Button>
               <Indicator
                 variant={
@@ -153,7 +155,7 @@ const Overview = ({ id }: { id: string }) => {
             </div>
           </Card>
           <Tab
-            items={programDetailTabItems}
+            items={programDetailTabsItem}
             active={active}
             onValueChange={(v) => setActive(TabsItem[v])}
             updates={programListDetails?.data?.latest_updates?.length}

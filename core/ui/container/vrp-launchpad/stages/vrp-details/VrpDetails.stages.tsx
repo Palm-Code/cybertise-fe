@@ -7,8 +7,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 import Information from "../_content/informations/Informations";
 import {
-  monetaryAwardData,
-  vrpInformations,
+  useGetMonetaryAwardData,
+  useVrpInformations,
 } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
 import Notes from "../_content/steps/notes/Notes";
@@ -46,6 +46,8 @@ const VRPDetails = ({
   initialValues,
   currentStep = "Phase1",
 }: I_VRPDetailsProps) => {
+  const vrpInformations = useVrpInformations();
+  const monetaryAwardData = useGetMonetaryAwardData();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { data: assetTypeOptions } = useGetAssetType();
   const options: SortFilterType[] =

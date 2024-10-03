@@ -12,6 +12,7 @@ import { ModalForbidden } from "@/core/ui/container";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface I_VRPCard {
@@ -23,6 +24,7 @@ interface I_VRPCard {
 }
 
 const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
+  const t = useTranslations("Programs");
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   return (
@@ -61,7 +63,7 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
                 affects="small"
                 className="text-neutal-light-20 dark:text-neutral-dark-20"
               >
-                Asset type Available
+                {t("asset_type_available")}
               </Typography>
               <div className="flex flex-wrap gap-4">
                 {asset_types?.slice(0, 3)?.map((item) => {
@@ -87,8 +89,8 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
           isOpen={showModalForbidden}
           onClose={() => setShowModalForbidden(false)}
           variant="company"
-          title="Continue on Desktop"
-          subtitle="Only can be accessed for Published VRP"
+          title={t("forbidden.title")}
+          subtitle={t("forbidden.description_vrp")}
         />
       </Mobile>
       <Desktop>
@@ -130,7 +132,7 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
                 affects="small"
                 className="text-neutal-light-20 dark:text-neutral-dark-20"
               >
-                Asset type Available
+                {t("asset_type_available")}
               </Typography>
               <div className="grid grid-flow-col gap-4">
                 {asset_types?.slice(0, 3)?.map((item) => {
@@ -163,8 +165,8 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
           isOpen={showModalForbidden}
           onClose={() => setShowModalForbidden(false)}
           variant="company"
-          title="Not Published"
-          subtitle="Only can be accessed for Published VRP"
+          title={t("forbidden.title_vrp")}
+          subtitle={t("forbidden.description_vrp")}
         />
       </Desktop>
     </>

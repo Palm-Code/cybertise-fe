@@ -15,7 +15,7 @@ import {
   ProgramsGridView,
   ProgramsTableView,
 } from "../../containers";
-import { tableColumns } from "../../constants/programs";
+import { useGetTableColumns } from "../../constants/programs";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "@/core/ui/layout";
@@ -31,13 +31,16 @@ import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 interface I_ProgramsProps {
   assetTypes: I_GetAssetTypeSuccessResponse["data"];
 }
 
 const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
+  const t = useTranslations("ProgramsHacker");
   const store = useProgramListParamStore();
+  const tableColumns = useGetTableColumns();
   const { payload, setPayload } = store;
   const {
     queryDesktop: {
@@ -121,7 +124,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
-                Programs
+                {t("title")}
               </Typography>
               <SearchInput
                 isMobile
@@ -171,7 +174,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText={t("see_programs")}
             />
           )}
         </div>
@@ -180,7 +183,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Bug Bounty Programs
+              {t("title")}
             </Typography>
             <div className="ml-auto w-fit max-w-xl">
               <FilterViewDropdown type="hacker" options={filterView} />
@@ -193,12 +196,12 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
             )}
           >
             <Typography variant="h6" weight="bold">
-              Search around 400+ programs
+              {t("search_title")}
             </Typography>
             <SearchInput
               id="program-search-hacker"
               variant="hacker"
-              placeholder="Search for programs"
+              placeholder={t("placeholder_search")}
               value={payload.params?.search}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, refetchProgramList)
@@ -244,7 +247,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
             <EmptyState
               variant="hacker"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText={t("see_programs")}
             />
           )}
         </div>

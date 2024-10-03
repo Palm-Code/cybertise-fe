@@ -18,6 +18,7 @@ import {
   createCompanyStaffSchema,
   I_StaffRequestType,
 } from "@/core/models/company/manage-company";
+import { useTranslations } from "next-intl";
 
 const EditStaffs = ({
   data,
@@ -26,6 +27,7 @@ const EditStaffs = ({
   data?: I_GetUserProfileSuccessResponse["data"];
   isEdit?: boolean;
 }) => {
+  const t = useTranslations("ManageCompany.CompanyStaff");
   const searchParams = useSearchParams();
   const id = searchParams.get("staff_id");
   const staffData =
@@ -66,7 +68,13 @@ const EditStaffs = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
-          <EditNavBar title={isEdit ? "Edit Staff" : "Add New Staff"} />
+          <EditNavBar
+            title={
+              isEdit
+                ? t("add_new_staff.header_title.add")
+                : t("add_new_staff.header_title.edit")
+            }
+          />
           <Card
             className={cn(
               "rounded-xl xl:px-8 xl:py-12",
@@ -75,12 +83,12 @@ const EditStaffs = ({
           >
             <div className="_flexbox__col__start__start w-full gap-6">
               <Typography variant="h6" weight="bold">
-                Staff Account Details
+                {t("add_new_staff.title")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-2.5">
                 <Input
                   type="text"
-                  label="Staff Name"
+                  label={t("add_new_staff.name")}
                   value={forms.name}
                   onChange={(e) =>
                     setValue("name", e.target.value, {
@@ -94,7 +102,7 @@ const EditStaffs = ({
                 />
                 <Input
                   type="email"
-                  label="Work Email"
+                  label={t("add_new_staff.email")}
                   value={forms.email}
                   onChange={(e) =>
                     setValue("email", e.target.value, {
@@ -111,7 +119,7 @@ const EditStaffs = ({
                   pattern="[0-9]*"
                   maxLength={25}
                   inputMode="numeric"
-                  label="Phone Number"
+                  label={t("add_new_staff.phone")}
                   value={forms.phone}
                   onChange={(e) =>
                     setValue("phone", e.target.value, {
@@ -131,7 +139,7 @@ const EditStaffs = ({
                   href="/manage-company"
                   variant="secondary-company"
                 >
-                  Discard
+                  {t("add_new_staff.button_discard")}
                 </Button>
                 <Button
                   variant="primary-company"
@@ -141,7 +149,7 @@ const EditStaffs = ({
                   isLoading={isPending}
                   onClick={handleSubmitForm}
                 >
-                  Save Changes
+                  {t("add_new_staff.button_save")}
                 </Button>
               </div>
             </div>
@@ -155,28 +163,19 @@ const EditStaffs = ({
             >
               <div className="_flexbox__col__start__start w-full gap-4">
                 <Typography variant="h6" weight="bold">
-                  Delete Staff
+                  {t("delete_staff.title")}
                 </Typography>
                 <ul className="list-disc pl-4">
-                  <li>
-                    Disables the employee&apos;s login credentials, preventing
-                    further access to company systems and data.{" "}
-                  </li>
-                  <li>
-                    Deactivated accounts can be reactivated if needed, allowing
-                    for a smoother off-boarding process.
-                  </li>
-                  <li>
-                    Completely removes the employee's profile and associated
-                    data from the system after <strong>30 days</strong>.
-                  </li>
+                  <li>{t("delete_staff.description.delete")}</li>
+                  <li>{t("delete_staff.description.deactivate")}</li>
+                  <li>{t("delete_staff.description.completely")}</li>
                 </ul>
                 <Button
                   type="button"
                   variant="alert"
                   onClick={() => setShowModalDelete(true)}
                 >
-                  Delete Staff
+                  {t("delete_staff.button_delete")}
                 </Button>
               </div>
             </Card>

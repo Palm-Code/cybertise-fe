@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { Button, Typography } from "@/core/ui/components";
 import { OctagonX, X } from "lucide-react";
 import { I_ModalSetup2faProps } from "../../two-factor-authentication/ModalSetup2fa";
+import { useTranslations } from "next-intl";
 
 const Information = ({
   variant = "hacker",
@@ -13,6 +14,9 @@ const Information = ({
   onClickVerify?: (password: string) => void;
   error?: string;
 }) => {
+  const t = useTranslations(
+    "Settings.data_privacy.deactivate_account.information"
+  );
   return (
     <div
       className={cn(
@@ -27,11 +31,11 @@ const Information = ({
           onClick={props.onClose}
           className="mr-auto p-0"
         >
-          Cancel
+          {t("button_cancel")}
         </Button>
         <OctagonX className="mx-auto h-16 w-16" />
         <Typography variant="h4" weight="semibold" align="center">
-          Deactivate Account
+          {t("title")}
         </Typography>
         <Typography
           variant="p"
@@ -39,9 +43,7 @@ const Information = ({
           align="center"
           className="text-neutral-light-50 dark:text-neutral-dark-50"
         >
-          You&apos;re about to start the process of deactivating your Sparta
-          account. Your username, and public profile will no longer be viewable
-          on the platform after 30 days of activation.
+          {t("description")}
         </Typography>
         <Typography
           variant="h5"
@@ -49,18 +51,11 @@ const Information = ({
           align="left"
           className="mr-auto"
         >
-          What else you should know?
+          {t("additional_information.title")}
         </Typography>
         <ul className="flex list-inside list-disc flex-col gap-4 text-start text-neutral-light-50 dark:text-neutral-dark-50">
-          <li>
-            You can restore you Sparta account if it was accidentally or
-            wrongfully deactivated for up to 30 days after deactivation
-          </li>
-          <li>
-            If you just want to use your current username or email address with
-            a different Sparta account, change them instead of deactivate your
-            account
-          </li>
+          <li>{t("additional_information.information_1")}</li>
+          <li>{t("additional_information.information_2")}</li>
         </ul>
       </div>
       <Button
@@ -69,7 +64,7 @@ const Information = ({
         fullWidth
         onClick={() => onClickVerify("confirmation")}
       >
-        Deactivate my account
+        {t("button_deactivate")}
       </Button>
     </div>
   );

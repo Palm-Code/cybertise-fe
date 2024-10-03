@@ -12,6 +12,7 @@ import { KeyRound, X } from "lucide-react";
 import Link from "next/link";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { cn } from "@/core/lib/utils";
+import { useTranslations } from "next-intl";
 
 export interface I_ModalUnbind2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
@@ -23,6 +24,9 @@ const ModalUnbind2fa = ({
   onClose = () => {},
   ...props
 }: I_ModalUnbind2faProps) => {
+  const t = useTranslations(
+    "Settings.security.two_factor_authentication.unbind_2fa"
+  );
   const [password, setPassword] = useState("");
   const {
     mutateAsync: mutateDisableTwoFactor,
@@ -56,24 +60,23 @@ const ModalUnbind2fa = ({
             onClick={onClose}
             className="mr-auto p-0"
           >
-            Cancel
+            {t("button_cancel")}
           </Button>
           <KeyRound className="h-16 w-16" />
           <Typography variant="h4" weight="semibold">
-            Unbind Authenticator
+            {t("title")}
           </Typography>
           <Typography variant="p" affects="normal" align="center">
-            Please enter authenticator code from your verified Two-Factor
-            Authenticator app.
+            {t("description")}
           </Typography>
         </div>
         <div className="_flexbox__col__start__start w-full gap-2">
           <PasswordInput
+            label={t("label_password")}
             isError={!!error}
             errorMsg={error?.message}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            label="Password"
           />
           <Link
             href="/forgot-password"
@@ -85,7 +88,7 @@ const ModalUnbind2fa = ({
               })
             )}
           >
-            Forgot Password ?
+            {t("forgot_password")}
           </Link>
         </div>
         <Button
@@ -95,7 +98,7 @@ const ModalUnbind2fa = ({
           fullWidth
           onClick={() => onClickVerifyDisableTwoFactor(password)}
         >
-          Verify
+          {t("button_unbind")}
         </Button>
       </div>
     </BaseModal>

@@ -3,12 +3,13 @@ import { Button } from "@/core/ui/components";
 import VrpDescriptionCard from "./_card/VrpDescriptionCard";
 import TargetAssetListCard from "./_card/TargetAssetListCard";
 import { useState } from "react";
-import { monetaryAwardData } from "@/core/constants/vrp-launchpad";
+import { useGetMonetaryAwardData } from "@/core/constants/vrp-launchpad";
 import { AnimationWrapper } from "@/core/ui/layout";
 import MonetaryAwardCardList from "./_card/MonetaryAwardsCard";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Role } from "@/types/admin/sidebar";
 import RulesAndPolicies from "../vrp-details-review/_card/RulesAndPolicies";
+import { useTranslations } from "next-intl";
 
 interface I_MakeChangesProps {
   onClickNext: () => void;
@@ -23,6 +24,8 @@ const MakeChanges = ({
   variant = "mediator",
   options = [],
 }: I_MakeChangesProps) => {
+  const t = useTranslations("VRPLaunchpad.phase.setup");
+  const monetaryAwardData = useGetMonetaryAwardData();
   const [activeElement, setActiveElement] = useState<number>(0);
 
   const element: Array<React.ReactNode> = [
@@ -65,7 +68,7 @@ const MakeChanges = ({
                 handleActiveElement(activeElement - 1);
               }}
             >
-              Previous
+              {t("button_previous")}
             </Button>
             <Button
               variant={`primary-${variant}`}
@@ -76,7 +79,7 @@ const MakeChanges = ({
                 handleActiveElement(activeElement + 1);
               }}
             >
-              Next
+              {t("button_next")}
             </Button>
           </div>
         )}

@@ -4,6 +4,7 @@ import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { sanitize } from "@/utils/sanitize-input";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 interface INotesProps {
@@ -19,6 +20,7 @@ const Notes = ({
   variant = "mediator",
   currentSteps = "Phase1",
 }: INotesProps) => {
+  const t = useTranslations("VRPLaunchpad.phase.setup");
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
 
@@ -26,7 +28,7 @@ const Notes = ({
     return (
       <div className="_flexbox__col__start__start w-full gap-6">
         <Typography variant="h5" weight="bold">
-          Notes
+          {t("notes")}
         </Typography>
         <Card
           className={cn(
@@ -40,7 +42,7 @@ const Notes = ({
           </article>
           {variant === "company" && (
             <Button variant="primary-company" onClick={onClickNext}>
-              Next
+              {t("button_next")}
             </Button>
           )}
         </Card>
@@ -50,17 +52,14 @@ const Notes = ({
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
       <Typography variant="h5" weight="bold">
-        {`${currentSteps === "Phase1" ? "Notes" : "Change Notes"}`}
+        {`${currentSteps === "Phase1" ? t("notes") : t("change_notes")}`}
       </Typography>
       <Typography variant="p" affects="small">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi
-        tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi
-        tristique senectus et netus et malesuada fames ac turpis.
+        {t("notes_description")}
       </Typography>
       <Tiptap
         description={forms.notes}
-        label={`${currentSteps === "Phase1" ? "Notes" : "Change Notes"}`}
+        label={`${currentSteps === "Phase1" ? t("notes") : t("change_notes")}`}
         onChangeValue={(v) => setValue("notes", v)}
         onClearInput={() => setValue("notes", "")}
         variant={variant}
@@ -68,14 +67,14 @@ const Notes = ({
       />
       <div className="_flexbox__row__center gap-8">
         <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
-          Previous
+          {t("button_previous")}
         </Button>
         <Button
           variant={`primary-${variant}`}
           disabled={!forms.notes}
           onClick={onClickNext}
         >
-          Next
+          {t("button_next")}
         </Button>
       </div>
     </Card>

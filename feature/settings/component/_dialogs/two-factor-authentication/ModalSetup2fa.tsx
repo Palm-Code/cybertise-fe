@@ -50,11 +50,15 @@ const ModalSetup2fa = ({
     });
   };
 
+  const onCloseModal = () => {
+    onClose();
+    setActiveState("input-password");
+  };
+
   const onClickActivateTwoFactor = (otp: string) => {
     mutateConfirmTwoFactor({ code: otp }).then((res) => {
       if (res) {
-        onClose();
-        setActiveState("input-password");
+        onCloseModal();
       }
     });
   };
@@ -65,7 +69,7 @@ const ModalSetup2fa = ({
     "input-password": (
       <InputPassword
         error={error?.message}
-        onClose={onClose}
+        onClose={onCloseModal}
         variant={variant}
         isLoading={isPending}
         onClickVerify={onClickVerifyEnableTwoFactor}
@@ -73,7 +77,7 @@ const ModalSetup2fa = ({
     ),
     "qr-code": (
       <QrCode
-        onClose={onClose}
+        onClose={onCloseModal}
         data={enableTwoFactorData}
         variant={variant}
         onClickAuthenticate={() => setActiveState("input-otp")}
@@ -83,7 +87,7 @@ const ModalSetup2fa = ({
       <InputOtp
         isError={isError}
         isLoading={isPendingConfirm || isSuccessConfirm}
-        onClose={onClose}
+        onClose={onCloseModal}
         variant={variant}
         onClickActivate={onClickActivateTwoFactor}
       />

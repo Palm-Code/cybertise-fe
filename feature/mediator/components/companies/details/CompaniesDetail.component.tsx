@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import CompaniesDetailHeroCard from "./_card/CompaniesDetailHeroCard";
-import { companyTabsItem } from "@/feature/mediator/constants/vrp-launchpad";
+import { useCompanyTabsItem } from "@/feature/mediator/constants/vrp-launchpad";
 import { companyTabsItemEnums } from "@/enums";
 import Tab from "./_tab/Tab";
 import VrpCardList from "./_card/VrpCard";
@@ -13,10 +13,10 @@ import {
   useGetCompaniesDetail,
   useGetProgramList,
 } from "@/feature/mediator/query/client";
-import Thanks from "./_tab/_content/Thanks";
 import { VRPHeroLoading } from "@/core/ui/container";
 
 const CompaniesDetail = ({ id }: { id: string }) => {
+  const companyTabsItem = useCompanyTabsItem();
   const store = useCompaniesDetailParamsStore();
   const {
     data: companyDetails,

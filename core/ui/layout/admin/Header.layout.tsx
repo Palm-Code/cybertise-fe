@@ -1,15 +1,16 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
-import { Desktop, Mobile } from "..";
 import { Logo } from "../../icons";
 import { useGetUserData, usePostLogout } from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
 import { LogOut, Settings } from "lucide-react";
 import { Skeleton } from "../../components/skeleton/skeleton";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Header = () => {
+  const t = useTranslations("Sidebar");
   const { data, isLoading } = useGetUserData();
 
   const { mutateAsync } = usePostLogout();
@@ -53,12 +54,12 @@ const Header = () => {
               avatar={data?.avatar}
               options={[
                 {
-                  label: "Settings",
+                  label: t("settings"),
                   value: "settings",
                   icon: <Settings width={20} height={20} />,
                 },
                 {
-                  label: "Logout",
+                  label: t("logout"),
                   value: "logout",
                   icon: <LogOut width={20} height={20} />,
                 },

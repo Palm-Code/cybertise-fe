@@ -1,4 +1,5 @@
 "use client";
+import * as React from "react";
 import { cn } from "@/core/lib/utils";
 import { Ban, Download, Eye, File, UploadCloud, X } from "lucide-react";
 import Typography from "../typography/typography";
@@ -16,6 +17,9 @@ import { SendReportRequestType } from "@/core/models/common/post_send_report";
 import { backgroundColor, iconColor } from "@/core/constants/common";
 import Button from "../button/button";
 import { useGetDownloadFiles } from "@/core/react-query/client";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Loader from "../loader/loader";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -23,6 +27,9 @@ export interface InputProps
   onFileSelected: (value: string, file: FileWithUrl[]) => void;
   onFileRemoved: (value: FileWithUrl["file_id"]) => void;
   variant?: "hacker" | "company" | "mediator";
+  isMultiple?: boolean;
+  accept?: string;
+  isInsertImage?: boolean;
 }
 
 const FileInput = forwardRef<HTMLInputElement, InputProps>(
@@ -33,15 +40,25 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
       onFileRemoved,
       fileValues,
       variant = "hacker",
+      isMultiple = true,
+      accept = "*/*",
+      isInsertImage = false,
       ...props
     },
     ref
   ) => {
+    const t = useTranslations("FileInput");
     const [uploadProggress, setUploadProggress] = useState<number[]>([]);
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [input, setInput] = useState<FileWithUrl[]>([]);
     const [errorFiles, setErrorFiles] = useState<string[]>([]);
     const { mutate, isPending } = useGetDownloadFiles();
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+
+    console.log(
+      fileValues && fileValues?.length > 0 && !isUploading,
+      isUploading
+    );
 
     useEffect(() => {
       if (fileValues && fileValues.length > 0) {
@@ -92,6 +109,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
             axiosFormDataInterceptorInstance
               .post(postFileTempAPIURL(), formData, {
                 onUploadProgress: (progressEvent) => {
+                  setIsUploading(true);
                   const { loaded, total } = progressEvent;
                   const percent = Math.floor((loaded * 95) / (total ?? 1));
                   setUploadProggress((prev) => {
@@ -122,12 +140,14 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                   progress[i] = 100;
                   return progress;
                 });
+                setIsUploading(false);
               })
               .catch((err) => {
                 toast.error("Error uploading file", {
                   position: "bottom-right",
                   duration: 1000,
                 });
+                setIsUploading(false);
                 setErrorFiles((prev) => {
                   return [...prev, name];
                 });
@@ -138,6 +158,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
           }
         }
       } catch (error) {
+        setIsUploading(false);
         toast.error("Error uploading file", {
           position: "bottom-right",
           duration: 1000,
@@ -278,7 +299,8 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
         className={cn(
           "_flexbox__col__center h-60 w-full rounded-3xl",
           "border-2 border-dashed border-neutral-light-80 dark:border-neutral-dark-80",
-          dragActive && "bg-neutral-light-70 dark:bg-neutral-dark-70"
+          dragActive && "bg-neutral-light-70 dark:bg-neutral-dark-70",
+          className
         )}
       >
         <div
@@ -296,14 +318,14 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               <div className="_flexbox__col__center m-auto mb-0 cursor-pointer gap-2.5">
                 <UploadCloud width={32} height={32} />
                 <Typography variant="h6" weight="bold">
-                  Drag & Drop
+                  {t("drag_and_drop")}
                 </Typography>
                 <Typography
                   variant="p"
                   affects="small"
                   className="text-neutral-light-60 dark:text-neutral-dark-60"
                 >
-                  or select files from device
+                  {t("select_files")}
                 </Typography>
               </div>
               <Typography
@@ -311,14 +333,14 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                 affects="small"
                 className="m-auto mt-0 text-neutral-light-60 dark:text-neutral-dark-60"
               >
-                max. 50MB
+                {t("max_50mb")}
               </Typography>
               <input
                 {...props}
                 ref={ref}
-                multiple
+                multiple={isMultiple}
                 onChange={handleChange}
-                accept="*/*"
+                accept={accept}
                 id="dropzone-file"
                 type="file"
                 className="hidden"
@@ -326,217 +348,258 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
             </label>
           ) : (
             <div className="_flexbox__col__center w-full gap-2">
-              <div
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
-                className={cn(
-                  "grid h-40 w-full gap-4 overflow-y-auto",
-                  input.length > 1 || (fileValues && fileValues.length > 1)
-                    ? "grid-cols-2"
-                    : "grid-cols-1"
-                )}
-              >
-                {fileValues?.map((file, index) => (
-                  <Card
-                    className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
-                    key={`file-${index}`}
+              {!isInsertImage ? (
+                <>
+                  <div
+                    onDragEnter={handleDrag}
+                    onDragLeave={handleDrag}
+                    onDragOver={handleDrag}
+                    onDrop={handleDrop}
+                    className={cn(
+                      "grid h-40 w-full gap-4 overflow-y-auto",
+                      input.length > 1 || (fileValues && fileValues.length > 1)
+                        ? "grid-cols-2"
+                        : "grid-cols-1"
+                    )}
                   >
-                    <div className="h-10 w-10">
-                      <File
-                        width={40}
-                        height={40}
-                        className={cn(
-                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
-                          iconColor[variant]
-                        )}
-                      />
-                    </div>
-                    <div
-                      className={cn(
-                        "_flexbox__col__start__between h-full gap-1.5",
-                        "w-full"
-                      )}
-                    >
-                      <Tooltip content={file.name}>
-                        <Typography
-                          variant="p"
-                          affects="small"
-                          weight="semibold"
-                        >
-                          {fileValues.length > 1
-                            ? file.name.substring(0, 15) + "..."
-                            : file.name}
-                        </Typography>
-                      </Tooltip>
-                      <Typography
-                        variant="p"
-                        affects="tiny"
-                        className="text-neutral-light-40 dark:text-neutral-dark-40"
+                    {fileValues?.map((file, index) => (
+                      <Card
+                        className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
+                        key={`file-${index}`}
                       >
-                        {(file.size / 1024).toFixed(1)}KB
-                      </Typography>
-                    </div>
-                    <div className="_flexbox__row__center ml-auto gap-2">
-                      {file.mime_type?.includes("image") ? (
-                        <Button
-                          type="button"
-                          asLink
-                          href={file.url}
-                          target="_blank"
-                          variant={`ghost-${variant}`}
-                          className="p-0"
-                          prefixIcon={<Eye className="h-6 w-6" />}
-                        />
-                      ) : (
-                        <Button
-                          type="button"
-                          variant={`ghost-${variant}`}
-                          disabled={isPending}
-                          className="p-0"
-                          prefixIcon={<Download className="h-6 w-6" />}
-                          onClick={() =>
-                            mutate({
-                              id: file.uuid as string,
-                              filename: file.name,
-                            })
-                          }
-                        />
-                      )}
-                      <X
-                        className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
-                        width={16}
-                        height={16}
-                        onClick={() => handleDelete(index)}
-                      />
-                    </div>
-                  </Card>
-                ))}
-                {input.map((file, index) => (
-                  <Card
-                    className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
-                    key={`file-${index}`}
-                  >
-                    <div className="h-10 w-10">
-                      <File
-                        width={40}
-                        height={40}
-                        className={cn(
-                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
-                          iconColor[variant]
-                        )}
-                      />
-                    </div>
-                    <div
-                      className={cn(
-                        "_flexbox__col__start__between h-full gap-1.5",
-                        "w-full"
-                      )}
-                    >
-                      <Tooltip content={file.name}>
-                        <Typography
-                          variant="p"
-                          affects="small"
-                          weight="semibold"
-                        >
-                          {input.length > 1
-                            ? file.name.substring(0, 15) + "..."
-                            : file.name}
-                        </Typography>
-                      </Tooltip>
-                      <Progress
-                        value={uploadProggress.filter((i) => i !== 100)[index]}
-                        className="h-2"
-                        indicatorColor={backgroundColor[variant]}
-                      />
-                      <div className="_flexbox__row__center__between w-full">
-                        <Typography
-                          variant="p"
-                          affects="tiny"
-                          className="text-neutral-light-40 dark:text-neutral-dark-40"
-                        >
-                          Uploading
-                        </Typography>
-                        <Typography
-                          variant="p"
-                          affects="tiny"
-                          className="text-neutral-light-40 dark:text-neutral-dark-40"
-                        >
-                          {Math.round(
-                            uploadProggress.filter((i) => i !== 100)[index]
+                        <div className="h-10 w-10">
+                          <File
+                            width={40}
+                            height={40}
+                            className={cn(
+                              "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                              iconColor[variant]
+                            )}
+                          />
+                        </div>
+                        <div
+                          className={cn(
+                            "_flexbox__col__start__between h-full gap-1.5",
+                            "w-full"
                           )}
-                          %
-                        </Typography>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-                {errorFiles?.map((file, index) => (
-                  <Card
-                    className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
-                    key={`file-${index}`}
-                  >
-                    <div className="h-10 w-10">
-                      <File
-                        width={40}
-                        height={40}
-                        className={cn(
-                          "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
-                          iconColor[variant]
-                        )}
-                      />
-                    </div>
-                    <div
-                      className={cn(
-                        "_flexbox__col__start__between h-full gap-1.5",
-                        "w-full"
-                      )}
-                    >
-                      <Tooltip content={file}>
-                        <Typography
-                          variant="p"
-                          affects="small"
-                          weight="semibold"
                         >
-                          {errorFiles.length > 0
-                            ? file.substring(0, 15) + "..."
-                            : file}
-                        </Typography>
-                      </Tooltip>
-                    </div>
-                    <div className="_flexbox__row__center ml-auto gap-2">
-                      <Ban
-                        width={16}
-                        height={16}
-                        className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
-                      />
-                      <X
-                        className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
-                        width={16}
-                        height={16}
-                        onClick={() => onDeleteFailUpload(index)}
-                      />
-                    </div>
-                  </Card>
-                ))}
-              </div>
-              <label
-                htmlFor="dropzone-file"
-                className={cn("cursor-pointer underline", iconColor[variant])}
-              >
-                + Upload more files
-                <input
-                  ref={ref}
-                  multiple
-                  onChange={handleChange}
-                  accept="*/*"
-                  id="dropzone-file"
-                  type="file"
-                  className="hidden"
-                  {...props}
-                />
-              </label>
+                          <Tooltip content={file.name}>
+                            <Typography
+                              variant="p"
+                              affects="small"
+                              weight="semibold"
+                            >
+                              {fileValues.length > 1
+                                ? file.name.substring(0, 15) + "..."
+                                : file.name}
+                            </Typography>
+                          </Tooltip>
+                          <Typography
+                            variant="p"
+                            affects="tiny"
+                            className="text-neutral-light-40 dark:text-neutral-dark-40"
+                          >
+                            {(file.size / 1024).toFixed(1)}KB
+                          </Typography>
+                        </div>
+                        <div className="_flexbox__row__center ml-auto gap-2">
+                          {file.mime_type?.includes("image") ? (
+                            <Button
+                              type="button"
+                              asLink
+                              href={file.url}
+                              target="_blank"
+                              variant={`ghost-${variant}`}
+                              className="p-0"
+                              prefixIcon={<Eye className="h-6 w-6" />}
+                            />
+                          ) : (
+                            <Button
+                              type="button"
+                              variant={`ghost-${variant}`}
+                              disabled={isPending}
+                              className="p-0"
+                              prefixIcon={<Download className="h-6 w-6" />}
+                              onClick={() =>
+                                mutate({
+                                  id: file.uuid as string,
+                                  filename: file.name,
+                                })
+                              }
+                            />
+                          )}
+                          <X
+                            className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
+                            width={16}
+                            height={16}
+                            onClick={() => handleDelete(index)}
+                          />
+                        </div>
+                      </Card>
+                    ))}
+                    {input.map((file, index) => (
+                      <Card
+                        className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
+                        key={`file-${index}`}
+                      >
+                        <div className="h-10 w-10">
+                          <File
+                            width={40}
+                            height={40}
+                            className={cn(
+                              "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                              iconColor[variant]
+                            )}
+                          />
+                        </div>
+                        <div
+                          className={cn(
+                            "_flexbox__col__start__between h-full gap-1.5",
+                            "w-full"
+                          )}
+                        >
+                          <Tooltip content={file.name}>
+                            <Typography
+                              variant="p"
+                              affects="small"
+                              weight="semibold"
+                            >
+                              {input.length > 1
+                                ? file.name.substring(0, 15) + "..."
+                                : file.name}
+                            </Typography>
+                          </Tooltip>
+                          <Progress
+                            value={
+                              uploadProggress.filter((i) => i !== 100)[index]
+                            }
+                            className="h-2"
+                            indicatorColor={backgroundColor[variant]}
+                          />
+                          <div className="_flexbox__row__center__between w-full">
+                            <Typography
+                              variant="p"
+                              affects="tiny"
+                              className="text-neutral-light-40 dark:text-neutral-dark-40"
+                            >
+                              {t("uploading")}
+                            </Typography>
+                            <Typography
+                              variant="p"
+                              affects="tiny"
+                              className="text-neutral-light-40 dark:text-neutral-dark-40"
+                            >
+                              {Math.round(
+                                uploadProggress.filter((i) => i !== 100)[index]
+                              )}
+                              %
+                            </Typography>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                    {errorFiles?.map((file, index) => (
+                      <Card
+                        className="_flexbox__row__center__start h-fit w-full gap-4 xl:p-4"
+                        key={`file-${index}`}
+                      >
+                        <div className="h-10 w-10">
+                          <File
+                            width={40}
+                            height={40}
+                            className={cn(
+                              "h-10 w-10 rounded-full bg-neutral-light-90 p-2 dark:bg-neutral-dark-90",
+                              iconColor[variant]
+                            )}
+                          />
+                        </div>
+                        <div
+                          className={cn(
+                            "_flexbox__col__start__between h-full gap-1.5",
+                            "w-full"
+                          )}
+                        >
+                          <Tooltip content={file}>
+                            <Typography
+                              variant="p"
+                              affects="small"
+                              weight="semibold"
+                            >
+                              {errorFiles.length > 0
+                                ? file.substring(0, 15) + "..."
+                                : file}
+                            </Typography>
+                          </Tooltip>
+                        </div>
+                        <div className="_flexbox__row__center ml-auto gap-2">
+                          <Ban
+                            width={16}
+                            height={16}
+                            className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
+                          />
+                          <X
+                            className="cursor-pointer text-semantic-light-critical hover:scale-105 dark:text-semantic-light-critical"
+                            width={16}
+                            height={16}
+                            onClick={() => onDeleteFailUpload(index)}
+                          />
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                  <label
+                    htmlFor="dropzone-file"
+                    className={cn(
+                      "cursor-pointer underline",
+                      iconColor[variant]
+                    )}
+                  >
+                    {t("upload_more")}
+                    <input
+                      ref={ref}
+                      multiple={isMultiple}
+                      onChange={handleChange}
+                      accept={accept}
+                      id="dropzone-file"
+                      type="file"
+                      className="hidden"
+                      {...props}
+                    />
+                  </label>
+                </>
+              ) : (
+                <label
+                  htmlFor="dropzone-file"
+                  className="relative mx-auto flex aspect-square h-auto w-full max-w-sm items-center justify-center overflow-hidden"
+                >
+                  <input
+                    ref={ref}
+                    multiple={isMultiple}
+                    onChange={handleChange}
+                    accept={accept}
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                    {...props}
+                  />
+                  {fileValues && fileValues?.length > 0 && !isUploading ? (
+                    <Image
+                      src={fileValues[0].url}
+                      alt={fileValues[0].name}
+                      fill
+                      sizes="100%"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <Loader
+                      noText
+                      width={24}
+                      height={24}
+                      className="m-auto h-auto"
+                    />
+                  )}
+                </label>
+              )}
             </div>
           )}
         </div>

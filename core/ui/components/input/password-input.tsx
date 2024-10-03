@@ -7,6 +7,7 @@ import ValidationCheck from "../validation-check/validation-check";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { cn } from "@/core/lib/utils";
 import { useOnClickOutside } from "usehooks-ts";
+import { useTranslations } from "next-intl";
 
 interface I_PasswordInputProps extends InputProps {
   check?: boolean;
@@ -22,6 +23,7 @@ const PasswordInput = ({
   options = [],
   ...props
 }: I_PasswordInputProps) => {
+  const t = useTranslations("PasswordInput");
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -77,7 +79,7 @@ const PasswordInput = ({
           align="left"
           className={cn(check ? "!text-emerald-normal" : "!text-red-error")}
         >
-          {check ? "Password Matched" : "Password doesn't match"}
+          {check ? t("password_matched") : t("password_not_matched")}
         </Typography>
       )}
     </div>

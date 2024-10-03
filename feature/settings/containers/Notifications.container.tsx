@@ -4,6 +4,7 @@ import CardNews from "../component/_tabs/_contents/notifications/CardNews";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 interface I_NotifyProps {
   variant: keyof typeof Role;
@@ -11,12 +12,13 @@ interface I_NotifyProps {
 }
 
 const Notifications = ({ variant }: I_NotifyProps) => {
+  const t = useTranslations("Settings.notifications");
   return (
     <>
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
           <Typography variant="h5" weight="bold">
-            Notifications
+            {t("title")}
           </Typography>
         </div>
         <CardSystemNotification variant={variant} />
@@ -25,7 +27,7 @@ const Notifications = ({ variant }: I_NotifyProps) => {
       <Desktop className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
           <Typography variant="h5" weight="bold">
-            Notifications
+            {t("title")}
           </Typography>
         </div>
         <CardSystemNotification variant={variant} />

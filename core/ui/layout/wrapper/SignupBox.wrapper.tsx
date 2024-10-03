@@ -1,5 +1,4 @@
 import { cn } from "@/core/lib/utils";
-import { Desktop, Mobile } from "..";
 
 const SignupBoxWrapper = ({ children }: { children: React.ReactNode }) => {
   return (

@@ -4,6 +4,7 @@ import { Button, Card, Typography } from "@/core/ui/components";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { FilePenLine } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const EmergencyContacs = ({
@@ -11,6 +12,7 @@ const EmergencyContacs = ({
 }: {
   data?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const t = useTranslations("ManageCompany.EmergencyContact");
   const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
@@ -18,7 +20,7 @@ const EmergencyContacs = ({
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="semibold">
-              Emergency Contact
+              {t("title")}
             </Typography>
             <Button
               variant="tertiary-company"
@@ -40,7 +42,7 @@ const EmergencyContacs = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Contact Person
+                  {t("contact_person")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.emergency_contact_person}
@@ -50,7 +52,7 @@ const EmergencyContacs = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Email
+                  {t("email")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.emergency_email}
@@ -60,7 +62,7 @@ const EmergencyContacs = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Phone number
+                  {t("phone")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.emergency_phone}
@@ -71,8 +73,8 @@ const EmergencyContacs = ({
         </div>
         <ModalForbiddden
           variant="company"
-          title="Edit from Desktop"
-          subtitle="Emergency Contact are currently only editable on the desktop version of our website."
+          title={t("forbidden.title")}
+          subtitle={t("forbidden.subtitle")}
           isOpen={openModal}
           onClose={() => setOpenModal(false)}
         />
@@ -81,7 +83,7 @@ const EmergencyContacs = ({
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Emergency Contact
+              {t("title")}
             </Typography>
             <Button
               asLink
@@ -89,7 +91,7 @@ const EmergencyContacs = ({
               variant="tertiary-company"
               prefixIcon={<FilePenLine />}
             >
-              Edit Emergency Contact
+              {t("button_edit")}
             </Button>
           </div>
           <Card
@@ -105,7 +107,7 @@ const EmergencyContacs = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Contact Person
+                  {t("contact_person")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.emergency_contact_person}
@@ -117,7 +119,7 @@ const EmergencyContacs = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Email
+                  {t("email")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.emergency_email}
@@ -129,7 +131,7 @@ const EmergencyContacs = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              Phone number
+              {t("phone")}
             </Typography>
             <Typography variant="p" affects="normal">
               {data?.emergency_phone}

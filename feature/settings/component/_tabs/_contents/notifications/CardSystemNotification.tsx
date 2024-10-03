@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { Card, Switch, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { BellRing } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 interface I_CardSystemNotificationProps {
@@ -9,6 +10,7 @@ interface I_CardSystemNotificationProps {
 }
 
 const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
+  const t = useTranslations("Settings.notifications");
   return (
     <Card
       className={cn(
@@ -23,7 +25,7 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
           className="block space-y-4 xl:inline-flex"
         >
           <BellRing className="mr-4 h-8 w-8" />
-          System Notification
+          {t("system_notification")}
         </Typography>
         <Switch
           disabled
@@ -41,7 +43,7 @@ const CardSystemNotification = ({ variant }: I_CardSystemNotificationProps) => {
         affects="normal"
         className="text-neutral-light-40 dark:text-neutral-dark-40"
       >
-        System notifications will send you updates from Sparta system
+        {t("system_notification_description")}
       </Typography>
     </Card>
   );

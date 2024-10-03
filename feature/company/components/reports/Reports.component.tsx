@@ -1,4 +1,5 @@
 "use client";
+import * as React from "react";
 import { filterItems, filterView } from "@/core/constants/dashboard";
 import {
   FilterDropdown,
@@ -16,7 +17,7 @@ import {
   ReportsGridView,
   ReportsTableView,
 } from "../../containers";
-import { tableColumns } from "../../constants/reports";
+import { useTableColumns } from "../../constants/reports";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { cn } from "@/core/lib/utils";
 import { useGetChatList } from "../../query/client";
@@ -30,8 +31,11 @@ import {
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const Reports = () => {
+  const t = useTranslations("ReportsCompany");
+  const tableColumns = useTableColumns();
   const store = useReportListStore();
   const { payload, setPayload } = store;
   const {
@@ -111,14 +115,14 @@ const Reports = () => {
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
               <Typography variant="h4" weight="bold" className="mr-auto">
-                Reports
+                {t("title")}
               </Typography>
               <SearchInput
                 isMobile
                 id="search-reports-company"
                 value={payload?.params?.search}
                 variant="company"
-                placeholder="Search for programs"
+                placeholder={t("placeholder_search")}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, mobileRefetch)
                 }
@@ -155,7 +159,7 @@ const Reports = () => {
             <EmptyState
               variant="company"
               type="ticket"
-              buttonText="See my Programs"
+              buttonText={t("see_programs")}
               href="/vrp-launchpad"
             />
           )}
@@ -165,13 +169,13 @@ const Reports = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              Reports
+              {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
               <SearchInput
                 id="search-reports-company"
                 variant="company"
-                placeholder="Try “#21231” or “Company name”"
+                placeholder={t("placeholder_search")}
                 value={payload?.params?.search}
                 onChange={(e) =>
                   useOnchangeSearch(e.target.value, store, refetch)
@@ -232,7 +236,7 @@ const Reports = () => {
             <EmptyState
               variant="company"
               type="ticket"
-              buttonText="See my Programs"
+              buttonText={t("see_programs")}
               href="/vrp-launchpad"
             />
           )}

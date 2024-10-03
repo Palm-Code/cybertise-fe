@@ -4,11 +4,10 @@ import { Card } from "@/core/ui/components";
 import { useMultistepForm } from "@/utils/multi-step-form";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState } from "react";
 import Information from "../_content/informations/Informations";
 import {
-  monetaryAwardData,
-  vrpInformations,
+  useGetMonetaryAwardData,
+  useVrpInformations,
 } from "@/core/constants/vrp-launchpad";
 import VrpDetailsReview from "../_content/steps/vrp-details-review/VrpDetailsReview";
 import Notes from "../_content/steps/notes/Notes";
@@ -40,6 +39,8 @@ const VRPCreation = ({
   initialValues,
   currentStep = "Phase1",
 }: I_VRPCreationProps) => {
+  const vrpInformations = useVrpInformations();
+  const monetaryAwardData = useGetMonetaryAwardData();
   const { data: assetTypeOptions } = useGetAssetType();
   const options: SortFilterType[] =
     assetTypeOptions

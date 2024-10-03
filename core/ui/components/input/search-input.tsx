@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import Button from "../button/button";
 import { useState } from "react";
 import BaseModal from "../modal/modal";
+import { useTranslations } from "next-intl";
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: "hacker" | "company" | "mediator";
@@ -23,6 +24,7 @@ const ModalSearch = ({
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   value: string | number | readonly string[];
   variant?: "hacker" | "company" | "mediator";
+  placeholder?: string;
   id?: string;
 }) => {
   return (
@@ -44,7 +46,7 @@ const ModalSearch = ({
           id={`${props.id}-mobile`}
           title="search"
           type="text"
-          placeholder="Search"
+          placeholder={props.placeholder}
           pattern=""
           enterKeyHint="search"
           className="w-full bg-transparent p-2 outline-none"
@@ -67,6 +69,7 @@ const SearchInput = ({
   isMobile = false,
   ...props
 }: SearchInputProps) => {
+  const t = useTranslations("Common");
   const [open, setOpen] = useState(false);
   if (isMobile)
     return (
@@ -85,6 +88,7 @@ const SearchInput = ({
           isOpen={open}
           onClose={() => setOpen(false)}
           onChange={onChange}
+          placeholder={props.placeholder}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setOpen(false);
@@ -118,7 +122,7 @@ const SearchInput = ({
           disabled={disabledButton}
           isLoading={loadingSubmit}
         >
-          Search
+          {t("submit_search")}
         </Button>
       </div>
     </>

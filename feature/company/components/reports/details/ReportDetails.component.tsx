@@ -1,4 +1,5 @@
 "use client";
+import * as React from "react";
 import { cn } from "@/core/lib/utils";
 import {
   Badge,
@@ -29,8 +30,10 @@ import { SendReportRequestType } from "@/core/models/common";
 import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
+import { useTranslations } from "next-intl";
 
 const ReportDetails = ({ id }: { id: string }) => {
+  const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
   const { data: userData } = useGetUserData();
@@ -159,8 +162,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 "bg-neutral-light-70 dark:bg-neutral-dark-70"
               )}
             >
-              This chat is read only on this device. Please access using desktop
-              to interact.
+              {t("chat_alert")}
             </div>
           </div>
           {isFetchingNextPage && (
@@ -188,7 +190,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 affects="small"
                 className="!text-neutral-dark-100"
               >
-                Jump into last message
+                {t("jump_to_last_message")}
               </Typography>
             </Button>
           )}
@@ -280,7 +282,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               affects="small"
               className="!text-neutral-dark-100"
             >
-              Jump into last message
+              {t("jump_to_last_message")}
             </Typography>
           </Button>
         )}

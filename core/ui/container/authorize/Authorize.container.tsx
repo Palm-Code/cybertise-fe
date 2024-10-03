@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { Button } from "../../components";
 import { useSearchParams } from "next/navigation";
 import { useGetAccessToken } from "@/core/react-query/client";
+import { useTranslations } from "next-intl";
 
 interface I_AuthorizeContainerProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,6 +16,7 @@ interface I_AuthorizeContainerProps
 
 let firstRender = true;
 const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
+  const t = useTranslations("Authorize");
   const searchParams = useSearchParams();
   const code = searchParams.get("code") as string;
   const { mutate } = useGetAccessToken();
@@ -41,14 +43,14 @@ const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
           <div className="_flexbox__row__center w-full gap-6">
             <Loader className="h-12 w-12 animate-spin transition-all delay-1000 duration-1000" />
             <Typography variant="p" affects="large">
-              You are being redirected, please wait....
+              {t("title")}
             </Typography>
           </div>
           <Typography variant="p" affects="large" align="center">
-            If you are not redirected in few seconds, please click this button
+            {t("description")}
           </Typography>
           <Button variant="default" onClick={() => mutate({ code })}>
-            Continue
+            {t("redirect_button")}
           </Button>
         </div>
       </Mobile>
@@ -65,14 +67,14 @@ const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
           <div className="_flexbox__row__center w-full gap-6">
             <Loader className="h-12 w-12 animate-spin transition-all delay-1000 duration-1000" />
             <Typography variant="p" affects="large" align="center">
-              You are being redirected, please wait....
+              {t("title")}
             </Typography>
           </div>
           <Typography variant="p" affects="large" align="center">
-            If you are not redirected, please click this button
+            {t("description")}
           </Typography>
           <Button variant="default" onClick={() => mutate({ code })}>
-            Continue
+            {t("redirect_button")}
           </Button>
         </div>
       </Desktop>

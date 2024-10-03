@@ -25,6 +25,7 @@ import {
 } from "@/core/react-query/client";
 import { Role } from "@/types/admin/sidebar";
 import { iconColor } from "@/core/constants/common";
+import { useTranslations } from "next-intl";
 
 interface I_ReviewProps {
   defaultData?: {
@@ -45,6 +46,7 @@ const Review = ({
   isCompanyTicketPreview = false,
   variant = "hacker",
 }: I_ReviewProps) => {
+  const t = useTranslations("SendReportHacker.reviews");
   const { data: asset_type, isLoading: assetTypeLoading } =
     useGetAssetTypeDetails(data?.custom_ta_asset_type_id as string);
 
@@ -121,7 +123,7 @@ const Review = ({
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Attachments
+                {t("problem_causes.attachment")}
               </Typography>
               <div
                 className={cn(
@@ -217,7 +219,7 @@ const Review = ({
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Attachments
+                {t("problem_causes.attachment")}
               </Typography>
               <div
                 className={cn(

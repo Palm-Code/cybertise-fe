@@ -5,6 +5,7 @@ import Link from "next/link";
 import { buttonVariants } from "../../components/button/base-button";
 import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface I_EmptyStateProps {
   variant?: keyof typeof Role;
@@ -31,6 +32,7 @@ const EmptyState = ({
   onClickButton = () => {},
   className = "",
 }: I_EmptyStateProps) => {
+  const t = useTranslations("EmptyState");
   const iconsType = () => {
     switch (type) {
       case "ticket":
@@ -43,7 +45,7 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              You Have Nothing Here
+              {t("you_have_nothing_here")}
             </Typography>
             {!!buttonText && (
               <Link
@@ -90,7 +92,7 @@ const EmptyState = ({
                 weight="bold"
                 align={"center"}
               >
-                Target assets not Found
+                {t("target_assets_not_found")}
               </Typography>
             </>
           </>
@@ -101,7 +103,7 @@ const EmptyState = ({
             <>
               <HackerLeaf />
               <Typography variant="p" affects="extralarge" weight="bold">
-                You Have Nothing Here
+                {t("you_have_nothing_here")}
               </Typography>
               {!!buttonText && (
                 <Button
@@ -125,13 +127,13 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              Under Construction
+              {t("under_construction")}
             </Typography>
             <Link
               className={buttonVariants({ variant: `primary-${variant}` })}
               href={href}
             >
-              Back
+              {t("back_button")}
             </Link>
           </>
         );
@@ -151,7 +153,7 @@ const EmptyState = ({
               className={buttonVariants({ variant: `primary-${variant}` })}
               href={href}
             >
-              Back
+              {t("back_button")}
             </Link>
           </>
         );

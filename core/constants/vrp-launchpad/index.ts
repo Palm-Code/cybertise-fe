@@ -1,4 +1,139 @@
+import { Role } from "@/types/admin/sidebar";
 import { MonetaryAwardType, PricingProps } from "@/types/admin/vrp-launchpad";
+import { useTranslations } from "next-intl";
+import { getMessages } from "next-intl/server";
+
+export const useVrpInformations = () => {
+  const t = useTranslations("VRPLaunchpad.phase");
+  return {
+    vrp_details: [
+      {
+        label: t("vrp_details.brief"),
+        value: 1,
+      },
+      {
+        label: t("vrp_details.details"),
+        value: 2,
+      },
+      {
+        label: t("vrp_details.setup"),
+        value: 3,
+      },
+      {
+        label: t("vrp_details.initial_scope"),
+        value: 4,
+      },
+      {
+        label: t("vrp_details.notes"),
+        value: 5,
+      },
+      {
+        label: t("vrp_details.review"),
+        value: 6,
+      },
+    ],
+    setup_phase: [
+      {
+        label: t("setup.review_vrp"),
+        value: 1,
+      },
+      {
+        label: t("setup.make_changes"),
+        value: 2,
+      },
+      {
+        label: t("setup.notes"),
+        value: 3,
+      },
+      {
+        label: t("setup.review"),
+        value: 4,
+      },
+    ],
+    company_revision: [
+      {
+        label: t("company_revision.notes"),
+        value: 1,
+      },
+      {
+        label: t("company_revision.details"),
+        value: 2,
+      },
+      {
+        label: t("company_revision.monetary_awards"),
+        value: 3,
+      },
+      {
+        label: t("company_revision.initial_scope"),
+        value: 4,
+      },
+      {
+        label: t("company_revision.rules_policies"),
+        value: 5,
+      },
+      {
+        label: t("company_revision.notes"),
+        value: 6,
+      },
+      {
+        label: t("company_revision.review"),
+        value: 7,
+      },
+    ],
+    mediator_revision: [
+      {
+        label: t("mediator_revision.review_vrp"),
+        value: 1,
+      },
+      {
+        label: t("mediator_revision.setup_monetary_awards"),
+        value: 2,
+      },
+      {
+        label: t("mediator_revision.setup_initial_scope"),
+        value: 3,
+      },
+      {
+        label: t("mediator_revision.notes"),
+        value: 4,
+      },
+      {
+        label: t("mediator_revision.review"),
+        value: 5,
+      },
+    ],
+    publish: [
+      {
+        label: t("publish.publish"),
+        value: 1,
+      },
+      {
+        label: t("publish.details"),
+        value: 2,
+      },
+      {
+        label: t("publish.monetary_awards"),
+        value: 3,
+      },
+      {
+        label: t("publish.initial_scope"),
+        value: 4,
+      },
+      {
+        label: t("publish.rules_policies"),
+        value: 5,
+      },
+      {
+        label: t("publish.notes"),
+        value: 6,
+      },
+      {
+        label: t("publish.review"),
+        value: 7,
+      },
+    ],
+  };
+};
 
 export const vrpInformations = {
   vrp_details: [
@@ -404,6 +539,39 @@ export const monetaryXLData: PricingProps[] = [
     ],
   },
 ];
+
+export const useGetMonetaryAwardData = () => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details.monetary_awards");
+
+  const monetaryAwardData: MonetaryAwardType[] = [
+    {
+      title: `${t("category")} S`,
+      category: "S",
+      priceData: monetarySData,
+      variant: "company",
+    },
+    {
+      title: `${t("category")} M`,
+      category: "M",
+      priceData: monetaryMData,
+      variant: "company",
+    },
+    {
+      title: `${t("category")} L`,
+      category: "L",
+      priceData: monetaryLData,
+      variant: "company",
+    },
+    {
+      title: `${t("category")} XL`,
+      category: "XL",
+      priceData: monetaryXLData,
+      variant: "company",
+    },
+  ];
+
+  return monetaryAwardData;
+};
 
 export const monetaryAwardData: MonetaryAwardType[] = [
   {

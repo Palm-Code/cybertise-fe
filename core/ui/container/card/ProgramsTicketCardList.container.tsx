@@ -7,6 +7,7 @@ import { Desktop, Mobile } from "../../layout";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { Dot } from "lucide-react";
 import { ShieldCheck } from "../../icons";
+import { useTranslations } from "next-intl";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -16,6 +17,7 @@ const TicketCard = ({
   isGridCard,
   ...props
 }: I_TicketCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
+  const t = useTranslations("Programs");
   return (
     <>
       <Mobile className="h-full">
@@ -57,7 +59,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Asset type available
+                    {t("asset_type_available")}
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types
@@ -83,7 +85,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Rewards
+                    {t("rewards")}
                   </Typography>
                   <div className="grid grid-cols-[18px_1fr] gap-2">
                     <ShieldCheck
@@ -208,7 +210,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Asset type available
+                    {t("asset_type_available")}
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types
