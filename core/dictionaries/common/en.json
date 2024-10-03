@@ -1,278 +1,288 @@
 {
-    "Common": {
-        "search": "Search...",
-        "search_not_found": "No results found",
-        "submit_search": "Search",
-        "button_back": "Back"
-    },
-    "Sidebar": {
-        "menu": "Menu",
-        "dashboard": "Dashboard",
-        "programs": "Programs",
-        "reports": "Reports",
-        "companies": "Companies",
-        "vrp_launchpad": "VRP Launchpad",
-        "vrp_management": "VRP Management",
-        "manage_company": "Manage Company",
-        "settings": "Settings",
-        "logout": "Logout",
-        "mode": "Mode"
-    },
-    "Filter": {
-        "title": "Filter",
-        "submit_filter": "Apply Filter",
-        "type": "Type",
-        "risk_level": "Risk Level",
-        "status": "Status",
-        "asset_type": "Asset Type",
-        "date_range": {
-            "title": "Date Range",
-            "button_apply": "Apply",
-            "button_clear": "Clear"
-        }
-    },
-    "Ticket": {
-        "ticket": "Ticket",
-        "ticket_type": "Ticket Type",
-        "risk_level": "Risk Level",
-        "vulnerability_type": "Vulnerability Type (CWE)",
-        "rewards": "Rewards",
-        "status": "Status",
-        "last_update": "Last Update",
-        "last_reported": "Last Reported {date} ago",
-        "last_message": "Last Message"
-    },
-    "Programs": {
-        "program_name": "Program Name",
-        "program_title": "Program Title",
-        "asset_type": "Asset Type",
-        "asset_type_available": "Asset Type Available",
-        "rewards": "Rewards",
-        "bounty": "Bounty",
-        "forbidden": {
-            "title": "Continue on Desktop",
-            "title_vrp": "Not Published",
-            "description_vrp": "Only can be accessed for Published VRP"
-        }
-    },
-    "Pagination": {
-        "page": "Page",
-        "show": "Showing in page"
-    },
-    "EmptyState": {
-        "you_have_nothing_here": "You have nothing here",
-        "under_construction": "Under Construction",
-        "back_button": "Back",
-        "target_assets_not_found": "Target assets not found"
-    },
-    "SuccesState": {
-        "send_report": {
-            "title": "Your Report Submited!",
-            "description": "We have sent your report to the Mediator for review. You can access your Hacker ticket directly on the dashboard or report menu.",
-            "button_back": "Back to Dasboard",
-            "button_reports": "Go to my Reports"
-        },
-        "close_send_report": {
-            "title": "Cancel Submit Report?",
-            "description": "You will loose all the information you have entered for the related reports.",
-            "button_keep_it": "Keep It",
-            "button_yes_cancel_report": "Yes, Cancel report"
-        }
-    },
-    "TextEditor": {
-        "title_upload_attachment": "Upload Attachment",
-        "remaining_characters": "Remaining Characters",
-        "button_send_attachment": "Send Attachment",
-        "button_send_message": "Send",
-        "placeholder_chat": "Write your message...",
-        "button_cancel": "Cancel",
-        "label_caption": "Write a caption"
-    },
-    "FileInput": {
-        "drag_and_drop": "Drag & Drop",
-        "select_files": "or Select files from device",
-        "max_50mb": "max. 50MB",
-        "uploading": "Uploading",
-        "upload_more": "+ Upload more files"
-    },
-    "ChatReports": {
-        "jump_to_last_message": "Jump into last message",
-        "go_to": "Go to {role} Ticket",
-        "company": "Company",
-        "ticket_type": "{role} Ticket",
-        "hacker": "Hacker",
-        "create_company_ticket": "Create Company Ticket",
-        "chat_alert": "This chat is read only on this device. Please access using desktop to interact."
-    },
-    "Loading": {
-        "loading_data": "Getting data..."
-    },
-    "Settings": {
-        "title": "Settings",
-        "tabs": {
-            "details": "{role} Details",
-            "billings": "Billings",
-            "notifications": "Notifications",
-            "security": "Security",
-            "data_privacy": "Data & Privacy"
-        },
-        "details": {
-            "title": "{role} Details",
-            "account": "Account",
-            "company": "Company",
-            "about": "About {role}",
-            "company_information": "Company Information",
-            "account_details": "{role} Account Details",
-            "button_edit_account": "Edit {role} Details",
-            "about_you": "About You",
-            "label_avatar": "{role} Avatar",
-            "label_logo": "Company Logo",
-            "logo": "Logo",
-            "image": "Image",
-            "label_change_image": "Change {role}",
-            "label_name": "{role} Name",
-            "label_country": "Country",
-            "label_about_your_account": "About your {role}",
-            "label_email": "Registered Email",
-            "label_phone": "Phone Number",
-            "button_discard": "Discard",
-            "button_save": "Save Changes",
-            "company_address": "Company Address",
-            "address": "Address",
-            "address_2": "Address 2",
-            "optional": "Optional",
-            "state": "State",
-            "zip": "Zip Code",
-            "country": "Country",
-            "company_website": "Company Website"
-        },
-        "billings": {
-            "title": "Billings",
-            "button_edit_billing": "Edit Billing Setting",
-            "edit_billing_information": "Edit Billing Information",
-            "payment_information": "Payment Information",
-            "bank_name": "Bank Name",
-            "account_number": "Account Number",
-            "holder_name": "Holder Name",
-            "vat": "VAT",
-            "iban": "IBAN",
-            "bic": "BIC",
-            "button_save": "Save Changes",
-            "button_discard": "Discard"
-        },
-        "notifications": {
-            "title": "Notifications",
-            "system_notification": "System Notification",
-            "system_notification_description": "System notifications will send you updates from Sparta system",
-            "news": "News",
-            "news_description": "News notifications will send you updates from others"
-        },
-        "security": {
-            "title": "Security",
-            "login_info": {
-                "title": "Login Information",
-                "login_password": "Login Password",
-                "login_password_description": "The login password helps guarantee account and communication security.",
-                "button_edit_password": "Change Password",
-                "change_login_password": "Change Login Password",
-                "button_discard": "Discard",
-                "button_save": "Save Changes",
-                "current_password": "Confirm Current Password",
-                "label_current_password": "Current Password",
-                "placeholder_current_password": "Enter your current password",
-                "new_password": "New Password",
-                "label_new_password": "New Password",
-                "placeholder_new_password": "Enter your new password",
-                "label_confirm_new_password": "Confirm New Password",
-                "placeholder_confirm_new_password": "Confirm your new password",
-                "logout_all": "Logout from All Devices (Optional)",
-                "logout_all_description": "Logging out from all devices ensures that any potentially compromised sessions are terminated immediately. This is especially important if you suspect your account was accessed without your permission.",
-                "logout_all_check": "By selecting this option, you will be logged out from all devices currently signed into your account, including phones, tablets, and computers. You will need to log back in on each device using your new password"
-            },
-            "two_factor_authentication": {
-                "title": "Two Factor Authentication",
-                "label_2fa": "Authenticator",
-                "label_2fa_description": "Authenticator codes help guarantee account security.",
-                "badge": {
-                    "connected": "Connected",
-                    "not_connected": "Not Connected"
-                },
-                "button_connect_2fa": "Connect Authenticator",
-                "button_unbind_2fa": "Unbind Authenticator",
-                "button_edit_2fa": "Edit",
-                "button_verify_2fa": "Verification",
-                "setup_2fa": {
-                    "title": "Setup Authenticator",
-                    "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
-                    "button_cancel": "Cancel",
-                    "label_password": "Password",
-                    "placeholder_password": "Enter your password",
-                    "forgot_password": "Forgot your password?",
-                    "button_verify": "Verify",
-                    "description_2": "Scan or Copy the 'key code' below to your authenticator app to activate your 2FA.",
-                    "key_phrase": "Key phrases are used to restore Authenticator in case of device loss or change - make sure to secure key phrases before setting up authenticator app.",
-                    "label_key_phrase": "Key Phrases",
-                    "important_note": "Please copy the key phrase to activate the Authenticate button",
-                    "button_authenticate": "Authenticate",
-                    "title_2": "Activate Your Authenticator",
-                    "description_3": "Please enter authenticator code from your verified Two-Factor Authenticator app."
-                },
-                "unbind_2fa": {
-                    "title": "Unbind Authenticator",
-                    "description": "Please enter authenticator code from your verified Two-Factor Authenticator app.",
-                    "label_password": "Password",
-                    "placeholder_password": "Enter your password",
-                    "forgot_password": "Forgot your password?",
-                    "button_cancel": "Cancel",
-                    "button_unbind": "Unbind"
-                },
-                "verify_2fa": {
-                    "title": "Verify Your Authenticator",
-                    "button_cancel": "Cancel",
-                    "description": "Please enter authenticator code from your verified Two-Factor Authenticator app."
-                }
-            }
-        },
-        "data_privacy": {
-            "title": "Data & Privacy",
-            "privacy_policy": {
-                "title": "Privacy Policy",
-                "description": "Please read the Privacy Policy carefully."
-            },
-            "faq": {
-                "title": "FAQ",
-                "description": "Frequently Asked Questions"
-            },
-            "title_2": "Account",
-            "deactivate_account": {
-                "title": "Deactivate Your Account",
-                "description": "Find out how you can deactivate your account",
-                "information": {
-                    "title": "Deactivate Account",
-                    "description": "You're about to start the process of deactivating your Sparta account. Your username, and public profile will no longer be viewable on the platform after 30 days of activation.",
-                    "additional_information": {
-                        "title": "What else you should know?",
-                        "information_1": "You can restore you Sparta account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.",
-                        "information_2": "If you just want to use your current username or email address with a different Sparta account, change them instead of deactivate your account"
-                    },
-                    "button_cancel": "Cancel",
-                    "button_deactivate": "Deactivate my Account"
-                },
-                "confirmation": {
-                    "title": "Confirm Deactivation",
-                    "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
-                    "label_password": "Password",
-                    "placeholder_password": "Enter your password",
-                    "forgot_password": "Forgot your password?",
-                    "button_cancel": "Cancel",
-                    "button_deactivate": "Confirm Account Deactivation"
-                }
-            }
-        }
-    },
-    "Companies": {
-        "company_name": "Company Name",
-        "asset_type": "Asset Type",
-        "status": "Status"
+  "Common": {
+    "search": "Search...",
+    "search_not_found": "No results found",
+    "submit_search": "Search",
+    "button_back": "Back"
+  },
+  "Sidebar": {
+    "menu": "Menu",
+    "dashboard": "Dashboard",
+    "programs": "Programs",
+    "reports": "Reports",
+    "companies": "Companies",
+    "vrp_launchpad": "VRP Launchpad",
+    "vrp_management": "VRP Management",
+    "manage_company": "Manage Company",
+    "settings": "Settings",
+    "logout": "Logout",
+    "mode": "Mode"
+  },
+  "Filter": {
+    "title": "Filter",
+    "submit_filter": "Apply Filter",
+    "type": "Type",
+    "risk_level": "Risk Level",
+    "status": "Status",
+    "asset_type": "Asset Type",
+    "date_range": {
+      "title": "Date Range",
+      "button_apply": "Apply",
+      "button_clear": "Clear"
     }
+  },
+  "Ticket": {
+    "ticket": "Ticket",
+    "ticket_type": "Ticket Type",
+    "risk_level": "Risk Level",
+    "vulnerability_type": "Vulnerability Type (CWE)",
+    "rewards": "Rewards",
+    "status": "Status",
+    "last_update": "Last Update",
+    "last_reported": "Last Reported {date} ago",
+    "last_message": "Last Message"
+  },
+  "Programs": {
+    "program_name": "Program Name",
+    "program_title": "Program Title",
+    "asset_type": "Asset Type",
+    "asset_type_available": "Asset Type Available",
+    "rewards": "Rewards",
+    "bounty": "Bounty",
+    "forbidden": {
+      "title": "Continue on Desktop",
+      "title_vrp": "Not Published",
+      "description_vrp": "Only can be accessed for Published VRP"
+    }
+  },
+  "Pagination": {
+    "page": "Page",
+    "show": "Showing in page"
+  },
+  "EmptyState": {
+    "you_have_nothing_here": "You have nothing here",
+    "under_construction": "Under Construction",
+    "back_button": "Back",
+    "target_assets_not_found": "Target assets not found"
+  },
+  "SuccesState": {
+    "send_report": {
+      "title": "Your Report Submited!",
+      "description": "We have sent your report to the Mediator for review. You can access your Hacker ticket directly on the dashboard or report menu.",
+      "button_back": "Back to Dasboard",
+      "button_reports": "Go to my Reports"
+    },
+    "close_send_report": {
+      "title": "Cancel Submit Report?",
+      "description": "You will loose all the information you have entered for the related reports.",
+      "button_keep_it": "Keep It",
+      "button_yes_cancel_report": "Yes, Cancel report"
+    }
+  },
+  "TextEditor": {
+    "title_upload_attachment": "Upload Attachment",
+    "remaining_characters": "Remaining Characters",
+    "button_send_attachment": "Send Attachment",
+    "button_send_message": "Send",
+    "placeholder_chat": "Write your message...",
+    "button_cancel": "Cancel",
+    "label_caption": "Write a caption",
+    "title": "Insert Image",
+    "title_paste_url": "Paste URL of the image",
+    "label_image_url": "Image URL",
+    "placeholder_image_url": "Paste Image URL here",
+    "alert_only_select_image": "Only select image that you’ve confirmed you have the license to use",
+    "button_insert": "Insert",
+    "tab": {
+      "upload": "Upload",
+      "url": "Web Address (URL)"
+    }
+  },
+  "FileInput": {
+    "drag_and_drop": "Drag & Drop",
+    "select_files": "or Select files from device",
+    "max_50mb": "max. 50MB",
+    "uploading": "Uploading",
+    "upload_more": "+ Upload more files"
+  },
+  "ChatReports": {
+    "jump_to_last_message": "Jump into last message",
+    "go_to": "Go to {role} Ticket",
+    "company": "Company",
+    "ticket_type": "{role} Ticket",
+    "hacker": "Hacker",
+    "create_company_ticket": "Create Company Ticket",
+    "chat_alert": "This chat is read only on this device. Please access using desktop to interact."
+  },
+  "Loading": {
+    "loading_data": "Getting data..."
+  },
+  "Settings": {
+    "title": "Settings",
+    "tabs": {
+      "details": "{role} Details",
+      "billings": "Billings",
+      "notifications": "Notifications",
+      "security": "Security",
+      "data_privacy": "Data & Privacy"
+    },
+    "details": {
+      "title": "{role} Details",
+      "account": "Account",
+      "company": "Company",
+      "about": "About {role}",
+      "company_information": "Company Information",
+      "account_details": "{role} Account Details",
+      "button_edit_account": "Edit {role} Details",
+      "about_you": "About You",
+      "label_avatar": "{role} Avatar",
+      "label_logo": "Company Logo",
+      "logo": "Logo",
+      "image": "Image",
+      "label_change_image": "Change {role}",
+      "label_name": "{role} Name",
+      "label_country": "Country",
+      "label_about_your_account": "About your {role}",
+      "label_email": "Registered Email",
+      "label_phone": "Phone Number",
+      "button_discard": "Discard",
+      "button_save": "Save Changes",
+      "company_address": "Company Address",
+      "address": "Address",
+      "address_2": "Address 2",
+      "optional": "Optional",
+      "state": "State",
+      "zip": "Zip Code",
+      "country": "Country",
+      "company_website": "Company Website"
+    },
+    "billings": {
+      "title": "Billings",
+      "button_edit_billing": "Edit Billing Setting",
+      "edit_billing_information": "Edit Billing Information",
+      "payment_information": "Payment Information",
+      "bank_name": "Bank Name",
+      "account_number": "Account Number",
+      "holder_name": "Holder Name",
+      "vat": "VAT",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "button_save": "Save Changes",
+      "button_discard": "Discard"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "system_notification": "System Notification",
+      "system_notification_description": "System notifications will send you updates from Sparta system",
+      "news": "News",
+      "news_description": "News notifications will send you updates from others"
+    },
+    "security": {
+      "title": "Security",
+      "login_info": {
+        "title": "Login Information",
+        "login_password": "Login Password",
+        "login_password_description": "The login password helps guarantee account and communication security.",
+        "button_edit_password": "Change Password",
+        "change_login_password": "Change Login Password",
+        "button_discard": "Discard",
+        "button_save": "Save Changes",
+        "current_password": "Confirm Current Password",
+        "label_current_password": "Current Password",
+        "placeholder_current_password": "Enter your current password",
+        "new_password": "New Password",
+        "label_new_password": "New Password",
+        "placeholder_new_password": "Enter your new password",
+        "label_confirm_new_password": "Confirm New Password",
+        "placeholder_confirm_new_password": "Confirm your new password",
+        "logout_all": "Logout from All Devices (Optional)",
+        "logout_all_description": "Logging out from all devices ensures that any potentially compromised sessions are terminated immediately. This is especially important if you suspect your account was accessed without your permission.",
+        "logout_all_check": "By selecting this option, you will be logged out from all devices currently signed into your account, including phones, tablets, and computers. You will need to log back in on each device using your new password"
+      },
+      "two_factor_authentication": {
+        "title": "Two Factor Authentication",
+        "label_2fa": "Authenticator",
+        "label_2fa_description": "Authenticator codes help guarantee account security.",
+        "badge": {
+          "connected": "Connected",
+          "not_connected": "Not Connected"
+        },
+        "button_connect_2fa": "Connect Authenticator",
+        "button_unbind_2fa": "Unbind Authenticator",
+        "button_edit_2fa": "Edit",
+        "button_verify_2fa": "Verification",
+        "setup_2fa": {
+          "title": "Setup Authenticator",
+          "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
+          "button_cancel": "Cancel",
+          "label_password": "Password",
+          "placeholder_password": "Enter your password",
+          "forgot_password": "Forgot your password?",
+          "button_verify": "Verify",
+          "description_2": "Scan or Copy the 'key code' below to your authenticator app to activate your 2FA.",
+          "key_phrase": "Key phrases are used to restore Authenticator in case of device loss or change - make sure to secure key phrases before setting up authenticator app.",
+          "label_key_phrase": "Key Phrases",
+          "important_note": "Please copy the key phrase to activate the Authenticate button",
+          "button_authenticate": "Authenticate",
+          "title_2": "Activate Your Authenticator",
+          "description_3": "Please enter authenticator code from your verified Two-Factor Authenticator app."
+        },
+        "unbind_2fa": {
+          "title": "Unbind Authenticator",
+          "description": "Please enter authenticator code from your verified Two-Factor Authenticator app.",
+          "label_password": "Password",
+          "placeholder_password": "Enter your password",
+          "forgot_password": "Forgot your password?",
+          "button_cancel": "Cancel",
+          "button_unbind": "Unbind"
+        },
+        "verify_2fa": {
+          "title": "Verify Your Authenticator",
+          "button_cancel": "Cancel",
+          "description": "Please enter authenticator code from your verified Two-Factor Authenticator app."
+        }
+      }
+    },
+    "data_privacy": {
+      "title": "Data & Privacy",
+      "privacy_policy": {
+        "title": "Privacy Policy",
+        "description": "Please read the Privacy Policy carefully."
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Frequently Asked Questions"
+      },
+      "title_2": "Account",
+      "deactivate_account": {
+        "title": "Deactivate Your Account",
+        "description": "Find out how you can deactivate your account",
+        "information": {
+          "title": "Deactivate Account",
+          "description": "You're about to start the process of deactivating your Sparta account. Your username, and public profile will no longer be viewable on the platform after 30 days of activation.",
+          "additional_information": {
+            "title": "What else you should know?",
+            "information_1": "You can restore you Sparta account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.",
+            "information_2": "If you just want to use your current username or email address with a different Sparta account, change them instead of deactivate your account"
+          },
+          "button_cancel": "Cancel",
+          "button_deactivate": "Deactivate my Account"
+        },
+        "confirmation": {
+          "title": "Confirm Deactivation",
+          "description": "Protecting your account is our top priority. Please confirm your activity by entering your login password.",
+          "label_password": "Password",
+          "placeholder_password": "Enter your password",
+          "forgot_password": "Forgot your password?",
+          "button_cancel": "Cancel",
+          "button_deactivate": "Confirm Account Deactivation"
+        }
+      }
+    }
+  },
+  "Companies": {
+    "company_name": "Company Name",
+    "asset_type": "Asset Type",
+    "status": "Status"
+  }
 }

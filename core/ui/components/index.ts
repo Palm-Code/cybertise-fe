@@ -25,6 +25,7 @@ export * from "./table/table";
 export { default as Separator } from "./separator/separator";
 export { default as Tiptap } from "./tiptap/tiptap";
 export { default as Toolbar } from "./tiptap/toolbar";
+export * from "./tiptap/modal-embed-image";
 export * from "./toggle/toggle";
 export { default as FileInput } from "./input/file-input";
 export { default as BaseModal } from "./modal/modal";

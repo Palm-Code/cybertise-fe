@@ -1,3 +1,4 @@
+"use client";
 import { type Editor } from "@tiptap/react";
 import {
   Bold,
@@ -6,7 +7,6 @@ import {
   Link,
   List,
   ListOrdered,
-  Paperclip,
   Strikethrough,
   TerminalSquare,
   TextQuote,
@@ -15,14 +15,18 @@ import {
 import { Toggle } from "../toggle/toggle";
 import Separator from "../separator/separator";
 import { cn } from "@/core/lib/utils";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Skeleton } from "../skeleton/skeleton";
+import { ModalEmbedImage } from "./modal-embed-image";
+import { FileWithUrl } from "@/interfaces";
 
 interface I_ToolbarProps {
   editor: Editor | null;
 }
 
 const Toolbar = ({ editor }: I_ToolbarProps) => {
+  const [fileValues, setFileValues] = useState<FileWithUrl[]>();
+  const [openModalEmbedImage, setOpenModalEmbedImage] = useState(false);
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
@@ -48,13 +52,16 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
       .run();
   }, [editor]);
 
-  const addImage = useCallback(() => {
-    const url = window.prompt("Image URL");
-
-    if (url) {
-      editor?.chain().focus().setImage({ src: url }).run();
-    }
-  }, [editor]);
+  const addImage = useCallback(
+    (url: string) => {
+      if (url) {
+        editor?.chain().focus().setImage({ src: url }).run();
+        setFileValues(undefined);
+      }
+      setOpenModalEmbedImage(false);
+    },
+    [editor]
+  );
 
   if (!editor) return <Skeleton className="grid h-8 w-1/2" />;
   return (
@@ -142,10 +149,20 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
       <Toggle
         size="sm"
         pressed={editor.isActive("image")}
-        onPressedChange={addImage}
+        onPressedChange={() => setOpenModalEmbedImage(true)}
       >
         <Image />
       </Toggle>
+      <ModalEmbedImage
+        fileValues={fileValues}
+        onFileSelected={(_, file) => setFileValues(file)}
+        isOpen={openModalEmbedImage}
+        onClose={() => {
+          setFileValues(undefined);
+          setOpenModalEmbedImage(false);
+        }}
+        onClickInsert={addImage}
+      />
     </div>
   );
 };

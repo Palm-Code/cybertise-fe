@@ -86,7 +86,17 @@
     "placeholder_chat": "Schreiben Sie Ihre Nachricht...",
     "button_cancel": "Stornieren",
     "title_upload_attachment": "Anhang hochladen",
-    "label_caption": "Schreiben Sie eine Bildunterschrift"
+    "label_caption": "Schreiben Sie eine Bildunterschrift",
+    "title": "Bild einfügen",
+    "title_paste_url": "Fügen Sie die URL des Bildes ein",
+    "label_image_url": "Bild-URL",
+    "placeholder_image_url": "Fügen Sie hier die Bild-URL ein",
+    "alert_only_select_image": "Wählen Sie nur Bilder aus, von denen Sie bestätigt haben, dass Sie über die Lizenz zur Nutzung verfügen",
+    "button_insert": "Einfügen",
+    "tab": {
+      "upload": "Hochladen",
+      "url": "Webadresse (URL)"
+    }
   },
   "FileInput": {
     "drag_and_drop": "Ziehen",
