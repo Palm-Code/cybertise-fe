@@ -1,0 +1,130 @@
+{
+  "SignIn": {
+    "title": "Anmelden",
+    "error": {
+      "missmatch": "E-Mail und Passwort stimmen nicht überein",
+      "not_found": "E-Mail nicht gefunden"
+    },
+    "email": "E-Mail",
+    "email_placeholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "password": "Passwort",
+    "password_placeholder": "Geben Sie Ihr Passwort ein",
+    "forgot_password": "Passwort vergessen?",
+    "sign_in_button": "Anmelden",
+    "not_have_account": "Sie haben noch kein Konto?",
+    "sign_up": "Melden Sie sich an"
+  },
+  "AuthenticateEmail": {
+    "title": "Authentifizieren Sie Ihr Konto",
+    "description_1": "Der Schutz Ihres Kontos hat für uns oberste Priorität. \nBitte bestätigen Sie Ihre Aktivität, indem Sie auf den an Ihre E-Mail-Adresse gesendeten Zauber klicken:",
+    "description_2": "Wir haben eine E-Mail an die angegebene Adresse gesendet, falls diese noch nicht registriert war. \nEs kann eine Minute dauern, bis Sie Ihren Code erhalten.",
+    "resend_button": "Erneut senden"
+  },
+  "AuthenticateOtp": {
+    "title": "Authentifizieren Sie Ihr Konto",
+    "description": "Der Schutz Ihres Kontos hat für uns oberste Priorität. \nBitte bestätigen Sie Ihre Aktivität, indem Sie den Code aus Ihrer Authentifizierungs-App eingeben",
+    "authenticator_error": "Authentifizierungscode funktioniert nicht?"
+  },
+  "Authorize": {
+    "title": "Sie werden weitergeleitet, bitte warten...",
+    "description": "Wenn Sie nicht innerhalb weniger Sekunden weitergeleitet werden, klicken Sie bitte auf diese Schaltfläche",
+    "redirect_button": "Weitermachen"
+  },
+  "ForgotPassword": {
+    "title": "Passwort vergessen",
+    "description": "Bitte geben Sie Ihre E-Mail-Adresse ein, um einen Link zur Bestätigung des Zurücksetzens des Passworts anzufordern.",
+    "submit_button": "Passwort zurücksetzen",
+    "footer": "Erinnern Sie sich schon an Ihr Passwort?",
+    "link": "Anmelden",
+    "verification_text": "Wir haben Ihnen gerade einen Bestätigungslink zum Zurücksetzen des Passworts an <strong>E-Mail</strong> gesendet und können mit dem Zurücksetzen des Passworts fortfahren.",
+    "resend_button": "Bestätigung erneut senden",
+    "footer_2": "Von allen Geräten abmelden?",
+    "label": "E-Mail",
+    "placeholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "label_new_password": "Neues Passwort",
+    "label_confirm_password": "Passwort bestätigen",
+    "placeholder_confirm_password": "Bestätigen Sie Ihr neues Passwort",
+    "placeholder_new_password": "Geben Sie Ihr neues Passwort ein"
+  },
+  "PasswordInput": {
+    "password_matched": "Passwort stimmt überein",
+    "password_not_matched": "Passwort stimmt nicht überein",
+    "reqex": {
+      "characters": "Mindestens 8 Zeichen",
+      "numerical": "Mindestens 1 Zahl",
+      "lowercase": "Mindestens 1 Kleinbuchstabe",
+      "uppercase": "Mindestens 1 Großbuchstabe",
+      "special_character": "Mindestens 1 Sonderzeichen"
+    }
+  },
+  "SignUp": {
+    "hacker": {
+      "cancel_button": "Anmeldung abbrechen",
+      "back_button": "Zurück",
+      "title": "Hacker-Anmeldung",
+      "subtitle": "Hacker-Details",
+      "label_username": "Benutzername",
+      "placeholder_username": "Geben Sie Ihren Benutzernamen ein",
+      "label_country": "Land",
+      "next_button": "Nächste",
+      "subtitle_2": "Kontoeinrichtung",
+      "label_email": "E-Mail",
+      "placeholder_email": "Geben Sie Ihre E-Mail-Adresse ein",
+      "label_password": "Passwort",
+      "placeholder_password": "Geben Sie Ihr Passwort ein",
+      "label_confirm_password": "Passwort bestätigen",
+      "placeholder_confirm_password": "Bestätigen Sie Ihr Passwort",
+      "legal": "Ich habe alle Seiten gelesen und akzeptiert",
+      "link": "Richtlinien",
+      "submit_button": "Konto registrieren"
+    },
+    "title": "Bitte wählen Sie aus, welche Art von Konto Sie erstellen möchten",
+    "company_type": "Unternehmen",
+    "hacker_type": "Hacker",
+    "footer": "Sie haben bereits ein Konto?",
+    "link": "Anmelden",
+    "company": {
+      "cancel_button": "Anmeldung abbrechen",
+      "back_button": "Zurück",
+      "title": "Firmenanmeldung",
+      "subtitle": "Firmendetails",
+      "label_company_name": "Name der Firma",
+      "placeholder_company_name": "Geben Sie Ihren Firmennamen ein",
+      "label_website": "Unternehmenswebsite",
+      "placeholder_website": "Geben Sie die Website Ihres Unternehmens ein",
+      "next_button": "Nächste",
+      "subtitle_2": "Korrespondenzdetails",
+      "label_address": "Adresse",
+      "placeholder_address": "Geben Sie Ihre Adresse ein",
+      "label_address_2": "Adresszeile 2",
+      "placeholder_address_2": "Geben Sie Ihre Adresszeile 2 ein",
+      "label_optional": "Optional",
+      "label_country": "Land",
+      "label_state": "Zustand",
+      "placeholder_state": "Geben Sie Ihr Bundesland ein",
+      "label_city": "Stadt",
+      "placeholder_city": "Geben Sie Ihre Stadt ein",
+      "label_zip": "PLZ",
+      "placeholder_zip": "Geben Sie Ihre Postleitzahl ein",
+      "subtitle_3": "Kontoeinrichtung",
+      "label_email": "E-Mail",
+      "placeholder_email": "Geben Sie Ihre E-Mail-Adresse ein",
+      "label_password": "Passwort",
+      "placeholder_password": "Geben Sie Ihr Passwort ein",
+      "label_confirm_password": "Passwort bestätigen",
+      "placeholder_confirm_password": "Bestätigen Sie Ihr Passwort",
+      "legal": "Ich habe alle Seiten gelesen und akzeptiert",
+      "link": "Richtlinien",
+      "submit_button": "Konto registrieren"
+    }
+  },
+  "Reactivate": {
+    "title": "Konto reaktivieren",
+    "description": "Sie haben Ihr Konto am deaktiviert",
+    "content_title": "Was sollten Sie sonst noch wissen?",
+    "content_lists_1": "Ab dem {date} ist die Wiederherstellung Ihres Kontos nicht mehr möglich, wenn es versehentlich oder unrechtmäßig deaktiviert wurde.",
+    "content_lists_2": "Durch Klicken auf „Ja, reaktivieren“ stoppen Sie den Deaktivierungsprozess und reaktivieren Ihr Konto.",
+    "cancel_button": "Stornieren",
+    "submit_button": "Ja, reaktivieren"
+  }
+}

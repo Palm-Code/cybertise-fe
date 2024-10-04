@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import {
   AlignJustify,
   Bug,
@@ -14,8 +15,8 @@ import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
 import { VrpManagement } from "../../icons";
-import { usePathname, useRouter } from "next/navigation";
-import { borderColor, menuItems } from "@/core/constants/common";
+import { usePathname } from "next/navigation";
+import { borderColor, useMenuItems } from "@/core/constants/common";
 import {
   Avatar,
   Sheet,
@@ -28,6 +29,7 @@ import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
 import { useGetUserData, usePostLogout } from "@/core/react-query/client";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -38,17 +40,19 @@ const iconsObject: { [key: string]: React.ReactNode } = {
   programs: <TextSearch className="h-6 w-6" />,
   reports: <Bug className="h-6 w-6" />,
   companies: <Building2 className="h-6 w-6" />,
-  "vrp launchpad": <Bug className="h-6 w-6" />,
-  "vrp management": (
+  vrp_launchpad: <Bug className="h-6 w-6" />,
+  vrp_management: (
     <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
   ),
-  "manage company": <Building2 className="h-6 w-6" />,
+  manage_company: <Building2 className="h-6 w-6" />,
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
+  const t = useTranslations("Sidebar");
   const queryClient = useQueryClient();
   const { theme } = useTheme();
   const pathname = usePathname();
+  const menuItems = useMenuItems();
   const menu = menuItems[type as keyof typeof menuItems];
 
   const { mutateAsync } = usePostLogout();
@@ -81,7 +85,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     <X />
                   </SheetClose>
                   <Typography variant="h6" weight="bold">
-                    Menu
+                    {t("menu")}
                   </Typography>
                 </div>
                 <Avatar image={user?.avatar as string} />
@@ -92,7 +96,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     key={`navbar-item-${index}`}
                     href={item.path}
                     className={cn(
-                      "_flexbox__row__center__start h-16 w-full gap-4",
+                      "grid h-16 w-full grid-cols-[auto_1fr] items-center gap-4",
                       "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
                       "border-l-2",
                       `hover:${borderColor[type as keyof typeof borderColor]}`,
@@ -110,7 +114,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                       }
                     }}
                   >
-                    {iconsObject[item.title.toLowerCase()]}
+                    {iconsObject[item.id.toLowerCase()]}
                     <Typography variant="p" affects="normal">
                       {item.title}
                     </Typography>
@@ -130,7 +134,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                 >
                   <Settings className="h-6 w-6" />
                   <Typography variant="p" affects="normal">
-                    Settings
+                    {t("settings")}
                   </Typography>
                 </Link>
                 <button
@@ -146,7 +150,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                 >
                   <LogOut className="h-6 w-6" />
                   <Typography variant="p" affects="normal">
-                    Logout
+                    {t("logout")}
                   </Typography>
                 </button>
               </div>
@@ -158,7 +162,7 @@ const Sidebar = ({ type }: SidebarProps) => {
               )}
             >
               <Typography variant="p" affects="normal" className="capitalize">
-                {theme} Mode
+                {theme} {t("mode")}
               </Typography>
               <ThemeSwitcher />
             </div>
@@ -202,7 +206,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     }
                   }}
                 >
-                  {iconsObject[item.title.toLowerCase()]}
+                  {iconsObject[item.id.toLowerCase()]}
                   <Typography variant="p" affects="normal">
                     {item.title}
                   </Typography>
@@ -210,46 +214,6 @@ const Sidebar = ({ type }: SidebarProps) => {
               ))}
             </div>
           </div>
-          {/* <div
-            className={cn(
-              "_flexbox__col__center sticky bottom-[calc(64px+env(safe-area-inset-bottom))]",
-              "w-full gap-4 pr-5"
-            )}
-          >
-            <Link
-              href="/settings"
-              className={cn(
-                "_flexbox__row__center__start h-16 w-full gap-4",
-                "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                "border-l-2",
-                `hover:${borderColor[type as keyof typeof borderColor]}`,
-                pathname.includes("/settings")
-                  ? `${borderColor[type as keyof typeof borderColor]} bg-background-page-light *:font-bold dark:bg-background-page-dark`
-                  : "border-transparent bg-transparent font-normal dark:border-transparent"
-              )}
-            >
-              <Settings className="h-6 w-6" />
-              <Typography variant="p" affects="normal">
-                Settings
-              </Typography>
-            </Link>
-            <button
-              type="submit"
-              className={cn(
-                "_flexbox__row__center__start h-16 w-full gap-4",
-                "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
-                "border-l-2",
-                `hover:${borderColor[type as keyof typeof borderColor]}`,
-                "border-transparent bg-transparent font-normal dark:border-transparent"
-              )}
-              onClick={() => mutateAsync()}
-            >
-              <LogOut className="h-6 w-6" />
-              <Typography variant="p" affects="normal">
-                Logout
-              </Typography>
-            </button>
-          </div> */}
         </div>
       </div>
     </>

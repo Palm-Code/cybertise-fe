@@ -11,6 +11,7 @@ import { useState } from "react";
 import { I_GetParamsPayload } from "@/core/models/common";
 import { iconColor } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface IDashboardFilterProps {
   variant?: "hacker" | "company" | "mediator";
@@ -24,6 +25,7 @@ const DashboardFilter = ({
   store,
 }: IDashboardFilterProps) => {
   if (!store) return null;
+  const t = useTranslations("Filter");
   const { payload, setPayload } = store;
   const [tempPayload, setTempPayload] = useState<I_GetParamsPayload>(payload);
 
@@ -37,7 +39,7 @@ const DashboardFilter = ({
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
               variant={variant}
-              label="Type"
+              label={t("type")}
               value={tempPayload?.params?.filter?.["program.type"] || "all"}
               options={filterItems.type}
               onValueChange={(v) => {
@@ -56,7 +58,7 @@ const DashboardFilter = ({
             <Separator />
             <BaseDropdown
               variant={variant}
-              label="Risk Level"
+              label={t("risk_level")}
               value={tempPayload?.params?.filter?.level || "all"}
               options={filterItems.risk_level}
               onValueChange={(v) => {
@@ -75,7 +77,7 @@ const DashboardFilter = ({
             <Separator />
             <BaseDropdown
               variant={variant}
-              label="Status"
+              label={t("status")}
               value={tempPayload?.params?.filter?.status || "all"}
               options={filterItems.status}
               onValueChange={(v) => {
@@ -109,19 +111,19 @@ const DashboardFilter = ({
             />
           </div>
           <BaseDropdown
-            label="Type"
+            label={t("type")}
             value={payload?.params?.filter?.["program.type"] || "all"}
             options={filterItems.type}
             onValueChange={(v) => onValueChange(v, "program.type")}
           />
           <BaseDropdown
-            label="Risk Level"
+            label={t("risk_level")}
             value={payload?.params?.filter?.level || "all"}
             options={filterItems.risk_level}
             onValueChange={(v) => onValueChange(v, "level")}
           />
           <BaseDropdown
-            label="Status"
+            label={t("status")}
             value={payload?.params?.filter?.status || "all"}
             options={filterItems.status}
             onValueChange={(v) => onValueChange(v, "status")}

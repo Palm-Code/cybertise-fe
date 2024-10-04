@@ -4,6 +4,7 @@ import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { Button, Card, Tiptap, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { sanitize } from "@/utils/sanitize-input";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 interface IRulesAndPoliciesProps {
@@ -20,6 +21,9 @@ const RulesAndPolicies = ({
   variant = "mediator",
   isReview = false,
 }: IRulesAndPoliciesProps) => {
+  const t = useTranslations(
+    "VRPLaunchpad.phase.vrp_details.rules_and_policies"
+  );
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
 
@@ -33,7 +37,7 @@ const RulesAndPolicies = ({
         )}
       >
         <Typography variant="h6" weight="bold">
-          Rules & Policies
+          {t("header_title")}
         </Typography>
         <div className="__flexbox__col__start__start w-full gap-2.5">
           <Typography
@@ -41,7 +45,7 @@ const RulesAndPolicies = ({
             affects="normal"
             className="text-neutral-light-40 dark:text-neutral-dark-40"
           >
-            Rules
+            {t("rules")}
           </Typography>
           <article>
             <Tiptap showing description={sanitize(forms.rules ?? "")} />
@@ -53,7 +57,7 @@ const RulesAndPolicies = ({
             affects="normal"
             className="text-neutral-light-40 dark:text-neutral-dark-40"
           >
-            Policies
+            {t("policies")}
           </Typography>
           <article>
             <Tiptap showing description={sanitize(forms.policies ?? "")} />
@@ -65,19 +69,16 @@ const RulesAndPolicies = ({
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
       <Typography variant="h5" weight="bold">
-        Rules And Policies
+        {t("header_title")}
       </Typography>
       <Typography variant="p" affects="small">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi
-        tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi
-        tristique senectus et netus et malesuada fames ac turpis.
+        {t("description")}
       </Typography>
       {variant === "mediator" ? (
         <>
           <Tiptap
             description={forms.rules as string}
-            label="Rules"
+            label={t("rules")}
             onChangeValue={(v) => setValue("rules", v)}
             onClearInput={() => setValue("rules", "")}
             variant={variant}
@@ -85,7 +86,7 @@ const RulesAndPolicies = ({
           />
           <Tiptap
             description={forms.policies as string}
-            label="Policies"
+            label={t("policies")}
             onChangeValue={(v) => setValue("policies", v)}
             onClearInput={() => setValue("policies", "")}
             variant={variant}
@@ -100,7 +101,7 @@ const RulesAndPolicies = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              Rules
+              {t("rules")}
             </Typography>
             <article>
               <Tiptap
@@ -116,7 +117,7 @@ const RulesAndPolicies = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              Policies
+              {t("policies")}
             </Typography>
             <article>
               <Tiptap
@@ -128,10 +129,10 @@ const RulesAndPolicies = ({
           </div>
           <div className="_flexbox__row__center gap-8">
             <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
-              Previous
+              {t("button_previous")}
             </Button>
             <Button variant={`primary-${variant}`} onClick={onClickNext}>
-              Next
+              {t("button_next")}
             </Button>
           </div>
         </>

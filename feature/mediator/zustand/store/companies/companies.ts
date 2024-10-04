@@ -12,6 +12,7 @@ export type Actions = {
 const initialState: State = {
   payload: {
     params: {
+      sort: "name",
       page: {
         size: 10,
         number: 1,

@@ -1,4 +1,5 @@
 import "./globals.scss";
+import "highlight.js/styles/default.css";
 import NextTopLoader from "nextjs-toploader";
 import { Inter } from "@/public/fonts/inter";
 import type { Metadata } from "next";
@@ -7,8 +8,9 @@ import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
-import "highlight.js/styles/default.css";
 import { headers } from "next/headers";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
   const session = await getSession();
   const requestHeaders = headers().get("x-url");
 
@@ -46,8 +49,10 @@ export default async function RootLayout({
     mediator: "#845EEE",
   };
 
+  const messages = await getMessages();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           Inter.className,
@@ -63,16 +68,18 @@ export default async function RootLayout({
           }
           showSpinner={false}
         />
-        <ReactQueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-          <Toaster position="top-center" />
-        </ReactQueryProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ReactQueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+            <Toaster position="top-center" />
+          </ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

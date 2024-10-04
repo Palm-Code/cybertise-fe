@@ -7,8 +7,10 @@ import {
   Input,
   Typography,
 } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 
 const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details.target_assets");
   return (
     <>
       <Card
@@ -19,7 +21,7 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
         )}
       >
         <Typography variant="h6" weight="bold">
-          List of Target Assets
+          {t("header_title")}
         </Typography>
         {data.target_assets.map((item, index) => (
           <Card
@@ -31,7 +33,7 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
           >
             <Input
               transparentBg
-              label={`Asset ${index + 1}`}
+              label={`${t(`asset`)} ${index + 1}`}
               value={item.content}
               containerClassName="w-4/6"
               readOnly

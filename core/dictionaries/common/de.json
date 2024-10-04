@@ -1,0 +1,276 @@
+{
+  "Common": {
+    "search": "Suche...",
+    "search_not_found": "Keine Ergebnisse gefunden",
+    "submit_search": "Suchen",
+    "button_back": "Zurück"
+  },
+  "Sidebar": {
+    "dashboard": "Armaturenbrett",
+    "programs": "Programme",
+    "reports": "Berichte",
+    "vrp_launchpad": "VRP-Launchpad",
+    "companies": "Unternehmen",
+    "menu": "Speisekarte",
+    "logout": "Abmelden",
+    "settings": "Einstellungen",
+    "mode": "Modus",
+    "vrp_management": "VRP-Management",
+    "manage_company": "Unternehmen verwalten"
+  },
+  "Filter": {
+    "type": "Typ",
+    "risk_level": "Risikostufe",
+    "status": "Status",
+    "asset_type": "Asset-Typ",
+    "submit_filter": "Filter anwenden",
+    "title": "Filter",
+    "date_range": {
+      "title": "Datumsbereich",
+      "button_clear": "Klar",
+      "button_apply": "Anwenden"
+    }
+  },
+  "Ticket": {
+    "last_reported": "Zuletzt gemeldet vor {date}",
+    "ticket": "Ticket",
+    "risk_level": "Risikostufe",
+    "vulnerability_type": "Schwachstellentyp (CWE)",
+    "rewards": "Belohnungen",
+    "status": "Status",
+    "last_update": "Letztes Update",
+    "last_message": "Letzte Nachricht",
+    "ticket_type": "Tickettyp"
+  },
+  "Pagination": {
+    "show": "Wird auf der Seite angezeigt",
+    "page": "Seite"
+  },
+  "Programs": {
+    "program_name": "Programmname",
+    "program_title": "Programmtitel",
+    "asset_type": "Asset-Typ",
+    "bounty": "Kopfgeld",
+    "asset_type_available": "Asset-Typ verfügbar",
+    "rewards": "Belohnungen",
+    "forbidden": {
+      "description_vrp": "Der Zugriff ist nur für veröffentlichte VRP möglich",
+      "title": "Fahren Sie auf dem Desktop fort",
+      "title_vrp": "Nicht veröffentlicht"
+    }
+  },
+  "EmptyState": {
+    "you_have_nothing_here": "Du hast hier nichts",
+    "under_construction": "Im Bau",
+    "back_button": "Zurück",
+    "target_assets_not_found": "Ziel-Assets nicht gefunden"
+  },
+  "SuccesState": {
+    "send_report": {
+      "title": "Ihr Bericht wurde eingereicht!",
+      "description": "Wir haben Ihren Bericht zur Prüfung an den Mediator gesendet. \nSie können direkt im Dashboard oder Berichtsmenü auf Ihr Hacker-Ticket zugreifen.",
+      "button_back": "Zurück zum Dashboard",
+      "button_reports": "Gehen Sie zu meinen Berichten"
+    },
+    "close_send_report": {
+      "title": "Bericht abbrechen abbrechen?",
+      "description": "Dabei gehen alle Informationen verloren, die Sie für die entsprechenden Berichte eingegeben haben.",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_report": "Ja, Bericht abbrechen"
+    }
+  },
+  "TextEditor": {
+    "remaining_characters": "Verbleibende Charaktere",
+    "button_send_attachment": "Anhang senden",
+    "button_send_message": "Schicken",
+    "placeholder_chat": "Schreiben Sie Ihre Nachricht...",
+    "button_cancel": "Stornieren",
+    "title_upload_attachment": "Anhang hochladen",
+    "label_caption": "Schreiben Sie eine Bildunterschrift",
+    "title": "Bild einfügen",
+    "title_paste_url": "Fügen Sie die URL des Bildes ein",
+    "label_image_url": "Bild-URL",
+    "placeholder_image_url": "Fügen Sie hier die Bild-URL ein",
+    "alert_only_select_image": "Wählen Sie nur Bilder aus, von denen Sie bestätigt haben, dass Sie über die Lizenz zur Nutzung verfügen",
+    "button_insert": "Einfügen",
+    "tab": {
+      "upload": "Hochladen",
+      "url": "Webadresse (URL)"
+    }
+  },
+  "FileInput": {
+    "drag_and_drop": "Ziehen",
+    "select_files": "oder Dateien vom Gerät auswählen",
+    "max_50mb": "max. \n50 MB",
+    "uploading": "Hochladen",
+    "upload_more": "Laden Sie weitere Dateien hoch"
+  },
+  "ChatReports": {
+    "jump_to_last_message": "Zur letzten Nachricht springen",
+    "create_company_ticket": "Firmenticket erstellen",
+    "company": "Unternehmen",
+    "go_to": "Gehen Sie zu {role} Ticket",
+    "hacker": "Hacker",
+    "chat_alert": "Dieser Chat ist auf diesem Gerät schreibgeschützt. \nBitte greifen Sie über den Desktop zu, um zu interagieren.",
+    "ticket_type": "{role} Ticket"
+  },
+  "Loading": {
+    "loading_data": "Daten abrufen..."
+  },
+  "Settings": {
+    "details": {
+      "account_details": "{role} Kontodetails",
+      "company": "Unternehmen",
+      "account": "Konto",
+      "button_edit_account": "Bearbeiten Sie die {role}-Details",
+      "button_discard": "Verwerfen",
+      "button_save": "Änderungen speichern",
+      "company_information": "Unternehmensinformationen",
+      "about_you": "Über Dich",
+      "label_logo": "Firmenlogo",
+      "label_avatar": "{role} Avatar",
+      "image": "Bild",
+      "logo": "Logo",
+      "label_change_image": "{role} ändern",
+      "label_name": "{role} Name",
+      "company_address": "Firmenadresse",
+      "address": "Adresse",
+      "address_2": "Adresse 2",
+      "optional": "Optional",
+      "country": "Land",
+      "state": "Zustand",
+      "zip": "PLZ",
+      "label_about_your_account": "Über Ihr Konto",
+      "about": "Über {role}",
+      "label_email": "Registrierte E-Mail",
+      "company_website": "Unternehmenswebsite",
+      "label_phone": "Telefonnummer",
+      "title": "{role} Details"
+    },
+    "billings": {
+      "edit_billing_information": "Rechnungsinformationen bearbeiten",
+      "button_discard": "Verwerfen",
+      "button_save": "Änderungen speichern",
+      "title": "Abrechnungen",
+      "button_edit_billing": "Abrechnungseinstellung bearbeiten",
+      "payment_information": "Zahlungsinformationen",
+      "bank_name": "Bankname",
+      "account_number": "Kontonummer",
+      "holder_name": "Name des Inhabers",
+      "vat": "MwSt",
+      "iban": "IBAN",
+      "bic": "BIC"
+    },
+    "tabs": {
+      "details": "{role} Details",
+      "billings": "Abrechnungen",
+      "notifications": "Benachrichtigungen",
+      "security": "Sicherheit",
+      "data_privacy": "Datenschutz"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "system_notification": "Systembenachrichtigung",
+      "system_notification_description": "Systembenachrichtigungen senden Ihnen Aktualisierungen vom Sparta-System",
+      "news": "Nachricht",
+      "news_description": "Nachrichtenbenachrichtigungen senden Ihnen Updates von anderen"
+    },
+    "security": {
+      "login_info": {
+        "login_password": "Login-Passwort",
+        "login_password_description": "Das Login-Passwort trägt zur Gewährleistung der Konto- und Kommunikationssicherheit bei.",
+        "button_edit_password": "Kennwort ändern",
+        "change_login_password": "Anmeldepasswort ändern",
+        "button_discard": "Verwerfen",
+        "button_save": "Änderungen speichern",
+        "current_password": "Bestätigen Sie das aktuelle Passwort",
+        "label_current_password": "Aktuelles Passwort",
+        "new_password": "Neues Passwort",
+        "label_new_password": "Neues Passwort",
+        "label_confirm_new_password": "Bestätigen Sie das neue Passwort",
+        "logout_all": "Von allen Geräten abmelden (optional)",
+        "logout_all_description": "Durch das Abmelden von allen Geräten wird sichergestellt, dass potenziell gefährdete Sitzungen sofort beendet werden. \nDies ist besonders wichtig, wenn Sie vermuten, dass ohne Ihre Erlaubnis auf Ihr Konto zugegriffen wurde.",
+        "logout_all_check": "Wenn Sie diese Option auswählen, werden Sie von allen Geräten abgemeldet, die derzeit in Ihrem Konto angemeldet sind, einschließlich Telefonen, Tablets und Computern. \nSie müssen sich auf jedem Gerät erneut mit Ihrem neuen Passwort anmelden",
+        "title": "Anmeldeinformationen"
+      },
+      "two_factor_authentication": {
+        "title": "Zwei-Faktor-Authentifizierung",
+        "label_2fa": "Authentifikator",
+        "label_2fa_description": "Authentifizierungscodes tragen zur Gewährleistung der Kontosicherheit bei.",
+        "button_edit_2fa": "Bearbeiten",
+        "button_unbind_2fa": "Authentifikator entbinden",
+        "button_verify_2fa": "Überprüfung",
+        "button_connect_2fa": "Authentifikator verbinden",
+        "badge": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        },
+        "setup_2fa": {
+          "button_cancel": "Stornieren",
+          "title": "Authentifikator einrichten",
+          "description": "Der Schutz Ihres Kontos hat für uns oberste Priorität. \nBitte bestätigen Sie Ihre Aktivität durch Eingabe Ihres Login-Passworts.",
+          "label_password": "Passwort",
+          "forgot_password": "Passwort vergessen?",
+          "button_verify": "Verifizieren",
+          "description_2": "Scannen oder kopieren Sie den unten stehenden „Schlüsselcode“ in Ihre Authentifizierungs-App, um Ihre 2FA zu aktivieren.",
+          "label_key_phrase": "Schlüsselsätze",
+          "important_note": "Bitte kopieren Sie den Schlüsselsatz, um die Schaltfläche „Authentifizieren“ zu aktivieren",
+          "button_authenticate": "Authentifizieren",
+          "key_phrase": "Schlüsselphrasen werden verwendet, um Authenticator im Falle eines Geräteverlusts oder einer Änderung wiederherzustellen. Stellen Sie sicher, dass Sie Schlüsselphrasen sichern, bevor Sie die Authenticator-App einrichten.",
+          "title_2": "Aktivieren Sie Ihren Authentifikator"
+        },
+        "unbind_2fa": {
+          "button_cancel": "Stornieren",
+          "title": "Authentifikator entbinden",
+          "description": "Bitte geben Sie den Authentifizierungscode Ihrer verifizierten Zwei-Faktor-Authentifizierungs-App ein.",
+          "label_password": "Passwort",
+          "forgot_password": "Passwort vergessen?",
+          "button_unbind": "Lösen"
+        },
+        "verify_2fa": {
+          "button_cancel": "Stornieren",
+          "title": "Überprüfen Sie Ihren Authentifikator",
+          "description": "Bitte geben Sie den Authentifizierungscode Ihrer verifizierten Zwei-Faktor-Authentifizierungs-App ein."
+        }
+      },
+      "title": "Sicherheit"
+    },
+    "title": "Einstellungen",
+    "data_privacy": {
+      "title": "Datenschutz",
+      "title_2": "Konto",
+      "privacy_policy": {
+        "title": "Datenschutzrichtlinie",
+        "description": "Bitte lesen Sie die Datenschutzerklärung sorgfältig durch."
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Häufig gestellte Fragen"
+      },
+      "deactivate_account": {
+        "title": "Deaktivieren Sie Ihr Konto",
+        "description": "Erfahren Sie, wie Sie Ihr Konto deaktivieren können",
+        "information": {
+          "button_cancel": "Stornieren",
+          "title": "Konto deaktivieren",
+          "description": "Sie sind dabei, mit der Deaktivierung Ihres Sparta-Kontos zu beginnen. \nIhr Benutzername und Ihr öffentliches Profil sind nach 30 Tagen nach der Aktivierung nicht mehr auf der Plattform sichtbar.",
+          "additional_information": {
+            "title": "Was sollten Sie sonst noch wissen?",
+            "information_1": "Sie können Ihr Sparta-Konto bis zu 30 Tage nach der Deaktivierung wiederherstellen, wenn es versehentlich oder unrechtmäßig deaktiviert wurde.",
+            "information_2": "Wenn Sie nur Ihren aktuellen Benutzernamen oder Ihre E-Mail-Adresse mit einem anderen Sparta-Konto verwenden möchten, ändern Sie diese, anstatt Ihr Konto zu deaktivieren"
+          },
+          "button_deactivate": "Deaktivieren Sie mein Konto"
+        },
+        "confirmation": {
+          "button_cancel": "Stornieren",
+          "title": "Bestätigen Sie die Deaktivierung",
+          "description": "Der Schutz Ihres Kontos hat für uns oberste Priorität. \nBitte bestätigen Sie Ihre Aktivität durch Eingabe Ihres Login-Passworts.",
+          "label_password": "Passwort",
+          "placeholder_password": "Geben Sie Ihr Passwort ein",
+          "forgot_password": "Passwort vergessen?",
+          "button_deactivate": "Bestätigen Sie die Kontodeaktivierung"
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { FilterDrawer } from "../drawer/filter-drawer";
 import { useState } from "react";
 import { I_GetParamsPayload } from "@/core/models/common";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 interface ICompaniesFilterProps {
   variant?: keyof typeof Role;
@@ -19,6 +20,7 @@ const CompaniesFilter = ({
   onValueChange = () => {},
   store,
 }: ICompaniesFilterProps) => {
+  const t = useTranslations("Filter");
   const { payload, setPayload } = store;
   const [tempPayload, setTempPayload] = useState<I_GetParamsPayload>(payload);
 
@@ -32,7 +34,7 @@ const CompaniesFilter = ({
           <div className="_flexbox__col__start__start w-full gap-6">
             <BaseDropdown
               variant={variant}
-              label="Type"
+              label={t("status")}
               value={tempPayload?.params?.filter?.status || "all"}
               options={filterItems.company_status ?? []}
               onValueChange={(v) => {
@@ -54,7 +56,7 @@ const CompaniesFilter = ({
       <Desktop className="w-fit">
         <BaseDropdown
           variant={variant}
-          label="Type"
+          label={t("status")}
           value={payload?.params?.filter?.status || "all"}
           options={filterItems.company_status ?? []}
           onValueChange={(v) => onValueChange(v, "status")}

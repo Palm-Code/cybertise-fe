@@ -10,7 +10,7 @@ import BugTarget from "./steps/BugTarget";
 import ReportDescription from "./steps/ReportDescription";
 import ProblemCauses from "./steps/ProblemCauses";
 import Review from "./steps/Review";
-import { informations } from "@/feature/hacker/constants/programs";
+import { useGetInformations } from "@/feature/hacker/constants/programs";
 import { AnimationWrapper } from "@/core/ui/layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { useMemo, useState } from "react";
@@ -28,6 +28,7 @@ import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendRep
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface I_SendReportProps {
   id: string;
@@ -37,6 +38,7 @@ interface I_SendReportProps {
 }
 
 const SendReport = ({ id, defaultData }: I_SendReportProps) => {
+  const t = useTranslations("SendReportHacker");
   const { data } = useGetProgramDetails(
     {
       params: {
@@ -45,7 +47,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
     },
     id
   );
-
+  const informations = useGetInformations();
   const [isAgreed, setIsAgreed] = useState<boolean>(false);
   const { mutateAsync, isPending, isSuccess } = usePostSendReports();
   const { data: vulnerabilityType } = useGetVulnerabilityType();
@@ -171,7 +173,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                     <Skeleton className="w-48" />
                   ) : (
                     <Typography variant="h5" weight="bold">
-                      Submit Report -{" "}
+                      {t("title")} -{" "}
                       <Tooltip content={data?.data.title as string}>
                         {data?.data && data?.data.title.length > 50
                           ? `${data?.data.title.substring(0, 50)}...`
@@ -213,7 +215,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                           prefixIcon={<FilePenLine />}
                           onClick={() => goTo(0)}
                         >
-                          Edit Report
+                          {t("button_edit_report")}
                         </Button>
                       )}
                     </div>
@@ -233,7 +235,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                       <div className="_flexbox__row__start__start w-full gap-8">
                         {!isFirstStep && !isLastStep ? (
                           <Button variant="secondary-hacker" onClick={back}>
-                            Previous
+                            {t("button_previous")}
                           </Button>
                         ) : null}
                         {isLastStep ? (
@@ -248,26 +250,12 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                                 checked={isAgreed}
                                 onCheckedChange={() => setIsAgreed(!isAgreed)}
                               />
-                              <Typography variant="p" affects="normal">
-                                By clicking 'Submit Report', you agree to our{" "}
-                                <Link
-                                  href="/terms-and-conditions"
-                                  target="_blank"
-                                  className="underline"
-                                >
-                                  Terms and Conditions
-                                </Link>{" "}
-                                and and acknowledge that you have read our Code
-                                of Conduct,{" "}
-                                <Link
-                                  href="/policy"
-                                  target="_blank"
-                                  className="underline"
-                                >
-                                  Privacy Policy
-                                </Link>{" "}
-                                and Disclosure Guidelines.
-                              </Typography>
+                              <div
+                                className="legal_cta"
+                                dangerouslySetInnerHTML={{
+                                  __html: t.raw("footer"),
+                                }}
+                              />
                             </Card>
                             <Button
                               type="button"
@@ -276,7 +264,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                               disabled={isPending || !isAgreed}
                               onClick={() => onSubmitForm()}
                             >
-                              Send Report
+                              {t("button_submit")}
                             </Button>
                           </div>
                         ) : (
@@ -285,7 +273,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                             onClick={next}
                             disabled={disabledButton[currentStepIndex]}
                           >
-                            Next
+                            {t("button_next")}
                           </Button>
                         )}
                       </div>

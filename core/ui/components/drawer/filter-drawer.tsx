@@ -13,6 +13,7 @@ import { Filter } from "lucide-react";
 import Typography from "../typography/typography";
 import { iconColor } from "@/core/constants/common";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 export const FilterDrawer = ({
   variant,
@@ -23,6 +24,7 @@ export const FilterDrawer = ({
   children: React.ReactNode;
   onSubmitFilter: () => void;
 }) => {
+  const t = useTranslations("Filter");
   return (
     <BaseDrawer>
       <DrawerTrigger>
@@ -35,19 +37,19 @@ export const FilterDrawer = ({
         >
           <Filter className={iconColor[variant]} width={20} height={20} />
           <Typography variant="p" affects="small">
-            Filter
+            {t("title")}
           </Typography>
         </div>
       </DrawerTrigger>
       <DrawerContent className="max-h-[90%]">
         <DrawerHeader className="flex flex-col items-start justify-start">
-          <DrawerTitle>Filter</DrawerTitle>
+          <DrawerTitle>{t("title")}</DrawerTitle>
         </DrawerHeader>
         <div className="w-full overflow-auto px-6">{children}</div>
         <DrawerFooter>
           <DrawerClose onClick={() => onSubmitFilter()}>
             <Button variant={`primary-${variant}`} fullWidth>
-              Apply Filter
+              {t("submit_filter")}
             </Button>
           </DrawerClose>
         </DrawerFooter>

@@ -4,12 +4,14 @@ import { ChevronRight, ShieldX } from "lucide-react";
 import ModalDeactivateAccount from "../../../_dialogs/deactivate-account/ModalDeactivateAcccount";
 import { useState } from "react";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 interface I_CardDeactivateAccountProps {
   variant?: keyof typeof Role;
 }
 
 const CardDeactivateAccount = ({ variant }: I_CardDeactivateAccountProps) => {
+  const t = useTranslations("Settings.data_privacy.deactivate_account");
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
@@ -24,7 +26,7 @@ const CardDeactivateAccount = ({ variant }: I_CardDeactivateAccountProps) => {
         <div className="_flexbox__row__start__between w-full">
           <Typography variant="h6" weight="bold" className="xl:inline-flex">
             <ShieldX className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
-            Deactivate your account
+            {t("title")}
           </Typography>
           <ChevronRight className="hidden xl:block" />
         </div>
@@ -33,7 +35,7 @@ const CardDeactivateAccount = ({ variant }: I_CardDeactivateAccountProps) => {
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Find out how you can deactivate your account
+          {t("description")}
         </Typography>
       </Card>
       <ModalDeactivateAccount

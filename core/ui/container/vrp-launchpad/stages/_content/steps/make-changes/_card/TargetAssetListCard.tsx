@@ -6,6 +6,7 @@ import { Badge, Button, Card, Input, Typography } from "@/core/ui/components";
 import AssetType from "@/feature/mediator/components/vrp-launcpad/_dropdown/AssetType.component";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Check, FilePenLine, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -27,6 +28,7 @@ const TargetAssetListCard = ({
   onClickPrev,
   options,
 }: I_TargetAssetListCard<boolean>) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details.target_assets");
   const {
     watch,
     setValue,
@@ -68,13 +70,10 @@ const TargetAssetListCard = ({
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <Typography variant="h5" weight="bold">
-        Scope
+        {t("header_title")}
       </Typography>
       <Typography variant="p" affects="small">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi
-        tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi
-        tristique senectus et netus et malesuada fames ac turpis.
+        {t("description")}
       </Typography>
       <Card
         className={cn(
@@ -88,7 +87,7 @@ const TargetAssetListCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          List of Target Assets
+          {t("header_title")}
         </Typography>
         {forms.target_assets.map((v, index) =>
           isEditingList[index] ? (
@@ -105,11 +104,11 @@ const TargetAssetListCard = ({
               key={`list-make-changes-target-assets-${index}`}
             >
               <Input
-                label={"Asset type " + (index + 1)}
+                label={`${t("asset")} ${index + 1}`}
                 disabled={!isEditingList[index]}
                 autoFocus
-                placeholderText="Hostname or IP Address"
-                value={v.content ?? "Hostname or IP Address"}
+                placeholderText={t("hostname")}
+                value={v.content ?? t("hostname")}
                 className="w-full bg-transparent"
                 onChange={(e) =>
                   setValue(
@@ -123,7 +122,7 @@ const TargetAssetListCard = ({
                 transparentBg
               />
               <AssetType
-                label="Asset Type"
+                label={t("asset_type")}
                 value={forms.target_assets[index].asset_type_id}
                 onValueChange={(e) => {
                   const newAssetTypeValue = options.find(
@@ -172,7 +171,7 @@ const TargetAssetListCard = ({
                     handleEditClick(index);
                   }}
                 >
-                  Delete
+                  {t("delete_button")}
                 </Button>
                 <Button
                   variant={`tertiary-${isCompany ? "company" : "mediator"}`}
@@ -181,7 +180,7 @@ const TargetAssetListCard = ({
                   onClick={() => handleEditClick(index)}
                   disabled={disabledSave}
                 >
-                  Save
+                  {t("save_button")}
                 </Button>
               </div>
             </Card>
@@ -195,11 +194,11 @@ const TargetAssetListCard = ({
               key={`target-assets-${index}`}
             >
               <Input
-                label={"Asset type " + (index + 1)}
+                label={`${t("asset")} ${index + 1}`}
                 disabled
                 autoFocus
-                placeholderText="Hostname or IP Address"
-                value={v.content ?? "Hostname or IP Address"}
+                placeholderText={t("hostname")}
+                value={v.content ?? t("hostname")}
                 className="w-full bg-transparent"
                 transparentBg
               />
@@ -228,7 +227,7 @@ const TargetAssetListCard = ({
           )}
           onClick={() => handleAddAsset()}
         >
-          + Add New Assets
+          {t("button_add_new")}
         </button>
         {isEditingList.some((v) => v) && (
           <Typography
@@ -236,7 +235,7 @@ const TargetAssetListCard = ({
             affects="tiny"
             className="text-semantic-light-critical dark:text-semantic-dark-critical"
           >
-            You have unsaved assets, please save these first before continuing.
+            {t("alert")}
           </Typography>
         )}
       </Card>
@@ -245,14 +244,14 @@ const TargetAssetListCard = ({
           variant={`secondary-${isCompany ? "company" : "mediator"}`}
           onClick={onClickPrev}
         >
-          Previous
+          {t("button_previous")}
         </Button>
         <Button
           variant={`primary-${isCompany ? "company" : "mediator"}`}
           disabled={disabledButton}
           onClick={onClickNext}
         >
-          Next
+          {t("button_next")}
         </Button>
       </div>
     </div>

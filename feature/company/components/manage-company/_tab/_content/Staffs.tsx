@@ -5,6 +5,7 @@ import { ModalForbidden } from "@/core/ui/container";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { FilePenLine, UserPlus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const Staffs = ({
@@ -12,13 +13,14 @@ const Staffs = ({
 }: {
   data?: I_GetUserProfileSuccessResponse["data"]["staff"];
 }) => {
+  const t = useTranslations("ManageCompany.CompanyStaff");
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <Mobile>
         <div className="_flexbox__col__start__start gap-6">
           <Typography variant="h5" weight="semibold">
-            Company Staff
+            {t("title")}
           </Typography>
           <Card
             className={cn(
@@ -27,7 +29,7 @@ const Staffs = ({
             )}
           >
             {data?.length === 0 && (
-              <EmptyState variant="company" titleText="No staff found" />
+              <EmptyState variant="company" titleText={t("not_found")} />
             )}
             {data?.map((item, idx) => (
               <Card
@@ -38,7 +40,7 @@ const Staffs = ({
                 key={`staff-${idx}`}
               >
                 <Input
-                  label={`Staff ${idx + 1}`}
+                  label={`${t("staff")} ${idx + 1}`}
                   value={item.name}
                   className="w-full"
                   transparentBg
@@ -64,7 +66,7 @@ const Staffs = ({
               fullWidth
               onClick={() => setIsModalOpen(true)}
             >
-              Add New Staff
+              {t("button_add_new")}
             </Button>
           </Card>
         </div>
@@ -72,15 +74,15 @@ const Staffs = ({
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           variant="company"
-          title="Add New Staff"
-          subtitle="Add New Staff currently only available on desktop"
+          title={t("button_add_new")}
+          subtitle={t("forbidden.add_new")}
         />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Company Staff
+              {t("title")}
             </Typography>
             <Button
               asLink
@@ -88,7 +90,7 @@ const Staffs = ({
               variant="tertiary-company"
               prefixIcon={<UserPlus />}
             >
-              Add New Staff
+              {t("button_add_new")}
             </Button>
           </div>
           <Card
@@ -98,12 +100,12 @@ const Staffs = ({
             )}
           >
             <Typography variant="h6" weight="bold">
-              Staff
+              {t("staff")}
             </Typography>
             {data?.length === 0 && (
               <EmptyState
                 variant="company"
-                titleText="No staff found"
+                titleText={t("not_found")}
                 className="mt-0"
               />
             )}
@@ -117,7 +119,7 @@ const Staffs = ({
                 key={`staff-${idx}`}
               >
                 <Input
-                  label={`Staff ${idx + 1}`}
+                  label={`${t("staff")} ${idx + 1}`}
                   value={item.name}
                   className="w-full"
                   transparentBg

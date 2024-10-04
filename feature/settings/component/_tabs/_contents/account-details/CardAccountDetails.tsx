@@ -5,6 +5,7 @@ import { Card, Input, Typography } from "@/core/ui/components";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { Role } from "@/types/admin/sidebar";
 import { UserRound } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useFormContext } from "react-hook-form";
 
@@ -19,6 +20,7 @@ const CardAccountDetails = ({
   variant,
   data,
 }: I_CardAccountDetailsProps) => {
+  const t = useTranslations("Settings.details");
   const {
     watch,
     setValue,
@@ -36,12 +38,14 @@ const CardAccountDetails = ({
             )}
           >
             <Typography variant="h6" weight="bold" className="inline-flex">
-              Account Details
+              {t("account_details", {
+                role: variant === "company" ? t("company") : t("account"),
+              })}
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-6">
               <Input
                 type="email"
-                label="Registered Email"
+                label={t("label_email")}
                 disabled
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.email}
@@ -58,7 +62,7 @@ const CardAccountDetails = ({
               {variant === "company" && (
                 <Input
                   type="text"
-                  label="Company Website"
+                  label={t("company_website")}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   value={forms.website}
                   onChange={(e) =>
@@ -76,7 +80,7 @@ const CardAccountDetails = ({
                 type="tel"
                 pattern="[0-9]*"
                 inputMode="numeric"
-                label="Phone Number"
+                label={t("label_phone")}
                 maxLength={25}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.phone}
@@ -106,7 +110,9 @@ const CardAccountDetails = ({
         >
           <Typography variant="h6" weight="bold" className="inline-flex">
             <UserRound className="mr-4 h-8 w-8" />
-            Account Details
+            {t("account_details", {
+              role: variant === "company" ? t("company") : t("account"),
+            })}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
             <div className="_flexbox__row__center__between w-full gap-2.5">
@@ -115,7 +121,7 @@ const CardAccountDetails = ({
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Registered Email
+                {t("label_email")}
               </Typography>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
@@ -129,7 +135,7 @@ const CardAccountDetails = ({
                     affects="normal"
                     className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
                   >
-                    Company Website
+                    {t("company_website")}
                   </Typography>
                 </div>
                 <Link
@@ -154,7 +160,7 @@ const CardAccountDetails = ({
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Phone Number
+                {t("label_phone")}
               </Typography>
             </div>
             <Typography variant="p" affects="normal" className="col-span-1">
@@ -172,7 +178,9 @@ const CardAccountDetails = ({
         >
           <Typography variant="h6" weight="bold" className="inline-flex">
             <UserRound className="mr-4 h-8 w-8" />
-            Account Details
+            {t("account_details", {
+              role: variant === "company" ? t("company") : t("account"),
+            })}
           </Typography>
           <div className="grid w-full grid-cols-3 gap-x-6 gap-y-2.5">
             <div className="_flexbox__col__start__start gap-2.5">
@@ -181,7 +189,7 @@ const CardAccountDetails = ({
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Registered Email
+                {t("label_email")}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">
                 {data?.email}
@@ -194,7 +202,7 @@ const CardAccountDetails = ({
                   affects="normal"
                   className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Website
+                  {t("company_website")}
                 </Typography>
                 <Link
                   target="_blank"
@@ -218,7 +226,7 @@ const CardAccountDetails = ({
                 affects="normal"
                 className="col-span-1 text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                Phone Number
+                {t("label_phone")}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">
                 {data?.phone}

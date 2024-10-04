@@ -1,8 +1,10 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
+import { useTranslations } from "next-intl";
 
 const Notes = ({ data }: { data?: string }) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details");
   return (
     <Card
       className={cn(
@@ -12,7 +14,7 @@ const Notes = ({ data }: { data?: string }) => {
       )}
     >
       <Typography variant="h6" weight="bold">
-        Notes
+        {t("notes")}
       </Typography>
       <article className="*:break-all">
         <Tiptap showing description={sanitize(data ?? "")} />

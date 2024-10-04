@@ -24,6 +24,7 @@ import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/program
 import { CheckCircle2, XCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 interface I_BugTargetProps {
   defaultData?: {
@@ -34,6 +35,7 @@ interface I_BugTargetProps {
 }
 
 const BugTarget = ({ defaultData }: I_BugTargetProps) => {
+  const t = useTranslations("SendReportHacker.bug_target");
   const queryClient = useQueryClient();
   const {
     setValue,
@@ -51,7 +53,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
       <Card className="rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90">
         <div className="_flexbox__col__start__start w-full gap-4">
           <Typography variant="p" affects="normal">
-            Target Assets
+            {t("target_assets")}
           </Typography>
           <div className="_flexbox__col__start__start max-h-80 w-full gap-4 overflow-y-auto">
             {defaultData &&
@@ -107,8 +109,8 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
             }}
           >
             <Input
-              label="Other"
-              placeholderText="Input url"
+              label={t("other")}
+              placeholderText={t("input_url")}
               className="w-full bg-transparent"
               transparentBg
               value={forms.custom_ta_value ?? ""}
@@ -122,7 +124,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
               }}
             />
             <AssetType
-              label="Asset type"
+              label={t("asset_type")}
               value={
                 defaultData?.assetType && forms.custom_ta_asset_type_id
                   ? (defaultData.assetType.find(
@@ -166,7 +168,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     <XCircle className="text-semantic-light-critical dark:text-semantic-dark-critical" />
                   )}
                   <Typography variant="p" affects="small">
-                    Enter target asset hostname or IP Address
+                    {t("hostname")}
                   </Typography>
                 </div>
                 <div className="grid grid-cols-[auto_1fr] items-center gap-2">
@@ -176,7 +178,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     <XCircle className="text-semantic-light-critical dark:text-semantic-dark-critical" />
                   )}
                   <Typography variant="p" affects="small">
-                    Select asset type
+                    {t("select_asset_type")}
                   </Typography>
                 </div>
               </motion.div>
@@ -191,7 +193,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
         )}
       >
         <SelectGroupDropdown
-          label="Vulnerability Type"
+          label={t("vulnerability_type")}
           withSearch
           value={
             isOtherVulnerabilityType
@@ -228,8 +230,8 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
         {isOtherVulnerabilityType && (
           <Input
             type="text"
-            label="Custom Type"
-            placeholderText="Enter your vulnerability type"
+            label={t("custom_type")}
+            placeholderText={t("custom_type_description")}
             value={forms.custom_vulnerability || ""}
             onChange={(e) =>
               setValue("custom_vulnerability", e.target.value, {

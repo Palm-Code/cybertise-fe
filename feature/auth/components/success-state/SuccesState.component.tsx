@@ -4,6 +4,7 @@ import Typography from "@/core/ui/components/typography/typography";
 import { Locker } from "@/core/ui/icons";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import useTimer from "@/utils/timer";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -17,6 +18,7 @@ const SuccessState = ({
   onClickResendVerification = () => {},
   ...props
 }: I_SuccesStateProps) => {
+  const t = useTranslations("AuthenticateEmail");
   const [count, setCount] = React.useState(5);
   const initialDuration = count * 60 * 1000;
   const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
@@ -52,8 +54,8 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker className="h-12 w-12" />
-            <Typography variant="h4" weight="semibold">
-              Authenticate Your Account
+            <Typography variant="h4" weight="semibold" align="center">
+              {t("title")}
             </Typography>
             <Typography
               variant="p"
@@ -61,8 +63,7 @@ const SuccessState = ({
               align="center"
               className="auto__phrase"
             >
-              Protecting your account is our top priority. Please confirm your
-              activity by clicking the magic sent to your email:
+              {t("description_1")}
             </Typography>
             <Typography variant="p" affects="small" weight="semibold">
               {email}
@@ -74,9 +75,7 @@ const SuccessState = ({
             align="center"
             className="auto__phrase"
           >
-            We have sent an email to the given address, in case it was not yet
-            registered. It may take a minute to receive your code. <br />{" "}
-            Haven&apos;t received it?{" "}
+            {t("description_2")}{" "}
             <button
               type="button"
               title="resend"
@@ -84,7 +83,8 @@ const SuccessState = ({
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+              {t("resend_button")}{" "}
+              {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>
           </Typography>
         </div>
@@ -101,8 +101,8 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker />
-            <Typography variant="h4" weight="bold">
-              Authenticate Your Account
+            <Typography variant="h4" weight="bold" align="center">
+              {t("title")}
             </Typography>
             <Typography
               variant="p"
@@ -110,8 +110,7 @@ const SuccessState = ({
               align="center"
               className="auto__phrase"
             >
-              Protecting your account is our top priority. Please confirm your
-              activity by clicking the magic sent to your email:
+              {t("description_1")}
             </Typography>
             <Typography variant="p" affects="normal" weight="semibold">
               {email}
@@ -123,9 +122,7 @@ const SuccessState = ({
             align="center"
             className="auto__phrase"
           >
-            We have sent an email to the given address, in case it was not yet
-            registered. It may take a minute to receive your code. <br />{" "}
-            Haven&apos;t received it?{" "}
+            {t("description_2")}{" "}
             <button
               type="button"
               title="resend"
@@ -133,7 +130,8 @@ const SuccessState = ({
               className="cursor-pointer font-bold text-brand-emerald underline disabled:cursor-not-allowed disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              Resend {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+              {t("resend_button")}{" "}
+              {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
             </button>
           </Typography>
         </div>

@@ -6,6 +6,7 @@ import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { OptionsType } from "@/types/auth/sign-up";
 import { FilePenLine } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -15,6 +16,7 @@ const CompanyDetails = ({
 }: {
   data?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const t = useTranslations("Settings.details");
   const country = useGetCountry();
   const dataCountry =
     (country &&
@@ -27,7 +29,7 @@ const CompanyDetails = ({
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Company Details
+              {t("title", { role: t("company") })}
             </Typography>
             <Button
               variant="tertiary-company"
@@ -43,7 +45,7 @@ const CompanyDetails = ({
             )}
           >
             <Typography variant="h6" weight="semibold">
-              Company Information
+              {t("company_information")}
             </Typography>
             <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
               <div className="_flexbox__col__start__start gap-2.5">
@@ -52,7 +54,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Logo
+                  {t("label_logo")}
                 </Typography>
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
@@ -70,7 +72,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Name
+                  {t("label_name", { role: t("company") })}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.name}
@@ -82,7 +84,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Country
+                  {t("country")}
                 </Typography>
                 <Country icon={dataCountry.icon} label={dataCountry.label} />
               </div>
@@ -92,7 +94,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Address
+                  {t("address")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.address}
@@ -104,7 +106,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  State
+                  {t("state")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.state}
@@ -116,7 +118,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Zip Code
+                  {t("zip")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.zip}
@@ -128,7 +130,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Address Line 2
+                  {t("address_2")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.address_2}
@@ -141,7 +143,7 @@ const CompanyDetails = ({
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About Company
+                {t("about", { role: t("company") })}
               </Typography>
               <Typography variant="p" affects="normal">
                 {data?.about}
@@ -155,7 +157,7 @@ const CompanyDetails = ({
             )}
           >
             <Typography variant="h6" weight="semibold">
-              Company Account Details
+              {t("account_details", { role: t("company") })}
             </Typography>
             <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
               <div className="_flexbox__col__start__start gap-2.5">
@@ -164,7 +166,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Registered email
+                  {t("label_email")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.email}
@@ -176,7 +178,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Website
+                  {t("company_website")}
                 </Typography>
                 <Link
                   href={
@@ -199,7 +201,7 @@ const CompanyDetails = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              Phone number
+              {t("label_phone")}
             </Typography>
             <Typography variant="p" affects="normal">
               {data?.phone}
@@ -218,7 +220,7 @@ const CompanyDetails = ({
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h5" weight="bold">
-              Company Details
+              {t("title", { role: t("company") })}
             </Typography>
             <Button
               asLink
@@ -226,7 +228,7 @@ const CompanyDetails = ({
               variant="tertiary-company"
               prefixIcon={<FilePenLine />}
             >
-              Edit Company Details
+              {t("button_edit_account", { role: t("company") })}
             </Button>
           </div>
           <Card
@@ -236,7 +238,7 @@ const CompanyDetails = ({
             )}
           >
             <Typography variant="h6" weight="bold">
-              Company Information
+              {t("company_information")}
             </Typography>
             <div className="grid w-full grid-cols-3 gap-6">
               <div className="_flexbox__col__start__start gap-2.5">
@@ -245,7 +247,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Logo
+                  {t("label_logo")}
                 </Typography>
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
                   <Image
@@ -263,7 +265,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Name
+                  {t("label_name", { role: t("company") })}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.name}
@@ -275,7 +277,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Country
+                  {t("country")}
                 </Typography>
                 <Country icon={dataCountry.icon} label={dataCountry.label} />
               </div>
@@ -285,7 +287,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Address
+                  {t("address")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.address}
@@ -297,7 +299,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  State
+                  {t("state")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.state}
@@ -309,7 +311,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Zip Code
+                  {t("zip")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.zip}
@@ -321,7 +323,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Address Line 2
+                  {t("address_2")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.address_2}
@@ -334,7 +336,7 @@ const CompanyDetails = ({
                 affects="normal"
                 className="text-neutral-light-40 dark:text-neutral-dark-40"
               >
-                About Company
+                {t("about", { role: t("company") })}
               </Typography>
               <Typography variant="p" affects="normal">
                 {data?.about}
@@ -348,7 +350,7 @@ const CompanyDetails = ({
             )}
           >
             <Typography variant="h6" weight="bold">
-              Company Account Details
+              {t("account_details", { role: t("company") })}
             </Typography>
             <div className="grid w-full grid-cols-2 gap-6">
               <div className="_flexbox__col__start__start gap-2.5">
@@ -357,7 +359,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Registered email
+                  {t("label_email")}
                 </Typography>
                 <Typography variant="p" affects="normal">
                   {data?.email}
@@ -369,7 +371,7 @@ const CompanyDetails = ({
                   affects="normal"
                   className="text-neutral-light-40 dark:text-neutral-dark-40"
                 >
-                  Company Website
+                  {t("company_website")}
                 </Typography>
                 <Link
                   href={
@@ -392,7 +394,7 @@ const CompanyDetails = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              Phone number
+              {t("label_phone")}
             </Typography>
             <Typography variant="p" affects="normal">
               {data?.phone}

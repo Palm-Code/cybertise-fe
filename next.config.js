@@ -1,26 +1,13 @@
+const createNextIntlPlugin = require("next-intl/plugin");
+
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  trailingSlash: true,
   reactStrictMode: false,
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "flagcdn.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "3f93-103-89-77-157.ngrok-free.app",
-        port: "",
-        pathname: "/**",
-      },
       {
         protocol: "https",
         hostname: "cybertise-backend-mmppce625q-de.a.run.app",
@@ -30,12 +17,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cybertise-storage.s3.us-east-005.backblazeb2.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
         port: "",
         pathname: "/**",
       },
@@ -51,4 +32,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

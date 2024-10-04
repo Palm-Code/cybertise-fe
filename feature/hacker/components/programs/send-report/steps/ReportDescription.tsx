@@ -1,8 +1,10 @@
 import { Input, TextArea, Typography } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const ReportDescription = () => {
+  const t = useTranslations("SendReportHacker.report_description");
   const {
     setValue,
     watch,
@@ -15,7 +17,7 @@ const ReportDescription = () => {
     <div className="_flexbox__col__start__start w-full gap-4">
       <Input
         type="text"
-        label="Title"
+        label={t("title")}
         value={watch("title")}
         onChange={(e) =>
           setValue("title", e.target.value, { shouldValidate: true })
@@ -24,7 +26,7 @@ const ReportDescription = () => {
         maxLength={255}
       />
       <TextArea
-        label="Short Description"
+        label={t("description")}
         value={watch("description")}
         onChange={(e) => {
           setValue("description", e.target.value, { shouldValidate: true });
@@ -38,7 +40,7 @@ const ReportDescription = () => {
         affects="tiny"
         className="-mt-3 text-neutral-light-50 dark:text-neutral-dark-50"
       >
-        Remaining Characters: {5000 - characterCount} / 5000
+        {t("remaining_characters")}: {5000 - characterCount} / 5000
       </Typography>
     </div>
   );

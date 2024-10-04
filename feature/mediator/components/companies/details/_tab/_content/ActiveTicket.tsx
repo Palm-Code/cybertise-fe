@@ -13,7 +13,7 @@ import {
   DashboardGridView,
   DashboardTableView,
 } from "@/feature/mediator/containers";
-import { tableColumns } from "@/feature/mediator/constants/dashboard";
+import { useGetTableColumns } from "@/feature/mediator/constants/dashboard";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { useGetChatList } from "@/feature/mediator/query/client";
 import { useChatListParamStore } from "@/feature/mediator/zustand/store/dashboard";
@@ -24,6 +24,7 @@ import { useEffect } from "react";
 
 const ActiveTicket = ({ id }: { id: string }) => {
   const store = useChatListParamStore();
+  const tableColumns = useGetTableColumns();
   const { payload, setPayload } = store;
   const {
     queryDesktop: { data: ticketData, isLoading, isFetching },

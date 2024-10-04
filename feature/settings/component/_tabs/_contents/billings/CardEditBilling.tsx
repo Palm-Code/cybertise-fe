@@ -6,6 +6,7 @@ import { ModalForbidden } from "@/core/ui/container";
 import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
 import { Role } from "@/types/admin/sidebar";
 import { Banknote } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 interface I_CardEditBillingProps {
@@ -14,6 +15,7 @@ interface I_CardEditBillingProps {
 }
 
 const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
+  const t = useTranslations("Settings.billings");
   const { watch, setValue } = useFormContext<I_UpdateProfile>();
   const forms = watch();
   return (
@@ -30,12 +32,12 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
         >
           <Typography variant="h6" weight="bold" className="inline-flex">
             <Banknote className="mr-4 h-8 w-8" />
-            Payment Information
+            {t("payment_information")}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
             <Input
               type="text"
-              label="Bank name"
+              label={t("bank_name")}
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               value={forms.bank_name}
               onChange={(e) =>
@@ -47,7 +49,7 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
               inputMode="numeric"
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               pattern="[0-9]*"
-              label="Account Number"
+              label={t("account_number")}
               value={forms.account_number}
               onChange={(e) => {
                 setValue("account_number", e.target.value, {
@@ -57,7 +59,7 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
             />
             <Input
               type="text"
-              label="Holder Name"
+              label={t("holder_name")}
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               value={forms.holder_name}
               onChange={(e) =>
@@ -69,7 +71,7 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
             <div className="grid w-full grid-cols-3 gap-x-6">
               <Input
                 type="text"
-                label="VAT"
+                label={t("vat")}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.vat}
                 onChange={(e) =>
@@ -78,7 +80,7 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
               />
               <Input
                 type="text"
-                label="IBAN"
+                label={t("iban")}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.iban}
                 onChange={(e) =>
@@ -87,7 +89,7 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
               />
               <Input
                 type="text"
-                label="BIC"
+                label={t("bic")}
                 wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                 value={forms.bic}
                 onChange={(e) =>

@@ -1,6 +1,7 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Tiptap, Typography } from "@/core/ui/components";
 import { sanitize } from "@/utils/sanitize-input";
+import { useTranslations } from "next-intl";
 
 interface I_ProblemCausesProps {
   summary: string;
@@ -11,10 +12,11 @@ const ProblemCausesCard = ({
   summary,
   proof_of_concept,
 }: I_ProblemCausesProps) => {
+  const t = useTranslations("SendReportHacker.reviews");
   return (
     <>
       <Typography variant="h6" weight="bold">
-        Problem and Causes
+        {t("problem_causes.header_title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography
@@ -22,7 +24,7 @@ const ProblemCausesCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Summary
+          {t("problem_causes.impact")}
         </Typography>
         <article>
           <Tiptap description={sanitize(summary)} showing />
@@ -34,7 +36,7 @@ const ProblemCausesCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Proof of Concept
+          {t("problem_causes.proof_of_concept")}
         </Typography>
         <article>
           <Tiptap description={sanitize(proof_of_concept)} showing />

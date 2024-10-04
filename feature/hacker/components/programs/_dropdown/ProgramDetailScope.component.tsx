@@ -8,18 +8,20 @@ interface IProgramDetailScopeDropdownProps {
   options?: SortFilterType[];
   payload?: I_GetParamsPayload;
   onValueChange?: (value: string) => void;
+  label?: string;
 }
 
 const ProgramDetailScopeDropdown = ({
   variant = "hacker",
   payload = {},
   options = [],
+  label,
   onValueChange = () => {},
 }: IProgramDetailScopeDropdownProps) => {
   return (
     <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
       <BaseDropdown
-        label="Asset type"
+        label={label}
         value={
           payload?.params?.filter?.asset_type_id
             ? (options.find(

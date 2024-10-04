@@ -31,8 +31,10 @@ import { useGetAssetType } from "@/core/react-query/client";
 import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const VRPLaunchpad = () => {
+  const t = useTranslations("ProgramsMediator");
   const store = useProgramListParamStore();
   const { data: assetType } = useGetAssetType();
   const { payload, setPayload } = store;
@@ -108,14 +110,14 @@ const VRPLaunchpad = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 px-6 py-12">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              VRP Launchpad
+              {t("title")}
             </Typography>
             <SearchInput
               isMobile
               id="search-vrp-launchpad-mediator-mobile"
               value={payload?.params?.search}
               variant="mediator"
-              placeholder="Try “#21231” or “Company name”"
+              placeholder={t("placeholder_search")}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, mobileRefetch)
               }
@@ -137,7 +139,7 @@ const VRPLaunchpad = () => {
                 submitChange("status", "all");
               }}
             >
-              All
+              {t("button_all")}
             </Button>
             <Button
               variant={
@@ -147,7 +149,7 @@ const VRPLaunchpad = () => {
               }
               onClick={() => submitChange("status", "Phase2")}
             >
-              Phase 2
+              {t("button_phase_2")}
             </Button>
             <Button
               variant={
@@ -157,7 +159,7 @@ const VRPLaunchpad = () => {
               }
               onClick={() => submitChange("status", "Phase4")}
             >
-              Phase 4
+              {t("button_phase_4")}
             </Button>
           </div>
           <div className="_flexbox__row__center__between w-full">
@@ -193,7 +195,7 @@ const VRPLaunchpad = () => {
             <EmptyState
               variant="mediator"
               type="ticket"
-              buttonText="See VRP Launchpad"
+              buttonText={t("see_programs")}
             />
           )}
         </div>
@@ -202,7 +204,7 @@ const VRPLaunchpad = () => {
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="_flexbox__row__center__between w-full">
             <Typography variant="h4" weight="bold" className="mr-auto">
-              VRP Launchpad
+              {t("title")}
             </Typography>
             <div className="grid w-fit grid-cols-3 gap-4">
               <Button
@@ -216,7 +218,7 @@ const VRPLaunchpad = () => {
                 }}
                 fullWidth
               >
-                All
+                {t("button_all")}
               </Button>
               <Button
                 variant={
@@ -226,7 +228,7 @@ const VRPLaunchpad = () => {
                 }
                 onClick={() => submitChange("status", "Phase2")}
               >
-                Phase 2
+                {t("button_phase_2")}
               </Button>
               <Button
                 variant={
@@ -238,18 +240,18 @@ const VRPLaunchpad = () => {
                   submitChange("status", "Phase4");
                 }}
               >
-                Phase 4
+                {t("button_phase_4")}
               </Button>
             </div>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
             <Typography variant="h6" weight="bold">
-              Search VRP Launchpad
+              {t("search_title")}
             </Typography>
             <SearchInput
               id="search-vrp-launchpad-mediator"
               variant="mediator"
-              placeholder="Try “#21231” or “Company name”"
+              placeholder={t("placeholder_search")}
               value={payload?.params?.search}
               onChange={(e) =>
                 useOnchangeSearch(e.target.value, store, refetchProgramData)
@@ -305,7 +307,11 @@ const VRPLaunchpad = () => {
               />
             </>
           ) : (
-            <EmptyState variant="mediator" type="ticket" buttonText="" />
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+              buttonText={t("see_programs")}
+            />
           )}
         </div>
       </Desktop>

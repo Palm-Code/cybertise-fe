@@ -11,6 +11,7 @@ import {
 } from "@/core/models/auth/forgot-password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostResetPassword } from "@/feature/auth/query/password";
+import { useTranslations } from "next-intl";
 
 interface I_CardLoginInfoProps extends I_SecurityProps {}
 
@@ -19,6 +20,7 @@ const CardLoginInfo = ({
   isEditing,
   handleClickEdit = () => {},
 }: I_CardLoginInfoProps) => {
+  const t = useTranslations("Settings.security.login_info");
   const methods = useForm<I_GetResetPasswordRequest>({
     resolver: zodResolver(formResetPasswordShcema),
     defaultValues: {
@@ -49,7 +51,7 @@ const CardLoginInfo = ({
                   onClick={() => handleClickEdit(false)}
                 />
                 <Typography variant="h5" weight="bold" className="capitalize">
-                  Change Login Password
+                  {t("change_login_password")}
                 </Typography>
               </div>
             </Card>
@@ -60,7 +62,7 @@ const CardLoginInfo = ({
                   variant={`secondary-${variant}`}
                   onClick={() => handleClickEdit(false)}
                 >
-                  Discard
+                  {t("button_discard")}
                 </Button>
                 <Button
                   disabled={
@@ -81,7 +83,7 @@ const CardLoginInfo = ({
                       })
                   }
                 >
-                  Save Changes
+                  {t("button_save")}
                 </Button>
               </div>
             </Card>
@@ -100,16 +102,15 @@ const CardLoginInfo = ({
       <div className="_flexbox__row__start__between w-full">
         <Typography variant="h6" weight="bold" className="xl:inline-flex">
           <RectangleEllipsis className="mb-4 h-8 w-8 xl:mr-4" />
-          Login password
+          {t("login_password")}
         </Typography>
-        {/* <Badge variant="default">Verified</Badge> */}
       </div>
       <Typography
         variant="p"
         affects="normal"
         className="text-neutral-light-40 dark:text-neutral-dark-40"
       >
-        The login password helps guarantee account and communication security.
+        {t("login_password_description")}
       </Typography>
       <Button
         size="ghost"
@@ -117,7 +118,7 @@ const CardLoginInfo = ({
         className="mt-3"
         onClick={() => handleClickEdit(true)}
       >
-        Change Password
+        {t("button_edit_password")}
       </Button>
     </Card>
   );

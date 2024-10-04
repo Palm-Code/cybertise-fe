@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, Checkbox, Input, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { passwordValidation } from "@/core/constants/common";
 import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
@@ -16,12 +15,16 @@ import { validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import useTimer from "@/utils/timer";
 import { usePostResendVerification } from "../../query/resend-verification";
+import { useTranslations } from "next-intl";
+import { usePasswordValidation } from "@/core/constants/common";
 
 interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
 }
 
 const ForgotPassword = (props: I_ForgotPassword) => {
+  const t = useTranslations("ForgotPassword");
+  const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [count, setCount] = React.useState(5);
@@ -36,6 +39,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
       content: "",
+      type: null,
       checked: false,
     });
   const { mutate, isPending, isSuccess, error, isError } =
@@ -110,12 +114,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           <div className="_flexbox__col__center w-full gap-6">
             <RectangleEllipsis width={72} height={72} />
             <Typography variant="h4" weight="bold">
-              Forgot Password
+              {t("title")}
             </Typography>
             {!isSuccess && (
               <Typography variant="p" affects="normal" className="text-center">
-                Please enter your email address to request a password reset
-                verification link.
+                {t("description")}
               </Typography>
             )}
             <div className="flex w-full flex-col items-center justify-center gap-7">
@@ -125,12 +128,14 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
-                    label="New password"
+                    label={t("label_new_password")}
+                    placeholderText={t("placeholder_new_password")}
                     options={passwordValidationItems}
                   />
                   <PasswordInput
                     value={confirmPassworText.content}
-                    label="Confirm new password"
+                    label={t("label_confirm_password")}
+                    placeholderText={t("placeholder_confirm_password")}
                     onChange={passwordConfirmationCheck}
                     isConfirmation={!!confirmPassworText.content}
                     check={confirmPassworText.checked}
@@ -144,7 +149,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                       }
                     />
                     <Typography variant="p" affects="normal" weight="bold">
-                      Logout from all devices?
+                      {t("footer_2")}
                     </Typography>
                   </div>
                 </>
@@ -154,14 +159,15 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   affects="normal"
                   className="text-center"
                 >
-                  We have just sent you a verification link to reset the
-                  password to <strong>{email}</strong> and continue to reset the
-                  password.
+                  {t.rich("verification_text", {
+                    strong: () => <strong>{email}</strong>,
+                  })}
                 </Typography>
               ) : (
                 <Input
                   type="email"
-                  label="Email"
+                  label={t("label")}
+                  placeholderText={t("placeholder")}
                   value={email}
                   isError={isError}
                   errorMsg={error?.message}
@@ -193,13 +199,13 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               }
             >
               {isSuccess
-                ? `Resend Verification ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
-                : "Reset Password"}
+                ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
+                : t("submit_button")}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Already remember your password?
+              {t("footer")}
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+                {t("link")}
               </Link>
             </Typography>
           </div>
@@ -218,12 +224,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           <div className="_flexbox__col__center w-full gap-6">
             <RectangleEllipsis width={72} height={72} />
             <Typography variant="h4" weight="bold">
-              Forgot Password
+              {t("title")}
             </Typography>
             {!isSuccess && (
               <Typography variant="p" affects="normal" className="text-center">
-                Please enter your email address to request a password reset
-                verification link.
+                {t("description")}
               </Typography>
             )}
             <div className="flex w-full flex-col items-center justify-center gap-7">
@@ -233,13 +238,24 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
-                    label="New password"
+                    label={t("label_new_password")}
+                    placeholderText={t("placeholder_new_password")}
                     options={passwordValidationItems}
                   />
                   <PasswordInput
                     value={confirmPassworText.content}
-                    label="Confirm new password"
+                    label={t("label_confirm_password")}
+                    placeholderText={t("placeholder_confirm_password")}
                     onChange={passwordConfirmationCheck}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" &&
+                      token &&
+                      mutateForgotPassword({
+                        code: token,
+                        new_password: newPassword,
+                        logout_all: logoutAll,
+                      })
+                    }
                     isConfirmation={!!confirmPassworText.content}
                     check={confirmPassworText.checked}
                   />
@@ -252,7 +268,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                       }
                     />
                     <Typography variant="p" affects="normal" weight="bold">
-                      Logout from all devices?
+                      {t("footer_2")}
                     </Typography>
                   </div>
                 </>
@@ -262,18 +278,25 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   affects="normal"
                   className="text-center"
                 >
-                  We have just sent you a verification link to reset the
-                  password to <strong>{email}</strong> and continue to reset the
-                  password.
+                  {t.rich("verification_text", {
+                    strong: () => <strong>{email}</strong>,
+                  })}
                 </Typography>
               ) : (
                 <Input
                   type="email"
-                  label="Email"
+                  label={t("label")}
+                  placeholderText={t("placeholder")}
                   value={email}
                   isError={isError}
                   errorMsg={error?.message}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      mutate(email);
+                    }
+                  }}
                 />
               )}
             </div>
@@ -303,13 +326,13 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               }}
             >
               {isSuccess
-                ? `Resend Verification ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
-                : "Reset Password"}
+                ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
+                : t("submit_button")}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Already remember your password?
+              {t("footer")}
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+                {t("link")}
               </Link>
             </Typography>
           </div>

@@ -13,6 +13,7 @@ import {
   PaginationPrevious,
 } from "./base-pagination";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 type PaginationProps = I_PaginationProps & {
   active?: number;
@@ -34,6 +35,7 @@ const Pagination = ({
   onClickPrevious = () => {},
   setActivePage = () => {},
 }: PaginationProps) => {
+  const t = useTranslations("Pagination");
   const [slicePage, setSlicePage] = useState(3);
   //split meta.last_page into array of number
   const pageNumbers = meta
@@ -44,7 +46,7 @@ const Pagination = ({
       <Showing active={active} variant={variant} onClickShow={onClickShow} />
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography variant="p" affects="small">
-          Page
+          {t("page")}
         </Typography>
         <PaginationContent>
           {meta && meta?.last_page > 1 && (

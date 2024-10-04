@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { CVSS30 } from "@pandatix/js-cvss";
 import { riskLevelCalculator } from "@/utils/risk-level-calculator";
+import { useTranslations } from "next-intl";
 
 export interface I_CsvssCalculatorProps {
   isManualRisk: boolean;
@@ -37,6 +38,7 @@ const CsvssCalculator = ({
   isManualRisk,
   onChangeManualRisk,
 }: I_CsvssCalculatorProps) => {
+  const t = useTranslations("SendReportHacker.bug_target");
   const { setValue, getValues } = useFormContext<SendReportRequestType>();
   const forms = getValues();
   const [metricsValue, setMetricsValue] = useState<{ [key: string]: string }>(
@@ -80,7 +82,7 @@ const CsvssCalculator = ({
               affects="normal"
               className="text-neutral-light-40 dark:text-neutral-dark-40"
             >
-              CVSS Calculator
+              {t("label_cvss_calculator")}
             </Typography>
           </div>
           {!isManualRisk && (

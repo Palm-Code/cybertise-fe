@@ -12,6 +12,7 @@ import { useFormContext } from "react-hook-form";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 export type MonetaryAwardsCardProps = MonetaryAwardType & {
   activeCard?: boolean;
@@ -103,6 +104,7 @@ const MonetaryAwardCardList = ({
   onClickPrev,
   variant = "company",
 }: PricingCardListProps) => {
+  const t = useTranslations("VRPLaunchpad.phase.vrp_details");
   const { watch, setValue } = useFormContext<CreateVrpType>();
   const forms = watch();
   const [activeCard, setActiveCard] = useState<string | null>(
@@ -151,7 +153,7 @@ const MonetaryAwardCardList = ({
         )}
       >
         <Typography variant="h6" weight="bold">
-          Monetary Awards
+          {t("monetary_awards.header_title")}
         </Typography>
         <div className="_flexbox__col__start w-full gap-6">
           {data.map((item, idx) => (
@@ -181,14 +183,14 @@ const MonetaryAwardCardList = ({
       {isCompany && (
         <div className="_flexbox__row__center gap-8">
           <Button variant="secondary-company" onClick={onClickPrev}>
-            Previous
+            {t("button_previous")}
           </Button>
           <Button
             variant="primary-company"
             disabled={disabledButton}
             onClick={onClickNext}
           >
-            Next
+            {t("button_next")}
           </Button>
         </div>
       )}

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ModalForbidden } from "@/core/ui/container";
 import { toast } from "sonner";
 import { usePostUpdateProfile } from "@/core/react-query/client";
+import { useTranslations } from "next-intl";
 
 interface I_BillingProps {
   variant: keyof typeof Role;
@@ -27,7 +28,8 @@ const Billing = ({
   data,
   handleClickEdit = () => {},
 }: I_BillingProps) => {
-  const { mutateAsync, isPending, isSuccess } = usePostUpdateProfile(true);
+  const t = useTranslations("Settings.billings");
+  const { mutateAsync, isPending } = usePostUpdateProfile(true);
   const [openModalForbidden, setOpenModalForbidden] = useState<boolean>(false);
   const {
     getValues,
@@ -63,7 +65,7 @@ const Billing = ({
                   onClick={() => handleClickEdit(false)}
                 />
                 <Typography variant="h5" weight="bold" className="capitalize">
-                  Edit Billing Informations
+                  {t("edit_billing_information")}
                 </Typography>
               </div>
             </Card>
@@ -74,7 +76,7 @@ const Billing = ({
                   variant={`secondary-${variant}`}
                   onClick={() => handleClickEdit(false)}
                 >
-                  Discard
+                  {t("button_discard")}
                 </Button>
                 <Button
                   isLoading={isPending}
@@ -82,7 +84,7 @@ const Billing = ({
                   variant={`primary-${variant}`}
                   onClick={() => handleSubmitForm()}
                 >
-                  Save Changes
+                  {t("button_save")}
                 </Button>
               </div>
             </Card>
@@ -96,7 +98,7 @@ const Billing = ({
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
           <Typography variant="h5" weight="bold">
-            Billings
+            {t("title")}
           </Typography>
           {!isEditing && (
             <Button
@@ -118,7 +120,7 @@ const Billing = ({
       <Desktop className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
           <Typography variant="h5" weight="bold">
-            Billings
+            {t("title")}
           </Typography>
           {!isEditing && (
             <Button
@@ -126,7 +128,7 @@ const Billing = ({
               prefixIcon={<FilePenLine />}
               onClick={() => handleClickEdit(true)}
             >
-              Edit billings setting
+              {t("button_edit_billing")}
             </Button>
           )}
         </div>

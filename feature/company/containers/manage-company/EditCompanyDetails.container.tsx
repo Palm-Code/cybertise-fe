@@ -27,12 +27,14 @@ import {
 } from "@/core/react-query/client";
 import { toast } from "sonner";
 import { ChangeEvent } from "react";
+import { useTranslations } from "next-intl";
 
 const EditCompnayDetails = ({
   data,
 }: {
   data?: I_GetUserProfileSuccessResponse["data"];
 }) => {
+  const t = useTranslations("Settings.details");
   const countryOptions = useGetCountry();
   const {
     watch,
@@ -104,7 +106,7 @@ const EditCompnayDetails = ({
             >
               <div className="_flexbox__col__start__start w-full gap-6">
                 <Typography variant="h6" weight="bold">
-                  Company Information
+                  {t("company_information")}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-2.5">
                   <div className="_flexbox__row__center__between w-full">
@@ -114,7 +116,7 @@ const EditCompnayDetails = ({
                         affects="normal"
                         className="text-neutral-light-40 dark:text-neutral-dark-40"
                       >
-                        Company logo
+                        {t("label_logo")}
                       </Typography>
                       <div className="relative h-12 w-12 overflow-hidden rounded-full">
                         {isPendingUpload ? (
@@ -137,13 +139,14 @@ const EditCompnayDetails = ({
                       </div>
                     </div>
                     <AvatarInput
+                      title={t("label_change_image", { role: t("logo") })}
                       variant="company"
                       onChange={(e) => handleChangeAvatar(e)}
                     />
                   </div>
                   <Input
                     type="text"
-                    label="Company Name"
+                    label={t("label_name", { role: t("company") })}
                     value={forms.name}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -160,12 +163,12 @@ const EditCompnayDetails = ({
               </div>
               <div className="_flexbox__col__start__start w-full gap-6">
                 <Typography variant="h6" weight="bold">
-                  Company Address
+                  {t("company")} {t("address")}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-6">
                   <Input
                     type="text"
-                    label="Address"
+                    label={t("address")}
                     value={forms.address}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -180,7 +183,7 @@ const EditCompnayDetails = ({
                   />
                   <Input
                     type="text"
-                    label="Address 2"
+                    label={t("address_2")}
                     value={forms.address_2}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -195,7 +198,7 @@ const EditCompnayDetails = ({
                   />
                   <div className="grid w-full grid-cols-3 gap-6">
                     <SelectDropdown
-                      label="Country"
+                      label={t("country")}
                       value={forms.country_code as string}
                       wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                       options={countryOptions?.data || []}
@@ -207,7 +210,7 @@ const EditCompnayDetails = ({
                     />
                     <Input
                       type="text"
-                      label="State"
+                      label={t("state")}
                       value={forms.state}
                       wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                       onChange={(e) =>
@@ -222,7 +225,7 @@ const EditCompnayDetails = ({
                     />
                     <Input
                       type="text"
-                      label="Zip Code"
+                      label={t("zip")}
                       value={forms.zip}
                       wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                       onChange={(e) =>
@@ -240,12 +243,12 @@ const EditCompnayDetails = ({
               </div>
               <div className="_flexbox__col__start__start w-full gap-6">
                 <Typography variant="h6" weight="bold">
-                  About Company
+                  {t("about", { role: t("company") })}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-6">
                   <TextArea
                     type="text"
-                    label="About Company"
+                    label={t("about", { role: t("company") })}
                     value={forms.about}
                     wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                     onChange={(e) =>
@@ -270,11 +273,11 @@ const EditCompnayDetails = ({
             >
               <div className="_flexbox__col__start__start w-full gap-6">
                 <Typography variant="h6" weight="bold">
-                  Company Account Details
+                  {t("account_details", { role: t("company") })}
                 </Typography>
                 <Input
                   type="email"
-                  label="Registered Email"
+                  label={t("label_email")}
                   value={forms.email}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
@@ -290,7 +293,7 @@ const EditCompnayDetails = ({
                 />
                 <Input
                   type="text"
-                  label="Company Website"
+                  label={t("company_website")}
                   value={forms.website}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
                   onChange={(e) =>
@@ -307,7 +310,7 @@ const EditCompnayDetails = ({
                   type="tel"
                   pattern="[0-9]*"
                   inputMode="numeric"
-                  label="Phone Number"
+                  label={t("label_phone")}
                   maxLength={25}
                   value={forms.phone}
                   wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
@@ -325,7 +328,7 @@ const EditCompnayDetails = ({
             </Card>
             <div className="_flexbox__row__center gap-6">
               <Button asLink href="/manage-company" variant="secondary-company">
-                Discard
+                {t("button_discard")}
               </Button>
               <Button
                 variant="primary-company"
@@ -333,7 +336,7 @@ const EditCompnayDetails = ({
                 isLoading={isPending}
                 onClick={handleSubmitForm}
               >
-                Save Changes
+                {t("button_save")}
               </Button>
             </div>
           </Card>

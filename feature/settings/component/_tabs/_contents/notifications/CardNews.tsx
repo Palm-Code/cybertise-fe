@@ -4,6 +4,7 @@ import { usePostUpdateProfile } from "@/core/react-query/client";
 import { Card, Switch, Typography } from "@/core/ui/components";
 import { Role } from "@/types/admin/sidebar";
 import { Megaphone } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 interface I_CardNewsProps {
@@ -11,6 +12,7 @@ interface I_CardNewsProps {
 }
 
 const CardNews = ({ variant }: I_CardNewsProps) => {
+  const t = useTranslations("Settings.notifications");
   const { setValue, watch } = useFormContext<I_UpdateProfile>();
   const { mutateAsync } = usePostUpdateProfile(true);
   return (
@@ -27,7 +29,7 @@ const CardNews = ({ variant }: I_CardNewsProps) => {
           className="block space-y-4 xl:inline-flex"
         >
           <Megaphone className="mr-4 h-8 w-8" />
-          News
+          {t("news")}
         </Typography>
         <Switch
           value={watch("want_news")}
@@ -46,7 +48,7 @@ const CardNews = ({ variant }: I_CardNewsProps) => {
         affects="normal"
         className="text-neutral-light-40 dark:text-neutral-dark-40"
       >
-        News notifications will send you updates from others
+        {t("news_description")}
       </Typography>
     </Card>
   );

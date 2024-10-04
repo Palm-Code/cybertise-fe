@@ -15,6 +15,7 @@ import { cn } from "@/core/lib/utils";
 import Input, { InputProps } from "../input/input";
 import { OptionsType } from "@/types/auth/sign-up";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface I_SelectDropdownProps extends InputProps {
   onValueChange: (value: string) => void;
@@ -33,6 +34,7 @@ export default function SelectDropdown({
   withSearch = false,
   ...props
 }: I_SelectDropdownProps) {
+  const t = useTranslations("Common");
   const [isOpen, setIsOpen] = React.useState(false);
   const inputValueLabel = options.find(
     (option) => option.value === value
@@ -64,9 +66,9 @@ export default function SelectDropdown({
         align="start"
       >
         <Command className="flex flex-col gap-2 !bg-transparent">
-          {withSearch && <CommandInput placeholder="Search..." />}
+          {withSearch && <CommandInput placeholder={t("search")} />}
           <CommandList>
-            <CommandEmpty>No data found</CommandEmpty>
+            <CommandEmpty>{t("search_not_found")}</CommandEmpty>
             <CommandGroup>
               {options.map((v) => (
                 <CommandItem

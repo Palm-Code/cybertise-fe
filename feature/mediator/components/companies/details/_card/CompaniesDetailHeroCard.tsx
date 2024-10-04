@@ -11,6 +11,7 @@ import {
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { Desktop, Mobile } from "@/core/ui/layout";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
@@ -20,6 +21,7 @@ interface I_CompaniesDetailHeroCard {
 }
 
 const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
+  const t = useTranslations("CompanyDetailsMediator");
   const { ref, inView } = useInView({ threshold: 0.1 });
   if (data)
     return (
@@ -64,7 +66,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Reports resolved
+                    {t("reports_resolved")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {data.report_resolved}
@@ -76,7 +78,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Bounty Program
+                    {t("bounty_program")}
                   </Typography>
                   <Typography variant="p" affects="small" weight="semibold">
                     {data.program_count}
@@ -88,7 +90,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     affects="small"
                     className="!text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Company Website
+                    {t("company_website")}
                   </Typography>
                   <Link
                     href={
@@ -173,7 +175,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Reports resolved
+                      {t("reports_resolved")}
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
                       {data.report_resolved}
@@ -186,7 +188,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Bounty Program
+                      {t("bounty_program")}
                     </Typography>
                     <Typography variant="p" affects="small" weight="semibold">
                       {data.program_count}
@@ -199,7 +201,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                       affects="small"
                       className="!text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Company Website
+                      {t("company_website")}
                     </Typography>
                     <Link
                       href={

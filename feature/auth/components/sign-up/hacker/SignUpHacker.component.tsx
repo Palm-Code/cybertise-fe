@@ -16,8 +16,10 @@ import {
   SignupHackerFormType,
 } from "@/core/models/auth/register";
 import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
+import { useTranslations } from "next-intl";
 
 const SignUpHacker = () => {
+  const t = useTranslations("SignUp.hacker");
   const method = useForm<SignupHackerFormType>({
     resolver: zodResolver(signupHackerFormSchema),
     defaultValues: {
@@ -76,7 +78,7 @@ const SignUpHacker = () => {
                 )}
               >
                 <X width={24} height={24} />
-                Cancel Sign Up
+                {t("cancel_button")}
               </Link>
             ) : isLastStep ? null : (
               <button
@@ -87,7 +89,7 @@ const SignUpHacker = () => {
                 onClick={() => back()}
               >
                 <MoveLeft width={24} height={24} />
-                Back
+                {t("back_button")}
               </button>
             )}
             {step}

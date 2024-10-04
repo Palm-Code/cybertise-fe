@@ -1,28 +1,139 @@
 import { MenuItemType, Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
+import { useTranslations } from "next-intl";
 
-export const passwordValidation: PasswordValidationItemsType[] = [
-  {
-    content: "Atleast 8 characters",
-    checked: false,
-  },
-  {
-    content: "At least 1 numerical",
-    checked: false,
-  },
-  {
-    content: "At least 1 lowercase",
-    checked: false,
-  },
-  {
-    content: "At least 1 uppercase",
-    checked: false,
-  },
-  {
-    content: "At least 1 special character",
-    checked: false,
-  },
-];
+export const usePasswordValidation = () => {
+  const t = useTranslations("PasswordInput.reqex");
+
+  const passwordValidation: PasswordValidationItemsType[] = [
+    {
+      type: "characters",
+      content: t("characters"),
+      checked: false,
+    },
+    {
+      type: "numerical",
+      content: t("numerical"),
+      checked: false,
+    },
+    {
+      type: "lowercase",
+      content: t("lowercase"),
+      checked: false,
+    },
+    {
+      type: "uppercase",
+      content: t("uppercase"),
+      checked: false,
+    },
+    {
+      type: "special_character",
+      content: t("special_character"),
+      checked: false,
+    },
+  ];
+
+  return passwordValidation;
+};
+
+export const useMenuItems = () => {
+  const t = useTranslations("Sidebar");
+
+  return {
+    hacker: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "programs",
+        title: t("programs"),
+        path: "/programs",
+        key: "getProgramList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+    ],
+    company: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_management",
+        title: t("vrp_management"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+      {
+        id: "manage_company",
+        title: t("manage_company"),
+        path: "/manage-company",
+        key: "getUserProfile",
+      },
+    ],
+    "company staff": [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_management",
+        title: t("vrp_management"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+    ],
+    mediator: [
+      {
+        id: "dashboard",
+        title: t("dashboard"),
+        path: "/dashboard",
+        key: "getChatList",
+      },
+      {
+        id: "vrp_launchpad",
+        title: t("vrp_launchpad"),
+        path: "/vrp-launchpad",
+        key: "getProgramList",
+      },
+      {
+        id: "companies",
+        title: t("companies"),
+        path: "/companies",
+        key: "getCompanyList",
+      },
+      {
+        id: "reports",
+        title: t("reports"),
+        path: "/reports",
+        key: "getChatList",
+      },
+    ],
+  };
+};
 
 export const menuItems: MenuItemType = {
   hacker: [
@@ -135,6 +246,20 @@ export const fillColor: { [key in Role]: string } = {
   company: "fill-sky-normal",
   "company staff": "fill-sky-normal",
   hacker: "fill-lime-normal",
+};
+
+export const useCurrentPhase = () => {
+  const t = useTranslations("VRPLaunchpad.steps");
+
+  const currentPhase: { [key: string]: string } = {
+    phase1: t("vrp_details"),
+    phase2: t("setup"),
+    phase3: t("company_revision"),
+    phase4: t("mediator_revision"),
+    phase5: t("publish"),
+  };
+
+  return currentPhase;
 };
 
 export const currentPhase: { [key: string]: string } = {

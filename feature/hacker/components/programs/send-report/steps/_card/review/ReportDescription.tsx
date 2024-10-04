@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
+import { useTranslations } from "next-intl";
 
 interface I_ReportDescriptionProps {
   title: string;
@@ -10,6 +11,7 @@ const ReportDescriptionCard = ({
   title,
   description,
 }: I_ReportDescriptionProps) => {
+  const t = useTranslations("SendReportHacker.reviews");
   return (
     <Card
       className={cn(
@@ -18,7 +20,7 @@ const ReportDescriptionCard = ({
       )}
     >
       <Typography variant="h6" weight="bold">
-        Report Description
+        {t("report_description.header_title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-2.5">
         <Typography
@@ -26,7 +28,7 @@ const ReportDescriptionCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Title
+          {t("report_description.title")}
         </Typography>
         <Typography variant="p" affects="normal">
           {title}
@@ -38,7 +40,7 @@ const ReportDescriptionCard = ({
           affects="normal"
           className="text-neutral-light-40 dark:text-neutral-dark-40"
         >
-          Description
+          {t("report_description.description")}
         </Typography>
         <Typography variant="p" affects="normal">
           {description}

@@ -15,8 +15,9 @@ import {
 } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import ScopeCardList from "../../_card/ScopeCardList";
-import { scopeTableColumns } from "@/feature/company/constants/vrp-management";
+import { useScopeTableColumns } from "@/feature/company/constants/vrp-management";
 import ScopeCardLoadingList from "@/core/ui/container/loading-state/ScopeCardLoadingList";
+import { useTranslations } from "next-intl";
 
 const Scope = ({
   id,
@@ -25,6 +26,8 @@ const Scope = ({
   id: string;
   assetTypes?: I_GetAssetTypeSuccessResponse["data"];
 }) => {
+  const t = useTranslations("VRPManagement.overview.scope");
+  const scopeTableColumns = useScopeTableColumns();
   const [payload, setPayload] = useState<I_GetParamsPayload>({
     params: {
       page: {
@@ -58,7 +61,7 @@ const Scope = ({
             <SearchInput
               id="scope-search"
               variant="company"
-              placeholder="Search for assets"
+              placeholder={t("placeholder_search")}
               value={payload.params?.search}
               onChange={(e) =>
                 useOnchangeSearch(

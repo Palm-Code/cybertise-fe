@@ -1,4 +1,37 @@
 import { I_TableColumns, I_TableReportTicketData } from "@/interfaces";
+import { useTranslations } from "next-intl";
+
+export const useGetTableColumns = () => {
+  const t = useTranslations("Ticket");
+  const tableColumns: I_TableColumns[] = [
+    {
+      title: t("ticket"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("risk_level"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("last_message"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("status"),
+      align: "left",
+      width: "w-2/12",
+    },
+    {
+      title: t("last_update"),
+      align: "center",
+      width: "w-1/12",
+    },
+  ];
+  return tableColumns;
+};
 
 export const tableColumns: I_TableColumns[] = [
   {

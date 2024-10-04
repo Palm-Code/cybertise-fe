@@ -11,8 +11,10 @@ import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 import { useGetRole } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useTranslations } from "next-intl";
 
 const VrpManagement = () => {
+  const t = useTranslations("VRPManagement");
   const role = useGetRole();
   const store = useProgramListParamStore();
   const {
@@ -27,7 +29,7 @@ const VrpManagement = () => {
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-10">
           <Typography variant="h4" weight="bold">
-            VRP Management
+            {t("title")}
           </Typography>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
@@ -37,8 +39,8 @@ const VrpManagement = () => {
             <EmptyState
               variant="company"
               type="program"
-              titleText="You have no any program yet"
-              buttonText="Add new VRP"
+              titleText={t("not_found")}
+              buttonText={t("button_add_new")}
               href={"/vrp-launchpad/create-vrp"}
             />
           )}
@@ -48,7 +50,7 @@ const VrpManagement = () => {
               fullWidth
               onClick={() => setShowModalForbidden(true)}
             >
-              + Add New VRP
+              {"+ " + t("button_add_new")}
             </Button>
           )}
         </div>
@@ -57,7 +59,7 @@ const VrpManagement = () => {
         <div className="_flexbox__col__start__start w-full gap-10">
           <Card className={cn("rounded-b-none rounded-t-2xl xl:px-9 xl:py-6")}>
             <Typography variant="h4" weight="bold">
-              VRP Management
+              {t("title")}
             </Typography>
           </Card>
           {isLoading || isFetching ? (
@@ -68,8 +70,8 @@ const VrpManagement = () => {
             <EmptyState
               variant="company"
               type="program"
-              titleText="You have no any program yet"
-              buttonText="Add new VRP"
+              titleText={t("not_found")}
+              buttonText={t("button_add_new")}
               href={"/vrp-launchpad/create-vrp"}
             />
           )}
@@ -80,7 +82,7 @@ const VrpManagement = () => {
                 href={"/vrp-launchpad/create-vrp"}
                 className="w-full rounded-md border border-brand-neutral px-4 py-6 text-center dark:border-white"
               >
-                + Add New VRP
+                {"+ " + t("button_add_new")}
               </Link>
             )}
         </div>
@@ -89,8 +91,8 @@ const VrpManagement = () => {
         isOpen={showModalForbidden}
         onClose={() => setShowModalForbidden(false)}
         variant="company"
-        title="Continue on Desktop"
-        subtitle="Adding VRP feature are currently only accessible on the desktop version of our website."
+        title={t("forbidden_title")}
+        subtitle={t("forbidden_description")}
       />
     </AnimationWrapper>
   );

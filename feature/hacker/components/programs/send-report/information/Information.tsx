@@ -2,6 +2,7 @@ import { cn } from "@/core/lib/utils";
 import { Card, Typography } from "@/core/ui/components";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { Square } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface I_InformationProps {
   activeStep: number;
@@ -9,15 +10,16 @@ interface I_InformationProps {
 }
 
 const Information = ({ activeStep, lists }: I_InformationProps) => {
+  const t = useTranslations("SendReportHacker.information");
   return (
     <Card
       className={cn(
         "_flexbox__col__start__start w-full gap-6 rounded-xl",
-        "!bg-transparent px-8 py-12"
+        "!bg-transparent xl:px-8 xl:py-12"
       )}
     >
       <Typography variant="p" affects="extralarge" weight="bold">
-        Information
+        {t("title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-5">
         {lists.map((info, index) => (

@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useState } from "react";
-import { passwordValidation } from "@/core/constants/common";
+import { usePasswordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
@@ -15,18 +15,22 @@ import Link from "next/link";
 import { SignupHackerFormType } from "@/core/models/auth/register";
 import { usePostSignupHacker } from "@/feature/auth/query/signup";
 import { getBrowserAndOS } from "@/utils/device-type";
+import { useTranslations } from "next-intl";
 
 interface I_HackerStepTwoProps {
   onClickNext: () => void;
 }
 
 const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
+  const t = useTranslations("SignUp.hacker");
   const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
+  const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
       content: "",
+      type: null,
       checked: false,
     });
   const {
@@ -91,14 +95,15 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
     <StepWrapper
       currentSteps={2}
       totalSteps={2}
-      title="Hacker Sign Up"
-      subtitle="Account Setup"
+      title={t("title")}
+      subtitle={t("subtitle_2")}
     >
       <div className="_flexbox__col__center__between h-full w-full gap-8 pb-8">
         <div className="_flexbox__col__center w-full gap-8">
           <Input
             type="email"
-            label="Email"
+            label={t("label_email")}
+            placeholderText={t("placeholder_email")}
             value={forms.email}
             onChange={(e) =>
               setValue("email", e.target.value, { shouldValidate: true })
@@ -106,15 +111,17 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             isError={!!errors.email || error?.code === 422}
           />
           <PasswordInput
+            label={t("label_password")}
+            placeholderText={t("placeholder_password")}
             value={forms.password}
-            label="Password"
             onChange={checkPassword}
             options={passwordValidationItems}
             withRegex
           />
           <PasswordInput
+            label={t("label_confirm_password")}
+            placeholderText={t("placeholder_confirm_password")}
             value={confirmPassworText.content}
-            label="Confirm Password"
             onChange={passwordConfirmationCheck}
             isConfirmation={!!confirmPassworText.content}
             check={confirmPassworText.checked}
@@ -125,9 +132,9 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
               onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
             />
             <Typography variant="p" affects="normal">
-              I have read and accepted the all sites{" "}
+              {t("legal")}{" "}
               <Link target="_blank" href={"/policy"} className="underline">
-                Policies
+                {t("link")}
               </Link>
             </Typography>
           </div>
@@ -145,7 +152,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
           }
           isLoading={isPending}
         >
-          Register Account
+          {t("submit_button")}
         </Button>
       </div>
     </StepWrapper>

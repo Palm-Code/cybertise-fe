@@ -3,6 +3,7 @@ import { cn } from "@/core/lib/utils";
 import { Loader2 } from "lucide-react";
 import Typography from "../typography/typography";
 import { Role } from "@/types/admin/sidebar";
+import { useTranslations } from "next-intl";
 
 interface I_LoaderProps {
   variant?: keyof typeof Role;
@@ -19,6 +20,7 @@ const Loader = ({
   className = "",
   noText = false,
 }: I_LoaderProps) => {
+  const t = useTranslations("Loading");
   return (
     <div
       className={cn("_flexbox__col__center h-screen w-full gap-4", className)}
@@ -39,7 +41,7 @@ const Loader = ({
             align="center"
             className="animate-pulse transition-all duration-1000"
           >
-            Getting data...
+            {t("loading_data")}
           </Typography>
         )}
       </div>
