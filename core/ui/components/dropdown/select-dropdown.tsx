@@ -44,7 +44,12 @@ export default function SelectDropdown({
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger className={cn("_flexbox__row__center__between w-full")}>
+      <PopoverTrigger
+        className={cn(
+          "_flexbox__row__center__between w-full",
+          props.containerClassName
+        )}
+      >
         <Input
           label={inputValueLabel ? props.label : undefined}
           placeholder={props.label || " "}

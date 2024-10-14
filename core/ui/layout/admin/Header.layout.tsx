@@ -2,17 +2,25 @@
 import { cn } from "@/core/lib/utils";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
 import { Logo } from "../../icons";
-import { useGetUserData, usePostLogout } from "@/core/react-query/client";
+import {
+  useGetUserData,
+  usePostLogout,
+  usePostUpdateLang,
+} from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
-import { LogOut, Settings } from "lucide-react";
+import { Globe, LogOut, Settings } from "lucide-react";
 import { Skeleton } from "../../components/skeleton/skeleton";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import LanguageDropdown from "./dropdown/LanguageDropdown.component";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const t = useTranslations("Sidebar");
+  const pathname = usePathname();
   const { data, isLoading } = useGetUserData();
-
+  const [language, setLanguage] = useState<string>(data?.language || "en");
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {
@@ -27,6 +35,8 @@ const Header = () => {
     }
   };
 
+  const { mutate } = usePostUpdateLang();
+
   return (
     <>
       <div className="w-full xl:hidden">
@@ -39,6 +49,29 @@ const Header = () => {
           <Link href="/dashboard">
             <Logo className="h-[32px] w-[85px]" />
           </Link>
+          {!isLoading && pathname.includes("/settings") && (
+            <LanguageDropdown
+              label=""
+              triggerClassName="!p-0 absolute right-2"
+              defaultValue={language}
+              prefixIcon={<Globe className="size-5 md:size-6" />}
+              value={language}
+              options={[
+                {
+                  label: "EN",
+                  value: "en",
+                },
+                {
+                  label: "DE",
+                  value: "de",
+                },
+              ]}
+              onValueChange={(v) => {
+                setLanguage(v);
+                mutate(v);
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="hidden w-full xl:block">
@@ -48,6 +81,29 @@ const Header = () => {
             "_flexbox__row__center__end gap-8"
           )}
         >
+          {!isLoading && pathname.includes("/settings") && (
+            <LanguageDropdown
+              label=""
+              triggerClassName="!p-0"
+              defaultValue={language}
+              prefixIcon={<Globe className="size-6" />}
+              value={language}
+              options={[
+                {
+                  label: "EN",
+                  value: "en",
+                },
+                {
+                  label: "DE",
+                  value: "de",
+                },
+              ]}
+              onValueChange={(v) => {
+                setLanguage(v);
+                mutate(v);
+              }}
+            />
+          )}
           <ThemeSwitcher />
           {!isLoading ? (
             <HeaderDropdown

@@ -12,9 +12,10 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
-interface SelectTriggerProps
+export interface SelectTriggerProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
   withIcon?: boolean;
+  prefixIcon?: React.ReactNode;
 }
 
 interface SelectContentProps
@@ -26,7 +27,7 @@ interface SelectContentProps
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerProps
->(({ className, withIcon, children, ...props }, ref) => (
+>(({ className, withIcon, prefixIcon, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     id={`${props.id}-select-trigger`}
@@ -38,7 +39,14 @@ const SelectTrigger = React.forwardRef<
     )}
     {...props}
   >
-    {children}
+    {prefixIcon ? (
+      <div className="grid grid-cols-[auto_1fr] items-center gap-2">
+        <SelectPrimitive.Icon asChild>{prefixIcon}</SelectPrimitive.Icon>
+        {children}
+      </div>
+    ) : (
+      children
+    )}
     {withIcon && (
       <SelectPrimitive.Icon asChild>
         <ChevronDownIcon className="h-6 w-6 transition-all duration-200" />
@@ -149,7 +157,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-xs outline-none hover:cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 md:text-base dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
       className
     )}
     {...props}

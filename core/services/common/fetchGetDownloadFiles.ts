@@ -1,10 +1,10 @@
 import { getDownloadFileAPIURL } from "@/core/routes/common";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 export const fetchGetDownloadFiles = async (id: string, filename: string) => {
-  const cookie = new Cookies();
+  const cookie = Cookies;
   const accessToken = cookie.get("token");
   return await axios
     .get(`${BASE_URL}${getDownloadFileAPIURL(id)}`, {
