@@ -43,7 +43,9 @@ const PasswordInput = ({
       <div className="_flexbox__col__start relative w-full">
         <Input
           wrapperClassName={cn(
-            isBreached && "!bg-warning/10 border !border-warning"
+            isBreached
+              ? "!bg-warning/10 border !border-warning"
+              : props.wrapperClassName
           )}
           ref={inputRef}
           type={showPassword ? "text" : "password"}

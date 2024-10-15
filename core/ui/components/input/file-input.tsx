@@ -55,11 +55,6 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
     const { mutate, isPending } = useGetDownloadFiles();
     const [isUploading, setIsUploading] = useState<boolean>(false);
 
-    console.log(
-      fileValues && fileValues?.length > 0 && !isUploading,
-      isUploading
-    );
-
     useEffect(() => {
       if (fileValues && fileValues.length > 0) {
         setInput(input.slice(0, input.length - 1));

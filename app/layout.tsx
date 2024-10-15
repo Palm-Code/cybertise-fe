@@ -11,6 +11,8 @@ import { Toaster } from "@/core/ui/components";
 import { headers } from "next/headers";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { fetchGetCountryList } from "@/core/services/common";
+import CountryListInitializer from "@/core/zustands/country-list/initializer";
 
 export const metadata: Metadata = {
   title: {
@@ -50,6 +52,7 @@ export default async function RootLayout({
   };
 
   const messages = await getMessages();
+  const countryList = await fetchGetCountryList();
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -75,7 +78,9 @@ export default async function RootLayout({
               defaultTheme="dark"
               disableTransitionOnChange
             >
-              {children}
+              <CountryListInitializer countryList={countryList}>
+                {children}
+              </CountryListInitializer>
             </ThemeProvider>
             <Toaster position="top-center" />
           </ReactQueryProvider>

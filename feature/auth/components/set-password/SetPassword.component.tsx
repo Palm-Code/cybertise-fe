@@ -3,7 +3,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
@@ -14,6 +14,9 @@ import {
 import { validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { usePasswordValidation } from "@/core/constants/common";
+import { useDebounceValue } from "usehooks-ts";
+import { usePasswordStrength } from "@/core/lib";
+import { toast } from "sonner";
 
 interface I_SetPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -21,11 +24,13 @@ interface I_SetPassword extends React.HTMLAttributes<HTMLDivElement> {
 
 const SetPassword = (props: I_SetPassword) => {
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const searchParams = useSearchParams();
   const token = searchParams.get("code");
   const [newPassword, setNewPassword] = useState<string>("");
+  const [debounceValue] = useDebounceValue(newPassword, 1000);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
       type: null,
@@ -38,6 +43,22 @@ const SetPassword = (props: I_SetPassword) => {
     isPending: isPendingForgot,
     isSuccess: isSuccessForgot,
   } = usePostForgotPassword();
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -86,6 +107,7 @@ const SetPassword = (props: I_SetPassword) => {
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
+                isBreached={isBreached}
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
@@ -93,6 +115,7 @@ const SetPassword = (props: I_SetPassword) => {
                 options={passwordValidationItems}
               />
               <PasswordInput
+                disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
                 label="Confirm new password"
                 onChange={passwordConfirmationCheck}
@@ -112,7 +135,8 @@ const SetPassword = (props: I_SetPassword) => {
                 isPendingForgot ||
                 isSuccessForgot ||
                 !confirmPassworText.checked ||
-                passwordValidationItems.every((item) => !item.checked)
+                isBreached ||
+                !validatePasswordRegex
               }
               onClick={() =>
                 token &&
@@ -151,6 +175,7 @@ const SetPassword = (props: I_SetPassword) => {
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
+                isBreached={isBreached}
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
@@ -158,6 +183,7 @@ const SetPassword = (props: I_SetPassword) => {
                 options={passwordValidationItems}
               />
               <PasswordInput
+                disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
                 label="Confirm new password"
                 onChange={passwordConfirmationCheck}
@@ -177,7 +203,8 @@ const SetPassword = (props: I_SetPassword) => {
                 isPendingForgot ||
                 isSuccessForgot ||
                 !confirmPassworText.checked ||
-                passwordValidationItems.every((item) => !item.checked)
+                isBreached ||
+                !validatePasswordRegex
               }
               onClick={() =>
                 token &&

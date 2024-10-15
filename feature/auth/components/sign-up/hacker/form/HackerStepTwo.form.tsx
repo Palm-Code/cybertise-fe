@@ -137,6 +137,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             withRegex
           />
           <PasswordInput
+            disabled={isBreached || !validatePasswordRegex}
             label={t("label_confirm_password")}
             placeholderText={t("placeholder_confirm_password")}
             value={confirmPassworText.content}
@@ -167,7 +168,8 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             isSuccess ||
             isBreached ||
             !isPolicyChecked ||
-            !validatePasswordRegex
+            !validatePasswordRegex ||
+            !!errors.email
           }
           isLoading={isPending}
         >

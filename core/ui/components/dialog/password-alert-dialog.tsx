@@ -21,8 +21,11 @@ export const PasswordModalAlert = ({ ...props }: I_PasswordModalAlertProps) => {
           "bg-background-main-light dark:bg-background-main-dark"
         )}
       >
-        <div className="grid grid-cols-[auto_1fr] items-center gap-2">
-          <X className="size-6 cursor-pointer" onClick={props.onClose} />
+        <div
+          className="grid cursor-pointer grid-cols-[auto_1fr] items-center gap-2"
+          onClick={props.onClose}
+        >
+          <X className="size-6" />
           <Typography variant="p" affects="normal">
             {t("button_close")}
           </Typography>

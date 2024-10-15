@@ -3,7 +3,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, Checkbox, Input, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
@@ -17,6 +17,9 @@ import useTimer from "@/utils/timer";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { useTranslations } from "next-intl";
 import { usePasswordValidation } from "@/core/constants/common";
+import { useDebounceValue } from "usehooks-ts";
+import { usePasswordStrength } from "@/core/lib";
+import { toast } from "sonner";
 
 interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -25,6 +28,7 @@ interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
 const ForgotPassword = (props: I_ForgotPassword) => {
   const t = useTranslations("ForgotPassword");
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [count, setCount] = React.useState(5);
@@ -35,6 +39,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   const token = searchParams.get("code");
   const [email, setEmail] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
+  const [debounceValue] = useDebounceValue(newPassword, 1000);
   const [logoutAll, setLogoutAll] = useState<0 | 1>(0);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
@@ -51,6 +56,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   } = usePostForgotPassword();
 
   const { mutate: resendVerification } = usePostResendVerification();
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   useEffect(() => {
     if (isSuccess) start();
@@ -125,6 +146,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               {!!token ? (
                 <>
                   <PasswordInput
+                    isBreached={isBreached}
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
@@ -133,6 +155,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     options={passwordValidationItems}
                   />
                   <PasswordInput
+                    disabled={isBreached || !validatePasswordRegex}
                     value={confirmPassworText.content}
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
@@ -186,7 +209,12 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
-                (token ? !newPassword || !confirmPassworText.checked : !email)
+                (token
+                  ? !newPassword ||
+                    isBreached ||
+                    !validatePasswordRegex ||
+                    !confirmPassworText.checked
+                  : !email)
               }
               onClick={() =>
                 token
@@ -235,6 +263,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               {!!token ? (
                 <>
                   <PasswordInput
+                    isBreached={isBreached}
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
@@ -243,6 +272,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     options={passwordValidationItems}
                   />
                   <PasswordInput
+                    disabled={isBreached || !validatePasswordRegex}
                     value={confirmPassworText.content}
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
@@ -311,7 +341,12 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
-                (token ? !confirmPassworText.checked || !validated : !email)
+                (token
+                  ? !confirmPassworText.checked ||
+                    !validated ||
+                    isBreached ||
+                    !validatePasswordRegex
+                  : !email)
               }
               onClick={() => {
                 isSuccess
