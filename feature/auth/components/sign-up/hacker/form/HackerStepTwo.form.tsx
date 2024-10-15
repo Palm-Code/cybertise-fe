@@ -63,7 +63,6 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   useMemo(async () => {
     if (validatePasswordRegex) {
       const result = await usePasswordStrength(debounceValue);
-      console.log(result);
       setIsBreached(!!result.feedback.warning);
       if (result.feedback.warning) {
         toast.error(result.feedback.warning, {
@@ -134,6 +133,7 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             value={forms.password}
             onChange={checkPassword}
             options={passwordValidationItems}
+            isBreached={isBreached}
             withRegex
           />
           <PasswordInput
