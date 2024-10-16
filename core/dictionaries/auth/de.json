@@ -134,5 +134,13 @@
     "content_lists_2": "Durch Klicken auf „Ja, reaktivieren“ stoppen Sie den Deaktivierungsprozess und reaktivieren Ihr Konto.",
     "cancel_button": "Stornieren",
     "submit_button": "Ja, reaktivieren"
+  },
+  "SetPassword": {
+    "title": "Legen Sie das Passwort für Firmenmitarbeiter fest",
+    "new_password": "Neues Passwort",
+    "confirm_password": "Passwort bestätigen",
+    "submit_button": "Passwort festlegen",
+    "footer": "Sie haben bereits ein Konto?",
+    "link": "Anmelden"
   }
 }

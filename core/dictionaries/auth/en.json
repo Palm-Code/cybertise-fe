@@ -46,6 +46,16 @@
         "footer_2": "Logout from all devices?",
         "link": "Sign In"
     },
+    "SetPassword": {
+        "title": "Set Company Staff Password",
+        "new_password": "New Password",
+        "placeholder_new_password": "Enter your new password",
+        "confirm_password": "Confirm Password",
+        "placeholder_confirm_password": "Confirm your new password",
+        "submit_button": "Set Password",
+        "footer": "Already have an account?",
+        "link": "Sign In"
+    },
     "PasswordInput": {
         "password_matched": "Password matched",
         "password_not_matched": "Password not matched",

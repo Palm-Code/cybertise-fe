@@ -20,16 +20,18 @@ import { useGetDownloadFiles } from "@/core/react-query/client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Loader from "../loader/loader";
+import { Role } from "@/types/admin/sidebar";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   fileValues?: SendReportRequestType["files"];
   onFileSelected: (value: string, file: FileWithUrl[]) => void;
   onFileRemoved: (value: FileWithUrl["file_id"]) => void;
-  variant?: "hacker" | "company" | "mediator";
+  variant?: keyof typeof Role;
   isMultiple?: boolean;
   accept?: string;
   isInsertImage?: boolean;
+  persistFile?: boolean;
 }
 
 const FileInput = forwardRef<HTMLInputElement, InputProps>(
@@ -43,6 +45,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
       isMultiple = true,
       accept = "*/*",
       isInsertImage = false,
+      persistFile = false,
       ...props
     },
     ref
@@ -101,6 +104,9 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
             const formData = new FormData();
             formData.append("file", file);
             formData.append("content", file.name);
+            if (persistFile) {
+              formData.append("persist", "1");
+            }
             axiosFormDataInterceptorInstance
               .post(postFileTempAPIURL(), formData, {
                 onUploadProgress: (progressEvent) => {
@@ -192,6 +198,9 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               const formData = new FormData();
               formData.append("file", file);
               formData.append("content", file.name);
+              if (persistFile) {
+                formData.append("persist", "1");
+              }
               axiosFormDataInterceptorInstance
                 .post(postFileTempAPIURL(), formData, {
                   onUploadProgress: (progressEvent) => {
@@ -587,6 +596,7 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
                     />
                   ) : (
                     <Loader
+                      variant={variant}
                       noText
                       width={24}
                       height={24}

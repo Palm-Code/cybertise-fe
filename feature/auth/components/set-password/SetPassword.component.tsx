@@ -17,12 +17,14 @@ import { usePasswordValidation } from "@/core/constants/common";
 import { useDebounceValue } from "usehooks-ts";
 import { usePasswordStrength } from "@/core/lib";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface I_SetPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
 }
 
 const SetPassword = (props: I_SetPassword) => {
+  const t = useTranslations("SetPassword");
   const passwordValidation = usePasswordValidation();
   const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
@@ -71,8 +73,8 @@ const SetPassword = (props: I_SetPassword) => {
 
     setPasswordValidationItems(updatedValidationItems);
     confirmPassworText.content && confirmPassworText.content === newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+      ? setConfirmPassworText({ ...confirmPassworText, checked: true })
+      : setConfirmPassworText({ ...confirmPassworText, checked: false });
 
     setNewPassword(newPassword);
   };
@@ -103,7 +105,7 @@ const SetPassword = (props: I_SetPassword) => {
           <div className="_flexbox__col__center w-full gap-6">
             <RectangleEllipsis width={72} height={72} />
             <Typography variant="h4" weight="bold">
-              Set Company Staff Password
+              {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
@@ -111,13 +113,13 @@ const SetPassword = (props: I_SetPassword) => {
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
-                label="New password"
+                label={t("new_password")}
                 options={passwordValidationItems}
               />
               <PasswordInput
                 disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
-                label="Confirm new password"
+                label={t("confirm_password")}
                 onChange={passwordConfirmationCheck}
                 isConfirmation={!!confirmPassworText.content}
                 check={confirmPassworText.checked}
@@ -147,12 +149,12 @@ const SetPassword = (props: I_SetPassword) => {
                 })
               }
             >
-              Set Password
+              {t("submit_button")}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Already have an account?
+              {t("footer")}
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+                {t("link")}
               </Link>
             </Typography>
           </div>
@@ -171,7 +173,7 @@ const SetPassword = (props: I_SetPassword) => {
           <div className="_flexbox__col__center w-full gap-6">
             <RectangleEllipsis width={72} height={72} />
             <Typography variant="h4" weight="bold">
-              Set Company Staff Password
+              {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
@@ -179,13 +181,13 @@ const SetPassword = (props: I_SetPassword) => {
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
-                label="New password"
+                label={t("new_password")}
                 options={passwordValidationItems}
               />
               <PasswordInput
                 disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
-                label="Confirm new password"
+                label={t("confirm_password")}
                 onChange={passwordConfirmationCheck}
                 isConfirmation={!!confirmPassworText.content}
                 check={confirmPassworText.checked}
@@ -215,12 +217,12 @@ const SetPassword = (props: I_SetPassword) => {
                 })
               }
             >
-              Set Password
+              {t("submit_button")}
             </Button>
             <Typography variant="p" affects="normal" align="center">
-              Already have an account?
+              {t("footer")}
               <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+                {t("link")}
               </Link>
             </Typography>
           </div>

@@ -19,12 +19,14 @@ import { useCallback, useState } from "react";
 import { Skeleton } from "../skeleton/skeleton";
 import { ModalEmbedImage } from "./modal-embed-image";
 import { FileWithUrl } from "@/interfaces";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_ToolbarProps {
   editor: Editor | null;
+  variant?: keyof typeof Role;
 }
 
-const Toolbar = ({ editor }: I_ToolbarProps) => {
+const Toolbar = ({ editor, variant = "hacker" }: I_ToolbarProps) => {
   const [fileValues, setFileValues] = useState<FileWithUrl[]>();
   const [openModalEmbedImage, setOpenModalEmbedImage] = useState(false);
   const setLink = useCallback(() => {
@@ -154,6 +156,7 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
         <Image />
       </Toggle>
       <ModalEmbedImage
+        variant={variant}
         fileValues={fileValues}
         onFileSelected={(_, file) => setFileValues(file)}
         isOpen={openModalEmbedImage}
