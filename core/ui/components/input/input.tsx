@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { cn } from "@/core/lib/utils";
-import { Eye, EyeOff, Info, X } from "lucide-react";
+import { Eye, EyeOff, Info, TriangleAlert, X } from "lucide-react";
 import Tooltip from "../tooltip/tooltip";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
@@ -29,6 +29,8 @@ export interface InputProps
   isSelect?: boolean;
   errorMsg?: string;
   wrapperClassName?: string;
+  onClickWarningIcon?: () => void;
+  isBreached?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -55,6 +57,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isSelect = false,
       errorMsg,
       wrapperClassName,
+      onClickWarningIcon,
+      isBreached = false,
       ...props
     },
     ref
@@ -185,6 +189,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
             </>
           </div>
+          {onClickWarningIcon && isBreached && (
+            <TriangleAlert
+              className="absolute right-12 top-1/2 h-6 w-6 -translate-y-1/2 cursor-pointer text-warning"
+              onClick={onClickWarningIcon}
+            />
+          )}
           {(onClickRevealPassword &&
             hasValue &&
             (props.type === "password" ? (

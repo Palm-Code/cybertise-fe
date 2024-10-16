@@ -8,6 +8,7 @@ export interface I_UserData {
   role: keyof typeof Role;
   avatar?: string;
   company?: I_Company;
+  language: string;
 }
 
 export interface I_GetUserDataSuccessResponse {

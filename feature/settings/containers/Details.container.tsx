@@ -105,14 +105,6 @@ const Details = ({
               role: variant === "company" ? t("company") : t("account"),
             })}
           </Typography>
-          {/* <Button
-            variant={`tertiary-${variant}`}
-            className="p-0"
-            prefixIcon={<FilePenLine />}
-            onClick={() => {
-              setModalForbidden(true);
-            }}
-          /> */}
         </div>
         <CardAbout data={data} variant={variant} />
         <CardAccountDetails data={data} variant={variant} />

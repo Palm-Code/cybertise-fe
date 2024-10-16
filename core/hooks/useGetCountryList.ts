@@ -1,20 +1,9 @@
-import { useGetCountryList } from "../react-query/client";
-import { OptionsType } from "@/types/auth/sign-up";
+"use client";
+import { useCountryListStore } from "../zustands/country-list";
 
 export const useGetCountry = () => {
-  const { data, isError } = useGetCountryList();
+  const { data } = useCountryListStore.getState();
   if (data) {
-    const dataList: OptionsType[] = data.data.map((item) => {
-      return {
-        label: item.name,
-        value: item.code,
-        icon: item.flag_url,
-      };
-    });
-
-    return { data: dataList };
-  }
-  if (isError) {
-    return { data: [] };
+    return { data: data };
   }
 };

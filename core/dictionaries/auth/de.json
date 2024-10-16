@@ -55,6 +55,14 @@
       "lowercase": "Mindestens 1 Kleinbuchstabe",
       "uppercase": "Mindestens 1 Großbuchstabe",
       "special_character": "Mindestens 1 Sonderzeichen"
+    },
+    "password_alert": {
+      "button_close": "Schließen",
+      "description": "Ihr Passwort wurde durch eine Datenpanne im Internet preisgegeben. \nDie weitere Verwendung dieses Passworts kann zu unbefugtem Zugriff auf Ihr Konto führen.",
+      "title": "Passwort offengelegt",
+      "suggestion": "Anregung",
+      "list_1": "Fügen Sie weitere Wörter hinzu, die weniger häufig vorkommen",
+      "list_2": "Wenn Sie dieses Passwort anderweitig verwenden, sollten Sie es ändern"
     }
   },
   "SignUp": {
@@ -126,5 +134,13 @@
     "content_lists_2": "Durch Klicken auf „Ja, reaktivieren“ stoppen Sie den Deaktivierungsprozess und reaktivieren Ihr Konto.",
     "cancel_button": "Stornieren",
     "submit_button": "Ja, reaktivieren"
+  },
+  "SetPassword": {
+    "title": "Legen Sie das Passwort für Firmenmitarbeiter fest",
+    "new_password": "Neues Passwort",
+    "confirm_password": "Passwort bestätigen",
+    "submit_button": "Passwort festlegen",
+    "footer": "Sie haben bereits ein Konto?",
+    "link": "Anmelden"
   }
 }

@@ -15,6 +15,7 @@ const initialState: State = {
     email: "",
     role: "hacker",
     avatar: "",
+    language: "en",
   },
 };
 

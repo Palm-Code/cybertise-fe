@@ -11,22 +11,27 @@ import Input from "../input/input";
 import { FileWithUrl } from "@/interfaces";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { Role } from "@/types/admin/sidebar";
+import { borderColor } from "@/core/constants/common";
 
 interface I_ModalEmbedImageProps extends I_ModalProps {
   onClickInsertImage?: (url: string) => void;
   onFileSelected: (value: string, file: FileWithUrl[]) => void;
   fileValues?: FileWithUrl[];
   onClickInsert: (url: string) => void;
+  variant?: keyof typeof Role;
 }
 
 const Tabs = ({
   options,
   activeTab,
   onValueChange,
+  variant = "hacker",
 }: {
   options: OptionsType[];
   activeTab: number;
   onValueChange: (value: number) => void;
+  variant?: keyof typeof Role;
 }) => {
   return (
     <div className="flex items-center gap-10">
@@ -36,9 +41,7 @@ const Tabs = ({
           key={index}
           className={cn(
             "border-b-2 border-b-transparent",
-            index === activeTab &&
-              "border-b-lime-normal-light dark:border-b-lime-normal-dark",
-            "hover:border-b-lime-normal-light dark:hover:border-b-lime-normal-dark"
+            index === activeTab && borderColor[variant]
           )}
           onClick={() => onValueChange(index)}
         >
@@ -55,6 +58,7 @@ export const ModalEmbedImage = ({
   fileValues,
   onClickInsert,
   onClose = () => {},
+  variant = "hacker",
   ...props
 }: I_ModalEmbedImageProps) => {
   const t = useTranslations("TextEditor");
@@ -80,6 +84,7 @@ export const ModalEmbedImage = ({
           )}
         >
           <Tabs
+            variant={variant}
             activeTab={activeTab}
             options={[
               {
@@ -97,10 +102,12 @@ export const ModalEmbedImage = ({
           />
           {activeTab === 0 ? (
             <FileInput
+              variant={variant}
               isInsertImage
               fileValues={fileValues}
               accept="image/*"
               isMultiple={false}
+              persistFile
               onFileRemoved={() => {}}
               onFileSelected={(v, file) => onFileSelected(v, file)}
               className="h-auto"
@@ -152,7 +159,7 @@ export const ModalEmbedImage = ({
           )}
           <div className="flex items-center gap-8">
             <Button
-              variant={"secondary-hacker"}
+              variant={`secondary-${variant}`}
               onClick={() => {
                 onClose();
                 setUrlImage("");
@@ -161,7 +168,12 @@ export const ModalEmbedImage = ({
               {t("button_cancel")}
             </Button>
             <Button
-              variant={"primary-hacker"}
+              variant={`primary-${variant}`}
+              disabled={
+                activeTab === 0
+                  ? !fileValues?.[0]?.url
+                  : !urlImage || urlImage === ""
+              }
               onClick={() => {
                 onClickInsert(
                   activeTab === 0 ? fileValues?.[0]?.url ?? "" : urlImage

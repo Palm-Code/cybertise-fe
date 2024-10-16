@@ -1,11 +1,11 @@
 const createNextIntlPlugin = require("next-intl/plugin");
-
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
   reactStrictMode: false,
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   images: {
     remotePatterns: [
       {

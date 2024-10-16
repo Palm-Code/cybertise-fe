@@ -27,9 +27,6 @@ const TicketDropDown = ({
   onOpenChange = () => {},
   ...props
 }: I_TicketDropDownProps) => {
-  console.log(
-    status.toLowerCase() === "canceled" || status.toLowerCase() === "closed"
-  );
   return (
     <>
       <Desktop className="w-fit">

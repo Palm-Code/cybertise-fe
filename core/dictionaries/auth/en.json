@@ -46,6 +46,16 @@
         "footer_2": "Logout from all devices?",
         "link": "Sign In"
     },
+    "SetPassword": {
+        "title": "Set Company Staff Password",
+        "new_password": "New Password",
+        "placeholder_new_password": "Enter your new password",
+        "confirm_password": "Confirm Password",
+        "placeholder_confirm_password": "Confirm your new password",
+        "submit_button": "Set Password",
+        "footer": "Already have an account?",
+        "link": "Sign In"
+    },
     "PasswordInput": {
         "password_matched": "Password matched",
         "password_not_matched": "Password not matched",
@@ -55,6 +65,14 @@
             "lowercase": "At least 1 lowercase",
             "uppercase": "At least 1 uppercase",
             "special_character": "At least 1 special character"
+        },
+        "password_alert": {
+            "title": "Password Exposed",
+            "description": "Your password was exposed by a data breach on the Internet. Continuing to use this password can lead to Unauthorized access to your account.",
+            "suggestion": "Suggestion",
+            "list_1": "Add more words that are less common",
+            "list_2": "If you use this password elsewhere, you should change it",
+            "button_close" : "Close"
         }
     },
     "SignUp": {

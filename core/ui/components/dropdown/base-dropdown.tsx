@@ -4,19 +4,22 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectTriggerProps,
 } from "../select/select";
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { Desktop, Mobile } from "../../layout";
 import Checkbox from "../checkbox/checkbox";
 import { Role } from "@/types/admin/sidebar";
+import { cn } from "@/core/lib/utils";
 
-interface I_BaseDropdownProps {
+interface I_BaseDropdownProps extends SelectTriggerProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;
   label?: string;
   variant?: keyof typeof Role;
+  triggerClassName?: string;
 }
 
 const BaseDropdown = ({
@@ -25,6 +28,7 @@ const BaseDropdown = ({
   value,
   label = "Sort By",
   variant = "hacker",
+  triggerClassName,
   ...props
 }: I_BaseDropdownProps) => {
   const inputValueLabel = options.find(
@@ -64,15 +68,21 @@ const BaseDropdown = ({
         <Select onValueChange={onValueChange} defaultValue={value}>
           <SelectTrigger
             withIcon
-            className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent"
+            className={cn(
+              "!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent",
+              triggerClassName
+            )}
+            {...props}
           >
-            <Typography
-              variant="p"
-              affects="small"
-              className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
-            >
-              {label}
-            </Typography>
+            {label && (
+              <Typography
+                variant="p"
+                affects="small"
+                className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
+              >
+                {label}
+              </Typography>
+            )}
             <Typography variant="p" affects="small">
               {inputValueLabel || "All type"}
             </Typography>

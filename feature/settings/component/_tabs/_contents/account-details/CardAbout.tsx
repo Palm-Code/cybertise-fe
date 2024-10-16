@@ -374,7 +374,7 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 className="col-span-1 capitalize text-neutral-light-40 dark:text-neutral-dark-40"
               >
                 {t("label_name", {
-                  role: t(variant),
+                  role: variant,
                 })}
               </Typography>
               <Typography variant="p" affects="normal" className="col-span-1">

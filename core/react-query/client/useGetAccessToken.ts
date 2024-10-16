@@ -9,7 +9,7 @@ import { authorize } from "@/service/server/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { useReadLocalStorage } from "usehooks-ts";
 
 export const useGetAccessToken = () => {
@@ -23,7 +23,7 @@ export const useGetAccessToken = () => {
     mutationFn: fetchGetAccessToken,
     onSuccess: async (data, variables) => {
       await authorize(data.data);
-      const cookies = new Cookies();
+      const cookies = Cookies;
       cookies.set("token", data.data["access-token"], { path: "/" });
       if (!!variables.totp) {
         if (!!callbackUrl) {

@@ -132,7 +132,7 @@
       "company": "Company",
       "about": "About {role}",
       "company_information": "Company Information",
-      "account_details": "{role} Account Details",
+      "account_details": "{role} Details",
       "button_edit_account": "Edit {role} Details",
       "about_you": "About You",
       "label_avatar": "{role} Avatar",

@@ -27,6 +27,7 @@ export const updatePorfileSchema = z.object({
   vat: z.string().optional(),
   iban: z.string().optional(),
   bic: z.string().optional(),
+  language: z.string(),
 });
 
 export const updateEmergencyContactSchema = z.object({

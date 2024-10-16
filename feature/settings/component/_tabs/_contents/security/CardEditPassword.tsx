@@ -1,5 +1,6 @@
 "use client";
 import { usePasswordValidation } from "@/core/constants/common";
+import { usePasswordStrength } from "@/core/lib";
 import { cn } from "@/core/lib/utils";
 import { I_GetResetPasswordRequest } from "@/core/models/auth/forgot-password";
 import {
@@ -14,8 +15,10 @@ import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { validatePassword } from "@/utils/password-validation";
 import { CircleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { toast } from "sonner";
+import { useDebounceValue } from "usehooks-ts";
 
 interface I_CardEditPasswordProps {
   variant?: keyof typeof Role;
@@ -29,7 +32,9 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
     formState: { errors },
   } = useFormContext<I_GetResetPasswordRequest>();
   const forms = watch();
+  const [debounceValue] = useDebounceValue(forms.new_password, 1000);
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
@@ -38,6 +43,22 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
       content: "",
       checked: false,
     });
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        setValue("isValidated", false, { shouldValidate: true });
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -107,16 +128,22 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               {t("new_password")}
             </Typography>
             <PasswordInput
-              wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               withRegex
               value={forms.new_password}
               label={t("label_new_password")}
               options={passwordValidationItems}
+              isBreached={isBreached}
               onChange={checkPassword}
+              {...(!isBreached && {
+                wrapperClassName:
+                  "bg-neutral-light-100 dark:bg-neutral-dark-100",
+              })}
             />
             <PasswordInput
+              disabled={isBreached || !watch().isValidated}
               wrapperClassName="bg-neutral-light-100 dark:bg-neutral-dark-100"
               label={t("label_confirm_new_password")}
+              id="confirm_new_password"
               value={confirmPassworText.content}
               onChange={passwordConfirmationCheck}
               isConfirmation={!!confirmPassworText.content}
@@ -125,7 +152,7 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
           </Card>
           <Card
             className={cn(
-              "_flexbox__col__start__start w-full gap-6 xl:px-8 xl:py-12",
+              "_flexbox__col__start__start z-0 w-full gap-6 xl:px-8 xl:py-12",
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >

@@ -45,6 +45,7 @@ module.exports = {
         separator: "#E0E0E7",
         light: "#3572AF",
         dark: "#1B1E2A",
+        warning: "#FECA00",
         brand: {
           neutral: "#18181B",
           red: "#DD524C",
