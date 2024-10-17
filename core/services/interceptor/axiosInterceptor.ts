@@ -8,6 +8,8 @@ const axiosInterceptorInstance = axios.create({
   headers: {
     "ngrok-skip-browser-warning": true,
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
   },
 });
 
@@ -39,6 +41,7 @@ axiosInterceptorInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.data.code === 401) {
       logout();
+      return;
     }
     // Handle response errors here
     return Promise.reject(error);

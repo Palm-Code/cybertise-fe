@@ -10,6 +10,7 @@ export interface I_GetAccessTokenResponse {
   message: string;
   role?: keyof typeof Role;
   "access-token": string;
+  language: string;
 }
 
 export interface I_GetAccessTokenSuccessResponse {

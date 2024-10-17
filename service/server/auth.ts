@@ -19,10 +19,14 @@ export async function encrypt(payload: any) {
 }
 
 export async function decrypt(input: string): Promise<any> {
-  const { payload } = await jwtVerify(input, key, {
-    algorithms: ["HS256"],
-  });
-  return payload;
+  try {
+    const { payload } = await jwtVerify(input, key, {
+      algorithms: ["HS256"],
+    });
+    return payload;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function authorize(
@@ -31,6 +35,7 @@ export async function authorize(
   const user = {
     role: formData.role && (formData.role.toLowerCase() as keyof typeof Role),
     token: formData["access-token"],
+    language: formData.language,
   };
 
   // Create the session
@@ -46,6 +51,7 @@ export async function logout() {
     cookies().set("session", "", { expires: new Date(0) });
     cookies().set("token", "", { expires: new Date(0) });
   } catch (error) {
+    console.log("kesini error", error);
     throw new Error("Failed to logout");
   } finally {
     redirect("/auth/signin");

@@ -10,9 +10,11 @@ export const fetchGetProgramList = async (payload?: I_GetParamsPayload) => {
       params: payload?.params,
     })
     .then((res: AxiosResponse<I_GetProgramListSuccessResponse>) => {
+      console.log("res", res);
       return res.data;
     })
     .catch((err) => {
+      console.log("err", err);
       throw err?.response?.data || err?.response;
     });
 
