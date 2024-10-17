@@ -144,7 +144,7 @@ const SetPassword = (props: I_SetPassword) => {
                 token &&
                 mutateForgotPassword({
                   code: token,
-                  new_password: newPassword,
+                  new_password: btoa(newPassword),
                   logout_all: 0,
                 })
               }
@@ -212,7 +212,7 @@ const SetPassword = (props: I_SetPassword) => {
                 token &&
                 mutateForgotPassword({
                   code: token,
-                  new_password: newPassword,
+                  new_password: btoa(newPassword),
                   logout_all: 0,
                 })
               }

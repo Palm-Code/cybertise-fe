@@ -15,9 +15,7 @@ export const usePostSignIn = (callbackUrl: string | null) => {
     I_GetErrorResponse,
     FormLoginSchema
   >({
-    mutationFn: (payload) => {
-      return fetchPostLogin(payload);
-    },
+    mutationFn: fetchPostLogin,
     onSuccess(data, variables) {
       mutation.reset();
       callbackUrl && setCallbackUrl(callbackUrl);

@@ -4,11 +4,9 @@ import { I_GetErrorRes } from "@/core/models/common";
 import { fetchPostResetPassword } from "@/core/services/auth/password";
 import { logout } from "@/service/server/auth";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export const usePostResetPassword = () => {
-  const router = useRouter();
   const mutation = useMutation<[], I_GetErrorRes, I_GetResetPasswordRequest>({
     mutationFn: fetchPostResetPassword,
     onSuccess: (_, variables) => {
