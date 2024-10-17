@@ -35,7 +35,7 @@ const ModalEdit2fa = ({
   const [activeState, setActiveState] = useState<string>("input-old-otp");
 
   const onClickVerifyEnableTwoFactor = async (password: string) => {
-    await mutateEnableTwoFactor({ password: password }).then((res) => {
+    await mutateEnableTwoFactor({ password: btoa(password) }).then((res) => {
       if (res) {
         const encodedSvg = encodeURIComponent(res.data.qr)
           .replace(/'/g, "%27")

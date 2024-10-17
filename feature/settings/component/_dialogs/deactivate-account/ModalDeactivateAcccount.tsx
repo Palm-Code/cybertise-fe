@@ -21,12 +21,11 @@ const ModalDeactivateAccount = ({
     mutateAsync: mutateDeactivatedAccount,
     isPending: isPendingConfirm,
     isSuccess: isSuccessConfirm,
-    variables,
   } = usePostSelfDeactivatedAccount();
   const [activeState, setActiveState] = useState<string>("information");
 
   const onClickVerifyDEactivatedAccount = async (password: string) => {
-    await mutateDeactivatedAccount(password).then((res) => {
+    await mutateDeactivatedAccount(btoa(password)).then((res) => {
       if (res) {
         setActiveState("success");
       }

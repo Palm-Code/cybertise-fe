@@ -35,7 +35,7 @@ const ModalUnbind2fa = ({
   } = useGetDisableTwoFactor();
 
   const onClickVerifyDisableTwoFactor = async (password: string) => {
-    mutateDisableTwoFactor(password).then((res) => {
+    mutateDisableTwoFactor(btoa(password)).then((res) => {
       if (res) {
         onClose();
       }
