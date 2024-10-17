@@ -14,6 +14,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: {
     default: "Sparta",

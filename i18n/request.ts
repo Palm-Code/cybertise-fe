@@ -31,7 +31,9 @@ const getUserData = async () => {
       (res: AxiosResponse<I_GetUserDataSuccessResponse["data"]>) => res.data
     )
     .catch((err) => {
-      throw err?.response?.data || err?.response;
+      return {
+        language: "en",
+      };
     });
 
   return userData;

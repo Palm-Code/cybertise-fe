@@ -22,5 +22,6 @@ export type UserType = {
     name: string;
     role: "hacker" | "company" | "mediator" | "company staff";
     token: string;
+    language: string;
   };
 };
