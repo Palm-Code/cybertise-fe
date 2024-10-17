@@ -58,7 +58,11 @@ const SignInComponent = () => {
   const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    await mutateAsync({ ...forms, device_type: deviceType }).then((res) => {
+    await mutateAsync({
+      ...forms,
+      password: btoa(forms.password),
+      device_type: deviceType,
+    }).then((res) => {
       if (res?.data.deactivated_at) {
         setActiveData({
           deactivated_at: res?.data.deactivated_at as Date,

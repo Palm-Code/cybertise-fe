@@ -74,7 +74,12 @@ const CardLoginInfo = ({
                   isLoading={isPending}
                   variant={`primary-${variant}`}
                   onClick={() =>
-                    mutateAsync(methods.watch())
+                    mutateAsync({
+                      ...methods.watch(),
+                      old_password: btoa(methods.watch().old_password),
+                      new_password: btoa(methods.watch().new_password),
+                      logout_all: methods.watch().logout_all,
+                    })
                       .then()
                       .catch((err) => {
                         methods.setError("root", err?.message, {

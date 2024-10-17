@@ -49,7 +49,11 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     if (Object.keys(errors).length > 0) return;
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    mutateAsync({ ...forms, device_type: deviceType }).then(() => {
+    mutateAsync({
+      ...forms,
+      password: btoa(forms.password),
+      device_type: deviceType,
+    }).then(() => {
       onClickNext();
     });
   };

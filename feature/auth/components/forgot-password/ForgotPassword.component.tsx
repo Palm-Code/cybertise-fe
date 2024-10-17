@@ -220,7 +220,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 token
                   ? mutateForgotPassword({
                       code: token,
-                      new_password: newPassword,
+                      new_password: btoa(newPassword),
                       logout_all: 1,
                     })
                   : mutate(email)
@@ -282,7 +282,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                       token &&
                       mutateForgotPassword({
                         code: token,
-                        new_password: newPassword,
+                        new_password: btoa(newPassword),
                         logout_all: logoutAll,
                       })
                     }
@@ -354,7 +354,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                   : token
                     ? mutateForgotPassword({
                         code: token,
-                        new_password: newPassword,
+                        new_password: btoa(newPassword),
                         logout_all: 1,
                       })
                     : mutate(email);
