@@ -1,6 +1,6 @@
 # Cybertise Portal App
 
-## Installation
+## Installation Steps
 
 First, run the development server:
 
