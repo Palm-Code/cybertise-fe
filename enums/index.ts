@@ -9,7 +9,7 @@ export enum companyTabsItemEnums {
   vulnerability_program = "vulnerability_program",
   active_tickets = "active_tickets",
   // thanks = "thanks",
-  // collaborators = "collaborators",
+  collaborators = "collaborators",
   // activity_logs = "activity_logs",
 }
 

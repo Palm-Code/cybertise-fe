@@ -147,14 +147,16 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              {titleText}
+              {t("you_have_nothing_here")}
             </Typography>
-            <Link
-              className={buttonVariants({ variant: `primary-${variant}` })}
-              href={href}
-            >
-              {t("back_button")}
-            </Link>
+            {!!buttonText && (
+              <Link
+                className={buttonVariants({ variant: `primary-${variant}` })}
+                href={href}
+              >
+                {t("back_button")}
+              </Link>
+            )}
           </>
         );
     }

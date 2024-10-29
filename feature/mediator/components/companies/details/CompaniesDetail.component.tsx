@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
 import CompaniesDetailHeroCard from "./_card/CompaniesDetailHeroCard";
-import { useCompanyTabsItem } from "@/feature/mediator/constants/vrp-launchpad";
+import {
+  collaboratorCardData,
+  useCompanyTabsItem,
+} from "@/feature/mediator/constants/vrp-launchpad";
 import { companyTabsItemEnums } from "@/enums";
 import Tab from "./_tab/Tab";
 import VrpCardList from "./_card/VrpCard";
@@ -14,6 +17,7 @@ import {
   useGetProgramList,
 } from "@/feature/mediator/query/client";
 import { VRPHeroLoading } from "@/core/ui/container";
+import Collaborators from "./_tab/_content/Collaborators";
 
 const CompaniesDetail = ({ id }: { id: string }) => {
   const companyTabsItem = useCompanyTabsItem();
@@ -45,7 +49,7 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     // ) : (
     //   <EmptyState variant="mediator" type="update" className="mt-0" />
     // ),
-    // collaborators: <Collaborators data={collaboratorCardData} />,
+    collaborators: <Collaborators data={programList?.data ?? []} />,
     // activity_logs: <EmptyState variant="mediator" type="under-construction" />,
   };
 

@@ -10,7 +10,10 @@ import {
 } from "@tanstack/react-query";
 import { useMediaQuery } from "usehooks-ts";
 
-export const useGetCollaboratorList = (payload?: I_GetParamsPayload) => {
+export const useGetCollaboratorList = (
+  payload?: I_GetParamsPayload,
+  id?: string
+) => {
   const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
@@ -44,7 +47,16 @@ export const useGetCollaboratorList = (payload?: I_GetParamsPayload) => {
       payload?.params?.filter,
       payload?.params?.sort,
     ],
-    queryFn: () => fetchGetCollaboratorList(payload),
+    queryFn: () =>
+      fetchGetCollaboratorList({
+        params: {
+          ...payload?.params,
+          filter: {
+            ...payload?.params?.filter,
+            program_id: id,
+          },
+        },
+      }),
     placeholderData: keepPreviousData,
     enabled: !isMobileDevice,
   });

@@ -138,7 +138,8 @@
     "company_website": "Unternehmenswebsite",
     "tabs": {
       "vulnerability_program": "Schwachstellenprogramm",
-      "active_tickets": "Aktive Tickets"
+      "active_tickets": "Aktive Tickets",
+      "collaborators": "Mitarbeiter"
     }
   },
   "CreateCompanyTicket": {

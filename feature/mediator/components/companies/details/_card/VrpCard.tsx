@@ -134,7 +134,7 @@ const VrpCardList = ({
   data: I_GetProgramListSuccessResponse["data"];
 }) => {
   if (!data || data?.length === 0)
-    return <EmptyState type="program" variant="mediator" buttonText="" />;
+    return <EmptyState variant="mediator" buttonText="" />;
   return data.map((item, index) => <VRPCard key={index} {...item} />);
 };
 

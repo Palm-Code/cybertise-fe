@@ -89,10 +89,10 @@ export const useCompanyTabsItem = () => {
     //   label: "Thanks",
     //   value: "thanks",
     // },
-    // {
-    //   label: "Collaborators",
-    //   value: "collaborators",
-    // },
+    {
+      label: t("collaborators"),
+      value: "collaborators",
+    },
     // {
     //   label: "Activity Logs",
     //   value: "activity_logs",
