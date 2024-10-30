@@ -26,13 +26,16 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     data: companyDetails,
     isLoading,
     isFetching,
+    isRefetching,
   } = useGetCompaniesDetail(store.payload, id);
+  const [programType, setProgramType] = useState<string | undefined>();
   const {
     queryDesktop: { data: programList },
   } = useGetProgramList({
     params: {
       filter: {
         company_id: id,
+        type: programType,
       },
       append: "asset_types",
     },
@@ -53,7 +56,8 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     // activity_logs: <EmptyState variant="mediator" type="under-construction" />,
   };
 
-  if (isLoading || isFetching) return <VRPHeroLoading variant="mediator" />;
+  if (isLoading || isFetching || isRefetching)
+    return <VRPHeroLoading variant="mediator" />;
 
   return (
     <>
@@ -64,7 +68,14 @@ const CompaniesDetail = ({ id }: { id: string }) => {
             <Tab
               items={companyTabsItem}
               active={active}
-              onValueChange={(v) => setActive(companyTabsItemEnums[v])}
+              onValueChange={(v) => {
+                setActive(companyTabsItemEnums[v]);
+                if (v === "collaborators") {
+                  setProgramType("private");
+                  return;
+                }
+                setProgramType(undefined);
+              }}
             />
             <div className="_flexbox__col__start__start w-full gap-4 px-6">
               {tabs[active]}
@@ -79,7 +90,14 @@ const CompaniesDetail = ({ id }: { id: string }) => {
             <Tab
               items={companyTabsItem}
               active={active}
-              onValueChange={(v) => setActive(companyTabsItemEnums[v])}
+              onValueChange={(v) => {
+                setActive(companyTabsItemEnums[v]);
+                if (v === "collaborators") {
+                  setProgramType("private");
+                  return;
+                }
+                setProgramType(undefined);
+              }}
             />
             {tabs[active]}
           </div>

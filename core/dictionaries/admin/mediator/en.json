@@ -151,6 +151,32 @@
       "vulnerability_program": "Vulnerability Program",
       "active_tickets": "Active Tickets",
       "collaborators": "Collaborators"
+    },
+    "collaborators": {
+      "title": "Add New Collaborators",
+      "hacker_invited": "Hacker Invited",
+      "hacker_selected": "Hacker Selected",
+      "button_invite": "invite",
+      "button_add_collaborator": "Add Collaborator",
+      "search_placeholder": "Search for invited collaborators",
+      "search_add_collaborator": "Search for hackers",
+      "filter_by": "Filter by",
+      "sort_by": "Sort by",
+      "close": "Close",
+      "add_collaborator": "Add Collaborator",
+      "no_collaborators": "No collaborators found",
+      "no_hacker": "No hacker found",
+      "empty_state": {
+        "title": "No collaborators found",
+        "description": "You can invite collaborators to your VRP by adding them to the collaborators list."
+      },
+      "table": {
+        "name": "Hacker Name",
+        "valid_reports": "Valid Reports",
+        "asset_type_reported": "Asset Type Reported",
+        "last_activity": "Last Activity",
+        "action": "Action"
+      }
     }
   },
   "CreateCompanyTicket": {

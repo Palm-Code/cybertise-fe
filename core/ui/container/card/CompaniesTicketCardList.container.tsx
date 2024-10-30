@@ -99,7 +99,7 @@ const TicketCard = ({
                 isGridCard ? "gap-8" : "gap-12"
               )}
             >
-              <div className="_flexbox__row__center__start w-full gap-4">
+              <div className="grid w-full grid-cols-[auto_1fr_auto] gap-4">
                 {isGridCard && (
                   <Avatar
                     image={props.logo}
@@ -112,7 +112,7 @@ const TicketCard = ({
                     {props.name}
                   </Typography>
                 </div>
-                <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
+                <div className="_flexbox__row__center mb-auto ml-auto gap-4">
                   <Indicator
                     variant={
                       props.status.toLowerCase() as keyof typeof indicatorVariants

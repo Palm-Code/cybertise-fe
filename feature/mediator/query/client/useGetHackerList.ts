@@ -1,27 +1,15 @@
 "use client";
 import { I_GetParamsPayload } from "@/core/models/common";
-import { fetchGetCollaboratorList } from "@/core/services/mediator/collaborators";
+import { fetchGetHackerList } from "@/core/services/mediator/collaborators";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const useGetCollaboratorList = (
-  payload?: I_GetParamsPayload,
-  id?: string
-) => {
+export const useGetHackerList = (id: string, payload?: I_GetParamsPayload) => {
   const queryInfinity = useInfiniteQuery({
-    queryKey: [
-      "getCollaboratorList",
-      payload?.params?.filter,
-      payload?.params?.sort,
-    ],
+    queryKey: ["getHackerList", payload?.params?.filter, payload?.params?.sort],
     queryFn: (pageParam) =>
-      fetchGetCollaboratorList({
+      fetchGetHackerList(id, {
         params: {
           ...payload?.params,
-          include: "user",
-          filter: {
-            ...payload?.params?.filter,
-            program_id: id,
-          },
           page: {
             size: 10,
             number: pageParam.pageParam,

@@ -140,6 +140,24 @@
       "vulnerability_program": "Schwachstellenprogramm",
       "active_tickets": "Aktive Tickets",
       "collaborators": "Mitarbeiter"
+    },
+    "collaborators": {
+      "table": {
+        "name": "Hackername",
+        "valid_reports": "Gültige Berichte",
+        "asset_type_reported": "Gemeldeter Asset-Typ",
+        "last_activity": "Letzte Aktivität",
+        "action": "Aktion"
+      },
+      "hacker_invited": "Hacker eingeladen",
+      "button_add_collaborator": "Mitarbeiter hinzufügen",
+      "search_placeholder": "Suchen Sie nach eingeladenen Mitarbeitern",
+      "close": "Schließen",
+      "no_collaborators": "Keine Mitarbeiter gefunden",
+      "title": "Neue Mitarbeiter hinzufügen",
+      "hacker_selected": "Hacker ausgewählt",
+      "button_invite": "einladen",
+      "no_hacker": "Kein Hacker gefunden"
     }
   },
   "CreateCompanyTicket": {

@@ -5,3 +5,4 @@ export * from "./usePostUpdateTicket";
 export * from "./useGetCompanies";
 export * from "./useGetCompanyDetails";
 export * from "./useGetCollaboratorList";
+export * from "./useGetHackerList";

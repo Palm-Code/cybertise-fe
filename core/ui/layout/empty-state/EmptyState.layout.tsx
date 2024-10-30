@@ -14,13 +14,16 @@ interface I_EmptyStateProps {
     | "program"
     | "ticket"
     | "under-construction"
+    | "collaborators"
     | "update"
     | "target-assets";
+
   buttonText?: string;
   titleText?: string;
   href?: string;
   onClickButton?: () => void;
   className?: string;
+  noMargin?: boolean;
 }
 
 const EmptyState = ({
@@ -31,6 +34,7 @@ const EmptyState = ({
   titleText = "You're not Allowed Here",
   onClickButton = () => {},
   className = "",
+  noMargin = false,
 }: I_EmptyStateProps) => {
   const t = useTranslations("EmptyState");
   const iconsType = () => {
@@ -118,6 +122,7 @@ const EmptyState = ({
           </>
         );
       case "under-construction":
+      case "collaborators":
         return (
           <>
             <EmptyFolder className={iconColor[variant]} />
@@ -127,14 +132,17 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              {t("under_construction")}
+              {titleText}
             </Typography>
-            <Link
-              className={buttonVariants({ variant: `primary-${variant}` })}
-              href={href}
-            >
-              {t("back_button")}
-            </Link>
+            {!!buttonText && (
+              <Button
+                variant={`primary-${variant}`}
+                className="w-full"
+                onClick={() => onClickButton()}
+              >
+                {buttonText}
+              </Button>
+            )}
           </>
         );
       default:
@@ -165,7 +173,8 @@ const EmptyState = ({
   return (
     <div
       className={cn(
-        "_flexbox__col__center mt-32 h-full w-full gap-12",
+        "_flexbox__col__center h-full w-full gap-12",
+        !noMargin && "mt-32",
         className
       )}
     >

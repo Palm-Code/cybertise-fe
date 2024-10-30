@@ -3,6 +3,8 @@ import { cn } from "@/core/lib/utils";
 import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
 import {
   BaseTable,
+  Button,
+  Checkbox,
   TableBody,
   TableBodyRow,
   TableData,
@@ -12,13 +14,16 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { I_TableColumns } from "@/interfaces";
+import { useTranslations } from "next-intl";
 
 interface I_TableProps {
   columns: I_TableColumns[];
   data: I_GetCollaboratorSuccessResponse["data"];
+  onClickInvite: (ids: string[]) => void;
 }
 
-export default function Table({ data, columns }: I_TableProps) {
+export default function Table({ data, columns, onClickInvite }: I_TableProps) {
+  const t = useTranslations("CompanyDetailsMediator.collaborators");
   return (
     <BaseTable>
       <div
@@ -54,24 +59,18 @@ export default function Table({ data, columns }: I_TableProps) {
               <TableData
                 className={cn(columns[0].width, `text-${columns[0].align}`)}
               >
-                <Typography
-                  variant="p"
-                  affects="small"
-                  weight="semibold"
-                  align={columns[0].align}
-                >
-                  {item.user.name}
-                </Typography>
+                <Checkbox variant="mediator" />
               </TableData>
               <TableData
                 className={cn(columns[1].width, `text-${columns[1].align}`)}
               >
                 <Typography
                   variant="p"
-                  affects="normal"
+                  affects="small"
+                  weight="semibold"
                   align={columns[1].align}
                 >
-                  {`${item.user.valid_report} ticket${item.user.valid_report > 1 ? "s" : ""}`}
+                  {item.user.name}
                 </Typography>
               </TableData>
               <TableData
@@ -82,7 +81,7 @@ export default function Table({ data, columns }: I_TableProps) {
                   affects="normal"
                   align={columns[2].align}
                 >
-                  {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                  {`${item.user.valid_report} ticket${item.user.valid_report > 1 ? "s" : ""}`}
                 </Typography>
               </TableData>
               <TableData
@@ -93,8 +92,30 @@ export default function Table({ data, columns }: I_TableProps) {
                   affects="normal"
                   align={columns[3].align}
                 >
+                  {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                </Typography>
+              </TableData>
+              <TableData
+                className={cn(columns[4].width, `text-${columns[4].align}`)}
+              >
+                <Typography
+                  variant="p"
+                  affects="normal"
+                  align={columns[4].align}
+                >
                   {item.user.last_active || "-"}
                 </Typography>
+              </TableData>
+              <TableData
+                className={cn(columns[5].width, `text-${columns[5].align}`)}
+              >
+                <Button
+                  variant="tertiary-mediator"
+                  size="ghost"
+                  onClick={() => onClickInvite([item.user.id])}
+                >
+                  {t("button_invite")}
+                </Button>
               </TableData>
             </TableRow>
           </TableBodyRow>

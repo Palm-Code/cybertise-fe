@@ -256,6 +256,67 @@ export const vrpCompaniesCardsData: VRPCompaniesCardType[] = [
   },
 ];
 
+export const useGetAddCollaboratorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: "",
+      align: "left",
+      width: "w-[5%]",
+    },
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.action"),
+      align: "center",
+      width: "w-2/12",
+    },
+  ] as I_TableColumns[];
+};
+export const useGetCollaboratorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-1/4",
+    },
+  ] as I_TableColumns[];
+};
+
 export const collaboratorTableColums: I_TableColumns[] = [
   {
     title: "Hacker Name",

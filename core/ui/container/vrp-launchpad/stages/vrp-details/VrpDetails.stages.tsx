@@ -220,7 +220,7 @@ const VRPDetails = ({
           <AnimationWrapper
             key={steps[currentStepIndex].key}
             className={cn(
-              "sticky z-30 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark",
+              "sticky z-20 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark",
               variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
             )}
           >
@@ -247,9 +247,8 @@ const VRPDetails = ({
             </div>
             <div
               className={cn(
-                "sticky z-40 -mt-4 h-fit w-full rounded-xl",
-                "bg-background-main-light dark:bg-background-main-dark",
-                variant === "mediator" ? "top-[19rem]" : "top-[17.5rem]"
+                "fixed right-12 z-20 -mt-4 mb-28 h-fit w-fit rounded-xl",
+                "bg-background-main-light dark:bg-background-main-dark"
               )}
             >
               <Information
