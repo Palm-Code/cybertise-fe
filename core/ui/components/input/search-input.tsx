@@ -13,6 +13,7 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   loadingSubmit?: boolean;
   id?: string;
   isMobile?: boolean;
+  buttonVariant?: "primary" | "secondary" | "tertiary";
 }
 
 const ModalSearch = ({
@@ -26,6 +27,7 @@ const ModalSearch = ({
   variant?: "hacker" | "company" | "mediator";
   placeholder?: string;
   id?: string;
+  buttonVariant?: "primary" | "secondary" | "tertiary";
 }) => {
   return (
     <BaseModal
@@ -67,6 +69,7 @@ const SearchInput = ({
   value = "",
   id,
   isMobile = false,
+  buttonVariant = "primary",
   ...props
 }: SearchInputProps) => {
   const t = useTranslations("Common");
@@ -117,7 +120,7 @@ const SearchInput = ({
           {...props}
         />
         <Button
-          variant={`primary-${variant}`}
+          variant={`${buttonVariant}-${variant}`}
           onClick={onSubmitSearch}
           disabled={disabledButton}
           isLoading={loadingSubmit}

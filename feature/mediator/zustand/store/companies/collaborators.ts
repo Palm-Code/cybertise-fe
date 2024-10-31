@@ -9,7 +9,7 @@ export type Actions = {
   setPayload: (payload: I_GetParamsPayload) => void;
 };
 
-const initialState: State = {
+export const initialState: State = {
   payload: {},
 };
 

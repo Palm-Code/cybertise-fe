@@ -157,7 +157,12 @@
       "title": "Neue Mitarbeiter hinzufügen",
       "hacker_selected": "Hacker ausgewählt",
       "button_invite": "einladen",
-      "no_hacker": "Kein Hacker gefunden"
+      "no_hacker": "Kein Hacker gefunden",
+      "search_add_collaborator": "Suche nach Hackern",
+      "button_delete": "Löschen",
+      "showing_collaborator": "Zeigt {currentShowCollaborator} von {totalCollaborator} Mitarbeitern",
+      "showing_hacker": "Zeigt {currentShowHacker} von {totalHackers} Hacker",
+      "ago": "vor"
     }
   },
   "CreateCompanyTicket": {

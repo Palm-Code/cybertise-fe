@@ -10,9 +10,16 @@ type CollaboratorDialogProps = I_ModalProps & {
 
 export const CollaboratorDialog = ({
   id,
+  onClose = () => {},
   ...props
 }: CollaboratorDialogProps) => {
   const [openAddCollaborator, setOpenAddCollaborator] = useState(false);
+
+  const onCloseModal = () => {
+    setOpenAddCollaborator(false);
+    onClose();
+  };
+
   return (
     <BaseModal {...props}>
       <div className="container h-screen w-full py-20">
@@ -23,11 +30,15 @@ export const CollaboratorDialog = ({
           )}
         >
           {openAddCollaborator ? (
-            <AddCollaborators id={id} onClose={props.onClose} />
+            <AddCollaborators
+              id={id}
+              onClose={onCloseModal}
+              onClickBack={() => setOpenAddCollaborator(false)}
+            />
           ) : (
             <ViewCollaborators
               id={id}
-              onClose={props.onClose}
+              onClose={onCloseModal}
               onClickAddCollaborator={() => setOpenAddCollaborator(true)}
             />
           )}

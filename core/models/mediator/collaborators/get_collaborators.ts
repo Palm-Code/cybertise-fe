@@ -1,4 +1,8 @@
-import { I_Meta, I_UserData } from "../../common";
+import {
+  I_GetAssetTypeSuccessResponse,
+  I_Meta,
+  I_UserData,
+} from "../../common";
 
 export interface I_GetCollaboratorSuccessResponse {
   data: I_GetCollaboratorResponse[];
@@ -15,6 +19,6 @@ interface I_GetCollaboratorResponse {
   user: I_UserData & {
     valid_report: number;
     last_active: string | null;
-    asset_types: string[];
+    asset_types: I_GetAssetTypeSuccessResponse["data"];
   };
 }

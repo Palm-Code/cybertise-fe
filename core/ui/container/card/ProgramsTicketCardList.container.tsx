@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Badge, Card, Separator, Tooltip, Typography } from "../../components";
+import {
+  AssetTypeTooltip,
+  Badge,
+  Card,
+  Separator,
+  Tooltip,
+  Typography,
+} from "../../components";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { cn } from "@/core/lib/utils";
 import { Desktop, Mobile } from "../../layout";
@@ -224,16 +231,11 @@ const TicketCard = ({
                       ))
                       .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Tooltip
-                        content={props.asset_types
-                          .map((item) => item.value)
-                          .slice(3, props.asset_types.length - 1)
-                          .join(", ")}
-                      >
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
                         <Badge variant="default">
                           +{props.asset_types.length - 3} more
                         </Badge>
-                      </Tooltip>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>

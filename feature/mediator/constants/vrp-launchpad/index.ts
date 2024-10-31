@@ -295,6 +295,11 @@ export const useGetCollaboratorTableColumns = () => {
   const t = useTranslations("CompanyDetailsMediator");
   return [
     {
+      title: "",
+      align: "center",
+      width: "w-[15%]",
+    },
+    {
       title: t("collaborators.table.name"),
       align: "left",
       width: "w-1/4",
@@ -311,6 +316,11 @@ export const useGetCollaboratorTableColumns = () => {
     },
     {
       title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.action"),
       align: "center",
       width: "w-1/4",
     },

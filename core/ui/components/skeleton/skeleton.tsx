@@ -15,4 +15,18 @@ function Skeleton({
   );
 }
 
+export const SkeletonList = ({
+  className,
+  count = 10,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & {
+  count?: number;
+}) => {
+  return Array(count)
+    .fill(0)
+    .map((_, index) => (
+      <Skeleton key={`skeleton-${index}`} className={className} />
+    ));
+};
+
 export { Skeleton };

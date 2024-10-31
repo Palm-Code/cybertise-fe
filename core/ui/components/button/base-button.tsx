@@ -33,6 +33,8 @@ const buttonVariants = cva(
           "border bg-transparent text-brand-neutral dark:text-white hover:bg-violet-lighter/20 focus:bg-violet-lighter/20 active:bg-violet-lighter/20 border-violet-normal hover:border-violet-normal active:border-violet-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-mediator":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal focus:text-violet-normal active:text-violet-dark",
+        "tertirary-alert":
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-semantic-light-critical focus:text-semantic-light-critical active:text-semantic-light-critical",
         default:
           "border-none bg-white text-brand-neutral dark:text-brand-neutral hover:text-brand-neutral/80 focus:text-brand-neutral active:text-brand-neutral",
         "outline-hacker":
@@ -52,6 +54,8 @@ const buttonVariants = cva(
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
         "ghost-company staff":
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
+        "ghost-alert":
+          "bg-transparent text-semantic-light-critical hover:text-semantic-dark-critical focus:text-semantic-dark-critical active:text-semantic-darker-critical",
         alert:
           "border bg-semantic-light-critical/10 dark:bg-semantic-dark-critical/10 text-semantic-light-critical dark:text-semantic-dark-critical border-semantic-light-critical dark:border-semantic-dark-critica hover:bg-semantic-light-critical/20 dark:hover:bg-semantic-dark-critical/20 focus:bg-semantic-light-critical/20 dark:focus:bg-semantic-dark-critical/20 active:bg-semantic-light-critical/20 dark:active:bg-semantic-dark-critical/20 disabled:bg-semantic-light-critical/20 disabled:dark:bg-semantic-dark-critical/20 disabled:border-semantic-light-critical/20 disabled:dark:border-semantic-dark-critical/20",
       },

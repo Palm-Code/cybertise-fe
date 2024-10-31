@@ -2,6 +2,7 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
 import {
+  AssetTypeTooltip,
   BaseTable,
   Button,
   Checkbox,
@@ -14,15 +15,24 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { I_TableColumns } from "@/interfaces";
+import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { useTranslations } from "next-intl";
 
 interface I_TableProps {
   columns: I_TableColumns[];
   data: I_GetCollaboratorSuccessResponse["data"];
+  isLoading: boolean;
   onClickInvite: (ids: string[]) => void;
+  onChangeCheckbox: (id: string, checked: boolean) => void;
 }
 
-export default function Table({ data, columns, onClickInvite }: I_TableProps) {
+export default function Table({
+  data,
+  columns,
+  isLoading,
+  onClickInvite,
+  onChangeCheckbox,
+}: I_TableProps) {
   const t = useTranslations("CompanyDetailsMediator.collaborators");
   return (
     <BaseTable>
@@ -59,7 +69,12 @@ export default function Table({ data, columns, onClickInvite }: I_TableProps) {
               <TableData
                 className={cn(columns[0].width, `text-${columns[0].align}`)}
               >
-                <Checkbox variant="mediator" />
+                <Checkbox
+                  variant="mediator"
+                  onCheckedChange={(checked: boolean) => {
+                    onChangeCheckbox(item.user.id, checked);
+                  }}
+                />
               </TableData>
               <TableData
                 className={cn(columns[1].width, `text-${columns[1].align}`)}
@@ -87,13 +102,25 @@ export default function Table({ data, columns, onClickInvite }: I_TableProps) {
               <TableData
                 className={cn(columns[3].width, `text-${columns[3].align}`)}
               >
-                <Typography
-                  variant="p"
-                  affects="normal"
-                  align={columns[3].align}
-                >
-                  {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
-                </Typography>
+                {item.user.asset_types.length > 0 ? (
+                  <AssetTypeTooltip assetTypes={item.user.asset_types}>
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      align={columns[3].align}
+                    >
+                      {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                    </Typography>
+                  </AssetTypeTooltip>
+                ) : (
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                    align={columns[3].align}
+                  >
+                    {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                  </Typography>
+                )}
               </TableData>
               <TableData
                 className={cn(columns[4].width, `text-${columns[4].align}`)}
@@ -103,13 +130,18 @@ export default function Table({ data, columns, onClickInvite }: I_TableProps) {
                   affects="normal"
                   align={columns[4].align}
                 >
-                  {item.user.last_active || "-"}
+                  {item.user.last_active
+                    ? formatDateToAgo(item.user.last_active)
+                    : "-"}{" "}
+                  {t("ago")}
                 </Typography>
               </TableData>
               <TableData
                 className={cn(columns[5].width, `text-${columns[5].align}`)}
               >
                 <Button
+                  disabled={isLoading}
+                  isLoading={isLoading}
                   variant="tertiary-mediator"
                   size="ghost"
                   onClick={() => onClickInvite([item.user.id])}

@@ -1,5 +1,6 @@
 "use client";
 import {
+  AssetTypeTooltip,
   Badge,
   badgeVariants,
   Card,
@@ -126,16 +127,11 @@ const VRPCard = ({
                       </Badge>
                     ))}
                   {asset_types && asset_types.length > 3 && (
-                    <Tooltip
-                      content={asset_types
-                        .slice(3)
-                        .map((item) => item.value)
-                        .join(", ")}
-                    >
+                    <AssetTypeTooltip assetTypes={asset_types.slice(3)}>
                       <Badge variant={"default"}>
                         +{asset_types.length - 3} more
                       </Badge>
-                    </Tooltip>
+                    </AssetTypeTooltip>
                   )}
                 </div>
               </div>

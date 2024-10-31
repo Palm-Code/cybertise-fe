@@ -2,7 +2,10 @@
 import { cn } from "@/core/lib/utils";
 import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
 import {
+  AssetTypeTooltip,
   BaseTable,
+  Button,
+  Checkbox,
   TableBody,
   TableBodyRow,
   TableData,
@@ -12,13 +15,25 @@ import {
   Typography,
 } from "@/core/ui/components";
 import { I_TableColumns } from "@/interfaces";
+import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import { useTranslations } from "next-intl";
 
 interface I_TableProps {
   columns: I_TableColumns[];
   data: I_GetCollaboratorSuccessResponse["data"];
+  isLoading: boolean;
+  onClickDeleteCollaborator: (ids: string[]) => void;
+  onChangeCheckbox: (id: string, checked: boolean) => void;
 }
 
-export default function Table({ data, columns }: I_TableProps) {
+export default function Table({
+  data,
+  columns,
+  isLoading,
+  onClickDeleteCollaborator,
+  onChangeCheckbox,
+}: I_TableProps) {
+  const t = useTranslations("CompanyDetailsMediator.collaborators");
   return (
     <BaseTable>
       <div
@@ -54,24 +69,23 @@ export default function Table({ data, columns }: I_TableProps) {
               <TableData
                 className={cn(columns[0].width, `text-${columns[0].align}`)}
               >
-                <Typography
-                  variant="p"
-                  affects="small"
-                  weight="semibold"
-                  align={columns[0].align}
-                >
-                  {item.user.name}
-                </Typography>
+                <Checkbox
+                  variant="mediator"
+                  onCheckedChange={(checked: boolean) => {
+                    item.id && onChangeCheckbox(item.id, checked);
+                  }}
+                />
               </TableData>
               <TableData
                 className={cn(columns[1].width, `text-${columns[1].align}`)}
               >
                 <Typography
                   variant="p"
-                  affects="normal"
+                  affects="small"
+                  weight="semibold"
                   align={columns[1].align}
                 >
-                  {`${item.user.valid_report} ticket${item.user.valid_report > 1 ? "s" : ""}`}
+                  {item.user.name}
                 </Typography>
               </TableData>
               <TableData
@@ -82,19 +96,60 @@ export default function Table({ data, columns }: I_TableProps) {
                   affects="normal"
                   align={columns[2].align}
                 >
-                  {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                  {`${item.user.valid_report} ticket${item.user.valid_report > 1 ? "s" : ""}`}
                 </Typography>
               </TableData>
               <TableData
                 className={cn(columns[3].width, `text-${columns[3].align}`)}
               >
+                {item.user.asset_types.length > 0 ? (
+                  <AssetTypeTooltip assetTypes={item.user.asset_types}>
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      align={columns[3].align}
+                    >
+                      {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                    </Typography>
+                  </AssetTypeTooltip>
+                ) : (
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                    align={columns[3].align}
+                  >
+                    {`${item.user.asset_types.length} asset type${item.user.asset_types.length > 1 ? "s" : ""}`}
+                  </Typography>
+                )}
+              </TableData>
+              <TableData
+                className={cn(columns[4].width, `text-${columns[4].align}`)}
+              >
                 <Typography
                   variant="p"
                   affects="normal"
-                  align={columns[3].align}
+                  align={columns[4].align}
                 >
-                  {item.user.last_active || "-"}
+                  {item.user.last_active
+                    ? formatDateToAgo(item.user.last_active)
+                    : "-"}{" "}
+                  {t("ago")}
                 </Typography>
+              </TableData>
+              <TableData
+                className={cn(columns[5].width, `text-${columns[5].align}`)}
+              >
+                <Button
+                  disabled={isLoading}
+                  isLoading={isLoading}
+                  variant="tertirary-alert"
+                  size="ghost"
+                  onClick={() =>
+                    item.id && onClickDeleteCollaborator([item.id])
+                  }
+                >
+                  {t("button_delete")}
+                </Button>
               </TableData>
             </TableRow>
           </TableBodyRow>

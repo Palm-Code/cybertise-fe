@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  AssetTypeTooltip,
   Avatar,
   Badge,
   badgeVariants,
@@ -70,15 +71,11 @@ const TicketCard = ({
                         ))
                         .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Tooltip
-                        content={props.asset_types
-                          .map((item) => item.value)
-                          .join(", ")}
-                      >
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
                         <Badge variant="default">
                           +{props.asset_types.length - 3} more
                         </Badge>
-                      </Tooltip>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>
@@ -144,15 +141,11 @@ const TicketCard = ({
                         ))
                         .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Tooltip
-                        content={props.asset_types
-                          .map((item) => item.value)
-                          .join(", ")}
-                      >
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
                         <Badge variant="default">
                           +{props.asset_types.length - 3} more
                         </Badge>
-                      </Tooltip>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>
