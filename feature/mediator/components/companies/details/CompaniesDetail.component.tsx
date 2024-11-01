@@ -37,6 +37,7 @@ const CompaniesDetail = ({ id }: { id: string }) => {
         company_id: id,
         type: programType,
       },
+      include: "collaboratorsCount",
       append: "asset_types",
     },
   });

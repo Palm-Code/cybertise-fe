@@ -16,6 +16,7 @@ import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useTranslations } from "next-intl";
+import { Users } from "lucide-react";
 
 type I_VRPCardProps = {
   isCollaborators?: boolean;
@@ -30,6 +31,7 @@ const VRPCard = ({
   onClickVrp = () => {},
   status,
   type,
+  collaborators_count,
 }: I_VRPCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
   const t = useTranslations("Programs");
   const [showModal, setShowModal] = useState(false);
@@ -43,6 +45,22 @@ const VRPCard = ({
           }
         >
           <div className="_flexbox__col__start__start w-full gap-4">
+            <div className="flex w-full items-center justify-between">
+              <Badge variant="default">{type}</Badge>
+              {isCollaborators && (
+                <div className="flex flex-col gap-2.5">
+                  <div className="grid grid-cols-[auto_1fr] items-center gap-2.5">
+                    <Users
+                      size={16}
+                      className="text-neutral-light-30 dark:text-neutral-dark-30"
+                    />
+                    <Typography variant="p" affects="small" weight="semibold">
+                      {collaborators_count}
+                    </Typography>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="_flexbox__col__start__start w-full gap-4">
               <Typography variant="p" affects="large" weight="semibold">
                 {title}
@@ -135,6 +153,26 @@ const VRPCard = ({
                   )}
                 </div>
               </div>
+              {isCollaborators && (
+                <div className="flex flex-col gap-2.5">
+                  <div className="grid grid-cols-[auto_1fr] items-center gap-2.5">
+                    <Users
+                      size={16}
+                      className="text-neutral-light-30 dark:text-neutral-dark-30"
+                    />
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      className="text-neutral-light-30 dark:text-neutral-dark-30"
+                    >
+                      {t("collaborators")}
+                    </Typography>
+                  </div>
+                  <Typography variant="p" affects="small" weight="semibold">
+                    {collaborators_count} {t("collaborators")}
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
         </Card>

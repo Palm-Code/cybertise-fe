@@ -57,7 +57,8 @@
       "description_vrp": "Der Zugriff ist nur für veröffentlichte VRP möglich",
       "title": "Fahren Sie auf dem Desktop fort",
       "title_vrp": "Nicht veröffentlicht"
-    }
+    },
+    "collaborators": "Mitarbeiter"
   },
   "EmptyState": {
     "you_have_nothing_here": "Du hast hier nichts",
