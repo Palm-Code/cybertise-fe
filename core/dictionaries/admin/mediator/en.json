@@ -153,6 +153,7 @@
       "collaborators": "Collaborators"
     },
     "collaborators": {
+      "titles": "Collaborators",
       "title": "Add New Collaborators",
       "hacker_invited": "Hacker Invited",
       "hacker_selected": "Hacker Selected",
@@ -164,6 +165,8 @@
       "showing_collaborator": "Showing {currentShowCollaborator} of {totalCollaborator} collaborator",
       "showing_hacker": "Showing {currentShowHacker} of {totalHackers} hacker",
       "filter_by": "Filter by",
+      "ticket": "ticket",
+      "asset_type": "Asset Type",
       "sort_by": "Sort by",
       "close": "Close",
       "add_collaborator": "Add Collaborator",

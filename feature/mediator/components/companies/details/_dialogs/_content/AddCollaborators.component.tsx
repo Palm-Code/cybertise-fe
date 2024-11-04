@@ -22,14 +22,10 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type CollaboratorDialogProps = I_ModalProps & {
   id: string;
-  onClickBack: () => void;
 };
 
-export const AddCollaborators = ({
-  id,
-  onClickBack,
-  ...props
-}: CollaboratorDialogProps) => {
+export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
+  const queryClient = useQueryClient();
   const t = useTranslations("CompanyDetailsMediator.collaborators");
   const addCollaboratorTableColums = useGetAddCollaboratorTableColumns();
   const { payload, setPayload } = useHackersParamsStore();
@@ -81,6 +77,9 @@ export const AddCollaborators = ({
       program_id: id,
     }).then((res) => {
       if (res) {
+        queryClient.invalidateQueries({
+          queryKey: ["getHackerList"],
+        });
         setSelectedCollaboratorsIds([]);
       }
     });
@@ -91,10 +90,6 @@ export const AddCollaborators = ({
       <div className="flex w-full flex-col gap-6">
         <div className="flex w-full items-center justify-between">
           <div className="grid grid-cols-[auto_1fr] items-center gap-2">
-            <ChevronLeft
-              className="size-8 cursor-pointer"
-              onClick={onClickBack}
-            />
             <Typography variant="h4" weight="bold">
               {t("title")}
             </Typography>
@@ -119,7 +114,6 @@ export const AddCollaborators = ({
             useSubmitSearch(payload.params?.search, refetch)
           }
           variant="mediator"
-          buttonVariant="tertiary"
         />
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-6">
@@ -180,12 +174,11 @@ export const AddCollaborators = ({
         ) : totalHackers > 0 ? (
           <>
             <AddCollaboratorsTableView
+              id={id}
+              selectedIds={selectedCollaboratorsIds}
               columns={addCollaboratorTableColums}
               data={tableData ?? []}
               isLoading={isPendingPostAddCollaborators}
-              onClickInvite={(ids) => {
-                onClickInvite(ids);
-              }}
               onChangeCheckbox={(id, checked) => {
                 if (checked) {
                   setSelectedCollaboratorsIds((prev) => [...prev, id]);

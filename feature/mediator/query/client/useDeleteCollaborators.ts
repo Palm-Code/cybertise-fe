@@ -15,10 +15,6 @@ export const useDeleteCollaborators = () => {
     retry: 3,
     mutationFn: fetchDeleteCollaborators,
     onSuccess(_, variables) {
-      mutation.reset();
-      queryClient.invalidateQueries({
-        queryKey: ["getCollaboratorList"],
-      });
       toast.success(
         `Successfully deleted ${variables.collaborator_ids.length} collaborators`,
         {

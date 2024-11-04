@@ -1,32 +1,15 @@
-import { I_GetUserDataSuccessResponse, I_UserData } from "@/core/models/common";
+import { I_GetUserDataSuccessResponse } from "@/core/models/common";
 import { create } from "zustand";
-export type State = {
-  data: I_GetUserDataSuccessResponse["data"];
-};
 
-export type Actions = {
-  setUserData: (payload: I_GetUserDataSuccessResponse["data"]) => void;
-};
+export type UserState = I_GetUserDataSuccessResponse["data"];
 
-const initialState: State = {
+export const useUserStore = create<{ data: UserState }>(() => ({
   data: {
     id: "",
     name: "",
     email: "",
-    role: "hacker",
     avatar: "",
+    role: "hacker",
     language: "en",
   },
-};
-
-export const useUserStore = create<State & Actions>()((set) => {
-  return {
-    ...initialState,
-    setUserData: (payload: I_GetUserDataSuccessResponse["data"]) => {
-      set((state) => ({
-        ...state,
-        data: payload,
-      }));
-    },
-  };
-});
+}));

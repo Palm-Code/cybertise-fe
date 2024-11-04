@@ -162,7 +162,10 @@
       "button_delete": "Löschen",
       "showing_collaborator": "Zeigt {currentShowCollaborator} von {totalCollaborator} Mitarbeitern",
       "showing_hacker": "Zeigt {currentShowHacker} von {totalHackers} Hacker",
-      "ago": "vor"
+      "ago": "vor",
+      "titles": "Mitarbeiter",
+      "asset_type": "Asset-Typ",
+      "ticket": "ticket"
     }
   },
   "CreateCompanyTicket": {

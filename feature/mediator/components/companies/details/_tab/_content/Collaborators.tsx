@@ -25,7 +25,6 @@ const Collaborators = ({
   const [openModalConfirm, setOpenModalConfirm] = useState(false);
 
   const onCloseCollaboratorDialog = () => {
-    // setOpenModalConfirm(true);
     setOpenCollaboratorDialog(false);
     queryClient.removeQueries();
     setHackerPayload(initialState.payload);
@@ -35,14 +34,7 @@ const Collaborators = ({
   return (
     <>
       <AnimationWrapper>
-        <VrpCardList
-          isCollaborators
-          data={data ?? []}
-          onClickVrp={(v) => {
-            setSelectedId(v);
-            setOpenCollaboratorDialog(true);
-          }}
-        />
+        <VrpCardList isCollaborators data={data ?? []} />
       </AnimationWrapper>
       <CollaboratorDialog
         id={selectedId}

@@ -27,6 +27,7 @@ const VRPCard = ({
   id,
   title,
   asset_types,
+  company_id,
   isCollaborators = false,
   onClickVrp = () => {},
   status,
@@ -39,10 +40,10 @@ const VRPCard = ({
     <AnimationWrapper>
       <Mobile>
         <Card
-          isButton
-          onClick={() =>
-            isCollaborators ? onClickVrp(id) : setShowModal(true)
-          }
+          isButton={!isCollaborators}
+          isClickable={isCollaborators}
+          onClick={() => (isCollaborators ? undefined : setShowModal(true))}
+          href={`${company_id}/collaborators?program=${id}`}
         >
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="flex w-full items-center justify-between">
@@ -106,10 +107,12 @@ const VRPCard = ({
       </Mobile>
       <Desktop>
         <Card
-          isButton={isCollaborators}
-          isClickable={!isCollaborators}
-          href={`/vrp-launchpad/${id}`}
-          onClick={() => (isCollaborators ? onClickVrp(id) : undefined)}
+          isClickable
+          href={
+            isCollaborators
+              ? `${company_id}/collaborators?program=${id}`
+              : `/vrp-launchpad/${id}`
+          }
         >
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">

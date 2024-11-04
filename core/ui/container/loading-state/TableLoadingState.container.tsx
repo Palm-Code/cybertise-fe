@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "../../components";
-import { AnimationWrapper } from "../../layout";
 import { Skeleton } from "../../components/skeleton/skeleton";
 import { I_TableColumns } from "@/interfaces";
 
@@ -41,9 +40,8 @@ const TableLoadingState = ({
             <TableBodyRow key={`table-row-${index}`}>
               <TableRow>
                 <TableData
-                  className={cn("_flexbox__col__center h-24 w-full gap-3")}
+                  className={cn("_flexbox__col__center h-8 w-full gap-3")}
                 >
-                  <Skeleton className="h-full w-full" />
                   <Skeleton className="h-full w-full" />
                 </TableData>
               </TableRow>

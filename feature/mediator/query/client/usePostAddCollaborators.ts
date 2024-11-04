@@ -17,9 +17,9 @@ export const usePostAddCollaborators = () => {
     retry: 3,
     mutationFn: fetchPostAddCollaborators,
     onSuccess(_, variables) {
-      mutation.reset();
+      // mutation.reset();
       queryClient.invalidateQueries({
-        queryKey: ["getHackerList"],
+        queryKey: ["getCollaboratorList"],
       });
       toast.success(
         `Successfully added ${variables.user_ids.length} collaborators`,

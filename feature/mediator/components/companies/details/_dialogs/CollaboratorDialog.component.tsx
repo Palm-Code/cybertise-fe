@@ -1,8 +1,8 @@
 import { cn } from "@/core/lib/utils";
 import BaseModal, { I_ModalProps } from "@/core/ui/components/modal/modal";
-import React, { useState } from "react";
-import { ViewCollaborators } from "./_content";
+import React from "react";
 import { AddCollaborators } from "./_content/AddCollaborators.component";
+import { useQueryClient } from "@tanstack/react-query";
 
 type CollaboratorDialogProps = I_ModalProps & {
   id: string;
@@ -13,10 +13,11 @@ export const CollaboratorDialog = ({
   onClose = () => {},
   ...props
 }: CollaboratorDialogProps) => {
-  const [openAddCollaborator, setOpenAddCollaborator] = useState(false);
-
+  const queryClient = useQueryClient();
   const onCloseModal = () => {
-    setOpenAddCollaborator(false);
+    queryClient.removeQueries({
+      queryKey: ["getHackerList"],
+    });
     onClose();
   };
 
@@ -29,19 +30,7 @@ export const CollaboratorDialog = ({
             "px-10 py-8"
           )}
         >
-          {openAddCollaborator ? (
-            <AddCollaborators
-              id={id}
-              onClose={onCloseModal}
-              onClickBack={() => setOpenAddCollaborator(false)}
-            />
-          ) : (
-            <ViewCollaborators
-              id={id}
-              onClose={onCloseModal}
-              onClickAddCollaborator={() => setOpenAddCollaborator(true)}
-            />
-          )}
+          <AddCollaborators id={id} onClose={onCloseModal} />
         </div>
       </div>
     </BaseModal>

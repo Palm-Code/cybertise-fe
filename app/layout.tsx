@@ -6,13 +6,20 @@ import type { Metadata } from "next";
 import { cn } from "@/core/lib/utils";
 import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
-import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
+import {
+  getQueryClient,
+  Hydrate,
+  ReactQueryProvider,
+  ThemeProvider,
+} from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
-import { headers } from "next/headers";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
+import { dehydrate } from "@tanstack/react-query";
+import { prefetchGetUserData } from "@/core/react-query/server";
+import { UserInitializer } from "@/core/zustands/user";
 
 export const revalidate = 0;
 
@@ -31,20 +38,17 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const session = await getSession();
-  const requestHeaders = headers().get("x-url");
+  // const requestHeaders = headers().get("x-url");
 
-  const includedArray = [
-    "/auth",
-    "/authorize",
-    "/forgot-password",
-    "/set-password",
-    "/faq",
-    "/policy",
-    "/terms-and-conditions",
-  ];
-  const containsIncludedPath = includedArray.some((path) =>
-    requestHeaders?.includes(path)
-  );
+  // const includedArray = [
+  //   "/auth",
+  //   "/authorize",
+  //   "/forgot-password",
+  //   "/set-password",
+  //   "/faq",
+  //   "/policy",
+  //   "/terms-and-conditions",
+  // ];
 
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
@@ -55,14 +59,15 @@ export default async function RootLayout({
 
   const messages = await getMessages();
   const countryList = await fetchGetCountryList();
+  const user = await prefetchGetUserData();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           Inter.className,
-          "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
-          !containsIncludedPath ? "overflow-hidden" : ""
+          "hyphens-auto bg-background-page-light dark:bg-background-page-dark"
+          // !containsIncludedPath ? "overflow-hidden" : ""
         )}
       >
         <NextTopLoader
@@ -75,15 +80,19 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <ReactQueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              disableTransitionOnChange
-            >
-              <CountryListInitializer countryList={countryList}>
-                {children}
-              </CountryListInitializer>
-            </ThemeProvider>
+            <Hydrate state={dehydrate(getQueryClient())}>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="dark"
+                disableTransitionOnChange
+              >
+                <UserInitializer users={user}>
+                  <CountryListInitializer countryList={countryList}>
+                    {children}
+                  </CountryListInitializer>
+                </UserInitializer>
+              </ThemeProvider>
+            </Hydrate>
             <Toaster position="top-center" />
           </ReactQueryProvider>
         </NextIntlClientProvider>

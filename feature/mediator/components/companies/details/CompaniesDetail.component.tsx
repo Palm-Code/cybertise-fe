@@ -10,7 +10,6 @@ import Tab from "./_tab/Tab";
 import VrpCardList from "./_card/VrpCard";
 import ActiveTicket from "./_tab/_content/ActiveTicket";
 import { Desktop, Mobile } from "@/core/ui/layout";
-import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useCompaniesDetailParamsStore } from "@/feature/mediator/zustand/store/companies/companies_detail";
 import {
   useGetCompaniesDetail,

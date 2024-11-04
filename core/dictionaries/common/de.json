@@ -40,7 +40,10 @@
     "status": "Status",
     "last_update": "Letztes Update",
     "last_message": "Letzte Nachricht",
-    "ticket_type": "Tickettyp"
+    "ticket_type": "Tickettyp",
+    "hacker_ticket": "Hacker-Ticket",
+    "company_ticket": "Firmenticket",
+    "create_company_ticket": "Firmenticket erstellen"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -273,5 +276,12 @@
         }
       }
     }
+  },
+  "ProgramsVRPLaunchpad": {
+    "company_name": "Name der Firma",
+    "vrp_title": "VRP-Titel",
+    "asset_type": "Asset-Typ",
+    "status": "Status",
+    "vrp_type": "VRP-Typ"
   }
 }

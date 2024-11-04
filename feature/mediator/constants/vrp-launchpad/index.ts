@@ -7,6 +7,37 @@ import {
 } from "@/types/admin/vrp-launchpad";
 import { useTranslations } from "next-intl";
 
+export const useGetVrpLaunchpadTableColumns = () => {
+  const t = useTranslations("ProgramsVRPLaunchpad");
+  return [
+    {
+      title: t("company_name"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("vrp_title"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("vrp_type"),
+      align: "center",
+      width: "w-1/6",
+    },
+    {
+      title: t("asset_type"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("status"),
+      align: "center",
+      width: "w-1/6",
+    },
+  ] as I_TableColumns[];
+};
+
 export const tableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
@@ -262,7 +293,7 @@ export const useGetAddCollaboratorTableColumns = () => {
     {
       title: "",
       align: "left",
-      width: "w-[5%]",
+      width: "w-0",
     },
     {
       title: t("collaborators.table.name"),
@@ -297,7 +328,7 @@ export const useGetCollaboratorTableColumns = () => {
     {
       title: "",
       align: "center",
-      width: "w-[15%]",
+      width: "w-0",
     },
     {
       title: t("collaborators.table.name"),
