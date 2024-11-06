@@ -20,6 +20,8 @@ import CountryListInitializer from "@/core/zustands/country-list/initializer";
 import { dehydrate } from "@tanstack/react-query";
 import { prefetchGetUserData } from "@/core/react-query/server";
 import { UserInitializer } from "@/core/zustands/user";
+import { headers } from "next/headers";
+import { fetchGetUserData } from "@/core/services/server";
 
 export const revalidate = 0;
 
@@ -38,17 +40,22 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const session = await getSession();
-  // const requestHeaders = headers().get("x-url");
+  const requestHeaders = headers().get("x-url");
 
-  // const includedArray = [
-  //   "/auth",
-  //   "/authorize",
-  //   "/forgot-password",
-  //   "/set-password",
-  //   "/faq",
-  //   "/policy",
-  //   "/terms-and-conditions",
-  // ];
+  const includedArray = [
+    "/auth",
+    "/authorize",
+    "/forgot-password",
+    "/set-password",
+    "/faq",
+    "/policy",
+    "/terms-and-conditions",
+    "/companies",
+  ];
+
+  const containsIncludedPath = includedArray.some((path) =>
+    requestHeaders?.includes(path)
+  );
 
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
@@ -59,15 +66,14 @@ export default async function RootLayout({
 
   const messages = await getMessages();
   const countryList = await fetchGetCountryList();
-  const user = await prefetchGetUserData();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           Inter.className,
-          "hyphens-auto bg-background-page-light dark:bg-background-page-dark"
-          // !containsIncludedPath ? "overflow-hidden" : ""
+          "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
+          !containsIncludedPath ? "overflow-hidden" : ""
         )}
       >
         <NextTopLoader
@@ -80,19 +86,15 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <ReactQueryProvider>
-            <Hydrate state={dehydrate(getQueryClient())}>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="dark"
-                disableTransitionOnChange
-              >
-                <UserInitializer users={user}>
-                  <CountryListInitializer countryList={countryList}>
-                    {children}
-                  </CountryListInitializer>
-                </UserInitializer>
-              </ThemeProvider>
-            </Hydrate>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+            >
+              <CountryListInitializer countryList={countryList}>
+                {children}
+              </CountryListInitializer>
+            </ThemeProvider>
             <Toaster position="top-center" />
           </ReactQueryProvider>
         </NextIntlClientProvider>

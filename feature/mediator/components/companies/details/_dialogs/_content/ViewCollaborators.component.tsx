@@ -22,13 +22,18 @@ import { TableLoadingList } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useInView } from "react-intersection-observer";
-import { useOnchangeSearch, useSubmitSearch } from "@/core/hooks";
+import { useClickSort, useOnchangeSearch, useSubmitSearch } from "@/core/hooks";
 import { SkeletonList } from "@/core/ui/components/skeleton/skeleton";
 import { cn } from "@/core/lib/utils";
 import { useRouter } from "next/navigation";
 import { CollaboratorDialog } from "../CollaboratorDialog.component";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetProgramDetails } from "@/feature/mediator/query/client/useGetProgramDetails";
+import {
+  collaboratorSortBy,
+  ticketReportedOptions,
+} from "@/core/constants/options";
+import { useGetAssetType } from "@/core/react-query/client";
 
 type CollaboratorDialogProps = I_ModalProps & {
   onClickAddCollaborator: () => void;
@@ -41,6 +46,7 @@ export const ViewCollaborators = ({
   ...props
 }: CollaboratorDialogProps) => {
   const t = useTranslations("CompanyDetailsMediator.collaborators");
+  const { data: assetType } = useGetAssetType();
   const router = useRouter();
   const collaboratorTableColums = useGetAddCollaboratorTableColumns();
   const { payload, setPayload } = useCollaboratorsParamsStore();
@@ -48,7 +54,7 @@ export const ViewCollaborators = ({
     useState(false);
 
   const { data, isLoading: isLoadingProgramDetails } = useGetProgramDetails(
-    payload,
+    undefined,
     id
   );
 
@@ -97,6 +103,27 @@ export const ViewCollaborators = ({
         });
         setSelectedCollaboratorsIds([]);
       }
+    });
+  };
+
+  const submitChange = (
+    type: "valid_report_size" | "has_asset_type",
+    value: string
+  ) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]:
+            value === "all"
+              ? undefined
+              : type === "valid_report_size"
+                ? value
+                : assetType?.find((v) => v.value === value)?.id,
+        },
+      },
     });
   };
 
@@ -158,39 +185,65 @@ export const ViewCollaborators = ({
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-6">
               <BaseDropdown
-                label="Filter by"
-                value="all"
-                options={[]}
-                onValueChange={() => {}}
+                label="Asset Type"
+                value={
+                  assetType?.find(
+                    (item) =>
+                      item.id === payload?.params?.filter?.has_asset_type
+                  )?.value as string
+                }
+                options={assetType}
+                onValueChange={(value) => {
+                  submitChange("has_asset_type", value);
+                }}
               />
               <BaseDropdown
-                label="Sort by"
-                value="all"
-                options={[]}
-                onValueChange={() => {}}
+                label="Ticket Reported"
+                value={payload.params?.filter?.valid_report_size ?? "all"}
+                options={ticketReportedOptions}
+                onValueChange={(value) => {
+                  setPayload({
+                    ...payload,
+                    params: {
+                      ...payload.params,
+                      filter: {
+                        ...payload.params?.filter,
+                        valid_report_size: value,
+                      },
+                    },
+                  });
+                }}
               />
             </div>
-            <div className="flex items-center gap-4">
-              <Typography variant="p" affects="normal" weight="semibold">
-                {selectedCollaboratorsIds.length} {t("hacker_selected")}
-              </Typography>
-              <Button
-                disabled={
-                  selectedCollaboratorsIds.length === 0 ||
-                  isPendingDeleteCollaborators
-                }
-                isLoading={isPendingDeleteCollaborators}
-                variant="ghost-alert"
-                size="lg"
-                className="font-semibold"
-                onClick={() => {
-                  onClickDeleteCollaborators(selectedCollaboratorsIds);
-                }}
-                prefixIcon={<UserX className="h-4 w-4" />}
-              >
-                {t("button_delete")}
-              </Button>
-            </div>
+            <BaseDropdown
+              label="Sort by"
+              value={payload.params?.filter?.sort ?? "all"}
+              options={collaboratorSortBy}
+              onValueChange={(value) => {
+                useClickSort(value, { payload, setPayload });
+              }}
+            />
+          </div>
+          <div className="ml-auto flex items-center gap-4">
+            <Typography variant="p" affects="normal" weight="semibold">
+              {selectedCollaboratorsIds.length} {t("hacker_selected")}
+            </Typography>
+            <Button
+              disabled={
+                selectedCollaboratorsIds.length === 0 ||
+                isPendingDeleteCollaborators
+              }
+              isLoading={isPendingDeleteCollaborators}
+              variant="ghost-alert"
+              size="lg"
+              className="font-semibold"
+              onClick={() => {
+                onClickDeleteCollaborators(selectedCollaboratorsIds);
+              }}
+              prefixIcon={<UserX className="h-4 w-4" />}
+            >
+              {t("button_delete")}
+            </Button>
           </div>
         </div>
         <div className="h-full w-full space-y-6">
@@ -239,7 +292,7 @@ export const ViewCollaborators = ({
               variant="mediator"
               titleText={t("no_collaborators")}
               buttonText={t("button_add_collaborator")}
-              onClickButton={onClickAddCollaborator}
+              onClickButton={() => setShowModalAddCollaborator(true)}
             />
           )}
         </div>

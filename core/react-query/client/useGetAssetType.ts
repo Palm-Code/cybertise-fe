@@ -6,21 +6,12 @@ import {
 import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { fetchGetAssetType } from "@/core/services/common/fetchGetAssetType";
 import { initialState } from "@/core/zustands/asset-type/store";
+import { useAssetTypeStore } from "@/core/zustands/globals/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export const useGetAssetType = (payload?: I_GetParamsPayload) => {
-  const query = useQuery<I_GetAssetTypeSuccessResponse, I_GetErrorResponse>({
-    queryKey: ["getAssetType", payload?.params?.page, payload?.params?.filter],
-    queryFn: () => fetchGetAssetType(),
-    placeholderData: keepPreviousData,
-    refetchOnMount: false,
-  });
+  const { data } = useAssetTypeStore.getState();
 
-  if (query.error) {
-    throw new Error(JSON.stringify(query.error));
-  }
-
-  const data = query.data?.data || [];
   const filteredAssetTypes = data
     ? data.map((item) => {
         return {

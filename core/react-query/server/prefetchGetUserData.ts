@@ -3,9 +3,8 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const prefetchGetUserData = async () => {
   const queryClient = new QueryClient();
-
   const data = await queryClient.fetchQuery({
-    queryKey: ["getUserData"],
+    queryKey: ["getServerUserData"],
     queryFn: () => fetchGetUserData(),
   });
 

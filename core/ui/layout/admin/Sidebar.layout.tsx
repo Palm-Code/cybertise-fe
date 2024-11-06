@@ -27,9 +27,10 @@ import {
 } from "../../components";
 import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
-import { useGetUserData, usePostLogout } from "@/core/react-query/client";
+import { usePostLogout } from "@/core/react-query/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { useUserStore } from "@/core/zustands/globals/store";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -56,7 +57,7 @@ const Sidebar = ({ type }: SidebarProps) => {
   const menu = menuItems[type as keyof typeof menuItems];
 
   const { mutateAsync } = usePostLogout();
-  const { data: user } = useGetUserData();
+  const { data: user } = useUserStore.getState();
 
   return (
     <>

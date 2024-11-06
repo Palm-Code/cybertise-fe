@@ -3,6 +3,7 @@ import { I_GetErrorRes } from "@/core/models/common";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { I_UpdateProfile } from "@/core/models/company/settings";
 import { fetchPostUpdateProfile } from "@/core/services/common";
+import { useUserStore } from "@/core/zustands/globals/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -29,7 +30,14 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
         queryKey: ["getUserProfile"],
       });
       queryClient.invalidateQueries({
-        queryKey: ["getUserData"],
+        queryKey: ["getServerUserData"],
+      });
+      useUserStore.setState({
+        data: {
+          ...useUserStore.getState().data,
+          avatar: data.data.image,
+          name: data.data.name,
+        },
       });
     },
     onError: (error) => {

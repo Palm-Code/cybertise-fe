@@ -10,7 +10,11 @@ export type Actions = {
 };
 
 export const initialState: State = {
-  payload: {},
+  payload: {
+    params: {
+      include: "user",
+    },
+  },
 };
 
 export const useCollaboratorsParamsStore = create<State & Actions>()((set) => {

@@ -48,7 +48,7 @@ const ActionDropDown = ({
       <Desktop className="mx-auto w-fit">
         <Select open={open} onOpenChange={onOpenChange}>
           <SelectTrigger className="!bg-transparent !p-0">
-            <Button variant="tertiary-mediator">
+            <Button variant="tertiary-mediator" size="ghost">
               <EllipsisVertical />
             </Button>
           </SelectTrigger>

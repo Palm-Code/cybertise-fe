@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import LanguageDropdown from "./dropdown/LanguageDropdown.component";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { useUserStore } from "@/core/zustands/user";
+import { useUserStore } from "@/core/zustands/globals/store";
 
 const Header = () => {
   const t = useTranslations("Sidebar");

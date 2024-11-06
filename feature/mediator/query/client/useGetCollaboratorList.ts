@@ -17,7 +17,6 @@ export const useGetCollaboratorList = (
       fetchGetCollaboratorList({
         params: {
           ...payload?.params,
-          include: "user",
           filter: {
             ...payload?.params?.filter,
             program_id: id,

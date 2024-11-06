@@ -7,8 +7,6 @@ const axiosServerInterceptorInstance = axios.create({
   headers: {
     "ngrok-skip-browser-warning": true,
     "Content-Type": "application/json",
-    "Cache-Control": "no-cache",
-    Pragma: "no-cache",
   },
 });
 
