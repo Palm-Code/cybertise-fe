@@ -217,7 +217,7 @@ export const ViewCollaborators = ({
             </div>
             <BaseDropdown
               label="Sort by"
-              value={payload.params?.filter?.sort ?? "all"}
+              value={payload.params?.sort ?? "name"}
               options={collaboratorSortBy}
               onValueChange={(value) => {
                 useClickSort(value, { payload, setPayload });

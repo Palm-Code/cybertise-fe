@@ -19,6 +19,12 @@ import { useInView } from "react-intersection-observer";
 import { useClickSort, useOnchangeSearch, useSubmitSearch } from "@/core/hooks";
 import { SkeletonList } from "@/core/ui/components/skeleton/skeleton";
 import { useQueryClient } from "@tanstack/react-query";
+import {
+  collaboratorSortBy,
+  hackerSortBy,
+  ticketReportedOptions,
+} from "@/core/constants/options";
+import { useGetAssetType } from "@/core/react-query/client";
 
 type CollaboratorDialogProps = I_ModalProps & {
   id: string;
@@ -26,6 +32,7 @@ type CollaboratorDialogProps = I_ModalProps & {
 
 export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
   const queryClient = useQueryClient();
+  const { data: assetType } = useGetAssetType();
   const t = useTranslations("CompanyDetailsMediator.collaborators");
   const addCollaboratorTableColums = useGetAddCollaboratorTableColumns();
   const { payload, setPayload } = useHackersParamsStore();
@@ -70,6 +77,27 @@ export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
 
   const totalHackers = data?.pages[0].meta.total ?? 0;
   const currentShowHacker = hackerListData?.length ?? 0;
+
+  const submitChange = (
+    type: "valid_report_size" | "has_asset_type",
+    value: string
+  ) => {
+    setPayload({
+      ...payload,
+      params: {
+        ...payload.params,
+        filter: {
+          ...payload.params?.filter,
+          [type]:
+            value === "all"
+              ? undefined
+              : type === "valid_report_size"
+                ? value
+                : assetType?.find((v) => v.value === value)?.id,
+        },
+      },
+    });
+  };
 
   const onClickInvite = (ids: string[]) => {
     postAddCollaborators({
@@ -118,25 +146,43 @@ export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-6">
             <BaseDropdown
+              label="Asset Type"
               contentClassName="z-[99999]"
-              label="Filter by"
-              value="all"
-              options={[]}
-              onValueChange={() => {}}
+              value={
+                assetType?.find(
+                  (item) => item.id === payload?.params?.filter?.has_asset_type
+                )?.value as string
+              }
+              options={assetType}
+              onValueChange={(value) => {
+                submitChange("has_asset_type", value);
+              }}
+            />
+            <BaseDropdown
+              label="Ticket Reported"
+              contentClassName="z-[99999]"
+              value={payload.params?.filter?.valid_report_size ?? "all"}
+              options={ticketReportedOptions}
+              onValueChange={(value) => {
+                setPayload({
+                  ...payload,
+                  params: {
+                    ...payload.params,
+                    filter: {
+                      ...payload.params?.filter,
+                      valid_report_size: value,
+                    },
+                  },
+                });
+              }}
             />
             <BaseDropdown
               contentClassName="z-[99999]"
-              variant="mediator"
               label="Sort by"
-              value={payload?.params?.sort}
-              options={[
-                {
-                  label: "Valid Reports",
-                  value: "-valid_report",
-                },
-              ]}
-              onValueChange={(v) => {
-                useClickSort(v, { payload, setPayload });
+              value={payload.params?.sort ?? "all"}
+              options={hackerSortBy}
+              onValueChange={(value) => {
+                useClickSort(value, { payload, setPayload });
               }}
             />
           </div>

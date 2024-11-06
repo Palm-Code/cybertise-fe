@@ -10,7 +10,11 @@ export type Actions = {
 };
 
 const initialState: State = {
-  payload: {},
+  payload: {
+    params: {
+      sort: "name",
+    },
+  },
 };
 
 export const useHackersParamsStore = create<State & Actions>()((set) => {

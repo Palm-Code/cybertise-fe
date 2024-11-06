@@ -73,7 +73,11 @@ export default function Table({
           >
             <TableRow>
               <TableData
-                className={cn(columns[0].width, `text-${columns[0].align}`)}
+                className={cn(
+                  columns[0].width,
+                  `text-${columns[0].align}`,
+                  "mt-auto"
+                )}
               >
                 <Checkbox
                   checked={selectedIds.includes(item.user.id as string)}
@@ -145,7 +149,11 @@ export default function Table({
                 </Typography>
               </TableData>
               <TableData
-                className={cn(columns[5].width, `text-${columns[5].align}`)}
+                className={cn(
+                  columns[5].width,
+                  `text-${columns[5].align}`,
+                  "leading-[0px]"
+                )}
               >
                 <AddCollaboratorButton
                   program_id={id}

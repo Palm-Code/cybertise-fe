@@ -13,6 +13,7 @@ export const initialState: State = {
   payload: {
     params: {
       include: "user",
+      sort: "user.name",
     },
   },
 };

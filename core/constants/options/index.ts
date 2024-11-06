@@ -16,8 +16,30 @@ export const collaboratorSortBy: SortFilterType[] = [
     value: "-user.last_active",
   },
   {
+    label: "Valid Report",
+    value: "-user.valid_report",
+  },
+];
+export const hackerSortBy: SortFilterType[] = [
+  {
+    label: "A-Z",
+    value: "name",
+  },
+  {
+    label: "Z-A",
+    value: "-name",
+  },
+  {
+    label: "Last Active",
+    value: "-last_active",
+  },
+  {
     label: "First Active",
-    value: "user.last_active",
+    value: "last_active",
+  },
+  {
+    label: "Valid Report",
+    value: "-valid_report",
   },
 ];
 
