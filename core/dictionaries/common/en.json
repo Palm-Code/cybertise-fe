@@ -25,6 +25,7 @@
     "risk_level": "Risk Level",
     "status": "Status",
     "asset_type": "Asset Type",
+    "ticket_reported": "Ticket Reported",
     "date_range": {
       "title": "Date Range",
       "button_apply": "Apply",

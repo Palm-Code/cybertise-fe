@@ -14,6 +14,9 @@ export const initialState: State = {
     params: {
       include: "user",
       sort: "user.name",
+      fields: {
+        collaborators: "id,user_id,program_id",
+      },
     },
   },
 };

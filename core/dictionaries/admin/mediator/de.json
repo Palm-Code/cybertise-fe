@@ -159,13 +159,14 @@
       "button_invite": "einladen",
       "no_hacker": "Kein Hacker gefunden",
       "search_add_collaborator": "Suche nach Hackern",
-      "button_delete": "Löschen",
+      "button_delete": "Laden Sie Mitarbeiter nicht mehr ein",
       "showing_collaborator": "Zeigt {currentShowCollaborator} von {totalCollaborator} Mitarbeitern",
       "showing_hacker": "Zeigt {currentShowHacker} von {totalHackers} Hacker",
       "ago": "vor",
       "titles": "Mitarbeiter",
       "asset_type": "Asset-Typ",
-      "ticket": "ticket"
+      "ticket": "ticket",
+      "sort_by": "Sortieren nach"
     }
   },
   "CreateCompanyTicket": {

@@ -1,4 +1,4 @@
-import { ChevronLeft, X } from "lucide-react";
+import { ChevronLeft, UserPlus, X } from "lucide-react";
 import { Button, Loader, SearchInput, Typography } from "@/core/ui/components";
 import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import React, { useEffect, useRef, useState } from "react";
@@ -25,6 +25,10 @@ import {
   ticketReportedOptions,
 } from "@/core/constants/options";
 import { useGetAssetType } from "@/core/react-query/client";
+import { FilterDropdown } from "../../_dropdown";
+import SortByDropdown from "../../../_dropdown/SortBy.component";
+import SortDropdown from "../../_dropdown/SortDropdown.component";
+import { cn } from "@/core/lib/utils";
 
 type CollaboratorDialogProps = I_ModalProps & {
   id: string;
@@ -114,7 +118,7 @@ export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col gap-8">
+    <div className="relative flex h-full w-full flex-col gap-8">
       <div className="flex w-full flex-col gap-6">
         <div className="flex w-full items-center justify-between">
           <div className="grid grid-cols-[auto_1fr] items-center gap-2">
@@ -145,76 +149,24 @@ export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
         />
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-6">
-            <BaseDropdown
-              label="Asset Type"
-              contentClassName="z-[99999]"
-              value={
-                assetType?.find(
-                  (item) => item.id === payload?.params?.filter?.has_asset_type
-                )?.value as string
-              }
-              options={assetType}
-              onValueChange={(value) => {
-                submitChange("has_asset_type", value);
-              }}
-            />
-            <BaseDropdown
-              label="Ticket Reported"
-              contentClassName="z-[99999]"
-              value={payload.params?.filter?.valid_report_size ?? "all"}
-              options={ticketReportedOptions}
-              onValueChange={(value) => {
-                setPayload({
-                  ...payload,
-                  params: {
-                    ...payload.params,
-                    filter: {
-                      ...payload.params?.filter,
-                      valid_report_size: value,
-                    },
-                  },
-                });
-              }}
-            />
-            <BaseDropdown
-              contentClassName="z-[99999]"
-              label="Sort by"
-              value={payload.params?.sort ?? "all"}
-              options={hackerSortBy}
-              onValueChange={(value) => {
-                useClickSort(value, { payload, setPayload });
-              }}
+            <FilterDropdown
+              isModal
+              store={{ payload, setPayload }}
+              onValueChange={submitChange}
             />
           </div>
-          <div className="flex items-center gap-4">
-            <Typography variant="p" affects="normal" weight="semibold">
-              {selectedCollaboratorsIds.length} {t("hacker_selected")}
-            </Typography>
-            <Button
-              disabled={
-                selectedCollaboratorsIds.length === 0 ||
-                isPendingPostAddCollaborators
-              }
-              isLoading={isPendingPostAddCollaborators}
-              variant="ghost-mediator"
-              size="lg"
-              className="font-semibold"
-              onClick={() => {
-                onClickInvite(selectedCollaboratorsIds);
-              }}
-            >
-              {t("button_invite")}
-            </Button>
-          </div>
+          <SortDropdown
+            isModal
+            variant="mediator"
+            value={payload.params?.sort ?? "name"}
+            options={hackerSortBy}
+            onValueChange={(value) => {
+              useClickSort(value, { payload, setPayload });
+            }}
+          />
         </div>
-        <Typography variant="p" affects="normal" weight="semibold">
-          {t("showing_hacker", {
-            currentShowHacker,
-            totalHackers,
-          })}
-        </Typography>
       </div>
-      <div className="h-full w-full space-y-6 overflow-auto">
+      <div className="relative h-full w-full space-y-6 overflow-auto">
         {isLoading || isRefetching ? (
           <TableLoadingList stickyHeader columns={addCollaboratorTableColums} />
         ) : totalHackers > 0 ? (
@@ -250,7 +202,45 @@ export const AddCollaborators = ({ id, ...props }: CollaboratorDialogProps) => {
             buttonText={""}
           />
         )}
+        {selectedCollaboratorsIds.length > 0 && (
+          <div className={cn("sticky bottom-4 z-50 mx-auto w-full", "px-6")}>
+            <div
+              className={cn(
+                "flex w-full items-center justify-between gap-4 rounded-md px-6 py-3",
+                "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
+              )}
+            >
+              <Typography variant="p" affects="small" weight="medium">
+                {selectedCollaboratorsIds.length} {t("hacker_selected")}
+              </Typography>
+              <Button
+                disabled={
+                  selectedCollaboratorsIds.length === 0 ||
+                  isPendingPostAddCollaborators
+                }
+                isLoading={isPendingPostAddCollaborators}
+                variant="ghost-mediator"
+                onClick={() => {
+                  onClickInvite(selectedCollaboratorsIds);
+                }}
+                prefixIcon={<UserPlus />}
+              >
+                {t("button_invite")}
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
+      <Typography
+        variant="p"
+        affects="tiny"
+        className="italic text-neutral-light-40 dark:text-neutral-dark-40"
+      >
+        {t("showing_hacker", {
+          currentShowHacker,
+          totalHackers,
+        })}
+      </Typography>
     </div>
   );
 };

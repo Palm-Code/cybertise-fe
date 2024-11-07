@@ -158,7 +158,7 @@
       "hacker_invited": "Hacker Invited",
       "hacker_selected": "Hacker Selected",
       "button_invite": "invite",
-      "button_delete": "Delete",
+      "button_delete": "Uninvite collaborators",
       "button_add_collaborator": "Add Collaborator",
       "search_placeholder": "Search for invited collaborators",
       "search_add_collaborator": "Search for hackers",

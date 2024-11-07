@@ -29,7 +29,8 @@
       "title": "Datumsbereich",
       "button_clear": "Klar",
       "button_apply": "Anwenden"
-    }
+    },
+    "ticket_reported": "Ticket gemeldet"
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",

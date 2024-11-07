@@ -1,14 +1,6 @@
 "use client";
-import {
-  MoveLeft,
-  Plus,
-  UserMinus,
-  UserPlus,
-  Users,
-  UserX,
-} from "lucide-react";
+import { MoveLeft, UserPlus, Users, X } from "lucide-react";
 import { Button, Card, SearchInput, Typography } from "@/core/ui/components";
-import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import React, { useEffect, useState } from "react";
 import { CollaboratorsTableView } from "@/feature/mediator/containers";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
@@ -29,11 +21,10 @@ import { useRouter } from "next/navigation";
 import { CollaboratorDialog } from "../CollaboratorDialog.component";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetProgramDetails } from "@/feature/mediator/query/client/useGetProgramDetails";
-import {
-  collaboratorSortBy,
-  ticketReportedOptions,
-} from "@/core/constants/options";
+import { collaboratorSortBy } from "@/core/constants/options";
 import { useGetAssetType } from "@/core/react-query/client";
+import { FilterDropdown } from "../../_dropdown";
+import SortDropdown from "../../_dropdown/SortDropdown.component";
 
 type CollaboratorDialogProps = I_ModalProps & {
   onClickAddCollaborator: () => void;
@@ -129,7 +120,7 @@ export const ViewCollaborators = ({
 
   return (
     <>
-      <div className="flex h-full w-full flex-col gap-6 pt-12">
+      <div className="relative flex h-full w-full flex-col gap-6 pt-12">
         <Card
           className={cn(
             "grid grid-cols-[auto_1fr] items-center gap-6",
@@ -147,7 +138,7 @@ export const ViewCollaborators = ({
         </Card>
         <div
           className={cn(
-            "flex w-full flex-col gap-6 rounded-2xl px-12 py-8",
+            "flex w-full flex-col gap-6 rounded-t-2xl px-12 py-8",
             "bg-background-main-light dark:bg-background-main-dark"
           )}
         >
@@ -183,67 +174,18 @@ export const ViewCollaborators = ({
             }
           />
           <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-6">
-              <BaseDropdown
-                label="Asset Type"
-                value={
-                  assetType?.find(
-                    (item) =>
-                      item.id === payload?.params?.filter?.has_asset_type
-                  )?.value as string
-                }
-                options={assetType}
-                onValueChange={(value) => {
-                  submitChange("has_asset_type", value);
-                }}
-              />
-              <BaseDropdown
-                label="Ticket Reported"
-                value={payload.params?.filter?.valid_report_size ?? "all"}
-                options={ticketReportedOptions}
-                onValueChange={(value) => {
-                  setPayload({
-                    ...payload,
-                    params: {
-                      ...payload.params,
-                      filter: {
-                        ...payload.params?.filter,
-                        valid_report_size: value,
-                      },
-                    },
-                  });
-                }}
-              />
-            </div>
-            <BaseDropdown
-              label="Sort by"
+            <FilterDropdown
+              store={{ payload, setPayload }}
+              onValueChange={submitChange}
+            />
+            <SortDropdown
+              variant="mediator"
               value={payload.params?.sort ?? "name"}
               options={collaboratorSortBy}
               onValueChange={(value) => {
                 useClickSort(value, { payload, setPayload });
               }}
             />
-          </div>
-          <div className="ml-auto flex items-center gap-4">
-            <Typography variant="p" affects="normal" weight="semibold">
-              {selectedCollaboratorsIds.length} {t("hacker_selected")}
-            </Typography>
-            <Button
-              disabled={
-                selectedCollaboratorsIds.length === 0 ||
-                isPendingDeleteCollaborators
-              }
-              isLoading={isPendingDeleteCollaborators}
-              variant="ghost-alert"
-              size="lg"
-              className="font-semibold"
-              onClick={() => {
-                onClickDeleteCollaborators(selectedCollaboratorsIds);
-              }}
-              prefixIcon={<UserX className="h-4 w-4" />}
-            >
-              {t("button_delete")}
-            </Button>
           </div>
         </div>
         <div className="h-full w-full space-y-6">
@@ -296,6 +238,37 @@ export const ViewCollaborators = ({
             />
           )}
         </div>
+        {selectedCollaboratorsIds.length > 0 && (
+          <div
+            className={cn(
+              "fixed bottom-4 right-12 z-50 mx-auto max-w-[calc(100vw-(272px+104px))]",
+              "flex w-full items-center justify-center gap-4 rounded-md",
+              "px-6 py-3",
+              "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
+            )}
+          >
+            <div className="flex w-full items-center justify-between">
+              <Typography variant="p" affects="small" weight="medium">
+                {selectedCollaboratorsIds.length} {t("hacker_selected")}
+              </Typography>
+              <Button
+                disabled={
+                  selectedCollaboratorsIds.length === 0 ||
+                  isPendingDeleteCollaborators
+                }
+                isLoading={isPendingDeleteCollaborators}
+                variant="ghost-alert"
+                size="lg"
+                onClick={() => {
+                  onClickDeleteCollaborators(selectedCollaboratorsIds);
+                }}
+                prefixIcon={<X />}
+              >
+                {t("button_delete")}
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
       <CollaboratorDialog
         id={id}

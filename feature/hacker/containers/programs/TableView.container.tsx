@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import {
+  AssetTypeTooltip,
   Badge,
   BaseTable,
   TableBody,
@@ -104,9 +105,13 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         </Badge>
                       ))}
                       {item.asset_types && item.asset_types?.length > 3 && (
-                        <Badge variant="default">
-                          +{item.asset_types?.length - 3} More
-                        </Badge>
+                        <AssetTypeTooltip
+                          assetTypes={item.asset_types.slice(3)}
+                        >
+                          <Badge variant="default">
+                            +{item.asset_types?.length - 3} More
+                          </Badge>
+                        </AssetTypeTooltip>
                       )}
                     </div>
                   </TableData>
