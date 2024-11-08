@@ -57,7 +57,10 @@ const SortDropdown = ({
             </Typography>
             <div></div>
           </SelectTrigger>
-          <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+          <SelectContent
+            align="center"
+            className="!bg-white dark:!bg-neutral-dark-100"
+          >
             {options.length! ? (
               options.map((option) => (
                 <SelectItem key={option.value} value={option.value as string}>
@@ -85,6 +88,7 @@ const SortDropdown = ({
             </Typography>
           </SelectTrigger>
           <SelectContent
+            align="center"
             className={cn(
               "!bg-white dark:!bg-neutral-dark-100",
               isModal && "z-[99999]"

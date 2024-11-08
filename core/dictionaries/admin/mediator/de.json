@@ -156,17 +156,28 @@
       "no_collaborators": "Keine Mitarbeiter gefunden",
       "title": "Neue Mitarbeiter hinzufügen",
       "hacker_selected": "Hacker ausgewählt",
-      "button_invite": "einladen",
+      "button_invite": "hinzufügen",
       "no_hacker": "Kein Hacker gefunden",
       "search_add_collaborator": "Suche nach Hackern",
-      "button_delete": "Laden Sie Mitarbeiter nicht mehr ein",
+      "button_delete": "Mitarbeiter löschen",
       "showing_collaborator": "Zeigt {currentShowCollaborator} von {totalCollaborator} Mitarbeitern",
       "showing_hacker": "Zeigt {currentShowHacker} von {totalHackers} Hacker",
       "ago": "vor",
       "titles": "Mitarbeiter",
       "asset_type": "Asset-Typ",
       "ticket": "ticket",
-      "sort_by": "Sortieren nach"
+      "sort_by": "Sortieren nach",
+      "description": "Sie sind dabei, einen neuen Mitarbeiter des unten aufgeführten Hackers hinzuzufügen",
+      "success_title": "Mitarbeiter hinzugefügt",
+      "success_button": "Zurück",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_report": "Ja, Abbrechen",
+      "alert_title": "Hinzufügen eines Mitarbeiters abbrechen?",
+      "alert_description": "Die von Ihnen vorgenommenen Änderungen werden nicht gespeichert",
+      "forbidden": {
+        "title": "Fügen Sie Mitarbeiter auf Mobilgeräten hinzu",
+        "subtitle": "„Mitarbeiter hinzufügen“ ist nur auf dem Desktop verfügbar"
+      }
     }
   },
   "CreateCompanyTicket": {

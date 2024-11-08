@@ -37,15 +37,16 @@ const VRPCard = ({
   const t = useTranslations("Programs");
   const [showModal, setShowModal] = useState(false);
   return (
-    <AnimationWrapper>
-      <Mobile>
+    <AnimationWrapper className="h-full">
+      <Mobile className="h-full">
         <Card
           isButton={!isCollaborators}
           isClickable={isCollaborators}
           onClick={() => (isCollaborators ? undefined : setShowModal(true))}
           href={`${company_id}/collaborators?program=${id}`}
+          className="h-full"
         >
-          <div className="_flexbox__col__start__start w-full gap-4">
+          <div className="_flexbox__col__start__start h-full w-full gap-4">
             <div className="flex w-full items-center justify-between">
               <Badge variant="default">{type}</Badge>
               {isCollaborators && (

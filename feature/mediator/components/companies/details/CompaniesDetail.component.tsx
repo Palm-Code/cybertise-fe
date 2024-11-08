@@ -17,6 +17,7 @@ import {
 } from "@/feature/mediator/query/client";
 import { VRPHeroLoading } from "@/core/ui/container";
 import Collaborators from "./_tab/_content/Collaborators";
+import { cn } from "@/core/lib/utils";
 
 const CompaniesDetail = ({ id }: { id: string }) => {
   const companyTabsItem = useCompanyTabsItem();
@@ -77,7 +78,16 @@ const CompaniesDetail = ({ id }: { id: string }) => {
                 setProgramType(undefined);
               }}
             />
-            <div className="_flexbox__col__start__start w-full gap-4 px-6">
+            <div
+              className={cn(
+                "_flexbox__col__start__start w-full grid-cols-2 gap-4 px-6",
+                {
+                  "md:grid":
+                    (active !== "active_tickets" && programList?.meta?.total) ??
+                    0 > 1,
+                }
+              )}
+            >
               {tabs[active]}
             </div>
           </div>

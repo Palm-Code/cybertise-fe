@@ -24,14 +24,7 @@ export const CollaboratorDialog = ({
   return (
     <BaseModal {...props}>
       <div className="container h-screen w-full py-20">
-        <div
-          className={cn(
-            "h-full w-full rounded-2xl bg-background-main-light dark:bg-background-main-dark",
-            "px-10 py-8"
-          )}
-        >
-          <AddCollaborators id={id} onClose={onCloseModal} />
-        </div>
+        <AddCollaborators id={id} onClose={onCloseModal} />
       </div>
     </BaseModal>
   );
