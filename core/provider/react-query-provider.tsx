@@ -1,8 +1,13 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  dehydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
+import { Hydrate } from "./hydration";
 
 const ReactQueryProvider = ({ children }: { children: React.ReactNode }) => {
   const [queryClient] = useState(
@@ -10,6 +15,7 @@ const ReactQueryProvider = ({ children }: { children: React.ReactNode }) => {
       new QueryClient({
         defaultOptions: {
           queries: {
+            retry: false,
             refetchOnReconnect: true,
             refetchOnWindowFocus: false,
             refetchOnMount: true,
@@ -19,7 +25,7 @@ const ReactQueryProvider = ({ children }: { children: React.ReactNode }) => {
   );
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <Hydrate state={dehydrate(queryClient)}>{children}</Hydrate>
       <ReactQueryDevtools
         initialIsOpen={false}
         position="bottom"

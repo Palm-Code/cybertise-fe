@@ -8,6 +8,7 @@ import {
 import { Desktop } from "@/core/ui/layout";
 import { Button } from "@/core/ui/components";
 import { Hacker } from "@/core/ui/icons";
+import { useTranslations } from "next-intl";
 
 interface I_TicketDropDownProps {
   withIcon?: boolean;
@@ -27,6 +28,7 @@ const TicketDropDown = ({
   onOpenChange = () => {},
   ...props
 }: I_TicketDropDownProps) => {
+  const t = useTranslations("Ticket");
   return (
     <>
       <Desktop className="w-fit">
@@ -46,7 +48,7 @@ const TicketDropDown = ({
               variant={"tertiary-hacker"}
               prefixIcon={<Hacker className="h-4 w-4" />}
             >
-              Hacker Ticket
+              {t("hacker_ticket")}
             </Button>
             <br />
             {!!companyTicketId ? (
@@ -56,7 +58,7 @@ const TicketDropDown = ({
                 variant={"tertiary-company"}
                 prefixIcon={<Building2 className="h-4 w-4" />}
               >
-                Company Ticket
+                {t("company_ticket")}
               </Button>
             ) : status.toLowerCase() === "canceled" ||
               status.toLowerCase() === "closed" ? null : (
@@ -66,7 +68,7 @@ const TicketDropDown = ({
                 variant={"tertiary-company"}
                 prefixIcon={<Building2 className="h-4 w-4" />}
               >
-                Create Company Ticket
+                {t("create_company_ticket")}
               </Button>
             )}
           </SelectContent>

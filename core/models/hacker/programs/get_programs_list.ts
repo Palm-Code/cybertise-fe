@@ -61,6 +61,7 @@ export interface I_GetProgramListSuccessResponse {
     notes?: string;
     created_at: string;
     updated_at: string;
+    collaborators_count?: number;
   }[];
   meta?: I_Meta;
 }

@@ -42,20 +42,21 @@ const Card = ({
 
   if (isButton) {
     return (
-      <button
+      <div
         className={cn(
           "relative z-20 flex w-full rounded-lg bg-background-main-light px-6 py-8 xl:p-9",
-          "transition-colors duration-75 hover:bg-neutral-light-90 hover:shadow-xl",
-          "dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
+          "transition-colors duration-75",
+          "dark:bg-background-main-dark",
+          disabled
+            ? "cursor-not-allowed"
+            : "cursor-pointer hover:bg-neutral-light-90 hover:shadow-xl dark:hover:bg-neutral-dark-90",
           className
         )}
-        type="button"
-        onClick={onClick}
-        disabled={disabled}
+        onClick={disabled ? undefined : onClick}
         {...props}
       >
         {children}
-      </button>
+      </div>
     );
   }
 

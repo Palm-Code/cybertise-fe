@@ -4,18 +4,18 @@ import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 
 export const checkboxVariants = cva(
-  "disabled:bg-opacity-20 bg-neutral-light-80 dark:bg-neutral-dark-80",
+  "border-2 border-transparent disabled:bg-opacity-20 bg-neutral-light-80 dark:bg-neutral-dark-80",
   {
     variants: {
       variant: {
         hacker:
-          "text-brand-neutral data-[state=checked]:bg-lime-normal-light dark:data-[state=checked]:bg-lime-normal-dark hover:border hover:border-lime-normal-light dark:hover:border-lime-normal-dark focus:border-2 focus:border-lime-normal-light dark:focus:border-lime-normal-dark disabled:bg-lime-light",
+          "text-brand-neutral data-[state=checked]:bg-lime-normal-light dark:data-[state=checked]:bg-lime-normal-dark data-[state=checked]:border-lime-normal-light dark:data-[state=checked]:border-lime-normal-dark hover:border-lime-normal-light dark:hover:border-lime-normal-dark focus:border-2 focus:border-lime-normal-light dark:focus:border-lime-normal-dark disabled:bg-lime-light",
         company:
-          "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
+          "text-white data-[state=checked]:bg-sky-normal data-[state=checked]:border-sky-normal hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
         "company staff":
-          "text-white data-[state=checked]:bg-sky-normal hover:border hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
+          "text-white data-[state=checked]:bg-sky-normal data-[state=checked]:border-sky-normal hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
         mediator:
-          "text-white data-[state=checked]:bg-violet-normal hover:border hover:border-violet-normal focus:border-2 focus:border-violet-normal disabled:bg-violet-light",
+          "text-white data-[state=checked]:bg-violet-normal data-[state=checked]:border-violet-normal hover:border-violet-normal focus:border-2 focus:border-violet-normal disabled:bg-violet-light",
       },
     },
     defaultVariants: {
@@ -36,7 +36,7 @@ const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         className={checkboxVariants({ variant, className })}
         {...props}
       >
-        <CheckIcon className="h-4 w-4" />
+        <CheckIcon className="size-full" />
       </BaseCheckbox>
     );
   }

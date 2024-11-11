@@ -2,25 +2,21 @@
 import { cn } from "@/core/lib/utils";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
 import { Logo } from "../../icons";
-import {
-  useGetUserData,
-  usePostLogout,
-  usePostUpdateLang,
-} from "@/core/react-query/client";
+import { usePostLogout, usePostUpdateLang } from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
 import { Globe, LogOut, Settings } from "lucide-react";
-import { Skeleton } from "../../components/skeleton/skeleton";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LanguageDropdown from "./dropdown/LanguageDropdown.component";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useUserStore } from "@/core/zustands/globals/store";
 
 const Header = () => {
   const t = useTranslations("Sidebar");
+  const { data: user } = useUserStore();
   const pathname = usePathname();
-  const { data, isLoading } = useGetUserData();
-  const [language, setLanguage] = useState<string>(data?.language || "en");
+  const [language, setLanguage] = useState<string>(user.language);
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {
@@ -49,11 +45,10 @@ const Header = () => {
           <Link href="/dashboard">
             <Logo className="h-[32px] w-[85px]" />
           </Link>
-          {!isLoading && pathname.includes("/settings") && (
+          {pathname.includes("/settings") && (
             <LanguageDropdown
               label=""
               triggerClassName="!p-0 absolute right-2"
-              defaultValue={language}
               prefixIcon={<Globe className="size-5 md:size-6" />}
               value={language}
               options={[
@@ -81,11 +76,10 @@ const Header = () => {
             "_flexbox__row__center__end gap-8"
           )}
         >
-          {!isLoading && pathname.includes("/settings") && (
+          {pathname.includes("/settings") && (
             <LanguageDropdown
               label=""
               triggerClassName="!p-0"
-              defaultValue={language}
               prefixIcon={<Globe className="size-6" />}
               value={language}
               options={[
@@ -105,26 +99,22 @@ const Header = () => {
             />
           )}
           <ThemeSwitcher />
-          {!isLoading ? (
-            <HeaderDropdown
-              avatar={data?.avatar}
-              options={[
-                {
-                  label: t("settings"),
-                  value: "settings",
-                  icon: <Settings width={20} height={20} />,
-                },
-                {
-                  label: t("logout"),
-                  value: "logout",
-                  icon: <LogOut width={20} height={20} />,
-                },
-              ]}
-              onValueChange={(v) => handleDropdownClicks(v)}
-            />
-          ) : (
-            <Skeleton className="h-9 w-9 rounded-full" />
-          )}
+          <HeaderDropdown
+            avatar={user.avatar}
+            options={[
+              {
+                label: t("settings"),
+                value: "settings",
+                icon: <Settings width={20} height={20} />,
+              },
+              {
+                label: t("logout"),
+                value: "logout",
+                icon: <LogOut width={20} height={20} />,
+              },
+            ]}
+            onValueChange={(v) => handleDropdownClicks(v)}
+          />
         </div>
       </div>
     </>

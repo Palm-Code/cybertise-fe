@@ -29,7 +29,8 @@
       "title": "Datumsbereich",
       "button_clear": "Klar",
       "button_apply": "Anwenden"
-    }
+    },
+    "ticket_reported": "Ticket gemeldet"
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",
@@ -40,7 +41,10 @@
     "status": "Status",
     "last_update": "Letztes Update",
     "last_message": "Letzte Nachricht",
-    "ticket_type": "Tickettyp"
+    "ticket_type": "Tickettyp",
+    "hacker_ticket": "Hacker-Ticket",
+    "company_ticket": "Firmenticket",
+    "create_company_ticket": "Firmenticket erstellen"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -57,7 +61,8 @@
       "description_vrp": "Der Zugriff ist nur für veröffentlichte VRP möglich",
       "title": "Fahren Sie auf dem Desktop fort",
       "title_vrp": "Nicht veröffentlicht"
-    }
+    },
+    "collaborators": "Mitarbeiter"
   },
   "EmptyState": {
     "you_have_nothing_here": "Du hast hier nichts",
@@ -272,5 +277,12 @@
         }
       }
     }
+  },
+  "ProgramsVRPLaunchpad": {
+    "company_name": "Name der Firma",
+    "vrp_title": "VRP-Titel",
+    "asset_type": "Asset-Typ",
+    "status": "Status",
+    "vrp_type": "VRP-Typ"
   }
 }

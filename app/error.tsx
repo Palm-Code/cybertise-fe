@@ -10,7 +10,7 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
         alt="sparta logo"
         width={211}
         height={78}
-        className="absolute top-8 mx-auto"
+        className="absolute top-8 mx-auto h-[78px] w-[211px]"
       />
       <div className="_flexbox__col__center relative z-20 mx-auto w-fit max-w-3xl gap-2.5">
         <Image
@@ -46,14 +46,14 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
         alt="error dot"
         width={322}
         height={322}
-        className="absolute -left-16 top-1/2 aspect-square h-[113px] w-[113px] -translate-y-1/2 xl:-left-36 xl:w-[322px]"
+        className="absolute -left-16 top-1/2 aspect-square size-[322px] h-[113px] w-[113px] -translate-y-1/2 xl:-left-36 xl:w-[322px]"
       />
       <Image
         src="/icons/error-dot.svg"
         alt="error dot"
         width={322}
         height={322}
-        className="absolute -right-16 bottom-0 aspect-square h-[113px] w-[113px] xl:-right-36 xl:w-[322px]"
+        className="absolute -right-16 bottom-0 aspect-square size-[322px] h-[113px] w-[113px] xl:-right-36 xl:w-[322px]"
       />
     </div>
   );

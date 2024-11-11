@@ -19,19 +19,12 @@ export const usePostUpdateLang = () => {
       return fetchPostUpdateLang(payload);
     },
     onSuccess: (data) => {
-      router.refresh();
+      window.location.reload();
       toast.success("Successfully update language", {
         position: "bottom-right",
       });
-      queryClient.invalidateQueries({
-        queryKey: ["getUserProfile"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["getUserData"],
-      });
     },
     onError: (error) => {
-      router.refresh();
       toast.error(error.message, {
         position: "bottom-right",
         action: {

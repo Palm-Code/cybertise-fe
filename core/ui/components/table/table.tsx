@@ -37,7 +37,7 @@ export const TableHeader = ({
   return (
     <div
       className={cn(
-        "w-full rounded-2xl bg-neutral-light-80 px-9 py-6 dark:bg-neutral-dark-80",
+        "w-full rounded-2xl bg-neutral-light-80 px-9 py-5 dark:bg-neutral-dark-80",
         className
       )}
       {...props}
@@ -125,7 +125,7 @@ export const TableBodyRow = ({
       <Link
         href={props.href as string}
         className={cn(
-          "relative w-full rounded-2xl bg-background-main-light px-9 py-6",
+          "relative w-full rounded-2xl bg-background-main-light px-9 py-5",
           "hover:bg-neutral-light-90 dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
           className
         )}
@@ -144,7 +144,7 @@ export const TableBodyRow = ({
         type="button"
         className={cn(
           "relative w-full rounded-2xl bg-background-main-light",
-          "px-9 py-6 dark:bg-background-main-dark",
+          "px-9 py-5 dark:bg-background-main-dark",
           "hover:bg-neutral-light-90 dark:hover:bg-neutral-dark-90",
           className
         )}
@@ -161,7 +161,7 @@ export const TableBodyRow = ({
     <div
       className={cn(
         "relative w-full rounded-2xl bg-background-main-light",
-        "px-9 py-6 dark:bg-background-main-dark",
+        "px-9 py-5 dark:bg-background-main-dark",
         className
       )}
       {...props}

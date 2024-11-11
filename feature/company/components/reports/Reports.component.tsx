@@ -84,7 +84,9 @@ const Reports = () => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

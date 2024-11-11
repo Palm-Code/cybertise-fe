@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import { getCountryListAPIURL } from "@/core/routes/common";
 import { I_GetCountryListSuccessResponse } from "@/core/models/common";
+import { cache } from "react";
 
-export const fetchGetCountryList = async () => {
+export const fetchGetCountryList = cache(async () => {
   const res = await axios
     .get(process.env.NEXT_PUBLIC_BASE_URL + getCountryListAPIURL())
     .then((res: AxiosResponse<I_GetCountryListSuccessResponse>) => {
@@ -13,4 +14,4 @@ export const fetchGetCountryList = async () => {
     });
 
   return res;
-};
+});

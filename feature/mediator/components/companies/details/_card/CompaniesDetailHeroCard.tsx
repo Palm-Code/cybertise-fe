@@ -119,7 +119,7 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
               !inView ? "z-50 opacity-100" : "opacity-0"
             )}
           >
-            <div className="_flexbox__row__center__between w-full gap-9">
+            <div className="grid w-full grid-cols-[1fr_auto] gap-9">
               <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">
                 <Avatar className="h-12 w-12" image={data?.logo} initials="C" />
                 <Typography variant="h4" affects="small" weight="bold">

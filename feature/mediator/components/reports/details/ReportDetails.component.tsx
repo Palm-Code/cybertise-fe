@@ -20,7 +20,6 @@ import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatLi
 import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
 import {
   useGetTicketDetails,
-  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
@@ -34,12 +33,13 @@ import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { ModalForbidden } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
+import { useUserStore } from "@/core/zustands/globals/store";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data: userData } = useGetUserData();
+  const { data: userData } = useUserStore.getState();
   const {
     data: ticketDetails,
     isError: isErrorTicket,
@@ -79,7 +79,9 @@ const ReportDetails = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

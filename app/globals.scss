@@ -7,8 +7,9 @@
   src: url("../public/fonts/jetbrains-mono/JetBrainsMono-Regular.woff");
 }
 
-body {
-  @apply transition-colors duration-200;
+body,
+html {
+  @apply overscroll-none transition-colors duration-200;
 }
 
 @layer utilities {

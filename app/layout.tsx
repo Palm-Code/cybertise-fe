@@ -8,11 +8,11 @@ import { Role } from "@/types/admin/sidebar";
 import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
-import { headers } from "next/headers";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
+import { headers } from "next/headers";
 
 export const revalidate = 0;
 
@@ -41,7 +41,9 @@ export default async function RootLayout({
     "/faq",
     "/policy",
     "/terms-and-conditions",
+    "/companies",
   ];
+
   const containsIncludedPath = includedArray.some((path) =>
     requestHeaders?.includes(path)
   );

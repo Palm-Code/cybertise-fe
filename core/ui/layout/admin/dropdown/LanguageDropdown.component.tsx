@@ -55,7 +55,7 @@ const LanguageDropdown = ({
           )}
           <div className="flex w-full items-center justify-between gap-2">
             <Typography variant="p" affects="small" className="text-sm">
-              {inputValueLabel || "All type"}
+              {inputValueLabel || "EN"}
             </Typography>
             <ChevronDown className="size-5 md:size-6" />
           </div>

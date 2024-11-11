@@ -21,7 +21,6 @@ import { useReportDetailsParamStore } from "@/feature/hacker/zustand/store/repor
 import { useRouter } from "next/navigation";
 import {
   useGetTicketDetails,
-  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common/post_send_report";
@@ -29,12 +28,13 @@ import { toast } from "sonner";
 import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
+import { useUserStore } from "@/core/zustands/globals/store";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data: userData } = useGetUserData();
+  const { data: userData } = useUserStore.getState();
   const { data: ticketDetails, isError: isErrorTicket } =
     useGetTicketDetails(id);
   const { data, isError, fetchNextPage, isFetchingNextPage } =
@@ -63,7 +63,9 @@ const ReportDetails = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

@@ -8,16 +8,21 @@ import {
 
 interface I_TooltipProps {
   children: React.ReactNode;
-  content: string;
+  content?: string;
   fullwidth?: boolean;
   className?: string;
+  comps?: React.ReactNode;
+  contentClassName?: string;
 }
 
 const Tooltip = ({
   className,
+  contentClassName,
   children,
-  content,
+  content = "",
   fullwidth,
+  comps,
+  ...props
 }: I_TooltipProps) => {
   return (
     <TooltipProvider>
@@ -28,7 +33,8 @@ const Tooltip = ({
         >
           {children}
         </TooltipTrigger>
-        <TooltipContent className="max-w-xs">
+        <TooltipContent className={cn("max-w-xs", contentClassName)}>
+          {comps}
           <p>{content}</p>
         </TooltipContent>
       </BaseTooltip>

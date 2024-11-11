@@ -1,17 +1,12 @@
 "use client";
 import { I_GetParamsPayload } from "@/core/models/common";
-import { I_GetErrorResponse } from "@/core/models/hacker/programs";
-import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
 import { fetchGetCollaboratorList } from "@/core/services/mediator/collaborators";
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-  useQuery,
-} from "@tanstack/react-query";
-import { useMediaQuery } from "usehooks-ts";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const useGetCollaboratorList = (payload?: I_GetParamsPayload) => {
-  const isMobileDevice = useMediaQuery("(max-width: 1279px)");
+export const useGetCollaboratorList = (
+  payload?: I_GetParamsPayload,
+  id?: string
+) => {
   const queryInfinity = useInfiniteQuery({
     queryKey: [
       "getCollaboratorList",
@@ -22,6 +17,10 @@ export const useGetCollaboratorList = (payload?: I_GetParamsPayload) => {
       fetchGetCollaboratorList({
         params: {
           ...payload?.params,
+          filter: {
+            ...payload?.params?.filter,
+            program_id: id,
+          },
           page: {
             size: 10,
             number: pageParam.pageParam,
@@ -34,24 +33,12 @@ export const useGetCollaboratorList = (payload?: I_GetParamsPayload) => {
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined;
     },
-    enabled: isMobileDevice,
+    enabled: !!id,
   });
 
-  const query = useQuery<I_GetCollaboratorSuccessResponse, I_GetErrorResponse>({
-    queryKey: [
-      "getCollaboratorList",
-      payload?.params?.page,
-      payload?.params?.filter,
-      payload?.params?.sort,
-    ],
-    queryFn: () => fetchGetCollaboratorList(payload),
-    placeholderData: keepPreviousData,
-    enabled: !isMobileDevice,
-  });
-
-  if (query.error) {
-    throw new Error(JSON.stringify(query.error));
+  if (queryInfinity.error) {
+    throw new Error(JSON.stringify(queryInfinity.error));
   }
 
-  return { queryDesktop: query, queryMobile: queryInfinity };
+  return { queryMobile: queryInfinity };
 };

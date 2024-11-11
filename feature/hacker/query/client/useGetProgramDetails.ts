@@ -4,6 +4,7 @@ import { I_GetErrorResponse } from "@/core/models/hacker/programs";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { fetchGetProgramDetails } from "@/core/services/hacker/programs/fetchProgramDetails";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 export const useGetProgramDetails = (
   payload?: I_GetParamsPayload,
@@ -23,7 +24,7 @@ export const useGetProgramDetails = (
   });
 
   if (query.error) {
-    throw new Error(JSON.stringify(query.error));
+    return notFound();
   }
 
   return query;

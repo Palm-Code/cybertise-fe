@@ -88,7 +88,9 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

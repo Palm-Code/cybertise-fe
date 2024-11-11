@@ -7,6 +7,37 @@ import {
 } from "@/types/admin/vrp-launchpad";
 import { useTranslations } from "next-intl";
 
+export const useGetVrpLaunchpadTableColumns = () => {
+  const t = useTranslations("ProgramsVRPLaunchpad");
+  return [
+    {
+      title: t("company_name"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("vrp_title"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("vrp_type"),
+      align: "center",
+      width: "w-1/6",
+    },
+    {
+      title: t("asset_type"),
+      align: "left",
+      width: "w-1/6",
+    },
+    {
+      title: t("status"),
+      align: "center",
+      width: "w-1/6",
+    },
+  ] as I_TableColumns[];
+};
+
 export const tableColumns: I_TableColumns[] = [
   {
     title: "Company Name",
@@ -89,10 +120,10 @@ export const useCompanyTabsItem = () => {
     //   label: "Thanks",
     //   value: "thanks",
     // },
-    // {
-    //   label: "Collaborators",
-    //   value: "collaborators",
-    // },
+    {
+      label: t("collaborators"),
+      value: "collaborators",
+    },
     // {
     //   label: "Activity Logs",
     //   value: "activity_logs",
@@ -255,6 +286,77 @@ export const vrpCompaniesCardsData: VRPCompaniesCardType[] = [
     status: "inactive",
   },
 ];
+
+export const useGetAddCollaboratorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: "",
+      align: "left",
+      width: "w-0",
+    },
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-3/12",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.action"),
+      align: "center",
+      width: "w-2/12",
+    },
+  ] as I_TableColumns[];
+};
+export const useGetCollaboratorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: "",
+      align: "center",
+      width: "w-0",
+    },
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-1/4",
+    },
+    {
+      title: t("collaborators.table.action"),
+      align: "center",
+      width: "w-1/4",
+    },
+  ] as I_TableColumns[];
+};
 
 export const collaboratorTableColums: I_TableColumns[] = [
   {

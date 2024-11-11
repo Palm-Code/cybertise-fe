@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {
+  AssetTypeTooltip,
   Avatar,
   Badge,
   badgeVariants,
@@ -70,15 +71,11 @@ const TicketCard = ({
                         ))
                         .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Tooltip
-                        content={props.asset_types
-                          .map((item) => item.value)
-                          .join(", ")}
-                      >
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
                         <Badge variant="default">
                           +{props.asset_types.length - 3} more
                         </Badge>
-                      </Tooltip>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>
@@ -99,7 +96,7 @@ const TicketCard = ({
                 isGridCard ? "gap-8" : "gap-12"
               )}
             >
-              <div className="_flexbox__row__center__start w-full gap-4">
+              <div className="grid w-full grid-cols-[auto_1fr_auto] gap-4">
                 {isGridCard && (
                   <Avatar
                     image={props.logo}
@@ -112,7 +109,7 @@ const TicketCard = ({
                     {props.name}
                   </Typography>
                 </div>
-                <div className="_flexbox__row__center -mt-7.5 ml-auto gap-4">
+                <div className="_flexbox__row__center mb-auto ml-auto gap-4">
                   <Indicator
                     variant={
                       props.status.toLowerCase() as keyof typeof indicatorVariants
@@ -144,15 +141,11 @@ const TicketCard = ({
                         ))
                         .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Tooltip
-                        content={props.asset_types
-                          .map((item) => item.value)
-                          .join(", ")}
-                      >
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
                         <Badge variant="default">
                           +{props.asset_types.length - 3} more
                         </Badge>
-                      </Tooltip>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>

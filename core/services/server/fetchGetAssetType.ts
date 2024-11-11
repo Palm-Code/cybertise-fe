@@ -1,0 +1,27 @@
+import { AxiosResponse } from "axios";
+import { getAssetTypeAPIURL } from "@/core/routes/common";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import axiosServerInterceptorInstance from "../interceptor/axiosServerInterceptor";
+
+export const fetchGetAssetType = async () => {
+  const params = {
+    fields: {
+      asset_types: "id,value",
+      page: {
+        number: 1,
+        size: 30,
+      },
+    },
+  };
+  const url = getAssetTypeAPIURL();
+  return await axiosServerInterceptorInstance
+    .get(url, {
+      params: params?.fields,
+    })
+    .then((res: AxiosResponse<I_GetAssetTypeSuccessResponse>) => {
+      return res.data;
+    })
+    .catch((err) => {
+      throw err?.response?.data || err?.response;
+    });
+};

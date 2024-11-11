@@ -17,7 +17,7 @@ import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useReadLocalStorage } from "usehooks-ts";
 import ProgramsFilterDropdown from "./_dropdown/ProgramFilter.component";
 import { VRPCardView, VRPGridView, VRPTableView } from "../../containers";
-import { tableColumns } from "../../constants/vrp-launchpad";
+import { useGetVrpLaunchpadTableColumns } from "../../constants/vrp-launchpad";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { useProgramListParamStore } from "../../zustand/store/programs";
 import { useGetProgramList } from "../../query/client";
@@ -35,6 +35,7 @@ import { useTranslations } from "next-intl";
 
 const VRPLaunchpad = () => {
   const t = useTranslations("ProgramsMediator");
+  const tableColumns = useGetVrpLaunchpadTableColumns();
   const store = useProgramListParamStore();
   const { data: assetType } = useGetAssetType();
   const { payload, setPayload } = store;
@@ -85,7 +86,9 @@ const VRPLaunchpad = () => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

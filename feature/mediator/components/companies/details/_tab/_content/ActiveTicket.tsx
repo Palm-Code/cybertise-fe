@@ -74,7 +74,9 @@ const ActiveTicket = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 

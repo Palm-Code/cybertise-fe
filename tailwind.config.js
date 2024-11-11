@@ -218,6 +218,7 @@ module.exports = {
         company: "0px 0px 15px 0px rgba(75, 162, 227, 0.20)",
         bubble: "0px -10px 25px 0px rgba(130, 130, 130, 0.10)",
         sidebar: "4px 0px 50px 0px rgba(255, 255, 255, 0.10)",
+        toggle: "0px 0px 4px 0px rgba(183, 183, 183, 0.40)",
       },
       backgroundImage: {
         progress:

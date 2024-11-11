@@ -20,6 +20,7 @@ interface I_BaseDropdownProps extends SelectTriggerProps {
   label?: string;
   variant?: keyof typeof Role;
   triggerClassName?: string;
+  contentClassName?: string;
 }
 
 const BaseDropdown = ({
@@ -29,6 +30,7 @@ const BaseDropdown = ({
   label = "Sort By",
   variant = "hacker",
   triggerClassName,
+  contentClassName,
   ...props
 }: I_BaseDropdownProps) => {
   const inputValueLabel = options.find(
@@ -87,7 +89,12 @@ const BaseDropdown = ({
               {inputValueLabel || "All type"}
             </Typography>
           </SelectTrigger>
-          <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+          <SelectContent
+            className={cn(
+              "!bg-white dark:!bg-neutral-dark-100",
+              contentClassName
+            )}
+          >
             {options.length! ? (
               options.map((option) => (
                 <SelectItem key={option.value} value={option.value as string}>

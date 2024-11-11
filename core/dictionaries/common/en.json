@@ -25,6 +25,7 @@
     "risk_level": "Risk Level",
     "status": "Status",
     "asset_type": "Asset Type",
+    "ticket_reported": "Ticket Reported",
     "date_range": {
       "title": "Date Range",
       "button_apply": "Apply",
@@ -40,7 +41,10 @@
     "status": "Status",
     "last_update": "Last Update",
     "last_reported": "Last Reported {date} ago",
-    "last_message": "Last Message"
+    "last_message": "Last Message",
+    "create_company_ticket": "Create Company Ticket",
+    "hacker_ticket": "Hacker Ticket",
+    "company_ticket": "Company Ticket"
   },
   "Programs": {
     "program_name": "Program Name",
@@ -49,11 +53,19 @@
     "asset_type_available": "Asset Type Available",
     "rewards": "Rewards",
     "bounty": "Bounty",
+    "collaborators": "Collaborators",
     "forbidden": {
       "title": "Continue on Desktop",
       "title_vrp": "Not Published",
       "description_vrp": "Only can be accessed for Published VRP"
     }
+  },
+  "ProgramsVRPLaunchpad": {
+    "company_name": "Company Name",
+    "vrp_title": "VRP Title",
+    "vrp_type": "VRP Type",
+    "asset_type": "Asset Type",
+    "status": "Status"
   },
   "Pagination": {
     "page": "Page",
