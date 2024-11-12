@@ -41,6 +41,9 @@ const CompaniesDetail = ({ id }: { id: string }) => {
       append: "asset_types",
     },
   });
+  const filteredPorgramList = programList?.data.filter(
+    (item) => item.status === "Published"
+  );
   const [active, setActive] = useState<companyTabsItemEnums>(
     companyTabsItemEnums.vulnerability_program
   );
@@ -53,7 +56,7 @@ const CompaniesDetail = ({ id }: { id: string }) => {
     // ) : (
     //   <EmptyState variant="mediator" type="update" className="mt-0" />
     // ),
-    collaborators: <Collaborators data={programList?.data ?? []} />,
+    collaborators: <Collaborators data={filteredPorgramList ?? []} />,
     // activity_logs: <EmptyState variant="mediator" type="under-construction" />,
   };
 

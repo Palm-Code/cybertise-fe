@@ -1,4 +1,5 @@
 import { currentPhase } from "@/core/constants/common";
+import { cn } from "@/core/lib/utils";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
 import {
   Badge,
@@ -19,11 +20,19 @@ interface I_VRPCard {
   id?: string;
   title?: string;
   status?: string;
+  type: string;
   asset_types?: SortFilterType[];
   variant?: keyof typeof Role;
 }
 
-const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
+const VRPCard = ({
+  id,
+  title,
+  status,
+  asset_types,
+  variant,
+  type,
+}: I_VRPCard) => {
   const t = useTranslations("Programs");
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
@@ -48,6 +57,9 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
                     : title}
                 </Typography>
               </Tooltip>
+              {type.toLowerCase() === "private" && (
+                <Badge variant="default">{type}</Badge>
+              )}
               <Indicator
                 variant={
                   status?.toLowerCase().includes("phase") ? "open" : "clear"
@@ -111,13 +123,20 @@ const VRPCard = ({ id, title, status, asset_types, variant }: I_VRPCard) => {
         >
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">
-              <Tooltip content={title || ""}>
-                <Typography variant="p" affects="large" weight="semibold">
-                  {title && title?.length > 50
-                    ? title?.substring(0, 50) + "..."
-                    : title}
-                </Typography>
-              </Tooltip>
+              <div
+                className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}
+              >
+                <Tooltip content={title || ""}>
+                  <Typography variant="p" affects="large" weight="semibold">
+                    {title && title?.length > 50
+                      ? title?.substring(0, 50) + "..."
+                      : title}
+                  </Typography>
+                </Tooltip>
+                {type.toLowerCase() === "private" && (
+                  <Badge variant="default">{type}</Badge>
+                )}
+              </div>
               <Indicator
                 variant={
                   status?.toLowerCase().includes("phase") ? "open" : "clear"

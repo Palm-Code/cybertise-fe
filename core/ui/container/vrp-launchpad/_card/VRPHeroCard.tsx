@@ -14,6 +14,7 @@ import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { MoveLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface I_VRPHeroCard {
   variant: keyof typeof Role;
@@ -23,6 +24,7 @@ interface I_VRPHeroCard {
 
 const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
   const t = useTranslations("VRPLaunchpad");
+  const router = useRouter();
   const currentPhase = useCurrentPhase();
   return (
     <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
@@ -33,9 +35,10 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
             "inline-flex items-center gap-5"
           )}
         >
-          <Link href="/vrp-launchpad" className="mb-auto mt-1">
-            <MoveLeft className="cursor-pointer" />
-          </Link>
+          <MoveLeft
+            className="mb-auto mt-1 cursor-pointer"
+            onClick={() => router.back()}
+          />
           <div className="_flexbox__col__start__start gap-3">
             <Tooltip
               content={initialData?.title || t("phase.vrp_details.title")}

@@ -48,7 +48,9 @@ const VRPCard = ({
         >
           <div className="_flexbox__col__start__start h-full w-full gap-4">
             <div className="flex w-full items-center justify-between">
-              <Badge variant="default">{type}</Badge>
+              {type.toLowerCase() === "private" && (
+                <Badge variant="default">{type}</Badge>
+              )}
               {isCollaborators && (
                 <div className="flex flex-col gap-2.5">
                   <div className="grid grid-cols-[auto_1fr] items-center gap-2.5">
@@ -121,7 +123,9 @@ const VRPCard = ({
                 <Typography variant="p" affects="large" weight="semibold">
                   {title}
                 </Typography>
-                <Badge variant="default">{type}</Badge>
+                {type.toLowerCase() === "private" && (
+                  <Badge variant="default">{type}</Badge>
+                )}
               </div>
               <Indicator
                 variant={
