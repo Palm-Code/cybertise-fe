@@ -57,9 +57,7 @@ const VRPCard = ({
                     : title}
                 </Typography>
               </Tooltip>
-              {type.toLowerCase() === "private" && (
-                <Badge variant="default">{type}</Badge>
-              )}
+              <Badge variant="default">{type}</Badge>
               <Indicator
                 variant={
                   status?.toLowerCase().includes("phase") ? "open" : "clear"
@@ -133,9 +131,7 @@ const VRPCard = ({
                       : title}
                   </Typography>
                 </Tooltip>
-                {type.toLowerCase() === "private" && (
-                  <Badge variant="default">{type}</Badge>
-                )}
+                <Badge variant="default">{type}</Badge>
               </div>
               <Indicator
                 variant={

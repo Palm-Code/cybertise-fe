@@ -74,28 +74,26 @@ const Header = () => {
             "_flexbox__row__center__end gap-8"
           )}
         >
-          {pathname.includes("/settings") && (
-            <LanguageDropdown
-              label=""
-              triggerClassName="!p-0"
-              prefixIcon={<Globe className="size-6" />}
-              value={language}
-              options={[
-                {
-                  label: "EN",
-                  value: "en",
-                },
-                {
-                  label: "DE",
-                  value: "de",
-                },
-              ]}
-              onValueChange={(v) => {
-                setLanguage(v);
-                mutate(v);
-              }}
-            />
-          )}
+          <LanguageDropdown
+            label=""
+            triggerClassName="!p-0"
+            prefixIcon={<Globe className="size-6" />}
+            value={language}
+            options={[
+              {
+                label: "EN",
+                value: "en",
+              },
+              {
+                label: "DE",
+                value: "de",
+              },
+            ]}
+            onValueChange={(v) => {
+              setLanguage(v);
+              mutate(v);
+            }}
+          />
           <ThemeSwitcher />
           <HeaderDropdown
             avatar={user.avatar}
