@@ -45,28 +45,26 @@ const Header = () => {
           <Link href="/dashboard">
             <Logo className="h-[32px] w-[85px]" />
           </Link>
-          {pathname.includes("/settings") && (
-            <LanguageDropdown
-              label=""
-              triggerClassName="!p-0 absolute right-2"
-              prefixIcon={<Globe className="size-5 md:size-6" />}
-              value={language}
-              options={[
-                {
-                  label: "EN",
-                  value: "en",
-                },
-                {
-                  label: "DE",
-                  value: "de",
-                },
-              ]}
-              onValueChange={(v) => {
-                setLanguage(v);
-                mutate(v);
-              }}
-            />
-          )}
+          <LanguageDropdown
+            label=""
+            triggerClassName="!p-0 absolute right-2"
+            prefixIcon={<Globe className="size-5 md:size-6" />}
+            value={language}
+            options={[
+              {
+                label: "EN",
+                value: "en",
+              },
+              {
+                label: "DE",
+                value: "de",
+              },
+            ]}
+            onValueChange={(v) => {
+              setLanguage(v);
+              mutate(v);
+            }}
+          />
         </div>
       </div>
       <div className="hidden w-full xl:block">
@@ -76,28 +74,26 @@ const Header = () => {
             "_flexbox__row__center__end gap-8"
           )}
         >
-          {pathname.includes("/settings") && (
-            <LanguageDropdown
-              label=""
-              triggerClassName="!p-0"
-              prefixIcon={<Globe className="size-6" />}
-              value={language}
-              options={[
-                {
-                  label: "EN",
-                  value: "en",
-                },
-                {
-                  label: "DE",
-                  value: "de",
-                },
-              ]}
-              onValueChange={(v) => {
-                setLanguage(v);
-                mutate(v);
-              }}
-            />
-          )}
+          <LanguageDropdown
+            label=""
+            triggerClassName="!p-0"
+            prefixIcon={<Globe className="size-6" />}
+            value={language}
+            options={[
+              {
+                label: "EN",
+                value: "en",
+              },
+              {
+                label: "DE",
+                value: "de",
+              },
+            ]}
+            onValueChange={(v) => {
+              setLanguage(v);
+              mutate(v);
+            }}
+          />
           <ThemeSwitcher />
           <HeaderDropdown
             avatar={user.avatar}

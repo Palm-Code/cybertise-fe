@@ -31,7 +31,9 @@ const TicketCard = ({
         <Card isClickable href={`/programs/${props.id}`} className="h-full">
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full", "gap-8")}>
-              <Badge variant="default">{props.type}</Badge>
+              {props.type.toLowerCase() === "private" && (
+                <Badge variant="default">{props.type}</Badge>
+              )}
               <div className="_flexbox__col__start w-full gap-4">
                 <div className="grid w-full grid-cols-[auto_1fr] gap-4">
                   <div className="relative aspect-square w-8 overflow-hidden rounded-full">
@@ -184,8 +186,12 @@ const TicketCard = ({
                     </div>
                   </div>
                   <div className="_flexbox__row__center gap-2">
-                    <Badge variant="default">{props.type}</Badge>
-                    <Dot />
+                    {props.type.toLowerCase() === "private" && (
+                      <>
+                        <Badge variant="default">{props.type}</Badge>
+                        <Dot />
+                      </>
+                    )}
                     {props.title.length > 50 ? (
                       <Tooltip content={props.title}>
                         <Typography
