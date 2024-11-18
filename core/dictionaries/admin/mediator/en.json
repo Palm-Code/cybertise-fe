@@ -155,12 +155,12 @@
     "collaborators": {
       "titles": "Collaborators",
       "title": "Add New Collaborators",
-      "hacker_invited": "Hacker Invited",
+      "hacker_invited": "Hacker Added to Collaborators",
       "hacker_selected": "Hacker Selected",
-      "button_invite": "invite",
-      "button_delete": "Uninvite collaborators",
+      "button_invite": "add",
+      "button_delete": "delete collaborators",
       "button_add_collaborator": "Add Collaborator",
-      "search_placeholder": "Search for invited collaborators",
+      "search_placeholder": "Search for added collaborators",
       "search_add_collaborator": "Search for hackers",
       "showing_collaborator": "Showing {currentShowCollaborator} of {totalCollaborator} collaborator",
       "showing_hacker": "Showing {currentShowHacker} of {totalHackers} hacker",
@@ -175,7 +175,7 @@
       "ago": "ago",
       "empty_state": {
         "title": "No collaborators found",
-        "description": "You can invite collaborators to your VRP by adding them to the collaborators list."
+        "description": "You can add collaborators to your VRP by adding them to the collaborators list."
       },
       "table": {
         "name": "Hacker Name",
@@ -183,6 +183,18 @@
         "asset_type_reported": "Asset Type Reported",
         "last_activity": "Last Activity",
         "action": "Action"
+      },
+      "description": "You’re about to add new collaborator from the hacker listed below",
+      "success_title": "Collaborators Added",
+      "success_description": "The collaborators added to the program! Keep an eye out for their response to start collaborating",
+      "success_button": "Back",
+      "button_keep_it": "Keep It",
+      "button_yes_cancel_report": "Yes, Cancel",
+      "alert_title": "Cancel Adding Collaborator ?",
+      "alert_description": "The changes you have made will not be saved",
+      "forbidden": {
+        "title": "Add Collaborators on Mobile",
+        "subtitle": "Add Collaborators only available on Desktop"
       }
     }
   },

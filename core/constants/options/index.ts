@@ -19,6 +19,10 @@ export const collaboratorSortBy: SortFilterType[] = [
     label: "Valid Report",
     value: "-user.valid_report",
   },
+  {
+    label: "Asset Type",
+    value: "-user.asset_types_count",
+  },
 ];
 export const hackerSortBy: SortFilterType[] = [
   {
@@ -40,6 +44,10 @@ export const hackerSortBy: SortFilterType[] = [
   {
     label: "Valid Report",
     value: "-valid_report",
+  },
+  {
+    label: "Asset Type",
+    value: "-asset_types_count",
   },
 ];
 

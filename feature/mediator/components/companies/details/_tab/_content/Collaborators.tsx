@@ -33,9 +33,7 @@ const Collaborators = ({
 
   return (
     <>
-      <AnimationWrapper>
-        <VrpCardList isCollaborators data={data ?? []} />
-      </AnimationWrapper>
+      <VrpCardList isCollaborators data={data ?? []} />
       <CollaboratorDialog
         id={selectedId}
         isOpen={openCollaboratorDialog}

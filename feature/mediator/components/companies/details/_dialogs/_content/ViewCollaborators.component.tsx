@@ -10,7 +10,7 @@ import {
   useDeleteCollaborators,
   useGetCollaboratorList,
 } from "@/feature/mediator/query/client";
-import { TableLoadingList } from "@/core/ui/container";
+import { ModalForbidden, TableLoadingList } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useInView } from "react-intersection-observer";
@@ -25,6 +25,12 @@ import { collaboratorSortBy } from "@/core/constants/options";
 import { useGetAssetType } from "@/core/react-query/client";
 import { FilterDropdown } from "../../_dropdown";
 import SortDropdown from "../../_dropdown/SortDropdown.component";
+import { Desktop, Mobile } from "@/core/ui/layout";
+import { CollaboratorLoadingCard } from "../../_card/CollaboratorLoadingCard";
+import {
+  CollaboratorCard,
+  CollaboratorListCard,
+} from "../../_card/CollaboratorCard";
 
 type CollaboratorDialogProps = I_ModalProps & {
   onClickAddCollaborator: () => void;
@@ -43,6 +49,7 @@ export const ViewCollaborators = ({
   const { payload, setPayload } = useCollaboratorsParamsStore();
   const [showModalAddCollaborator, setShowModalAddCollaborator] =
     useState(false);
+  const [showModalForbidden, setShowModalForbidden] = useState(false);
 
   const { data, isLoading: isLoadingProgramDetails } = useGetProgramDetails(
     undefined,
@@ -120,156 +127,289 @@ export const ViewCollaborators = ({
 
   return (
     <>
-      <div className="relative flex h-full w-full flex-col gap-6 pt-12">
-        <Card
-          className={cn(
-            "grid grid-cols-[auto_1fr] items-center gap-6",
-            "rounded-b-none rounded-t-2xl xl:px-8 xl:py-6"
-          )}
-        >
-          <MoveLeft onClick={router.back} className="cursor-pointer" />
-          {isLoadingProgramDetails ? (
-            <SkeletonList className="h-8 w-48" count={1} />
-          ) : (
-            <Typography variant="h5" weight="bold">
-              {data?.data.title} - {t("titles")}
-            </Typography>
-          )}
-        </Card>
-        <div
-          className={cn(
-            "flex w-full flex-col gap-6 rounded-t-2xl px-12 py-8",
-            "bg-background-main-light dark:bg-background-main-dark"
-          )}
-        >
-          <div className={cn("flex w-full items-center justify-between")}>
-            <div className="grid grid-cols-[auto_1fr] items-center gap-4">
-              <Users />
-              <Typography variant="p" affects="large" weight="semibold">
-                {totalCollaborator} {t("hacker_invited")}
-              </Typography>
-            </div>
-            <Button
-              variant="tertiary-mediator"
-              prefixIcon={<UserPlus />}
-              onClick={() => setShowModalAddCollaborator(true)}
+      <Mobile>
+        <div className="relative flex h-full w-full flex-col">
+          <div className="sticky top-0 z-30 flex w-full flex-col">
+            <Card
+              className={cn(
+                "grid grid-cols-[auto_1fr_auto] items-center gap-6",
+                "rounded-none"
+              )}
             >
-              {t("button_add_collaborator")}
-            </Button>
-          </div>
-          <SearchInput
-            placeholder={t("search_placeholder")}
-            variant="mediator"
-            value={payload?.params?.search}
-            onChange={(e) =>
-              useOnchangeSearch(
-                e.target.value,
-                { payload, setPayload },
-                refetch
-              )
-            }
-            loadingSubmit={isLoading && isRefetching}
-            onSubmitSearch={() =>
-              useSubmitSearch(payload.params?.search, refetch)
-            }
-          />
-          <div className="flex w-full items-center justify-between">
-            <FilterDropdown
-              store={{ payload, setPayload }}
-              onValueChange={submitChange}
-            />
-            <SortDropdown
-              variant="mediator"
-              value={payload.params?.sort ?? "name"}
-              options={collaboratorSortBy}
-              onValueChange={(value) => {
-                useClickSort(value, { payload, setPayload });
-              }}
-            />
-          </div>
-        </div>
-        <div className="h-full w-full space-y-6">
-          {isLoading || isRefetching ? (
-            <TableLoadingList stickyHeader columns={collaboratorTableColums} />
-          ) : totalCollaborator > 0 ? (
-            <>
-              <CollaboratorsTableView
-                selectedIds={selectedCollaboratorsIds}
-                isLoading={isLoading || isRefetching}
-                columns={collaboratorTableColums}
-                data={collaboratorListData ?? []}
-                onClickDeleteCollaborator={(ids) => {
-                  onClickDeleteCollaborators(ids);
-                }}
-                onChangeCheckbox={(id, checked) => {
-                  if (checked) {
-                    setSelectedCollaboratorsIds((prev) => [...prev, id]);
-                  } else {
-                    setSelectedCollaboratorsIds((prev) =>
-                      prev.filter((item) => item !== id)
-                    );
-                  }
-                }}
-              />
-              <div ref={paginationRef} className="w-full space-y-6 pb-28">
-                {isFetchingNextPage && (
-                  <SkeletonList className="h-16 w-full rounded-2xl" count={3} />
-                )}
-                <Typography
-                  variant="p"
-                  affects="tiny"
-                  className="italic text-neutral-light-40 dark:text-neutral-dark-40"
-                >
-                  {t("showing_collaborator", {
-                    currentShowCollaborator,
-                    totalCollaborator,
-                  })}
+              <MoveLeft onClick={router.back} className="cursor-pointer" />
+              {isLoadingProgramDetails ? (
+                <SkeletonList className="h-8 w-48" count={1} />
+              ) : (
+                <Typography variant="p" affects="normal">
+                  {data?.data.title}
                 </Typography>
+              )}
+              <SearchInput
+                isMobile
+                placeholder={t("search_placeholder")}
+                variant="mediator"
+                value={payload?.params?.search}
+                onChange={(e) =>
+                  useOnchangeSearch(
+                    e.target.value,
+                    { payload, setPayload },
+                    refetch
+                  )
+                }
+                loadingSubmit={isLoading && isRefetching}
+                onSubmitSearch={() =>
+                  useSubmitSearch(payload.params?.search, refetch)
+                }
+              />
+            </Card>
+            <div
+              className={cn(
+                "flex w-full flex-col gap-6 px-6 pb-8 pt-0",
+                "bg-background-main-light dark:bg-background-main-dark"
+              )}
+            >
+              <div
+                className={cn(
+                  "flex w-full flex-col items-center justify-between gap-4"
+                )}
+              >
+                <div className="flex w-full items-center justify-between gap-4">
+                  <Typography variant="p" affects="large" weight="semibold">
+                    {t("titles")}
+                  </Typography>
+                  <div className="grid grid-cols-[auto_1fr] gap-2">
+                    <Users />
+                    {totalCollaborator}
+                  </div>
+                </div>
+                <Button
+                  variant="tertiary-mediator"
+                  prefixIcon={<UserPlus />}
+                  onClick={() => setShowModalForbidden(true)}
+                >
+                  {t("button_add_collaborator")}
+                </Button>
               </div>
-            </>
-          ) : (
-            <EmptyState
-              noMargin
-              type="collaborators"
-              variant="mediator"
-              titleText={t("no_collaborators")}
-              buttonText={t("button_add_collaborator")}
-              onClickButton={() => setShowModalAddCollaborator(true)}
-            />
-          )}
-        </div>
-        {selectedCollaboratorsIds.length > 0 && (
+              <div className="flex w-full items-center justify-between">
+                <FilterDropdown
+                  store={{ payload, setPayload }}
+                  onValueChange={submitChange}
+                />
+                <SortDropdown
+                  variant="mediator"
+                  value={payload.params?.sort ?? "name"}
+                  options={collaboratorSortBy}
+                  onValueChange={(value) => {
+                    useClickSort(value, { payload, setPayload });
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <div
+            className={cn("grid h-fit w-full gap-6 px-6 py-4", {
+              "md:grid-cols-2": totalCollaborator > 1,
+            })}
+          >
+            {isLoading || isRefetching ? (
+              <CollaboratorLoadingCard list={10} />
+            ) : totalCollaborator > 0 ? (
+              <>
+                <CollaboratorListCard data={collaboratorListData || []} />
+                <div ref={paginationRef} className="w-full space-y-6 pb-8">
+                  {isFetchingNextPage && <CollaboratorLoadingCard list={3} />}
+                  <Typography
+                    variant="p"
+                    affects="tiny"
+                    className="italic text-neutral-light-40 dark:text-neutral-dark-40"
+                  >
+                    {t("showing_collaborator", {
+                      currentShowCollaborator,
+                      totalCollaborator,
+                    })}
+                  </Typography>
+                </div>
+              </>
+            ) : (
+              <EmptyState
+                noMargin
+                type="collaborators"
+                variant="mediator"
+                titleText={t("no_collaborators")}
+                buttonText={t("button_add_collaborator")}
+                onClickButton={() => setShowModalAddCollaborator(true)}
+              />
+            )}
+          </div>
+        </div>
+        <ModalForbidden
+          title={t("forbidden.title")}
+          subtitle={t("forbidden.subtitle")}
+          variant="mediator"
+          isOpen={showModalForbidden}
+          onClose={() => {
+            setShowModalForbidden(false);
+          }}
+        />
+      </Mobile>
+      <Desktop>
+        <div className="relative flex h-full w-full flex-col gap-6 pt-12">
+          <Card
             className={cn(
-              "fixed bottom-4 right-12 z-50 mx-auto max-w-[calc(100vw-(272px+104px))]",
-              "flex w-full items-center justify-center gap-4 rounded-md",
-              "px-6 py-3",
-              "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
+              "grid grid-cols-[auto_1fr] items-center gap-6",
+              "rounded-b-none rounded-t-2xl xl:px-8 xl:py-6"
             )}
           >
-            <div className="flex w-full items-center justify-between">
-              <Typography variant="p" affects="small" weight="medium">
-                {selectedCollaboratorsIds.length} {t("hacker_selected")}
+            <MoveLeft onClick={router.back} className="cursor-pointer" />
+            {isLoadingProgramDetails ? (
+              <SkeletonList className="h-8 w-48" count={1} />
+            ) : (
+              <Typography variant="h5" weight="bold">
+                {data?.data.title} - {t("titles")}
               </Typography>
+            )}
+          </Card>
+          <div
+            className={cn(
+              "flex w-full flex-col gap-6 rounded-t-2xl px-12 py-8",
+              "bg-background-main-light dark:bg-background-main-dark"
+            )}
+          >
+            <div className={cn("flex w-full items-center justify-between")}>
+              <div className="grid grid-cols-[auto_1fr] items-center gap-4">
+                <Users />
+                <Typography variant="p" affects="large" weight="semibold">
+                  {totalCollaborator} {t("hacker_invited")}
+                </Typography>
+              </div>
               <Button
-                disabled={
-                  selectedCollaboratorsIds.length === 0 ||
-                  isPendingDeleteCollaborators
-                }
-                isLoading={isPendingDeleteCollaborators}
-                variant="ghost-alert"
-                size="lg"
-                onClick={() => {
-                  onClickDeleteCollaborators(selectedCollaboratorsIds);
-                }}
-                prefixIcon={<X />}
+                variant="tertiary-mediator"
+                prefixIcon={<UserPlus />}
+                onClick={() => setShowModalAddCollaborator(true)}
               >
-                {t("button_delete")}
+                {t("button_add_collaborator")}
               </Button>
             </div>
+            <SearchInput
+              placeholder={t("search_placeholder")}
+              variant="mediator"
+              value={payload?.params?.search}
+              onChange={(e) =>
+                useOnchangeSearch(
+                  e.target.value,
+                  { payload, setPayload },
+                  refetch
+                )
+              }
+              loadingSubmit={isLoading && isRefetching}
+              onSubmitSearch={() =>
+                useSubmitSearch(payload.params?.search, refetch)
+              }
+            />
+            <div className="flex w-full items-center justify-between">
+              <FilterDropdown
+                store={{ payload, setPayload }}
+                onValueChange={submitChange}
+              />
+              <SortDropdown
+                variant="mediator"
+                value={payload.params?.sort ?? "name"}
+                options={collaboratorSortBy}
+                onValueChange={(value) => {
+                  useClickSort(value, { payload, setPayload });
+                }}
+              />
+            </div>
           </div>
-        )}
-      </div>
+          <div className="h-full w-full space-y-6">
+            {isLoading || isRefetching ? (
+              <TableLoadingList
+                stickyHeader
+                columns={collaboratorTableColums}
+              />
+            ) : totalCollaborator > 0 ? (
+              <>
+                <CollaboratorsTableView
+                  selectedIds={selectedCollaboratorsIds}
+                  isLoading={isLoading || isRefetching}
+                  columns={collaboratorTableColums}
+                  data={collaboratorListData ?? []}
+                  onClickDeleteCollaborator={(ids) => {
+                    onClickDeleteCollaborators(ids);
+                  }}
+                  onChangeCheckbox={(id, checked) => {
+                    if (checked) {
+                      setSelectedCollaboratorsIds((prev) => [...prev, id]);
+                    } else {
+                      setSelectedCollaboratorsIds((prev) =>
+                        prev.filter((item) => item !== id)
+                      );
+                    }
+                  }}
+                />
+                <div ref={paginationRef} className="w-full space-y-6 pb-28">
+                  {isFetchingNextPage && (
+                    <SkeletonList
+                      className="h-16 w-full rounded-2xl"
+                      count={3}
+                    />
+                  )}
+                  <Typography
+                    variant="p"
+                    affects="tiny"
+                    className="italic text-neutral-light-40 dark:text-neutral-dark-40"
+                  >
+                    {t("showing_collaborator", {
+                      currentShowCollaborator,
+                      totalCollaborator,
+                    })}
+                  </Typography>
+                </div>
+              </>
+            ) : (
+              <EmptyState
+                noMargin
+                type="collaborators"
+                variant="mediator"
+                titleText={t("no_collaborators")}
+                buttonText={t("button_add_collaborator")}
+                onClickButton={() => setShowModalAddCollaborator(true)}
+              />
+            )}
+          </div>
+          {selectedCollaboratorsIds.length > 0 && (
+            <div
+              className={cn(
+                "fixed bottom-4 right-16 z-50 mx-auto max-w-[calc(100%-(272px+120px))]",
+                "flex w-full items-center justify-center gap-4 rounded-md",
+                "px-6 py-3",
+                "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
+              )}
+            >
+              <div className="flex w-full items-center justify-between">
+                <Typography variant="p" affects="small" weight="medium">
+                  {selectedCollaboratorsIds.length} {t("hacker_selected")}
+                </Typography>
+                <Button
+                  disabled={
+                    selectedCollaboratorsIds.length === 0 ||
+                    isPendingDeleteCollaborators
+                  }
+                  isLoading={isPendingDeleteCollaborators}
+                  variant="ghost-alert"
+                  size="lg"
+                  onClick={() => {
+                    onClickDeleteCollaborators(selectedCollaboratorsIds);
+                  }}
+                  prefixIcon={<X />}
+                >
+                  {t("button_delete")}
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </Desktop>
       <CollaboratorDialog
         id={id}
         isOpen={showModalAddCollaborator}

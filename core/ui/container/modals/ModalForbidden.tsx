@@ -30,7 +30,7 @@ const ModalForbiddden = ({
       <div className="_flexbox__col__center mx-auto w-full max-w-xs gap-6 p-2">
         <MonitorSmartphone className={cn("h-12 w-12 ", iconColor[variant])} />
         <div className="_flexbox__col__center w-full gap-2">
-          <Typography variant="h5" weight="semibold">
+          <Typography variant="h5" weight="semibold" align="center">
             {title}
           </Typography>
           <Typography variant="p" affects="normal" align="center">

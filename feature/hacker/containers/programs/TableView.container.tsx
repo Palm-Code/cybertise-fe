@@ -74,9 +74,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         >
                           {item.company?.name}
                         </Typography>
-                        <Badge variant="default" className="w-fit">
-                          {item.type}
-                        </Badge>
+                        {item.type.toLowerCase() === "private" && (
+                          <Badge variant="default" className="w-fit">
+                            {item.type}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   </TableData>
