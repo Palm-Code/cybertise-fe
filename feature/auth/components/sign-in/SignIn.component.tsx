@@ -20,6 +20,7 @@ import { useGetAccessToken } from "@/core/react-query/client";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { ReactivateAccount } from "../reactivate-account";
 import { useTranslations } from "next-intl";
+import { useDebounce } from "@/utils/hooks/debounce";
 
 const SignInComponent = () => {
   const t = useTranslations("SignIn");
@@ -27,8 +28,9 @@ const SignInComponent = () => {
   const auth_2fa = useSearchParams().get("code");
   const auth_email = useSearchParams().get("authenticate_email");
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
+  const emailDebounce = useDebounce();
   const {
-    formState: { errors },
+    formState: { errors, dirtyFields },
     setValue,
     watch,
   } = useForm<FormLoginSchema>({
@@ -38,7 +40,6 @@ const SignInComponent = () => {
       password: "",
     },
   });
-
   const forms = watch();
   const { mutateAsync, error, isPending, isSuccess } =
     usePostSignIn(callbackUrl);
@@ -145,7 +146,9 @@ const SignInComponent = () => {
             type="email"
             label={t("email")}
             placeholderText={t("email_placeholder")}
-            onClearInput={() => setValue("email", "", { shouldValidate: true })}
+            onClearInput={() =>
+              setValue("email", "", { shouldValidate: true, shouldDirty: true })
+            }
             value={forms.email}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -153,9 +156,11 @@ const SignInComponent = () => {
               }
             }}
             onChange={(e) =>
-              setValue("email", e.target.value, { shouldValidate: true })
+              setValue("email", e.target.value, {
+                shouldValidate: true,
+              })
             }
-            isError={!!error?.email || !!errors.email}
+            isError={dirtyFields.email && (!!error?.email || !!errors.email)}
           />
           <div className="w-full space-y-1">
             <Input

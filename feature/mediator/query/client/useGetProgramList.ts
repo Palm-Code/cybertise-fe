@@ -12,7 +12,10 @@ import {
 } from "@tanstack/react-query";
 import { useMediaQuery } from "usehooks-ts";
 
-export const useGetProgramList = (payload?: I_GetParamsPayload) => {
+export const useGetProgramList = (
+  payload?: I_GetParamsPayload,
+  enableMobile: boolean = false
+) => {
   const isMobileDevice = useMediaQuery("(max-width: 1279px)");
   const queryInfinity = useInfiniteQuery({
     queryKey: [
@@ -25,7 +28,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
         params: {
           ...payload?.params,
           page: {
-            size: 10,
+            size: 6,
             number: pageParam.pageParam,
           },
         },
@@ -36,7 +39,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
         ? (lastPage?.meta?.current_page ?? 0) + 1
         : undefined;
     },
-    enabled: isMobileDevice,
+    enabled: isMobileDevice || enableMobile,
   });
 
   const query = useQuery<I_GetProgramListSuccessResponse, I_GetErrorResponse>({
@@ -47,7 +50,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
     ],
     queryFn: () => fetchGetProgramList(payload),
     placeholderData: keepPreviousData,
-    enabled: !isMobileDevice,
+    enabled: !isMobileDevice && !enableMobile,
   });
 
   if (query.error) {

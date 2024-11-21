@@ -15,9 +15,10 @@ import {
   useGetCompaniesDetail,
   useGetProgramList,
 } from "@/feature/mediator/query/client";
-import { VRPHeroLoading } from "@/core/ui/container";
+import { VRPCardLoadingList, VRPHeroLoading } from "@/core/ui/container";
 import Collaborators from "./_tab/_content/Collaborators";
 import { cn } from "@/core/lib/utils";
+import { useInView } from "react-intersection-observer";
 
 const CompaniesDetail = ({ id }: { id: string }) => {
   const companyTabsItem = useCompanyTabsItem();
@@ -30,18 +31,39 @@ const CompaniesDetail = ({ id }: { id: string }) => {
   } = useGetCompaniesDetail(store.payload, id);
   const [programType, setProgramType] = useState<string | undefined>();
   const {
-    queryDesktop: { data: programList },
-  } = useGetProgramList({
-    params: {
-      filter: {
-        company_id: id,
-        type: programType,
+    queryMobile: {
+      data: programs,
+      isFetchingNextPage,
+      isFetching: isFetchingPrograms,
+      fetchNextPage,
+    },
+  } = useGetProgramList(
+    {
+      params: {
+        filter: {
+          company_id: id,
+          type: programType,
+        },
+        include: "collaboratorsCount",
+        append: "asset_types",
       },
-      include: "collaboratorsCount",
-      append: "asset_types",
+    },
+    true
+  );
+
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView) {
+        setTimeout(() => {
+          fetchNextPage();
+        }, 200);
+      }
     },
   });
-  const filteredPorgramList = programList?.data.filter(
+
+  const programListDesktop = programs?.pages.map((page) => page.data).flat();
+
+  const filteredPorgramList = programListDesktop?.filter(
     (item) => item.status === "Published"
   );
   const [active, setActive] = useState<companyTabsItemEnums>(
@@ -49,7 +71,7 @@ const CompaniesDetail = ({ id }: { id: string }) => {
   );
 
   const tabs: { [key in companyTabsItemEnums]: JSX.Element } = {
-    vulnerability_program: <VrpCardList data={programList?.data ?? []} />,
+    vulnerability_program: <VrpCardList data={filteredPorgramList ?? []} />,
     active_tickets: <ActiveTicket id={id} />,
     // thanks: companyDetails?.data.thanks_message ? (
     //   <Thanks data={companyDetails?.data.thanks_message} />
@@ -86,12 +108,25 @@ const CompaniesDetail = ({ id }: { id: string }) => {
                 "_flexbox__col__start__start w-full grid-cols-2 gap-4 px-6",
                 {
                   "md:grid":
-                    (active !== "active_tickets" && programList?.meta?.total) ??
+                    (active !== "active_tickets" &&
+                      programs?.pages[0].meta?.total) ??
                     0 > 1,
                 }
               )}
             >
-              {tabs[active]}
+              {isFetchingPrograms &&
+              !isFetchingNextPage &&
+              active !== "active_tickets" ? (
+                <VRPCardLoadingList count={10} />
+              ) : (
+                tabs[active]
+              )}
+              {active === "vulnerability_program" ||
+              active === "collaborators" ? (
+                <div ref={ref} className={cn("w-full space-y-6")}>
+                  {isFetchingNextPage && <VRPCardLoadingList count={3} />}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -112,7 +147,19 @@ const CompaniesDetail = ({ id }: { id: string }) => {
                 setProgramType(undefined);
               }}
             />
-            {tabs[active]}
+            {isFetchingPrograms &&
+            !isFetchingNextPage &&
+            active !== "active_tickets" ? (
+              <VRPCardLoadingList count={10} />
+            ) : (
+              tabs[active]
+            )}
+            {active === "vulnerability_program" ||
+            active === "collaborators" ? (
+              <div ref={ref} className={cn("w-full space-y-6")}>
+                {isFetchingNextPage && <VRPCardLoadingList count={3} />}
+              </div>
+            ) : null}
           </div>
         </div>
       </Desktop>
