@@ -1,9 +1,10 @@
 import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
-import { Button, Card, Typography } from "@/core/ui/components";
+import { Avatar, Button, Card, Typography } from "@/core/ui/components";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { DrawerAssetType } from "../_drawer";
+import { cn } from "@/core/lib/utils";
 
 export const CollaboratorCard = ({
   user,
@@ -12,9 +13,12 @@ export const CollaboratorCard = ({
   return (
     <Card className="h-full">
       <div className="flex h-full w-full flex-col gap-4">
-        <Typography variant="p" affects="small" weight="medium">
-          {user.name}
-        </Typography>
+        <div className={cn("grid grid-cols-[auto_1fr] items-center gap-2")}>
+          <Avatar image={user.avatar} className={cn("size-6")} />
+          <Typography variant="p" affects="small" weight="medium">
+            {user.name}
+          </Typography>
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <Typography

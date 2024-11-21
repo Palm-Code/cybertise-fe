@@ -3,6 +3,7 @@ import { cn } from "@/core/lib/utils";
 import { I_GetCollaboratorSuccessResponse } from "@/core/models/mediator/collaborators";
 import {
   AssetTypeTooltip,
+  Avatar,
   BaseTable,
   Button,
   Checkbox,
@@ -91,14 +92,20 @@ export default function Table({
               <TableData
                 className={cn(columns[1].width, `text-${columns[1].align}`)}
               >
-                <Typography
-                  variant="p"
-                  affects="small"
-                  weight="semibold"
-                  align={columns[1].align}
-                >
-                  {item.user.name}
-                </Typography>
+                <div className="grid grid-cols-[auto_1fr] items-center gap-2">
+                  <Avatar
+                    className={cn("size-6")}
+                    image={item.user.avatar || ""}
+                  />
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                    align={columns[1].align}
+                  >
+                    {item.user.name}
+                  </Typography>
+                </div>
               </TableData>
               <TableData
                 className={cn(columns[2].width, `text-${columns[2].align}`)}
