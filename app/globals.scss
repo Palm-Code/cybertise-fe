@@ -426,3 +426,12 @@ li {
     }
   }
 }
+
+.recharts-default-legend {
+  @apply space-y-4;
+}
+
+.recharts-legend-item {
+  @apply grid-cols-[auto_1fr] items-center gap-2;
+  display: grid !important;
+}

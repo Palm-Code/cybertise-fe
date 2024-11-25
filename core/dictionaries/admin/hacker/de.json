@@ -3,7 +3,8 @@
     "title": "Offene Tickets",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
     "search_result": "Ergebnis anzeigen für",
-    "see_programs": "Siehe Programme"
+    "see_programs": "Siehe Programme",
+    "overview": "Überblick"
   },
   "ProgramsHacker": {
     "title": "Bug-Bounty-Programme",

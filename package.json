@@ -73,6 +73,7 @@
     "react-hook-form": "^7.51.3",
     "react-intersection-observer": "^9.8.2",
     "react-number-format": "^5.3.4",
+    "recharts": "^2.13.3",
     "sass": "^1.71.1",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.2.0",

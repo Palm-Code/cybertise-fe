@@ -68,27 +68,29 @@ const BaseDropdown = ({
       </Mobile>
       <Desktop className="w-fit">
         <Select onValueChange={onValueChange} defaultValue={value}>
-          <SelectTrigger
-            withIcon
-            className={cn(
-              "!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent",
-              triggerClassName
-            )}
-            {...props}
-          >
+          <div className={cn("flex items-center gap-1")}>
             {label && (
               <Typography
                 variant="p"
                 affects="small"
-                className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
+                className="text-neutral-light-30 dark:text-neutral-dark-30"
               >
                 {label}
               </Typography>
             )}
-            <Typography variant="p" affects="small">
-              {inputValueLabel || "All type"}
-            </Typography>
-          </SelectTrigger>
+            <SelectTrigger
+              withIcon
+              className={cn(
+                "!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent",
+                triggerClassName
+              )}
+              {...props}
+            >
+              <Typography variant="p" affects="small">
+                {inputValueLabel || "All type"}
+              </Typography>
+            </SelectTrigger>
+          </div>
           <SelectContent
             className={cn(
               "!bg-white dark:!bg-neutral-dark-100",
