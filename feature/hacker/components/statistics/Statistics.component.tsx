@@ -7,9 +7,32 @@ import React from "react";
 import { OverviewCard } from "./card";
 import { AreaChartCard, PieChartCard } from "./card/chart";
 import { FilterStatistic } from "./filter";
+import { TicketListCard } from "./card/ticket";
+import { useChatListParamStore } from "../../zustand/store/dashboard";
+import { useGetTableColumns } from "../../constants/dashboard";
+import { useGetChatList } from "../../query/client";
 
 export const Statistics = () => {
   const t = useTranslations("DashboardHacker");
+  const store = useChatListParamStore();
+  const { payload, setPayload } = store;
+  const {
+    queryDesktop: {
+      data: dashboardData,
+      isLoading,
+      isFetching,
+      refetch,
+      isRefetching,
+    },
+    queryMobile: {
+      data,
+      isLoading: mobileIsLoading,
+      refetch: mobileRefetch,
+      isFetching: mobileIsFetching,
+      isFetchingNextPage,
+      fetchNextPage,
+    },
+  } = useGetChatList(payload);
   return (
     <DesktopLayout>
       <div className={cn("flex w-full flex-col gap-10")}>
@@ -50,6 +73,7 @@ export const Statistics = () => {
           <AreaChartCard />
           <PieChartCard />
         </div>
+        <TicketListCard data={dashboardData?.data} />
       </div>
     </DesktopLayout>
   );
