@@ -23,7 +23,10 @@
     "tabs": {
       "rules_and_policy": "Rules & Policy",
       "scope": "Scope",
-      "updates": "Updates"
+      "updates": "Updates",
+      "thanks": "Thanks",
+      "summary": "Summary",
+      "bounty": "Bounties"
     },
     "scope": {
       "placeholder_search": "Search for assets",

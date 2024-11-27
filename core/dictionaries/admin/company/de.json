@@ -19,7 +19,10 @@
       "tabs": {
         "rules": "Regel & Politik",
         "scope": "Umfang",
-        "updates": "Aktualisierungen"
+        "updates": "Aktualisierungen",
+        "summary": "Zusammenfassung",
+        "bounty": "Kopfgelder",
+        "thanks": "Danke"
       },
       "scope": {
         "placeholder_search": "Nach Asset suchen",

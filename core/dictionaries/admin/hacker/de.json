@@ -24,7 +24,10 @@
     "tabs": {
       "rules_and_policy": "Regeln & Politik",
       "scope": "Umfang",
-      "updates": "Aktualisierungen"
+      "updates": "Aktualisierungen",
+      "thanks": "Danke",
+      "summary": "Zusammenfassung",
+      "bounty": "Kopfgelder"
     },
     "scope": {
       "placeholder_search": "Nach Vermögenswerten suchen",

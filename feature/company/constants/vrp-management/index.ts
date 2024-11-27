@@ -94,8 +94,16 @@ export const useProgramDetailTabsItem = () => {
 
   const programDetailTabsItem: SortFilterType[] = [
     {
+      label: t("tabs.summary"),
+      value: "summary",
+    },
+    {
       label: t("tabs.rules"),
       value: "rules",
+    },
+    {
+      label: t("tabs.bounty"),
+      value: "bounty",
     },
     {
       label: t("tabs.scope"),
@@ -104,6 +112,10 @@ export const useProgramDetailTabsItem = () => {
     {
       label: t("tabs.updates"),
       value: "updates",
+    },
+    {
+      label: t("tabs.thanks"),
+      value: "thanks",
     },
   ];
   return programDetailTabsItem;

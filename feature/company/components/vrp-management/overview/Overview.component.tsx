@@ -20,6 +20,9 @@ import { currentPhase } from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
 import { useGetRole } from "@/core/hooks";
 import { useTranslations } from "next-intl";
+import Summary from "./_tab/_content/Summary";
+import { CreateVrpType } from "@/core/models/common/post_create_vrp";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 const Overview = ({ id }: { id: string }) => {
   const t = useTranslations("VRPManagement.overview");
@@ -32,11 +35,32 @@ const Overview = ({ id }: { id: string }) => {
     isLoading,
     isFetching,
   } = useGetProgramDetails(store.payload, id);
-  const [active, setActive] = useState<TabsItem>(TabsItem.rules);
+  const [active, setActive] = useState<TabsItem>(TabsItem.summary);
   const [showModalForbidden, setShowModalForbidden] = useState(false);
 
+  const summary: CreateVrpType = {
+    title: programListDetails?.data?.title || "",
+    type: programListDetails?.data?.type || "",
+    status: programListDetails?.data?.status || "",
+    rules: programListDetails?.data?.rules || "",
+    target_assets: programListDetails?.data?.target_assets || [],
+    monetary_awards_critical:
+      programListDetails?.data?.monetary_awards_critical || 0,
+    monetary_awards_high: programListDetails?.data?.monetary_awards_high || 0,
+    monetary_awards_medium:
+      programListDetails?.data?.monetary_awards_medium || 0,
+    monetary_awards_low: programListDetails?.data?.monetary_awards_low || 0,
+    monetary_awards_level:
+      programListDetails?.data?.monetary_awards_level || "",
+    asset_types_values: programListDetails?.data?.asset_types || [],
+    description: programListDetails?.data?.description || "",
+    notes: programListDetails?.data?.notes || "",
+  };
+
   const tabs: { [key in TabsItem]: JSX.Element } = {
+    summary: <Summary type="details" data={summary} />,
     rules: <RnP data={programListDetails?.data?.rules || "-"} />,
+    bounty: <Summary type="bounty" data={summary} />,
     scope: <Scope id={id} assetTypes={assetTypes} />,
     updates: (
       <UpdateList
@@ -44,16 +68,16 @@ const Overview = ({ id }: { id: string }) => {
         data={programListDetails?.data?.latest_updates || []}
       />
     ),
-    // thanks: programListDetails?.data?.company?.thanks_message ? (
-    //   <Thanks data={programListDetails?.data?.company?.thanks_message} />
-    // ) : (
-    //   <EmptyState
-    //     titleText="You Have No Thanks Message"
-    //     variant="company"
-    //     type="update"
-    //     buttonText=""
-    //   />
-    // ),
+    thanks: programListDetails?.data?.company?.thanks_message ? (
+      <Thanks data={programListDetails?.data?.company?.thanks_message} />
+    ) : (
+      <EmptyState
+        titleText="You Have No Thanks Message"
+        variant="company"
+        type="update"
+        buttonText=""
+      />
+    ),
   };
 
   if (isLoading || isFetching) return <Loader variant="company" />;
