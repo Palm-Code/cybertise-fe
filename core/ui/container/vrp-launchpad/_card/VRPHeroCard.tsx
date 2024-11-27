@@ -1,3 +1,4 @@
+"use client";
 import { useCurrentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
