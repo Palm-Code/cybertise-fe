@@ -4,7 +4,8 @@
     "placeholder_search": "Try “#21231” or “Company name”",
     "submit_search": "Search",
     "search_result": "Show result for",
-    "see_programs": "See VRP Launchpad"
+    "see_programs": "See VRP Launchpad",
+    "overview": "Overview"
   },
   "ProgramsCompany": {
     "title": "VRP Launchpad",

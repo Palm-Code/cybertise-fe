@@ -146,9 +146,7 @@ const SignInComponent = () => {
             type="email"
             label={t("email")}
             placeholderText={t("email_placeholder")}
-            onClearInput={() =>
-              setValue("email", "", { shouldValidate: true, shouldDirty: true })
-            }
+            onClearInput={() => setValue("email", "", { shouldValidate: true })}
             value={forms.email}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -160,7 +158,7 @@ const SignInComponent = () => {
                 shouldValidate: true,
               })
             }
-            isError={dirtyFields.email && (!!error?.email || !!errors.email)}
+            isError={!!forms.email && (!!error?.email || !!errors.email)}
           />
           <div className="w-full space-y-1">
             <Input
@@ -177,7 +175,7 @@ const SignInComponent = () => {
                   onSubmitLogin();
                 }
               }}
-              isError={!!errors.password}
+              isError={!!forms.password && !!errors.password}
             />
             <Link
               href={"/forgot-password"}

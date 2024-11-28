@@ -88,7 +88,7 @@ export const FilterDropdown = ({
         </FilterDrawer>
       </Mobile>
       <Desktop>
-        <div className="grid w-fit grid-cols-[auto_1fr] items-center rounded-md bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100">
+        <div className="grid w-fit grid-cols-[auto_1fr] items-center gap-2.5 rounded-md bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100">
           <div className="flex items-center gap-2.5">
             <Filter className={cn(iconColor.mediator)} />
             <Separator

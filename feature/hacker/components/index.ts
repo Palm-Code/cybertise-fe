@@ -4,4 +4,4 @@ export { default as ProgramDetails } from "./programs/details/ProgramDetails.com
 export { default as SendReport } from "./programs/send-report/SendReport.component";
 export { default as Reports } from "./reports/Reports.component";
 export { default as ReportDetails } from "./reports/details/ReportDetails.component";
-export * from "./statistics/Statistics.component";
+export { default as Statistics } from "./statistics/Statistics.component";

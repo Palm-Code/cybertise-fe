@@ -2,7 +2,8 @@
   "DashboardCompany": {
     "title": "Offene Tickets",
     "see_programs": "Siehe VRP Launchpad",
-    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
+    "overview": "Überblick"
   },
   "ReportsCompany": {
     "title": "Berichte",

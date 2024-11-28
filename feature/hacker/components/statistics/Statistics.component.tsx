@@ -12,7 +12,7 @@ import { useChatListParamStore } from "../../zustand/store/dashboard";
 import { useGetTableColumns } from "../../constants/dashboard";
 import { useGetChatList } from "../../query/client";
 
-export const Statistics = () => {
+const Statistics = () => {
   const t = useTranslations("DashboardHacker");
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
@@ -78,3 +78,5 @@ export const Statistics = () => {
     </DesktopLayout>
   );
 };
+
+export default Statistics;

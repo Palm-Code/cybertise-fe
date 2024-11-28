@@ -9,6 +9,8 @@ import { Desktop } from "@/core/ui/layout";
 import { Button } from "@/core/ui/components";
 import { useTranslations } from "next-intl";
 import { useDeleteCollaborators } from "@/feature/mediator/query/client/useDeleteCollaborators";
+import { cn } from "@/core/lib/utils";
+import { buttonVariants } from "@/core/ui/components/button/base-button";
 
 interface I_ActionDropDownProps {
   withIcon?: boolean;
@@ -48,9 +50,11 @@ const ActionDropDown = ({
       <Desktop className="mx-auto w-fit">
         <Select open={open} onOpenChange={onOpenChange}>
           <SelectTrigger className="!bg-transparent !p-0">
-            <Button variant="tertiary-mediator" size="ghost">
-              <EllipsisVertical />
-            </Button>
+            <EllipsisVertical
+              className={cn(
+                buttonVariants({ variant: "tertiary-mediator", size: "ghost" })
+              )}
+            />
           </SelectTrigger>
           <SelectContent
             align="center"
