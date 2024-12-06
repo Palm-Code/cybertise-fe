@@ -16,12 +16,12 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "22/10/24", value: 50 },
-  { name: "29/10/24", value: 80 },
-  { name: "5/11/24", value: 80 },
-  { name: "12/11/24", value: 70 },
-  { name: "19/11/24", value: 90 },
-  { name: "22/11/24", value: 60 },
+  { name: "22/10/24", ticket: 50 },
+  { name: "29/10/24", ticket: 80 },
+  { name: "5/11/24", ticket: 80 },
+  { name: "12/11/24", ticket: 70 },
+  { name: "19/11/24", ticket: 90 },
+  { name: "22/11/24", ticket: 60 },
 ];
 
 const CustomDot = (props: { cx: number; cy: number }) => {

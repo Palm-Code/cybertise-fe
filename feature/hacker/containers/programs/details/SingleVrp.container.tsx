@@ -28,6 +28,7 @@ const SingleVrp = ({
     type: data?.type || "",
     status: data?.status || "",
     rules: data?.rules || "",
+    policies: data?.policies || "",
     target_assets: data?.target_assets || [],
     monetary_awards_critical: data?.monetary_awards_critical || 0,
     monetary_awards_high: data?.monetary_awards_high || 0,
