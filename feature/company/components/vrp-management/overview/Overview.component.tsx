@@ -15,14 +15,20 @@ import { ModalForbidden } from "@/core/ui/container";
 import { useProgramListParamStore } from "@/feature/company/zustand/store/programs";
 import { useGetProgramDetails } from "@/feature/company/query/client/useGetProgramDetails";
 import { useGetAssetType } from "@/core/react-query/client";
-import Thanks from "./_tab/_content/Thanks";
-import { currentPhase } from "@/core/constants/common";
+import {
+  currentPhase,
+  useGetContibutorTableColumns,
+} from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
 import { useGetRole } from "@/core/hooks";
 import { useTranslations } from "next-intl";
 import Summary from "./_tab/_content/Summary";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { useGetContibutorList } from "@/core/react-query/client/useGetContributorList";
+import { useContributorsParamsStore } from "@/core/zustands/contributors";
+import { ContributorTableView } from "./_table";
+import Thanks from "./_tab/_content/Thanks";
 
 const Overview = ({ id }: { id: string }) => {
   const t = useTranslations("VRPManagement.overview");
@@ -37,7 +43,6 @@ const Overview = ({ id }: { id: string }) => {
   } = useGetProgramDetails(store.payload, id);
   const [active, setActive] = useState<TabsItem>(TabsItem.summary);
   const [showModalForbidden, setShowModalForbidden] = useState(false);
-
   const summary: CreateVrpType = {
     title: programListDetails?.data?.title || "",
     type: programListDetails?.data?.type || "",
@@ -68,16 +73,7 @@ const Overview = ({ id }: { id: string }) => {
         data={programListDetails?.data?.latest_updates || []}
       />
     ),
-    thanks: programListDetails?.data?.company?.thanks_message ? (
-      <Thanks data={programListDetails?.data?.company?.thanks_message} />
-    ) : (
-      <EmptyState
-        titleText="You Have No Thanks Message"
-        variant="company"
-        type="update"
-        buttonText=""
-      />
-    ),
+    thanks: <Thanks programId={id} />,
   };
 
   if (isLoading || isFetching) return <Loader variant="company" />;

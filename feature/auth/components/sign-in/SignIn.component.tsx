@@ -28,9 +28,8 @@ const SignInComponent = () => {
   const auth_2fa = useSearchParams().get("code");
   const auth_email = useSearchParams().get("authenticate_email");
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
-  const emailDebounce = useDebounce();
   const {
-    formState: { errors, dirtyFields },
+    formState: { errors },
     setValue,
     watch,
   } = useForm<FormLoginSchema>({
