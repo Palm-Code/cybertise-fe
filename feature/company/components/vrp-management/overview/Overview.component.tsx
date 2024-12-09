@@ -15,19 +15,12 @@ import { ModalForbidden } from "@/core/ui/container";
 import { useProgramListParamStore } from "@/feature/company/zustand/store/programs";
 import { useGetProgramDetails } from "@/feature/company/query/client/useGetProgramDetails";
 import { useGetAssetType } from "@/core/react-query/client";
-import {
-  currentPhase,
-  useGetContibutorTableColumns,
-} from "@/core/constants/common";
+import { currentPhase } from "@/core/constants/common";
 import Loader from "@/core/ui/components/loader/loader";
 import { useGetRole } from "@/core/hooks";
 import { useTranslations } from "next-intl";
 import Summary from "./_tab/_content/Summary";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
-import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { useGetContibutorList } from "@/core/react-query/client/useGetContributorList";
-import { useContributorsParamsStore } from "@/core/zustands/contributors";
-import { ContributorTableView } from "./_table";
 import Thanks from "./_tab/_content/Thanks";
 
 const Overview = ({ id }: { id: string }) => {

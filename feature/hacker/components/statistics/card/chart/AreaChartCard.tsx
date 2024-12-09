@@ -86,7 +86,7 @@ export const AreaChartCard = () => {
             <Area
               type="monotone"
               dot={<CustomDot cx={0} cy={0} />}
-              dataKey="value"
+              dataKey="ticket"
               stroke="#BAFF00"
               fillOpacity={1}
               fill="url(#colorPv)"

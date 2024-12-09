@@ -1,14 +1,15 @@
 "use client";
+import { cn } from "@/core/lib/utils";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { CreateVrpType } from "@/core/models/common/post_create_vrp";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
-import { EmptState } from "@/core/ui/layout";
+import RulesAndPoliciesReview from "@/core/ui/container/vrp-launchpad/stages/_content/steps/vrp-details-review/_card/RulesAndPoliciesReview";
 import { TabsItem } from "@/enums";
+import Thanks from "@/feature/company/components/vrp-management/overview/_tab/_content/Thanks";
 import Tab from "@/feature/hacker/components/programs/details/_tab/Tab";
 import RnP from "@/feature/hacker/components/programs/details/_tab/_content/RnP";
 import Scope from "@/feature/hacker/components/programs/details/_tab/_content/Scope";
 import Summary from "@/feature/hacker/components/programs/details/_tab/_content/Summary";
-import Thanks from "@/feature/hacker/components/programs/details/_tab/_content/Thanks";
 import UpdateList from "@/feature/hacker/components/programs/details/_tab/_content/Update";
 import { useGetProgramDetailsTabItems } from "@/feature/hacker/constants/programs";
 import { useState } from "react";
@@ -42,15 +43,16 @@ const SingleVrp = ({
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
     summary: <Summary type="details" data={summary} />,
-    rules: <RnP data={data?.rules ?? null} />,
+    rules: (
+      <RulesAndPoliciesReview
+        className={cn("bg-background-main-light dark:bg-background-main-dark")}
+        data={summary}
+      />
+    ),
     bounty: <Summary type="bounty" data={summary} />,
     scope: <Scope id={data?.id || ""} assetTypes={assetTypes} />,
     updates: <UpdateList data={data?.latest_updates} />,
-    thanks: data?.company?.thanks_message ? (
-      <Thanks data={data?.company?.thanks_message} />
-    ) : (
-      <EmptState type="update" variant="hacker" buttonText="" />
-    ),
+    thanks: <Thanks programId={data?.id || ""} />,
   };
   return (
     <>
@@ -60,7 +62,7 @@ const SingleVrp = ({
         onValueChange={(v) => setActive(TabsItem[v])}
         updates={data?.latest_updates?.length}
       />
-      <div className="w-full pb-12">{tabs[active]}</div>
+      <div className="w-full px-6 pb-12 xl:p-0">{tabs[active]}</div>
     </>
   );
 };

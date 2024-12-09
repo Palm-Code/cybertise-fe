@@ -23,6 +23,7 @@ const Summary = ({ data, type = "details" }: SummaryProps) => {
     ),
     bounty: <MonetaryAwardsCard data={data} />,
   };
+
   return (
     <div
       className={cn(

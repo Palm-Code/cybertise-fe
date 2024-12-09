@@ -7,9 +7,10 @@ import React from "react";
 
 type RnpProps = {
   data: CreateVrpType;
+  className?: string;
 };
 
-const RulesAndPoliciesReview = ({ data }: RnpProps) => {
+const RulesAndPoliciesReview = ({ data, className }: RnpProps) => {
   const t = useTranslations(
     "VRPLaunchpad.phase.vrp_details.rules_and_policies"
   );
@@ -19,7 +20,8 @@ const RulesAndPoliciesReview = ({ data }: RnpProps) => {
       className={cn(
         "_flexbox__col__start__start w-full gap-6",
         "bg-background-page-light dark:bg-background-page-dark",
-        "xl:p-7.5"
+        "xl:p-7.5",
+        className
       )}
     >
       <Typography variant="h6" weight="bold">
@@ -33,9 +35,9 @@ const RulesAndPoliciesReview = ({ data }: RnpProps) => {
         >
           {t("rules")}
         </Typography>
-        <article>
-          <Tiptap showing description={sanitize(data.rules ?? "")} />
-        </article>
+        <article
+          dangerouslySetInnerHTML={{ __html: sanitize(data.rules ?? "") }}
+        />
       </div>
       <div className="__flexbox__col__start__start w-full gap-2.5">
         <Typography
@@ -45,9 +47,9 @@ const RulesAndPoliciesReview = ({ data }: RnpProps) => {
         >
           {t("policies")}
         </Typography>
-        <article>
-          <Tiptap showing description={sanitize(data.policies ?? "")} />
-        </article>
+        <article
+          dangerouslySetInnerHTML={{ __html: sanitize(data.policies ?? "") }}
+        />
       </div>
     </Card>
   );

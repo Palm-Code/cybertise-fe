@@ -22,7 +22,7 @@ export const useGetContibutorList = (
             program_id: id,
           },
           page: {
-            size: 10,
+            size: 30,
             number: pageParam.pageParam,
           },
         },
