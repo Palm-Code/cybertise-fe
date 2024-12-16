@@ -43,6 +43,7 @@ export const useGetProgramList = (payload?: I_GetParamsPayload) => {
     queryKey: [
       "getProgramList",
       payload?.params?.page,
+      payload?.params?.sort,
       payload?.params?.filter,
     ],
     queryFn: () => fetchGetProgramList(payload),

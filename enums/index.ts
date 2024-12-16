@@ -1,8 +1,10 @@
 export enum TabsItem {
+  summary = "summary",
   rules = "rules",
+  bounty = "bounty",
   scope = "scope",
   updates = "updates",
-  // thanks = "thanks",
+  thanks = "thanks",
 }
 
 export enum companyTabsItemEnums {

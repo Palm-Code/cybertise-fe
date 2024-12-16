@@ -17,6 +17,7 @@ import { headers } from "next/headers";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cybertise.de"),
   title: {
     default: "Sparta",
     template: "%s | Sparta",

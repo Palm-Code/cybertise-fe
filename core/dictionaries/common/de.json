@@ -30,7 +30,8 @@
       "button_clear": "Klar",
       "button_apply": "Anwenden"
     },
-    "ticket_reported": "Ticket gemeldet"
+    "ticket_reported": "Ticket gemeldet",
+    "showing_data_for": "Daten werden angezeigt für"
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",

@@ -1,0 +1,50 @@
+import { iconColor } from "@/core/constants/common";
+import { cn } from "@/core/lib/utils";
+import { Typography } from "@/core/ui/components";
+import { ArrowUp, Coins } from "lucide-react";
+import React from "react";
+import { Wrapper } from "./Wrapper";
+
+interface I_OverviewCardProps {
+  title: string;
+}
+
+export const OverviewCard = ({ title }: I_OverviewCardProps) => {
+  return (
+    <Wrapper>
+      <div className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}>
+        <Coins className={iconColor.mediator} />
+        <Typography variant="p" affects="normal" weight="semibold">
+          {title}
+        </Typography>
+      </div>
+      <div className={cn("flex w-full items-center justify-between")}>
+        <Typography variant="p" className={cn("text-[40px]")} weight="medium">
+          1,500
+          <span
+            className={cn(
+              "text-xl text-neutral-light-40 dark:text-neutral-dark-40"
+            )}
+          >
+            €
+          </span>
+        </Typography>
+        <div className={cn("grid grid-cols-[auto_1fr] items-center gap-2")}>
+          <div className={cn("rounded-full bg-semantic-dark-success/10 p-1")}>
+            <ArrowUp className={cn("size-4 text-semantic-dark-success")} />
+          </div>
+          <Typography
+            variant="p"
+            affects="normal"
+            weight="bold"
+            className={cn(
+              "text-semantic-light-success dark:text-semantic-dark-success"
+            )}
+          >
+            20%
+          </Typography>
+        </div>
+      </div>
+    </Wrapper>
+  );
+};

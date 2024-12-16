@@ -27,7 +27,6 @@ import { useGetVulnerabilityType } from "@/core/react-query/client/useGetVulnera
 import { usePostSendReports } from "@/feature/hacker/query/client/usePostSendReport";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 interface I_SendReportProps {
@@ -283,7 +282,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               </div>
               <div
                 className={cn(
-                  "sticky top-[8.8rem] z-40 -mt-12 h-fit w-full rounded-xl",
+                  "fixed right-12 z-40 -mt-4 h-fit w-fit max-w-[235px] rounded-xl",
                   isLastStep
                     ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
                     : "bg-background-main-light dark:bg-background-main-dark"

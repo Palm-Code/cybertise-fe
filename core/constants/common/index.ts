@@ -1,3 +1,4 @@
+import { I_TableColumns } from "@/interfaces";
 import { MenuItemType, Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { useTranslations } from "next-intl";
@@ -371,4 +372,30 @@ export const faqData = {
   title: "Frequently Asked Questions",
   date_published: new Date(),
   content: faqs,
+};
+
+export const useGetContibutorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-5/12",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-3/12",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-2/12",
+    },
+  ] as I_TableColumns[];
 };

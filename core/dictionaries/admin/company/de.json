@@ -2,7 +2,8 @@
   "DashboardCompany": {
     "title": "Offene Tickets",
     "see_programs": "Siehe VRP Launchpad",
-    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“"
+    "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
+    "overview": "Überblick"
   },
   "ReportsCompany": {
     "title": "Berichte",
@@ -19,7 +20,10 @@
       "tabs": {
         "rules": "Regel & Politik",
         "scope": "Umfang",
-        "updates": "Aktualisierungen"
+        "updates": "Aktualisierungen",
+        "summary": "Zusammenfassung",
+        "bounty": "Kopfgelder",
+        "thanks": "Danke"
       },
       "scope": {
         "placeholder_search": "Nach Asset suchen",

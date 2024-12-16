@@ -1,5 +1,9 @@
 "use client";
-import { filterItems, filterView } from "@/core/constants/dashboard";
+import {
+  filterItems,
+  filterSortBy,
+  filterView,
+} from "@/core/constants/dashboard";
 import {
   FilterDropdown,
   FilterViewDropdown,
@@ -153,7 +157,7 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
                 <FilterDropdown
                   variant="hacker"
                   value={payload.params?.sort}
-                  options={filterItems}
+                  options={filterSortBy.timestamp}
                   onValueChange={(v) => useClickSort(v, store)}
                 />
               </div>
@@ -187,9 +191,6 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
             <Typography variant="h4" weight="bold" className="mr-auto">
               {t("title")}
             </Typography>
-            <div className="ml-auto w-fit max-w-xl">
-              <FilterViewDropdown type="hacker" options={filterView} />
-            </div>
           </div>
           <div
             className={cn(
@@ -218,6 +219,19 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               assetTypeOptions={assetTypes}
               onValueChange={(v, t) => submitChange(t, v)}
             />
+          </div>
+          <div className="_flexbox__row__center__between w-full">
+            <div className="inline-flex gap-4">
+              <FilterDropdown
+                variant="hacker"
+                value={payload?.params?.sort as string}
+                options={filterSortBy.timestamp}
+                onValueChange={(v) => useClickSort(v, store)}
+              />
+            </div>
+            <div className="ml-auto w-fit max-w-xl">
+              <FilterViewDropdown type="hacker" options={filterView} />
+            </div>
           </div>
           {programList && programList.data.length! ? (
             <>

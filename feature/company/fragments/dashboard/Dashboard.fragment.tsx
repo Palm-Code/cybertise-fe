@@ -1,14 +1,6 @@
-import dynamic from "next/dynamic";
-import { tableTicketData } from "../../constants/dashboard";
-
-const Dashboard = dynamic(
-  () => import("@/feature/company/components/dashboard/Dashboard.component"),
-  {
-    ssr: false,
-  }
-);
+import { Statistics } from "../../components";
 
 const DashboardFragment = () => {
-  return <Dashboard />;
+  return <Statistics />;
 };
 export default DashboardFragment;

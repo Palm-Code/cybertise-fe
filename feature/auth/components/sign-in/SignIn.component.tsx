@@ -20,6 +20,7 @@ import { useGetAccessToken } from "@/core/react-query/client";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { ReactivateAccount } from "../reactivate-account";
 import { useTranslations } from "next-intl";
+import { useDebounce } from "@/utils/hooks/debounce";
 
 const SignInComponent = () => {
   const t = useTranslations("SignIn");
@@ -38,7 +39,6 @@ const SignInComponent = () => {
       password: "",
     },
   });
-
   const forms = watch();
   const { mutateAsync, error, isPending, isSuccess } =
     usePostSignIn(callbackUrl);
@@ -153,9 +153,11 @@ const SignInComponent = () => {
               }
             }}
             onChange={(e) =>
-              setValue("email", e.target.value, { shouldValidate: true })
+              setValue("email", e.target.value, {
+                shouldValidate: true,
+              })
             }
-            isError={!!error?.email || !!errors.email}
+            isError={!!forms.email && (!!error?.email || !!errors.email)}
           />
           <div className="w-full space-y-1">
             <Input
@@ -172,7 +174,7 @@ const SignInComponent = () => {
                   onSubmitLogin();
                 }
               }}
-              isError={!!errors.password}
+              isError={!!forms.password && !!errors.password}
             />
             <Link
               href={"/forgot-password"}

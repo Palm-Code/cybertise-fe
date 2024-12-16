@@ -224,6 +224,14 @@ module.exports = {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
         slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 30.34%, #C00 99.48%)",
+        "statistic-logo-dark":
+          "radial-gradient(297.62% 80.21% at 50.44% 51.69%, rgba(221, 217, 217, 0.00) 0%, rgba(235, 235, 235, 0.43) 100%)",
+        "statistic-logo-light":
+          "radial-gradient(297.62% 80.21% at 50.44% 51.69%, rgba(50, 50, 50, 0.00) 0%, rgba(152, 151, 151, 0.43) 100%)",
+        "statistic-card-dark":
+          "radial-gradient(126.71% 60.93% at 50% 50%, rgba(110, 106, 106, 0.14) 0%, rgba(30, 30, 30, 0.35) 100%)",
+        "statistic-card-light":
+          "radial-gradient(581.84% 175.19% at 3.51% 7.46%, rgba(255, 251, 251, 0.14) 0%, rgba(221, 217, 217, 0.35) 100%)",
       },
     },
   },

@@ -6,3 +6,4 @@ export { default as EditState } from "./manage-company/EditState";
 export { default as VrpManagement } from "./vrp-management/VrpManagement.component";
 export { default as Overview } from "./vrp-management/overview/Overview.component";
 export { default as CreateVrp } from "./vrp-management/create-vrp/CreateVrp.component";
+export { default as Statistics } from "./statistics/Statistics.component";

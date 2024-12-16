@@ -2,7 +2,8 @@
   "DashboardMediator": {
     "title": "Offene Tickets",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
-    "see_programs": "Siehe VRP Launchpad"
+    "see_programs": "Siehe VRP Launchpad",
+    "overview": "Überblick"
   },
   "ProgramsMediator": {
     "title": "VRP-Launchpad",

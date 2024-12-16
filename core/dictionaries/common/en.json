@@ -30,7 +30,8 @@
       "title": "Date Range",
       "button_apply": "Apply",
       "button_clear": "Clear"
-    }
+    },
+    "showing_data_for": "Showing data for"
   },
   "Ticket": {
     "ticket": "Ticket",
