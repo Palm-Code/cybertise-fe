@@ -34,6 +34,7 @@ import { useInView } from "react-intersection-observer";
 import { ModalForbidden } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
 import { useUserStore } from "@/core/zustands/globals/store";
+import ModalAddToContributor from "../_dialog/ModalAddToContributor";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
@@ -55,6 +56,8 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
     useState<boolean>(false);
   const [openModalForbidden, setOpenModalForbidden] = useState<boolean>(false);
+  const [openModalConfirmContributor, setOpenModalConfirmContributor] =
+    useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
   const [files, setFiles] = useState<SendReportRequestType["files"]>();
@@ -307,7 +310,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 )}
                 <button
                   type="button"
-                  className="_flexbox__row__center gap-2.5"
+                  className="_flexbox__row__center gap-2.5 disabled:cursor-not-allowed disabled:text-transparent"
                   disabled={isHiddenChatBox}
                   onClick={() => {
                     setOpenModalSetRiskLevel(true);
@@ -336,10 +339,21 @@ const ReportDetails = ({ id }: { id: string }) => {
                   />
                 ) : (
                   <StatusDropdown
+                    disabled={
+                      ticketDetails.status.toLowerCase() === "closed" ||
+                      ticketDetails.status.toLowerCase() === "canceled"
+                    }
                     value={ticketDetails.status}
                     options={filterItems.status}
                     onValueChange={(v) => {
-                      mutateUpdateTicket(`status=${v}`);
+                      if (
+                        v.toLowerCase() === "closed" &&
+                        ticketDetails.ticket_type.toLowerCase() === "hacker"
+                      ) {
+                        setOpenModalConfirmContributor(true);
+                        return;
+                      }
+                      mutateUpdateTicket(`status=${v}&is_contributed=0`);
                     }}
                   />
                 )}
@@ -491,6 +505,16 @@ const ReportDetails = ({ id }: { id: string }) => {
           value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}
           onClose={() => setOpenModalSetRiskLevel(false)}
+        />
+        <ModalAddToContributor
+          isLoading={isPendingUpdate}
+          isOpen={openModalConfirmContributor}
+          onClose={() => setOpenModalConfirmContributor(false)}
+          onClickConfirm={(v) => {
+            mutateUpdateTicket(`status=Closed&is_contributed=${v}`).then(() => {
+              setOpenModalConfirmContributor(false);
+            });
+          }}
         />
       </Desktop>
       <div ref={chatRef}></div>
