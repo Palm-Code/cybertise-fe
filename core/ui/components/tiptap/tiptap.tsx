@@ -1,5 +1,5 @@
 "use client";
-import { useEditor, EditorContent, PureEditorContent } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./toolbar";
 import Underline from "@tiptap/extension-underline";
@@ -67,6 +67,7 @@ const Tiptap = ({
   const t = useTranslations("TextEditor");
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
+    immediatelyRender: false,
     editable: !showing,
     extensions: [
       StarterKit.configure({
@@ -104,7 +105,6 @@ const Tiptap = ({
         ),
       },
     },
-    autofocus: true,
     onUpdate: ({ editor }) => {
       const value = editor.isEmpty ? "" : editor.getHTML();
       onChangeValue(value);
@@ -120,7 +120,7 @@ const Tiptap = ({
 
   if (showing) {
     return (
-      <PureEditorContent
+      <EditorContent
         editor={editor}
         defaultValue={description}
         value={description}
