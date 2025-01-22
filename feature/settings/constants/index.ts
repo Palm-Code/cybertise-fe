@@ -106,6 +106,10 @@ export const useHackerSettingTabItems = (): SortFilterType[] => {
       label: t("data_privacy"),
       value: "data_privacy",
     },
+    {
+      label: t("activity_logs"),
+      value: "activity_logs",
+    },
   ];
 };
 
@@ -129,6 +133,10 @@ export const useMediatorSettingTabItems = (): SortFilterType[] => {
     {
       label: t("data_privacy"),
       value: "data_privacy",
+    },
+    {
+      label: t("activity_logs"),
+      value: "activity_logs",
     },
   ];
 };

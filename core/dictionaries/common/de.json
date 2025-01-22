@@ -172,7 +172,8 @@
       "billings": "Abrechnungen",
       "notifications": "Benachrichtigungen",
       "security": "Sicherheit",
-      "data_privacy": "Datenschutz"
+      "data_privacy": "Datenschutz",
+      "activity_logs": "Aktivitätsprotokolle"
     },
     "notifications": {
       "title": "Benachrichtigungen",

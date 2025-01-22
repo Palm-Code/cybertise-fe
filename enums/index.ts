@@ -28,6 +28,7 @@ export enum SettingItems {
   notifications = "notifications",
   security = "security",
   data_privacy = "data_privacy",
+  activity_logs = "activity_logs",
 }
 
 export enum AttackVector {

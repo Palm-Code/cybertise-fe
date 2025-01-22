@@ -137,7 +137,8 @@
       "billings": "Billings",
       "notifications": "Notifications",
       "security": "Security",
-      "data_privacy": "Data & Privacy"
+      "data_privacy": "Data & Privacy",
+      "activity_logs": "Activity Logs"
     },
     "details": {
       "title": "{role} Details",
