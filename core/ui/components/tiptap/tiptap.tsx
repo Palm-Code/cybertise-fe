@@ -67,7 +67,6 @@ const Tiptap = ({
   const t = useTranslations("TextEditor");
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
-    immediatelyRender: false,
     editable: !showing,
     extensions: [
       StarterKit.configure({

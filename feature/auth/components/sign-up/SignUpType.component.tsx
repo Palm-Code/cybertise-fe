@@ -40,8 +40,8 @@ const SignUpType = () => {
                 href="/auth/signup?type=hacker"
                 className={cn(
                   "transition-color _flexbox__row__center bg-background-main-light shadow-hacker dark:bg-background-main-dark",
-                  "group w-full cursor-pointer px-6 py-8 active:bg-lime-lighter-light",
-                  "gap-4 rounded-lg duration-100 hover:bg-brand-hacker"
+                  "group w-full cursor-pointer px-6 py-8",
+                  "gap-4 rounded-lg duration-100 hover:bg-brand-hacker active:bg-lime-lighter-light dark:hover:bg-brand-hacker dark:active:bg-lime-lighter-dark"
                 )}
               >
                 <Hacker className="group-hover:text-brand-neutral" />
@@ -58,7 +58,7 @@ const SignUpType = () => {
                 className={cn(
                   "_flexbox__row__center bg-background-main-light shadow-company dark:bg-background-main-dark",
                   "transition-color group w-full cursor-pointer px-6 py-8",
-                  "gap-4 rounded-lg duration-100 hover:bg-sky-light active:bg-sky-lighter"
+                  "gap-4 rounded-lg duration-100 hover:!bg-sky-light active:!bg-sky-lighter"
                 )}
               >
                 <Building2 className="size-8 group-hover:text-brand-neutral" />
@@ -101,8 +101,8 @@ const SignUpType = () => {
                 href="/auth/signup?type=hacker"
                 className={cn(
                   "transition-color _flexbox__col__center bg-background-main-light shadow-hacker dark:bg-background-main-dark",
-                  "group aspect-[244/236] w-full cursor-pointer active:bg-lime-lighter-light",
-                  "gap-6 rounded-lg duration-100 hover:bg-brand-hacker"
+                  "group aspect-[244/236] w-full cursor-pointer",
+                  "gap-6 rounded-lg duration-100 hover:bg-brand-hacker active:bg-lime-lighter-light dark:hover:bg-brand-hacker dark:active:bg-lime-lighter-dark"
                 )}
               >
                 <Hacker className="group-hover:text-brand-neutral" />
@@ -119,7 +119,7 @@ const SignUpType = () => {
                 className={cn(
                   "_flexbox__col__center bg-background-main-light shadow-company dark:bg-background-main-dark",
                   "transition-color group aspect-[244/236] w-full cursor-pointer",
-                  "gap-6 rounded-lg duration-100 hover:bg-sky-light active:bg-sky-lighter"
+                  "gap-6 rounded-lg duration-100 hover:!bg-sky-light active:!bg-sky-lighter"
                 )}
               >
                 <Building2 className="size-8 group-hover:text-brand-neutral" />
