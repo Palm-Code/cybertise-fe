@@ -235,6 +235,14 @@ export const backgroundColor: { [key in Role]: string } = {
   mediator: "bg-violet-normal",
 };
 
+export const hoverColor: { [key in Role]: string } = {
+  hacker:
+    "hover:bg-lime-lighter-light dark:hover:bg-lime-lighter-dark hover:!text-brand-neutral",
+  company: "hover:bg-sky-lighter/20",
+  "company staff": "hover:bg-sky-lighter/20",
+  mediator: "hover:bg-violet-lighter/20",
+};
+
 export const iconColor: { [key in Role]: string } = {
   hacker: "text-lime-normal-light dark:text-lime-normal-dark",
   company: "text-sky-normal",
@@ -247,6 +255,12 @@ export const fillColor: { [key in Role]: string } = {
   company: "fill-sky-normal",
   "company staff": "fill-sky-normal",
   hacker: "fill-lime-normal",
+};
+export const textColor: { [key in Role]: string } = {
+  mediator: "text-violet-normal",
+  company: "text-sky-normal",
+  "company staff": "text-sky-normal",
+  hacker: "text-lime-normal",
 };
 
 export const useCurrentPhase = () => {

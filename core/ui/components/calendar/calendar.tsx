@@ -6,6 +6,11 @@ import { cn } from "@/core/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { buttonVariants } from "../button/base-button";
 import { Role } from "@/types/admin/sidebar";
+import {
+  backgroundColor,
+  borderColor,
+  hoverColor,
+} from "@/core/constants/common";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   variant?: keyof typeof Role;
@@ -49,23 +54,26 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          "h-8 w-8 p-0 font-normal rounded-full hover:bg-sky-lighter dark:text-white text-neutral-900",
-          "hover:text-white dark:hover:text-white"
+          "h-8 w-8 p-0 font-normal rounded-full dark:text-white text-neutral-900",
+          "hover:text-white dark:hover:text-white",
+          hoverColor[variant]
         ),
         day_today: cn(
-          "rounded-full w-8 h-8 p-0 dark:!text-white !text-brand-neutral",
-          "border border-sky-lighter"
+          "rounded-full w-8 h-8 p-0 dark:!text-white !text-brand-neutral border",
+          borderColor[variant]
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: cn(
-          "rounded-full w-8 h-8 p-0 dark:text-white text-white",
-          "bg-sky-lighter"
+          "rounded-full w-8 h-8 p-0 dark:text-white text-white !bg-opacity-30",
+          backgroundColor[variant]
         ),
         day_outside: "!text-opacity-50",
         day_disabled: "!text-neutral-light-50 opacity-50",
-        day_range_middle:
-          "!bg-sky-light/20 dark:!text-white !text-brand-neutral",
+        day_range_middle: cn(
+          "dark:!text-white !text-brand-neutral !bg-opacity-30",
+          backgroundColor[variant]
+        ),
         day_hidden: "invisible",
         ...classNames,
       }}

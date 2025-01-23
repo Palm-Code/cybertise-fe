@@ -31,6 +31,7 @@ import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profil
 import { Role } from "@/types/admin/sidebar";
 import { SortFilterType } from "@/types/admin/dashboard";
 import { useTranslations } from "next-intl";
+import ActivityLogs from "@/feature/company/components/manage-company/_tab/_content/ActivityLogs";
 
 const Setting = ({
   role,
@@ -100,6 +101,7 @@ const Setting = ({
       />
     ),
     [SettingItems.data_privacy]: <DataPrivacy variant={role} />,
+    [SettingItems.activity_logs]: <ActivityLogs variant={role} />,
   };
 
   return (
