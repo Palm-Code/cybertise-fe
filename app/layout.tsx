@@ -9,6 +9,7 @@ import { getSession } from "@/service/server/session";
 import { ReactQueryProvider, ThemeProvider } from "@/core/provider";
 import { Toaster } from "@/core/ui/components";
 import { getLocale, getMessages } from "next-intl/server";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { NextIntlClientProvider } from "next-intl";
 import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
@@ -103,18 +104,20 @@ export default async function RootLayout({
           showSpinner={false}
         />
         <NextIntlClientProvider messages={messages}>
-          <ReactQueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              disableTransitionOnChange
-            >
-              <CountryListInitializer countryList={countryList}>
-                {children}
-              </CountryListInitializer>
-            </ThemeProvider>
-            <Toaster position="top-center" />
-          </ReactQueryProvider>
+          <NuqsAdapter>
+            <ReactQueryProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="dark"
+                disableTransitionOnChange
+              >
+                <CountryListInitializer countryList={countryList}>
+                  {children}
+                </CountryListInitializer>
+              </ThemeProvider>
+              <Toaster position="top-center" />
+            </ReactQueryProvider>
+          </NuqsAdapter>
         </NextIntlClientProvider>
       </body>
     </html>

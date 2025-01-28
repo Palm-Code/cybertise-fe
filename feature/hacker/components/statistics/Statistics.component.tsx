@@ -11,11 +11,14 @@ import { TicketListCard } from "./card/ticket";
 import { useChatListParamStore } from "../../zustand/store/dashboard";
 import { useGetTableColumns } from "../../constants/dashboard";
 import { useGetChatList } from "../../query/client";
+import { useGetAnalytics } from "../../query/client/useGetAnalytics";
+import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 
 const Statistics = () => {
   const t = useTranslations("DashboardHacker");
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
+  const { data: analytics, isLoading: analyticsLoading } = useGetAnalytics();
   const {
     queryDesktop: {
       data: dashboardData,
@@ -65,13 +68,39 @@ const Statistics = () => {
           ))}
         </div>
         <div className={cn("grid grid-cols-3 items-center gap-5")}>
-          <OverviewCard title="Bounties Paid" />
-          <OverviewCard title="Active Tickets" />
-          <OverviewCard title="Highest Bounties" />
+          <OverviewCard
+            title="Bounties Paid"
+            value={parseInt(
+              currencyFormatters.NumberToEUR(analytics?.data.total_bounty ?? 0)
+            )}
+            changes={parseInt(
+              currencyFormatters.NumberToEUR(
+                analytics?.data.total_bounty_changes ?? 0
+              )
+            )}
+          />
+          <OverviewCard
+            title="Active Tickets"
+            value={analytics?.data.total_active_tickets ?? 0}
+            changes={analytics?.data.total_active_tickets_changes ?? 0}
+          />
+          <OverviewCard
+            title="Highest Bounties"
+            value={parseInt(
+              currencyFormatters.NumberToEUR(
+                analytics?.data.highest_bounty_changes ?? 0
+              )
+            )}
+            changes={parseInt(
+              currencyFormatters.NumberToEUR(
+                analytics?.data.highest_bounty_changes ?? 0
+              )
+            )}
+          />
         </div>
         <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
-          <AreaChartCard />
-          <PieChartCard />
+          <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+          <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
         </div>
         <TicketListCard data={dashboardData?.data} />
       </div>

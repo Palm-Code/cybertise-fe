@@ -14,15 +14,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
-const data = [
-  { name: "22/10/24", ticket: 50 },
-  { name: "29/10/24", ticket: 80 },
-  { name: "5/11/24", ticket: 80 },
-  { name: "12/11/24", ticket: 70 },
-  { name: "19/11/24", ticket: 90 },
-  { name: "22/11/24", ticket: 60 },
-];
+import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
 
 const CustomDot = (props: { cx: number; cy: number }) => {
   const { cx, cy } = props; // Coordinates of the dot
@@ -44,7 +36,11 @@ const CustomDot = (props: { cx: number; cy: number }) => {
   );
 };
 
-export const AreaChartCard = () => {
+type AreaChartPropsType = {
+  data?: I_GetAnalyticsResponse["ticket_reports"];
+};
+
+export const AreaChartCard = ({ data }: AreaChartPropsType) => {
   return (
     <Wrapper className={cn("gap-3")}>
       <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
@@ -71,7 +67,7 @@ export const AreaChartCard = () => {
                 <stop offset="95%" stopColor="#BAFF00" stopOpacity={0.01} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="name" />
+            <XAxis dataKey="date" />
             <YAxis
               interval={0}
               ticks={[0, 20, 40, 60, 80, 100]}
@@ -86,7 +82,7 @@ export const AreaChartCard = () => {
             <Area
               type="monotone"
               dot={<CustomDot cx={0} cy={0} />}
-              dataKey="ticket"
+              dataKey="value"
               stroke="#BAFF00"
               fillOpacity={1}
               fill="url(#colorPv)"
