@@ -3,7 +3,7 @@ import {
   I_GetAnalyticsParamsPayload,
   I_GetAnalyticsSuccessResponse,
 } from "@/core/models/common/analytics";
-import { fetchGetAnalytics } from "@/core/services/common/analytics";
+import { fetchGetAdvancedAnalytics } from "@/core/services/common/analytics";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 
@@ -17,8 +17,8 @@ export const useGetAnalytics = () => {
     interval: interval ?? 7,
   };
   const query = useQuery<I_GetAnalyticsSuccessResponse, I_GetErrorResponse>({
-    queryKey: ["analytics", payloads],
-    queryFn: () => fetchGetAnalytics(payloads),
+    queryKey: ["analytics_mediator", payloads],
+    queryFn: () => fetchGetAdvancedAnalytics(payloads),
   });
 
   return query;

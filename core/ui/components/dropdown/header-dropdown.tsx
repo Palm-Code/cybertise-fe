@@ -9,7 +9,7 @@ import {
 } from "../select/select";
 import Typography from "../typography/typography";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 
 interface I_HeaderDropdownProps {
   options: {
@@ -37,11 +37,15 @@ const HeaderDropdown = ({
       >
         <SelectTrigger
           name="header-options-trigger"
-          className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent xl:p-0"
+          className="!w-fit !justify-start gap-1.5 whitespace-nowrap text-nowrap !bg-transparent xl:p-0"
         >
           <Avatar image={avatar} initials={""} />
+          <ChevronDown />
         </SelectTrigger>
-        <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+        <SelectContent
+          sideOffset={8}
+          className="!bg-white dark:!bg-neutral-dark-100"
+        >
           {options.length! ? (
             options.map((option) =>
               option.value === "settings" ? (

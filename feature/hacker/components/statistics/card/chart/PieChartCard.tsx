@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
+import { useTranslations } from "next-intl";
 
 const colorKeys: Record<string, string> = {
   critical_risk: "#E60202",
@@ -61,12 +62,13 @@ type DoughnutCartPropsType = {
 };
 
 export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
+  const t = useTranslations("DashboardHacker");
   return (
     <Wrapper className={cn("gap-3")}>
       <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
         <Coins className={iconColor.hacker} />
         <Typography variant="p" affects="normal" weight="semibold">
-          Overal Risks Reported
+          {t("pieChart.title")}
         </Typography>
       </div>
       <div className="h-[300px] w-full">

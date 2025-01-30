@@ -9,7 +9,6 @@ import { AreaChartCard, PieChartCard } from "./card/chart";
 import { FilterStatistic } from "./filter";
 import { TicketListCard } from "./card/ticket";
 import { useChatListParamStore } from "../../zustand/store/dashboard";
-import { useGetTableColumns } from "../../constants/dashboard";
 import { useGetChatList } from "../../query/client";
 import { useGetAnalytics } from "../../query/client/useGetAnalytics";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
@@ -26,14 +25,6 @@ const Statistics = () => {
       isFetching,
       refetch,
       isRefetching,
-    },
-    queryMobile: {
-      data,
-      isLoading: mobileIsLoading,
-      refetch: mobileRefetch,
-      isFetching: mobileIsFetching,
-      isFetchingNextPage,
-      fetchNextPage,
     },
   } = useGetChatList(payload);
   return (
@@ -69,7 +60,7 @@ const Statistics = () => {
         </div>
         <div className={cn("grid grid-cols-3 items-center gap-5")}>
           <OverviewCard
-            title="Bounties Paid"
+            title={t("bounties_paid")}
             value={parseInt(
               currencyFormatters.NumberToEUR(analytics?.data.total_bounty ?? 0)
             )}
@@ -80,12 +71,12 @@ const Statistics = () => {
             )}
           />
           <OverviewCard
-            title="Active Tickets"
+            title={t("active_tickets")}
             value={analytics?.data.total_active_tickets ?? 0}
             changes={analytics?.data.total_active_tickets_changes ?? 0}
           />
           <OverviewCard
-            title="Highest Bounties"
+            title={t("highest_bounty")}
             value={parseInt(
               currencyFormatters.NumberToEUR(
                 analytics?.data.highest_bounty_changes ?? 0

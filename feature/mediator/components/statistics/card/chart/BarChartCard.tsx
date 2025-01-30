@@ -14,78 +14,33 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
+import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
+import { useQueryState } from "nuqs";
 
-const data = [
-  {
-    name: "Jan",
-    hacker: 100,
-    company: 80,
-  },
-  {
-    name: "Feb",
-    hacker: 80,
-    company: 60,
-  },
-  {
-    name: "Mar",
-    hacker: 60,
-    company: 40,
-  },
-  {
-    name: "Apr",
-    hacker: 40,
-    company: 20,
-  },
-  {
-    name: "May",
-    hacker: 80,
-    company: 40,
-  },
-  {
-    name: "Jun",
-    hacker: 50,
-    company: 80,
-  },
-  {
-    name: "Jul",
-    hacker: 10,
-    company: 60,
-  },
-  {
-    name: "Aug",
-    hacker: 80,
-    company: 40,
-  },
-  {
-    name: "Sep",
-    hacker: 20,
-    company: 80,
-  },
-  {
-    name: "Oct",
-    hacker: 40,
-    company: 20,
-  },
-  {
-    name: "Nov",
-    hacker: 80,
-    company: 40,
-  },
-  {
-    name: "Dec",
-    hacker: 50,
-    company: 80,
-  },
-];
+type BarChartCardProps = {
+  data: I_GetAnalyticsResponse["ytd_bar_chart"];
+};
 
-export const BarChartCard = () => {
+export const BarChartCard = ({ data }: BarChartCardProps) => {
+  const [ticket_status, setTicket_status] = useQueryState("ticket_status");
   return (
     <Wrapper className={cn("gap-3")}>
       <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
         <Coins className={iconColor.mediator} />
-        <Typography variant="p" affects="normal" weight="semibold">
-          Open Ticket
-        </Typography>
+        <BaseDropdown
+          triggerClassName="[&>p]:text-xl !p-0"
+          label=""
+          options={[
+            { label: "Open", value: "Open" },
+            { label: "Closed", value: "Closed" },
+            { label: "Waiting for Payment", value: "waiting_for_payment" },
+          ]}
+          value={ticket_status ?? "Open"}
+          onValueChange={(v) => {
+            setTicket_status(v);
+          }}
+        />
       </div>
       <div className={cn("h-[300px] w-full")}>
         <ResponsiveContainer width="100%" height="100%">

@@ -9,11 +9,12 @@ import { AreaChartCard, BarChartCard, PieChartCard } from "./card/chart";
 import { FilterStatistic } from "./filter";
 import { TicketListCard } from "./card/ticket";
 import { useChatListParamStore } from "../../zustand/store/dashboard";
-import { useGetChatList } from "../../query/client";
+import { useGetAnalytics, useGetChatList } from "../../query/client";
 
 const Statistics = () => {
   const t = useTranslations("DashboardMediator");
   const store = useChatListParamStore();
+  const { data: analytics, isLoading: analyticsLoading } = useGetAnalytics();
   const { payload, setPayload } = store;
   const {
     queryDesktop: {
@@ -40,16 +41,32 @@ const Statistics = () => {
           <FilterStatistic />
         </div>
         <div className={cn("grid grid-cols-4 items-center gap-5")}>
-          <OverviewCard title="Published VRP" />
-          <OverviewCard title="Unpublished VRP" />
-          <OverviewCard title="Active Tickets" />
-          <OverviewCard title="Valid Tickets" />
+          <OverviewCard
+            title={t("published_vrp")}
+            value={analytics?.data.published_vrp || 0}
+            changes={analytics?.data.published_vrp_changes || 0}
+          />
+          <OverviewCard
+            title={t("unpublished_vrp")}
+            value={analytics?.data.unpublished_vrp || 0}
+            changes={analytics?.data.unpublished_vrp_changes || 0}
+          />
+          <OverviewCard
+            title={t("active_tickets")}
+            value={analytics?.data.total_active_tickets || 0}
+            changes={analytics?.data.total_active_tickets_changes || 0}
+          />
+          <OverviewCard
+            title={t("valid_tickets")}
+            value={analytics?.data.total_valid_tickets || 0}
+            changes={analytics?.data.total_valid_tickets_changes || 0}
+          />
         </div>
         <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
-          <AreaChartCard />
-          <PieChartCard />
+          <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+          <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
         </div>
-        <BarChartCard />
+        <BarChartCard data={analytics?.data.ytd_bar_chart ?? []} />
         <TicketListCard data={dashboardData?.data} />
       </div>
     </DesktopLayout>

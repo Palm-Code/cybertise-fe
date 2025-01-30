@@ -4,7 +4,6 @@ import { Wrapper } from "../Wrapper";
 import { cn } from "@/core/lib/utils";
 import { Coins } from "lucide-react";
 import { iconColor } from "@/core/constants/common";
-import { Typography } from "@/core/ui/components";
 import {
   Area,
   AreaChart,
@@ -15,6 +14,8 @@ import {
   YAxis,
 } from "recharts";
 import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
+import { useQueryState } from "nuqs";
+import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 
 const CustomDot = (props: { cx: number; cy: number }) => {
   const { cx, cy } = props; // Coordinates of the dot
@@ -41,13 +42,28 @@ type AreaChartPropsType = {
 };
 
 export const AreaChartCard = ({ data }: AreaChartPropsType) => {
+  const [ticket_status, setTicket_status] = useQueryState("ticket_status");
   return (
     <Wrapper className={cn("gap-3")}>
-      <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
+      <div
+        className={cn(
+          "grid w-fit grid-cols-[auto_1fr_auto] items-center gap-4"
+        )}
+      >
         <Coins className={iconColor.hacker} />
-        <Typography variant="p" affects="normal" weight="semibold">
-          Open Ticket
-        </Typography>
+        <BaseDropdown
+          triggerClassName="[&>p]:text-xl !p-0"
+          label=""
+          options={[
+            { label: "Open", value: "Open" },
+            { label: "Closed", value: "Closed" },
+            { label: "Waiting for Payment", value: "waiting_for_payment" },
+          ]}
+          value={ticket_status ?? "Open"}
+          onValueChange={(v) => {
+            setTicket_status(v);
+          }}
+        />
       </div>
       <div className={cn("h-[300px] w-full")}>
         <ResponsiveContainer width="100%" height="100%">
@@ -78,7 +94,13 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
               stroke="#888"
               strokeOpacity={0.5}
             />
-            <Tooltip itemStyle={{ color: "black" }} />
+            <Tooltip
+              itemStyle={{ color: "black" }}
+              labelStyle={{ color: "black" }}
+              isAnimationActive
+              formatter={(value) => `${value} Tickets`}
+              contentStyle={{ backgroundColor: "white" }}
+            />
             <Area
               type="monotone"
               dot={<CustomDot cx={0} cy={0} />}

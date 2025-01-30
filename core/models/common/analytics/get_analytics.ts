@@ -17,6 +17,13 @@ export interface I_GetAnalyticsResponse {
   id: number;
   overall_risk_reported: OverallRiskReported[];
   ticket_reports: TicketReport[];
+  ytd_bar_chart?: YtdBarChart[];
+  published_vrp: number;
+  published_vrp_changes: number;
+  total_valid_tickets: number;
+  total_valid_tickets_changes: number;
+  unpublished_vrp: number;
+  unpublished_vrp_changes: number;
 }
 
 export interface OverallRiskReported {
@@ -34,6 +41,12 @@ export interface OverallRiskReported {
 export interface TicketReport {
   date: string;
   value: number;
+}
+
+export interface YtdBarChart {
+  name: string;
+  hacker: number;
+  company: number;
 }
 
 export interface I_GetAnalyticsParamsPayload {

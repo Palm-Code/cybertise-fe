@@ -4,7 +4,13 @@
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
     "search_result": "Ergebnis anzeigen für",
     "see_programs": "Siehe Programme",
-    "overview": "Überblick"
+    "overview": "Überblick",
+    "pieChart": {
+      "title": "Überlagungsrisiken berichteten"
+    },
+    "bounties_paid": "Bounties bezahlt",
+    "active_tickets": "Aktive Tickets",
+    "highest_bounty": "Höchste Kopfgelder"
   },
   "ProgramsHacker": {
     "title": "Bug-Bounty-Programme",

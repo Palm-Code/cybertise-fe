@@ -11,16 +11,17 @@ import {
   PieChart,
   PieLabelRenderProps,
   ResponsiveContainer,
-  Tooltip,
 } from "recharts";
+import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
+import { useTranslations } from "next-intl";
 
-const data = [
-  { name: "Low risk (34%)", value: 34, color: "#F0F00A" },
-  { name: "Medium Risk (13%)", value: 13, color: "#F5891D" },
-  { name: "High Risk (28%)", value: 28, color: "#FF5151" },
-  { name: "Critical Risk (8%)", value: 8, color: "#E60202" },
-  { name: "Not scoring bug (17%)", value: 17, color: "#D9D9D9" },
-];
+const colorKeys: Record<string, string> = {
+  critical_risk: "#E60202",
+  high_risk: "#FF5151",
+  medium_risk: "#F5891D",
+  low_risk: "#F0F00A",
+  no_risk: "#D9D9D9",
+};
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = (props: PieLabelRenderProps) => {
@@ -56,13 +57,18 @@ const renderCustomizedLabel = (props: PieLabelRenderProps) => {
   );
 };
 
-export const PieChartCard = () => {
+type DoughnutCartPropsType = {
+  data: I_GetAnalyticsResponse["overall_risk_reported"];
+};
+
+export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
+  const t = useTranslations("DashboardHacker");
   return (
     <Wrapper className={cn("gap-3")}>
       <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
-        <Coins className={iconColor.mediator} />
+        <Coins className={iconColor.hacker} />
         <Typography variant="p" affects="normal" weight="semibold">
-          Overal Risks Reported
+          {t("pieChart.title")}
         </Typography>
       </div>
       <div className="h-[300px] w-full">
@@ -103,8 +109,8 @@ export const PieChartCard = () => {
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={entry.color}
-                  stroke={entry.color}
+                  fill={colorKeys[entry.color_key]}
+                  stroke={entry.color_key}
                   strokeWidth={2}
                   className={cn("!outline-none")}
                 />
