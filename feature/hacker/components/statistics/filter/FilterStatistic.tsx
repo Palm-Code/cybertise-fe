@@ -16,7 +16,7 @@ export const FilterStatistic = () => {
       <BaseDropdown
         triggerClassName="ml-3 bg-neutral-light-100 dark:bg-neutral-dark-100 border-[0.5px] border-neutral-light-60 dark:border-neutral-dark-60 rounded-md"
         label={t("showing_data_for")}
-        value={interval.toString()}
+        value={interval.toString() ?? "7"}
         options={[
           { value: "7", label: "Last 7 Days" },
           { value: "30", label: "Last 30 Days" },

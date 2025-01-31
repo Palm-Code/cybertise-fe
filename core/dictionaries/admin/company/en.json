@@ -5,7 +5,13 @@
     "submit_search": "Search",
     "search_result": "Show result for",
     "see_programs": "See VRP Launchpad",
-    "overview": "Overview"
+    "overview": "Overview",
+    "bounties_paid": "Bounties Paid",
+    "active_tickets": "Active Tickets",
+    "active_programs": "Active Programs",
+    "pieChart": {
+      "title": "Overall Risk Reported"
+    }
   },
   "ProgramsCompany": {
     "title": "VRP Launchpad",
