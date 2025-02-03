@@ -6,7 +6,13 @@
     "search_result": "Show result for",
     "see_programs": "See Programs",
     "overview": "Overview",
-    "showing_data": "Showing data for"
+    "showing_data": "Showing data for",
+    "pieChart": {
+      "title": "Overal Risks Reported"
+    },
+    "bounties_paid": "Bounties Paid",
+    "active_tickets": "Active Tickets",
+    "highest_bounty": "Highest Bounties"
   },
   "ProgramsHacker": {
     "title": "Bug Bounty Programs",

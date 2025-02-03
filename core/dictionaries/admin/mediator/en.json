@@ -5,7 +5,11 @@
     "submit_search": "Search",
     "search_result": "Show result for",
     "see_programs": "See VRP Launchpad",
-    "overview": "Overview"
+    "overview": "Overview",
+    "published_vrp": "Published VRP",
+    "unpublished_vrp": "Unpublished VRP",
+    "active_tickets": "Active Tickets",
+    "valid_tickets": "Valid Tickets"
   },
   "ProgramsMediator": {
     "title": "VRP Launchpad",

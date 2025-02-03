@@ -62,7 +62,8 @@
       "title": "Passwort offengelegt",
       "suggestion": "Anregung",
       "list_1": "Fügen Sie weitere Wörter hinzu, die weniger häufig vorkommen",
-      "list_2": "Wenn Sie dieses Passwort anderweitig verwenden, sollten Sie es ändern"
+      "list_2": "Wenn Sie dieses Passwort anderweitig verwenden, sollten Sie es ändern",
+      "read_more_explanation": "Unsere Überprüfungen stellen sicher, dass Ihr Passwort stark und eindeutig ist. \nSeien Sie versichert, Ihr Passwort bleibt privat und wird nie mit externen Diensten geteilt."
     }
   },
   "SignUp": {

@@ -65,7 +65,7 @@ const PasswordInput = ({
               animate={{ height: "auto", marginTop: "8px", opacity: 1 }}
               exit={{ height: 0, marginTop: "0px", opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="w-full"
+              className="w-full rounded-lg bg-neutral-light-80 dark:bg-neutral-dark-90"
             >
               <div className="grid w-full grid-cols-1 items-start gap-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] min-[435px]:grid-cols-2 dark:bg-neutral-dark-90">
                 {options?.length! &&
@@ -80,6 +80,18 @@ const PasswordInput = ({
                       {item.content}
                     </Typography>
                   ))}
+              </div>
+              <div className="grid w-full grid-cols-1 items-start gap-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90">
+                <div
+                  className={cn(
+                    "w-full rounded-[10px] p-2",
+                    "border !border-warning !bg-warning/10"
+                  )}
+                >
+                  <Typography variant={"p"} affects="small">
+                    {t("password_alert.read_more_explanation")}
+                  </Typography>
+                </div>
               </div>
             </motion.div>
           )}

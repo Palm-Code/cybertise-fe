@@ -3,7 +3,13 @@
     "title": "Offene Tickets",
     "see_programs": "Siehe VRP Launchpad",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
-    "overview": "Überblick"
+    "overview": "Überblick",
+    "bounties_paid": "Bounties bezahlt",
+    "active_tickets": "Aktive Tickets",
+    "active_programs": "Aktive Programme",
+    "pieChart": {
+      "title": "Gesamtrisiko gemeldet"
+    }
   },
   "ReportsCompany": {
     "title": "Berichte",

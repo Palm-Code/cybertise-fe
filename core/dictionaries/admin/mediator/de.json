@@ -3,7 +3,11 @@
     "title": "Offene Tickets",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
     "see_programs": "Siehe VRP Launchpad",
-    "overview": "Überblick"
+    "overview": "Überblick",
+    "published_vrp": "Veröffentlicht VRP",
+    "unpublished_vrp": "Unveröffentlichtes VRP",
+    "active_tickets": "Aktive Tickets",
+    "valid_tickets": "Gültige Tickets"
   },
   "ProgramsMediator": {
     "title": "VRP-Launchpad",

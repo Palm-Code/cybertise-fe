@@ -7,9 +7,15 @@ import { Wrapper } from "./Wrapper";
 
 interface I_OverviewCardProps {
   title: string;
+  value: number;
+  changes: number;
 }
 
-export const OverviewCard = ({ title }: I_OverviewCardProps) => {
+export const OverviewCard = ({
+  title,
+  value,
+  changes,
+}: I_OverviewCardProps) => {
   return (
     <Wrapper>
       <div className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}>
@@ -20,14 +26,7 @@ export const OverviewCard = ({ title }: I_OverviewCardProps) => {
       </div>
       <div className={cn("flex w-full items-center justify-between")}>
         <Typography variant="p" className={cn("text-[40px]")} weight="medium">
-          1,500
-          <span
-            className={cn(
-              "text-xl text-neutral-light-40 dark:text-neutral-dark-40"
-            )}
-          >
-            €
-          </span>
+          {value}
         </Typography>
         <div className={cn("grid grid-cols-[auto_1fr] items-center gap-2")}>
           <div className={cn("rounded-full bg-semantic-dark-success/10 p-1")}>
@@ -41,7 +40,7 @@ export const OverviewCard = ({ title }: I_OverviewCardProps) => {
               "text-semantic-light-success dark:text-semantic-dark-success"
             )}
           >
-            20%
+            {changes}
           </Typography>
         </div>
       </div>
