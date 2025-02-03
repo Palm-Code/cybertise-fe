@@ -11,6 +11,8 @@ export interface I_GetAnalyticsResponse {
   highest_bounty: number;
   total_bounty_changes: number;
   total_active_tickets_changes: number;
+  active_programs: number;
+  active_programs_changes: number;
   highest_bounty_changes: number;
   updated_at: string;
   created_at: string;

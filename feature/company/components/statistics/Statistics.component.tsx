@@ -78,7 +78,11 @@ const Statistics = () => {
               value={analytics?.data.total_active_tickets ?? 0}
               changes={analytics?.data.total_active_tickets_changes ?? 0}
             />
-            <OverviewCard title={t("active_programs")} value={0} changes={0} />
+            <OverviewCard
+              title={t("active_programs")}
+              value={analytics?.data.active_programs ?? 0}
+              changes={analytics?.data.active_programs_changes ?? 0}
+            />
           </div>
           <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
             <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
