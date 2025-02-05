@@ -7,8 +7,10 @@ import { I_GetErrorRes } from "@/core/models/common";
 import { fetchPostResendVerification } from "@/core/services/auth/resend-verification/fetchPostResendverification";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
 
 export const usePostResendVerification = () => {
+  const [_, setValue] = useLocalStorage("expiredTime", "");
   const mutation = useMutation<
     I_GetResendVerificationSuccessResponse,
     I_GetErrorRes,
@@ -16,7 +18,8 @@ export const usePostResendVerification = () => {
   >({
     mutationFn: fetchPostResendVerification,
     onSuccess: (data) => {
-      toast.success(data.data.message, {
+      setValue(data.data.expired_at);
+      toast.success("Verification code has been sent", {
         position: "bottom-right",
       });
     },

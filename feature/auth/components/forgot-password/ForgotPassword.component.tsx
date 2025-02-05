@@ -17,7 +17,7 @@ import useTimer from "@/utils/timer";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { useTranslations } from "next-intl";
 import { usePasswordValidation } from "@/core/constants/common";
-import { useDebounceValue } from "usehooks-ts";
+import { useDebounceValue, useReadLocalStorage } from "usehooks-ts";
 import { usePasswordStrength } from "@/core/lib";
 import { toast } from "sonner";
 
@@ -33,8 +33,8 @@ const ForgotPassword = (props: I_ForgotPassword) => {
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [count, setCount] = React.useState(5);
   const [validated, setValidated] = useState(false);
-  const initialDuration = count * 60 * 1000;
-  const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
+  const expiredTime = useReadLocalStorage("expiredTime") as string;
+  const { remainingTime, start, getFormattedTime } = useTimer(expiredTime);
   const searchParams = useSearchParams();
   const token = searchParams.get("code");
   const [email, setEmail] = useState<string>("");

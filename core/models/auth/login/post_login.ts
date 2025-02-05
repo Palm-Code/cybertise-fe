@@ -12,6 +12,7 @@ export interface I_GetLoginResponse {
   email?: string;
   deactivated_at?: Date;
   destroyed_at?: Date;
+  expired_at?: Date;
   "two-factor": boolean;
   session_code: string;
 }
