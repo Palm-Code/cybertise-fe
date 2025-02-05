@@ -51,6 +51,7 @@ const renderCustomizedLabel = (props: PieLabelRenderProps) => {
       fontSize={12}
       fontWeight="bold"
       color="#000"
+      className={cn(percent === 0 ? "opacity-0" : "")}
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>

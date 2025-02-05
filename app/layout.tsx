@@ -13,7 +13,6 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { NextIntlClientProvider } from "next-intl";
 import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
-import { headers } from "next/headers";
 
 export const revalidate = 0;
 
@@ -59,22 +58,6 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const session = await getSession();
-  const requestHeaders = headers().get("x-url");
-
-  const includedArray = [
-    "/auth",
-    "/authorize",
-    "/forgot-password",
-    "/set-password",
-    "/faq",
-    "/policy",
-    "/terms-and-conditions",
-    "/companies",
-  ];
-
-  const containsIncludedPath = includedArray.some((path) =>
-    requestHeaders?.includes(path)
-  );
 
   const colors: Record<Role, string> = {
     hacker: "#BAFF00",
@@ -91,8 +74,7 @@ export default async function RootLayout({
       <body
         className={cn(
           Inter.className,
-          "hyphens-auto bg-background-page-light dark:bg-background-page-dark",
-          !containsIncludedPath ? "overflow-hidden" : ""
+          "overflow-hidden hyphens-auto bg-background-page-light dark:bg-background-page-dark"
         )}
       >
         <NextTopLoader
