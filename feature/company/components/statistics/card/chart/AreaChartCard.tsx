@@ -18,32 +18,6 @@ import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
 import { useQueryState } from "nuqs";
 import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 
-const CustomDot = (props: { cx: number; cy: number }) => {
-  const { cx, cy } = props; // Coordinates of the dot
-  return (
-    <g>
-      {/* Outer glow */}
-      <circle
-        cx={cx}
-        cy={cy}
-        r={12}
-        fill="currentColor"
-        className={cn("text-sky-normal/25")}
-      />
-      {/* Inner dot */}
-      <circle
-        cx={cx}
-        cy={cy}
-        r={6}
-        fill="currentColor"
-        stroke="#ffffff"
-        strokeWidth={2}
-        className={cn("!text-sky-normal")}
-      />
-    </g>
-  );
-};
-
 type AreaChartPropsType = {
   data?: I_GetAnalyticsResponse["ticket_reports"];
 };
@@ -109,7 +83,6 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
             />
             <Area
               type="monotone"
-              dot={<CustomDot cx={0} cy={0} />}
               dataKey="value"
               stroke="#4BA2E3"
               fillOpacity={1}

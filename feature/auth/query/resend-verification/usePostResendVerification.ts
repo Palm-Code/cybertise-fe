@@ -12,18 +12,23 @@ import { useLocalStorage } from "usehooks-ts";
 export const usePostResendVerification = () => {
   const [_, setValue] = useLocalStorage("expiredTime", "");
   const mutation = useMutation<
-    I_GetResendVerificationSuccessResponse,
+    I_GetResendVerificationSuccessResponse["data"],
     I_GetErrorRes,
     I_GetResendVerificationRequest
   >({
     mutationFn: fetchPostResendVerification,
     onSuccess: (data) => {
-      setValue(data.data.expired_at);
-      toast.success("Verification code has been sent", {
+      console.log("kesini jugaa ????", data);
+      setValue(data.expired_at);
+      toast.success(data.message, {
         position: "bottom-right",
       });
     },
     onError: (error) => {
+      console.log("kesini ????", error);
+      let currentDate = new Date();
+      currentDate = new Date(currentDate.getTime() + 5 * 60000); //add 5 minutes more if the verification failed
+      setValue(currentDate.toISOString());
       toast.error(error.message, {
         position: "bottom-right",
       });

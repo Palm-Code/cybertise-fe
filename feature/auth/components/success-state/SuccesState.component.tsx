@@ -39,7 +39,6 @@ const SuccessState = ({
 
   const onClickResend = () => {
     onClickResendVerification();
-    start();
   };
 
   return (
