@@ -67,7 +67,6 @@ export default async function Dashboardlayout({
             >
               {child[session?.user.role]}
             </div>
-            <div id="new-chat"></div>
           </div>
         </div>
       </Desktop>

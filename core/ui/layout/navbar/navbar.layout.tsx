@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import { Avatar, ThemeSwitcher } from "../../components";
+import { ThemeSwitcher } from "../../components";
 import { Logo } from "../../icons";
 import Link from "next/link";
 
