@@ -16,7 +16,6 @@ import {
 } from "recharts";
 import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
 import { useQueryState } from "nuqs";
-import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
 import { Dropdown } from "../../filter/Dropdown";
 import { filterItems } from "@/feature/company/constants/dashboard";
 import MobileLayout from "@/core/ui/layout/wrapper/MobileLayout.wrapper";
@@ -49,7 +48,9 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
         <div className={cn("my-8 h-[300px] w-full")}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              className={cn("h-full w-full max-w-full scale-110 !text-[8px]")}
+              className={cn(
+                "h-full w-full max-w-full scale-110 !text-[8px] sm:scale-100"
+              )}
               data={data}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
               defaultShowTooltip
@@ -63,18 +64,29 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                   y2="150"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stopColor="#4BA2E3" stopOpacity="0.3" />
-                  <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.01" />
+                  <stop stopColor="#4BA2E3" stopOpacity="0.5" />
+                  <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.1" />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
               <YAxis
                 interval={0}
-                ticks={[0, 20, 40, 60, 80, 100]}
-                domain={[0, "dataMax"]}
+                ticks={
+                  data?.every((d) => d.value === 0)
+                    ? [0]
+                    : [-300, -200, -100, 0, 100, 200, 300, 400, 500]
+                }
+                domain={[-300, "dataMax"]}
+                tickFormatter={(value) =>
+                  value < 0
+                    ? " "
+                    : data?.every((d) => d.value === 0)
+                      ? "0"
+                      : `${value}`
+                }
               />
               <CartesianGrid
-                strokeDasharray="8 3"
+                strokeDasharray="3 3"
                 stroke="#888"
                 strokeOpacity={0.5}
               />
@@ -91,6 +103,7 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 stroke="#4BA2E3"
                 fillOpacity={1}
                 fill="url(#paint0_linear_4547_5071)"
+                baseValue={-300}
               />
             </AreaChart>
           </ResponsiveContainer>

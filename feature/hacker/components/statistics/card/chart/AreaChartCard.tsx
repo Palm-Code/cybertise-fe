@@ -51,28 +51,34 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               className={cn(
-                "h-full w-full max-w-full scale-110 !text-[8px] md:scale-100"
+                "h-full w-full max-w-full scale-110 !text-[8px] sm:scale-100"
               )}
               data={data}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
               defaultShowTooltip
             >
               <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                </linearGradient>
                 <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#BAFF00" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#BAFF00" stopOpacity={0.01} />
+                  <stop offset="5%" stopColor="#BAFF00" stopOpacity={0.5} />
+                  <stop offset="95%" stopColor="#BAFF00" stopOpacity={0.1} />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
               <YAxis
-                strokeDasharray={0}
                 interval={0}
-                ticks={[0, 20, 40, 60, 80, 100]}
-                domain={[0, "dataMax"]}
+                ticks={
+                  data?.every((d) => d.value === 0)
+                    ? [0]
+                    : [-300, -200, -100, 0, 100, 200, 300, 400, 500]
+                }
+                domain={[-300, "dataMax"]}
+                tickFormatter={(value) =>
+                  value < 0
+                    ? " "
+                    : data?.every((d) => d.value === 0)
+                      ? "0"
+                      : `${value}`
+                }
               />
               <CartesianGrid
                 strokeDasharray="8 3"
@@ -92,6 +98,7 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 stroke="#BAFF00"
                 fillOpacity={1}
                 fill="url(#colorPv)"
+                baseValue={-300}
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -105,8 +112,9 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
             )}
           >
             <Coins className={iconColor.hacker} />
-            <BaseDropdown
+            <Dropdown
               triggerClassName="[&>p]:text-xl !p-0"
+              withIcon
               label=""
               options={filterItems.status.slice(1)}
               value={ticket_status ?? "Open"}
