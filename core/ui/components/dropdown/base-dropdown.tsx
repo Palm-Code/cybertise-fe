@@ -13,7 +13,7 @@ import Checkbox from "../checkbox/checkbox";
 import { Role } from "@/types/admin/sidebar";
 import { cn } from "@/core/lib/utils";
 
-interface I_BaseDropdownProps extends SelectTriggerProps {
+export interface I_BaseDropdownProps extends SelectTriggerProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;

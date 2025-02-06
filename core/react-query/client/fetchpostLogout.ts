@@ -10,6 +10,7 @@ export const usePostLogout = () => {
     onSuccess(data) {
       localStorage.removeItem("callbackUrl");
       toast.success("Logout success", {
+        duration: 500,
         position: "bottom-right",
       });
       logout();

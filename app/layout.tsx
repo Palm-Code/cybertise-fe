@@ -1,5 +1,6 @@
 import "./globals.scss";
 import "highlight.js/styles/default.css";
+import "swiper/css";
 import NextTopLoader from "nextjs-toploader";
 import { Inter } from "@/public/fonts/inter";
 import type { Metadata } from "next";

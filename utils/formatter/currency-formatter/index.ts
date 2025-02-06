@@ -27,6 +27,20 @@ export const currencyFormatters = {
     });
     return result;
   },
+  NumberToSmallEUR(value: number): string {
+    // Format the number as currency
+    const formattedValue = value.toLocaleString("de-DE", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    });
+
+    // Split the formatted value into the numeric part and the currency symbol
+    const [numericPart, currencySymbol] = formattedValue.split(/\s+/);
+
+    // Return the HTML string with the currency symbol in a smaller font size
+    return `<span>${numericPart}</span><span style="font-size: 0.6em; opacity: 0.5; font-weight: 500">${currencySymbol}</span>`;
+  },
   NumberToIDRAbbreviation(value: number) {
     const billion = 1000000000;
     const million = 1000000;

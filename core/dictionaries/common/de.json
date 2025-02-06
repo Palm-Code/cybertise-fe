@@ -31,7 +31,8 @@
       "button_apply": "Anwenden"
     },
     "ticket_reported": "Ticket gemeldet",
-    "showing_data_for": "Daten werden angezeigt für"
+    "showing_data_for": "Daten werden angezeigt für",
+    "days": "Letzte {days} Tage"
   },
   "Ticket": {
     "last_reported": "Zuletzt gemeldet vor {date}",
