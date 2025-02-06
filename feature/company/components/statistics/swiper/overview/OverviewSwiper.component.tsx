@@ -2,15 +2,15 @@ import { I_GetAnalyticsSuccessResponse } from "@/core/models/common/analytics";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { OverviewCard } from "../../OverviewCard";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { cn } from "@/core/lib/utils";
+import { OverviewCard } from "../../card";
 
 type OverviewSwiperProps = {
   data?: I_GetAnalyticsSuccessResponse["data"];
 };
 export const OverviewSwiper = ({ data }: OverviewSwiperProps) => {
-  const t = useTranslations("DashboardHacker");
+  const t = useTranslations("DashboardCompany");
   if (data)
     return (
       <Swiper
@@ -39,10 +39,8 @@ export const OverviewSwiper = ({ data }: OverviewSwiperProps) => {
         </SwiperSlide>
         <SwiperSlide>
           <OverviewCard
-            title={t("highest_bounty")}
-            value={currencyFormatters.NumberToSmallEUR(
-              data.highest_bounty_changes ?? 0
-            )}
+            title={t("active_programs")}
+            value={data.active_programs.toString() ?? "0"}
             changes={data.highest_bounty_changes}
           />
         </SwiperSlide>
