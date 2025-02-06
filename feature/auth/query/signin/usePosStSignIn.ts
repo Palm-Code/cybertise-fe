@@ -9,6 +9,7 @@ import { useLocalStorage } from "usehooks-ts";
 
 export const usePostSignIn = (callbackUrl: string | null) => {
   const [_, setCallbackUrl] = useLocalStorage("callbackUrl", "");
+  const [__, setExpiredTime] = useLocalStorage("expiredTime", "");
   const { replace } = useRouter();
   const mutation = useMutation<
     I_GetLoginSuccessResponse,
@@ -17,6 +18,9 @@ export const usePostSignIn = (callbackUrl: string | null) => {
   >({
     mutationFn: fetchPostLogin,
     onSuccess(data, variables) {
+      if (data.data.expired_at) {
+        setExpiredTime(data.data.expired_at.toString());
+      }
       mutation.reset();
       callbackUrl && setCallbackUrl(callbackUrl);
       data.data["two-factor"]
