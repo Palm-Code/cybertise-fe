@@ -1,5 +1,6 @@
 import { logout } from "@/service/server/auth";
 import { getSession } from "@/service/server/session";
+import { cookies } from "next/headers";
 import axios from "axios";
 
 const axiosServerInterceptorInstance = axios.create({
@@ -35,10 +36,13 @@ axiosServerInterceptorInstance.interceptors.response.use(
     // Modify the response data here
     return response;
   },
-  (error) => {
+  async (error) => {
     if (error?.response?.data.code === 401) {
-      logout();
-      return;
+      try {
+        await axios.get("/api/logout");
+      } catch (err) {
+        console.error("Failed to call logout route:", err);
+      }
     }
     // Handle response errors here
     return Promise.reject(error);
