@@ -241,7 +241,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                           <div className="_flexbox__col__start__start w-full gap-6">
                             <Card
                               className={cn(
-                                "rounded-[10px] bg-neutral-light-90 px-4 py-6 xl:px-7.5 xl:py-7.5 dark:bg-neutral-dark-90",
+                                "rounded-[10px] bg-neutral-light-90 px-4 py-6 dark:bg-neutral-dark-90 xl:px-7.5 xl:py-7.5",
                                 "_flexbox__row__start__start w-full gap-6"
                               )}
                             >

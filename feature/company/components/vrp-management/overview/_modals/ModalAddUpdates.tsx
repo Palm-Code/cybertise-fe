@@ -70,7 +70,7 @@ const ModalAddUpdates = ({ id, ...props }: I_ModalAddUpdatesProps) => {
         </div>
         <Card
           className={cn(
-            "bg-neutral-light-100 xl:p-7.5 dark:bg-neutral-dark-100",
+            "bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-7.5",
             "rounded-[10px]",
             "_flexbox__col__start__start gap-8"
           )}

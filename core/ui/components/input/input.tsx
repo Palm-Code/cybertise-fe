@@ -172,7 +172,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <label
                   htmlFor={`${props.id ?? label}`}
                   className={cn(
-                    "absolute transform text-sm text-neutral-light-30 duration-300 md:text-base dark:text-neutral-dark-30",
+                    "absolute transform text-sm text-neutral-light-30 duration-300 dark:text-neutral-dark-30 md:text-base",
                     "start-0 top-6 -z-10 origin-[0] scale-75 px-5 peer-focus:start-0 md:top-6",
                     "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
                     "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",

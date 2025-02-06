@@ -76,7 +76,7 @@ const ModalEditRiskLevel = ({
         </div>
         <Card
           className={cn(
-            "rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100",
+            "rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5",
             "_flexbox__col__start__start gap-8 transition-all duration-100"
           )}
         >
@@ -105,7 +105,7 @@ const ModalEditRiskLevel = ({
           />
           <Card
             className={cn(
-              "rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90",
+              "rounded-md bg-neutral-light-90 dark:bg-neutral-dark-90 xl:px-4 xl:py-4.5",
               "_flexbox__col__start__start gap-4 transition-all duration-100"
             )}
           >

@@ -24,7 +24,7 @@ const CustomPricing = ({
 }: CustomPricingProps) => {
   const t = useTranslations("VRPLaunchpad.phase.vrp_details.monetary_awards");
   return (
-    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:p-8 dark:bg-neutral-dark-100">
+    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-8">
       <button
         type="button"
         title="Expand"
