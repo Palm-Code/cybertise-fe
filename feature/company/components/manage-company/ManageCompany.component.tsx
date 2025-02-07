@@ -48,7 +48,7 @@ const ManageCompany = () => {
           onValueChange={(v) => setActive(manageCompanyTabsItemEnums[v])}
         />
         <AnimationWrapper key={active}>
-          <Card className="w-full bg-transparent pt-2 xl:bg-background-main-light xl:p-8 dark:bg-transparent dark:xl:bg-background-main-dark">
+          <Card className="w-full bg-transparent pt-2 dark:bg-transparent xl:bg-background-main-light xl:p-8 dark:xl:bg-background-main-dark">
             {tabs[active]}
           </Card>
         </AnimationWrapper>

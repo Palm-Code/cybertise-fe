@@ -67,7 +67,7 @@ const PasswordInput = ({
               transition={{ duration: 0.3 }}
               className="w-full rounded-lg bg-neutral-light-80 dark:bg-neutral-dark-90"
             >
-              <div className="grid w-full grid-cols-1 items-start gap-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] min-[435px]:grid-cols-2 dark:bg-neutral-dark-90">
+              <div className="grid w-full grid-cols-1 items-start gap-2.5 rounded-lg bg-neutral-light-80 px-5 py-[17px] dark:bg-neutral-dark-90 min-[435px]:grid-cols-2">
                 {options?.length! &&
                   options.map((item, index) => (
                     <Typography

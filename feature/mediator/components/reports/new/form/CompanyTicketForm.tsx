@@ -125,7 +125,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                 <div className="w-full">
                   <Card
                     isButton
-                    className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100"
+                    className="_flexbox__col__start rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4 xl:py-4.5"
                     onClick={() => handleCardClick("initial")}
                   >
                     <div
@@ -155,7 +155,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                         transition={{ duration: 0.3 }}
                         className="w-full overflow-hidden"
                       >
-                        <Card className="_flexbox__col__start gap-8 rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
+                        <Card className="_flexbox__col__start gap-8 rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4 xl:py-4.5">
                           <div className="grid w-full grid-cols-[auto_1fr] gap-4 rounded-md bg-neutral-light-90 p-4 dark:bg-neutral-dark-90">
                             <Info />
                             <Typography variant="p" affects="normal">
@@ -373,7 +373,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                 <div className="w-full">
                   <Card
                     isButton
-                    className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100"
+                    className="_flexbox__col__start rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4 xl:py-4.5"
                     onClick={() => {
                       handleCardClick("chat");
                       chatRef.current?.scrollIntoView({
@@ -408,7 +408,7 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                         transition={{ duration: 0.3 }}
                         className="w-full overflow-hidden"
                       >
-                        <Card className="_flexbox__col__start__start max-h-96 overflow-auto rounded-md bg-neutral-light-100 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-100">
+                        <Card className="_flexbox__col__start__start max-h-96 overflow-auto rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4 xl:py-4.5">
                           <ChatBubble data={initialData ?? []} />
                           <div ref={chatRef}></div>
                         </Card>

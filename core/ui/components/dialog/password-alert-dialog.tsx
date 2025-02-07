@@ -40,7 +40,7 @@ export const PasswordModalAlert = ({ ...props }: I_PasswordModalAlertProps) => {
           <Typography variant="p" affects="normal">
             {t("description")}
           </Typography>
-          <div className="w-full rounded-[10px] bg-background-page-light p-2 xl:p-4 dark:bg-background-page-dark">
+          <div className="w-full rounded-[10px] bg-background-page-light p-2 dark:bg-background-page-dark xl:p-4">
             <Typography variant="p" affects="small" weight="semibold">
               {t("suggestion")}
             </Typography>

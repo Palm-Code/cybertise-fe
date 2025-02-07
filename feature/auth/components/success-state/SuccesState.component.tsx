@@ -80,12 +80,18 @@ const SuccessState = ({
             <button
               type="button"
               title="resend"
-              disabled={remainingTime > 0}
+              disabled={remainingTime > 0 || isLoading}
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              {t("resend_button")}{" "}
-              {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+              {isLoading ? (
+                <Loader width={16} height={16} noText className={cn("h-fit")} />
+              ) : (
+                <>
+                  {t("resend_button")}{" "}
+                  {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+                </>
+              )}
             </button>
           </Typography>
         </div>
@@ -137,7 +143,7 @@ const SuccessState = ({
                 <Loader width={16} height={16} noText className={cn("h-fit")} />
               ) : (
                 <>
-                  {t("resend_button")}
+                  {t("resend_button")}{" "}
                   {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
                 </>
               )}

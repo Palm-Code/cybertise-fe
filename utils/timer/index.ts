@@ -101,7 +101,7 @@ const createTimer = ({
     let minutes = Math.floor(totalSeconds / 60) % 60;
     let hours = Math.floor(totalSeconds / 3600);
 
-    return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
+    return `${pad(minutes, 2)}:${pad(seconds, 2)}`;
   };
 
   const pad = (num: number, size: number): string => {

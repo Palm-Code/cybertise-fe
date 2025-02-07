@@ -13,6 +13,8 @@ import { useGetAnalytics, useGetChatList } from "../../query/client";
 import MobileLayout from "@/core/ui/layout/wrapper/MobileLayout.wrapper";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { OverviewSwiper } from "./swiper/overview";
+import { DashboardCardView } from "../../containers";
 
 const Statistics = () => {
   const t = useTranslations("DashboardCompany");
@@ -51,7 +53,18 @@ const Statistics = () => {
   return (
     <>
       <MobileLayout>
-        <EmptyState type="under-construction" variant="company" />
+        <div className={cn("flex w-full flex-col gap-10")}>
+          <div className={cn("flex w-full items-center justify-between")}>
+            <Typography variant="h4">{t("overview")}</Typography>
+            <FilterStatistic />
+          </div>
+          <OverviewSwiper data={analytics?.data} />
+          <div className={cn("grid w-full grid-cols-1 items-center gap-5")}>
+            <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+            <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
+          </div>
+          <DashboardCardView data={dashboardData?.data} />
+        </div>
       </MobileLayout>
       <DesktopLayout>
         <div className={cn("flex w-full flex-col gap-10")}>
@@ -59,31 +72,7 @@ const Statistics = () => {
             <Typography variant="h4">{t("overview")}</Typography>
             <FilterStatistic />
           </div>
-          <div className={cn("grid grid-cols-3 items-center gap-5")}>
-            <OverviewCard
-              title={t("bounties_paid")}
-              value={parseInt(
-                currencyFormatters.NumberToEUR(
-                  analytics?.data.total_bounty ?? 0
-                )
-              )}
-              changes={parseInt(
-                currencyFormatters.NumberToEUR(
-                  analytics?.data.total_bounty_changes ?? 0
-                )
-              )}
-            />
-            <OverviewCard
-              title={t("active_tickets")}
-              value={analytics?.data.total_active_tickets ?? 0}
-              changes={analytics?.data.total_active_tickets_changes ?? 0}
-            />
-            <OverviewCard
-              title={t("active_programs")}
-              value={analytics?.data.active_programs ?? 0}
-              changes={analytics?.data.active_programs_changes ?? 0}
-            />
-          </div>
+          <OverviewSwiper data={analytics?.data} />
           <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
             <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
             <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />

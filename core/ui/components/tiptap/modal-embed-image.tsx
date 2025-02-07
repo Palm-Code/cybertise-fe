@@ -176,7 +176,7 @@ export const ModalEmbedImage = ({
               }
               onClick={() => {
                 onClickInsert(
-                  activeTab === 0 ? fileValues?.[0]?.url ?? "" : urlImage
+                  activeTab === 0 ? (fileValues?.[0]?.url ?? "") : urlImage
                 );
                 setUrlImage("");
               }}

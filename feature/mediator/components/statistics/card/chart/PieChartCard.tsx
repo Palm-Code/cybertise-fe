@@ -14,6 +14,8 @@ import {
 } from "recharts";
 import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
 import { useTranslations } from "next-intl";
+import DesktopLayout from "@/core/ui/layout/wrapper/DesktopLayout.wrapper";
+import MobileLayout from "@/core/ui/layout/wrapper/MobileLayout.wrapper";
 
 const colorKeys: Record<string, string> = {
   critical_risk: "#E60202",
@@ -51,7 +53,7 @@ const renderCustomizedLabel = (props: PieLabelRenderProps) => {
       fontSize={12}
       fontWeight="bold"
       color="#000"
-      className={cn(percent === 0 ? "opacity-0" : "")}
+      className={cn("text-[8px] md:text-xs", percent === 0 ? "opacity-0" : "")}
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
@@ -65,61 +67,171 @@ type DoughnutCartPropsType = {
 export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
   const t = useTranslations("DashboardHacker");
   return (
-    <Wrapper className={cn("gap-3")}>
-      <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
-        <Coins className={iconColor.hacker} />
-        <Typography variant="p" affects="normal" weight="semibold">
-          {t("pieChart.title")}
-        </Typography>
-      </div>
-      <div className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Legend
-              layout="vertical"
-              align="left"
-              verticalAlign="middle"
-              iconType="circle"
-              className={cn(
-                "grid grid-cols-[auto_1fr] items-center gap-1 space-y-4"
-              )}
-              formatter={(value: string) => (
-                <Typography
-                  variant="p"
-                  affects="tiny"
-                  className={cn("text-neutral-dark-90 dark:text-white")}
-                >
-                  {value}
-                </Typography>
-              )}
-            />
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={80}
-              outerRadius={120}
-              paddingAngle={4}
-              dataKey="value"
-              cornerRadius={8}
-              labelLine={false}
-              label={renderCustomizedLabel}
-              className={cn("!outline-none")}
-              animationEasing="ease-in-out"
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={colorKeys[entry.color_key]}
-                  stroke={entry.color_key}
-                  strokeWidth={2}
-                  className={cn("!outline-none")}
+    <>
+      <MobileLayout>
+        <div
+          className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
+        >
+          <Coins className={iconColor.hacker} />
+          <Typography variant="p" affects="normal" weight="semibold">
+            {t("pieChart.title")}
+          </Typography>
+        </div>
+        <div className="mx-auto hidden h-[300px] w-full max-w-sm md:block">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Legend
+                layout="vertical"
+                align="left"
+                verticalAlign="middle"
+                iconType="circle"
+                formatter={(value: string) => (
+                  <Typography
+                    variant="p"
+                    affects="tiny"
+                    className={cn(
+                      "!text-[8px] text-neutral-dark-90 dark:text-white"
+                    )}
+                  >
+                    {value}
+                  </Typography>
+                )}
+              />
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                innerRadius={80}
+                outerRadius={120}
+                paddingAngle={4}
+                dataKey="value"
+                cornerRadius={8}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                className={cn("!outline-none")}
+                animationEasing="ease-in-out"
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colorKeys[entry.color_key]}
+                    stroke={entry.color_key}
+                    strokeWidth={2}
+                    className={cn("!outline-none")}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="mx-auto h-[300px] w-full max-w-sm md:hidden">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Legend
+                layout="vertical"
+                align="left"
+                verticalAlign="middle"
+                iconType="circle"
+                formatter={(value: string) => (
+                  <Typography
+                    variant="p"
+                    affects="tiny"
+                    className={cn(
+                      "!text-[8px] text-neutral-dark-90 dark:text-white"
+                    )}
+                  >
+                    {value}
+                  </Typography>
+                )}
+              />
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                innerRadius={50}
+                outerRadius={80}
+                paddingAngle={4}
+                dataKey="value"
+                cornerRadius={8}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                className={cn("!outline-none")}
+                animationEasing="ease-in-out"
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colorKeys[entry.color_key]}
+                    stroke={entry.color_key}
+                    strokeWidth={2}
+                    className={cn("!outline-none")}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </MobileLayout>
+      <DesktopLayout>
+        <Wrapper className={cn("gap-3")}>
+          <div
+            className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
+          >
+            <Coins className={iconColor.hacker} />
+            <Typography variant="p" affects="normal" weight="semibold">
+              {t("pieChart.title")}
+            </Typography>
+          </div>
+          <div className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Legend
+                  layout="vertical"
+                  align="left"
+                  verticalAlign="middle"
+                  iconType="circle"
+                  className={cn(
+                    "grid grid-cols-[auto_1fr] items-center gap-1 space-y-4"
+                  )}
+                  formatter={(value: string) => (
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                      className={cn("text-neutral-dark-90 dark:text-white")}
+                    >
+                      {value}
+                    </Typography>
+                  )}
                 />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    </Wrapper>
+                <Pie
+                  data={data}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={80}
+                  outerRadius={120}
+                  paddingAngle={4}
+                  dataKey="value"
+                  cornerRadius={8}
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  className={cn("!outline-none")}
+                  animationEasing="ease-in-out"
+                >
+                  {data.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={colorKeys[entry.color_key]}
+                      stroke={entry.color_key}
+                      strokeWidth={2}
+                      className={cn("!outline-none")}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </Wrapper>
+      </DesktopLayout>
+    </>
   );
 };

@@ -1,5 +1,6 @@
 import "./globals.scss";
 import "highlight.js/styles/default.css";
+import "swiper/css";
 import NextTopLoader from "nextjs-toploader";
 import { Inter } from "@/public/fonts/inter";
 import type { Metadata } from "next";
@@ -15,6 +16,7 @@ import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
 
 export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cybertise.de"),

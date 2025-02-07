@@ -31,7 +31,8 @@
       "button_apply": "Apply",
       "button_clear": "Clear"
     },
-    "showing_data_for": "Showing data for"
+    "showing_data_for": "Showing data for",
+    "days": "Last {days} Days"
   },
   "Ticket": {
     "ticket": "Ticket",

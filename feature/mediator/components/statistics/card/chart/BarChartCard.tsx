@@ -25,7 +25,7 @@ type BarChartCardProps = {
 export const BarChartCard = ({ data }: BarChartCardProps) => {
   const [ticket_status, setTicket_status] = useQueryState("ticket_status");
   return (
-    <Wrapper className={cn("gap-3")}>
+    <Wrapper className={cn("hidden gap-3 lg:block")}>
       <div className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}>
         <Coins className={iconColor.mediator} />
         <BaseDropdown

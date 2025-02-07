@@ -31,7 +31,7 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
           </Typography>
         </div>
         <div className="grid w-full grid-cols-2 gap-6">
-          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5">
             <Typography
               variant="p"
               affects="normal"
@@ -43,7 +43,7 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
               {currencyFormatters.NumberToEUR(data.monetary_awards_low ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5">
             <Typography
               variant="p"
               affects="normal"
@@ -55,7 +55,7 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
               {currencyFormatters.NumberToEUR(data.monetary_awards_high ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5">
             <Typography
               variant="p"
               affects="normal"
@@ -67,7 +67,7 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
               {currencyFormatters.NumberToEUR(data.monetary_awards_medium ?? 0)}
             </Typography>
           </Card>
-          <Card className="rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100">
+          <Card className="rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5">
             <Typography
               variant="p"
               affects="normal"

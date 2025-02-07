@@ -174,14 +174,26 @@ export const filterItems: MultiFilterType = {
     { label: "Critical", value: "critical" },
   ],
   type: [
+    { label: "All type", value: "all" },
     { label: "Public", value: "public" },
     { label: "Private", value: "private" },
   ],
   status: [
-    { label: "Open", value: "open" },
-    { label: "Closed", value: "closed" },
+    { label: "All status", value: "all" },
+    { label: "Open", value: "Open" },
+    { label: "In Review", value: "In Review" },
+    { label: "Waiting for Payment", value: "Waiting for Payment" },
+    { label: "Paid", value: "Paid" },
+    { label: "Canceled", value: "Canceled" },
+    { label: "Closed", value: "Closed" },
+  ],
+  company_status: [
+    { label: "All status", value: "all" },
+    { label: "Published", value: "Published" },
+    { label: "Pending", value: "Pending" },
   ],
   asset_type: [
+    { label: "All asset type", value: "all" },
     { label: "URL", value: "url" },
     { label: "Hardware/IOT", value: "iot" },
     { label: "Android: PlayStore", value: "android" },

@@ -73,7 +73,7 @@ export default function SelectGroupDropdown({
         />
       </PopoverTrigger>
       <PopoverContent
-        className="max-w-80 overflow-auto bg-neutral-light-90 !p-0 md:max-w-full dark:bg-neutral-dark-90"
+        className="max-w-80 overflow-auto bg-neutral-light-90 !p-0 dark:bg-neutral-dark-90 md:max-w-full"
         align="start"
       >
         <Command className="flex flex-col gap-2 !bg-transparent">

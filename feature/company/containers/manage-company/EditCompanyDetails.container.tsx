@@ -94,7 +94,7 @@ const EditCompnayDetails = ({
           <Card
             className={cn(
               "_flexbox__col__start__start relative z-20 w-full gap-8 rounded-lg",
-              "bg-background-main-light px-6 py-8 xl:p-9 xl:px-6 xl:py-12 dark:bg-background-main-dark"
+              "bg-background-main-light px-6 py-8 dark:bg-background-main-dark xl:p-9 xl:px-6 xl:py-12"
             )}
           >
             <Card
