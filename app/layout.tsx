@@ -16,6 +16,7 @@ import { fetchGetCountryList } from "@/core/services/common";
 import CountryListInitializer from "@/core/zustands/country-list/initializer";
 
 export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cybertise.de"),
