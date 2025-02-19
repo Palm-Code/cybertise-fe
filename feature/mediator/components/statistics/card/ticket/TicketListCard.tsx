@@ -26,7 +26,9 @@ export const TicketListCard = ({ data }: TicketListCardProps) => {
             Open Tickets
           </Typography>
         </div>
-        <Button variant="ghost-mediator">View all</Button>
+        <Button variant="ghost-mediator" asLink href="/reports">
+          View all
+        </Button>
       </div>
       {data?.length === 0 ? (
         <EmptyState type="ticket" variant="mediator" className={cn("mt-0")} />
