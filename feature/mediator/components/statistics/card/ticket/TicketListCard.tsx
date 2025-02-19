@@ -7,6 +7,7 @@ import { iconColor } from "@/core/constants/common";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import { StatisticTableView } from "@/feature/mediator/containers";
 import { useGetTableColumns } from "@/feature/mediator/constants/dashboard";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 interface TicketListCardProps {
   data?: I_GetChatListSuccessResponse["data"];
@@ -27,7 +28,11 @@ export const TicketListCard = ({ data }: TicketListCardProps) => {
         </div>
         <Button variant="ghost-mediator">View all</Button>
       </div>
-      <StatisticTableView columns={tableColumns} data={data} />
+      {data?.length === 0 ? (
+        <EmptyState type="ticket" variant="mediator" className={cn("mt-0")} />
+      ) : (
+        <StatisticTableView columns={tableColumns} data={data} />
+      )}
     </Wrapper>
   );
 };

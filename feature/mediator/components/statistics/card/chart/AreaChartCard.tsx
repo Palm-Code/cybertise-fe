@@ -71,22 +71,26 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
-              <YAxis
-                interval={0}
-                ticks={
-                  data?.every((d) => d.value === 0)
-                    ? [0]
-                    : [-300, -200, -100, 0, 100, 200, 300, 400, 500]
-                }
-                domain={[-300, "dataMax"]}
-                tickFormatter={(value) =>
-                  value < 0
-                    ? " "
-                    : data?.every((d) => d.value === 0)
+              {data?.every((d) => d.value === 0) ? (
+                <YAxis
+                  interval={0}
+                  ticks={[-300, -200, -100, 0, 100, 200, 300, 400, 500]}
+                  domain={[-300, "dataMax"]}
+                  tickFormatter={(value) =>
+                    data?.every((d) => d.value === 0) && value === 0
                       ? "0"
-                      : `${value}`
-                }
-              />
+                      : value < 0 || value > 0
+                        ? " "
+                        : `${value}`
+                  }
+                />
+              ) : (
+                <YAxis
+                  interval={0}
+                  ticks={[0, 100, 200, 300, 400, 500]}
+                  domain={[0, "dataMax"]}
+                />
+              )}
               <CartesianGrid
                 strokeDasharray="3 3"
                 stroke="#888"
@@ -107,7 +111,7 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 stroke="#845EEE"
                 fillOpacity={1}
                 fill="url(#paint0_linear_4549_92819)"
-                baseValue={-300}
+                baseValue={data?.every((d) => d.value === 0) ? -300 : 0}
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -152,22 +156,26 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />
-                <YAxis
-                  interval={0}
-                  ticks={
-                    data?.every((d) => d.value === 0)
-                      ? [0]
-                      : [-300, -200, -100, 0, 100, 200, 300, 400, 500]
-                  }
-                  domain={[-300, "dataMax"]}
-                  tickFormatter={(value) =>
-                    value < 0
-                      ? " "
-                      : data?.every((d) => d.value === 0)
+                {data?.every((d) => d.value === 0) ? (
+                  <YAxis
+                    interval={0}
+                    ticks={[-300, -200, -100, 0, 100, 200, 300, 400, 500]}
+                    domain={[-300, "dataMax"]}
+                    tickFormatter={(value) =>
+                      data?.every((d) => d.value === 0) && value === 0
                         ? "0"
-                        : `${value}`
-                  }
-                />
+                        : value < 0 || value > 0
+                          ? " "
+                          : `${value}`
+                    }
+                  />
+                ) : (
+                  <YAxis
+                    interval={0}
+                    ticks={[0, 100, 200, 300, 400, 500]}
+                    domain={[0, "dataMax"]}
+                  />
+                )}
                 <CartesianGrid
                   strokeDasharray="3 3"
                   stroke="#888"
@@ -188,7 +196,7 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                   stroke="#845EEE"
                   fillOpacity={1}
                   fill="url(#paint0_linear_4549_92819)"
-                  baseValue={-300}
+                  baseValue={data?.every((d) => d.value === 0) ? -300 : 0}
                 />
               </AreaChart>
             </ResponsiveContainer>
