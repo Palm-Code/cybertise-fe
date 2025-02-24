@@ -33,12 +33,22 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
               "_flexbox__col__start__start w-full gap-4 rounded-none"
             )}
           >
-            <div ref={ref} className="_flexbox__col__start__start w-full gap-4">
-              <Avatar image={data?.logo} initials="C" className="h-12 w-12" />
+            <div
+              ref={ref}
+              className="_flexbox__col__start__start w-full gap-4"
+            >
+              <Avatar
+                image={data?.logo}
+                initials="C"
+                className="h-12 w-12"
+              />
               <div className="_flexbox__row__start__between w-full">
                 <div className="_flexbox__col__start__start gap-4">
                   <div className="_flexbox__col__start__start gap-4">
-                    <Typography variant="h3" weight="bold">
+                    <Typography
+                      variant="h3"
+                      weight="bold"
+                    >
                       {data?.name}
                     </Typography>
                     <Indicator
@@ -68,7 +78,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   >
                     {t("reports_resolved")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {data.report_resolved}
                   </Typography>
                 </div>
@@ -80,7 +94,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   >
                     {t("bounty_program")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {data.program_count}
                   </Typography>
                 </div>
@@ -121,8 +139,16 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
           >
             <div className="grid w-full grid-cols-[1fr_auto] gap-9">
               <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">
-                <Avatar className="h-12 w-12" image={data?.logo} initials="C" />
-                <Typography variant="h4" affects="small" weight="bold">
+                <Avatar
+                  className="h-12 w-12"
+                  image={data?.logo}
+                  initials="C"
+                />
+                <Typography
+                  variant="h4"
+                  affects="small"
+                  weight="bold"
+                >
                   {data?.name}
                 </Typography>
               </div>
@@ -139,7 +165,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
         <Desktop>
           <Card>
             <div className="grid w-full grid-cols-[auto_1fr] gap-9">
-              <Avatar image={data?.logo} initials="C" className="h-12 w-12" />
+              <Avatar
+                image={data?.logo}
+                initials="C"
+                className="h-12 w-12"
+              />
               <div className="_flexbox__col__start__start w-full gap-12">
                 <div className="_flexbox__row__start__between w-full">
                   <div className="_flexbox__col__start__start gap-9">
@@ -177,7 +207,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     >
                       {t("reports_resolved")}
                     </Typography>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {data.report_resolved}
                     </Typography>
                   </div>
@@ -190,7 +224,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                     >
                       {t("bounty_program")}
                     </Typography>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {data.program_count}
                     </Typography>
                   </div>

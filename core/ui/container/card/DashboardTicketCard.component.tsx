@@ -32,9 +32,16 @@ const TicketCard = ({
   return (
     <>
       <Mobile>
-        <Card href={`/reports/${props.id}`} isClickable className="h-full">
+        <Card
+          href={`/reports/${props.id}`}
+          isClickable
+          className="h-full"
+        >
           {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
-            <Indicator variant="warning" className="absolute -right-4 -top-4" />
+            <Indicator
+              variant="warning"
+              className="absolute -right-4 -top-4"
+            />
           )}
           <div className={cn("_flexbox__col__start w-full", "gap-8")}>
             <div className="_flexbox__row__center__between w-full gap-4">
@@ -56,13 +63,19 @@ const TicketCard = ({
                 <div className="_flexbox__col__start ml-6 w-full gap-1">
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
-                      <Typography variant="p" affects="small">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
                         #{props.code} <br />{" "}
                         {props.title.substring(0, 50) + "..."}
                       </Typography>
                     </Tooltip>
                   ) : (
-                    <Typography variant="p" affects="small">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                    >
                       #{props.code} <br /> {props.title}
                     </Typography>
                   )}
@@ -85,7 +98,11 @@ const TicketCard = ({
                   >
                     {t("vulnerability_type")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
@@ -112,7 +129,11 @@ const TicketCard = ({
                     >
                       {t("rewards")}
                     </Typography>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
                     </Typography>
                   </div>
@@ -132,9 +153,16 @@ const TicketCard = ({
         </Card>
       </Mobile>
       <Desktop className="h-full">
-        <Card href={`/reports/${props.id}`} isClickable className="h-full">
+        <Card
+          href={`/reports/${props.id}`}
+          isClickable
+          className="h-full"
+        >
           {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
-            <Indicator variant="warning" className="absolute -right-4 -top-4" />
+            <Indicator
+              variant="warning"
+              className="absolute -right-4 -top-4"
+            />
           )}
           <div className="_flexbox__row__start w-full gap-9">
             {!isGridCard && (
@@ -172,12 +200,18 @@ const TicketCard = ({
                 >
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         #{props.code} - {props.title.substring(0, 50) + "..."}
                       </Typography>
                     </Tooltip>
                   ) : (
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       #{props.code} - {props.title}
                     </Typography>
                   )}
@@ -235,7 +269,11 @@ const TicketCard = ({
                   >
                     {t("vulnerability_type")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {props.vulnerabiity_type?.label}
                   </Typography>
                 </div>
@@ -261,7 +299,11 @@ const TicketCard = ({
                   >
                     {t("rewards")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
                   </Typography>
                 </div>
@@ -323,8 +365,15 @@ const TicketCardList = ({
 }: I_TicketCardListProps) => {
   if (data)
     return data.map((item) => (
-      <Suspense fallback={<CardLoader />} key={item.id}>
-        <TicketCard isGridCard={isGridCard} isMediator={isMediator} {...item} />
+      <Suspense
+        fallback={<CardLoader />}
+        key={item.id}
+      >
+        <TicketCard
+          isGridCard={isGridCard}
+          isMediator={isMediator}
+          {...item}
+        />
       </Suspense>
     ));
 };

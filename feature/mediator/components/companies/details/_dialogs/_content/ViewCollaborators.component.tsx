@@ -136,11 +136,20 @@ export const ViewCollaborators = ({
                 "rounded-none"
               )}
             >
-              <MoveLeft onClick={router.back} className="cursor-pointer" />
+              <MoveLeft
+                onClick={router.back}
+                className="cursor-pointer"
+              />
               {isLoadingProgramDetails ? (
-                <SkeletonList className="h-8 w-48" count={1} />
+                <SkeletonList
+                  className="h-8 w-48"
+                  count={1}
+                />
               ) : (
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.data.title}
                 </Typography>
               )}
@@ -174,7 +183,11 @@ export const ViewCollaborators = ({
                 )}
               >
                 <div className="flex w-full items-center justify-between gap-4">
-                  <Typography variant="p" affects="large" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="large"
+                    weight="semibold"
+                  >
                     {t("titles")}
                   </Typography>
                   <div className="grid grid-cols-[auto_1fr] gap-2">
@@ -216,7 +229,10 @@ export const ViewCollaborators = ({
             ) : totalCollaborator > 0 ? (
               <>
                 <CollaboratorListCard data={collaboratorListData || []} />
-                <div ref={paginationRef} className="w-full space-y-6 pb-8">
+                <div
+                  ref={paginationRef}
+                  className="w-full space-y-6 pb-8"
+                >
                   {isFetchingNextPage && <CollaboratorLoadingCard list={3} />}
                   <Typography
                     variant="p"
@@ -260,11 +276,20 @@ export const ViewCollaborators = ({
               "rounded-b-none rounded-t-2xl xl:px-8 xl:py-6"
             )}
           >
-            <MoveLeft onClick={router.back} className="cursor-pointer" />
+            <MoveLeft
+              onClick={router.back}
+              className="cursor-pointer"
+            />
             {isLoadingProgramDetails ? (
-              <SkeletonList className="h-8 w-48" count={1} />
+              <SkeletonList
+                className="h-8 w-48"
+                count={1}
+              />
             ) : (
-              <Typography variant="h5" weight="bold">
+              <Typography
+                variant="h5"
+                weight="bold"
+              >
                 {data?.data.title} - {t("titles")}
               </Typography>
             )}
@@ -278,7 +303,11 @@ export const ViewCollaborators = ({
             <div className={cn("flex w-full items-center justify-between")}>
               <div className="grid grid-cols-[auto_1fr] items-center gap-4">
                 <Users />
-                <Typography variant="p" affects="large" weight="semibold">
+                <Typography
+                  variant="p"
+                  affects="large"
+                  weight="semibold"
+                >
                   {totalCollaborator} {t("hacker_invited")}
                 </Typography>
               </div>
@@ -347,7 +376,10 @@ export const ViewCollaborators = ({
                     }
                   }}
                 />
-                <div ref={paginationRef} className="w-full space-y-6 pb-28">
+                <div
+                  ref={paginationRef}
+                  className="w-full space-y-6 pb-28"
+                >
                   {isFetchingNextPage && (
                     <SkeletonList
                       className="h-16 w-full rounded-2xl"
@@ -387,7 +419,11 @@ export const ViewCollaborators = ({
               )}
             >
               <div className="flex w-full items-center justify-between">
-                <Typography variant="p" affects="small" weight="medium">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="medium"
+                >
                   {selectedCollaboratorsIds.length} {t("hacker_selected")}
                 </Typography>
                 <Button

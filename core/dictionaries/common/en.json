@@ -18,7 +18,8 @@
     "logout": "Logout",
     "mode": "Mode",
     "services": "Services",
-    "payment": "Payment"
+    "payment": "Payment",
+    "earnings": "Earnings"
   },
   "Filter": {
     "title": "Filter",
@@ -48,7 +49,11 @@
     "last_message": "Last Message",
     "create_company_ticket": "Create Company Ticket",
     "hacker_ticket": "Hacker Ticket",
-    "company_ticket": "Company Ticket"
+    "company_ticket": "Company Ticket",
+    "view_chat": "View Chat",
+    "make_payment": "Make Payment",
+    "send_payment_request": "Send Payment Request",
+    "payment_request_sent": "Payment Request Sent"
   },
   "Programs": {
     "program_name": "Program Name",
@@ -79,7 +84,8 @@
     "you_have_nothing_here": "You have nothing here",
     "under_construction": "Under Construction",
     "back_button": "Back",
-    "target_assets_not_found": "Target assets not found"
+    "target_assets_not_found": "Target assets not found",
+    "only_desktop": "This feature only available on desktop"
   },
   "SuccesState": {
     "send_report": {

@@ -14,7 +14,7 @@ import Typography from "../../components/typography/typography";
 import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
-import { Service, VrpManagement } from "../../icons";
+import { Currency, Service, VrpManagement } from "../../icons";
 import { usePathname } from "next/navigation";
 import { borderColor, useMenuItems } from "@/core/constants/common";
 import {
@@ -37,17 +37,18 @@ interface SidebarProps {
 }
 
 const iconsObject: { [key: string]: React.ReactNode } = {
-  dashboard: <LayoutDashboard className="h-6 w-6" />,
-  programs: <TextSearch className="h-6 w-6" />,
-  reports: <Bug className="h-6 w-6" />,
-  companies: <Building2 className="h-6 w-6" />,
-  vrp_launchpad: <Bug className="h-6 w-6" />,
+  dashboard: <LayoutDashboard className="size-6" />,
+  programs: <TextSearch className="size-6" />,
+  reports: <Bug className="size-6" />,
+  companies: <Building2 className="size-6" />,
+  vrp_launchpad: <Bug className="size-6" />,
   vrp_management: (
-    <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
+    <VrpManagement className="size-6 fill-black dark:fill-white" />
   ),
-  manage_company: <Building2 className="h-6 w-6" />,
-  services: <Service className="h-6 w-6" />,
-  payment: <Service className="h-6 w-6" />,
+  manage_company: <Building2 className="size-6" />,
+  services: <Service className="size-6" />,
+  payment: <Currency className="size-6" />,
+  earnings: <Currency className={cn("size-6")} />,
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
@@ -87,7 +88,10 @@ const Sidebar = ({ type }: SidebarProps) => {
                   <SheetClose>
                     <X />
                   </SheetClose>
-                  <Typography variant="h6" weight="bold">
+                  <Typography
+                    variant="h6"
+                    weight="bold"
+                  >
                     {t("menu")}
                   </Typography>
                 </div>
@@ -118,7 +122,10 @@ const Sidebar = ({ type }: SidebarProps) => {
                     }}
                   >
                     {iconsObject[item.id.toLowerCase()]}
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       {item.title}
                     </Typography>
                   </Link>
@@ -136,7 +143,10 @@ const Sidebar = ({ type }: SidebarProps) => {
                   )}
                 >
                   <Settings className="h-6 w-6" />
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {t("settings")}
                   </Typography>
                 </Link>
@@ -152,7 +162,10 @@ const Sidebar = ({ type }: SidebarProps) => {
                   onClick={() => mutateAsync()}
                 >
                   <LogOut className="h-6 w-6" />
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {t("logout")}
                   </Typography>
                 </button>
@@ -164,7 +177,11 @@ const Sidebar = ({ type }: SidebarProps) => {
                 "w-full gap-4 pl-6 pr-5"
               )}
             >
-              <Typography variant="p" affects="normal" className="capitalize">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="capitalize"
+              >
                 {theme} {t("mode")}
               </Typography>
               <ThemeSwitcher />
@@ -180,7 +197,12 @@ const Sidebar = ({ type }: SidebarProps) => {
           )}
         >
           <div className="_flexbox__col__start w-full gap-8">
-            <Link href="/dashboard" prefetch replace className="px-12 py-3">
+            <Link
+              href="/dashboard"
+              prefetch
+              replace
+              className="px-12 py-3"
+            >
               <Logo className="h-[68px] w-[182px]" />
             </Link>
             <div className="_flexbox__col__center w-full gap-4 pr-5">
@@ -210,7 +232,10 @@ const Sidebar = ({ type }: SidebarProps) => {
                   }}
                 >
                   {iconsObject[item.id.toLowerCase()]}
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {item.title}
                   </Typography>
                 </Link>

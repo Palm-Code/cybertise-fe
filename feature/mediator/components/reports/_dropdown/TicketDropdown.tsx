@@ -32,7 +32,10 @@ const TicketDropDown = ({
   return (
     <>
       <Desktop className="w-fit">
-        <Select open={open} onOpenChange={onOpenChange}>
+        <Select
+          open={open}
+          onOpenChange={onOpenChange}
+        >
           <SelectTrigger className="!bg-transparent !p-0">
             <ChevronRight />
           </SelectTrigger>

@@ -72,7 +72,10 @@ export default async function RootLayout({
   const countryList = await fetchGetCountryList();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+    >
       <body
         className={cn(
           Inter.className,

@@ -90,7 +90,10 @@ const Setting = ({
       />
     ),
     [SettingItems.notifications]: (
-      <Notifications data={initialData} variant={role} />
+      <Notifications
+        data={initialData}
+        variant={role}
+      />
     ),
     [SettingItems.security]: (
       <Security
@@ -109,7 +112,10 @@ const Setting = ({
       <Mobile>
         {activeState === null ? (
           <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
-            <Typography variant="h4" weight="bold">
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-4">
@@ -120,7 +126,10 @@ const Setting = ({
                   className="_flexbox__row__center__between w-full rounded-[10px] px-7.5 py-6"
                   onClick={() => setActiveState(item.value as SettingItems)}
                 >
-                  <Typography variant="h4" weight="semibold">
+                  <Typography
+                    variant="h4"
+                    weight="semibold"
+                  >
                     {item.label}
                   </Typography>
                   <ChevronRight />
@@ -142,7 +151,10 @@ const Setting = ({
                 "_flexbox__col__start__start gap-2.5"
               )}
             >
-              <Typography variant="p" affects="small">
+              <Typography
+                variant="p"
+                affects="small"
+              >
                 {t("title")}
               </Typography>
               <Typography
@@ -162,7 +174,10 @@ const Setting = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start gap-10 pt-12">
-          <Typography variant="h4" weight="bold">
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           {!editing && (

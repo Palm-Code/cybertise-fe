@@ -129,7 +129,11 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
         >
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
-              <Typography variant="h4" weight="bold" className="mr-auto">
+              <Typography
+                variant="h4"
+                weight="bold"
+                className="mr-auto"
+              >
                 {t("title")}
               </Typography>
               <SearchInput
@@ -170,7 +174,10 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
                 isLoading={mobileIsLoading || mobileIsFetching}
                 data={mobileProgramListData}
               />
-              <div ref={ref} className="w-full space-y-6">
+              <div
+                ref={ref}
+                className="w-full space-y-6"
+              >
                 {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
@@ -188,7 +195,11 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
       <Desktop>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
           </div>
@@ -198,7 +209,10 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               "bg-background-main-light px-12 py-8 dark:bg-background-main-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("search_title")}
             </Typography>
             <SearchInput
@@ -230,7 +244,10 @@ const Dashboard = ({ assetTypes }: I_ProgramsProps) => {
               />
             </div>
             <div className="ml-auto w-fit max-w-xl">
-              <FilterViewDropdown type="hacker" options={filterView} />
+              <FilterViewDropdown
+                type="hacker"
+                options={filterView}
+              />
             </div>
           </div>
           {programList && programList.data.length! ? (

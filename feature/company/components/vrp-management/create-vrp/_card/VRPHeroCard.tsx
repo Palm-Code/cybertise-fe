@@ -17,11 +17,17 @@ const VRPHeroCard = ({}: I_VRPHeroCard) => {
             "inline-flex items-center gap-5"
           )}
         >
-          <Link href="/vrp-launchpad" className="mb-auto mt-1">
+          <Link
+            href="/vrp-launchpad"
+            className="mb-auto mt-1"
+          >
             <MoveLeft className="cursor-pointer" />
           </Link>
           <div className="_flexbox__col__start__start gap-3">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               Create New VRP
             </Typography>
           </div>

@@ -41,7 +41,10 @@ const ModalDeactivateAccount = ({
     [key: string]: JSX.Element;
   } = {
     information: (
-      <Information onClose={onCloseModal} onClickVerify={setActiveState} />
+      <Information
+        onClose={onCloseModal}
+        onClickVerify={setActiveState}
+      />
     ),
     confirmation: (
       <Confirmation

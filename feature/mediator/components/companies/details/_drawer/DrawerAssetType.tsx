@@ -29,7 +29,11 @@ export const DrawerAssetType = ({
           className="justify-start underline underline-offset-8"
           fullWidth
         >
-          <Typography variant="p" affects="small" weight="medium">
+          <Typography
+            variant="p"
+            affects="small"
+            weight="medium"
+          >
             {assetTypes.length} {t("asset_type")}
           </Typography>
         </Button>

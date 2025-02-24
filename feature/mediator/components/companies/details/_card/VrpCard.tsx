@@ -56,7 +56,11 @@ const VRPCard = ({
                       size={16}
                       className="text-neutral-light-30 dark:text-neutral-dark-30"
                     />
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {collaborators_count}
                     </Typography>
                   </div>
@@ -64,7 +68,11 @@ const VRPCard = ({
               )}
             </div>
             <div className="_flexbox__col__start__start w-full gap-4">
-              <Typography variant="p" affects="large" weight="semibold">
+              <Typography
+                variant="p"
+                affects="large"
+                weight="semibold"
+              >
                 {title}
               </Typography>
               <Indicator
@@ -80,7 +88,10 @@ const VRPCard = ({
             <Separator orientation="horizontal" />
             <div className="_flexbox__row__center__between w-full">
               <div className="_flexbox__col__start__start gap-2.5">
-                <Typography variant="p" affects="small">
+                <Typography
+                  variant="p"
+                  affects="small"
+                >
                   {t("asset_type_available")}
                 </Typography>
                 <div className="flex flex-wrap items-center gap-4">
@@ -118,7 +129,11 @@ const VRPCard = ({
           <div className="_flexbox__col__start__start w-full gap-12">
             <div className="_flexbox__row__center__between w-full">
               <div className="grid grid-cols-[1fr_auto] items-center gap-6">
-                <Typography variant="p" affects="large" weight="semibold">
+                <Typography
+                  variant="p"
+                  affects="large"
+                  weight="semibold"
+                >
                   {title}
                 </Typography>
                 <Badge variant="default">{type}</Badge>
@@ -135,7 +150,10 @@ const VRPCard = ({
             </div>
             <div className="_flexbox__row__center__between w-full">
               <div className="_flexbox__col__start__start gap-2.5">
-                <Typography variant="p" affects="small">
+                <Typography
+                  variant="p"
+                  affects="small"
+                >
                   {t("asset_type_available")}
                 </Typography>
                 <div className="grid grid-flow-col gap-4">
@@ -172,7 +190,11 @@ const VRPCard = ({
                       {t("collaborators")}
                     </Typography>
                   </div>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {collaborators_count} {t("collaborators")}
                   </Typography>
                 </div>
@@ -195,7 +217,13 @@ const VrpCardList = ({
   onClickVrp?: (id: string) => void;
 }) => {
   if (!data || data?.length === 0)
-    return <EmptyState variant="mediator" buttonText="" className="mt-16" />;
+    return (
+      <EmptyState
+        variant="mediator"
+        buttonText=""
+        className="mt-16"
+      />
+    );
   return data.map((item, index) => (
     <VRPCard
       key={index}

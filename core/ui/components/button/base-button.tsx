@@ -18,13 +18,13 @@ const buttonVariants = cva(
         "primary-company":
           "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
         "secondary-company":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:!bg-sky-lighter/20 focus:!bg-sky-lighter/20 active:!bg-sky-lighter/20 !border-sky-normal hover:!border-sky-normal active:!border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-company":
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:!text-sky-normal focus:!text-sky-normal active:!text-sky-dark",
         "primary-company staff":
-          "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
+          "border !bg-sky-normal text-white hover:!bg-sky-lighter focus:!bg-sky-lighter active:!bg-sky-darker !border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
         "secondary-company staff":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:!bg-sky-lighter/20 focus:!bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-company staff":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
         "primary-mediator":
@@ -32,7 +32,7 @@ const buttonVariants = cva(
         "secondary-mediator":
           "border bg-transparent text-brand-neutral dark:text-white hover:bg-violet-lighter/20 focus:bg-violet-lighter/20 active:bg-violet-lighter/20 border-violet-normal hover:border-violet-normal active:border-violet-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-mediator":
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal focus:text-violet-normal active:text-violet-dark",
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:!text-violet-normal focus:!text-violet-normal active:!text-violet-dark",
         "tertirary-alert":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-semantic-light-critical focus:text-semantic-light-critical active:text-semantic-light-critical",
         default:

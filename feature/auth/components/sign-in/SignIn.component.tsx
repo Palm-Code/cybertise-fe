@@ -123,20 +123,29 @@ const SignInComponent = () => {
           "bg-transparent px-6 xl:bg-background-main-light xl:px-10 xl:py-20 xl:dark:bg-background-main-dark"
         )}
       >
-        <Typography variant="h4" weight="bold">
+        <Typography
+          variant="h4"
+          weight="bold"
+        >
           {t("title")}
         </Typography>
         <div className="_flexbox__col__center w-full gap-7">
           {error?.status === 401 ? (
             <div className="w-full rounded-md bg-red-error/20 p-3.5">
-              <Typography variant="p" affects="tiny">
+              <Typography
+                variant="p"
+                affects="tiny"
+              >
                 {t("error.missmatch")}
               </Typography>
             </div>
           ) : null}
           {error?.status === 422 ? (
             <div className="w-full rounded-md bg-red-error/20 p-3.5">
-              <Typography variant="p" affects="tiny">
+              <Typography
+                variant="p"
+                affects="tiny"
+              >
                 {t("error.not_found")}
               </Typography>
             </div>
@@ -197,9 +206,16 @@ const SignInComponent = () => {
           >
             {t("sign_in_button")}
           </Button>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+          >
             {t("not_have_account")}{" "}
-            <Link href={"/auth/signup"} className="ml-2 font-semibold">
+            <Link
+              href={"/auth/signup"}
+              className="ml-2 font-semibold"
+            >
               {t("sign_up")}
             </Link>
           </Typography>

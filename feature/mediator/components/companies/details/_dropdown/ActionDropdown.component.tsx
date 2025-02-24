@@ -48,7 +48,10 @@ const ActionDropDown = ({
   return (
     <>
       <Desktop className="mx-auto w-fit">
-        <Select open={open} onOpenChange={onOpenChange}>
+        <Select
+          open={open}
+          onOpenChange={onOpenChange}
+        >
           <SelectTrigger className="!bg-transparent !p-0">
             <EllipsisVertical
               className={cn(

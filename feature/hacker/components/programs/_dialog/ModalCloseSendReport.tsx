@@ -16,7 +16,10 @@ const ModalCloseSendReport = ({
   const t = useTranslations("SuccesState.close_send_report");
   const router = useRouter();
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <div
         className={cn(
           "relative mx-auto w-fit max-w-[602px] rounded-lg p-20",
@@ -26,15 +29,26 @@ const ModalCloseSendReport = ({
       >
         <div className="_flexbox__col__start__start w-full gap-6">
           <XCircle className="h-16 w-16 text-semantic-light-critical dark:text-semantic-dark-critical" />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" className="mt-2">
+          <Typography
+            variant="p"
+            affects="normal"
+            className="mt-2"
+          >
             {t("description")}
           </Typography>
         </div>
         <div className="flex w-full items-center gap-6">
-          <Button variant="secondary-hacker" fullWidth onClick={onClose}>
+          <Button
+            variant="secondary-hacker"
+            fullWidth
+            onClick={onClose}
+          >
             {t("button_keep_it")}
           </Button>
           <Button

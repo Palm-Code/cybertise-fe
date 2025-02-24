@@ -51,7 +51,11 @@ const VRPCard = ({
           <div className="_flexbox__col__start__start w-full gap-4">
             <div className="_flexbox__col__start__between w-full gap-4">
               <Tooltip content={title || ""}>
-                <Typography variant="p" affects="large" weight="semibold">
+                <Typography
+                  variant="p"
+                  affects="large"
+                  weight="semibold"
+                >
                   {title && title?.length > 25
                     ? title?.substring(0, 25) + "..."
                     : title}
@@ -125,7 +129,11 @@ const VRPCard = ({
                 className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}
               >
                 <Tooltip content={title || ""}>
-                  <Typography variant="p" affects="large" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="large"
+                    weight="semibold"
+                  >
                     {title && title?.length > 50
                       ? title?.substring(0, 50) + "..."
                       : title}
@@ -195,7 +203,13 @@ interface I_VRPCardList {
 
 const VRPCardList = ({ data, variant }: I_VRPCardList) => {
   return data?.map((item) => {
-    return <VRPCard key={item?.id} variant={variant} {...item} />;
+    return (
+      <VRPCard
+        key={item?.id}
+        variant={variant}
+        {...item}
+      />
+    );
   });
 };
 

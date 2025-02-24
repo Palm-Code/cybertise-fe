@@ -50,7 +50,11 @@ const CardLoginInfo = ({
                   className="p-0"
                   onClick={() => handleClickEdit(false)}
                 />
-                <Typography variant="h5" weight="bold" className="capitalize">
+                <Typography
+                  variant="h5"
+                  weight="bold"
+                  className="capitalize"
+                >
                   {t("change_login_password")}
                 </Typography>
               </div>
@@ -105,7 +109,11 @@ const CardLoginInfo = ({
       )}
     >
       <div className="_flexbox__row__start__between w-full">
-        <Typography variant="h6" weight="bold" className="xl:inline-flex">
+        <Typography
+          variant="h6"
+          weight="bold"
+          className="xl:inline-flex"
+        >
           <RectangleEllipsis className="mb-4 h-8 w-8 xl:mr-4" />
           {t("login_password")}
         </Typography>

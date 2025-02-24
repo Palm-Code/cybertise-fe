@@ -9,5 +9,10 @@ export default async function VRPLaunchpadDetailPage({
   };
 }) {
   const session = await getSession();
-  return <DetailsVRPFragment id={params.id} variant={session?.user.role} />;
+  return (
+    <DetailsVRPFragment
+      id={params.id}
+      variant={session?.user.role}
+    />
+  );
 }

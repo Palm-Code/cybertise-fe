@@ -10,5 +10,10 @@ export default function CustomNumberFormat(props: NumberFormatBaseProps) {
     }).format(numStr === "" ? 0 : Number(numStr));
   };
 
-  return <NumberFormatBase {...props} format={format} />;
+  return (
+    <NumberFormatBase
+      {...props}
+      format={format}
+    />
+  );
 }

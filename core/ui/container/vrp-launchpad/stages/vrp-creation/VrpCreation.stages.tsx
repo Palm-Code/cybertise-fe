@@ -91,7 +91,10 @@ const VRPCreation = ({
           currentStep === "Phase1" ? (
             <Brief onClickNext={() => next()} />
           ) : (
-            <Notes currentSteps={currentStep} onClickNext={() => next()} />
+            <Notes
+              currentSteps={currentStep}
+              onClickNext={() => next()}
+            />
           ),
         key: currentStep === "Phase1" ? "brief" : "notes",
       },
@@ -165,7 +168,10 @@ const VRPCreation = ({
   return (
     <>
       <FormProvider {...method}>
-        <div ref={containerRef} className="absolute top-0"></div>
+        <div
+          ref={containerRef}
+          className="absolute top-0"
+        ></div>
         <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <AnimationWrapper
             key={steps[currentStepIndex].key}

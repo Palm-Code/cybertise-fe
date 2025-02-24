@@ -22,7 +22,10 @@ const ModalSuccessSubmit = ({ isOpen }: I_ModalSuccessSubmitProps) => {
       >
         <div className="_flexbox__col__center w-full gap-6">
           <CheckCircle className="h-16 w-16 text-semantic-light-success dark:text-semantic-dark-success" />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           <Typography

@@ -44,12 +44,18 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
       <Desktop>
         <div className="_flexbox__col__start__start gap-12">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__row__center__between w-full gap-4">
-            <FilterDateRange variant={variant} store={store} />
+            <FilterDateRange
+              variant={variant}
+              store={store}
+            />
             <FilterDropdown
               value={store.payload.params?.sort}
               variant={variant}
@@ -108,7 +114,10 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                     className="_flexbox__col__start__start w-full gap-4"
                     key={`key-${key}`}
                   >
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       {date}
                     </Typography>
                     <Card

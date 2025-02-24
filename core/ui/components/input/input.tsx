@@ -230,12 +230,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {!!description && (
-          <Typography variant="p" affects="tiny">
+          <Typography
+            variant="p"
+            affects="tiny"
+          >
             {description}
           </Typography>
         )}
         {!!errorMsg && (
-          <Typography variant="p" affects="tiny" className="!text-red-error">
+          <Typography
+            variant="p"
+            affects="tiny"
+            className="!text-red-error"
+          >
             {errorMsg}
           </Typography>
         )}

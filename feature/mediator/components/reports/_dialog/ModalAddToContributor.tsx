@@ -18,7 +18,10 @@ const ModalAddToContributor = ({
 }: I_ModalAddToContributorProps) => {
   const t = useTranslations("SuccesState.close_send_report");
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <div
         className={cn(
           "relative mx-auto w-fit max-w-[602px] rounded-lg p-10",
@@ -28,7 +31,10 @@ const ModalAddToContributor = ({
       >
         <div className="_flexbox__col__start__start w-full gap-6">
           <XCircle className="h-16 w-16 text-semantic-light-critical dark:text-semantic-dark-critical" />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Add Hacker to contributor list ?
           </Typography>
         </div>

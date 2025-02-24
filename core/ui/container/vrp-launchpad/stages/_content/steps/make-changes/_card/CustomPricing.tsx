@@ -37,7 +37,11 @@ const CustomPricing = ({
             activeCard ? "rotate-90" : "rotate-0"
           )}
         />
-        <Typography variant="p" affects="large" weight="semibold">
+        <Typography
+          variant="p"
+          affects="large"
+          weight="semibold"
+        >
           {t("custom")}
         </Typography>
       </button>

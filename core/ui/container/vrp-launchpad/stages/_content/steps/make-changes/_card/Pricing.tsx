@@ -40,7 +40,10 @@ const PricingCard = ({
           variant={variant as keyof typeof checkboxVariants}
           checked={checked}
         />
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {tier}
         </Typography>
       </div>
@@ -56,7 +59,10 @@ const PricingCard = ({
           >
             {data.label}
           </Typography>
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {currencyFormatters.NumberToEUR(data.value ?? 0)}
           </Typography>
         </div>

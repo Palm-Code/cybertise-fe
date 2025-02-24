@@ -112,7 +112,11 @@ const VRPLaunchpad = () => {
       <Mobile>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 px-6 py-12">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
             <SearchInput
@@ -188,7 +192,10 @@ const VRPLaunchpad = () => {
                 data={mobileProgramData}
                 isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full space-y-6">
+              <div
+                ref={ref}
+                className="w-full space-y-6"
+              >
                 {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
@@ -206,7 +213,11 @@ const VRPLaunchpad = () => {
       <Desktop>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
             <div className="grid w-fit grid-cols-3 gap-4">
@@ -248,7 +259,10 @@ const VRPLaunchpad = () => {
             </div>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6 rounded-2xl bg-background-main-light px-12 py-8 dark:bg-background-main-dark">
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("search_title")}
             </Typography>
             <SearchInput
@@ -280,7 +294,10 @@ const VRPLaunchpad = () => {
               />
             </div>
             <div className="ml-auto w-fit max-w-xl">
-              <FilterViewDropdown type="mediator" options={filterView} />
+              <FilterViewDropdown
+                type="mediator"
+                options={filterView}
+              />
             </div>
           </div>
           {programsData?.data.length! ? (

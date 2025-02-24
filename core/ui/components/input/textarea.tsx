@@ -144,7 +144,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
           {(onClickRevealPassword &&
             hasValue &&
             (props.type === "password" ? (
-              <Eye className="h-6 w-6 cursor-pointer" onClick={onClickReveal} />
+              <Eye
+                className="h-6 w-6 cursor-pointer"
+                onClick={onClickReveal}
+              />
             ) : (
               <EyeOff
                 className="h-6 w-6 cursor-pointer"
@@ -169,7 +172,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
           {suffixIcon}
         </div>
         {!!description && (
-          <Typography variant="p" affects="tiny">
+          <Typography
+            variant="p"
+            affects="tiny"
+          >
             {description}
           </Typography>
         )}

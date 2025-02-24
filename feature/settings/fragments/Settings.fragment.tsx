@@ -9,6 +9,11 @@ export interface I_SettingsFragmentProps {
 const SettingsFragment = ({ role }: I_SettingsFragmentProps) => {
   const { data: userData, isLoading } = useGetUserProfile();
   if (isLoading) return <Loader variant={role} />;
-  return <Settings initialData={userData?.data} role={role} />;
+  return (
+    <Settings
+      initialData={userData?.data}
+      role={role}
+    />
+  );
 };
 export default SettingsFragment;

@@ -60,7 +60,11 @@ export function ContributorTableView({ data, columns }: I_TableProps) {
                     className={cn("size-6")}
                     image={item.user.avatar || ""}
                   />
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {item.user.name}
                   </Typography>
                 </div>

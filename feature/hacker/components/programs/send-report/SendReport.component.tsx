@@ -171,7 +171,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                   {!data?.data ? (
                     <Skeleton className="w-48" />
                   ) : (
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {t("title")} -{" "}
                       <Tooltip content={data?.data.title as string}>
                         {data?.data && data?.data.title.length > 50
@@ -185,7 +188,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
               <AnimationWrapper key={steps[currentStepIndex].key}>
                 <div
                   className={cn(
-                    "sticky top-[8.15rem] z-30 h-4 w-[calc(100%-235px)] rounded-t-xl",
+                    "sticky top-[8.15rem] z-30 h-4 w-[calc(100%-267px)] rounded-t-xl",
                     isLastStep
                       ? "bg-neutral-light-100 dark:bg-neutral-dark-100"
                       : "bg-background-main-light pt-0 dark:bg-background-main-dark"
@@ -193,7 +196,7 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                 ></div>
               </AnimationWrapper>
             </div>
-            <div className="relative grid h-full w-full grid-cols-[1fr_203px] gap-8">
+            <div className="relative grid h-full w-full grid-cols-[1fr_235px] gap-8">
               <div className="h-full overflow-y-auto">
                 <AnimationWrapper key={steps[currentStepIndex].key}>
                   <Card
@@ -205,7 +208,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                     )}
                   >
                     <div className="_flexbox__row__center__between w-full">
-                      <Typography variant="h5" weight="bold">
+                      <Typography
+                        variant="h5"
+                        weight="bold"
+                      >
                         {informations[currentStepIndex].label}
                       </Typography>
                       {isLastStep && (
@@ -219,7 +225,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                       )}
                     </div>
                     {informations[currentStepIndex].description && (
-                      <Typography variant="p" affects="small">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
                         {informations[currentStepIndex].description}
                       </Typography>
                     )}
@@ -233,7 +242,10 @@ const SendReport = ({ id, defaultData }: I_SendReportProps) => {
                       {step}
                       <div className="_flexbox__row__start__start w-full gap-8">
                         {!isFirstStep && !isLastStep ? (
-                          <Button variant="secondary-hacker" onClick={back}>
+                          <Button
+                            variant="secondary-hacker"
+                            onClick={back}
+                          >
                             {t("button_previous")}
                           </Button>
                         ) : null}

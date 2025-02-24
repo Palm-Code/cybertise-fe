@@ -50,7 +50,10 @@ const ModalSendAttachment = ({
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <div
         className={cn(
           "relative mx-auto w-full max-w-3xl rounded-xl px-8 py-12",
@@ -59,7 +62,10 @@ const ModalSendAttachment = ({
         )}
       >
         <div className="_flexbox__col__start__start w-full gap-6">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title_upload_attachment")}
           </Typography>
           <div
@@ -85,7 +91,11 @@ const ModalSendAttachment = ({
           </div>
         </div>
         <div className="_flexbox__row__start__start gap-8">
-          <Button variant="secondary-company" fullWidth onClick={onClose}>
+          <Button
+            variant="secondary-company"
+            fullWidth
+            onClick={onClose}
+          >
             {t("button_cancel")}
           </Button>
           <Button

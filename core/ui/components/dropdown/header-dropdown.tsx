@@ -39,7 +39,10 @@ const HeaderDropdown = ({
           name="header-options-trigger"
           className="!w-fit !justify-start gap-1.5 whitespace-nowrap text-nowrap !bg-transparent xl:p-0"
         >
-          <Avatar image={avatar} initials={""} />
+          <Avatar
+            image={avatar}
+            initials={""}
+          />
           <ChevronDown />
         </SelectTrigger>
         <SelectContent
@@ -72,7 +75,10 @@ const HeaderDropdown = ({
               )
             )
           ) : (
-            <SelectItem value="no items" disabled>
+            <SelectItem
+              value="no items"
+              disabled
+            >
               No options
             </SelectItem>
           )}

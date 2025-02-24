@@ -103,8 +103,14 @@ const SetPassword = (props: I_SetPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
@@ -151,9 +157,16 @@ const SetPassword = (props: I_SetPassword) => {
             >
               {t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>
@@ -171,8 +184,14 @@ const SetPassword = (props: I_SetPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
@@ -219,9 +238,16 @@ const SetPassword = (props: I_SetPassword) => {
             >
               {t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>

@@ -18,7 +18,12 @@ const EditState = ({ state, data }: I_EditStateProps) => {
     {
       company_details: <EditCompanyDetails data={data} />,
       add_staff: <EditStaffs data={data} />,
-      staffs: <EditStaffs isEdit data={data} />,
+      staffs: (
+        <EditStaffs
+          isEdit
+          data={data}
+        />
+      ),
       emergency_contact: <EditEmergencyContact data={data} />,
       activity_logs: <></>,
     };

@@ -183,7 +183,10 @@ const Tiptap = ({
               : "bg-neutral-light-100 dark:bg-neutral-dark-100"
           )}
         >
-          <Toolbar variant={variant} editor={editor} />
+          <Toolbar
+            variant={variant}
+            editor={editor}
+          />
           {!!onClickSendAttachment && !!onClickSendMessage && (
             <div className="_flexbox__row__center gap-4">
               <Button

@@ -12,7 +12,12 @@ const Sun = (props: I_Icons) => {
     >
       <g clipPath="url(#clip0_1165_147977)">
         <g filter="url(#filter0_ii_1165_147977)">
-          <circle cx="12.3636" cy="12.3636" r="12.3636" fill="#F7C024" />
+          <circle
+            cx="12.3636"
+            cy="12.3636"
+            r="12.3636"
+            fill="#F7C024"
+          />
         </g>
       </g>
       <defs>
@@ -25,7 +30,10 @@ const Sun = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -38,9 +46,17 @@ const Sun = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="0.727273" dy="0.727273" />
+          <feOffset
+            dx="0.727273"
+            dy="0.727273"
+          />
           <feGaussianBlur stdDeviation="0.484848" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
@@ -56,9 +72,17 @@ const Sun = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="-0.727273" dy="-1.21212" />
+          <feOffset
+            dx="-0.727273"
+            dy="-1.21212"
+          />
           <feGaussianBlur stdDeviation="0.484848" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
@@ -70,7 +94,12 @@ const Sun = (props: I_Icons) => {
           />
         </filter>
         <clipPath id="clip0_1165_147977">
-          <rect width="24.7273" height="24.7273" rx="12.3636" fill="white" />
+          <rect
+            width="24.7273"
+            height="24.7273"
+            rx="12.3636"
+            fill="white"
+          />
         </clipPath>
       </defs>
     </svg>

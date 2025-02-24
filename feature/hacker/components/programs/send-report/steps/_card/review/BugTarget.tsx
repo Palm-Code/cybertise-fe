@@ -29,7 +29,10 @@ const BugTargetCard = ({
       )}
     >
       {!isNewCompanyTicket && (
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("bug_target.title")}
         </Typography>
       )}
@@ -42,7 +45,10 @@ const BugTargetCard = ({
           {t("bug_target.target_assets")}
         </Typography>
         <div className="flex flex-wrap gap-4">
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {target_assets.content}
           </Typography>
           <Badge
@@ -64,7 +70,10 @@ const BugTargetCard = ({
         >
           {t("bug_target.vulnerability_type")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {vulnerability_type}
         </Typography>
       </div>

@@ -116,7 +116,11 @@ const Reports = () => {
         >
           <div className="_flexbox__col__start__start w-full gap-2.5">
             <div className="_flexbox__row__center__between w-full">
-              <Typography variant="h4" weight="bold" className="mr-auto">
+              <Typography
+                variant="h4"
+                weight="bold"
+                className="mr-auto"
+              >
                 {t("title")}
               </Typography>
               <SearchInput
@@ -134,7 +138,10 @@ const Reports = () => {
               />
             </div>
             <div className="flex w-full items-center justify-between gap-4 sm:justify-start">
-              <DashboardFilter variant="company" store={store} />
+              <DashboardFilter
+                variant="company"
+                store={store}
+              />
               <div className="inline-flex min-w-32 gap-4">
                 <FilterDropdown
                   variant="company"
@@ -151,7 +158,10 @@ const Reports = () => {
                 data={mobileReportsData}
                 isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full space-y-6">
+              <div
+                ref={ref}
+                className="w-full space-y-6"
+              >
                 {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
@@ -170,7 +180,11 @@ const Reports = () => {
       <Desktop>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10 pb-28 pt-12">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
@@ -202,7 +216,10 @@ const Reports = () => {
                 options={filterItems}
                 onValueChange={(v) => useClickSort(v, store)}
               />
-              <FilterViewDropdown type="company" options={filterView} />
+              <FilterViewDropdown
+                type="company"
+                options={filterView}
+              />
             </div>
           </div>
           {reportsData?.data.length! ? (

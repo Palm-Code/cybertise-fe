@@ -44,7 +44,10 @@ const QrCode = ({
           {t("button_cancel")}
         </Button>
         <KeyRound className="h-16 w-16" />
-        <Typography variant="h4" weight="semibold">
+        <Typography
+          variant="h4"
+          weight="semibold"
+        >
           {t("title")}
         </Typography>
         <Typography
@@ -73,7 +76,10 @@ const QrCode = ({
           )}
         >
           <Info />
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("key_phrase")}
           </Typography>
         </div>
@@ -98,7 +104,10 @@ const QrCode = ({
             <Copy className="cursor-pointer" />
           </Button>
         </div>
-        <Typography variant="p" affects="tiny">
+        <Typography
+          variant="p"
+          affects="tiny"
+        >
           {t("important_note")}
         </Typography>
       </div>

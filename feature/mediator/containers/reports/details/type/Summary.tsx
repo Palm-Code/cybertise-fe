@@ -16,12 +16,22 @@ const Summary = ({
     return (
       <div className="grid max-h-full w-full grid-cols-[auto_1fr] place-items-start content-start gap-3">
         <div className="_flexbox__col__center__start h-full w-fit gap-3">
-          <Avatar image={data.sender_avatar} initials="J" />
-          <Separator orientation="vertical" className="h-full w-[0.5px]" />
+          <Avatar
+            image={data.sender_avatar}
+            initials="J"
+          />
+          <Separator
+            orientation="vertical"
+            className="h-full w-[0.5px]"
+          />
         </div>
         <div className="_flexbox__col__start__start h-full min-h-96 w-full gap-6 pb-12 xl:px-5">
           {ticket_type === "Hacker" ? (
-            <Typography variant="p" affects="small" weight="bold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="bold"
+            >
               {data.sender_name}{" "}
               <span className="font-normal text-violet-normal">
                 reported a bug
@@ -29,7 +39,11 @@ const Summary = ({
               to [{data.chat_ticket?.company_name}]
             </Typography>
           ) : (
-            <Typography variant="p" affects="small" weight="bold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="bold"
+            >
               A vulnerability was reported to [{data.chat_ticket?.company_name}]
             </Typography>
           )}

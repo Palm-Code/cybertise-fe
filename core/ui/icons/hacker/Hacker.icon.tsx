@@ -18,7 +18,11 @@ const HackerIcon = (props: I_Icons) => {
       </g>
       <defs>
         <clipPath id="clip0_1277_3669">
-          <rect width="32" height="32" fill="currentColor" />
+          <rect
+            width="32"
+            height="32"
+            fill="currentColor"
+          />
         </clipPath>
       </defs>
     </svg>

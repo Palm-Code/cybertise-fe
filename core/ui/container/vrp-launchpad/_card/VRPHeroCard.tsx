@@ -44,7 +44,10 @@ const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
             <Tooltip
               content={initialData?.title || t("phase.vrp_details.title")}
             >
-              <Typography variant="h5" weight={"bold"}>
+              <Typography
+                variant="h5"
+                weight={"bold"}
+              >
                 {initialData?.title
                   ? initialData?.title?.length > 50
                     ? initialData?.title?.substring(0, 50) + "..."

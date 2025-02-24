@@ -154,9 +154,16 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
               checked={isPolicyChecked}
               onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
             />
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {t("legal")}{" "}
-              <Link target="_blank" href={"/policy"} className="underline">
+              <Link
+                target="_blank"
+                href={"/policy"}
+                className="underline"
+              >
                 {t("link")}
               </Link>
             </Typography>

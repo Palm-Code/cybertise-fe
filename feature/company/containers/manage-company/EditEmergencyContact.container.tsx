@@ -43,7 +43,10 @@ const EditEmergencyContact = ({
   return (
     <>
       <Mobile>
-        <EmptyState variant="company" type="default" />
+        <EmptyState
+          variant="company"
+          type="default"
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
@@ -55,7 +58,10 @@ const EditEmergencyContact = ({
             )}
           >
             <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
+              <Typography
+                variant="h6"
+                weight="bold"
+              >
                 {t("title")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-2.5">

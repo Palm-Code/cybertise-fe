@@ -43,7 +43,10 @@ export default function SelectDropdown({
   const iconValue = options.find((option) => option.value === value)?.icon;
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <Popover
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <PopoverTrigger
         className={cn(
           "_flexbox__row__center__between w-full",

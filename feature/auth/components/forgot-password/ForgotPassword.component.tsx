@@ -133,12 +133,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             {!isSuccess && (
-              <Typography variant="p" affects="normal" className="text-center">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-center"
+              >
                 {t("description")}
               </Typography>
             )}
@@ -171,7 +181,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
                       }
                     />
-                    <Typography variant="p" affects="normal" weight="bold">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                    >
                       {t("footer_2")}
                     </Typography>
                   </div>
@@ -230,9 +244,16 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
                 : t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>
@@ -250,12 +271,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             {!isSuccess && (
-              <Typography variant="p" affects="normal" className="text-center">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-center"
+              >
                 {t("description")}
               </Typography>
             )}
@@ -297,7 +328,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
                       }
                     />
-                    <Typography variant="p" affects="normal" weight="bold">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                    >
                       {t("footer_2")}
                     </Typography>
                   </div>
@@ -364,9 +399,16 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
                 : t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>

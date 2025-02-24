@@ -10,7 +10,10 @@ export default async function AdminLayout({
   const user = await prefetchGetUserData();
   const assetType = await prefetchGetAssetType();
   return (
-    <GlobalInitializer users={user} assetTypes={assetType.data}>
+    <GlobalInitializer
+      users={user}
+      assetTypes={assetType.data}
+    >
       {children}
     </GlobalInitializer>
   );

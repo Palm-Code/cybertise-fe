@@ -17,7 +17,10 @@ const TicketView = ({
           {isLoading ? (
             <ChatListCardLoadingList />
           ) : (
-            <ReportsTicketCardList data={data} isMediator />
+            <ReportsTicketCardList
+              data={data}
+              isMediator
+            />
           )}
         </div>
       </AnimationWrapper>

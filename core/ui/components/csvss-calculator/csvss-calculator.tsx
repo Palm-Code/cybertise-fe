@@ -116,7 +116,10 @@ const CsvssCalculator = ({
                         }}
                         disabled={isManualRisk}
                       >
-                        <Typography variant="p" affects="small">
+                        <Typography
+                          variant="p"
+                          affects="small"
+                        >
                           {label.label}
                         </Typography>
                       </button>

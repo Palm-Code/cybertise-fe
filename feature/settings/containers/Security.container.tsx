@@ -61,12 +61,18 @@ const Security = ({
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="xl:_flexbox__row__center__between hidden w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__col__start__start w-full gap-6">
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("two_factor_authentication.title")}
             </Typography>
 
@@ -103,7 +109,10 @@ const Security = ({
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="xl:_flexbox__row__center__between hidden w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
           </div>
@@ -112,7 +121,10 @@ const Security = ({
               key={`menu-${idx}`}
               className="_flexbox__col__start__start w-full gap-6"
             >
-              <Typography variant="h6" weight="bold">
+              <Typography
+                variant="h6"
+                weight="bold"
+              >
                 {menu.title}
               </Typography>
               {menu.element}

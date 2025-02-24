@@ -36,7 +36,10 @@ const LanguageDropdown = ({
 
   return (
     <>
-      <Select onValueChange={onValueChange} defaultValue={value}>
+      <Select
+        onValueChange={onValueChange}
+        defaultValue={value}
+      >
         <SelectTrigger
           className={cn(
             "!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent",
@@ -54,7 +57,11 @@ const LanguageDropdown = ({
             </Typography>
           )}
           <div className="flex w-full items-center justify-between gap-2">
-            <Typography variant="p" affects="small" className="text-sm">
+            <Typography
+              variant="p"
+              affects="small"
+              className="text-sm"
+            >
               {inputValueLabel || "EN"}
             </Typography>
             <ChevronDown className="size-5 md:size-6" />
@@ -63,12 +70,18 @@ const LanguageDropdown = ({
         <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
           {options.length! ? (
             options.map((option) => (
-              <SelectItem key={option.value} value={option.value as string}>
+              <SelectItem
+                key={option.value}
+                value={option.value as string}
+              >
                 {option.label}
               </SelectItem>
             ))
           ) : (
-            <SelectItem value="no items" disabled>
+            <SelectItem
+              value="no items"
+              disabled
+            >
               No options
             </SelectItem>
           )}

@@ -40,14 +40,21 @@ const Sender = ({
         )}
       >
         <div className="_flexbox__col__center__start h-full w-fit gap-3">
-          <Avatar image={data?.sender_avatar} initials="J" />
+          <Avatar
+            image={data?.sender_avatar}
+            initials="J"
+          />
           <Separator
             orientation="vertical"
             className="h-[calc(100%-48px)] w-[0.5px]"
           />
         </div>
         <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:px-5">
-          <Typography variant="p" affects="small" weight="bold">
+          <Typography
+            variant="p"
+            affects="small"
+            weight="bold"
+          >
             {data.sender_name}{" "}
           </Typography>
           <div className="_flexbox__row__center__start gap-2">
@@ -91,7 +98,11 @@ const Sender = ({
               <div className="_flexbox__row__start__between h-full w-full gap-4">
                 <div className="_flexbox__col__start__between h-full gap-2.5">
                   <div>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {data.og_title}
                     </Typography>
                     <Typography
@@ -102,7 +113,10 @@ const Sender = ({
                       {data.og_description}
                     </Typography>
                   </div>
-                  <Link target="_blank" href={data.og_url || "#"}>
+                  <Link
+                    target="_blank"
+                    href={data.og_url || "#"}
+                  >
                     {data.og_url}
                   </Link>
                 </div>
@@ -140,7 +154,11 @@ const Sender = ({
                     <Tooltip
                       content={`${file.name}.${file.file_name.split(".")[1]}`}
                     >
-                      <Typography variant="p" affects="small" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                      >
                         {data.media && data.media?.length > 1
                           ? `${file.name.substring(0, 15)}.${file.file_name.split(".")[1]}` +
                             "..."

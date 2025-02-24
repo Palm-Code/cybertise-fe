@@ -19,12 +19,19 @@ const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
         "!bg-transparent xl:px-8 xl:py-12"
       )}
     >
-      <Typography variant="p" affects="extralarge" weight="bold">
+      <Typography
+        variant="p"
+        affects="extralarge"
+        weight="bold"
+      >
         Information
       </Typography>
       <div className="_flexbox__col__start__start gap-5">
         {lists.map((info, index) => (
-          <div className="grid grid-flow-col gap-3" key={`info-${index}`}>
+          <div
+            className="grid grid-flow-col gap-3"
+            key={`info-${index}`}
+          >
             <Square
               width={20}
               height={20}
@@ -35,7 +42,11 @@ const Information = ({ activeStep, lists, variant }: I_InformationProps) => {
                   : fillColor[variant]
               )}
             />
-            <Typography key={index} variant="p" affects="small">
+            <Typography
+              key={index}
+              variant="p"
+              affects="small"
+            >
               {info.label}
             </Typography>
           </div>

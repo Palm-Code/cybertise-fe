@@ -73,12 +73,19 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
           className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
         >
           <Coins className={iconColor.hacker} />
-          <Typography variant="p" affects="normal" weight="semibold">
+          <Typography
+            variant="p"
+            affects="normal"
+            weight="semibold"
+          >
             {t("pieChart.title")}
           </Typography>
         </div>
         <div className="mx-auto hidden h-[300px] w-full max-w-sm md:block">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <PieChart>
               <Legend
                 layout="vertical"
@@ -126,7 +133,10 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
           </ResponsiveContainer>
         </div>
         <div className="mx-auto h-[300px] w-full max-w-sm md:hidden">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <PieChart>
               <Legend
                 layout="vertical"
@@ -179,12 +189,19 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
             className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
           >
             <Coins className={iconColor.hacker} />
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {t("pieChart.title")}
             </Typography>
           </div>
           <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
               <PieChart>
                 <Legend
                   layout="vertical"

@@ -17,7 +17,10 @@ const Notifications = ({ variant }: I_NotifyProps) => {
     <>
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
         </div>
@@ -26,7 +29,10 @@ const Notifications = ({ variant }: I_NotifyProps) => {
       </Mobile>
       <Desktop className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
         </div>

@@ -6,3 +6,4 @@ export { default as CreateVrpFragment } from "./vrp-launchpad/create-vrp/CreateV
 export { default as CompaniesFragment } from "./companies/Companies.fragment";
 export { default as CompaniesDetailFragment } from "./companies/details/CompaniesDetails.fragment";
 export { default as NewCompanyReportFragment } from "./reports/new/NewCompanyReport.fragment";
+export { default as PaymentFragment } from "./payment/Payment.fragment";

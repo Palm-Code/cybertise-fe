@@ -24,7 +24,11 @@ export const OverviewCard = ({
         <Wrapper className={cn("h-full justify-between")}>
           <div className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}>
             <Coins className={iconColor.company} />
-            <Typography variant="p" affects="small" weight="semibold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="semibold"
+            >
               {title}
             </Typography>
           </div>
@@ -57,7 +61,11 @@ export const OverviewCard = ({
         <Wrapper>
           <div className={cn("grid grid-cols-[auto_1fr] items-center gap-4")}>
             <Coins className={iconColor.company} />
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {title}
             </Typography>
           </div>

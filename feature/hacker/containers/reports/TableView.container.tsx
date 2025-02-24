@@ -77,7 +77,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                             {item.company?.name}
                           </Typography>
                         </div>
-                        <Typography variant="p" affects="small" weight="normal">
+                        <Typography
+                          variant="p"
+                          affects="small"
+                          weight="normal"
+                        >
                           #{item.code} - {item.title}
                         </Typography>
                       </div>

@@ -123,7 +123,10 @@ const ReportDetails = ({ id }: { id: string }) => {
               <div className="_flexbox__col__start__start gap-4">
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -131,7 +134,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
@@ -164,7 +170,12 @@ const ReportDetails = ({ id }: { id: string }) => {
             </div>
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
@@ -217,7 +228,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                 />
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -225,7 +239,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
@@ -257,7 +274,12 @@ const ReportDetails = ({ id }: { id: string }) => {
             </AnimationWrapper>
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
 
           <ChatBubble data={chatData ?? []} />

@@ -131,7 +131,10 @@ export const TableBodyRow = ({
         )}
       >
         {hasNotification && (
-          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+          <Indicator
+            variant="warning"
+            className="absolute -right-4 -top-4"
+          />
         )}
         {children}
       </Link>
@@ -151,7 +154,10 @@ export const TableBodyRow = ({
         {...props}
       >
         {hasNotification && (
-          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+          <Indicator
+            variant="warning"
+            className="absolute -right-4 -top-4"
+          />
         )}
         {children}
       </button>
@@ -167,7 +173,10 @@ export const TableBodyRow = ({
       {...props}
     >
       {hasNotification && (
-        <Indicator variant="warning" className="absolute -right-4 -top-4" />
+        <Indicator
+          variant="warning"
+          className="absolute -right-4 -top-4"
+        />
       )}
       {children}
     </div>

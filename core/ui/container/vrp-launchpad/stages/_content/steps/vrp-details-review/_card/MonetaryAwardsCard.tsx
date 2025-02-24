@@ -18,14 +18,20 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
           "xl:p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("header_title")}
         </Typography>
         <div className="grid grid-cols-[auto_1fr] gap-4">
           {data.monetary_awards_level !== "custom" && (
             <ShieldCheck category={category as "S" | "M" | "L" | "XL"} />
           )}
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("category")}{" "}
             {data.monetary_awards_level === "custom" ? "Custom" : category}
           </Typography>
@@ -39,7 +45,10 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
             >
               Low
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {currencyFormatters.NumberToEUR(data.monetary_awards_low ?? 0)}
             </Typography>
           </Card>
@@ -51,7 +60,10 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
             >
               High
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {currencyFormatters.NumberToEUR(data.monetary_awards_high ?? 0)}
             </Typography>
           </Card>
@@ -63,7 +75,10 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
             >
               Medium
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {currencyFormatters.NumberToEUR(data.monetary_awards_medium ?? 0)}
             </Typography>
           </Card>
@@ -75,7 +90,10 @@ const MonetaryAwardsCard = ({ data }: { data: CreateVrpType }) => {
             >
               Critical
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {currencyFormatters.NumberToEUR(
                 data.monetary_awards_critical ?? 0
               )}

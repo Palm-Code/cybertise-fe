@@ -28,13 +28,23 @@ const TicketCard = ({
   return (
     <>
       <Mobile>
-        <Card isClickable href={`/companies/${props.id}`}>
+        <Card
+          isClickable
+          href={`/companies/${props.id}`}
+        >
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start__start w-full gap-8")}>
               <div className="_flexbox__col__start w-full max-w-xl gap-4">
                 <div className="_flexbox__row__center__start w-full gap-4">
-                  <Avatar image={props.logo} className="h-8 w-8" initials="C" />
-                  <Typography variant="p" affects="normal">
+                  <Avatar
+                    image={props.logo}
+                    className="h-8 w-8"
+                    initials="C"
+                  />
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {props.name}
                   </Typography>
                 </div>
@@ -85,10 +95,18 @@ const TicketCard = ({
         </Card>
       </Mobile>
       <Desktop className="h-full min-h-[210px]">
-        <Card isClickable href={`/companies/${props.id}`} className="h-full">
+        <Card
+          isClickable
+          href={`/companies/${props.id}`}
+          className="h-full"
+        >
           <div className="_flexbox__row__start h-full w-full gap-9">
             {!isGridCard && (
-              <Avatar image={props.logo} className="h-12 w-12" initials="C" />
+              <Avatar
+                image={props.logo}
+                className="h-12 w-12"
+                initials="C"
+              />
             )}
             <div
               className={cn(
@@ -105,7 +123,10 @@ const TicketCard = ({
                   />
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-1">
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {props.name}
                   </Typography>
                 </div>

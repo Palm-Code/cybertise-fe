@@ -33,7 +33,10 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
               "rounded-none px-6 py-2 transition-opacity duration-100"
             )}
           >
-            <div className="_flexbox__col__start__start w-full gap-4" ref={ref}>
+            <div
+              className="_flexbox__col__start__start w-full gap-4"
+              ref={ref}
+            >
               <div className="_flexbox__row__center__between w-full gap-9">
                 <div className="_flexbox__col__start__start w-full gap-4">
                   <div className="relative h-12 w-12 overflow-hidden rounded-full">
@@ -45,7 +48,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       className="object-cover"
                     />
                   </div>
-                  <Typography variant="p" affects="large" weight="bold">
+                  <Typography
+                    variant="p"
+                    affects="large"
+                    weight="bold"
+                  >
                     {data.company?.name}
                   </Typography>
                 </div>
@@ -66,7 +73,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                 >
                   {t("number_of_assets")}
                 </Typography>
-                <Typography variant="p" affects="small" weight="medium">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="medium"
+                >
                   {data.target_assets_count}
                 </Typography>
               </div>
@@ -78,7 +89,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                 >
                   {t("bounty_program")}
                 </Typography>
-                <Typography variant="p" affects="small" weight="medium">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="medium"
+                >
                   {`${currencyFormatters.NumberToEUR(data.company?.lowest_bounty ?? 0)} - ${currencyFormatters.NumberToEUR(data.company?.highest_bounty ?? 0)}`}
                 </Typography>
               </div>
@@ -132,7 +147,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                     className="object-cover"
                   />
                 </div>
-                <Typography variant="p" affects="small" weight="bold">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="bold"
+                >
                   {data.company?.name}
                 </Typography>
               </div>
@@ -205,7 +224,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                     >
                       {t("number_of_assets")}
                     </Typography>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {data.target_assets_count ?? 0}
                     </Typography>
                   </div>
@@ -218,7 +241,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                     >
                       {t("bounty_program")}
                     </Typography>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {`${currencyFormatters.NumberToEUR(data.company?.lowest_bounty ?? 0)} - ${currencyFormatters.NumberToEUR(data.company?.highest_bounty ?? 0)}`}
                     </Typography>
                   </div>

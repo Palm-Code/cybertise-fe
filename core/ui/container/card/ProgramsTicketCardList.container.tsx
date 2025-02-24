@@ -28,7 +28,11 @@ const TicketCard = ({
   return (
     <>
       <Mobile className="h-full">
-        <Card isClickable href={`/programs/${props.id}`} className="h-full">
+        <Card
+          isClickable
+          href={`/programs/${props.id}`}
+          className="h-full"
+        >
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full", "gap-8")}>
               {props.type.toLowerCase() === "private" && (
@@ -45,19 +49,31 @@ const TicketCard = ({
                     />
                   </div>
                   <div className="_flexbox__col__start w-full gap-4">
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {props.company?.name}
                     </Typography>
                   </div>
                 </div>
                 {props.title.length > 50 ? (
                   <Tooltip content={props.title}>
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {props.title.substring(0, 50) + "..."}
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {props.title}
                   </Typography>
                 )}
@@ -122,7 +138,11 @@ const TicketCard = ({
         </Card>
       </Mobile>
       <Desktop className="h-full">
-        <Card isClickable href={`/programs/${props.id}`} className="h-full">
+        <Card
+          isClickable
+          href={`/programs/${props.id}`}
+          className="h-full"
+        >
           <div className="_flexbox__row__start__start w-full gap-9">
             {!isGridCard && (
               <div className="relative aspect-square w-12 overflow-hidden rounded-full">
@@ -158,7 +178,11 @@ const TicketCard = ({
                 )}
                 <div className="grid w-full place-items-start gap-4">
                   <div className="_flexbox__row__center__between w-full gap-1">
-                    <Typography variant="p" affects="normal" weight="bold">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                    >
                       {props.company?.name}
                     </Typography>
                     <div className="grid grid-cols-[18px_1fr] gap-4">

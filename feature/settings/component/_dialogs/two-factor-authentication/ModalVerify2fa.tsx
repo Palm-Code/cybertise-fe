@@ -64,10 +64,18 @@ const ModalVerify2fa = ({
           >
             {t("button_cancel")}
           </Button>
-          <Typography variant="h4" weight="semibold" align="center">
+          <Typography
+            variant="h4"
+            weight="semibold"
+            align="center"
+          >
             {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+          >
             {t("description")}
           </Typography>
         </div>
@@ -87,7 +95,11 @@ const ModalVerify2fa = ({
               <>
                 <div className="_flexbox__row__center w-full gap-1.5">
                   {slots.map((slot, idx) => (
-                    <Slot isError={isError} key={`slot-${idx}`} {...slot} />
+                    <Slot
+                      isError={isError}
+                      key={`slot-${idx}`}
+                      {...slot}
+                    />
                   ))}
                 </div>
               </>

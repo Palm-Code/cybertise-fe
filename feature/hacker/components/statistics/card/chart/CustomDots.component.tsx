@@ -5,7 +5,12 @@ export const CustomDot = (props: { cx: number; cy: number }) => {
   return (
     <g>
       {/* Outer glow */}
-      <circle cx={cx} cy={cy} r={12} fill="rgba(170, 255, 0, 0.2)" />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={12}
+        fill="rgba(170, 255, 0, 0.2)"
+      />
       {/* Inner dot */}
       <circle
         cx={cx}

@@ -129,5 +129,8 @@
     "submit_search": "Search",
     "search_result": "Show result for",
     "see_programs": "See Programs"
+  },
+  "Earnings": {
+    "title": "Earnings"
   }
 }

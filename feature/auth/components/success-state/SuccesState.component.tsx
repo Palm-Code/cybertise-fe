@@ -55,7 +55,11 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker className="h-12 w-12" />
-            <Typography variant="h4" weight="semibold" align="center">
+            <Typography
+              variant="h4"
+              weight="semibold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <Typography
@@ -66,7 +70,11 @@ const SuccessState = ({
             >
               {t("description_1")}
             </Typography>
-            <Typography variant="p" affects="small" weight="semibold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="semibold"
+            >
               {email}
             </Typography>
           </div>
@@ -85,7 +93,12 @@ const SuccessState = ({
               onClick={onClickResend}
             >
               {isLoading ? (
-                <Loader width={16} height={16} noText className={cn("h-fit")} />
+                <Loader
+                  width={16}
+                  height={16}
+                  noText
+                  className={cn("h-fit")}
+                />
               ) : (
                 <>
                   {t("resend_button")}{" "}
@@ -108,7 +121,11 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker />
-            <Typography variant="h4" weight="bold" align="center">
+            <Typography
+              variant="h4"
+              weight="bold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <Typography
@@ -119,7 +136,11 @@ const SuccessState = ({
             >
               {t("description_1")}
             </Typography>
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {email}
             </Typography>
           </div>
@@ -140,7 +161,12 @@ const SuccessState = ({
               onClick={onClickResend}
             >
               {isLoading ? (
-                <Loader width={16} height={16} noText className={cn("h-fit")} />
+                <Loader
+                  width={16}
+                  height={16}
+                  noText
+                  className={cn("h-fit")}
+                />
               ) : (
                 <>
                   {t("resend_button")}{" "}

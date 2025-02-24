@@ -59,7 +59,11 @@ const CardView = ({
                     </div>
                     <div className="_flexbox__row__center__start gap-4">
                       <Badge variant="default">{item.program?.type}</Badge>
-                      <Typography variant="p" affects="small" weight="normal">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="normal"
+                      >
                         reported {formatDateToAgo(item?.created_at ?? "")} ago
                       </Typography>
                     </div>

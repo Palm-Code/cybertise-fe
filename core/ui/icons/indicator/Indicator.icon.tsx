@@ -11,9 +11,19 @@ const Indicator = (props: I_Icons) => {
       {...props}
     >
       <g filter="url(#filter0_f_1390_58061)">
-        <circle cx="20" cy="20.5" r="10" fill="currentColor" />
+        <circle
+          cx="20"
+          cy="20.5"
+          r="10"
+          fill="currentColor"
+        />
       </g>
-      <circle cx="20" cy="20.5" r="10" fill="currentColor" />
+      <circle
+        cx="20"
+        cy="20.5"
+        r="10"
+        fill="currentColor"
+      />
       <defs>
         <filter
           id="filter0_f_1390_58061"
@@ -24,7 +34,10 @@ const Indicator = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"

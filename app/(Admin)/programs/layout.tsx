@@ -19,8 +19,18 @@ export default async function Dashboardlayout({
   const session = (await getSession()) as UserType;
   const child: { [key: string]: React.ReactNode } = {
     hacker: hacker,
-    company: <EmptyState type="under-construction" variant="mediator" />,
-    mediator: <EmptyState type="under-construction" variant="mediator" />,
+    company: (
+      <EmptyState
+        type="under-construction"
+        variant="mediator"
+      />
+    ),
+    mediator: (
+      <EmptyState
+        type="under-construction"
+        variant="mediator"
+      />
+    ),
   };
 
   return (

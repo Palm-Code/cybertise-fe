@@ -153,7 +153,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                   className="cursor-pointer"
                 />
                 <div className="_flexbox__col__start__start gap-4">
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                   <Badge
@@ -226,14 +229,22 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Link>
                   )}
                 </div>
-                <Typography variant="p" affects="small">
+                <Typography
+                  variant="p"
+                  affects="small"
+                >
                   {t("chat_alert")}
                 </Typography>
               </div>
             )}
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <div className="px-6 py-8">
             <ChatBubble
@@ -296,7 +307,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                 />
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -304,7 +318,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
@@ -411,7 +428,12 @@ const ReportDetails = ({ id }: { id: string }) => {
             </AnimationWrapper>
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <ChatBubble
             ticket_type={ticketDetails.ticket_type}

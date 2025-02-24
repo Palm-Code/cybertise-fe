@@ -23,7 +23,10 @@ export function DatePicker({
   yesterday.setDate(yesterday.getDate() - 1);
 
   return (
-    <Popover open={openDropdown} onOpenChange={setOpenDropdown}>
+    <Popover
+      open={openDropdown}
+      onOpenChange={setOpenDropdown}
+    >
       <PopoverTrigger asChild>
         <button
           type="button"
@@ -38,7 +41,10 @@ export function DatePicker({
           <ChevronDown />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="z-[9999] w-full p-0" align="start">
+      <PopoverContent
+        className="z-[9999] w-full p-0"
+        align="start"
+      >
         <Calendar
           mode="single"
           showOutsideDays

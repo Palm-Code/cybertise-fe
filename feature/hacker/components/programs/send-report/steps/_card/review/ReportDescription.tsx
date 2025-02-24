@@ -19,7 +19,10 @@ const ReportDescriptionCard = ({
         "_flexbox__col__start__start w-full gap-6 break-all"
       )}
     >
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("report_description.header_title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-2.5">
@@ -30,7 +33,10 @@ const ReportDescriptionCard = ({
         >
           {t("report_description.title")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {title}
         </Typography>
       </div>
@@ -42,7 +48,10 @@ const ReportDescriptionCard = ({
         >
           {t("report_description.description")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {description}
         </Typography>
       </div>

@@ -18,7 +18,8 @@
     "vrp_management": "VRP-Management",
     "manage_company": "Unternehmen verwalten",
     "services": "Dienstleistungen",
-    "payment": "Zahlung"
+    "payment": "Zahlung",
+    "earnings": "Einkommen"
   },
   "Filter": {
     "type": "Typ",
@@ -48,7 +49,11 @@
     "ticket_type": "Tickettyp",
     "hacker_ticket": "Hacker-Ticket",
     "company_ticket": "Firmenticket",
-    "create_company_ticket": "Firmenticket erstellen"
+    "create_company_ticket": "Firmenticket erstellen",
+    "view_chat": "Chat anzeigen",
+    "make_payment": "Zahlung leisten",
+    "send_payment_request": "Zahlungsanfrage senden",
+    "payment_request_sent": "Zahlungsanfrage gesendet"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -72,7 +77,8 @@
     "you_have_nothing_here": "Du hast hier nichts",
     "under_construction": "Im Bau",
     "back_button": "Zurück",
-    "target_assets_not_found": "Ziel-Assets nicht gefunden"
+    "target_assets_not_found": "Ziel-Assets nicht gefunden",
+    "only_desktop": "Diese Funktion nur auf dem Desktop verfügbar"
   },
   "SuccesState": {
     "send_report": {

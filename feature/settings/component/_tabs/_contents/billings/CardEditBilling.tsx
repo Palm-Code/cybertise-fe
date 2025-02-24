@@ -21,7 +21,11 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
   return (
     <AnimationWrapper>
       <Mobile>
-        <ModalForbidden variant={variant} isOpen onClose={() => {}} />
+        <ModalForbidden
+          variant={variant}
+          isOpen
+          onClose={() => {}}
+        />
       </Mobile>
       <Desktop>
         <Card
@@ -30,7 +34,11 @@ const CardEditBilling = ({ variant, data }: I_CardEditBillingProps) => {
             "bg-background-page-light dark:bg-background-page-dark"
           )}
         >
-          <Typography variant="h6" weight="bold" className="inline-flex">
+          <Typography
+            variant="h6"
+            weight="bold"
+            className="inline-flex"
+          >
             <Banknote className="mr-4 h-8 w-8" />
             {t("payment_information")}
           </Typography>

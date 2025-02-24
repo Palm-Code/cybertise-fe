@@ -25,7 +25,10 @@ export const SkeletonList = ({
   return Array(count)
     .fill(0)
     .map((_, index) => (
-      <Skeleton key={`skeleton-${index}`} className={className} />
+      <Skeleton
+        key={`skeleton-${index}`}
+        className={className}
+      />
     ));
 };
 

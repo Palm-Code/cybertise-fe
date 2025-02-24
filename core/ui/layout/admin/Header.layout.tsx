@@ -101,12 +101,22 @@ const Header = () => {
               {
                 label: t("settings"),
                 value: "settings",
-                icon: <Settings width={20} height={20} />,
+                icon: (
+                  <Settings
+                    width={20}
+                    height={20}
+                  />
+                ),
               },
               {
                 label: t("logout"),
                 value: "logout",
-                icon: <LogOut width={20} height={20} />,
+                icon: (
+                  <LogOut
+                    width={20}
+                    height={20}
+                  />
+                ),
               },
             ]}
             onValueChange={(v) => handleDropdownClicks(v)}

@@ -15,7 +15,10 @@ const GridView = ({
         {isLoading ? (
           <VRPCardLoadingList />
         ) : (
-          <VRPTicketCardList data={data} isGridCard />
+          <VRPTicketCardList
+            data={data}
+            isGridCard
+          />
         )}
       </div>
     </AnimationWrapper>

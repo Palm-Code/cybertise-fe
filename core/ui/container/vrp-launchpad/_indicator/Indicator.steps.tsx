@@ -103,10 +103,17 @@ const IndicatorSteps = ({
               <div className="_flexbox__row__center relative w-full">
                 {index < 5 && (
                   <div className="_flexbox__col__center relative">
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {t("steps.title")} {index + 1}
                     </Typography>
-                    <Typography variant="p" affects="small">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                    >
                       {STEPS[index]}
                     </Typography>
                   </div>

@@ -129,7 +129,10 @@ const Setup = ({
   return (
     <>
       <FormProvider {...method}>
-        <div ref={containerRef} className="absolute top-0"></div>
+        <div
+          ref={containerRef}
+          className="absolute top-0"
+        ></div>
         <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <AnimationWrapper
             key={steps[currentStepIndex].key}

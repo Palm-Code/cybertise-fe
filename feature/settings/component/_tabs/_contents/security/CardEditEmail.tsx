@@ -14,7 +14,10 @@ const CardEditEmail = () => {
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               Confirm Current Email
             </Typography>
             <Input
@@ -29,7 +32,10 @@ const CardEditEmail = () => {
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               New Email
             </Typography>
             <Input

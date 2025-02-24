@@ -123,7 +123,10 @@ const CompaniesDetail = ({ id }: { id: string }) => {
               )}
               {active === "vulnerability_program" ||
               active === "collaborators" ? (
-                <div ref={ref} className={cn("w-full space-y-6")}>
+                <div
+                  ref={ref}
+                  className={cn("w-full space-y-6")}
+                >
                   {isFetchingNextPage && <VRPCardLoadingList count={3} />}
                 </div>
               ) : null}
@@ -156,7 +159,10 @@ const CompaniesDetail = ({ id }: { id: string }) => {
             )}
             {active === "vulnerability_program" ||
             active === "collaborators" ? (
-              <div ref={ref} className={cn("w-full space-y-6")}>
+              <div
+                ref={ref}
+                className={cn("w-full space-y-6")}
+              >
                 {isFetchingNextPage && <VRPCardLoadingList count={3} />}
               </div>
             ) : null}

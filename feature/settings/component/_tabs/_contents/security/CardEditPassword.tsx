@@ -103,7 +103,10 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("current_password")}
             </Typography>
             <PasswordInput
@@ -124,7 +127,10 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("new_password")}
             </Typography>
             <PasswordInput
@@ -156,7 +162,10 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("logout_all")}
             </Typography>
             <Card
@@ -185,7 +194,11 @@ const CardEditPassword = ({ variant = "hacker" }: I_CardEditPasswordProps) => {
                   })
                 }
               />
-              <Typography variant="p" affects="small" className="leading-none">
+              <Typography
+                variant="p"
+                affects="small"
+                className="leading-none"
+              >
                 {t("logout_all_check")}
               </Typography>
             </div>

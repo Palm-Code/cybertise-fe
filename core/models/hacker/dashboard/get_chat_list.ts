@@ -38,6 +38,7 @@ export interface I_GetChatListSuccessResponse {
     company?: I_Company;
     created_at: string;
     updated_at: string;
+    is_requested_payment: boolean;
   }[];
   meta?: I_Meta;
 }

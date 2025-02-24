@@ -48,7 +48,10 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
           />
         </div>
         <div className={cn("my-8 h-[300px] w-full")}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <AreaChart
               className={cn(
                 "h-full w-full max-w-full scale-110 !text-[8px] sm:scale-100"
@@ -58,9 +61,23 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
               defaultShowTooltip
             >
               <defs>
-                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#BAFF00" stopOpacity={0.5} />
-                  <stop offset="95%" stopColor="#BAFF00" stopOpacity={0.1} />
+                <linearGradient
+                  id="colorPv"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    stopColor="#BAFF00"
+                    stopOpacity={0.5}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="#BAFF00"
+                    stopOpacity={0.1}
+                  />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
@@ -128,7 +145,10 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
             />
           </div>
           <div className={cn("h-[300px] w-full")}>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
               <AreaChart
                 className={cn("h-full w-full max-w-full scale-100 !text-xs")}
                 data={data}
@@ -136,13 +156,41 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 defaultShowTooltip
               >
                 <defs>
-                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                  <linearGradient
+                    id="colorUv"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="5%"
+                      stopColor="#8884d8"
+                      stopOpacity={0.8}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="#8884d8"
+                      stopOpacity={0}
+                    />
                   </linearGradient>
-                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#BAFF00" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#BAFF00" stopOpacity={0.01} />
+                  <linearGradient
+                    id="colorPv"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="5%"
+                      stopColor="#BAFF00"
+                      stopOpacity={0.3}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="#BAFF00"
+                      stopOpacity={0.01}
+                    />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />

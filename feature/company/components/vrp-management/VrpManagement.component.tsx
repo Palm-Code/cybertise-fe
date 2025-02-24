@@ -28,13 +28,19 @@ const VrpManagement = () => {
     <AnimationWrapper className="space-y-0 px-6 pb-28 pt-12 xl:px-0">
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-10">
-          <Typography variant="h4" weight="bold">
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : programList && programList?.data?.length > 0 ? (
-            <VRPCardList data={programList?.data} variant={role} />
+            <VRPCardList
+              data={programList?.data}
+              variant={role}
+            />
           ) : (
             <EmptyState
               variant="company"
@@ -58,14 +64,20 @@ const VrpManagement = () => {
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-10">
           <Card className={cn("rounded-b-none rounded-t-2xl xl:px-9 xl:py-6")}>
-            <Typography variant="h4" weight="bold">
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
           </Card>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : programList && programList?.data?.length ? (
-            <VRPCardList data={programList?.data} variant={role} />
+            <VRPCardList
+              data={programList?.data}
+              variant={role}
+            />
           ) : (
             <EmptyState
               variant="company"
