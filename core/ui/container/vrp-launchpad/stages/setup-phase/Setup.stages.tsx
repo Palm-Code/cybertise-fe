@@ -137,19 +137,19 @@ const Setup = ({
           <AnimationWrapper
             key={steps[currentStepIndex].key}
             className={cn(
-              "sticky z-30 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark",
+              "sticky z-30 h-fit w-[calc(100%-267px)] space-y-0 bg-background-page-light dark:bg-background-page-dark",
               variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
             )}
           >
-            <div className="h-6 w-[calc(100%-235px)] bg-background-page-light dark:bg-background-page-dark"></div>
+            <div className="h-6 w-full bg-background-page-light dark:bg-background-page-dark"></div>
             <div
               className={cn(
-                "h-4 w-[calc(100%-235px)] rounded-t-xl",
+                "h-4 w-full rounded-t-xl",
                 "bg-background-main-light pt-0 dark:bg-background-main-dark"
               )}
             ></div>
           </AnimationWrapper>
-          <div className="relative grid h-full w-full grid-cols-[1fr_203px] gap-8">
+          <div className="relative grid h-full w-full grid-cols-[1fr_235px] gap-8">
             <div className="h-full w-full overflow-y-auto">
               <AnimationWrapper key={steps[currentStepIndex].key}>
                 <Card
@@ -164,9 +164,9 @@ const Setup = ({
             </div>
             <div
               className={cn(
-                "sticky z-40 -mt-4 h-fit w-full rounded-xl",
+                "fixed right-12 z-20 h-fit w-fit rounded-xl",
                 "bg-background-main-light dark:bg-background-main-dark",
-                variant === "mediator" ? "top-[19rem]" : "top-[17.5rem]"
+                variant === "mediator" ? "top-[24.2rem]" : "top-[17.5rem]"
               )}
             >
               <Information
