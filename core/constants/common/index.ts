@@ -75,6 +75,18 @@ export const useMenuItems = () => {
         key: "getChatList",
       },
       {
+        id: "services",
+        title: t("services"),
+        path: "/services",
+        key: "getServices",
+      },
+      {
+        id: "payment",
+        title: t("payment"),
+        path: "/payment",
+        key: "getPayment",
+      },
+      {
         id: "vrp_management",
         title: t("vrp_management"),
         path: "/vrp-launchpad",

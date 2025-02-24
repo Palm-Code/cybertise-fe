@@ -16,7 +16,9 @@
     "manage_company": "Manage Company",
     "settings": "Settings",
     "logout": "Logout",
-    "mode": "Mode"
+    "mode": "Mode",
+    "services": "Services",
+    "payment": "Payment"
   },
   "Filter": {
     "title": "Filter",

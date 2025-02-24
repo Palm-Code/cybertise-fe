@@ -22,7 +22,7 @@ export function formatDateToAgo(dateString: string): string {
   } else if (diffDays < 30) {
     return `${diffDays}d`;
   } else if (diffMonths < 12) {
-    return `${diffMonths}m`;
+    return `${diffMonths}mo`;
   } else {
     return `${diffYears}y`;
   }

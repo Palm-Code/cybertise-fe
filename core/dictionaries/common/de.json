@@ -16,7 +16,9 @@
     "settings": "Einstellungen",
     "mode": "Modus",
     "vrp_management": "VRP-Management",
-    "manage_company": "Unternehmen verwalten"
+    "manage_company": "Unternehmen verwalten",
+    "services": "Dienstleistungen",
+    "payment": "Zahlung"
   },
   "Filter": {
     "type": "Typ",

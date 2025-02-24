@@ -147,8 +147,8 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                     y2="150"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stopColor="#4BA2E3" stopOpacity="0.3" />
-                    <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.01" />
+                    <stop stopColor="#4BA2E3" stopOpacity="0.5" />
+                    <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.1" />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />
