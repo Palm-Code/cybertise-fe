@@ -1,9 +1,10 @@
 import { ProgramDetailsFragment } from "@/feature/hacker/fragments";
 
-export default function ProgramsDetailPage({
-  params: { slug },
+export default async function ProgramsDetailPage({
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   return <ProgramDetailsFragment id={slug} />;
 }

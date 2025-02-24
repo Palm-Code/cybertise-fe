@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   // Delete the session cookies
-  cookies().delete("session");
-  cookies().delete("token");
+  const cookiesData = await cookies();
+  cookiesData.delete("session");
+  cookiesData.delete("token");
 
   return NextResponse.json(
     { message: "Logged out successfully" },

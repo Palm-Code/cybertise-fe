@@ -4,14 +4,13 @@ import { getSession } from "@/service/server/session";
 export default async function VRPLaunchpadDetailPage({
   params,
 }: {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const session = await getSession();
   return (
     <DetailsVRPFragment
-      id={params.id}
+      id={id}
       variant={session?.user.role}
     />
   );

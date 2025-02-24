@@ -41,15 +41,15 @@ export async function authorize(
   // Create the session
   // const expires = new Date(Date.now() + 2592000000);
   const session = await encrypt({ user });
-  cookies().set("session", session, { httpOnly: true });
+  (await cookies()).set("session", session, { httpOnly: true });
 
   return { user };
 }
 
 export async function logout() {
   try {
-    cookies().set("session", "", { expires: new Date(0) });
-    cookies().set("token", "", { expires: new Date(0) });
+    (await cookies()).set("session", "", { expires: new Date(0) });
+    (await cookies()).set("token", "", { expires: new Date(0) });
   } catch (error) {
     console.log("kesini error", error);
     throw new Error("Failed to logout");
@@ -59,8 +59,8 @@ export async function logout() {
 }
 export async function logoutwithoutrevalidate() {
   try {
-    cookies().set("session", "", { expires: new Date(0) });
-    cookies().set("token", "", { expires: new Date(0) });
+    (await cookies()).set("session", "", { expires: new Date(0) });
+    (await cookies()).set("token", "", { expires: new Date(0) });
   } catch (error) {
     throw new Error("Failed to logout");
   }

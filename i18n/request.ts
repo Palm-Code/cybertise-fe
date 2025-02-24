@@ -12,7 +12,8 @@ const getUserData = async () => {
   const session = await getSession();
   if (!session) {
     //detect browser language
-    const browserLanguage = headers().get("accept-language")?.split(",")[0];
+    const serverHeaders = await headers();
+    const browserLanguage = serverHeaders.get("accept-language")?.split(",")[0];
     const language = LANGUAGE_LIST.some((lang) => lang === browserLanguage)
       ? browserLanguage
       : "en";

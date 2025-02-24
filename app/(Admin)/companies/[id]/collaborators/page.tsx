@@ -5,6 +5,7 @@ export default async function Collaborators({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const programId = (await searchParams).program;
+  const { program } = await searchParams;
+  const programId = program;
   return <CollaboratorsFragment id={programId as string} />;
 }
