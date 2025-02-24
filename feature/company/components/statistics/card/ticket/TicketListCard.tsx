@@ -7,6 +7,7 @@ import { iconColor } from "@/core/constants/common";
 import { StatisticTableView } from "@/feature/company/containers";
 import { useGetTableColumns } from "@/feature/company/constants/dashboard";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
+import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 
 interface TicketListCardProps {
   data?: I_GetChatListSuccessResponse["data"];
@@ -25,9 +26,15 @@ export const TicketListCard = ({ data }: TicketListCardProps) => {
             Open Tickets
           </Typography>
         </div>
-        <Button variant="ghost-company">View all</Button>
+        <Button asLink href="/reports" variant="ghost-company">
+          View all
+        </Button>
       </div>
-      <StatisticTableView columns={tableColumns} data={data} />
+      {data?.length === 0 ? (
+        <EmptyState type="ticket" variant="hacker" className={cn("mt-0")} />
+      ) : (
+        <StatisticTableView columns={tableColumns} data={data} />
+      )}
     </Wrapper>
   );
 };

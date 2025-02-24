@@ -133,5 +133,8 @@
         "title": "Activity Logs only available in desktop"
       }
     }
+  },
+  "Services": {
+    "title": "Services"
   }
 }

@@ -14,7 +14,7 @@ import Typography from "../../components/typography/typography";
 import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
-import { VrpManagement } from "../../icons";
+import { Service, VrpManagement } from "../../icons";
 import { usePathname } from "next/navigation";
 import { borderColor, useMenuItems } from "@/core/constants/common";
 import {
@@ -46,6 +46,8 @@ const iconsObject: { [key: string]: React.ReactNode } = {
     <VrpManagement className="h-6 w-6 fill-black dark:fill-white" />
   ),
   manage_company: <Building2 className="h-6 w-6" />,
+  services: <Service className="h-6 w-6" />,
+  payment: <Service className="h-6 w-6" />,
 };
 
 const Sidebar = ({ type }: SidebarProps) => {
