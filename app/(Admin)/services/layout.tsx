@@ -11,21 +11,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboardlayout({
-  hacker,
   company,
-  mediator,
 }: {
   children: React.ReactNode;
-  hacker: React.ReactNode;
   company: React.ReactNode;
-  mediator: React.ReactNode;
 }) {
   const session = (await getSession()) as UserType;
 
   const child: { [key: string]: React.ReactNode } = {
-    [Role.hacker]: hacker,
     [Role.company]: company,
-    [Role.mediator]: mediator,
     "company staff": company,
   };
 
