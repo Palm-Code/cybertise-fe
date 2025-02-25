@@ -209,6 +209,7 @@
     "button_create": "Firmenticket erstellen"
   },
   "Payment": {
-    "title": "Zahlung"
+    "title": "Zahlung",
+    "more_info": "Weitere Informationen"
   }
 }

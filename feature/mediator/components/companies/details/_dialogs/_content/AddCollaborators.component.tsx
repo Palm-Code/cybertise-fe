@@ -1,8 +1,6 @@
-import { ArrowLeft, ChevronLeft, MoveLeft, UserPlus, X } from "lucide-react";
-import { Button, Loader, SearchInput, Typography } from "@/core/ui/components";
-import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
-import React, { useEffect, useRef, useState } from "react";
-import { CollaboratorsTableView } from "@/feature/mediator/containers";
+import { MoveLeft, UserPlus, X } from "lucide-react";
+import { Button, SearchInput, Typography } from "@/core/ui/components";
+import React, { useEffect, useState } from "react";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { useGetAddCollaboratorTableColumns } from "@/feature/mediator/constants/vrp-launchpad";
 import { useTranslations } from "next-intl";

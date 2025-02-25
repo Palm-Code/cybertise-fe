@@ -3,7 +3,8 @@
     "search": "Search...",
     "search_not_found": "No results found",
     "submit_search": "Search",
-    "button_back": "Back"
+    "button_back": "Back",
+    "button_cancel": "Cancel"
   },
   "Sidebar": {
     "menu": "Menu",
@@ -53,7 +54,8 @@
     "view_chat": "View Chat",
     "make_payment": "Make Payment",
     "send_payment_request": "Send Payment Request",
-    "payment_request_sent": "Payment Request Sent"
+    "payment_request_sent": "Payment Request Sent",
+    "ticket_details": "Ticket Details"
   },
   "Programs": {
     "program_name": "Program Name",

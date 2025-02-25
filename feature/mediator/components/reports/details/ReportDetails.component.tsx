@@ -35,6 +35,7 @@ import { ModalForbidden } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
 import { useUserStore } from "@/core/zustands/globals/store";
 import ModalAddToContributor from "../_dialog/ModalAddToContributor";
+import { PaymentCard } from "../card/payment-card";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
@@ -289,13 +290,13 @@ const ReportDetails = ({ id }: { id: string }) => {
           <div
             className={cn(
               "_flexbox__col__start__start sticky top-0 z-30",
-              "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
+              "h-fit w-full bg-background-page-light pt-8 dark:bg-background-page-dark"
             )}
           >
             <Card
               className={cn(
                 "_flexbox__row__center__between sticky top-0",
-                "z-30 w-full rounded-b-none rounded-t-2xl !p-6"
+                "z-30 w-full rounded-b-none rounded-t-2xl !p-4"
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
@@ -382,7 +383,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               !ticketDetails.related_ticket_id ? null : (
                 <div
                   className={cn(
-                    "sticky top-[8.15rem] z-30 w-full rounded-[10px] p-4",
+                    "sticky top-[8.15rem] z-30 w-full rounded-b-[10px] px-4 py-2",
                     "mb-4 bg-neutral-light-80 dark:bg-neutral-dark-80"
                   )}
                 >
@@ -406,7 +407,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                             ? `/reports/${ticketDetails.related_ticket_id}`
                             : `/reports/new?ticket_id=${ticketDetails.id}`
                         }
-                        className="underline"
+                        className="text-xs underline"
                         replace
                       >
                         {ticketDetails.related_ticket_id
@@ -416,7 +417,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     ) : (
                       <Link
                         href={`/reports/${ticketDetails.related_ticket_id}`}
-                        className="underline"
+                        className="text-xs underline"
                         replace
                       >
                         {t("go_to", { role: t("hacker") })}
@@ -426,6 +427,9 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </div>
               )}
             </AnimationWrapper>
+            <div className={cn("mb-4 w-full")}>
+              <PaymentCard data={ticketDetails} />
+            </div>
           </div>
           {isFetchingNextPage && (
             <Loader
@@ -447,7 +451,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             className={cn(
               "absolute z-50 mx-auto w-fit",
               "left-1/2 transform",
-              isHiddenChatBox ? "bottom-12" : "bottom-72"
+              isHiddenChatBox ? "bottom-12" : "bottom-56"
             )}
             prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
@@ -466,7 +470,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         {!isHiddenChatBox && (
           <div
             className={cn(
-              "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"
+              "sticky bottom-0 z-50 bg-background-page-light py-2 dark:bg-background-page-dark"
             )}
           >
             <Tiptap

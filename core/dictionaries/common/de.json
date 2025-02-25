@@ -3,7 +3,8 @@
     "search": "Suche...",
     "search_not_found": "Keine Ergebnisse gefunden",
     "submit_search": "Suchen",
-    "button_back": "Zurück"
+    "button_back": "Zurück",
+    "button_cancel": "Stornieren"
   },
   "Sidebar": {
     "dashboard": "Armaturenbrett",
@@ -53,7 +54,8 @@
     "view_chat": "Chat anzeigen",
     "make_payment": "Zahlung leisten",
     "send_payment_request": "Zahlungsanfrage senden",
-    "payment_request_sent": "Zahlungsanfrage gesendet"
+    "payment_request_sent": "Zahlungsanfrage gesendet",
+    "ticket_details": "Ticketdetails"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",

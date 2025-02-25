@@ -8,6 +8,7 @@ export const fetchGetTicketDetails = async (id: string) => {
     .get(getChatListDetailAPIURL(id), {
       params: {
         append: "risk_level_category",
+        include: "program,vulnerabiityType",
       },
     })
     .then(

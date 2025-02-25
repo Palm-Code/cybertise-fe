@@ -3,8 +3,8 @@ import { I_Icons } from "@/interfaces";
 const Indicator = (props: I_Icons) => {
   return (
     <svg
-      width="40"
-      height="41"
+      width="32"
+      height="32"
       viewBox="0 0 40 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
