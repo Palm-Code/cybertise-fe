@@ -14,7 +14,6 @@ import { useUserStore } from "@/core/zustands/globals/store";
 const Header = () => {
   const t = useTranslations("Sidebar");
   const { data: user } = useUserStore();
-  const [language, setLanguage] = useState<string>(user.language);
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {
@@ -47,7 +46,7 @@ const Header = () => {
             label=""
             triggerClassName="!p-0 absolute right-2"
             prefixIcon={<Globe className="size-5 md:size-6" />}
-            value={language}
+            value={user.language}
             options={[
               {
                 label: "EN",
@@ -58,8 +57,11 @@ const Header = () => {
                 value: "de",
               },
             ]}
-            onValueChange={(v) => {
-              setLanguage(v);
+            onValueChange={async (v) => {
+              await fetch("/api/set-language", {
+                method: "POST",
+                body: JSON.stringify({ language: v }),
+              });
               mutate(v);
             }}
           />
@@ -76,7 +78,7 @@ const Header = () => {
             label=""
             triggerClassName="!p-0"
             prefixIcon={<Globe className="size-6" />}
-            value={language}
+            value={user.language}
             options={[
               {
                 label: "EN",
@@ -87,8 +89,11 @@ const Header = () => {
                 value: "de",
               },
             ]}
-            onValueChange={(v) => {
-              setLanguage(v);
+            onValueChange={async (v) => {
+              await fetch("/api/set-language", {
+                method: "POST",
+                body: JSON.stringify({ language: v }),
+              });
               mutate(v);
             }}
           />

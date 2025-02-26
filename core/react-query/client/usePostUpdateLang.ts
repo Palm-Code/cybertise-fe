@@ -2,13 +2,10 @@
 import { I_GetErrorRes } from "@/core/models/common";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { fetchPostUpdateLang } from "@/core/services/common";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const usePostUpdateLang = () => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
   const mutations = useMutation<
     I_GetUserProfileSuccessResponse,
     I_GetErrorRes,

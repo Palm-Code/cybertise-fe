@@ -9,7 +9,7 @@ import { useUserStore } from "./store/user";
 
 export const GlobalInitializer: React.FC<
   {
-    users: I_GetUserDataSuccessResponse["data"];
+    users?: I_GetUserDataSuccessResponse["data"];
     assetTypes: I_GetAssetTypeSuccessResponse["data"];
   } & PropsWithChildren
 > = ({ children, users, assetTypes }) => {

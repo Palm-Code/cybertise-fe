@@ -40,7 +40,6 @@ axiosServerInterceptorInstance.interceptors.response.use(
       try {
         await axios.get("/api/logout").then(() => {
           toast.error("Session expired, please login again");
-          window.location.href = "/auth/signin";
         });
       } catch (err) {
         console.error("Failed to call logout route:", err);
