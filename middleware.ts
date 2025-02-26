@@ -17,10 +17,6 @@ export async function mainMiddleware(request: NextRequest) {
       sameSite: "lax",
     });
   }
-  // await updateSession(request);
-  if (request.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
   return response;
 }
 

@@ -8,7 +8,6 @@ import { Globe, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LanguageDropdown from "./dropdown/LanguageDropdown.component";
-import { useState } from "react";
 import { useUserStore } from "@/core/zustands/globals/store";
 
 const Header = () => {
