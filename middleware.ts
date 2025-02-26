@@ -1,21 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import withAuth from "./middlewares/withAuth";
+import withAuthMiddleware from "./middlewares/withAuth";
+import { getSession } from "./service/server/session";
 
 export async function mainMiddleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-url", request.url);
-  // await updateSession(request);
-  if (request.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-  return NextResponse.next({
+  const session = await getSession();
+  const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
   });
+  if (session?.user.language) {
+    response.cookies.set("language", session.user.language, {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+    });
+  }
+  // await updateSession(request);
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  return response;
 }
 
-export default withAuth(mainMiddleware, [
+export default withAuthMiddleware(mainMiddleware, [
   "/dashboard",
   "/programs",
   "/companies",
