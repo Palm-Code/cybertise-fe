@@ -1,5 +1,4 @@
-import { prefetchGetUserData } from "@/core/react-query/server";
-import { prefetchGetAssetType } from "@/core/react-query/server/prefetchGetAssetType";
+import { fetchGetAssetType, fetchGetUserData } from "@/core/services/server";
 import { GlobalInitializer } from "@/core/zustands/globals";
 
 export default async function AdminPage({
@@ -7,8 +6,9 @@ export default async function AdminPage({
 }: {
   children: React.ReactNode;
 }) {
-  const assetType = await prefetchGetAssetType();
-  const user = await prefetchGetUserData();
+  const assetType = await fetchGetAssetType();
+  const user = await fetchGetUserData();
+
   return (
     <GlobalInitializer
       users={user}

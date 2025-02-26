@@ -1,6 +1,5 @@
 import { getSession } from "@/service/server/session";
 import axios from "axios";
-import { toast } from "sonner";
 
 const axiosServerInterceptorInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -37,9 +36,18 @@ axiosServerInterceptorInstance.interceptors.response.use(
   },
   async (error) => {
     if (error?.response?.data.code === 401) {
+      const session = await getSession();
       try {
-        await axios.get("/api/logout").then(() => {
-          toast.error("Session expired, please login again");
+        await fetch("/api/logout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: session?.user.token,
+          }),
+        }).then((res) => {
+          console.log("res", res);
         });
       } catch (err) {
         console.error("Failed to call logout route:", err);
