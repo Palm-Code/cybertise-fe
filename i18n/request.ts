@@ -3,7 +3,6 @@ import deepmerge from "deepmerge";
 import { cookies } from "next/headers";
 
 export default getRequestConfig(async () => {
-  console.log("kesini 1");
   // Provide a static locale, fetch a user setting,
   // read from `cookies()`, `headers()`, etc.
   const cookieStore = await cookies();

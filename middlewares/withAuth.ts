@@ -13,7 +13,6 @@ export default function withAuthMiddleware(
   requireAuth: string[] = []
 ) {
   return async (req: NextRequest, next: NextFetchEvent) => {
-    console.log("kesini 1.1");
     const pathname = req.nextUrl.pathname;
     const session = req.cookies.get("session")?.value;
     const decryptedSession = session ? await decrypt(session as string) : null;

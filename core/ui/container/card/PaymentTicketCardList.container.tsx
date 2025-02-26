@@ -15,7 +15,6 @@ import { Suspense } from "react";
 import { CardLoader, Desktop, Mobile } from "../../layout";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard/get_chat_list";
 import { Hacker } from "../../icons";
-import { iconColor } from "@/core/constants/common";
 import { Building2, ChevronRight, Ellipsis } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { indicatorVariants } from "../../components/indicator/indicator";
