@@ -129,7 +129,8 @@
     "go_to": "Gehen Sie zu {role} Ticket",
     "hacker": "Hacker",
     "chat_alert": "Dieser Chat ist auf diesem Gerät schreibgeschützt. \nBitte greifen Sie über den Desktop zu, um zu interagieren.",
-    "ticket_type": "{role} Ticket"
+    "ticket_type": "{role} Ticket",
+    "no_chat_found": "Kein Chat gefunden"
   },
   "Loading": {
     "loading_data": "Daten abrufen..."

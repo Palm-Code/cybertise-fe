@@ -136,7 +136,8 @@
     "ticket_type": "{role} Ticket",
     "hacker": "Hacker",
     "create_company_ticket": "Create Company Ticket",
-    "chat_alert": "This chat is read only on this device. Please access using desktop to interact."
+    "chat_alert": "This chat is read only on this device. Please access using desktop to interact.",
+    "no_chat_found": "No Chat Found"
   },
   "Loading": {
     "loading_data": "Getting data..."

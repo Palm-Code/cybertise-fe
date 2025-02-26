@@ -18,7 +18,7 @@ export const usePostChatItem = () => {
     mutationFn: (payload) => {
       return fetchPostChatItem(payload);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getChatListItem"],
       });

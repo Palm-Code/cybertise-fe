@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
-import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
+import { Desktop, Mobile } from "@/core/ui/layout";
 import { ChevronDown, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -49,8 +49,17 @@ const ReportDetails = ({ id }: { id: string }) => {
   } = useGetTicketDetails(id);
   const { data, isError, isRefetching, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
-  const { ref, inView } = useInView({ threshold: 0.5 });
-  const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
+  const { ref } = useInView({ threshold: 0.5 });
+  const { ref: endChatRef, inView: inViewEnd } = useInView({
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView) {
+        setTimeout(() => {
+          fetchNextPage();
+        }, 200);
+      }
+    },
+  });
   const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
@@ -81,14 +90,6 @@ const ReportDetails = ({ id }: { id: string }) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (inView) {
-      setTimeout(() => {
-        fetchNextPage();
-      }, 200);
-    }
-  }, [inView]);
-
   const sendMessage = async () => {
     await mutateAsync({
       chat_ticket_id: id,
@@ -105,7 +106,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
-        toast.error("Failed to send message");
+        toast.error(err.message);
       });
   };
 
@@ -377,7 +378,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                 )}
               </div>
             </Card>
-            <AnimationWrapper>
+            <div className="w-full">
               {isHiddenChatBox &&
               ticketDetails.ticket_type.toLowerCase() === "hacker" &&
               !ticketDetails.related_ticket_id ? null : (
@@ -426,7 +427,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                   </div>
                 </div>
               )}
-            </AnimationWrapper>
+            </div>
             <div className={cn("mb-4 w-full")}>
               <PaymentCard data={ticketDetails} />
             </div>
