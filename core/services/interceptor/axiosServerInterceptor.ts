@@ -1,6 +1,4 @@
-import { logout } from "@/service/server/auth";
 import { getSession } from "@/service/server/session";
-import { cookies } from "next/headers";
 import axios from "axios";
 
 const axiosServerInterceptorInstance = axios.create({

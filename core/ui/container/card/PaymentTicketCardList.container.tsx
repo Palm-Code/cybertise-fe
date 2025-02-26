@@ -142,7 +142,13 @@ const TicketCard = ({
                       affects="small"
                       weight="semibold"
                     >
-                      {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
+                      {!!props.bounty
+                        ? currencyFormatters.NumberToEUR(props.bounty ?? 0)
+                        : `${currencyFormatters.NumberToEUR(
+                            props.program?.monetary_awards_low ?? 0
+                          )} - ${currencyFormatters.NumberToEUR(
+                            props.program?.monetary_awards_high ?? 0
+                          )}`}
                     </Typography>
                   </div>
                 </div>
@@ -278,7 +284,13 @@ const TicketCard = ({
                     affects="small"
                     weight="semibold"
                   >
-                    {currencyFormatters.NumberToEUR(props.bounty ?? 0)}
+                    {!!props.bounty
+                      ? currencyFormatters.NumberToEUR(props.bounty ?? 0)
+                      : `${currencyFormatters.NumberToEUR(
+                          props.program?.monetary_awards_low ?? 0
+                        )} - ${currencyFormatters.NumberToEUR(
+                          props.program?.monetary_awards_high ?? 0
+                        )}`}
                   </Typography>
                 </div>
               </div>
@@ -305,18 +317,23 @@ const TicketCard = ({
                     {t("company_ticket")}
                   </Button>
                   <Button
-                    disabled={props.is_requested_payment || isPendingUpdate}
+                    disabled={
+                      props.is_requested_payment ||
+                      props.bounty ||
+                      isPendingUpdate
+                    }
                     isLoading={isPendingUpdate}
                     variant="primary-mediator"
                     onClick={onClickSendRequest}
                   >
-                    {props.is_requested_payment
+                    {props.is_requested_payment || props.bounty
                       ? t("payment_request_sent")
                       : t("send_payment_request")}
                   </Button>
                   <Button
                     size="icon"
                     variant="tertiary-mediator"
+                    title={t("help")}
                   >
                     <Ellipsis />
                   </Button>
@@ -334,8 +351,11 @@ const TicketCard = ({
                   </Button>
                   <Button variant="primary-company">{t("make_payment")}</Button>
                   <Button
+                    asLink
+                    href="mailto:hello@cybertise.eu?subject=Payment%Help"
                     size="icon"
                     variant="tertiary-company"
+                    title={t("help")}
                   >
                     <Ellipsis />
                   </Button>
