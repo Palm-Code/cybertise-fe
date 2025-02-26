@@ -2,6 +2,7 @@ import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 const axiosInterceptorInstance = axios.create({
   baseURL: BASE_URL,
@@ -41,7 +42,7 @@ axiosInterceptorInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.data.code === 401) {
       logout();
-      return;
+      return toast.error("Session expired, please login again");
     }
     // Handle response errors here
     return Promise.reject(error);

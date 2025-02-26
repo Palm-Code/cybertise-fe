@@ -51,7 +51,6 @@ export async function logout() {
     (await cookies()).set("session", "", { expires: new Date(0) });
     (await cookies()).set("token", "", { expires: new Date(0) });
   } catch (error) {
-    console.log("kesini error", error);
     throw new Error("Failed to logout");
   } finally {
     redirect("/auth/signin");
