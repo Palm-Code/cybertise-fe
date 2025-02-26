@@ -1,5 +1,4 @@
 import { fetchGetAssetType, fetchGetUserData } from "@/core/services/server";
-import { GlobalInitializer } from "@/core/zustands/globals";
 
 export default async function AdminPage({
   children,
@@ -9,12 +8,8 @@ export default async function AdminPage({
   const assetType = await fetchGetAssetType();
   const user = await fetchGetUserData();
 
-  return (
-    <GlobalInitializer
-      users={user}
-      assetTypes={assetType.data}
-    >
-      {children}
-    </GlobalInitializer>
-  );
+  console.log(assetType);
+  console.log(user);
+
+  return children;
 }
