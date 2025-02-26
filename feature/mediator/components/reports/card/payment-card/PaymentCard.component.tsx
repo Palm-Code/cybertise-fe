@@ -7,6 +7,8 @@ import { Ellipsis } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { ModalReportDetails } from "../../_dialog/ModalReportDetails";
+import { ModalSetReward } from "../../_dialog/ModalSetReward";
+import { useBoolean } from "usehooks-ts";
 
 export const PaymentCard = ({
   data,
@@ -15,6 +17,8 @@ export const PaymentCard = ({
 }) => {
   const t = useTranslations();
   const [showModal, setShowModal] = useState(false);
+  const { value: showModalSetReward, toggle: toggleModalSetReward } =
+    useBoolean();
   return (
     <>
       <Card
@@ -39,13 +43,19 @@ export const PaymentCard = ({
           >
             {t("Payment.more_info")}
           </Button>
-          <Button variant="primary-mediator">
-            {/* {t("Ticket.payment_request_sent")} */}
-            {t("Ticket.send_payment_request")}
+          <Button
+            disabled={data.bounty}
+            variant="primary-mediator"
+            onClick={toggleModalSetReward}
+          >
+            {data.bounty
+              ? t("Ticket.payment_request_sent")
+              : t("Ticket.set_reward")}
           </Button>
           <Button
             size="icon"
             variant="tertiary-mediator"
+            title={t("Ticket.help")}
           >
             <Ellipsis />
           </Button>
@@ -55,6 +65,11 @@ export const PaymentCard = ({
         data={data}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
+      />
+      <ModalSetReward
+        data={data}
+        isOpen={showModalSetReward}
+        onClose={toggleModalSetReward}
       />
     </>
   );

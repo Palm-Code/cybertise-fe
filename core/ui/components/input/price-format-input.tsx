@@ -12,8 +12,8 @@ export default function CustomNumberFormat(props: NumberFormatBaseProps) {
 
   return (
     <NumberFormatBase
-      {...props}
       format={format}
+      {...props}
     />
   );
 }

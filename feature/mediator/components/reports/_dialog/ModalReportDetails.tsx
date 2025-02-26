@@ -23,7 +23,6 @@ export const ModalReportDetails = ({
   ...props
 }: ModalReportDetailsProps) => {
   const t = useTranslations();
-  console.log({ data });
   return (
     <BaseModal {...props}>
       <div

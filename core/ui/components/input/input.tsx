@@ -46,7 +46,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       withTooltip = false,
       isError = false,
       placeholderText,
-      defaultValue,
       value,
       iconValue,
       description,

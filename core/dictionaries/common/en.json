@@ -55,7 +55,11 @@
     "make_payment": "Make Payment",
     "send_payment_request": "Send Payment Request",
     "payment_request_sent": "Payment Request Sent",
-    "ticket_details": "Ticket Details"
+    "ticket_details": "Ticket Details",
+    "set_reward": "Set Rewards",
+    "reward_range": "Rewards range:",
+    "set_reward_and_request_payment": "Set and Send Reward Request",
+    "help": "Help"
   },
   "Programs": {
     "program_name": "Program Name",

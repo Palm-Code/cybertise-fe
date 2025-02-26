@@ -119,7 +119,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
-        No Chat Found
+        {t("no_chat_found")}
       </div>
     );
   }
@@ -450,7 +450,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute z-50 mx-auto w-fit",
+              "absolute z-10 mx-auto w-fit",
               "left-1/2 transform",
               isHiddenChatBox ? "bottom-12" : "bottom-56"
             )}
@@ -471,7 +471,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         {!isHiddenChatBox && (
           <div
             className={cn(
-              "sticky bottom-0 z-50 bg-background-page-light py-2 dark:bg-background-page-dark"
+              "sticky bottom-0 z-20 bg-background-page-light py-2 dark:bg-background-page-dark"
             )}
           >
             <Tiptap

@@ -55,7 +55,11 @@
     "make_payment": "Zahlung leisten",
     "send_payment_request": "Zahlungsanfrage senden",
     "payment_request_sent": "Zahlungsanfrage gesendet",
-    "ticket_details": "Ticketdetails"
+    "ticket_details": "Ticketdetails",
+    "set_reward": "Belohnungen festlegen",
+    "reward_range": "Belohnungsbereich:",
+    "set_reward_and_request_payment": "Stellen und senden Sie eine Belohnungsanfrage",
+    "help": "Helfen"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
