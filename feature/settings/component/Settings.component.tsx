@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Loader, Typography } from "@/core/ui/components";
+import { Card, Typography } from "@/core/ui/components";
 import Tab from "./_tabs/SettingTab";
 import { useState } from "react";
 import { SettingItems } from "@/enums";
@@ -29,7 +29,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Role } from "@/types/admin/sidebar";
-import { SortFilterType } from "@/types/admin/dashboard";
 import { useTranslations } from "next-intl";
 import ActivityLogs from "@/feature/company/components/manage-company/_tab/_content/ActivityLogs";
 
@@ -40,7 +39,7 @@ const Setting = ({
   initialData?: I_GetUserProfileSuccessResponse["data"];
 }) => {
   const t = useTranslations("Settings");
-  const settingTabItems: { [key in Role]: SortFilterType[] } = {
+  const settingTabItems = {
     [Role.hacker]: useHackerSettingTabItems(),
     [Role.mediator]: useMediatorSettingTabItems(),
     [Role.company]: useCompanySettingTabItems(),
@@ -72,7 +71,7 @@ const Setting = ({
     },
   });
 
-  const tabs: { [key in SettingItems]: JSX.Element } = {
+  const tabs = {
     [SettingItems.details]: (
       <Details
         data={initialData}

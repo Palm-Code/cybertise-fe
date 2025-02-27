@@ -8,7 +8,7 @@ interface I_AvatarProps
   initials?: string;
 }
 
-const Avatar = ({ image, initials, ...props }: I_AvatarProps) => {
+const Avatar = ({ image, ...props }: I_AvatarProps) => {
   return (
     <BaseAvatar {...props}>
       <AvatarImage

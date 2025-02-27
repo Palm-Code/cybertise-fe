@@ -1,4 +1,3 @@
-import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -39,9 +38,15 @@ axiosInterceptorInstance.interceptors.response.use(
     // Modify the response data here
     return response;
   },
-  (error) => {
+  async (error) => {
+    const accessToken = Cookies.get("token");
     if (error?.response?.data.code === 401) {
-      logout();
+      await axios.post("/api/logout", {
+        token: accessToken,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return toast.error("Session expired, please login again");
     }
     // Handle response errors here

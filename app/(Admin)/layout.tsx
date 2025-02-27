@@ -1,10 +1,9 @@
 import React from "react";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  console.log("keinisisiisisi");
   return children;
 }

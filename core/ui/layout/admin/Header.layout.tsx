@@ -2,17 +2,26 @@
 import { cn } from "@/core/lib/utils";
 import ThemeSwitcher from "../../components/theme/theme-switcher";
 import { Logo } from "../../icons";
-import { usePostLogout, usePostUpdateLang } from "@/core/react-query/client";
+import {
+  useGetAssetType,
+  useGetUserData,
+  usePostLogout,
+  usePostUpdateLang,
+} from "@/core/react-query/client";
 import HeaderDropdown from "../../components/dropdown/header-dropdown";
-import { Globe, LogOut, Settings } from "lucide-react";
+import { ChevronDown, Globe, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LanguageDropdown from "./dropdown/LanguageDropdown.component";
-import { useUserStore } from "@/core/zustands/globals/store";
+import { useAssetTypeStore, useUserStore } from "@/core/zustands/globals/store";
+import { Skeleton } from "../../components/skeleton/skeleton";
 
 const Header = () => {
   const t = useTranslations("Sidebar");
-  const { data: user } = useUserStore();
+  const { data: user, isLoading, isRefetching } = useGetUserData();
+  const { data: assetTypes } = useGetAssetType();
+  useUserStore.setState({ data: user });
+  useAssetTypeStore.setState({ data: assetTypes });
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {
@@ -28,7 +37,6 @@ const Header = () => {
   };
 
   const { mutate } = usePostUpdateLang();
-
   return (
     <>
       <div className="w-full xl:hidden">
@@ -45,7 +53,7 @@ const Header = () => {
             label=""
             triggerClassName="!p-0 absolute right-2"
             prefixIcon={<Globe className="size-5 md:size-6" />}
-            value={user.language}
+            value={user?.language}
             options={[
               {
                 label: "EN",
@@ -69,60 +77,71 @@ const Header = () => {
       <div className="hidden w-full xl:block">
         <div
           className={cn(
-            "w-full bg-background-main-light px-12 py-6 dark:bg-background-main-dark",
+            "h-full w-full bg-background-main-light px-12 py-6 dark:bg-background-main-dark",
             "_flexbox__row__center__end gap-8"
           )}
         >
-          <LanguageDropdown
-            label=""
-            triggerClassName="!p-0"
-            prefixIcon={<Globe className="size-6" />}
-            value={user.language}
-            options={[
-              {
-                label: "EN",
-                value: "en",
-              },
-              {
-                label: "DE",
-                value: "de",
-              },
-            ]}
-            onValueChange={async (v) => {
-              await fetch("/api/set-language", {
-                method: "POST",
-                body: JSON.stringify({ language: v }),
-              });
-              mutate(v);
-            }}
-          />
+          {isLoading ? (
+            <Skeleton className="h-full w-20" />
+          ) : (
+            <LanguageDropdown
+              label=""
+              triggerClassName="!p-0"
+              prefixIcon={<Globe className="size-6" />}
+              value={user?.language}
+              options={[
+                {
+                  label: "EN",
+                  value: "en",
+                },
+                {
+                  label: "DE",
+                  value: "de",
+                },
+              ]}
+              onValueChange={async (v) => {
+                await fetch("/api/set-language", {
+                  method: "POST",
+                  body: JSON.stringify({ language: v }),
+                });
+                mutate(v);
+              }}
+            />
+          )}
           <ThemeSwitcher />
-          <HeaderDropdown
-            avatar={user.avatar}
-            options={[
-              {
-                label: t("settings"),
-                value: "settings",
-                icon: (
-                  <Settings
-                    width={20}
-                    height={20}
-                  />
-                ),
-              },
-              {
-                label: t("logout"),
-                value: "logout",
-                icon: (
-                  <LogOut
-                    width={20}
-                    height={20}
-                  />
-                ),
-              },
-            ]}
-            onValueChange={(v) => handleDropdownClicks(v)}
-          />
+          {isLoading || isRefetching ? (
+            <div className="flex items-center gap-2">
+              <Skeleton className="size-9 rounded-full" />
+              <ChevronDown />
+            </div>
+          ) : (
+            <HeaderDropdown
+              avatar={user?.avatar}
+              options={[
+                {
+                  label: t("settings"),
+                  value: "settings",
+                  icon: (
+                    <Settings
+                      width={20}
+                      height={20}
+                    />
+                  ),
+                },
+                {
+                  label: t("logout"),
+                  value: "logout",
+                  icon: (
+                    <LogOut
+                      width={20}
+                      height={20}
+                    />
+                  ),
+                },
+              ]}
+              onValueChange={(v) => handleDropdownClicks(v)}
+            />
+          )}
         </div>
       </div>
     </>

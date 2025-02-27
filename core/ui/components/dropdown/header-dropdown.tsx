@@ -7,9 +7,9 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../select/select";
-import Typography from "../typography/typography";
 import Link from "next/link";
 import { Check, ChevronDown } from "lucide-react";
+import { SelectProps } from "@radix-ui/react-select";
 
 interface I_HeaderDropdownProps {
   options: {
@@ -17,7 +17,7 @@ interface I_HeaderDropdownProps {
     value: string;
     icon?: JSX.Element;
   }[];
-  onValueChange: (value: string) => void;
+  onValueChange: SelectProps["onValueChange"];
   avatar?: string;
 }
 
