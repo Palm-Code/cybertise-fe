@@ -143,10 +143,9 @@ export const TableBodyRow = ({
 
   if (isButton)
     return (
-      <button
-        type="button"
+      <div
         className={cn(
-          "relative w-full rounded-2xl bg-background-main-light",
+          "relative w-full cursor-pointer rounded-2xl bg-background-main-light",
           "px-9 py-5 dark:bg-background-main-dark",
           "hover:bg-neutral-light-90 dark:hover:bg-neutral-dark-90",
           className
@@ -160,7 +159,7 @@ export const TableBodyRow = ({
           />
         )}
         {children}
-      </button>
+      </div>
     );
 
   return (
