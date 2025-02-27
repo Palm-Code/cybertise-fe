@@ -15,11 +15,12 @@ export async function POST(request: NextRequest) {
   });
 
   if (!res.ok) {
-    return NextResponse.json({ message: "Failed to logout" }, { status: 500 });
+    cookiesData.delete("session");
+    cookiesData.delete("token");
   }
 
   cookiesData.delete("session");
   cookiesData.delete("token");
 
-  return NextResponse.redirect(new URL("/auth/signin", request.url));
+  return NextResponse.json({ message: "Logged out successfully" });
 }
