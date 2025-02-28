@@ -42,7 +42,8 @@ const StatusDropdown = ({
       <Desktop>
         <Select
           onValueChange={onValueChange}
-          defaultValue={value}
+          defaultValue={inputValue}
+          value={inputValue}
           {...props}
         >
           <SelectTrigger className="gap-2.5 !bg-transparent !p-0 disabled:text-transparent">

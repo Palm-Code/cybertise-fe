@@ -10,11 +10,13 @@ import {
 } from "@/core/ui/components";
 import CustomNumberFormat from "@/core/ui/components/input/price-format-input";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
+import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+import { useBoolean } from "usehooks-ts";
 
 interface ModalSetRewardProps extends I_ModalProps {
   data: I_GetChatListSuccessResponse["data"][0];
@@ -22,7 +24,28 @@ interface ModalSetRewardProps extends I_ModalProps {
 
 export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
   const t = useTranslations();
-  const [reward, setReward] = useState(data?.bounty ?? 0);
+  const {
+    value: error,
+    setTrue: setErrorTrue,
+    setFalse: setErrorFalse,
+  } = useBoolean(true);
+  const [reward, setReward] = useState<number | null>(null);
+  const {
+    value: confirm,
+    setTrue: setConfirmTrue,
+    setFalse: setConfirmFalse,
+  } = useBoolean(false);
+  const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
+    usePostUpdateTicket(data.id);
+
+  const handleSetReward = () => {
+    mutateUpdateTicket(`bounty=${reward}&status=Waiting for Payment`).then(
+      () => {
+        props.onClose?.();
+        setConfirmFalse();
+      }
+    );
+  };
   return (
     <BaseModal {...props}>
       <div
@@ -141,51 +164,112 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
               </div>
             </div>
           </div>
-          <div className={cn("mx-auto flex w-full max-w-56 flex-col gap-4")}>
-            <div className={cn("grid w-full grid-cols-[auto_1fr] gap-2")}>
-              <Typography
-                variant="h1"
-                weight="bold"
-              >
-                €
-              </Typography>
-              <CustomNumberFormat
-                format={(numStr: string) => {
-                  return new Intl.NumberFormat("de-DE", {
-                    style: "decimal",
-                    currency: "EUR",
-                    maximumFractionDigits: 0,
-                  }).format(Number(numStr));
-                }}
-                value={reward}
-                onValueChange={(v) => {
-                  setReward(v.value);
-                }}
-                className="h-full w-full bg-transparent text-[56px] font-bold focus:outline-none"
-              />
+          {confirm ? (
+            <div className={cn("flex w-full flex-col gap-16")}>
+              <div className={cn("flex w-full flex-col gap-4")}>
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
+                  {t("Ticket.note")}
+                </Typography>
+                <Typography
+                  variant="p"
+                  affects="small"
+                >
+                  {t("Ticket.confirm_reward_description")}
+                </Typography>
+              </div>
+              <div className={cn("flex w-full flex-col gap-6")}>
+                <Button
+                  disabled={isPendingUpdate}
+                  variant="secondary-mediator"
+                  onClick={() => setConfirmFalse()}
+                  fullWidth
+                >
+                  {t("Ticket.edit_reward")}
+                </Button>
+                <Button
+                  variant="primary-mediator"
+                  fullWidth
+                  disabled={isPendingUpdate}
+                  onClick={handleSetReward}
+                >
+                  {t("Ticket.set_reward_and_request_payment")}
+                </Button>
+              </div>
             </div>
-            <Separator />
-            <Typography
-              variant="p"
-              affects="small"
-              className="italic"
-            >
-              {t("Ticket.reward_range")}{" "}
-              {currencyFormatters.NumberToEUR(
-                data?.program?.monetary_awards_low ?? 0
-              )}{" "}
-              -{" "}
-              {currencyFormatters.NumberToEUR(
-                data?.program?.monetary_awards_high ?? 0
-              )}
-            </Typography>
-          </div>
-          <Button
-            variant="primary-mediator"
-            fullWidth
-          >
-            {t("Ticket.set_reward_and_request_payment")}
-          </Button>
+          ) : (
+            <>
+              <div
+                className={cn("mx-auto flex w-full max-w-56 flex-col gap-4")}
+              >
+                <div className={cn("grid w-full grid-cols-[auto_1fr] gap-2")}>
+                  <Typography
+                    variant="h1"
+                    weight="bold"
+                  >
+                    €
+                  </Typography>
+                  <CustomNumberFormat
+                    format={(numStr: string) => {
+                      return new Intl.NumberFormat("de-DE", {
+                        style: "decimal",
+                        currency: "EUR",
+                      }).format(Number(numStr));
+                    }}
+                    disabled={data.bounty}
+                    value={data.bounty ?? reward}
+                    onValueChange={(v) => {
+                      console.log(
+                        Number(v.value) <
+                          (data?.program?.monetary_awards_low ?? 0) ||
+                          Number(v.value) >
+                            (data?.program?.monetary_awards_high ?? 0)
+                      );
+                      if (
+                        Number(v.value) <
+                          (data?.program?.monetary_awards_low ?? 0) ||
+                        Number(v.value) >
+                          (data?.program?.monetary_awards_high ?? 0)
+                      ) {
+                        setErrorTrue();
+                        return;
+                      }
+                      setErrorFalse();
+                      setReward(Number(v.value));
+                    }}
+                    className="h-full w-full bg-transparent text-[56px] font-bold focus:outline-none"
+                  />
+                </div>
+                <Separator className={cn(error && "!bg-red-error")} />
+                <Typography
+                  variant="p"
+                  affects="small"
+                  className="italic"
+                >
+                  {t("Ticket.reward_range")}{" "}
+                  {currencyFormatters.NumberToEUR(
+                    data?.program?.monetary_awards_low ?? 0
+                  )}{" "}
+                  -{" "}
+                  {currencyFormatters.NumberToEUR(
+                    data?.program?.monetary_awards_high ?? 0
+                  )}
+                </Typography>
+              </div>
+              <Button
+                variant="primary-mediator"
+                fullWidth
+                disabled={reward === 0 || error}
+                onClick={() => {
+                  setConfirmTrue();
+                }}
+              >
+                {t("Ticket.confirm_reward")}
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </BaseModal>

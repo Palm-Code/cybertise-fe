@@ -36,6 +36,8 @@ import { useTranslations } from "next-intl";
 import { useUserStore } from "@/core/zustands/globals/store";
 import ModalAddToContributor from "../_dialog/ModalAddToContributor";
 import { PaymentCard } from "../card/payment-card";
+import { ModalSetReward } from "../_dialog";
+import { useBoolean } from "usehooks-ts";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
@@ -77,6 +79,29 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [isManualRisk, setIsManualRisk] = useState<boolean>(
     !ticketDetails?.cvss_string
   );
+  const { value: showModalSetReward, toggle: toggleModalSetReward } =
+    useBoolean();
+
+  const handleStatusChange = (v: string) => {
+    if (
+      v.toLowerCase() === "closed" &&
+      ticketDetails?.ticket_type.toLowerCase() === "hacker"
+    ) {
+      setOpenModalConfirmContributor(true);
+      return;
+    }
+    if (v.toLowerCase() === "waiting for payment") {
+      if (ticketDetails?.ticket_type === "Company") {
+        toast.error(
+          t("Ticket.company_ticket_cannot_be_set_to_waiting_for_payment")
+        );
+        return;
+      }
+      toggleModalSetReward();
+      return;
+    }
+    mutateUpdateTicket(`status=${v}&is_contributed=0`);
+  };
 
   const scrollView = () => {
     setTimeout(() => {
@@ -364,16 +389,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     }
                     value={ticketDetails.status}
                     options={filterItems.status}
-                    onValueChange={(v) => {
-                      if (
-                        v.toLowerCase() === "closed" &&
-                        ticketDetails.ticket_type.toLowerCase() === "hacker"
-                      ) {
-                        setOpenModalConfirmContributor(true);
-                        return;
-                      }
-                      mutateUpdateTicket(`status=${v}&is_contributed=0`);
-                    }}
+                    onValueChange={handleStatusChange}
                   />
                 )}
               </div>
@@ -402,19 +418,24 @@ const ReportDetails = ({ id }: { id: string }) => {
                       })}
                     </Typography>
                     {ticketDetails.ticket_type === "Hacker" ? (
-                      <Link
-                        href={
-                          ticketDetails.related_ticket_id
-                            ? `/reports/${ticketDetails.related_ticket_id}`
-                            : `/reports/new?ticket_id=${ticketDetails.id}`
-                        }
-                        className="text-xs underline"
-                        replace
-                      >
-                        {ticketDetails.related_ticket_id
-                          ? t("go_to", { role: t("company") })
-                          : t("create_company_ticket")}
-                      </Link>
+                      ticketDetails.status.toLowerCase() === "paid" ||
+                      ticketDetails.status.toLowerCase() === "closed" ||
+                      (ticketDetails.status.toLowerCase() === "canceled" &&
+                        !ticketDetails.related_ticket_id) ? null : (
+                        <Link
+                          href={
+                            ticketDetails.related_ticket_id
+                              ? `/reports/${ticketDetails.related_ticket_id}`
+                              : `/reports/new?ticket_id=${ticketDetails.id}`
+                          }
+                          className="text-xs underline"
+                          replace
+                        >
+                          {ticketDetails.related_ticket_id
+                            ? t("go_to", { role: t("company") })
+                            : t("create_company_ticket")}
+                        </Link>
+                      )
                     ) : (
                       <Link
                         href={`/reports/${ticketDetails.related_ticket_id}`}
@@ -428,9 +449,14 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </div>
               )}
             </div>
-            <div className={cn("mb-4 w-full")}>
-              <PaymentCard data={ticketDetails} />
-            </div>
+            {ticketDetails.status.toLowerCase() === "waiting for payment" ||
+            ticketDetails.status.toLowerCase() === "paid" ||
+            ticketDetails.status.toLowerCase() === "closed" ||
+            ticketDetails.status.toLowerCase() === "canceled" ? (
+              <div className={cn("mb-4 w-full")}>
+                <PaymentCard data={ticketDetails} />
+              </div>
+            ) : null}
           </div>
           {isFetchingNextPage && (
             <Loader
@@ -450,7 +476,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute z-10 mx-auto w-fit",
+              "absolute z-30 mx-auto w-fit",
               "left-1/2 transform",
               isHiddenChatBox ? "bottom-12" : "bottom-56"
             )}
@@ -542,6 +568,11 @@ const ReportDetails = ({ id }: { id: string }) => {
               setOpenModalConfirmContributor(false);
             });
           }}
+        />
+        <ModalSetReward
+          data={ticketDetails}
+          isOpen={showModalSetReward}
+          onClose={toggleModalSetReward}
         />
       </Desktop>
       <div ref={chatRef}></div>
