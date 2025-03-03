@@ -21,7 +21,7 @@ export const OverviewSwiper = ({ data }: OverviewSwiperProps) => {
             slidesPerView: 3,
           },
         }}
-        className={cn("!grid w-full grid-cols-1")}
+        className={cn("!grid w-full grid-cols-1 !px-6 lg:!px-0")}
       >
         <SwiperSlide className={cn("*:!h-full")}>
           <OverviewCard

@@ -58,14 +58,13 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
               <defs>
                 <linearGradient
                   id="paint0_linear_4547_5071"
-                  x1="217.5"
-                  y1="0.318359"
-                  x2="217.5"
-                  y2="150"
-                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
                 >
-                  <stop stopColor="#4BA2E3" stopOpacity="0.5" />
-                  <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.1" />
+                  <stop stopColor="#4BA2E3" stopOpacity="0.2" />
+                  <stop offset={1} stopColor="#4BA2E3" stopOpacity="0" />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
@@ -141,14 +140,13 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 <defs>
                   <linearGradient
                     id="paint0_linear_4547_5071"
-                    x1="217.5"
-                    y1="0.318359"
-                    x2="217.5"
-                    y2="150"
-                    gradientUnits="userSpaceOnUse"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
                   >
-                    <stop stopColor="#4BA2E3" stopOpacity="0.5" />
-                    <stop offset="1" stopColor="#4BA2E3" stopOpacity="0.1" />
+                    <stop stopColor="#4BA2E3" stopOpacity="0.2" />
+                    <stop offset={1} stopColor="#4BA2E3" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />
