@@ -45,7 +45,10 @@ const Statistics = () => {
             )}
           >
             <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
-            <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+            <AreaChartCard
+              tick={analytics?.data.left_tick ?? []}
+              data={analytics?.data.ticket_reports ?? []}
+            />
           </div>
           <DashboardCardView data={dashboardData?.data} />
         </div>
@@ -82,7 +85,10 @@ const Statistics = () => {
           </div>
           <OverviewSwiper data={analytics?.data} />
           <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
-            <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+            <AreaChartCard
+              tick={analytics?.data.left_tick ?? []}
+              data={analytics?.data.ticket_reports ?? []}
+            />
             <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
           </div>
           <TicketListCard data={dashboardData?.data} />

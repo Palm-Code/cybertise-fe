@@ -22,10 +22,14 @@ import { Dropdown } from "../../filter";
 import { filterItems } from "@/feature/hacker/constants/dashboard";
 
 type AreaChartPropsType = {
+  tick?: I_GetAnalyticsResponse["left_tick"];
   data?: I_GetAnalyticsResponse["ticket_reports"];
 };
 
-export const AreaChartCard = ({ data }: AreaChartPropsType) => {
+export const AreaChartCard = ({
+  data,
+  tick = [-2, -1, 0, 1, 2],
+}: AreaChartPropsType) => {
   const [ticket_status, setTicket_status] = useQueryState("ticket_status");
   return (
     <>
@@ -67,8 +71,8 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
               {data?.every((d) => d.value === 0) ? (
                 <YAxis
                   interval={0}
-                  ticks={[-300, -200, -100, 0, 100, 200, 300, 400, 500]}
-                  domain={[-300, "dataMax"]}
+                  ticks={tick}
+                  domain={[tick?.[0] ?? 0, "dataMax"]}
                   tickFormatter={(value) =>
                     data?.every((d) => d.value === 0) && value === 0
                       ? "0"
@@ -80,8 +84,8 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
               ) : (
                 <YAxis
                   interval={0}
-                  ticks={[0, 100, 200, 300, 400, 500]}
-                  domain={[0, "dataMax"]}
+                  ticks={tick.slice(2)}
+                  domain={[tick?.[2] ?? 0, "dataMax"]}
                 />
               )}
               <CartesianGrid
@@ -102,7 +106,9 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 stroke="#BAFF00"
                 fillOpacity={1}
                 fill="url(#colorPv)"
-                baseValue={data?.every((d) => d.value === 0) ? -300 : 0}
+                baseValue={
+                  data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
+                }
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -145,8 +151,8 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 {data?.every((d) => d.value === 0) ? (
                   <YAxis
                     interval={0}
-                    ticks={[-300, -200, -100, 0, 100, 200, 300, 400, 500]}
-                    domain={[-300, "dataMax"]}
+                    ticks={tick}
+                    domain={[tick?.[0] ?? 0, "dataMax"]}
                     tickFormatter={(value) =>
                       data?.every((d) => d.value === 0) && value === 0
                         ? "0"
@@ -158,8 +164,8 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                 ) : (
                   <YAxis
                     interval={0}
-                    ticks={[0, 100, 200, 300, 400, 500]}
-                    domain={[-300, "dataMax"]}
+                    ticks={tick.slice(2)}
+                    domain={[tick?.[2] ?? 0, "dataMax"]}
                   />
                 )}
                 <CartesianGrid
@@ -180,7 +186,9 @@ export const AreaChartCard = ({ data }: AreaChartPropsType) => {
                   stroke="#BAFF00"
                   fillOpacity={1}
                   fill="url(#colorPv)"
-                  baseValue={data?.every((d) => d.value === 0) ? -300 : 0}
+                  baseValue={
+                    data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
+                  }
                 />
               </AreaChart>
             </ResponsiveContainer>
