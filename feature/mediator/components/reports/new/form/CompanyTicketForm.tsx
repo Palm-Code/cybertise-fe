@@ -183,7 +183,6 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                               label={t(
                                 "company_ticket.ticket_details.ticket_title"
                               )}
-                              defaultValue={forms.title}
                               value={forms.title}
                               onChange={(e) => {
                                 methods.setValue("title", e.target.value, {
@@ -197,7 +196,6 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                               label={t(
                                 "company_ticket.ticket_details.short_description"
                               )}
-                              defaultValue={forms.description}
                               value={forms.description}
                               onChange={(e) => {
                                 methods.setValue(

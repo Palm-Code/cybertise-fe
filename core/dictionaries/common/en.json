@@ -46,7 +46,7 @@
     "rewards": "Rewards",
     "status": "Status",
     "last_update": "Last Update",
-    "last_reported": "Last Reported {date} ago",
+    "last_reported": "Reported {date} ago",
     "last_message": "Last Message",
     "create_company_ticket": "Create Company Ticket",
     "hacker_ticket": "Hacker Ticket",
@@ -65,7 +65,9 @@
     "note": "Note:",
     "confirm_reward_description": "Please note, that rewards that had been set cannot be change after it sent to the company. ",
     "edit_reward": "Edit Reward",
-    "download_receipt": "Download Receipt"
+    "download_receipt": "Download Receipt",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "Programs": {
     "program_name": "Program Name",

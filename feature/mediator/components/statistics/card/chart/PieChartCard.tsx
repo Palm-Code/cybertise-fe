@@ -72,7 +72,7 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
         <div
           className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
         >
-          <Coins className={iconColor.hacker} />
+          <Coins className={iconColor.mediator} />
           <Typography
             variant="p"
             affects="normal"
@@ -187,7 +187,7 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
           <div
             className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
           >
-            <Coins className={iconColor.hacker} />
+            <Coins className={iconColor.mediator} />
             <Typography
               variant="p"
               affects="normal"

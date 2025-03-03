@@ -39,7 +39,7 @@
     "days": "Letzte {days} Tage"
   },
   "Ticket": {
-    "last_reported": "Zuletzt gemeldet vor {date}",
+    "last_reported": "Gemeldet {Datum} vor",
     "ticket": "Ticket",
     "risk_level": "Risikostufe",
     "vulnerability_type": "Schwachstellentyp (CWE)",
@@ -64,7 +64,9 @@
     "error_reward": "Die Belohnung muss zwischen {Minreward} und {maxreward} liegen",
     "note": "Notiz:",
     "confirm_reward_description": "Bitte beachten Sie, dass die festgelegten Belohnungen nicht geändert werden können, nachdem es an das Unternehmen gesendet wurde.",
-    "download_receipt": "Laden Sie die Quittung herunter"
+    "download_receipt": "Laden Sie die Quittung herunter",
+    "show_more": "Zeigen Sie mehr",
+    "show_less": "Weniger zeigen"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",

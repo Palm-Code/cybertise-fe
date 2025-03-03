@@ -105,7 +105,7 @@ export default function SelectGroupDropdown({
                       {Object.keys(groupedData)[idx]}
                     </Typography>
                   </div>
-                  {groupedData[Object.keys(groupedData)[idx]].map((v) => (
+                  {groupedData[Object.keys(groupedData)[idx]].map((v, i) => (
                     <CommandItem
                       className={cn(
                         "relative flex w-full cursor-default select-none items-center gap-1",
@@ -114,7 +114,7 @@ export default function SelectGroupDropdown({
                         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                         "dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
                       )}
-                      key={v.value}
+                      key={`${v.value}-${i}`}
                       value={v.label as string}
                       onSelect={(currentValue) => {
                         const values = options.find(
@@ -136,7 +136,7 @@ export default function SelectGroupDropdown({
                           className="h-4 w-6 object-contain"
                         />
                       )}
-                      {v.label}
+                      {v.label ?? "No data found"}
                       <Check
                         className={cn(
                           "ml-auto h-4 w-4",

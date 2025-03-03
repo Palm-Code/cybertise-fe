@@ -4,7 +4,7 @@ import {
   I_GetResendVerificationSuccessResponse,
 } from "@/core/models/auth/resend-verification";
 import { I_GetErrorRes } from "@/core/models/common";
-import { fetchPostResendVerification } from "@/core/services/auth/resend-verification/fetchPostResendverification";
+import { fetchPostResendVerification } from "@/core/services/auth/resend-verification";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";

@@ -13,6 +13,7 @@ import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { usePostUpdateTicket } from "@/feature/mediator/query/client";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
+import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
@@ -37,6 +38,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
   } = useBoolean(false);
   const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
     usePostUpdateTicket(data.id);
+  const { value: collapse, toggle: toggleCollapse } = useBoolean(false);
 
   const handleSetReward = () => {
     mutateUpdateTicket(`bounty=${reward}&status=Waiting for Payment`).then(
@@ -50,7 +52,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
     <BaseModal {...props}>
       <div
         className={cn(
-          "mx-auto aspect-square w-full max-w-2xl overflow-auto rounded-lg",
+          "mx-auto max-h-fit w-full max-w-2xl overflow-auto rounded-lg",
           "bg-background-main-light dark:bg-background-main-dark",
           "flex flex-col gap-6 px-6 py-4 pb-10"
         )}
@@ -77,9 +79,9 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
               "p-6"
             )}
           >
-            <div className={cn("flex w-full flex-col gap-8")}>
-              <div className="flex w-full items-center justify-between">
-                <div className={cn("flex flex-col gap-2")}>
+            <div className={cn("flex w-full flex-col")}>
+              <div className="grid w-full grid-cols-[1fr_auto] gap-4">
+                <div className={cn("!line-clamp-1 flex flex-col gap-2")}>
                   {`#${data.code} - ${data.title}`}
                 </div>
                 <div className={cn("flex items-center gap-4")}>
@@ -95,73 +97,101 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                   </Typography>
                 </div>
               </div>
-              <div
-                className={cn(
-                  "flex flex-wrap items-center justify-between gap-40",
-                  "gap-6"
+              <AnimatePresence>
+                {collapse && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, margin: "0px" }}
+                    animate={{
+                      opacity: 1,
+                      height: "auto",
+                      margin: "32px 0px",
+                    }}
+                    exit={{
+                      opacity: 0,
+                      height: 0,
+                      margin: "0px",
+                      transition: {
+                        height: { duration: 0.3, delay: 0.15 },
+                        margin: { duration: 0.3, delay: 0.15 },
+                        opacity: { duration: 0.2 },
+                      },
+                    }}
+                    transition={{ duration: 0.3, opacity: { delay: 0.15 } }}
+                    className={cn(
+                      "flex flex-wrap items-center justify-between gap-40",
+                      "gap-6"
+                    )}
+                  >
+                    <div className={cn("flex flex-col gap-2")}>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {t("Ticket.vulnerability_type")}
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {data?.vulnerabiity_type?.label}
+                      </Typography>
+                    </div>
+                    <div className={cn("flex w-fit flex-col gap-2")}>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {t("Ticket.risk_level")}
+                      </Typography>
+                      <Badge
+                        variant={
+                          data.risk_level_category.toLowerCase() as keyof typeof Badge
+                        }
+                      >
+                        {data?.risk_level_category}
+                      </Badge>
+                    </div>
+                    <div className={cn("flex w-fit flex-col gap-2")}>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {t("Ticket.status")}
+                      </Typography>
+                      <Indicator
+                        variant={
+                          data.status.toLowerCase() as keyof typeof Indicator
+                        }
+                      >
+                        {data?.status}
+                      </Indicator>
+                    </div>
+                    <div className={cn("flex w-fit flex-col gap-2")}>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {t("Ticket.rewards")}
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {data.bounty
+                          ? currencyFormatters.NumberToEUR(data?.bounty ?? 0)
+                          : `${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_low ?? 0)} - ${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_high ?? 0)}`}
+                      </Typography>
+                    </div>
+                  </motion.div>
                 )}
+              </AnimatePresence>
+              <Button
+                variant="ghost-mediator"
+                onClick={toggleCollapse}
+                size="icon"
               >
-                <div className={cn("flex flex-col gap-2")}>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {t("Ticket.vulnerability_type")}
-                  </Typography>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {data?.vulnerabiity_type?.label}
-                  </Typography>
-                </div>
-                <div className={cn("flex w-fit flex-col gap-2")}>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {t("Ticket.risk_level")}
-                  </Typography>
-                  <Badge
-                    variant={
-                      data.risk_level_category.toLowerCase() as keyof typeof Badge
-                    }
-                  >
-                    {data?.risk_level_category}
-                  </Badge>
-                </div>
-                <div className={cn("flex w-fit flex-col gap-2")}>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {t("Ticket.status")}
-                  </Typography>
-                  <Indicator
-                    variant={
-                      data.status.toLowerCase() as keyof typeof Indicator
-                    }
-                  >
-                    {data?.status}
-                  </Indicator>
-                </div>
-                <div className={cn("flex w-fit flex-col gap-2")}>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {t("Ticket.rewards")}
-                  </Typography>
-                  <Typography
-                    variant="p"
-                    affects="small"
-                  >
-                    {data.bounty
-                      ? currencyFormatters.NumberToEUR(data?.bounty ?? 0)
-                      : `${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_low ?? 0)} - ${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_high ?? 0)}`}
-                  </Typography>
-                </div>
-              </div>
+                {collapse ? t("Ticket.show_less") : t("Ticket.show_more")}
+              </Button>
             </div>
           </div>
           {confirm ? (

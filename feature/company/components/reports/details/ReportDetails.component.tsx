@@ -31,6 +31,7 @@ import { indicatorVariants } from "@/core/ui/components/indicator/indicator";
 import { useInView } from "react-intersection-observer";
 import { useTranslations } from "next-intl";
 import { useUserStore } from "@/core/zustands/globals/store";
+import { PaymentCard } from "../card/payment-card";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
@@ -270,6 +271,12 @@ const ReportDetails = ({ id }: { id: string }) => {
                 </Indicator>
               </div>
             </Card>
+            {ticketDetails.status.toLowerCase() === "waiting for payment" ||
+            ticketDetails.status.toLowerCase() === "paid" ||
+            ticketDetails.status.toLowerCase() === "closed" ||
+            ticketDetails.status.toLowerCase() === "canceled" ? (
+              <PaymentCard data={ticketDetails} />
+            ) : null}
             <AnimationWrapper>
               <div
                 className={cn(
