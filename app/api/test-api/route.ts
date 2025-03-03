@@ -1,3 +1,5 @@
-export async function GET() {
-  return Response.json({ message: "Hello, world!" });
+import { NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+  return Response.redirect(new URL("/auth/signin", request.url));
 }

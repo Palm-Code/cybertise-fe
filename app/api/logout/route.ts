@@ -1,6 +1,6 @@
 // app/api/logout/route.ts
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   const cookiesData = await cookies();
@@ -22,5 +22,5 @@ export async function POST(request: NextRequest) {
   cookiesData.delete("session");
   cookiesData.delete("token");
 
-  return NextResponse.json({ message: "Logged out successfully" });
+  return Response.redirect(new URL("/auth/signin", request.url));
 }

@@ -29,11 +29,10 @@ const TicketCard = ({
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   const t = useTranslations("Ticket");
-  const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
-    usePostUpdateTicket(props.related_ticket_id ?? props.id);
 
-  const onClickSendRequest = () => {
-    mutateUpdateTicket(`status=Waiting for Payment`);
+  const handleDownloadReceipt = () => {
+    // TODO: Implement download receipt
+    return;
   };
 
   return (
@@ -306,28 +305,25 @@ const TicketCard = ({
                   >
                     {t("hacker_ticket")}
                   </Button>
+                  {!!props.related_ticket_id && (
+                    <Button
+                      variant="tertiary-company"
+                      prefixIcon={<Building2 />}
+                      postFixIcon={<ChevronRight />}
+                      asLink
+                      href={`/reports/${props.related_ticket_id}`}
+                    >
+                      {t("company_ticket")}
+                    </Button>
+                  )}
                   <Button
-                    variant="tertiary-company"
-                    prefixIcon={<Building2 />}
-                    postFixIcon={<ChevronRight />}
-                    asLink
-                    href={`/reports/${props.related_ticket_id}`}
-                  >
-                    {t("company_ticket")}
-                  </Button>
-                  <Button
-                    disabled={
-                      props.is_requested_payment ||
-                      props.bounty ||
-                      isPendingUpdate
-                    }
-                    isLoading={isPendingUpdate}
+                    disabled={props.is_payment_requested === 1}
                     variant="primary-mediator"
-                    onClick={onClickSendRequest}
+                    onClick={handleDownloadReceipt}
                   >
-                    {props.is_requested_payment || props.bounty
+                    {props.is_payment_requested === 1
                       ? t("payment_request_sent")
-                      : t("send_payment_request")}
+                      : t("download_receipt")}
                   </Button>
                   <Button
                     size="icon"

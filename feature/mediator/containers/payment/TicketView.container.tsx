@@ -1,7 +1,6 @@
 "use client";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import { PaymentLoadingList, PaymentTicketCardList } from "@/core/ui/container";
-import ChatListCardLoadingList from "@/core/ui/container/loading-state/ChatLoadingList.container";
 import { AnimationWrapper } from "@/core/ui/layout";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 

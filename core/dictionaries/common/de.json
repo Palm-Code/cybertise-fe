@@ -59,7 +59,12 @@
     "set_reward": "Belohnungen festlegen",
     "reward_range": "Belohnungsbereich:",
     "set_reward_and_request_payment": "Stellen und senden Sie eine Belohnungsanfrage",
-    "help": "Helfen"
+    "help": "Helfen",
+    "confirm_reward": "Belohnung bestätigen",
+    "error_reward": "Die Belohnung muss zwischen {Minreward} und {maxreward} liegen",
+    "note": "Notiz:",
+    "confirm_reward_description": "Bitte beachten Sie, dass die festgelegten Belohnungen nicht geändert werden können, nachdem es an das Unternehmen gesendet wurde.",
+    "download_receipt": "Laden Sie die Quittung herunter"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -134,7 +139,10 @@
     "hacker": "Hacker",
     "chat_alert": "Dieser Chat ist auf diesem Gerät schreibgeschützt. \nBitte greifen Sie über den Desktop zu, um zu interagieren.",
     "ticket_type": "{role} Ticket",
-    "no_chat_found": "Kein Chat gefunden"
+    "no_chat_found": "Kein Chat gefunden",
+    "Ticket": {
+      "company_ticket_cannot_be_set_to_waiting_for_payment": "Das Unternehmens -Ticket kann nicht auf die Zahlung eingestellt werden"
+    }
   },
   "Loading": {
     "loading_data": "Daten abrufen..."
