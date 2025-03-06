@@ -80,7 +80,7 @@ export const OverviewCard = ({
                   "text-semantic-light-success dark:text-semantic-dark-success"
                 )}
               >
-                {changes}
+                {changes} %
               </Typography>
             </div>
           </div>

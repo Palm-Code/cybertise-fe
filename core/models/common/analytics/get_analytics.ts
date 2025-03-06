@@ -26,6 +26,7 @@ export interface I_GetAnalyticsResponse {
   total_valid_tickets_changes: number;
   unpublished_vrp: number;
   unpublished_vrp_changes: number;
+  left_tick: number[];
 }
 
 export interface OverallRiskReported {
