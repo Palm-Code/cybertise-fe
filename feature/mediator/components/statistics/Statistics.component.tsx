@@ -27,14 +27,6 @@ const Statistics = () => {
       refetch,
       isRefetching,
     },
-    queryMobile: {
-      data,
-      isLoading: mobileIsLoading,
-      refetch: mobileRefetch,
-      isFetching: mobileIsFetching,
-      isFetchingNextPage,
-      fetchNextPage,
-    },
   } = useGetChatList(payload);
   return (
     <>
