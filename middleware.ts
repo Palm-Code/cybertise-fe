@@ -25,4 +25,7 @@ export default withAuthMiddleware(mainMiddleware, [
   "/manage-company",
   "/reports",
   "/settings",
+  "/services",
+  "/payment",
+  "/earnings",
 ]);

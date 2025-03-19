@@ -26,7 +26,10 @@ export default function withAuthMiddleware(
       if (!decryptedSession) {
         return redirects();
       }
-      if (pathname.includes("/vrp-launchpad")) {
+      if (
+        pathname.includes("/vrp-launchpad") ||
+        pathname.includes("/payment")
+      ) {
         const isHacker = decryptedSession?.user.role === Role.hacker;
         if (isHacker) {
           const url = new URL("/dashboard", req.url);
@@ -40,14 +43,17 @@ export default function withAuthMiddleware(
           return NextResponse.redirect(url);
         }
       }
-      if (pathname.includes("/programs")) {
+      if (pathname.includes("/programs") || pathname.includes("/earnings")) {
         const isHacker = decryptedSession?.user.role === Role.hacker;
         if (!isHacker) {
           const url = new URL("/dashboard", req.url);
           return NextResponse.redirect(url);
         }
       }
-      if (pathname.includes("/manage-company")) {
+      if (
+        pathname.includes("/manage-company") ||
+        pathname.includes("/services")
+      ) {
         const isCompany = decryptedSession?.user.role === Role.company;
         if (!isCompany) {
           const url = new URL("/dashboard", req.url);

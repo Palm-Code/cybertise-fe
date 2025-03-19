@@ -123,7 +123,9 @@ export const AreaChartCard = ({
                 stroke="#BAFF00"
                 fillOpacity={1}
                 fill="url(#colorPv)"
-                baseValue={tick?.[0]}
+                baseValue={
+                  data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
+                }
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -217,7 +219,9 @@ export const AreaChartCard = ({
                   stroke="#BAFF00"
                   fillOpacity={1}
                   fill="url(#colorPv)"
-                  baseValue={tick?.[0]}
+                  baseValue={
+                    data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
+                  }
                 />
               </AreaChart>
             </ResponsiveContainer>
