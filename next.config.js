@@ -6,6 +6,9 @@ const nextConfig = {
   reactStrictMode: false,
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
+  },
   images: {
     remotePatterns: [
       {

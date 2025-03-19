@@ -33,15 +33,22 @@ const Statistics = () => {
     <>
       <MobileLayout>
         <div className={cn("flex w-full flex-col gap-10")}>
-          <div className={cn("flex w-full items-center justify-between")}>
+          <div className={cn("flex w-full items-center justify-between px-6")}>
             <Typography variant="h4">{t("overview")}</Typography>
             <FilterStatistic />
           </div>
           <PartnerSwiper />
           <OverviewSwiper data={analytics?.data} />
-          <div className={cn("grid w-full grid-cols-1 items-center gap-5")}>
-            <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+          <div
+            className={cn(
+              "grid w-full grid-cols-1 items-center gap-5 px-6 md:px-0"
+            )}
+          >
             <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
+            <AreaChartCard
+              tick={analytics?.data.left_tick ?? []}
+              data={analytics?.data.ticket_reports ?? []}
+            />
           </div>
           <DashboardCardView data={dashboardData?.data} />
         </div>
@@ -78,7 +85,10 @@ const Statistics = () => {
           </div>
           <OverviewSwiper data={analytics?.data} />
           <div className={cn("grid w-full grid-cols-2 items-center gap-5")}>
-            <AreaChartCard data={analytics?.data.ticket_reports ?? []} />
+            <AreaChartCard
+              tick={analytics?.data.left_tick ?? []}
+              data={analytics?.data.ticket_reports ?? []}
+            />
             <PieChartCard data={analytics?.data.overall_risk_reported ?? []} />
           </div>
           <TicketListCard data={dashboardData?.data} />

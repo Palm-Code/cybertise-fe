@@ -14,7 +14,7 @@ const TicketView = ({
 }) => {
   return (
     <AnimationWrapper>
-      <div className="_flexbox__col__center__start z-10 h-full w-full gap-6">
+      <div className="_flexbox__col__center__start z-10 h-full w-full gap-6 px-6 md:px-0">
         {isLoading ? (
           <ChatListCardLoadingList />
         ) : data?.length === 0 ? (

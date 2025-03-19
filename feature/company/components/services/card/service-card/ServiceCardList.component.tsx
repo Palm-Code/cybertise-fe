@@ -20,6 +20,7 @@ export const ServiceCard = ({
     <Card
       isClickable
       href={href}
+      target="_blank"
     >
       <div className={cn("grid w-full grid-cols-[auto_1fr] gap-4 xl:gap-9")}>
         <div
