@@ -69,7 +69,12 @@
     "show_more": "Show more",
     "show_less": "Show less",
     "change_bounty_rewards": "Change bounty rewards",
-    "reason": "Reason of bounty changes"
+    "reason": "Reason of bounty changes",
+    "payment_status": "Payment Status",
+    "retry_payment": "Retry payment",
+    "view_details": "View details",
+    "payment_failed": "Payment failed",
+    "rewards_payment": "Rewards Payment"
   },
   "Programs": {
     "program_name": "Program Name",

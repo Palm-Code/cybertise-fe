@@ -4,6 +4,7 @@ import { Wrapper } from "../Wrapper";
 import { cn } from "@/core/lib/utils";
 import { Coins } from "lucide-react";
 import { iconColor } from "@/core/constants/common";
+import { Typography } from "@/core/ui/components";
 import {
   Area,
   AreaChart,
@@ -119,9 +120,7 @@ export const AreaChartCard = ({
                 stroke="#4BA2E3"
                 fillOpacity={1}
                 fill="url(#paint0_linear_4547_5071)"
-                baseValue={
-                  data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
-                }
+                baseValue={tick?.[0]}
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -213,9 +212,7 @@ export const AreaChartCard = ({
                   stroke="#4BA2E3"
                   fillOpacity={1}
                   fill="url(#paint0_linear_4547_5071)"
-                  baseValue={
-                    data?.every((d) => d.value === 0) ? tick?.[0] : tick?.[2]
-                  }
+                  baseValue={tick?.[0]}
                 />
               </AreaChart>
             </ResponsiveContainer>

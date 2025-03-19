@@ -275,6 +275,22 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
+                    {t("payment_status")}
+                  </Typography>
+                  <Indicator
+                    variant={
+                      props.status?.toLowerCase() as keyof typeof indicatorVariants
+                    }
+                  >
+                    {props.status}
+                  </Indicator>
+                </div>
+                <div className="_flexbox__col__start gap-2.5">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    className="text-neutral-light-30 dark:text-neutral-dark-30"
+                  >
                     {t("rewards")}
                   </Typography>
                   <Typography
@@ -344,10 +360,11 @@ const TicketCard = ({
                   >
                     {t("view_chat")}
                   </Button>
-                  <Button variant="primary-company">{t("make_payment")}</Button>
+                  {/* <Button variant="primary-company">{t("make_payment")}</Button> */}
                   <Button
                     asLink
                     href="mailto:hello@cybertise.eu?subject=Payment%Help"
+                    target="_blank"
                     size="icon"
                     variant="tertiary-company"
                     title={t("help")}

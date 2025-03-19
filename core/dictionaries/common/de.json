@@ -68,7 +68,12 @@
     "show_more": "Zeigen Sie mehr",
     "show_less": "Weniger zeigen",
     "change_bounty_rewards": "Kopfgeldbelohnungen ändern",
-    "reason": "Grund für Kopfgeldänderungen"
+    "reason": "Grund für Kopfgeldänderungen",
+    "payment_status": "Zahlungsstatus",
+    "retry_payment": "Zahlung wiederholen",
+    "view_details": "Details anzeigen",
+    "payment_failed": "Zahlung fehlgeschlagen",
+    "rewards_payment": "Belohnungszahlung"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
