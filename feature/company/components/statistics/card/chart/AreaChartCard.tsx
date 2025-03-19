@@ -4,7 +4,6 @@ import { Wrapper } from "../Wrapper";
 import { cn } from "@/core/lib/utils";
 import { Coins } from "lucide-react";
 import { iconColor } from "@/core/constants/common";
-import { Typography } from "@/core/ui/components";
 import {
   Area,
   AreaChart,

@@ -4,8 +4,11 @@ import {
   Badge,
   BaseModal,
   Button,
+  Checkbox,
   Indicator,
+  Input,
   Separator,
+  TextArea,
   Typography,
 } from "@/core/ui/components";
 import CustomNumberFormat from "@/core/ui/components/input/price-format-input";
@@ -36,6 +39,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
     setTrue: setConfirmTrue,
     setFalse: setConfirmFalse,
   } = useBoolean(false);
+  const { value: changeBounty, toggle: toggleChangeBounty } = useBoolean(false);
   const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
     usePostUpdateTicket(data.id);
   const { value: collapse, toggle: toggleCollapse } = useBoolean(false);
@@ -72,7 +76,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
         >
           {t("Ticket.set_reward")}
         </Typography>
-        <div className={cn("flex w-full flex-col gap-16", "items-center")}>
+        <div className={cn("flex w-full flex-col gap-10", "items-center")}>
           <div
             className={cn(
               "w-full rounded-md bg-neutral-light-90 dark:bg-neutral-dark-90",
@@ -182,6 +186,20 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                           : `${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_low ?? 0)} - ${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_high ?? 0)}`}
                       </Typography>
                     </div>
+                    <div className={cn("flex w-fit flex-col gap-2")}>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        {t("Ticket.reason")}
+                      </Typography>
+                      <Typography
+                        variant="p"
+                        affects="small"
+                      >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      </Typography>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -193,6 +211,23 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                 {collapse ? t("Ticket.show_less") : t("Ticket.show_more")}
               </Button>
             </div>
+          </div>
+          <div
+            className={cn(
+              "mr-auto grid grid-cols-[auto_1fr] items-center gap-2"
+            )}
+          >
+            <Checkbox
+              variant="mediator"
+              checked={changeBounty}
+              onCheckedChange={toggleChangeBounty}
+            />
+            <Typography
+              variant="p"
+              affects="small"
+            >
+              {t("Ticket.change_bounty_rewards")}
+            </Typography>
           </div>
           {confirm ? (
             <div className={cn("flex w-full flex-col gap-16")}>
@@ -248,7 +283,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                         currency: "EUR",
                       }).format(Number(numStr));
                     }}
-                    disabled={data.bounty}
+                    disabled={data.bounty || !changeBounty}
                     value={data.bounty ?? reward}
                     onValueChange={(v) => {
                       console.log(
@@ -272,7 +307,9 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                     className="h-full w-full bg-transparent text-[56px] font-bold focus:outline-none"
                   />
                 </div>
-                <Separator className={cn(error && "!bg-red-error")} />
+                {changeBounty && (
+                  <Separator className={cn(error && "!bg-red-error")} />
+                )}
                 <Typography
                   variant="p"
                   affects="small"
@@ -288,15 +325,21 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                   )}
                 </Typography>
               </div>
+              {changeBounty && (
+                <TextArea
+                  label={t("Ticket.reason")}
+                  description={`${t("TextEditor.remaining_characters")}: 5000 / 5000`}
+                  maxLength={5000}
+                />
+              )}
               <Button
                 variant="primary-mediator"
                 fullWidth
-                disabled={reward === 0 || error}
                 onClick={() => {
                   setConfirmTrue();
                 }}
               >
-                {t("Ticket.confirm_reward")}
+                {t("Ticket.set_reward_and_request_payment")}
               </Button>
             </>
           )}

@@ -67,7 +67,9 @@
     "edit_reward": "Edit Reward",
     "download_receipt": "Download Receipt",
     "show_more": "Show more",
-    "show_less": "Show less"
+    "show_less": "Show less",
+    "change_bounty_rewards": "Change bounty rewards",
+    "reason": "Reason of bounty changes"
   },
   "Programs": {
     "program_name": "Program Name",

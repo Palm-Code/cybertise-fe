@@ -13,9 +13,9 @@ export const checkboxVariants = cva(
         company:
           "text-white data-[state=checked]:bg-sky-normal data-[state=checked]:border-sky-normal hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
         "company staff":
-          "text-white data-[state=checked]:bg-sky-normal data-[state=checked]:border-sky-normal hover:border-sky-normal focus:border-2 focus:border-sky-normal disabled:bg-sky-light",
+          "text-white data-[state=checked]:bg-sky-normal dark:data-[state=checked]:bg-sky-normal data-[state=checked]:border-sky-normal dark:data-[state=checked]:border-sky-normal hover:border-sky-normal dark:hover:border-sky-normal focus:border-2 focus:border-sky-normal dark:focus:border-sky-normal disabled:bg-sky-light",
         mediator:
-          "text-white data-[state=checked]:bg-violet-normal data-[state=checked]:border-violet-normal hover:border-violet-normal focus:border-2 focus:border-violet-normal disabled:bg-violet-light",
+          "text-white data-[state=checked]:bg-violet-normal dark:data-[state=checked]:bg-violet-normal data-[state=checked]:border-violet-normal dark:data-[state=checked]:border-violet-normal hover:border-violet-normal dark:hover:border-violet-normal focus:border-2 focus:border-violet-normal dark:focus:border-violet-normal disabled:bg-violet-light",
       },
     },
     defaultVariants: {
