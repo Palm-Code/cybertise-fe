@@ -22,14 +22,26 @@ export const SuccessDialog = ({ ...props }: SuccessDialogProps = {}) => {
           <div className="rounded-full border-[6px] border-neutral-light-0 p-4 dark:border-neutral-dark-0">
             <Users className="size-8 text-neutral-light-0 dark:text-neutral-dark-0" />
           </div>
-          <Typography variant="h4" weight="bold" align="center">
+          <Typography
+            variant="h4"
+            weight="bold"
+            align="center"
+          >
             {t("success_title")}
           </Typography>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+          >
             {t("success_description")}
           </Typography>
         </div>
-        <Button variant="primary-mediator" fullWidth onClick={props.onClose}>
+        <Button
+          variant="primary-mediator"
+          fullWidth
+          onClick={props.onClose}
+        >
           {t("success_button")}
         </Button>
       </div>

@@ -31,7 +31,11 @@ const Authentication = ({
           )}
         >
           <div className="_flexbox__row__start__between w-full">
-            <Typography variant="h6" weight="bold" className="xl:inline-flex">
+            <Typography
+              variant="h6"
+              weight="bold"
+              className="xl:inline-flex"
+            >
               <KeyRound className="mb-4 mr-4 h-8 w-8 xl:mb-0" />
               {t("label_2fa")}
             </Typography>

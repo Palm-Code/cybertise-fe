@@ -53,7 +53,10 @@ const AssetType = ({
         alignOffset={-12}
         className="!bg-background-main-light !p-6 !pr-11 dark:!bg-background-main-dark"
       >
-        <Typography variant="p" affects="small">
+        <Typography
+          variant="p"
+          affects="small"
+        >
           {label}
         </Typography>
         <div className="mt-4 flex w-fit max-w-[360px] flex-wrap gap-x-2 gap-y-4">
@@ -71,7 +74,10 @@ const AssetType = ({
               </SelectItem>
             ))
           ) : (
-            <SelectItem value="no items" disabled>
+            <SelectItem
+              value="no items"
+              disabled
+            >
               No options
             </SelectItem>
           )}

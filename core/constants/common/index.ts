@@ -60,6 +60,12 @@ export const useMenuItems = () => {
         path: "/reports",
         key: "getChatList",
       },
+      {
+        id: "earnings",
+        title: t("earnings"),
+        path: "/earnings",
+        key: "getEarnings",
+      },
     ],
     company: [
       {
@@ -143,6 +149,12 @@ export const useMenuItems = () => {
         title: t("reports"),
         path: "/reports",
         key: "getChatList",
+      },
+      {
+        id: "payment",
+        title: t("payment"),
+        path: "/payment",
+        key: "getPayment",
       },
     ],
   };

@@ -9,11 +9,18 @@ const RnP = ({ data }: { data: string | null }) => {
     <AnimationWrapper className="!px-0">
       <Card className="px-8 py-12">
         <div className="_flexbox__col__start__start w-full gap-6">
-          <Typography variant="p" affects="extralarge" weight="bold">
+          <Typography
+            variant="p"
+            affects="extralarge"
+            weight="bold"
+          >
             {t("rules")}
           </Typography>
           <article>
-            <Tiptap showing description={sanitize(data as string)} />
+            <Tiptap
+              showing
+              description={sanitize(data as string)}
+            />
           </article>
         </div>
       </Card>

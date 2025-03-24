@@ -320,8 +320,14 @@ const FileInput = forwardRef<HTMLInputElement, InputProps>(
               className="_flexbox__col__start__start h-full w-full gap-10"
             >
               <div className="_flexbox__col__center m-auto mb-0 cursor-pointer gap-2.5">
-                <UploadCloud width={32} height={32} />
-                <Typography variant="h6" weight="bold">
+                <UploadCloud
+                  width={32}
+                  height={32}
+                />
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("drag_and_drop")}
                 </Typography>
                 <Typography

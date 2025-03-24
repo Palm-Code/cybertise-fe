@@ -26,10 +26,17 @@ const ModalSubmitVRP = ({
       >
         <div className="_flexbox__col__center w-full gap-6">
           <CheckCircle className="h-16 w-16 text-semantic-light-success dark:text-semantic-dark-success" />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Your VRP Submited!
           </Typography>
-          <Typography variant="p" affects="normal" className="mt-2">
+          <Typography
+            variant="p"
+            affects="normal"
+            className="mt-2"
+          >
             {titleText}
           </Typography>
         </div>

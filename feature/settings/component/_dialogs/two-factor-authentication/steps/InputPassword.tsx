@@ -38,7 +38,10 @@ const InputPassword = ({
           {t("button_cancel")}
         </Button>
         <KeyRound className="h-16 w-16" />
-        <Typography variant="h4" weight="semibold">
+        <Typography
+          variant="h4"
+          weight="semibold"
+        >
           {t("title")}
         </Typography>
         <Typography

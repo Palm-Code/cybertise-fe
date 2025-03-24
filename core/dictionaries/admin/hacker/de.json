@@ -114,5 +114,8 @@
         "attachment": "Anhänge"
       }
     }
+  },
+  "Earnings": {
+    "title": "Einkommen"
   }
 }

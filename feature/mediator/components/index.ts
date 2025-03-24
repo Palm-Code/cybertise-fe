@@ -7,3 +7,4 @@ export { default as Companies } from "./companies/Companies.component";
 export { default as CompaniesDetail } from "./companies/details/CompaniesDetail.component";
 export { default as NewCompanyReport } from "./reports/new/NewCompanyReport.component";
 export { default as Statistics } from "./statistics/Statistics.component";
+export { default as Payment } from "./payment/Payment.component";

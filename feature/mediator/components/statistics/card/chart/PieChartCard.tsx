@@ -11,18 +11,38 @@ import {
   PieChart,
   PieLabelRenderProps,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 import { I_GetAnalyticsResponse } from "@/core/models/common/analytics";
 import { useTranslations } from "next-intl";
 import DesktopLayout from "@/core/ui/layout/wrapper/DesktopLayout.wrapper";
 import MobileLayout from "@/core/ui/layout/wrapper/MobileLayout.wrapper";
 
-const colorKeys: Record<string, string> = {
-  critical_risk: "#E60202",
-  high_risk: "#FF5151",
-  medium_risk: "#F5891D",
-  low_risk: "#F0F00A",
-  no_risk: "#D9D9D9",
+export const COLORS = [
+  { start: "#CC0000", end: "#FFF" },
+  { start: "#FF0000", end: "#FFF" },
+  { start: "#F5891D", end: "#FFF" },
+  { start: "#F0F00A", end: "#FFF" },
+  { start: "#D9D9D9", end: "#FFF" },
+];
+
+export const CustomTooltip = ({ payload }: any) => {
+  if (payload && payload.length) {
+    return (
+      <div
+        className={cn(
+          "rounded-md bg-neutral-light-80 px-2.5 py-2 dark:bg-neutral-dark-80",
+          "border border-neutral-light-60 dark:border-white",
+          "flex flex-col items-center gap-1"
+        )}
+      >
+        <p className="text-[10px]">{`${payload[0].name}`}</p>
+        <p className="text-[10px]">{`${payload[0].value} of ${payload[0].payload.totalData}`}</p>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 const RADIAN = Math.PI / 180;
@@ -53,7 +73,10 @@ const renderCustomizedLabel = (props: PieLabelRenderProps) => {
       fontSize={12}
       fontWeight="bold"
       color="#000"
-      className={cn("text-[8px] md:text-xs", percent === 0 ? "opacity-0" : "")}
+      className={cn(
+        "!stroke-none text-[8px] !text-black hover:!stroke-none md:text-xs",
+        percent === 0 ? "opacity-0" : ""
+      )}
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
@@ -66,19 +89,33 @@ type DoughnutCartPropsType = {
 
 export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
   const t = useTranslations("DashboardHacker");
+
+  const customData = data.map((entry) => ({
+    name: entry.name,
+    value: entry.value,
+    totalData: data.reduce((acc, curr) => acc + curr.value, 0),
+    color_key: entry.color_key,
+  }));
   return (
     <>
       <MobileLayout>
         <div
           className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
         >
-          <Coins className={iconColor.hacker} />
-          <Typography variant="p" affects="normal" weight="semibold">
+          <Coins className={iconColor.mediator} />
+          <Typography
+            variant="p"
+            affects="normal"
+            weight="semibold"
+          >
             {t("pieChart.title")}
           </Typography>
         </div>
         <div className="mx-auto hidden h-[300px] w-full max-w-sm md:block">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <PieChart>
               <Legend
                 layout="vertical"
@@ -97,8 +134,26 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                   </Typography>
                 )}
               />
+              <defs>
+                {data.map((_, index) => (
+                  <linearGradient
+                    className="rotate-[120deg] drop-shadow-pie-chart"
+                    key={`myGradient${index}`}
+                    id={`myGradient${index}`}
+                  >
+                    <stop
+                      offset="1.96%"
+                      stopColor={COLORS[index % COLORS.length].start}
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor={COLORS[index % COLORS.length].end}
+                    />
+                  </linearGradient>
+                ))}
+              </defs>
               <Pie
-                data={data}
+                data={customData}
                 cx="50%"
                 cy="50%"
                 innerRadius={80}
@@ -108,13 +163,15 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                 cornerRadius={8}
                 labelLine={false}
                 label={renderCustomizedLabel}
-                className={cn("!outline-none")}
+                className={cn(
+                  "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                )}
                 animationEasing="ease-in-out"
               >
-                {data.map((entry, index) => (
+                {customData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={colorKeys[entry.color_key]}
+                    fill={`url(#myGradient${index})`}
                     stroke={entry.color_key}
                     strokeWidth={2}
                     className={cn("!outline-none")}
@@ -125,7 +182,10 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
           </ResponsiveContainer>
         </div>
         <div className="mx-auto h-[300px] w-full max-w-sm md:hidden">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <PieChart>
               <Legend
                 layout="vertical"
@@ -144,8 +204,26 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                   </Typography>
                 )}
               />
+              <defs>
+                {data.map((_, index) => (
+                  <linearGradient
+                    className="rotate-[120deg] drop-shadow-pie-chart"
+                    key={`myGradient${index}`}
+                    id={`myGradient${index}`}
+                  >
+                    <stop
+                      offset="1.96%"
+                      stopColor={COLORS[index % COLORS.length].start}
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor={COLORS[index % COLORS.length].end}
+                    />
+                  </linearGradient>
+                ))}
+              </defs>
               <Pie
-                data={data}
+                data={customData}
                 cx="50%"
                 cy="50%"
                 innerRadius={50}
@@ -155,16 +233,15 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                 cornerRadius={8}
                 labelLine={false}
                 label={renderCustomizedLabel}
-                className={cn("!outline-none")}
+                className={cn(
+                  "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                )}
                 animationEasing="ease-in-out"
               >
-                {data.map((entry, index) => (
+                {customData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={colorKeys[entry.color_key]}
-                    stroke={entry.color_key}
-                    strokeWidth={2}
-                    className={cn("!outline-none")}
+                    fill={`url(#myGradient${index})`}
                   />
                 ))}
               </Pie>
@@ -177,13 +254,20 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
           <div
             className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
           >
-            <Coins className={iconColor.hacker} />
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Coins className={iconColor.mediator} />
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {t("pieChart.title")}
             </Typography>
           </div>
           <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
               <PieChart>
                 <Legend
                   layout="vertical"
@@ -203,8 +287,26 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                     </Typography>
                   )}
                 />
+                <defs>
+                  {data.map((_, index) => (
+                    <linearGradient
+                      className="rotate-[120deg] drop-shadow-pie-chart"
+                      key={`myGradient${index}`}
+                      id={`myGradient${index}`}
+                    >
+                      <stop
+                        offset="1.96%"
+                        stopColor={COLORS[index % COLORS.length].start}
+                      />
+                      <stop
+                        offset="100%"
+                        stopColor={COLORS[index % COLORS.length].end}
+                      />
+                    </linearGradient>
+                  ))}
+                </defs>
                 <Pie
-                  data={data}
+                  data={customData}
                   cx="50%"
                   cy="50%"
                   innerRadius={80}
@@ -214,19 +316,26 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                   cornerRadius={8}
                   labelLine={false}
                   label={renderCustomizedLabel}
-                  className={cn("!outline-none")}
+                  className={cn(
+                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                  )}
                   animationEasing="ease-in-out"
                 >
-                  {data.map((entry, index) => (
+                  {customData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={colorKeys[entry.color_key]}
-                      stroke={entry.color_key}
-                      strokeWidth={2}
-                      className={cn("!outline-none")}
+                      fill={`url(#myGradient${index})`}
                     />
                   ))}
                 </Pie>
+                <Tooltip
+                  animationEasing="ease-in-out"
+                  content={
+                    <CustomTooltip
+                      payload={data.reduce((acc, curr) => acc + curr.value, 0)}
+                    />
+                  }
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>

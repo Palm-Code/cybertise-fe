@@ -24,7 +24,10 @@ export const CollaboratorDialog = ({
   return (
     <BaseModal {...props}>
       <div className="container h-screen w-full py-20">
-        <AddCollaborators id={id} onClose={onCloseModal} />
+        <AddCollaborators
+          id={id}
+          onClose={onCloseModal}
+        />
       </div>
     </BaseModal>
   );

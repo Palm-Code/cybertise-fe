@@ -11,9 +11,16 @@ export const PartnerSwiper = () => {
         "border border-neutral-light-80 px-5 py-6 dark:border-neutral-dark-80"
       )}
     >
-      <Swiper slidesPerView={"auto"} spaceBetween={24} className={cn("w-full")}>
+      <Swiper
+        slidesPerView={"auto"}
+        spaceBetween={24}
+        className={cn("w-full")}
+      >
         {Array.from({ length: 7 }).map((_, idx) => (
-          <SwiperSlide key={`partner-${idx}`} className={cn("!w-fit")}>
+          <SwiperSlide
+            key={`partner-${idx}`}
+            className={cn("!w-fit")}
+          >
             <svg
               key={Math.random()}
               xmlns="http://www.w3.org/2000/svg"

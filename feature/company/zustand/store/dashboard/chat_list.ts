@@ -17,10 +17,6 @@ const initialState: State = {
         size: 10,
         number: 1,
       },
-      fields: {
-        chat_tickets:
-          "id,code,title,description,risk_level,vulnerabiity_type_id,status,bounty,program_id,has_new,user_id,company_id,created_at,updated_at",
-      },
       filter: {
         ticket_type: "Company",
       },

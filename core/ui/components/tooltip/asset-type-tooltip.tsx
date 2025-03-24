@@ -15,7 +15,10 @@ export const AssetTypeTooltip = ({ assetTypes, children }: I_TooltipProps) => {
       contentClassName="p-6 rounded-[10px] bg-background-page-light dark:bg-background-page-dark"
       comps={
         <div className="flex w-full flex-col gap-2">
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("asset_type")}
           </Typography>
           <div className="flex w-full flex-wrap items-center gap-2">

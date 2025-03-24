@@ -63,7 +63,11 @@ const Details = ({
                   className="p-0"
                   onClick={() => handleClickEdit(false)}
                 />
-                <Typography variant="h5" weight="bold" className="capitalize">
+                <Typography
+                  variant="h5"
+                  weight="bold"
+                  className="capitalize"
+                >
                   {t("button_edit_account", {
                     role: variant === "company" ? t("company") : variant,
                   })}
@@ -72,8 +76,14 @@ const Details = ({
             </Card>
             <AnimationWrapper>
               <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
-                <CardAbout isEditing variant={variant as Role} />
-                <CardAccountDetails isEditing variant={variant as Role} />
+                <CardAbout
+                  isEditing
+                  variant={variant as Role}
+                />
+                <CardAccountDetails
+                  isEditing
+                  variant={variant as Role}
+                />
                 <div className="_flexbox__row__center__start gap-6">
                   <Button
                     variant={`secondary-${variant}`}
@@ -100,14 +110,23 @@ const Details = ({
     <>
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between mb-6 w-full">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("account_details", {
               role: variant === "company" ? t("company") : t("account"),
             })}
           </Typography>
         </div>
-        <CardAbout data={data} variant={variant} />
-        <CardAccountDetails data={data} variant={variant} />
+        <CardAbout
+          data={data}
+          variant={variant}
+        />
+        <CardAccountDetails
+          data={data}
+          variant={variant}
+        />
         <ModalForbidden
           isOpen={modalForbidden}
           onClose={() => setModalForbidden(false)}
@@ -119,7 +138,10 @@ const Details = ({
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("account_details", {
                 role: variant === "company" ? t("company") : t("account"),
               })}
@@ -134,8 +156,14 @@ const Details = ({
               })}
             </Button>
           </div>
-          <CardAbout data={data} variant={variant} />
-          <CardAccountDetails data={data} variant={variant} />
+          <CardAbout
+            data={data}
+            variant={variant}
+          />
+          <CardAccountDetails
+            data={data}
+            variant={variant}
+          />
         </div>
       </Desktop>
     </>

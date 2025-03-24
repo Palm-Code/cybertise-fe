@@ -18,7 +18,11 @@ const Information = ({ activeStep, lists }: I_InformationProps) => {
         "!bg-transparent xl:px-8 xl:py-12"
       )}
     >
-      <Typography variant="p" affects="extralarge" weight="bold">
+      <Typography
+        variant="p"
+        affects="extralarge"
+        weight="bold"
+      >
         {t("title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-5">
@@ -37,7 +41,11 @@ const Information = ({ activeStep, lists }: I_InformationProps) => {
                   : "fill-lime-normal-light dark:fill-lime-normal-dark"
               )}
             />
-            <Typography key={index} variant="p" affects="small">
+            <Typography
+              key={index}
+              variant="p"
+              affects="small"
+            >
               {info.label}
             </Typography>
           </div>

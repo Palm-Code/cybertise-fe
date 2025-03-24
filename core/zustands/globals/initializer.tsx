@@ -1,19 +1,20 @@
 "use client";
-import {
-  I_GetAssetTypeSuccessResponse,
-  I_GetUserDataSuccessResponse,
-} from "@/core/models/common";
 import React, { PropsWithChildren } from "react";
 import { useAssetTypeStore } from "./store/asset-type";
 import { useUserStore } from "./store/user";
+import { Role } from "@/types/admin/sidebar";
+import { useGetAssetType, useGetUserData } from "@/core/react-query/client";
+import { Loader } from "@/core/ui/components";
 
 export const GlobalInitializer: React.FC<
   {
-    users: I_GetUserDataSuccessResponse["data"];
-    assetTypes: I_GetAssetTypeSuccessResponse["data"];
+    role: keyof typeof Role;
   } & PropsWithChildren
-> = ({ children, users, assetTypes }) => {
-  useUserStore.setState({ data: users });
+> = ({ children, role }) => {
+  const { data, isLoading } = useGetUserData();
+  const { data: assetTypes } = useGetAssetType();
+  if (isLoading) return <Loader variant={role} />;
+  useUserStore.setState({ data: data });
   useAssetTypeStore.setState({ data: assetTypes });
   return children;
 };

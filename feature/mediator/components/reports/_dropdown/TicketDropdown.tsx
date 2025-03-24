@@ -32,7 +32,10 @@ const TicketDropDown = ({
   return (
     <>
       <Desktop className="w-fit">
-        <Select open={open} onOpenChange={onOpenChange}>
+        <Select
+          open={open}
+          onOpenChange={onOpenChange}
+        >
           <SelectTrigger className="!bg-transparent !p-0">
             <ChevronRight />
           </SelectTrigger>
@@ -60,8 +63,9 @@ const TicketDropDown = ({
               >
                 {t("company_ticket")}
               </Button>
-            ) : status.toLowerCase() === "canceled" ||
-              status.toLowerCase() === "closed" ? null : (
+            ) : status.toLowerCase() === "paid" ||
+              status.toLowerCase() === "closed" ||
+              status.toLowerCase() === "canceled" ? null : (
               <Button
                 asLink
                 href={`/reports/new?ticket_id=${hackerId}`}

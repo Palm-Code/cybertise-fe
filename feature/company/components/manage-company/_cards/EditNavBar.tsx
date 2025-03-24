@@ -22,7 +22,10 @@ const EditNavBar = ({ title }: I_EditNavBarProps) => {
           prefixIcon={<X />}
           className="p-0"
         />
-        <Typography variant="h5" weight="bold">
+        <Typography
+          variant="h5"
+          weight="bold"
+        >
           {title}
         </Typography>
       </div>

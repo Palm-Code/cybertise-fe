@@ -22,18 +22,33 @@ export const TicketListCard = ({ data }: TicketListCardProps) => {
           className={cn("grid grid-cols-[auto_1fr_auto] items-center gap-4")}
         >
           <Coins className={iconColor.company} />
-          <Typography variant="p" affects="normal" weight="semibold">
+          <Typography
+            variant="p"
+            affects="normal"
+            weight="semibold"
+          >
             Open Tickets
           </Typography>
         </div>
-        <Button asLink href="/reports" variant="ghost-company">
+        <Button
+          asLink
+          href="/reports"
+          variant="ghost-company"
+        >
           View all
         </Button>
       </div>
       {data?.length === 0 ? (
-        <EmptyState type="ticket" variant="hacker" className={cn("mt-0")} />
+        <EmptyState
+          type="ticket"
+          variant="hacker"
+          className={cn("mt-0")}
+        />
       ) : (
-        <StatisticTableView columns={tableColumns} data={data} />
+        <StatisticTableView
+          columns={tableColumns}
+          data={data}
+        />
       )}
     </Wrapper>
   );

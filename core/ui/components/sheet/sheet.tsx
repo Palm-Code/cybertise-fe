@@ -3,6 +3,7 @@ import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/core/lib/utils";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const Sheet = SheetPrimitive.Root;
 
@@ -57,10 +58,14 @@ const SheetContent = React.forwardRef<
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Content
+      aria-labelledby="sheet-title"
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
+      <VisuallyHidden>
+        <SheetTitle></SheetTitle>
+      </VisuallyHidden>
       {children}
     </SheetPrimitive.Content>
   </SheetPortal>

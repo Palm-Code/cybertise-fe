@@ -87,7 +87,10 @@ const SignUpCompany = () => {
                   "dark:text-neutral-dark-40 dark:hover:!text-white"
                 )}
               >
-                <X width={24} height={24} />
+                <X
+                  width={24}
+                  height={24}
+                />
                 {t("cancel_button")}
               </Link>
             ) : isLastStep ? null : (
@@ -98,7 +101,10 @@ const SignUpCompany = () => {
                 )}
                 onClick={() => back()}
               >
-                <MoveLeft width={24} height={24} />
+                <MoveLeft
+                  width={24}
+                  height={24}
+                />
                 {t("back_button")}
               </button>
             )}

@@ -21,18 +21,32 @@ export const AlertDialog = ({ onClickKeep, ...props }: AlertDialogProps) => {
       >
         <XCircle className="h-16 w-16 text-semantic-light-critical dark:text-semantic-dark-critical" />
         <div className="flex flex-col gap-6">
-          <Typography variant="h4" weight="bold">
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
             {t("alert_title")}
           </Typography>
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("alert_description")}
           </Typography>
         </div>
         <div className="flex w-full items-center gap-6">
-          <Button variant="secondary-mediator" fullWidth onClick={onClickKeep}>
+          <Button
+            variant="secondary-mediator"
+            fullWidth
+            onClick={onClickKeep}
+          >
             {t("button_keep_it")}
           </Button>
-          <Button variant="primary-mediator" fullWidth onClick={props.onClose}>
+          <Button
+            variant="primary-mediator"
+            fullWidth
+            onClick={props.onClose}
+          >
             {t("button_yes_cancel_report")}
           </Button>
         </div>

@@ -19,7 +19,11 @@ const Update = ({ title, created_at, content }: I_Update) => {
       <Card className="xl:px-6 xl:py-12">
         <div className="_flexbox__col__start__start w-full gap-6">
           <div className="_flexbox__col__start__start w-full gap-2">
-            <Typography variant="p" affects="extralarge" weight="bold">
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+            >
               {title}
             </Typography>
             <Typography
@@ -31,7 +35,10 @@ const Update = ({ title, created_at, content }: I_Update) => {
             </Typography>
           </div>
           <article>
-            <Tiptap showing description={sanitize(content as string)} />
+            <Tiptap
+              showing
+              description={sanitize(content as string)}
+            />
           </article>
         </div>
       </Card>
@@ -92,7 +99,10 @@ const UpdateList = ({ data, id }: I_UpdateList) => {
             + Add New Update
           </button>
           {data.map((item, idx) => (
-            <Update key={`update-${idx}`} {...item} />
+            <Update
+              key={`update-${idx}`}
+              {...item}
+            />
           ))}
         </div>
         <ModalForbidden
@@ -113,7 +123,10 @@ const UpdateList = ({ data, id }: I_UpdateList) => {
             + Add New Update
           </button>
           {data.map((item, idx) => (
-            <Update key={`update-${idx}`} {...item} />
+            <Update
+              key={`update-${idx}`}
+              {...item}
+            />
           ))}
         </div>
         <ModalAddUpdates

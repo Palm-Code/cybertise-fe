@@ -56,10 +56,25 @@ const Overview = ({ id }: { id: string }) => {
   };
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
-    summary: <Summary type="details" data={summary} />,
+    summary: (
+      <Summary
+        type="details"
+        data={summary}
+      />
+    ),
     rules: <RnP data={programListDetails?.data?.rules || "-"} />,
-    bounty: <Summary type="bounty" data={summary} />,
-    scope: <Scope id={id} assetTypes={assetTypes} />,
+    bounty: (
+      <Summary
+        type="bounty"
+        data={summary}
+      />
+    ),
+    scope: (
+      <Scope
+        id={id}
+        assetTypes={assetTypes}
+      />
+    ),
     updates: (
       <UpdateList
         id={id}

@@ -10,7 +10,10 @@ export default function Services() {
   const locale = useLocale();
   return (
     <div className={cn("flex w-full flex-col gap-10")}>
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         {t("title")}
       </Typography>
       <div className={cn("grid w-full gap-10 xl:grid-cols-2")}>

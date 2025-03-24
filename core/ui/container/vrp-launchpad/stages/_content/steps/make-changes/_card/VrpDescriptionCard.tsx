@@ -32,7 +32,10 @@ const VrpDescriptionCard = ({
 
   return (
     <>
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         {t("details")}
       </Typography>
       <Card
@@ -42,7 +45,10 @@ const VrpDescriptionCard = ({
           "xl:p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("vrp_description.header_title")}
         </Typography>
         <SelectDropdown
@@ -89,7 +95,10 @@ const VrpDescriptionCard = ({
       </Card>
       {isCompany && (
         <div className="_flexbox__row__center gap-8">
-          <Button variant="secondary-company" onClick={onClickPrev}>
+          <Button
+            variant="secondary-company"
+            onClick={onClickPrev}
+          >
             {t("button_previous")}
           </Button>
           <Button

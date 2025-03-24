@@ -75,7 +75,10 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                           {item.company?.name}
                         </Typography>
                         {item.type.toLowerCase() === "private" && (
-                          <Badge variant="default" className="w-fit">
+                          <Badge
+                            variant="default"
+                            className="w-fit"
+                          >
                             {item.type}
                           </Badge>
                         )}
@@ -87,7 +90,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     align={columns[1].align}
                   >
                     <Tooltip content={item.title}>
-                      <Typography variant="p" affects="small" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                      >
                         {item.title.length > 20
                           ? `${item.title.substring(0, 20)}...`
                           : item.title}

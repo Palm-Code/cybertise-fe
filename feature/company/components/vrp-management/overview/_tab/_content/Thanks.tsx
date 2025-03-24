@@ -49,7 +49,10 @@ const Thanks = ({ programId }: { programId: string }) => {
     <AnimationWrapper className="px-0">
       <Mobile className={cn("space-y-6")}>
         <CollaboratorListCard data={contributorListData || []} />
-        <div ref={ref} className="w-full space-y-6 pb-8">
+        <div
+          ref={ref}
+          className="w-full space-y-6 pb-8"
+        >
           {isFetchingNextPage && <CollaboratorLoadingCard list={3} />}
         </div>
       </Mobile>
@@ -60,9 +63,15 @@ const Thanks = ({ programId }: { programId: string }) => {
               columns={contributorTableColums}
               data={contributorListData || []}
             />
-            <div ref={ref} className={cn("mt-6 space-y-6")}>
+            <div
+              ref={ref}
+              className={cn("mt-6 space-y-6")}
+            >
               {isFetchingNextPage && (
-                <SkeletonList className="h-16 w-full rounded-2xl" count={3} />
+                <SkeletonList
+                  className="h-16 w-full rounded-2xl"
+                  count={3}
+                />
               )}
             </div>
           </>

@@ -14,7 +14,10 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
         )}
       >
         <ThemeSwitcher className="absolute right-5 top-5 hidden xl:flex" />
-        <Link href="/auth/signin" replace>
+        <Link
+          href="/auth/signin"
+          replace
+        >
           <Logo className="h-12 w-32 xl:h-[99px] xl:w-[264px]" />
         </Link>
         {children}

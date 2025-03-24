@@ -14,7 +14,10 @@ const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
         "xl:p-7.5"
       )}
     >
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("header_title")}
       </Typography>
       <div className="_flexbox__col__start__start w-full gap-2.5">
@@ -35,7 +38,10 @@ const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
         >
           {t("title")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {data.title}
         </Typography>
       </div>
@@ -48,7 +54,10 @@ const VrpDescriptionCard = ({ data }: { data: CreateVrpType }) => {
           {t("description")}
         </Typography>
         <article>
-          <Tiptap showing description={sanitize(data?.description as string)} />
+          <Tiptap
+            showing
+            description={sanitize(data?.description as string)}
+          />
         </article>
       </div>
     </Card>

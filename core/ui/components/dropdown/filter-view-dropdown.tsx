@@ -47,7 +47,10 @@ const FilterViewDropdown = ({
   };
 
   return (
-    <Select onValueChange={onValueChange} defaultValue={view}>
+    <Select
+      onValueChange={onValueChange}
+      defaultValue={view}
+    >
       <SelectTrigger className="gap-2.5 !bg-white p-3 dark:!bg-neutral-dark-100">
         {icons(type, view)}
         <Typography
@@ -62,13 +65,19 @@ const FilterViewDropdown = ({
       <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
         {options.length! ? (
           options.map((option) => (
-            <SelectItem key={option.value} value={option.value as string}>
+            <SelectItem
+              key={option.value}
+              value={option.value as string}
+            >
               {icons(type, option.value as "card" | "table" | "grid")}
               {option.label}
             </SelectItem>
           ))
         ) : (
-          <SelectItem value="no items" disabled>
+          <SelectItem
+            value="no items"
+            disabled
+          >
             No options
           </SelectItem>
         )}

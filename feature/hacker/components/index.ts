@@ -5,3 +5,4 @@ export { default as SendReport } from "./programs/send-report/SendReport.compone
 export { default as Reports } from "./reports/Reports.component";
 export { default as ReportDetails } from "./reports/details/ReportDetails.component";
 export { default as Statistics } from "./statistics/Statistics.component";
+export { default as Earnings } from "./earnings/Earnings.component";

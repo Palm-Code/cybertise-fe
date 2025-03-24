@@ -16,7 +16,11 @@ const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
         >
           {t("asset_name")}
         </Typography>
-        <Typography variant="p" affects="small" weight="medium">
+        <Typography
+          variant="p"
+          affects="small"
+          weight="medium"
+        >
           {content}
         </Typography>
       </div>
@@ -28,7 +32,11 @@ const ScopeCard = ({ content, asset_type, updated_at }: I_TargetAsset) => {
         >
           {t("update")}
         </Typography>
-        <Typography variant="p" affects="small" weight="medium">
+        <Typography
+          variant="p"
+          affects="small"
+          weight="medium"
+        >
           {updated_at && updated_at.toString().split("T")[0]}
         </Typography>
       </div>
@@ -43,7 +51,10 @@ const ScopeCardList = ({
 }) => {
   if (data)
     return data.map((item, idx) => (
-      <ScopeCard key={`scope-card-${idx}`} {...item} />
+      <ScopeCard
+        key={`scope-card-${idx}`}
+        {...item}
+      />
     ));
 };
 export default ScopeCardList;

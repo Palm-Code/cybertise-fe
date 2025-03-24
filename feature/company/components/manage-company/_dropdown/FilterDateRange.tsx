@@ -34,12 +34,21 @@ const FilterDateRange = ({
       : undefined,
   });
   return (
-    <Select open={openDropdown} onOpenChange={setOpenDropdown}>
+    <Select
+      open={openDropdown}
+      onOpenChange={setOpenDropdown}
+    >
       <SelectTrigger className="!w-fit min-w-64 !justify-start gap-4 whitespace-nowrap text-nowrap">
         <CalendarDays className={iconColor[variant]} />
-        <Separator orientation="vertical" className="h-4" />
+        <Separator
+          orientation="vertical"
+          className="h-4"
+        />
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="p" affects="small">
+          <Typography
+            variant="p"
+            affects="small"
+          >
             {date?.from ? (
               date.to ? (
                 <>

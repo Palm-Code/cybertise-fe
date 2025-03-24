@@ -43,8 +43,14 @@ export const BarChartCard = ({ data }: BarChartCardProps) => {
         />
       </div>
       <div className={cn("h-[300px] w-full")}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} barGap={0}>
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+        >
+          <BarChart
+            data={data}
+            barGap={0}
+          >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />

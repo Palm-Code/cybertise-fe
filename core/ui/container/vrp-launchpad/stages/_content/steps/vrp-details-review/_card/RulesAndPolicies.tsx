@@ -36,7 +36,10 @@ const RulesAndPolicies = ({
           "xl:p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("header_title")}
         </Typography>
         <div className="__flexbox__col__start__start w-full gap-2.5">
@@ -48,7 +51,10 @@ const RulesAndPolicies = ({
             {t("rules")}
           </Typography>
           <article>
-            <Tiptap showing description={sanitize(forms.rules ?? "")} />
+            <Tiptap
+              showing
+              description={sanitize(forms.rules ?? "")}
+            />
           </article>
         </div>
         <div className="__flexbox__col__start__start w-full gap-2.5">
@@ -60,7 +66,10 @@ const RulesAndPolicies = ({
             {t("policies")}
           </Typography>
           <article>
-            <Tiptap showing description={sanitize(forms.policies ?? "")} />
+            <Tiptap
+              showing
+              description={sanitize(forms.policies ?? "")}
+            />
           </article>
         </div>
       </Card>
@@ -68,10 +77,16 @@ const RulesAndPolicies = ({
 
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         {t("header_title")}
       </Typography>
-      <Typography variant="p" affects="small">
+      <Typography
+        variant="p"
+        affects="small"
+      >
         {t("description")}
       </Typography>
       {variant === "mediator" ? (
@@ -128,10 +143,16 @@ const RulesAndPolicies = ({
             </article>
           </div>
           <div className="_flexbox__row__center gap-8">
-            <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
+            <Button
+              variant={`secondary-${variant}`}
+              onClick={onClickPrev}
+            >
               {t("button_previous")}
             </Button>
-            <Button variant={`primary-${variant}`} onClick={onClickNext}>
+            <Button
+              variant={`primary-${variant}`}
+              onClick={onClickNext}
+            >
               {t("button_next")}
             </Button>
           </div>

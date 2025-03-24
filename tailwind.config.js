@@ -14,26 +14,12 @@ module.exports = {
       container: {
         center: true,
         padding: "2rem",
-        screens: {
-          "2xl": "1400px",
-        },
+        screens: { "2xl": "1400px" },
       },
-      fontSize: {
-        "6xl": "56px",
-        "4xl": "40px",
-        "3xl": "32px",
-      },
-      lineHeight: {
-        120: "120%",
-        140: "140%",
-        150: "150%",
-      },
-      minWidth: {
-        25: "6.25rem",
-      },
-      maxWidth: {
-        "2xl": "676px",
-      },
+      fontSize: { "6xl": "56px", "4xl": "40px", "3xl": "32px" },
+      lineHeight: { 120: "120%", 140: "140%", 150: "150%" },
+      minWidth: { 25: "6.25rem" },
+      maxWidth: { "2xl": "676px" },
       spacing: {
         2.5: "0.625rem",
         4.5: "1.125rem",
@@ -76,14 +62,8 @@ module.exports = {
           },
         },
         background: {
-          page: {
-            dark: "#1F1F1F",
-            light: "#F5F5F5",
-          },
-          main: {
-            light: "#FAFAFA",
-            dark: "#0D0D0D",
-          },
+          page: { dark: "#1F1F1F", light: "#F5F5F5" },
+          main: { light: "#FAFAFA", dark: "#0D0D0D" },
           progress: "#D9D9D9",
         },
         neutral: {
@@ -130,30 +110,12 @@ module.exports = {
           light: "#F2C789",
         },
         lime: {
-          dark: {
-            light: "#597902",
-            dark: "#C0D093",
-          },
-          darker: {
-            light: "#55700C",
-            dark: "#CFE593",
-          },
-          normal: {
-            light: "#94CA03",
-            dark: "#BAFF00",
-          },
-          lighter: {
-            light: "#A9D535",
-            dark: "#C8FF33",
-          },
-          light: {
-            light: "#C9E581",
-            dark: "#D6FF66",
-          },
-          "dark-green": {
-            light: "#4D6900",
-            dark: "#4D6900",
-          },
+          dark: { light: "#597902", dark: "#C0D093" },
+          darker: { light: "#55700C", dark: "#CFE593" },
+          normal: { light: "#94CA03", dark: "#BAFF00" },
+          lighter: { light: "#A9D535", dark: "#C8FF33" },
+          light: { light: "#C9E581", dark: "#D6FF66" },
+          "dark-green": { light: "#4D6900", dark: "#4D6900" },
           badge: "#A3DF02",
         },
         emerald: {
@@ -220,6 +182,7 @@ module.exports = {
         sidebar: "4px 0px 50px 0px rgba(255, 255, 255, 0.10)",
         toggle: "0px 0px 4px 0px rgba(183, 183, 183, 0.40)",
       },
+      dropShadow: { "pie-chart": "0px 0px 1.5px rgba(255, 255, 255, 0.25)" },
       backgroundImage: {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",

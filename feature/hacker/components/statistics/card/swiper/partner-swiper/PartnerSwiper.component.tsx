@@ -18,7 +18,10 @@ export const PartnerSwiper = () => {
           className={cn("w-full")}
         >
           {Array.from({ length: 7 }).map((_, idx) => (
-            <SwiperSlide key={`partner-${idx}`} className={cn("!w-fit")}>
+            <SwiperSlide
+              key={`partner-${idx}`}
+              className={cn("!w-fit")}
+            >
               <svg
                 key={Math.random()}
                 xmlns="http://www.w3.org/2000/svg"

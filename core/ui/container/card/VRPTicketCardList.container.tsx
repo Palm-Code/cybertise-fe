@@ -32,7 +32,10 @@ const TicketCard = ({
   return (
     <>
       <Mobile>
-        <Card isButton onClick={() => setShowModal(true)}>
+        <Card
+          isButton
+          onClick={() => setShowModal(true)}
+        >
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full gap-8")}>
               <div className="_flexbox__row__center__between w-full">
@@ -57,16 +60,26 @@ const TicketCard = ({
                   <div className="_flexbox__col__start w-full max-w-xl gap-1">
                     {props.title.length > 50 ? (
                       <Tooltip content={props.title}>
-                        <Typography variant="p" affects="normal">
+                        <Typography
+                          variant="p"
+                          affects="normal"
+                        >
                           {props.title.substring(0, 50) + "..."}
                         </Typography>
                       </Tooltip>
                     ) : (
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {props.title}
                       </Typography>
                     )}
-                    <Typography variant="p" affects="tiny" weight="light">
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                      weight="light"
+                    >
                       {props.company?.name}
                     </Typography>
                   </div>
@@ -147,18 +160,27 @@ const TicketCard = ({
                 <div className="_flexbox__col__start w-full max-w-xl gap-2">
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {props.title.substring(0, 50) + "..."}
                       </Typography>
                     </Tooltip>
                   ) : (
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       {props.title}
                     </Typography>
                   )}
                   <div className="_flexbox__row__center gap-4">
                     <Badge variant="default">{props.type}</Badge>
-                    <Typography variant="p" affects="tiny">
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                    >
                       {props.company?.name}
                     </Typography>
                   </div>

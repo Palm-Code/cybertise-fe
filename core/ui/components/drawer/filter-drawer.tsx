@@ -35,8 +35,15 @@ export const FilterDrawer = ({
             "bg-neutral-light-100 px-3 py-2 dark:bg-neutral-dark-100"
           )}
         >
-          <Filter className={iconColor[variant]} width={20} height={20} />
-          <Typography variant="p" affects="small">
+          <Filter
+            className={iconColor[variant]}
+            width={20}
+            height={20}
+          />
+          <Typography
+            variant="p"
+            affects="small"
+          >
             {t("title")}
           </Typography>
         </div>
@@ -48,7 +55,10 @@ export const FilterDrawer = ({
         <div className="w-full overflow-auto px-6">{children}</div>
         <DrawerFooter>
           <DrawerClose onClick={() => onSubmitFilter()}>
-            <Button variant={`primary-${variant}`} fullWidth>
+            <Button
+              variant={`primary-${variant}`}
+              fullWidth
+            >
               {t("submit_filter")}
             </Button>
           </DrawerClose>

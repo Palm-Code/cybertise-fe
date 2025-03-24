@@ -16,7 +16,8 @@ interface I_EmptyStateProps {
     | "under-construction"
     | "collaborators"
     | "update"
-    | "target-assets";
+    | "target-assets"
+    | "disallowed";
 
   buttonText?: string;
   titleText?: string;
@@ -106,7 +107,11 @@ const EmptyState = ({
           <>
             <>
               <HackerLeaf />
-              <Typography variant="p" affects="extralarge" weight="bold">
+              <Typography
+                variant="p"
+                affects="extralarge"
+                weight="bold"
+              >
                 {t("you_have_nothing_here")}
               </Typography>
               {!!buttonText && (
@@ -133,6 +138,29 @@ const EmptyState = ({
               align={"center"}
             >
               {titleText}
+            </Typography>
+            {!!buttonText && (
+              <Button
+                variant={`primary-${variant}`}
+                className="w-full"
+                onClick={() => onClickButton()}
+              >
+                {buttonText}
+              </Button>
+            )}
+          </>
+        );
+      case "disallowed":
+        return (
+          <>
+            <EmptyFolder className={iconColor[variant]} />
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+              align={"center"}
+            >
+              {t("only_desktop")}
             </Typography>
             {!!buttonText && (
               <Button

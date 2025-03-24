@@ -1,4 +1,3 @@
-import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -38,10 +37,16 @@ axiosInterceptorInstance.interceptors.response.use(
     // Modify the response data here
     return response;
   },
-  (error) => {
+  async (error) => {
+    const accessToken = Cookies.get("token");
     if (error?.response?.data.code === 401) {
-      logout();
-      return;
+      await axios.post("/api/logout", {
+        token: accessToken,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return (window.location.href = "/auth/signin");
     }
     // Handle response errors here
     return Promise.reject(error);

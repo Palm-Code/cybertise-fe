@@ -38,7 +38,16 @@ const ReportDetails = ({ id }: { id: string }) => {
     useGetTicketDetails(id);
   const { data, isError, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
-  const { ref, inView } = useInView({ threshold: 0.5 });
+  const { ref } = useInView({
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView) {
+        setTimeout(() => {
+          fetchNextPage();
+        }, 200);
+      }
+    },
+  });
   const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
   const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
@@ -60,14 +69,6 @@ const ReportDetails = ({ id }: { id: string }) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (inView) {
-      setTimeout(() => {
-        fetchNextPage();
-      }, 200);
-    }
-  }, [inView]);
-
   const sendMessage = async () => {
     await mutateAsync({
       chat_ticket_id: id,
@@ -84,7 +85,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
-        toast.error("Failed to send message");
+        toast.error(err.message);
       });
   };
 
@@ -97,7 +98,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
-        No Chat Found
+        {t("no_chat_found")}
       </div>
     );
   }
@@ -123,7 +124,10 @@ const ReportDetails = ({ id }: { id: string }) => {
               <div className="_flexbox__col__start__start gap-4">
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -131,7 +135,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
@@ -164,7 +171,12 @@ const ReportDetails = ({ id }: { id: string }) => {
             </div>
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <div className="px-6 py-8">
             <ChatBubble data={chatData ?? []} />
@@ -199,7 +211,7 @@ const ReportDetails = ({ id }: { id: string }) => {
           <div
             className={cn(
               "_flexbox__col__start__start sticky top-0 z-30",
-              "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
+              "h-fit w-full gap-3 bg-background-page-light pt-8 dark:bg-background-page-dark"
             )}
           >
             <Card
@@ -217,7 +229,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                 />
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -225,7 +240,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
@@ -257,9 +275,13 @@ const ReportDetails = ({ id }: { id: string }) => {
             </AnimationWrapper>
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
-
           <ChatBubble data={chatData ?? []} />
           <div ref={endChatRef}></div>
         </div>
@@ -269,7 +291,7 @@ const ReportDetails = ({ id }: { id: string }) => {
             className={cn(
               "absolute z-50 mx-auto w-fit",
               "left-1/2 transform",
-              isHiddenChatBox ? "bottom-12" : "bottom-72"
+              isHiddenChatBox ? "bottom-12" : "bottom-56"
             )}
             prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
@@ -288,7 +310,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         {!isHiddenChatBox && (
           <div
             className={cn(
-              "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"
+              "sticky bottom-0 z-50 bg-background-page-light py-2 dark:bg-background-page-dark"
             )}
           >
             <Tiptap

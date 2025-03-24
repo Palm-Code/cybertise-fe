@@ -12,3 +12,5 @@ export { default as ModalForbidden } from "./modals/ModalForbidden";
 export { default as VRPCardLoadingList } from "./loading-state/VRPCardLoadingList";
 export { default as AuthorizeContainer } from "./authorize/Authorize.container";
 export { default as StatisticTicketCardList } from "./card/StatisticTicketCardList.container";
+export { default as PaymentTicketCardList } from "./card/PaymentTicketCardList.container";
+export { default as PaymentLoadingList } from "./loading-state/PaymentLoadingList.container";

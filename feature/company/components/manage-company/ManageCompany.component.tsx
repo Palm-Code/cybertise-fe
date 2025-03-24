@@ -37,7 +37,13 @@ const ManageCompany = () => {
   };
 
   if (isLoading || isFetching) return <VRPHeroLoading variant="company" />;
-  if (state) return <EditState state={state} data={companyData?.data} />;
+  if (state)
+    return (
+      <EditState
+        state={state}
+        data={companyData?.data}
+      />
+    );
   return (
     <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10 xl:pb-28 xl:pt-12">
       <CompaniesDetailHeroCard data={companyData?.data} />

@@ -30,7 +30,7 @@ export const usePostUpdateProfile = (revalidate: boolean = false) => {
         queryKey: ["getUserProfile"],
       });
       queryClient.invalidateQueries({
-        queryKey: ["getServerUserData"],
+        queryKey: ["getUserData"],
       });
       useUserStore.setState({
         data: {

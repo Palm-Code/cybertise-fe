@@ -4,15 +4,12 @@ import { Typography } from "@/core/ui/components";
 import DesktopLayout from "@/core/ui/layout/wrapper/DesktopLayout.wrapper";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { OverviewCard } from "./card";
 import { AreaChartCard, PieChartCard } from "./card/chart";
 import { FilterStatistic } from "./filter";
 import { TicketListCard } from "./card/ticket";
 import { useChatListParamStore } from "../../zustand/store/dashboard";
 import { useGetAnalytics, useGetChatList } from "../../query/client";
 import MobileLayout from "@/core/ui/layout/wrapper/MobileLayout.wrapper";
-import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
-import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { OverviewSwiper } from "./swiper/overview";
 import { DashboardCardView } from "../../containers";
 

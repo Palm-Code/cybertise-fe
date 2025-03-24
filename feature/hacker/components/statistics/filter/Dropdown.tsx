@@ -28,7 +28,10 @@ export const Dropdown = ({
   return (
     <>
       <MobileLayout className={cn("w-fit")}>
-        <Select onValueChange={onValueChange} defaultValue={value}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
           <SelectTrigger
             className={cn(
               "ml-0 !w-fit !justify-start gap-2 whitespace-nowrap text-nowrap border-none !bg-transparent p-0",
@@ -38,7 +41,10 @@ export const Dropdown = ({
           >
             <div className={cn("flex w-fit flex-shrink-0 items-center gap-2")}>
               {label && <Users />}
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {value ?? 7}
               </Typography>
             </div>
@@ -51,12 +57,18 @@ export const Dropdown = ({
           >
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}
@@ -64,7 +76,10 @@ export const Dropdown = ({
         </Select>
       </MobileLayout>
       <DesktopLayout className={cn("w-fit")}>
-        <Select onValueChange={onValueChange} defaultValue={value}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
           <div className={cn("flex flex-shrink-0 items-center gap-1")}>
             {label && (
               <Typography
@@ -83,7 +98,10 @@ export const Dropdown = ({
               )}
               {...props}
             >
-              <Typography variant="p" affects="small">
+              <Typography
+                variant="p"
+                affects="small"
+              >
                 {inputValueLabel || "Last 7 Days"}
               </Typography>
             </SelectTrigger>
@@ -96,12 +114,18 @@ export const Dropdown = ({
           >
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

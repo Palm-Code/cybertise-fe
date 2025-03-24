@@ -74,7 +74,10 @@ export const ModalEmbedImage = ({
           "flex flex-col gap-6"
         )}
       >
-        <Typography variant={"h5"} weight={"bold"}>
+        <Typography
+          variant={"h5"}
+          weight={"bold"}
+        >
           {t("title")}
         </Typography>
         <div
@@ -120,7 +123,10 @@ export const ModalEmbedImage = ({
               )}
             >
               <div className="flex w-full flex-col gap-2.5">
-                <Typography variant={"h6"} weight={"bold"}>
+                <Typography
+                  variant={"h6"}
+                  weight={"bold"}
+                >
                   {t("title_paste_url")}
                 </Typography>
                 <Input

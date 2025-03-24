@@ -17,7 +17,11 @@ export const ServiceCard = ({
   href,
 }: I_ServiceCardProps) => {
   return (
-    <Card isClickable href={href} target="_blank">
+    <Card
+      isClickable
+      href={href}
+      target="_blank"
+    >
       <div className={cn("grid w-full grid-cols-[auto_1fr] gap-4 xl:gap-9")}>
         <div
           className={cn(
@@ -29,10 +33,16 @@ export const ServiceCard = ({
         </div>
         <div className={cn("flex w-full items-center justify-between gap-2.5")}>
           <div className={cn("flex w-full flex-col gap-4")}>
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {title}
             </Typography>
-            <Typography variant="p" affects="small">
+            <Typography
+              variant="p"
+              affects="small"
+            >
               {description}
             </Typography>
           </div>
@@ -45,6 +55,9 @@ export const ServiceCard = ({
 
 export const ServiceCardList = ({ data }: { data: I_ServiceCardProps[] }) => {
   return data.map((item, index) => (
-    <ServiceCard key={`service-card-${index}`} {...item} />
+    <ServiceCard
+      key={`service-card-${index}`}
+      {...item}
+    />
   ));
 };

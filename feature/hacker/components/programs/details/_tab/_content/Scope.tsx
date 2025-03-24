@@ -133,7 +133,10 @@ const Scope = ({
               />
             </>
           ) : (
-            <EmptyState type="target-assets" variant="hacker" />
+            <EmptyState
+              type="target-assets"
+              variant="hacker"
+            />
           )}
         </div>
       </Desktop>

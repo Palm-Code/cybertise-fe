@@ -119,7 +119,10 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                   "overflow-y-auto rounded-b-xl rounded-t-none xl:px-8 xl:pb-12 xl:pt-8"
                 )}
               >
-                <Typography variant="h5" weight="bold">
+                <Typography
+                  variant="h5"
+                  weight="bold"
+                >
                   {`#${initialPreviewData.chat_ticket?.code}: ${initialPreviewData.chat_ticket?.title}`}
                 </Typography>
                 <div className="w-full">
@@ -134,7 +137,10 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                         "text-neutral-light-30 dark:text-neutral-dark-30"
                       )}
                     >
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {t("company_ticket.title")}
                       </Typography>
                       <ChevronDown
@@ -158,12 +164,18 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                         <Card className="_flexbox__col__start gap-8 rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4 xl:py-4.5">
                           <div className="grid w-full grid-cols-[auto_1fr] gap-4 rounded-md bg-neutral-light-90 p-4 dark:bg-neutral-dark-90">
                             <Info />
-                            <Typography variant="p" affects="normal">
+                            <Typography
+                              variant="p"
+                              affects="normal"
+                            >
                               {t("company_ticket.alert")}
                             </Typography>
                           </div>
                           <div className="_flexbox__col__start__start w-full gap-4">
-                            <Typography variant="h6" weight="bold">
+                            <Typography
+                              variant="h6"
+                              weight="bold"
+                            >
                               {t("company_ticket.ticket_details.title")}
                             </Typography>
                             <Input
@@ -171,7 +183,6 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                               label={t(
                                 "company_ticket.ticket_details.ticket_title"
                               )}
-                              defaultValue={forms.title}
                               value={forms.title}
                               onChange={(e) => {
                                 methods.setValue("title", e.target.value, {
@@ -185,7 +196,6 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                               label={t(
                                 "company_ticket.ticket_details.short_description"
                               )}
-                              defaultValue={forms.description}
                               value={forms.description}
                               onChange={(e) => {
                                 methods.setValue(
@@ -202,7 +212,10 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                           </div>
                           <Separator orientation="horizontal" />
                           <div className="_flexbox__col__start__start w-full gap-4">
-                            <Typography variant="h6" weight="bold">
+                            <Typography
+                              variant="h6"
+                              weight="bold"
+                            >
                               {t("company_ticket.problem_causes.title")}
                             </Typography>
                             <Tiptap
@@ -353,7 +366,10 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                           </div>
                           <Separator orientation="horizontal" />
                           <div className="_flexbox__col__start__start w-full gap-4">
-                            <Typography variant="h6" weight="bold">
+                            <Typography
+                              variant="h6"
+                              weight="bold"
+                            >
                               {t("company_ticket.bug_target.title")}
                             </Typography>
                             <Review
@@ -387,7 +403,10 @@ const CompanyTicketForm = ({ initialData, id }: I_CompanyTicketFormProps) => {
                         "text-neutral-light-30 dark:text-neutral-dark-30"
                       )}
                     >
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {t("hacker_ticket")}
                       </Typography>
                       <ChevronDown

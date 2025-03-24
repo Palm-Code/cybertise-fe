@@ -91,7 +91,10 @@ const VRPCreation = ({
           currentStep === "Phase1" ? (
             <Brief onClickNext={() => next()} />
           ) : (
-            <Notes currentSteps={currentStep} onClickNext={() => next()} />
+            <Notes
+              currentSteps={currentStep}
+              onClickNext={() => next()}
+            />
           ),
         key: currentStep === "Phase1" ? "brief" : "notes",
       },
@@ -165,24 +168,27 @@ const VRPCreation = ({
   return (
     <>
       <FormProvider {...method}>
-        <div ref={containerRef} className="absolute top-0"></div>
+        <div
+          ref={containerRef}
+          className="absolute top-0"
+        ></div>
         <div className="_flexbox__col__start__start min-h-full w-full gap-0 rounded-2xl">
           <AnimationWrapper
             key={steps[currentStepIndex].key}
             className={cn(
-              "sticky z-20 h-fit space-y-0 bg-background-page-light dark:bg-background-page-dark",
+              "sticky z-20 h-fit w-[calc(100%-267px)] space-y-0 bg-background-page-light dark:bg-background-page-dark",
               variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
             )}
           >
-            <div className="h-6 w-[calc(100%-235px)] bg-background-page-light dark:bg-background-page-dark"></div>
+            <div className="h-6 w-full bg-background-page-light dark:bg-background-page-dark"></div>
             <div
               className={cn(
-                "h-4 w-[calc(100%-235px)] rounded-t-xl",
+                "h-4 w-full rounded-t-xl",
                 "bg-background-main-light pt-0 dark:bg-background-main-dark"
               )}
             ></div>
           </AnimationWrapper>
-          <div className="relative grid h-full w-full grid-cols-[1fr_203px] gap-8">
+          <div className="relative grid h-full w-full grid-cols-[1fr_235px] gap-8">
             <div className="h-full w-full overflow-y-auto">
               <AnimationWrapper key={steps[currentStepIndex].key}>
                 <Card

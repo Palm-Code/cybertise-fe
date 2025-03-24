@@ -1,11 +1,11 @@
 import { SendReportFragment } from "@/feature/hacker/fragments";
 
-const SendReportPage = ({
+const SendReportPage = async ({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const { programs } = searchParams ?? { programs: "" };
+  const { programs } = (await searchParams) ?? { programs: "" };
   return <SendReportFragment id={programs as string} />;
 };
 export default SendReportPage;

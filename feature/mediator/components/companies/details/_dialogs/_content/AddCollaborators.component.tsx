@@ -1,8 +1,6 @@
-import { ArrowLeft, ChevronLeft, MoveLeft, UserPlus, X } from "lucide-react";
-import { Button, Loader, SearchInput, Typography } from "@/core/ui/components";
-import BaseDropdown from "@/core/ui/components/dropdown/base-dropdown";
-import React, { useEffect, useRef, useState } from "react";
-import { CollaboratorsTableView } from "@/feature/mediator/containers";
+import { MoveLeft, UserPlus, X } from "lucide-react";
+import { Button, SearchInput, Typography } from "@/core/ui/components";
+import React, { useEffect, useState } from "react";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
 import { useGetAddCollaboratorTableColumns } from "@/feature/mediator/constants/vrp-launchpad";
 import { useTranslations } from "next-intl";
@@ -143,7 +141,10 @@ export const AddCollaborators = ({
                     onClick={() => setIsPreview(false)}
                   />
                   <div className="flex flex-col gap-2">
-                    <Typography variant="h4" weight="bold">
+                    <Typography
+                      variant="h4"
+                      weight="bold"
+                    >
                       {t("title")}
                     </Typography>
                     <Typography
@@ -213,7 +214,11 @@ export const AddCollaborators = ({
                     "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
                   )}
                 >
-                  <Typography variant="p" affects="small" weight="medium">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="medium"
+                  >
                     {selectedCollaboratorsIds.length} {t("hacker_selected")}
                   </Typography>
                   <Button
@@ -256,7 +261,10 @@ export const AddCollaborators = ({
           <div className="flex w-full flex-col gap-6">
             <div className="flex w-full items-center justify-between">
               <div className="grid grid-cols-[auto_1fr] items-center gap-2">
-                <Typography variant="h4" weight="bold">
+                <Typography
+                  variant="h4"
+                  weight="bold"
+                >
                   {t("title")}
                 </Typography>
               </div>
@@ -332,7 +340,10 @@ export const AddCollaborators = ({
                     }
                   }}
                 />
-                <div ref={paginationRef} className="w-full space-y-6">
+                <div
+                  ref={paginationRef}
+                  className="w-full space-y-6"
+                >
                   {isFetchingNextPage && (
                     <SkeletonList
                       className="h-16 w-full rounded-2xl"
@@ -360,7 +371,11 @@ export const AddCollaborators = ({
                     "bg-background-main-light shadow-toggle dark:bg-background-main-dark"
                   )}
                 >
-                  <Typography variant="p" affects="small" weight="medium">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="medium"
+                  >
                     {selectedCollaboratorsIds.length} {t("hacker_selected")}
                   </Typography>
                   <Button

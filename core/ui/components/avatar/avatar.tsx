@@ -8,12 +8,18 @@ interface I_AvatarProps
   initials?: string;
 }
 
-const Avatar = ({ image, initials, ...props }: I_AvatarProps) => {
+const Avatar = ({ image, ...props }: I_AvatarProps) => {
   return (
     <BaseAvatar {...props}>
-      <AvatarImage src={image} alt={"avatar"} />
+      <AvatarImage
+        src={image}
+        alt={"avatar"}
+      />
       <AvatarFallback>
-        <User width={20} height={20} />
+        <User
+          width={20}
+          height={20}
+        />
       </AvatarFallback>
     </BaseAvatar>
   );

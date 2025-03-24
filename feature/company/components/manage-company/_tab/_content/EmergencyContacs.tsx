@@ -19,7 +19,10 @@ const EmergencyContacs = ({
       <Mobile>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="semibold">
+            <Typography
+              variant="h5"
+              weight="semibold"
+            >
               {t("title")}
             </Typography>
             <Button
@@ -44,7 +47,10 @@ const EmergencyContacs = ({
                 >
                   {t("contact_person")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.emergency_contact_person}
                 </Typography>
                 <Typography
@@ -54,7 +60,10 @@ const EmergencyContacs = ({
                 >
                   {t("email")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.emergency_email}
                 </Typography>
                 <Typography
@@ -64,7 +73,10 @@ const EmergencyContacs = ({
                 >
                   {t("phone")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.emergency_phone}
                 </Typography>
               </div>
@@ -82,7 +94,10 @@ const EmergencyContacs = ({
       <Desktop>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <Button
@@ -109,7 +124,10 @@ const EmergencyContacs = ({
                 >
                   {t("contact_person")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.emergency_contact_person}
                 </Typography>
               </div>
@@ -121,7 +139,10 @@ const EmergencyContacs = ({
                 >
                   {t("email")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.emergency_email}
                 </Typography>
               </div>
@@ -133,7 +154,10 @@ const EmergencyContacs = ({
             >
               {t("phone")}
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {data?.emergency_phone}
             </Typography>
           </Card>

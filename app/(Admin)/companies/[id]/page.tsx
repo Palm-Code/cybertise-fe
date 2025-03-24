@@ -1,11 +1,12 @@
 import { CompaniesDetailFragment } from "@/feature/mediator/fragments";
 
-export default function VRPLaunchpadDetailPage({
+export default async function VRPLaunchpadDetailPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }) {
-  return <CompaniesDetailFragment id={params.id} />;
+  const { id } = await params;
+  return <CompaniesDetailFragment id={id} />;
 }

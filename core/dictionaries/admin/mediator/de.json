@@ -207,5 +207,9 @@
     },
     "hacker_ticket": "Hacker-Ticket: Chat",
     "button_create": "Firmenticket erstellen"
+  },
+  "Payment": {
+    "title": "Zahlung",
+    "more_info": "Weitere Informationen"
   }
 }

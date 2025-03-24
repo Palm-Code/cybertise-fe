@@ -42,15 +42,30 @@ const SingleVrp = ({
   };
 
   const tabs: { [key in TabsItem]: JSX.Element } = {
-    summary: <Summary type="details" data={summary} />,
+    summary: (
+      <Summary
+        type="details"
+        data={summary}
+      />
+    ),
     rules: (
       <RulesAndPoliciesReview
         className={cn("bg-background-main-light dark:bg-background-main-dark")}
         data={summary}
       />
     ),
-    bounty: <Summary type="bounty" data={summary} />,
-    scope: <Scope id={data?.id || ""} assetTypes={assetTypes} />,
+    bounty: (
+      <Summary
+        type="bounty"
+        data={summary}
+      />
+    ),
+    scope: (
+      <Scope
+        id={data?.id || ""}
+        assetTypes={assetTypes}
+      />
+    ),
     updates: <UpdateList data={data?.latest_updates} />,
     thanks: <Thanks programId={data?.id || ""} />,
   };

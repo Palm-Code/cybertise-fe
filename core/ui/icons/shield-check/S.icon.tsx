@@ -21,9 +21,18 @@ const S = () => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#B50000" />
-          <stop offset="0.0001" stopColor="#B50000" />
-          <stop offset="1" stopColor="#FF9C9C" />
-          <stop offset="1" stopColor="#FF9C9C" />
+          <stop
+            offset="0.0001"
+            stopColor="#B50000"
+          />
+          <stop
+            offset="1"
+            stopColor="#FF9C9C"
+          />
+          <stop
+            offset="1"
+            stopColor="#FF9C9C"
+          />
         </linearGradient>
       </defs>
     </svg>

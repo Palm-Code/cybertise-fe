@@ -41,7 +41,10 @@ const BaseDropdown = ({
     <>
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-4.5">
-          <Typography variant="h6" weight="semibold">
+          <Typography
+            variant="h6"
+            weight="semibold"
+          >
             {label}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-4">
@@ -51,7 +54,10 @@ const BaseDropdown = ({
                   key={`option-${idx}`}
                   className="_flexbox__row__center__between w-full"
                 >
-                  <Typography variant="p" affects="small">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
                     {option.label}
                   </Typography>
                   <Checkbox
@@ -67,7 +73,10 @@ const BaseDropdown = ({
         </div>
       </Mobile>
       <Desktop className="w-fit">
-        <Select onValueChange={onValueChange} defaultValue={value}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
           <div className={cn("flex items-center gap-1")}>
             {label && (
               <Typography
@@ -86,7 +95,10 @@ const BaseDropdown = ({
               )}
               {...props}
             >
-              <Typography variant="p" affects="small">
+              <Typography
+                variant="p"
+                affects="small"
+              >
                 {inputValueLabel || "All type"}
               </Typography>
             </SelectTrigger>
@@ -99,12 +111,18 @@ const BaseDropdown = ({
           >
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

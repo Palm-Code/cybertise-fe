@@ -41,7 +41,10 @@ const Indicator = ({
     return (
       <div className="-ml-2.5 grid grid-cols-[auto_1fr] items-center">
         <Indicators className={indicatorVariants({ variant, className })} />
-        <Typography variant="p" affects="small">
+        <Typography
+          variant="p"
+          affects="small"
+        >
           {children}
         </Typography>
       </div>

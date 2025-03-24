@@ -163,7 +163,7 @@ const Tiptap = ({
           }}
           autoFocus
           className={cn(
-            "peer flex max-h-[33vh] min-h-32 w-full max-w-full overflow-auto whitespace-pre-line",
+            "peer flex max-h-32 min-h-32  w-full max-w-full overflow-auto whitespace-pre-line",
             "bg-background-main-light dark:bg-background-main-dark",
             "cursor-text rounded-md rounded-b-none p-3 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
             label ? "pt-6" : "pt-3"
@@ -177,13 +177,16 @@ const Tiptap = ({
         <div
           className={cn(
             "_flexbox__row__center__between w-full rounded-md p-3",
-            "mt-3",
+
             label
               ? "bg-background-page-light dark:bg-background-page-dark"
               : "bg-neutral-light-100 dark:bg-neutral-dark-100"
           )}
         >
-          <Toolbar variant={variant} editor={editor} />
+          <Toolbar
+            variant={variant}
+            editor={editor}
+          />
           {!!onClickSendAttachment && !!onClickSendMessage && (
             <div className="_flexbox__row__center gap-4">
               <Button

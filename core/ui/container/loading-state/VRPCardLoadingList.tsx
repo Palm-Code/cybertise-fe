@@ -81,7 +81,12 @@ const VRPCardLoadingList = ({
 }: I_VRPCardProps & { count?: number }) => {
   return Array(count)
     .fill(0)
-    .map((_, index) => <VRPCard key={index} isGridCard={isGridCard} />);
+    .map((_, index) => (
+      <VRPCard
+        key={index}
+        isGridCard={isGridCard}
+      />
+    ));
 };
 
 export default VRPCardLoadingList;

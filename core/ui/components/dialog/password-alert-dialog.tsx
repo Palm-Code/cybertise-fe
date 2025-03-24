@@ -26,22 +26,35 @@ export const PasswordModalAlert = ({ ...props }: I_PasswordModalAlertProps) => {
           onClick={props.onClose}
         >
           <X className="size-6" />
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("button_close")}
           </Typography>
         </div>
         <div className="grid grid-cols-[auto_1fr] items-center gap-6">
           <TriangleAlert className="size-6 text-warning" />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
         </div>
         <div className="_flexbox__col__start__start w-full gap-2.5">
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("description")}
           </Typography>
           <div className="w-full rounded-[10px] bg-background-page-light p-2 dark:bg-background-page-dark xl:p-4">
-            <Typography variant="p" affects="small" weight="semibold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="semibold"
+            >
               {t("suggestion")}
             </Typography>
             <ul className="list-inside list-disc text-sm *:text-white">

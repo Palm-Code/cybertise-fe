@@ -146,7 +146,10 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
           </div>
           {variant == "company" ? (
             <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
+              <Typography
+                variant="h6"
+                weight="bold"
+              >
                 {t("company_address")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-6">
@@ -295,7 +298,11 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
             >
               {`${variant === "company" ? t("logo") : t("label_avatar", { role: variant })}`}
             </Typography>
-            <Avatar image={data?.image} initials="" className="h-12 w-12" />
+            <Avatar
+              image={data?.image}
+              initials=""
+              className="h-12 w-12"
+            />
             <Typography
               variant="p"
               affects="normal"
@@ -305,7 +312,11 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                 role: variant,
               })}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {variant === "hacker" ? data?.username : data?.name}
             </Typography>
             {variant !== "mediator" && variant !== "company staff" && (
@@ -318,7 +329,10 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   {t("country")}
                 </Typography>
                 <div className="_flexbox__row__center__start gap-2.5">
-                  <Country icon={countryFlag.icon} label={countryFlag?.label} />
+                  <Country
+                    icon={countryFlag.icon}
+                    label={countryFlag?.label}
+                  />
                 </div>
               </>
             )}
@@ -334,7 +348,10 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   role: variant === "company" ? t("company") : t("account"),
                 })}
               </Typography>
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {data?.about}
               </Typography>
             </div>
@@ -365,7 +382,11 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
               >
                 {`${variant === "company" ? t("logo") : t("label_avatar", { role: variant })}`}
               </Typography>
-              <Avatar image={data?.image} initials="C" className="h-12 w-12" />
+              <Avatar
+                image={data?.image}
+                initials="C"
+                className="h-12 w-12"
+              />
             </div>
             <div className="_flexbox__col__start__start gap-2.5">
               <Typography
@@ -377,7 +398,11 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   role: variant,
                 })}
               </Typography>
-              <Typography variant="p" affects="normal" className="col-span-1">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="col-span-1"
+              >
                 {variant === "hacker" ? data?.username : data?.name}
               </Typography>
             </div>
@@ -464,7 +489,10 @@ const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
                   role: variant === "company" ? t("company") : t("account"),
                 })}
               </Typography>
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {data?.about}
               </Typography>
             </div>

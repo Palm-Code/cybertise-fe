@@ -40,7 +40,12 @@ const StatusDropdown = ({
   return (
     <>
       <Desktop>
-        <Select onValueChange={onValueChange} defaultValue={value} {...props}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={inputValue}
+          value={inputValue}
+          {...props}
+        >
           <SelectTrigger className="gap-2.5 !bg-transparent !p-0 disabled:text-transparent">
             <Indicator
               variant={
@@ -58,7 +63,10 @@ const StatusDropdown = ({
           >
             {options && slicedOptions.length! ? (
               slicedOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   <Indicator
                     variant={
                       option.value
@@ -71,7 +79,10 @@ const StatusDropdown = ({
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

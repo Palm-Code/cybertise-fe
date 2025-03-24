@@ -141,7 +141,10 @@ const Scope = ({
               />
             </>
           ) : (
-            <EmptyState type="target-assets" variant="company" />
+            <EmptyState
+              type="target-assets"
+              variant="company"
+            />
           )}
         </div>
       </Desktop>

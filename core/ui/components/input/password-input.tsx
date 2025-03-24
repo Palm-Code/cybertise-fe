@@ -88,7 +88,10 @@ const PasswordInput = ({
                     "border !border-warning !bg-warning/10"
                   )}
                 >
-                  <Typography variant={"p"} affects="small">
+                  <Typography
+                    variant={"p"}
+                    affects="small"
+                  >
                     {t("password_alert.read_more_explanation")}
                   </Typography>
                 </div>

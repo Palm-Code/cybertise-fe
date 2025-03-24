@@ -14,7 +14,10 @@ const DataPrivacy = ({ variant }: I_DataPrivacyProps) => {
   return (
     <div className="_flexbox__col__start__start gap-6">
       <div className="_flexbox__row__center__between w-full">
-        <Typography variant="h5" weight="bold">
+        <Typography
+          variant="h5"
+          weight="bold"
+        >
           {t("title")}
         </Typography>
       </div>
@@ -22,7 +25,10 @@ const DataPrivacy = ({ variant }: I_DataPrivacyProps) => {
       <CardFaq />
       {variant === "hacker" && (
         <div className="_flexbox__col__start__start w-full gap-6">
-          <Typography variant="h6" weight="bold">
+          <Typography
+            variant="h6"
+            weight="bold"
+          >
             {t("title_2")}
           </Typography>
           <CardDeactivateAccount variant={variant} />

@@ -64,7 +64,10 @@ const EditStaffs = ({
   return (
     <>
       <Mobile>
-        <EmptyState variant="company" type="default" />
+        <EmptyState
+          variant="company"
+          type="default"
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
@@ -82,7 +85,10 @@ const EditStaffs = ({
             )}
           >
             <div className="_flexbox__col__start__start w-full gap-6">
-              <Typography variant="h6" weight="bold">
+              <Typography
+                variant="h6"
+                weight="bold"
+              >
                 {t("add_new_staff.title")}
               </Typography>
               <div className="_flexbox__col__start__start w-full gap-2.5">
@@ -162,7 +168,10 @@ const EditStaffs = ({
               )}
             >
               <div className="_flexbox__col__start__start w-full gap-4">
-                <Typography variant="h6" weight="bold">
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("delete_staff.title")}
                 </Typography>
                 <ul className="list-disc pl-4">

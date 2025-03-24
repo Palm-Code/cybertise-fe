@@ -8,6 +8,11 @@ const DetailsVrpFragment = ({
   id: string;
   variant?: keyof typeof Role;
 }) => {
-  return <DetailsVRP id={id} variant={variant} />;
+  return (
+    <DetailsVRP
+      id={id}
+      variant={variant}
+    />
+  );
 };
 export default DetailsVrpFragment;

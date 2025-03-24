@@ -86,7 +86,10 @@ const EditCompnayDetails = ({
   return (
     <>
       <Mobile>
-        <EmptyState variant="company" type="default" />
+        <EmptyState
+          variant="company"
+          type="default"
+        />
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-8">
@@ -105,7 +108,10 @@ const EditCompnayDetails = ({
               )}
             >
               <div className="_flexbox__col__start__start w-full gap-6">
-                <Typography variant="h6" weight="bold">
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("company_information")}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-2.5">
@@ -162,7 +168,10 @@ const EditCompnayDetails = ({
                 </div>
               </div>
               <div className="_flexbox__col__start__start w-full gap-6">
-                <Typography variant="h6" weight="bold">
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("company")} {t("address")}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-6">
@@ -242,7 +251,10 @@ const EditCompnayDetails = ({
                 </div>
               </div>
               <div className="_flexbox__col__start__start w-full gap-6">
-                <Typography variant="h6" weight="bold">
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("about", { role: t("company") })}
                 </Typography>
                 <div className="_flexbox__col__start__start w-full gap-6">
@@ -272,7 +284,10 @@ const EditCompnayDetails = ({
               )}
             >
               <div className="_flexbox__col__start__start w-full gap-6">
-                <Typography variant="h6" weight="bold">
+                <Typography
+                  variant="h6"
+                  weight="bold"
+                >
                   {t("account_details", { role: t("company") })}
                 </Typography>
                 <Input
@@ -327,7 +342,11 @@ const EditCompnayDetails = ({
               </div>
             </Card>
             <div className="_flexbox__row__center gap-6">
-              <Button asLink href="/manage-company" variant="secondary-company">
+              <Button
+                asLink
+                href="/manage-company"
+                variant="secondary-company"
+              >
                 {t("button_discard")}
               </Button>
               <Button

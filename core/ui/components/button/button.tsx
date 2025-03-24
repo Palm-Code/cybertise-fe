@@ -38,7 +38,7 @@ const Button = ({
             <div className="relative flex w-full items-center justify-between gap-2.5">
               <div></div>
               {children}
-              <Loader2 className="h-6 w-6 animate-spin stroke-[3px]" />
+              <Loader2 className="h-4 w-4 animate-spin stroke-[3px]" />
             </div>
           ) : (
             <>
@@ -58,7 +58,7 @@ const Button = ({
         <div className="relative flex w-full items-center justify-between gap-2.5">
           <div></div>
           {children}
-          <Loader2 className="h-6 w-6 animate-spin stroke-[3px]" />
+          <Loader2 className="h-4 w-4 animate-spin stroke-[3px]" />
         </div>
       ) : (
         <>

@@ -28,10 +28,21 @@ const StepWrapper = ({
           className
         )}
       >
-        <Typography variant="p" className="inline-flex text-sm xl:text-base">
-          {currentSteps} of {totalSteps} <Dot width={24} height={24} /> {title}
+        <Typography
+          variant="p"
+          className="inline-flex text-sm xl:text-base"
+        >
+          {currentSteps} of {totalSteps}{" "}
+          <Dot
+            width={24}
+            height={24}
+          />{" "}
+          {title}
         </Typography>
-        <Typography variant="h4" weight="bold">
+        <Typography
+          variant="h4"
+          weight="bold"
+        >
           {subtitle}
         </Typography>
       </div>

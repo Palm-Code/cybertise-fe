@@ -20,7 +20,10 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
           "xl:p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("header_title")}
         </Typography>
         {data.target_assets.map((item, index) => (

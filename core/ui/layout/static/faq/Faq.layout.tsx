@@ -53,7 +53,10 @@ export const FaqLayout = ({
         </div>
         <div className="mx-auto my-6 w-full max-w-[804px] space-y-6 p-6">
           <div className="w-full py-8">
-            <SearchInput variant="hacker" placeholder="Search your question" />
+            <SearchInput
+              variant="hacker"
+              placeholder="Search your question"
+            />
           </div>
           <AccordionList data={data.content} />
         </div>

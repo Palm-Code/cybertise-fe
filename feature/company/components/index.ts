@@ -8,3 +8,4 @@ export { default as Overview } from "./vrp-management/overview/Overview.componen
 export { default as CreateVrp } from "./vrp-management/create-vrp/CreateVrp.component";
 export { default as Statistics } from "./statistics/Statistics.component";
 export { default as Services } from "./services/Services.component";
+export { default as Payment } from "./payment/Payment.component";

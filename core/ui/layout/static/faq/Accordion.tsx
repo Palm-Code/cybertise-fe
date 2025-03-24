@@ -26,7 +26,11 @@ export const Accordion = ({
         className="flex w-full items-center justify-between p-6"
         onClick={() => setCollapsed(!collapsed)}
       >
-        <Typography variant="p" affects="normal" weight="bold">
+        <Typography
+          variant="p"
+          affects="normal"
+          weight="bold"
+        >
           {question}
         </Typography>
         <ChevronDown
@@ -64,5 +68,10 @@ export const AccordionList = ({
 }: {
   data: { question: string; answer: string }[];
 }) => {
-  return data.map((item, idx) => <Accordion key={`faq-${idx}`} {...item} />);
+  return data.map((item, idx) => (
+    <Accordion
+      key={`faq-${idx}`}
+      {...item}
+    />
+  ));
 };

@@ -68,7 +68,11 @@ export default function Table({
                         className="h-6 w-6"
                         initials="S"
                       />
-                      <Typography variant="p" affects="small" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                      >
                         {item.company?.name}
                       </Typography>
                     </div>
@@ -77,7 +81,11 @@ export default function Table({
                     className={cn(columns[1].width, `text-${columns[1].align}`)}
                     align={columns[1].align}
                   >
-                    <Typography variant="p" affects="small" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                      weight="semibold"
+                    >
                       {item.title}
                     </Typography>
                   </TableData>

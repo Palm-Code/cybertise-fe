@@ -7,7 +7,6 @@ import { toast } from "sonner";
 export const usePostUpdateTicket = (id: string) => {
   const queryClient = useQueryClient();
   const mutation = useMutation<[], I_GetErrorRes, string>({
-    retry: 3,
     mutationFn: (payload) => {
       return fetchPostUpdateTicket(id, payload);
     },
@@ -24,8 +23,8 @@ export const usePostUpdateTicket = (id: string) => {
         duration: 3000,
       });
     },
-    onError: () => {
-      toast.error("Failed to update ticket", {
+    onError: (error) => {
+      toast.error(error.message, {
         position: "bottom-right",
         duration: 3000,
         action: {
@@ -33,6 +32,7 @@ export const usePostUpdateTicket = (id: string) => {
           onClick: () => mutation.mutateAsync(mutation.variables as string),
         },
       });
+      return;
     },
   });
 

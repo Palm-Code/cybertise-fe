@@ -63,10 +63,17 @@ const ModalUnbind2fa = ({
             {t("button_cancel")}
           </Button>
           <KeyRound className="h-16 w-16" />
-          <Typography variant="h4" weight="semibold">
+          <Typography
+            variant="h4"
+            weight="semibold"
+          >
             {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+          >
             {t("description")}
           </Typography>
         </div>

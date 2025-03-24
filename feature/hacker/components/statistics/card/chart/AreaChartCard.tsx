@@ -52,7 +52,10 @@ export const AreaChartCard = ({
           />
         </div>
         <div className={cn("my-8 h-[300px] w-full")}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <AreaChart
               className={cn(
                 "h-full w-full max-w-full scale-110 !text-[8px] sm:scale-100"
@@ -62,9 +65,23 @@ export const AreaChartCard = ({
               defaultShowTooltip
             >
               <defs>
-                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#BAFF00" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#BAFF00" stopOpacity={0} />
+                <linearGradient
+                  id="colorPv"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    stopColor="#BAFF00"
+                    stopOpacity={0.2}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="#BAFF00"
+                    stopOpacity={0}
+                  />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
@@ -134,7 +151,10 @@ export const AreaChartCard = ({
             />
           </div>
           <div className={cn("h-[300px] w-full")}>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
               <AreaChart
                 className={cn("h-full w-full max-w-full scale-100 !text-xs")}
                 data={data}
@@ -142,9 +162,22 @@ export const AreaChartCard = ({
                 defaultShowTooltip
               >
                 <defs>
-                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                    <stop stopColor="#BAFF00" stopOpacity={0.2} />
-                    <stop offset={1} stopColor="#BAFF00" stopOpacity={0} />
+                  <linearGradient
+                    id="colorPv"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      stopColor="#BAFF00"
+                      stopOpacity={0.2}
+                    />
+                    <stop
+                      offset={1}
+                      stopColor="#BAFF00"
+                      stopOpacity={0}
+                    />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />

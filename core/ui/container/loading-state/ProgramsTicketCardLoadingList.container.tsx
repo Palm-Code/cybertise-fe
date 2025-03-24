@@ -100,7 +100,12 @@ const TicketCard = ({ isGridCard }: I_TicketCardProps) => {
 const ProgramsTicketCardLoadingList = ({ isGridCard }: I_TicketCardProps) => {
   return Array(10)
     .fill(0)
-    .map((_, index) => <TicketCard key={index} isGridCard={isGridCard} />);
+    .map((_, index) => (
+      <TicketCard
+        key={index}
+        isGridCard={isGridCard}
+      />
+    ));
 };
 
 export default ProgramsTicketCardLoadingList;

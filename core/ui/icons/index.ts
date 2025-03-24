@@ -17,3 +17,5 @@ export { default as StepPassed } from "./step/StepPassed.icon";
 export * from "./shield-check/ShieldCheck.icon";
 export { default as S } from "./shield-check/S.icon";
 export * from "./service/Service.icon";
+export * from "./currency/Currency.icon";
+export * from "./stripe/Stripe.icon";

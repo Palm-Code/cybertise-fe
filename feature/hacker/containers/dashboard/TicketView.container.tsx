@@ -18,7 +18,11 @@ const TicketView = ({
         {isLoading ? (
           <ChatListCardLoadingList />
         ) : data?.length === 0 ? (
-          <EmptyState type="ticket" variant="hacker" className="mt-0" />
+          <EmptyState
+            type="ticket"
+            variant="hacker"
+            className="mt-0"
+          />
         ) : (
           <DashboardTicketCardList data={data} />
         )}

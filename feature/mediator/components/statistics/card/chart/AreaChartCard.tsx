@@ -52,7 +52,10 @@ export const AreaChartCard = ({
           />
         </div>
         <div className={cn("my-8 h-[300px] w-full")}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer
+            width="100%"
+            height="100%"
+          >
             <AreaChart
               className={cn(
                 "h-full w-full max-w-full scale-110 !text-xs sm:scale-100"
@@ -69,8 +72,15 @@ export const AreaChartCard = ({
                   x2="0"
                   y2="1"
                 >
-                  <stop stopColor="#845EEE" stopOpacity="0.2" />
-                  <stop offset="1" stopColor="#845EEE" stopOpacity="0" />
+                  <stop
+                    stopColor="#845EEE"
+                    stopOpacity="0.2"
+                  />
+                  <stop
+                    offset="1"
+                    stopColor="#845EEE"
+                    stopOpacity="0"
+                  />
                 </linearGradient>
               </defs>
               <XAxis dataKey="date" />
@@ -140,7 +150,10 @@ export const AreaChartCard = ({
             />
           </div>
           <div className={cn("h-[300px] w-full")}>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
               <AreaChart
                 className={cn("h-full w-full max-w-full scale-100 !text-xs")}
                 data={data}
@@ -155,8 +168,15 @@ export const AreaChartCard = ({
                     x2="0"
                     y2="1"
                   >
-                    <stop stopColor="#845EEE" stopOpacity="0.2" />
-                    <stop offset="1" stopColor="#845EEE" stopOpacity="0" />
+                    <stop
+                      stopColor="#845EEE"
+                      stopOpacity="0.2"
+                    />
+                    <stop
+                      offset="1"
+                      stopColor="#845EEE"
+                      stopOpacity="0"
+                    />
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="date" />

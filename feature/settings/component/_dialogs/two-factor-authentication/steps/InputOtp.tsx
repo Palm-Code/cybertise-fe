@@ -45,7 +45,11 @@ const InputOtp = ({
         >
           {t("button_cancel")}
         </Button>
-        <Typography variant="h4" weight="semibold" align="center">
+        <Typography
+          variant="h4"
+          weight="semibold"
+          align="center"
+        >
           {t("title_2")}
         </Typography>
         <Typography
@@ -73,7 +77,11 @@ const InputOtp = ({
             <>
               <div className="_flexbox__row__center__between w-full gap-2">
                 {slots.map((slot, idx) => (
-                  <Slot isError={isError} key={`slot-${idx}`} {...slot} />
+                  <Slot
+                    isError={isError}
+                    key={`slot-${idx}`}
+                    {...slot}
+                  />
                 ))}
               </div>
             </>

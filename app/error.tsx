@@ -20,7 +20,10 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
           height={332}
           className="mx-auto h-24 w-48 xl:h-full xl:w-full"
         />
-        <Typography variant="p" className="text-[56px] !text-neutral-light-40">
+        <Typography
+          variant="p"
+          className="text-[56px] !text-neutral-light-40"
+        >
           Oops!
         </Typography>
         <Typography

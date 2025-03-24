@@ -9,7 +9,10 @@ interface IBriefProps {
 const Brief = ({ onClickNext }: IBriefProps) => {
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         Brief
       </Typography>
       <Card
@@ -27,7 +30,10 @@ const Brief = ({ onClickNext }: IBriefProps) => {
             )}
           />
         </article>
-        <Button variant="primary-company" onClick={onClickNext}>
+        <Button
+          variant="primary-company"
+          onClick={onClickNext}
+        >
           Next
         </Button>
       </Card>

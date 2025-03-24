@@ -225,5 +225,9 @@
     },
     "hacker_ticket": "Hacker Ticket: Chat",
     "button_create": "Create Company Ticket"
+  },
+  "Payment": {
+    "title": "Payment",
+    "more_info": "More Info"
   }
 }

@@ -47,7 +47,10 @@ const BaseModal = ({
             exit={{ opacity: 0, scale: 0.2 }}
             className="w-full"
           >
-            <div className="w-full" ref={ref}>
+            <div
+              className="w-full"
+              ref={ref}
+            >
               {children}
             </div>
           </motion.div>

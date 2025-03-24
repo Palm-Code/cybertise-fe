@@ -15,7 +15,10 @@ const ProblemCausesCard = ({
   const t = useTranslations("SendReportHacker.reviews");
   return (
     <>
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("problem_causes.header_title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-2.5">
@@ -27,7 +30,10 @@ const ProblemCausesCard = ({
           {t("problem_causes.impact")}
         </Typography>
         <article>
-          <Tiptap description={sanitize(summary)} showing />
+          <Tiptap
+            description={sanitize(summary)}
+            showing
+          />
         </article>
       </div>
       <div className="_flexbox__col__start__start gap-2.5">
@@ -39,7 +45,10 @@ const ProblemCausesCard = ({
           {t("problem_causes.proof_of_concept")}
         </Typography>
         <article>
-          <Tiptap description={sanitize(proof_of_concept)} showing />
+          <Tiptap
+            description={sanitize(proof_of_concept)}
+            showing
+          />
         </article>
       </div>
     </>

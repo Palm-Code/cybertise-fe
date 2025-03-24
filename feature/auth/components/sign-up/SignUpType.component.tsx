@@ -32,7 +32,11 @@ const SignUpType = () => {
           )}
         >
           <div className="_flexbox__col__center w-full gap-8">
-            <Typography variant="h5" weight="semibold" align="center">
+            <Typography
+              variant="h5"
+              weight="semibold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <div className="flex w-full flex-col gap-7">
@@ -80,7 +84,10 @@ const SignUpType = () => {
           align="center"
         >
           {t("footer")}{" "}
-          <Link href="/auth/signin" className="ml-2 font-semibold underline">
+          <Link
+            href="/auth/signin"
+            className="ml-2 font-semibold underline"
+          >
             {t("link")}
           </Link>
         </Typography>
@@ -93,7 +100,11 @@ const SignUpType = () => {
           )}
         >
           <div className="_flexbox__col__center w-full gap-12">
-            <Typography variant="h4" weight="bold" align="center">
+            <Typography
+              variant="h4"
+              weight="bold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <div className="grid w-full grid-cols-2 gap-7">
@@ -133,9 +144,15 @@ const SignUpType = () => {
               </Link>
             </div>
           </div>
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("footer")}{" "}
-            <Link href="/auth/signin" className="ml-2 font-semibold underline">
+            <Link
+              href="/auth/signin"
+              className="ml-2 font-semibold underline"
+            >
               {t("link")}
             </Link>
           </Typography>

@@ -24,7 +24,10 @@ const RulesAndPoliciesReview = ({ data, className }: RnpProps) => {
         className
       )}
     >
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("header_title")}
       </Typography>
       <div className="__flexbox__col__start__start w-full gap-2.5">

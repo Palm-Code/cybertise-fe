@@ -25,7 +25,10 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   };
 
   return (
-    <Popover open={openDropdown} onOpenChange={setOpenDropdown}>
+    <Popover
+      open={openDropdown}
+      onOpenChange={setOpenDropdown}
+    >
       <PopoverTrigger asChild>
         <button
           type="button"

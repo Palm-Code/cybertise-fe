@@ -29,8 +29,19 @@ const ChatBubble = ({
               />
             );
           else if (item.sender === "Systems")
-            return <System data={item} key={`User-${idx}`} />;
-          else return <Sender data={item} key={`sender-${idx}`} />;
+            return (
+              <System
+                data={item}
+                key={`User-${idx}`}
+              />
+            );
+          else
+            return (
+              <Sender
+                data={item}
+                key={`sender-${idx}`}
+              />
+            );
         })}
     </div>
   );

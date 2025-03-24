@@ -7,5 +7,10 @@ interface I_CollaboratorsProps {
 }
 
 export const Collaborators = ({ id }: I_CollaboratorsProps) => {
-  return <ViewCollaborators id={id} onClickAddCollaborator={() => {}} />;
+  return (
+    <ViewCollaborators
+      id={id}
+      onClickAddCollaborator={() => {}}
+    />
+  );
 };

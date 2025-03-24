@@ -44,7 +44,10 @@ const ModalPublishVRP = ({
         )}
       >
         <div className="_flexbox__col__center w-full gap-8">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Publish VRP
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-6">
@@ -82,11 +85,17 @@ const ModalPublishVRP = ({
                 />
               </div>
               <div className="_flexbox__col__start__start gap-2">
-                <Typography variant="h6" weight="semibold">
+                <Typography
+                  variant="h6"
+                  weight="semibold"
+                >
                   Publish Now
                 </Typography>
                 {isPublishNow && (
-                  <Typography variant="p" affects="small">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
                     The new VRP will published immediately as soon as you click
                     on the publish button
                   </Typography>
@@ -124,12 +133,18 @@ const ModalPublishVRP = ({
                 />
               </div>
               <div className="_flexbox__col__start__start w-full gap-2">
-                <Typography variant="h6" weight="semibold">
+                <Typography
+                  variant="h6"
+                  weight="semibold"
+                >
                   Schedule Publish
                 </Typography>
                 {!isPublishNow && (
                   <div className="_flexbox__col__start__start w-full gap-2">
-                    <Typography variant="p" affects="small">
+                    <Typography
+                      variant="p"
+                      affects="small"
+                    >
                       Select a date to make you VRP Published
                     </Typography>
                     <DatePicker
@@ -157,7 +172,11 @@ const ModalPublishVRP = ({
           </div>
         </div>
         <div className="_flexbox__row__center__between w-full gap-6">
-          <Button variant="secondary-company" fullWidth onClick={onClose}>
+          <Button
+            variant="secondary-company"
+            fullWidth
+            onClick={onClose}
+          >
             Back
           </Button>
           <Button

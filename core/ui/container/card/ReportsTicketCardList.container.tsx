@@ -18,6 +18,7 @@ import { Hacker } from "../../icons";
 import { Building2, ChevronRight } from "lucide-react";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import { ModalForbidden } from "..";
+import { useTranslations } from "next-intl";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -29,6 +30,7 @@ const TicketCard = ({
   isMediator = false,
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
+  const t = useTranslations("Ticket");
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
@@ -39,7 +41,10 @@ const TicketCard = ({
           className="h-full"
         >
           {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
-            <Indicator variant="warning" className="absolute -right-4 -top-4" />
+            <Indicator
+              variant="warning"
+              className="absolute -right-4 -top-4"
+            />
           )}
           <div
             className={cn(
@@ -66,7 +71,11 @@ const TicketCard = ({
               </Typography>
             </div>
             <div className="_flexbox__col__start w-full gap-1">
-              <Typography variant="p" affects="large" weight="semibold">
+              <Typography
+                variant="p"
+                affects="large"
+                weight="semibold"
+              >
                 {props.company?.name}
               </Typography>
               <div className="_flexbox__row__center gap-4">
@@ -188,7 +197,10 @@ const TicketCard = ({
           className="h-full"
         >
           {(isMediator ? !!props.has_new_mediator : !!props.has_new) && (
-            <Indicator variant="warning" className="absolute -right-4 -top-4" />
+            <Indicator
+              variant="warning"
+              className="absolute -right-4 -top-4"
+            />
           )}
           <div
             className={cn(
@@ -210,12 +222,20 @@ const TicketCard = ({
                 <div className="_flexbox__col__start w-full gap-1">
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
-                      <Typography variant="p" affects="large" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="large"
+                        weight="semibold"
+                      >
                         #{props.code} - {props.title.substring(0, 50) + "..."}
                       </Typography>
                     </Tooltip>
                   ) : (
-                    <Typography variant="p" affects="large" weight="semibold">
+                    <Typography
+                      variant="p"
+                      affects="large"
+                      weight="semibold"
+                    >
                       #{props.code} - {props.title}
                     </Typography>
                   )}
@@ -294,7 +314,7 @@ const TicketCard = ({
                     href={`/reports/${props.ticket_type === "Hacker" ? props.id : props.related_ticket_id}`}
                     // fullWidth
                   >
-                    Hacker Ticket
+                    {t("hacker_ticket")}
                   </Button>
                   {props.related_ticket_id ? (
                     <Button
@@ -305,7 +325,7 @@ const TicketCard = ({
                       asLink
                       href={`/reports/${props.ticket_type === "Company" ? props.id : props.related_ticket_id}`}
                     >
-                      Company Ticket
+                      {t("company_ticket")}
                     </Button>
                   ) : props.status.toLowerCase() === "canceled" ||
                     props.status.toLowerCase() === "closed" ? null : (
@@ -317,7 +337,7 @@ const TicketCard = ({
                       asLink
                       href={`/reports/new?ticket_id=${props.id}`}
                     >
-                      Create Company Ticket
+                      {t("create_company_ticket")}
                     </Button>
                   )}
                 </div>
@@ -342,8 +362,15 @@ const TicketCardList = ({
   isMediator = false,
 }: I_TicketCardListProps) => {
   return data.map((item) => (
-    <Suspense fallback={<CardLoader />} key={item.code}>
-      <TicketCard isGridCard={isGridCard} isMediator={isMediator} {...item} />
+    <Suspense
+      fallback={<CardLoader />}
+      key={item.code}
+    >
+      <TicketCard
+        isGridCard={isGridCard}
+        isMediator={isMediator}
+        {...item}
+      />
     </Suspense>
   ));
 };
