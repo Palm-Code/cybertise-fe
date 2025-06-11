@@ -2,8 +2,9 @@ import { AxiosResponse } from "axios";
 import { getAssetTypeAPIURL } from "@/core/routes/common";
 import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import axiosInterceptorInstance from "../interceptor/axiosInterceptor";
+import { cache } from "react";
 
-export const fetchGetAssetType = async () => {
+export const fetchGetAssetType = cache(async () => {
   const params = {
     fields: {
       asset_types: "id,value",
@@ -24,4 +25,4 @@ export const fetchGetAssetType = async () => {
     .catch((err) => {
       throw err?.response?.data || err?.response;
     });
-};
+});

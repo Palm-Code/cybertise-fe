@@ -116,6 +116,20 @@
     }
   },
   "Earnings": {
-    "title": "Einkommen"
+    "title": "Einkommensübersicht",
+    "status": {
+      "not_connected": "Nicht verbunden",
+      "connected": "Verbunden"
+    },
+    "description": "Öffnen Sie Ihr Stripe -Konto, sehen Sie sich Ihren Gewinnüberblick an und ziehen Sie es auf Ihr Bankkonto ab.",
+    "connect_stripe": {
+      "title": "Streifenkonto verbinden",
+      "description": "Um Auszahlungen zu erhalten, müssen Sie Ihr Stripe -Konto verbinden. \nSparta verwendet Stripe Express, um Ihr Ergebnis sicher und effizient zu verwalten.",
+      "subtitle": "Was sollten Sie sonst noch wissen?",
+      "step_1": "Stripe Express gibt Ihnen die volle Kontrolle über Ihre Einnahmen, Steuerformulare und Auszahlungspläne.",
+      "step_2": "Sie müssen sich nur einmal eine Verbindung herstellen - Ihr Konto bleibt für zukünftige Bounties verknüpft.",
+      "step_3": "Ihre Daten werden sicher von Stripe behandelt und nie an Dritte geteilt.",
+      "button": "Streifenkonto verbinden"
+    }
   }
 }

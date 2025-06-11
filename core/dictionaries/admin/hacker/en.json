@@ -131,6 +131,20 @@
     "see_programs": "See Programs"
   },
   "Earnings": {
-    "title": "Earnings"
+    "title": "Earnings Overview",
+    "status": {
+      "not_connected": "Not Connected",
+      "connected": "Connected"
+    },
+    "description": "Open your stripe account, see your earnings overview, and withdraw to your bank account.",
+    "connect_stripe": {
+      "title": "Connect Stripe Account",
+      "description": "To start receiving payouts, you need to connect your Stripe account. Sparta uses Stripe Express to manage your earnings securely and efficiently.",
+      "subtitle": "What else you should know?",
+      "step_1": "Stripe Express gives you full control over your earnings, tax forms, and payout schedules.",
+      "step_2": "You only need to connect once — your account will stay linked for future bounties.",
+      "step_3": "Your data is handled securely by Stripe and never shared with third parties.",
+      "button": "Connect Stripe Account"
+    }
   }
 }
