@@ -32,6 +32,8 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
   const { data, isLoading, isFetching } = useGetActivityLog(store.payload);
   const meta = data?.meta;
 
+  console.log({ data });
+
   return (
     <>
       <Mobile>
@@ -128,12 +130,13 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                     >
                       {data.data &&
                         data.data[item].map((log, index: number) => {
+                          console.log({ log });
                           const valuesChanged =
-                            log.event.toLowerCase() ===
-                            log.description.toLowerCase()
+                            log?.event?.toLowerCase() ===
+                            log?.description?.toLowerCase()
                               ? getDifferencesAsArray(
-                                  log.properties.attributes,
-                                  log.properties.old
+                                  log?.properties?.attributes || {},
+                                  log?.properties?.old || {}
                                 )
                               : [];
                           return (
@@ -167,7 +170,7 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                                       iconColor[variant]
                                     )}
                                   >
-                                    {log.event}
+                                    {log.event || "-"}
                                   </span>
                                 </Typography>
                                 {log.event !== log.description ? (
@@ -219,7 +222,7 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                                                   iconColor[variant]
                                                 )}
                                               >
-                                                {value.oldValue}
+                                                {value.oldValue || "-"}
                                               </span>{" "}
                                               to{" "}
                                               <span
@@ -227,7 +230,7 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                                                   iconColor[variant]
                                                 )}
                                               >
-                                                {value.newValue}
+                                                {value.newValue || "-"}
                                               </span>
                                             </Typography>
                                           </li>
