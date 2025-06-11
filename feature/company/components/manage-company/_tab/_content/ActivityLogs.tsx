@@ -32,8 +32,6 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
   const { data, isLoading, isFetching } = useGetActivityLog(store.payload);
   const meta = data?.meta;
 
-  console.log({ data });
-
   return (
     <>
       <Mobile>
