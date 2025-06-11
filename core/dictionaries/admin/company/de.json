@@ -118,5 +118,16 @@
   },
   "Services": {
     "title": "Dienstleistungen"
+  },
+  "Payments": {
+    "subscription": {
+      "title": "Abonnieren Sie Sparta",
+      "description": "Um Ihr erstes VRP zu erstellen, müssen Sie Sparta abonnieren. \nIn diesem Abonnement wird das Zahlungssystem freigeschaltet und ermöglicht es Ihnen, Kopfgelder mit Ihrer registrierten Zahlungsmethode sofort zu zahlen.",
+      "subtitle": "Was sollten Sie sonst noch wissen?",
+      "step_1": "Ihr Abonnement bietet Zugriff auf die VRP -Funktion, automatisierte Zahlungen und erweiterte Tracking -Tools.",
+      "step_2": "Sie können Ihr Abonnement jederzeit aus Ihren Kontoeinstellungen verwalten oder kündigen.",
+      "step_3": "Alle Zahlungen werden von unserem vertrauenswürdigen Anbieter sicher verarbeitet und verschlüsselt.",
+      "button": "Abonnieren Sie Sparta"
+    }
   }
 }

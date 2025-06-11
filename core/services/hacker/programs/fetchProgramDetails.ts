@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import axiosInterceptorInstance from "../../interceptor/axiosInterceptor";
 import { I_GetParamsPayload } from "@/core/models/common";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
+import { redirect } from "next/navigation";
 
 export const fetchGetProgramDetails = async (
   payload?: I_GetParamsPayload,
@@ -16,6 +17,9 @@ export const fetchGetProgramDetails = async (
       return res.data;
     })
     .catch((err) => {
+      if (err?.response?.status === 404) {
+        redirect("/vrp-launchpad");
+      }
       throw err?.response?.data || err?.response;
     });
 

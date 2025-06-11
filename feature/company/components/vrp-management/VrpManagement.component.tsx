@@ -8,14 +8,21 @@ import { ModalForbidden, VRPCardLoadingList } from "@/core/ui/container";
 import { useGetProgramList } from "../../query/client";
 import { useProgramListParamStore } from "../../zustand/store/programs";
 import { Role } from "@/types/admin/sidebar";
-import { cn } from "@/core/lib/utils";
 import { useGetRole } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { useTranslations } from "next-intl";
+import { I_GetPaymentStatusSuccessResponse } from "@/core/models/payments";
+import { useToggle } from "usehooks-ts";
+import { SubscriptionDialog } from "./dialog";
 
-const VrpManagement = () => {
+const VrpManagement = ({
+  paymentStatus,
+}: {
+  paymentStatus: I_GetPaymentStatusSuccessResponse["data"];
+}) => {
   const t = useTranslations("VRPManagement");
   const role = useGetRole();
+  const [showSubscriptionDialog, toggleSubscriptionDialog] = useToggle(false);
   const store = useProgramListParamStore();
   const {
     data: programList,
@@ -63,14 +70,12 @@ const VrpManagement = () => {
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start w-full gap-10">
-          <Card className={cn("rounded-b-none rounded-t-2xl xl:px-9 xl:py-6")}>
-            <Typography
-              variant="h4"
-              weight="bold"
-            >
-              {t("title")}
-            </Typography>
-          </Card>
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
+            {t("title")}
+          </Typography>
           {isLoading || isFetching ? (
             <VRPCardLoadingList />
           ) : programList && programList?.data?.length ? (
@@ -85,6 +90,10 @@ const VrpManagement = () => {
               titleText={t("not_found")}
               buttonText={t("button_add_new")}
               href={"/vrp-launchpad/create-vrp"}
+              isButton={!paymentStatus?.active}
+              onClickButton={() =>
+                !paymentStatus?.active && toggleSubscriptionDialog()
+              }
             />
           )}
           {programList &&
@@ -105,6 +114,10 @@ const VrpManagement = () => {
         variant="company"
         title={t("forbidden_title")}
         subtitle={t("forbidden_description")}
+      />
+      <SubscriptionDialog
+        open={showSubscriptionDialog}
+        onOpenChange={toggleSubscriptionDialog}
       />
     </AnimationWrapper>
   );

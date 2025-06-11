@@ -136,5 +136,16 @@
   },
   "Services": {
     "title": "Services"
+  },
+  "Payments": {
+    "subscription": {
+      "title": "Subscribe to Sparta",
+      "description": "To create your first VRP, you’ll need to subscribe to Sparta. This subscription unlocks the payment system, allowing you to instantly pay bounties using your registered payment method.",
+      "subtitle": "What else you should know?",
+      "step_1": "Your subscription gives access to the VRP feature, automated payments, and advanced tracking tools.",
+      "step_2": "You can manage or cancel your subscription anytime from your account settings.",
+      "step_3": "All payments are securely processed and encrypted by our trusted provider.",
+      "button": "Subscribe to Sparta"
+    }
   }
 }
