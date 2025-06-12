@@ -90,10 +90,10 @@ export const useHackerSettingTabItems = (): SortFilterType[] => {
       }),
       value: "details",
     },
-    {
-      label: t("billings"),
-      value: "billings",
-    },
+    // {
+    //   label: t("billings"),
+    //   value: "billings",
+    // },
     {
       label: t("notifications"),
       value: "notifications",
