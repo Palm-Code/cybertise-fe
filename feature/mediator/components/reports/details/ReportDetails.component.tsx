@@ -97,7 +97,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         );
         return;
       }
-      toggleModalSetReward();
+      mutateUpdateTicket(`status=${v}`);
       return;
     }
     mutateUpdateTicket(`status=${v}&is_contributed=0`);
@@ -418,10 +418,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                       })}
                     </Typography>
                     {ticketDetails.ticket_type === "Hacker" ? (
-                      ticketDetails.status.toLowerCase() === "paid" ||
-                      ticketDetails.status.toLowerCase() === "closed" ||
-                      (ticketDetails.status.toLowerCase() === "canceled" &&
-                        !ticketDetails.related_ticket_id) ? null : (
+                      !ticketDetails.related_ticket_id ? null : (
                         <Link
                           href={
                             ticketDetails.related_ticket_id
@@ -568,11 +565,6 @@ const ReportDetails = ({ id }: { id: string }) => {
               setOpenModalConfirmContributor(false);
             });
           }}
-        />
-        <ModalSetReward
-          data={ticketDetails}
-          isOpen={showModalSetReward}
-          onClose={toggleModalSetReward}
         />
       </Desktop>
       <div ref={chatRef}></div>

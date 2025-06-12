@@ -1,13 +1,16 @@
+"use client";
 import { cn } from "@/core/lib/utils";
 import { Typography } from "@/core/ui/components";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import React from "react";
-import { earningsList } from "@/feature/hacker/constants/earnings";
-import { EarningCardList } from "./card/earning-card";
+import { EarningCard, EarningCardSkeleton } from "./card/earning-card";
+import { Stripe } from "@/core/ui/icons";
+import { useGetHasStripeAccount } from "../../query/client";
 
 export default function Earnings() {
   const t = useTranslations("Earnings");
-  const locale = useLocale();
+  const { data: hasStripeAccount, isLoading } = useGetHasStripeAccount();
+
   return (
     <div className={cn("flex w-full flex-col gap-10")}>
       <Typography
@@ -17,9 +20,16 @@ export default function Earnings() {
         {t("title")}
       </Typography>
       <div className={cn("grid w-full gap-10 xl:grid-cols-2")}>
-        <EarningCardList
-          data={earningsList[locale as keyof typeof earningsList]}
-        />
+        {isLoading ? (
+          <EarningCardSkeleton />
+        ) : (
+          <EarningCard
+            title={t("title")}
+            description={t("description")}
+            icon={<Stripe />}
+            data={hasStripeAccount}
+          />
+        )}
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ export const TicketListCard = ({ data }: TicketListCardProps) => {
       {data?.length === 0 ? (
         <EmptyState
           type="ticket"
-          variant="hacker"
+          variant="company"
           className={cn("mt-0")}
         />
       ) : (

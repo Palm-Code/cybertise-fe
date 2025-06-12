@@ -27,9 +27,14 @@ import {
 } from "../../components";
 import { useTheme } from "next-themes";
 import { Role } from "@/types/admin/sidebar";
-import { useGetUserData, usePostLogout } from "@/core/react-query/client";
+import {
+  useGetAssetType,
+  useGetUserData,
+  usePostLogout,
+} from "@/core/react-query/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { useAssetTypeStore } from "@/core/zustands/globals/store";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -58,6 +63,8 @@ const Sidebar = ({ type }: SidebarProps) => {
   const menuItems = useMenuItems();
   const menu = menuItems[type as keyof typeof menuItems];
   const { data: user } = useGetUserData();
+  const { data: assetTypes } = useGetAssetType();
+  useAssetTypeStore.setState({ data: assetTypes });
 
   const { mutateAsync } = usePostLogout();
 

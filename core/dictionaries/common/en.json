@@ -55,6 +55,7 @@
     "make_payment": "Make Payment",
     "send_payment_request": "Send Payment Request",
     "payment_request_sent": "Payment Request Sent",
+    "payment_complete": "Payment Complete",
     "ticket_details": "Ticket Details",
     "set_reward": "Set Rewards",
     "reward_range": "Rewards range:",
@@ -74,7 +75,9 @@
     "retry_payment": "Retry payment",
     "view_details": "View details",
     "payment_failed": "Payment failed",
-    "rewards_payment": "Rewards Payment"
+    "rewards_payment": "Rewards Payment",
+    "set_reward_and_make_payment": "Set Reward and Make Payment",
+    "payment_dashboard": "Payment Dashboard"
   },
   "Programs": {
     "program_name": "Program Name",

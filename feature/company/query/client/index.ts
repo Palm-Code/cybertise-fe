@@ -6,3 +6,7 @@ export * from "./useGetStaffDetail";
 export * from "./usePostDeleteStaff";
 export * from "./useGetActivity";
 export * from "./useGetAnalytics";
+export * from "./usePostPaymentConsent";
+export * from "./usePostPaymentCharge";
+export * from "./useGetPaymentReceipt";
+export * from "./useGetBillingPortal";

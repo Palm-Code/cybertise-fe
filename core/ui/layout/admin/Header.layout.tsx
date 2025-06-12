@@ -19,9 +19,7 @@ import { Skeleton } from "../../components/skeleton/skeleton";
 const Header = () => {
   const t = useTranslations("Sidebar");
   const { data: user, isLoading, isRefetching } = useGetUserData();
-  const { data: assetTypes } = useGetAssetType();
   useUserStore.setState({ data: user });
-  useAssetTypeStore.setState({ data: assetTypes });
   const { mutateAsync } = usePostLogout();
 
   const handleDropdownClicks = (value: string) => {

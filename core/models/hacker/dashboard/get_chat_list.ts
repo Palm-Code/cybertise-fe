@@ -36,8 +36,11 @@ export interface I_GetChatListSuccessResponse {
     related_ticket_id: string | null;
     vulnerability_type_id: string;
     status: keyof typeof ticketStatus;
+    payment_status: "unpaid" | "paid" | "failed";
+    payment_error_message: string | null;
     bounty: any;
     program_id: string;
+    override_reason: string | null;
     has_new: number;
     has_new_mediator: number;
     risk_level_category: string;

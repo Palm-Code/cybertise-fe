@@ -1,3 +1,4 @@
+import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import {
   Button,
   DropdownMenu,
@@ -10,12 +11,14 @@ import { useTranslations } from "next-intl";
 import React from "react";
 
 type PaymentDropdownProps = {
-  onClickRetryPayment: () => void;
+  data: I_GetChatListSuccessResponse["data"][0];
+  onClickDownloadReceipt: () => void;
   onClickViewDetails: () => void;
 };
 
 export const PaymentDropdown = ({
-  onClickRetryPayment,
+  data,
+  onClickDownloadReceipt,
   onClickViewDetails,
 }: PaymentDropdownProps) => {
   const t = useTranslations();
@@ -30,9 +33,11 @@ export const PaymentDropdown = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={onClickRetryPayment}>
-          {t("Ticket.retry_payment")}
-        </DropdownMenuItem>
+        {data.payment_status === "paid" && (
+          <DropdownMenuItem onClick={onClickDownloadReceipt}>
+            {t("Ticket.download_receipt")}
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={onClickViewDetails}>
           {t("Ticket.view_details")}
         </DropdownMenuItem>

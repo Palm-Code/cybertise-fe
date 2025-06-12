@@ -10,8 +10,13 @@ import { useChatListParamStore } from "../../zustand/store/dashboard";
 import { PaymentCardView } from "../../containers";
 import { useClickPaginate } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
+import { Role } from "@/types/admin/sidebar";
 
-const Payment = () => {
+type I_PaymentProps = {
+  variant?: keyof typeof Role;
+};
+
+const Payment = ({ variant }: I_PaymentProps) => {
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const t = useTranslations("Payment");
@@ -47,7 +52,7 @@ const Payment = () => {
           >
             {t("title")}
           </Typography>
-          <StatusTab />
+          <StatusTab variant={variant} />
           <PaymentCardView
             isLoading={isLoading || isFetching || isRefetching}
             data={data?.data}

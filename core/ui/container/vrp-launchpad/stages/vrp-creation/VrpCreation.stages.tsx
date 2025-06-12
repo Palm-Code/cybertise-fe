@@ -78,7 +78,7 @@ const VRPCreation = ({
       target_assets: initialValues?.target_assets || [],
       notes: initialValues?.notes || "",
       monetary_awards_level: initialValues?.monetary_awards_level || "",
-      type: initialValues?.type || "",
+      type: initialValues?.type || "Public",
       rules: initialValues?.rules || "",
       policies: initialValues?.policies || "",
       asset_types_values: initialValues?.asset_types || [],

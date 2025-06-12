@@ -25,6 +25,7 @@ interface I_EmptyStateProps {
   onClickButton?: () => void;
   className?: string;
   noMargin?: boolean;
+  isButton?: boolean;
 }
 
 const EmptyState = ({
@@ -36,6 +37,7 @@ const EmptyState = ({
   onClickButton = () => {},
   className = "",
   noMargin = false,
+  isButton = false,
 }: I_EmptyStateProps) => {
   const t = useTranslations("EmptyState");
   const iconsType = () => {
@@ -53,12 +55,14 @@ const EmptyState = ({
               {t("you_have_nothing_here")}
             </Typography>
             {!!buttonText && (
-              <Link
-                className={buttonVariants({ variant: `primary-${variant}` })}
+              <Button
+                asLink={!isButton}
                 href={href}
+                variant={`primary-${variant}`}
+                onClick={onClickButton}
               >
                 {buttonText}
-              </Link>
+              </Button>
             )}
           </>
         );
@@ -76,12 +80,14 @@ const EmptyState = ({
                 {titleText ?? "You have no any program yet"}
               </Typography>
               {!!buttonText && (
-                <Link
-                  className={buttonVariants({ variant: `primary-${variant}` })}
+                <Button
+                  asLink={!isButton}
                   href={href}
+                  variant={`primary-${variant}`}
+                  onClick={onClickButton}
                 >
                   {buttonText ?? "Add new program"}
-                </Link>
+                </Button>
               )}
             </>
           </>
