@@ -12,13 +12,13 @@ import React from "react";
 
 type PaymentDropdownProps = {
   data: I_GetChatListSuccessResponse["data"][0];
-  onClickDownloadReceipt: () => void;
+  onClickRetryPayment: () => void;
   onClickViewDetails: () => void;
 };
 
 export const PaymentDropdown = ({
   data,
-  onClickDownloadReceipt,
+  onClickRetryPayment,
   onClickViewDetails,
 }: PaymentDropdownProps) => {
   const t = useTranslations();
@@ -27,19 +27,23 @@ export const PaymentDropdown = ({
       <DropdownMenuTrigger asChild>
         <Button
           size="icon"
-          variant="tertiary-company"
+          variant="tertiary-mediator"
         >
           <Ellipsis />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {data.payment_status === "paid" && (
-          <DropdownMenuItem onClick={onClickDownloadReceipt}>
-            {t("Ticket.download_receipt")}
+      <DropdownMenuContent
+        align="end"
+        alignOffset={-20}
+        sideOffset={10}
+      >
+        {!!data.payment_error_message && (
+          <DropdownMenuItem onClick={onClickRetryPayment}>
+            {t("Ticket.retry_payment")}
           </DropdownMenuItem>
         )}
         <DropdownMenuItem onClick={onClickViewDetails}>
-          {t("Ticket.view_details")}
+          {t("Payment.more_info")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

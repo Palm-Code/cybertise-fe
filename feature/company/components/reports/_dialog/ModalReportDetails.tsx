@@ -131,6 +131,22 @@ export const ModalReportDetails = ({
                   {currencyFormatters.NumberToEUR(data?.bounty ?? 0)}
                 </Typography>
               </div>
+              {data.override_reason && (
+                <div className={cn("flex w-fit flex-col gap-2")}>
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
+                    {t("Ticket.reason")}
+                  </Typography>
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
+                    {data.override_reason}
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
         </div>

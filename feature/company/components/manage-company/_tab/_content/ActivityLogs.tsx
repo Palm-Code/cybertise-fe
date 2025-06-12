@@ -128,7 +128,6 @@ const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
                     >
                       {data.data &&
                         data.data[item].map((log, index: number) => {
-                          console.log({ log });
                           const valuesChanged =
                             log?.event?.toLowerCase() ===
                             log?.description?.toLowerCase()

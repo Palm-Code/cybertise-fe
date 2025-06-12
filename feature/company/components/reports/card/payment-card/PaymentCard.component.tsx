@@ -9,6 +9,7 @@ import { ModalReportDetails } from "../../_dialog";
 import { PaymentDropdown } from "./PaymentDropdown";
 import { useBoolean } from "usehooks-ts";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
+import { useGetPaymentReceipt } from "@/feature/company/query/client";
 
 export const PaymentCard = ({
   data,
@@ -21,6 +22,12 @@ export const PaymentCard = ({
     setTrue: setShowModalTrue,
     setFalse: setShowModalFalse,
   } = useBoolean(false);
+
+  const { mutate: mutatePaymentReceipt } = useGetPaymentReceipt();
+
+  const handleDownloadReceipt = () => {
+    mutatePaymentReceipt(data.related_ticket_id as string);
+  };
 
   return (
     <>
@@ -57,26 +64,35 @@ export const PaymentCard = ({
           </div>
         </div>
         <div className={cn("flex items-center gap-6")}>
-          <div className="grid grid-cols-[auto_1fr] gap-2">
-            <Indicator variant="open" />
+          <div className="grid grid-cols-[auto_1fr] items-center gap-2">
+            <Indicator
+              variant={
+                data.payment_status === "unpaid"
+                  ? "waiting for payment"
+                  : "closed"
+              }
+            />
             <div className="flex flex-col gap-1">
               <Typography
                 variant="p"
                 affects="small"
               >
-                {t("Ticket.payment_failed")}
+                {t(
+                  `Ticket.${data.payment_status === "unpaid" ? "payment_request_sent" : "payment_complete"}`
+                )}
               </Typography>
-              <Typography
+              {/* <Typography
                 variant="p"
                 affects="tiny"
                 className="italic"
               >
                 Insufficient balance
-              </Typography>
+              </Typography> */}
             </div>
           </div>
           <PaymentDropdown
-            onClickRetryPayment={() => {}}
+            data={data}
+            onClickDownloadReceipt={handleDownloadReceipt}
             onClickViewDetails={setShowModalTrue}
           />
         </div>

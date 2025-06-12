@@ -138,7 +138,7 @@ const Setup = ({
             key={steps[currentStepIndex].key}
             className={cn(
               "sticky z-30 h-fit w-[calc(100%-267px)] space-y-0 bg-background-page-light dark:bg-background-page-dark",
-              variant === "mediator" ? "top-[17.5rem]" : "top-[15.8rem]"
+              variant === "mediator" ? "top-[17.5rem]" : "top-[15.25rem]"
             )}
           >
             <div className="h-6 w-full bg-background-page-light dark:bg-background-page-dark"></div>
@@ -166,7 +166,7 @@ const Setup = ({
               className={cn(
                 "fixed right-12 z-20 h-fit w-fit rounded-xl",
                 "bg-background-main-light dark:bg-background-main-dark",
-                variant === "mediator" ? "top-[24.2rem]" : "top-[17.5rem]"
+                variant === "mediator" ? "top-[24.2rem]" : "top-[22rem]"
               )}
             >
               <Information

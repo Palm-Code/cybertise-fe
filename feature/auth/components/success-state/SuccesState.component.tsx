@@ -13,11 +13,13 @@ import { useReadLocalStorage } from "usehooks-ts";
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
   onClickResendVerification?: () => void;
+  isLoading?: boolean;
 }
 
 const SuccessState = ({
   noPadding = false,
   onClickResendVerification = () => {},
+  isLoading: isPending = false,
   ...props
 }: I_SuccesStateProps) => {
   const expiredTime = useReadLocalStorage("expiredTime") as string;
@@ -92,7 +94,7 @@ const SuccessState = ({
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              {isLoading ? (
+              {isLoading || isPending ? (
                 <Loader
                   width={16}
                   height={16}
@@ -160,7 +162,7 @@ const SuccessState = ({
               className="cursor-pointer font-bold text-brand-emerald underline disabled:cursor-not-allowed disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              {isLoading ? (
+              {isLoading || isPending ? (
                 <Loader
                   width={16}
                   height={16}

@@ -26,6 +26,7 @@ export interface I_Program {
   title: string;
   monetary_awards_level: string;
   monetary_awards_high: number;
+  monetary_awards_critical: number;
   monetary_awards_medium: number;
   monetary_awards_low: number;
   company_id: string;

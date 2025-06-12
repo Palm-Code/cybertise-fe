@@ -22,8 +22,6 @@ export const ConnectStripeDialog = ({
 }: I_ConnectStripeDialogProps) => {
   const t = useTranslations();
 
-  console.log(url);
-
   return (
     <Dialog {...props}>
       <DialogContent

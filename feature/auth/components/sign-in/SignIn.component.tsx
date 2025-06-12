@@ -48,7 +48,8 @@ const SignInComponent = () => {
     isSuccess: isSuccessGetToken,
     isError,
   } = useGetAccessToken();
-  const { mutate: resendVerification } = usePostResendVerification();
+  const { mutate: resendVerification, isPending: isPendingResendVerification } =
+    usePostResendVerification();
   const [activeData, setActiveData] = useState<any>({
     deactivated_at: undefined,
     destroyed_at: undefined,
@@ -95,6 +96,7 @@ const SignInComponent = () => {
   if (auth_email) {
     return (
       <SuccessState
+        isLoading={isPendingResendVerification}
         onClickResendVerification={() => {
           resendVerification({
             email: auth_email,

@@ -55,6 +55,7 @@
     "make_payment": "Zahlung leisten",
     "send_payment_request": "Zahlungsanfrage senden",
     "payment_request_sent": "Zahlungsanfrage gesendet",
+    "payment_complete": "Zahlung abgeschlossen",
     "ticket_details": "Ticketdetails",
     "set_reward": "Belohnungen festlegen",
     "reward_range": "Belohnungsbereich:",
@@ -73,7 +74,9 @@
     "retry_payment": "Zahlung wiederholen",
     "view_details": "Details anzeigen",
     "payment_failed": "Zahlung fehlgeschlagen",
-    "rewards_payment": "Belohnungszahlung"
+    "rewards_payment": "Belohnungszahlung",
+    "set_reward_and_make_payment": "Belohnung festlegen und Zahlung leisten",
+    "payment_dashboard": "Zahlungs Dashboard"
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",

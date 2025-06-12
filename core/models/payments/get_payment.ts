@@ -24,3 +24,20 @@ export interface I_PostPaymentConsentSuccessResponse {
     url: string;
   };
 }
+
+export interface I_PostPaymentChargeSuccessResponse {
+  data: {
+    url: string;
+  };
+}
+
+export interface I_PostPaymentReceiptSuccessResponse
+  extends I_PostPaymentChargeSuccessResponse {}
+
+export interface I_GetBillingPortalSuccessResponse
+  extends I_PostPaymentChargeSuccessResponse {}
+
+export interface I_PostMakePaymentPayload {
+  bounty?: number;
+  override_reason?: string;
+}

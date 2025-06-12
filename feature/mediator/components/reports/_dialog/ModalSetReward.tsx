@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/core/lib/utils";
 import { I_GetChatListSuccessResponse } from "@/core/models/hacker/dashboard";
 import {
@@ -13,7 +14,7 @@ import {
 } from "@/core/ui/components";
 import CustomNumberFormat from "@/core/ui/components/input/price-format-input";
 import { I_ModalProps } from "@/core/ui/components/modal/modal";
-import { usePostUpdateTicket } from "@/feature/mediator/query/client";
+import { usePostPaymentRequested } from "@/feature/company/query/client";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { formatDateToAgo } from "@/utils/formatter/date-formatter";
 import { AnimatePresence, motion } from "framer-motion";
@@ -32,31 +33,40 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
     value: error,
     setTrue: setErrorTrue,
     setFalse: setErrorFalse,
-  } = useBoolean(true);
+  } = useBoolean(false);
   const [reward, setReward] = useState<number | null>(null);
+  const [reason, setReason] = useState<string | undefined>();
   const {
     value: confirm,
     setTrue: setConfirmTrue,
     setFalse: setConfirmFalse,
   } = useBoolean(false);
   const { value: changeBounty, toggle: toggleChangeBounty } = useBoolean(false);
-  const { mutateAsync: mutateUpdateTicket, isPending: isPendingUpdate } =
-    usePostUpdateTicket(data.id);
   const { value: collapse, toggle: toggleCollapse } = useBoolean(false);
+  const {
+    mutateAsync: mutatePostPaymentRequested,
+    isPending: isPendingPostPaymentRequested,
+  } = usePostPaymentRequested();
 
   const handleSetReward = () => {
-    mutateUpdateTicket(`bounty=${reward}&status=Waiting for Payment`).then(
-      () => {
-        props.onClose?.();
-        setConfirmFalse();
-      }
-    );
+    mutatePostPaymentRequested({
+      id:
+        data.ticket_type === "Hacker"
+          ? data.id
+          : (data.related_ticket_id ?? ""),
+      payload: {
+        bounty: reward ?? undefined,
+        override_reason: reason ?? undefined,
+      },
+    }).then(() => {
+      props.onClose?.();
+    });
   };
   return (
     <BaseModal {...props}>
       <div
         className={cn(
-          "mx-auto max-h-fit w-full max-w-2xl overflow-auto rounded-lg",
+          "mx-auto max-h-[795px] w-full max-w-2xl overflow-auto rounded-lg",
           "bg-background-main-light dark:bg-background-main-dark",
           "flex flex-col gap-6 px-6 py-4 pb-10"
         )}
@@ -183,23 +193,25 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                       >
                         {data.bounty
                           ? currencyFormatters.NumberToEUR(data?.bounty ?? 0)
-                          : `${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_low ?? 0)} - ${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_high ?? 0)}`}
+                          : `${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_low ?? 0)} - ${currencyFormatters.NumberToEUR(data?.program?.monetary_awards_critical ?? 0)}`}
                       </Typography>
                     </div>
-                    <div className={cn("flex w-fit flex-col gap-2")}>
-                      <Typography
-                        variant="p"
-                        affects="small"
-                      >
-                        {t("Ticket.reason")}
-                      </Typography>
-                      <Typography
-                        variant="p"
-                        affects="small"
-                      >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </Typography>
-                    </div>
+                    {data.override_reason && (
+                      <div className={cn("flex w-fit flex-col gap-2")}>
+                        <Typography
+                          variant="p"
+                          affects="small"
+                        >
+                          {t("Ticket.reason")}
+                        </Typography>
+                        <Typography
+                          variant="p"
+                          affects="small"
+                        >
+                          {data.override_reason}
+                        </Typography>
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -247,7 +259,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
               </div>
               <div className={cn("flex w-full flex-col gap-6")}>
                 <Button
-                  disabled={isPendingUpdate}
+                  disabled={isPendingPostPaymentRequested}
                   variant="secondary-mediator"
                   onClick={() => setConfirmFalse()}
                   fullWidth
@@ -257,10 +269,11 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                 <Button
                   variant="primary-mediator"
                   fullWidth
-                  disabled={isPendingUpdate}
+                  disabled={isPendingPostPaymentRequested}
+                  isLoading={isPendingPostPaymentRequested}
                   onClick={handleSetReward}
                 >
-                  {t("Ticket.set_reward_and_request_payment")}
+                  {t("Ticket.set_reward_and_make_payment")}
                 </Button>
               </div>
             </div>
@@ -283,20 +296,14 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                         currency: "EUR",
                       }).format(Number(numStr));
                     }}
-                    disabled={data.bounty || !changeBounty}
+                    disabled={!changeBounty}
                     value={data.bounty ?? reward}
                     onValueChange={(v) => {
-                      console.log(
-                        Number(v.value) <
-                          (data?.program?.monetary_awards_low ?? 0) ||
-                          Number(v.value) >
-                            (data?.program?.monetary_awards_high ?? 0)
-                      );
                       if (
                         Number(v.value) <
                           (data?.program?.monetary_awards_low ?? 0) ||
                         Number(v.value) >
-                          (data?.program?.monetary_awards_high ?? 0)
+                          (data?.program?.monetary_awards_critical ?? 0)
                       ) {
                         setErrorTrue();
                         return;
@@ -321,15 +328,21 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                   )}{" "}
                   -{" "}
                   {currencyFormatters.NumberToEUR(
-                    data?.program?.monetary_awards_high ?? 0
+                    data?.program?.monetary_awards_critical ?? 0
                   )}
                 </Typography>
               </div>
               {changeBounty && (
                 <TextArea
                   label={t("Ticket.reason")}
-                  description={`${t("TextEditor.remaining_characters")}: 5000 / 5000`}
+                  description={`${t("TextEditor.remaining_characters")}: ${5000 - (reason?.length ?? 0)} / 5000`}
                   maxLength={5000}
+                  value={reason ?? ""}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 5000) {
+                      setReason(e.target.value);
+                    }
+                  }}
                 />
               )}
               <Button
@@ -338,8 +351,9 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                 onClick={() => {
                   setConfirmTrue();
                 }}
+                disabled={(changeBounty && !reason) || error}
               >
-                {t("Ticket.set_reward_and_request_payment")}
+                {t("Ticket.set_reward_and_make_payment")}
               </Button>
             </>
           )}

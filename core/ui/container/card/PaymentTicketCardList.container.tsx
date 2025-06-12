@@ -19,6 +19,12 @@ import { Building2, ChevronRight, Ellipsis } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { indicatorVariants } from "../../components/indicator/indicator";
 import { usePostUpdateTicket } from "@/feature/mediator/query/client";
+import {
+  useGetPaymentReceipt,
+  usePostPaymentRequested,
+} from "@/feature/company/query/client";
+import { useToggle } from "usehooks-ts";
+import { ModalSetReward } from "@/feature/mediator/components/reports/_dialog";
 
 interface I_TicketCardProps {
   isMediator?: boolean;
@@ -29,10 +35,19 @@ const TicketCard = ({
   ...props
 }: I_TicketCardProps & I_GetChatListSuccessResponse["data"][0]) => {
   const t = useTranslations("Ticket");
+  const [openModalMakePayment, toggleOpenModalMakePayment] = useToggle(false);
+  const { mutate: mutatePaymentReceipt, isPending: isPendingDownloadReceipt } =
+    useGetPaymentReceipt();
 
   const handleDownloadReceipt = () => {
-    // TODO: Implement download receipt
-    return;
+    const { ticket_type, related_ticket_id, id } = props;
+    mutatePaymentReceipt(
+      ticket_type === "Company" ? (related_ticket_id as string) : (id as string)
+    );
+  };
+
+  const handleMakePayment = () => {
+    toggleOpenModalMakePayment();
   };
 
   return (
@@ -218,8 +233,8 @@ const TicketCard = ({
               </div>
               <div
                 className={cn(
-                  "grid items-start gap-y-8",
-                  "grid-flow-col gap-x-28"
+                  "grid w-full grid-flow-col gap-y-8",
+                  "gap-x-12 2xl:gap-x-28"
                 )}
               >
                 <div className="_flexbox__col__start gap-2.5">
@@ -279,10 +294,10 @@ const TicketCard = ({
                   </Typography>
                   <Indicator
                     variant={
-                      props.status?.toLowerCase() as keyof typeof indicatorVariants
+                      props.payment_status?.toLowerCase() as keyof typeof indicatorVariants
                     }
                   >
-                    {props.status}
+                    {props.payment_status}
                   </Indicator>
                 </div>
                 <div className="_flexbox__col__start gap-2.5">
@@ -333,12 +348,16 @@ const TicketCard = ({
                     </Button>
                   )}
                   <Button
-                    disabled={props.is_payment_requested === 1}
                     variant="primary-mediator"
-                    onClick={handleDownloadReceipt}
+                    onClick={
+                      props.payment_status === "unpaid"
+                        ? handleMakePayment
+                        : handleDownloadReceipt
+                    }
+                    isLoading={isPendingDownloadReceipt}
                   >
-                    {props.is_payment_requested === 1
-                      ? t("payment_request_sent")
+                    {props.payment_status === "unpaid"
+                      ? t("make_payment")
                       : t("download_receipt")}
                   </Button>
                   <Button
@@ -360,7 +379,16 @@ const TicketCard = ({
                   >
                     {t("view_chat")}
                   </Button>
-                  {/* <Button variant="primary-company">{t("make_payment")}</Button> */}
+                  {props.payment_status === "paid" && (
+                    <Button
+                      variant="primary-company"
+                      onClick={handleDownloadReceipt}
+                      disabled={isPendingDownloadReceipt}
+                      isLoading={isPendingDownloadReceipt}
+                    >
+                      {t("download_receipt")}
+                    </Button>
+                  )}
                   <Button
                     asLink
                     href="mailto:hello@cybertise.eu?subject=Payment%Help"
@@ -377,6 +405,11 @@ const TicketCard = ({
           </div>
         </Card>
       </Desktop>
+      <ModalSetReward
+        data={props}
+        isOpen={openModalMakePayment}
+        onClose={toggleOpenModalMakePayment}
+      />
     </>
   );
 };

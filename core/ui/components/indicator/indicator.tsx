@@ -20,6 +20,8 @@ export const indicatorVariants = cva("", {
       "in review": "text-yellow-light rounded-full",
       paid: "text-sky-darker rounded-full",
       canceled: "text-red-normal rounded-full",
+      unpaid: "text-red-normal rounded-full",
+      failed: "text-red-normal rounded-full",
     },
   },
   defaultVariants: {
