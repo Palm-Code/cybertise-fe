@@ -1,4 +1,5 @@
 "use client";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
 import { fetchGetAssetType } from "@/core/services/common";
 import { initialState } from "@/core/zustands/asset-type/store";
 import { useQuery } from "@tanstack/react-query";
@@ -8,7 +9,7 @@ export const useGetAssetType = () => {
     queryFn: () => fetchGetAssetType(),
   });
 
-  const filteredAssetTypes = data
+  const filteredAssetTypes: I_GetAssetTypeSuccessResponse["data"] = data
     ? data.data.map((item) => {
         return {
           id: item.id,
