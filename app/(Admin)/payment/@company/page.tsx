@@ -1,5 +1,5 @@
 import { PaymentFragment } from "@/feature/company/fragments";
 
-export default function PaymentCompanyPage() {
+export default async function PaymentCompanyPage() {
   return <PaymentFragment />;
 }
