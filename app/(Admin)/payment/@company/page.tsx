@@ -1,5 +1,5 @@
 import { PaymentFragment } from "@/feature/company/fragments";
 
-export default function DashboardCompanyPage() {
+export default function PaymentCompanyPage() {
   return <PaymentFragment />;
 }
