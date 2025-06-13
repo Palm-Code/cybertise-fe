@@ -7,7 +7,7 @@ import PasswordInput from "@/core/ui/components/input/password-input";
 import { useEffect, useMemo, useState } from "react";
 import { usePasswordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Checkbox from "@/core/ui/components/checkbox/checkbox";
 import Typography from "@/core/ui/components/typography/typography";
@@ -47,13 +47,14 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
 
   const { mutateAsync, isPending, isSuccess, error } = usePostSignupHacker();
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (Object.keys(errors).length > 0) return;
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
+    const passwordEncrypt = await encryptPassword(forms.password);
     mutateAsync({
       ...forms,
-      password: btoa(forms.password),
+      password: passwordEncrypt,
       device_type: deviceType,
     }).then(() => {
       onClickNext();

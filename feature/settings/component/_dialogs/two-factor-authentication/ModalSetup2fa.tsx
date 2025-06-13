@@ -7,6 +7,7 @@ import { useGetConfirmTwoFactor } from "@/core/react-query/client/useGetConfirmT
 import InputPassword from "./steps/InputPassword";
 import QrCode from "./steps/QrCode";
 import InputOtp from "./steps/InputOtp";
+import { encryptPassword } from "@/utils/password-validation";
 
 export interface I_ModalSetup2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
@@ -36,7 +37,8 @@ const ModalSetup2fa = ({
   const [activeState, setActiveState] = useState<string>("input-password");
 
   const onClickVerifyEnableTwoFactor = async (password: string) => {
-    await mutateEnableTwoFactor({ password: btoa(password) }).then((res) => {
+    const passwordEncrypt = await encryptPassword(password);
+    await mutateEnableTwoFactor({ password: passwordEncrypt }).then((res) => {
       if (res) {
         const encodedSvg = encodeURIComponent(res.data.qr)
           .replace(/'/g, "%27")
