@@ -26,7 +26,7 @@ export const ConnectStripeDialog = ({
     <Dialog {...props}>
       <DialogContent
         showCloseButton={false}
-        className="max-sm:max-w-80 lg:!px-10 lg:!pb-20 lg:!pt-10"
+        className="max-sm:max-w-80 xl:!p-10"
       >
         <DialogTitle>
           <DialogClose

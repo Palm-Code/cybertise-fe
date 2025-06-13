@@ -59,7 +59,7 @@
     "ticket_details": "Ticketdetails",
     "set_reward": "Belohnungen festlegen",
     "reward_range": "Belohnungsbereich:",
-    "set_reward_and_request_payment": "Stellen und senden Sie eine Belohnungsanfrage",
+    "set_reward_and_request_payment": "Zahlungsanforderung einstellen und senden",
     "help": "Helfen",
     "confirm_reward": "Belohnung bestätigen",
     "error_reward": "Die Belohnung muss zwischen {Minreward} und {maxreward} liegen",

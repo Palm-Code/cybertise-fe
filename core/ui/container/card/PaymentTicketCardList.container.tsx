@@ -357,7 +357,7 @@ const TicketCard = ({
                     isLoading={isPendingDownloadReceipt}
                   >
                     {props.payment_status === "unpaid"
-                      ? t("make_payment")
+                      ? t("send_payment_request")
                       : t("download_receipt")}
                   </Button>
                   <Button

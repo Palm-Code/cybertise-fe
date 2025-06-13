@@ -13,6 +13,9 @@ import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
 import { currencyFormatters } from "@/utils/formatter/currency-formatter";
 import { useTranslations } from "next-intl";
+import { useToggle } from "usehooks-ts";
+import { useGetHasStripeAccount } from "@/feature/hacker/query/client";
+import { ConnectStripeDialog } from "../../../earnings/dialog";
 
 interface I_VRPHeroCard {
   data?: I_GetProgramDetailsSuccessResponse["data"];
@@ -20,6 +23,11 @@ interface I_VRPHeroCard {
 
 const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
   const t = useTranslations("ProgramDetailsHacker");
+  const [isOpenConnectStripeDialog, toggleConnectStripeDialog] = useToggle();
+  const { data: hasStripeAccount, isLoading } = useGetHasStripeAccount();
+  const isConnected =
+    hasStripeAccount?.has_stripe_account &&
+    hasStripeAccount?.has_completed_onboarding;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.1 });
 
@@ -205,15 +213,27 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
                       </Typography>
                     </div>
                   </div>
-                  <Link
-                    href={`/programs/send-report?programs=${data.id}`}
-                    className={cn(
-                      buttonVariants({ variant: "primary-hacker" })
-                    )}
-                  >
-                    <Send className="mr-2.5" />
-                    {t("send_report_button")}
-                  </Link>
+                  {!isConnected ? (
+                    <Button
+                      variant="primary-hacker"
+                      prefixIcon={<Send />}
+                      onClick={toggleConnectStripeDialog}
+                      disabled={isLoading}
+                      isLoading={isLoading}
+                    >
+                      {t("send_report_button")}
+                    </Button>
+                  ) : (
+                    <Link
+                      href={`/programs/send-report?programs=${data.id}`}
+                      className={cn(
+                        buttonVariants({ variant: "primary-hacker" })
+                      )}
+                    >
+                      <Send className="mr-2.5" />
+                      {t("send_report_button")}
+                    </Link>
+                  )}
                 </div>
                 <div className="grid h-fit max-h-12 grid-flow-col gap-12">
                   <div className="grid h-full gap-2.5">
@@ -279,6 +299,11 @@ const VRPHeroCard = ({ data }: I_VRPHeroCard) => {
             </div>
           </Card>
         </Desktop>
+        <ConnectStripeDialog
+          url={hasStripeAccount?.url ?? ""}
+          open={isOpenConnectStripeDialog}
+          onOpenChange={toggleConnectStripeDialog}
+        />
       </>
     );
 };
