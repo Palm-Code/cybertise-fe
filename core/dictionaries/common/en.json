@@ -59,7 +59,7 @@
     "ticket_details": "Ticket Details",
     "set_reward": "Set Rewards",
     "reward_range": "Rewards range:",
-    "set_reward_and_request_payment": "Set and Send Reward Request",
+    "set_reward_and_request_payment": "Set and Send Payment Request",
     "help": "Help",
     "confirm_reward": "Confirm Reward",
     "error_reward": "The reward must be between {minReward} and {maxReward}",

@@ -273,7 +273,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                   isLoading={isPendingPostPaymentRequested}
                   onClick={handleSetReward}
                 >
-                  {t("Ticket.set_reward_and_make_payment")}
+                  {t("Ticket.set_reward_and_request_payment")}
                 </Button>
               </div>
             </div>
@@ -353,7 +353,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                 }}
                 disabled={(changeBounty && !reason) || error}
               >
-                {t("Ticket.set_reward_and_make_payment")}
+                {t("Ticket.set_reward_and_request_payment")}
               </Button>
             </>
           )}

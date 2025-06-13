@@ -104,7 +104,7 @@ export const PaymentCard = ({
             disabled={isPendingGetPaymentReceipt}
           >
             {data.status.toLowerCase() === "waiting for payment"
-              ? t("Ticket.make_payment")
+              ? t("Ticket.send_payment_request")
               : t("Ticket.download_receipt")}
           </Button>
           <PaymentDropdown
