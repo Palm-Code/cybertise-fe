@@ -7,6 +7,7 @@ import { Role } from "@/types/admin/sidebar";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useGetBillingPortal } from "@/feature/company/query/client";
+import { I_GetPaymentStatusResponse } from "@/core/models/payments";
 
 const filteredStatus = [
   { label: "All", value: undefined },
@@ -15,9 +16,10 @@ const filteredStatus = [
 
 type I_StatusTabProps = {
   variant?: keyof typeof Role;
+  paymentStatus: I_GetPaymentStatusResponse;
 };
 
-export const StatusTab = ({ variant }: I_StatusTabProps) => {
+export const StatusTab = ({ variant, paymentStatus }: I_StatusTabProps) => {
   const t = useTranslations();
   const { payload, setPayload } = useChatListParamStore();
   const { mutate: mutateGetBillingPortal } = useGetBillingPortal();
@@ -61,7 +63,7 @@ export const StatusTab = ({ variant }: I_StatusTabProps) => {
           </button>
         ))}
       </div>
-      {variant === "company" && (
+      {variant === "company" && paymentStatus.active && (
         <Button
           variant="tertiary-company"
           postFixIcon={<ChevronRight />}
