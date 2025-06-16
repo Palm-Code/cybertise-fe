@@ -6,6 +6,7 @@ import Confirmation from "./steps/Confirmation";
 import Information from "./steps/Information";
 import Success from "./steps/Success";
 import { usePostSelfDeactivatedAccount } from "@/core/react-query/client";
+import { encryptPassword } from "@/utils/password-validation";
 
 export interface I_ModalDeactivateAccountProps extends I_ModalProps {
   variant?: keyof typeof Role;
@@ -25,7 +26,8 @@ const ModalDeactivateAccount = ({
   const [activeState, setActiveState] = useState<string>("information");
 
   const onClickVerifyDEactivatedAccount = async (password: string) => {
-    await mutateDeactivatedAccount(btoa(password)).then((res) => {
+    const passwordEncrypt = await encryptPassword(password);
+    await mutateDeactivatedAccount(passwordEncrypt).then((res) => {
       if (res) {
         setActiveState("success");
       }

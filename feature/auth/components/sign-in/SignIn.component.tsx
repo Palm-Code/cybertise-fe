@@ -21,6 +21,7 @@ import { usePostResendVerification } from "../../query/resend-verification";
 import { ReactivateAccount } from "../reactivate-account";
 import { useTranslations } from "next-intl";
 import { useDebounce } from "@/utils/hooks/debounce";
+import { encryptPassword } from "@/utils/password-validation";
 
 const SignInComponent = () => {
   const t = useTranslations("SignIn");
@@ -59,9 +60,10 @@ const SignInComponent = () => {
   const onSubmitLogin = async () => {
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
+    const password = await encryptPassword(forms.password);
     await mutateAsync({
       ...forms,
-      password: btoa(forms.password),
+      password: password,
       device_type: deviceType,
     }).then((res) => {
       if (res?.data.deactivated_at) {

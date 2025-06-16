@@ -11,7 +11,7 @@ import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
 } from "../../query/password";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { usePasswordValidation } from "@/core/constants/common";
 import { useDebounceValue } from "usehooks-ts";
@@ -146,14 +146,15 @@ const SetPassword = (props: I_SetPassword) => {
                 isBreached ||
                 !validatePasswordRegex
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token &&
-                mutateForgotPassword({
-                  code: token,
-                  new_password: btoa(newPassword),
-                  logout_all: 0,
-                })
-              }
+                  mutateForgotPassword({
+                    code: token,
+                    new_password: newPasswordEncrypt,
+                    logout_all: 0,
+                  });
+              }}
             >
               {t("submit_button")}
             </Button>
@@ -227,14 +228,15 @@ const SetPassword = (props: I_SetPassword) => {
                 isBreached ||
                 !validatePasswordRegex
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token &&
-                mutateForgotPassword({
-                  code: token,
-                  new_password: btoa(newPassword),
-                  logout_all: 0,
-                })
-              }
+                  mutateForgotPassword({
+                    code: token,
+                    new_password: newPasswordEncrypt,
+                    logout_all: 0,
+                  });
+              }}
             >
               {t("submit_button")}
             </Button>

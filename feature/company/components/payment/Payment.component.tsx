@@ -11,12 +11,14 @@ import { PaymentCardView } from "../../containers";
 import { useClickPaginate } from "@/core/hooks";
 import EmptyState from "@/core/ui/layout/empty-state/EmptyState.layout";
 import { Role } from "@/types/admin/sidebar";
+import { I_GetPaymentStatusResponse } from "@/core/models/payments";
 
 type I_PaymentProps = {
   variant?: keyof typeof Role;
+  paymentStatus: I_GetPaymentStatusResponse;
 };
 
-const Payment = ({ variant }: I_PaymentProps) => {
+const Payment = ({ variant, paymentStatus }: I_PaymentProps) => {
   const store = useChatListParamStore();
   const { payload, setPayload } = store;
   const t = useTranslations("Payment");
@@ -52,7 +54,10 @@ const Payment = ({ variant }: I_PaymentProps) => {
           >
             {t("title")}
           </Typography>
-          <StatusTab variant={variant} />
+          <StatusTab
+            variant={variant}
+            paymentStatus={paymentStatus}
+          />
           <PaymentCardView
             isLoading={isLoading || isFetching || isRefetching}
             data={data?.data}

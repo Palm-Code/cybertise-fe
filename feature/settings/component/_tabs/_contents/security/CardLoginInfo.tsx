@@ -12,6 +12,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostResetPassword } from "@/feature/auth/query/password";
 import { useTranslations } from "next-intl";
+import { encryptPassword } from "@/utils/password-validation";
 
 interface I_CardLoginInfoProps extends I_SecurityProps {}
 
@@ -31,6 +32,23 @@ const CardLoginInfo = ({
   });
 
   const { mutateAsync, isPending, isSuccess } = usePostResetPassword();
+
+  const handleSubmitNewPassword = async () => {
+    const oldPassword = await encryptPassword(methods.watch().old_password);
+    const newPassword = await encryptPassword(methods.watch().new_password);
+    mutateAsync({
+      ...methods.watch(),
+      old_password: oldPassword,
+      new_password: newPassword,
+      logout_all: methods.watch().logout_all,
+    })
+      .then()
+      .catch((err) => {
+        methods.setError("root", err?.message, {
+          shouldFocus: true,
+        });
+      });
+  };
 
   if (isEditing)
     return (
@@ -77,20 +95,7 @@ const CardLoginInfo = ({
                   }
                   isLoading={isPending}
                   variant={`primary-${variant}`}
-                  onClick={() =>
-                    mutateAsync({
-                      ...methods.watch(),
-                      old_password: btoa(methods.watch().old_password),
-                      new_password: btoa(methods.watch().new_password),
-                      logout_all: methods.watch().logout_all,
-                    })
-                      .then()
-                      .catch((err) => {
-                        methods.setError("root", err?.message, {
-                          shouldFocus: true,
-                        });
-                      })
-                  }
+                  onClick={handleSubmitNewPassword}
                 >
                   {t("button_save")}
                 </Button>

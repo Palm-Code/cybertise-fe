@@ -6,7 +6,7 @@ import { Checkbox, Input, Typography } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
 import { useMemo, useState } from "react";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Link from "next/link";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
@@ -45,13 +45,14 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
 
   const { mutateAsync, isPending, isSuccess, error } = usePostSignupCompany();
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (Object.keys(errors).length > 0) return;
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
+    const passwordEncrypt = await encryptPassword(forms.password);
     mutateAsync({
       ...forms,
-      password: btoa(forms.password),
+      password: passwordEncrypt,
       device_type: deviceType,
     }).then(() => {
       onClickNext();

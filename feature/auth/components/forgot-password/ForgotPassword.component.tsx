@@ -11,7 +11,7 @@ import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
 } from "../../query/password";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import useTimer from "@/utils/timer";
 import { usePostResendVerification } from "../../query/resend-verification";
@@ -230,15 +230,16 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     !confirmPassworText.checked
                   : !email)
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token
                   ? mutateForgotPassword({
                       code: token,
-                      new_password: btoa(newPassword),
+                      new_password: newPasswordEncrypt,
                       logout_all: 1,
                     })
-                  : mutate(email)
-              }
+                  : mutate(email);
+              }}
             >
               {isSuccess
                 ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
@@ -308,15 +309,17 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
                     onChange={passwordConfirmationCheck}
-                    onKeyDown={(e) =>
+                    onKeyDown={async (e) => {
+                      const newPasswordEncrypt =
+                        await encryptPassword(newPassword);
                       e.key === "Enter" &&
-                      token &&
-                      mutateForgotPassword({
-                        code: token,
-                        new_password: btoa(newPassword),
-                        logout_all: logoutAll,
-                      })
-                    }
+                        token &&
+                        mutateForgotPassword({
+                          code: token,
+                          new_password: newPasswordEncrypt,
+                          logout_all: logoutAll,
+                        });
+                    }}
                     isConfirmation={!!confirmPassworText.content}
                     check={confirmPassworText.checked}
                   />
@@ -383,13 +386,14 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     !validatePasswordRegex
                   : !email)
               }
-              onClick={() => {
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 isSuccess
                   ? onClickResend()
                   : token
                     ? mutateForgotPassword({
                         code: token,
-                        new_password: btoa(newPassword),
+                        new_password: newPasswordEncrypt,
                         logout_all: 1,
                       })
                     : mutate(email);
