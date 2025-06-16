@@ -7,4 +7,3 @@ export { default as OverviewFragment } from "./vrp-management/overview/Overview.
 export { default as CreateVrpFragment } from "./vrp-management/create-vrp/CreateVrp.fragment";
 export { default as DetailsVRPFragment } from "./vrp-management/details/DetailsVrp.fragment";
 export { default as ServicesFragment } from "./services/Services.fragment";
-export { default as PaymentFragment } from "./payment/Payment.fragment";
