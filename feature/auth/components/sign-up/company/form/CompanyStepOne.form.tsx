@@ -65,6 +65,11 @@ const CompanyStepOne = ({ onClickNext }: I_CompanyStepOneProps) => {
               })
             }
             isError={!!errors.website}
+            errorMsg={
+              errors.website?.type === "invalid_string"
+                ? errors.website?.message
+                : undefined
+            }
           />
         </div>
         <Button
