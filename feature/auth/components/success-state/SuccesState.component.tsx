@@ -30,8 +30,10 @@ const SuccessState = ({
   const email = searchparams.get("authenticate_email");
 
   useEffect(() => {
-    start();
-  }, []);
+    if (expiredTime) {
+      start();
+    }
+  }, [expiredTime]);
 
   useEffect(() => {
     setTimeout(() => {

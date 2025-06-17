@@ -23,6 +23,41 @@ import {
 } from "@/feature/mediator/components/statistics/card/chart";
 
 const RADIAN = Math.PI / 180;
+const renderEmptyLabel = (props: PieLabelRenderProps) => {
+  const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props;
+
+  if (
+    typeof cx !== "number" ||
+    typeof cy !== "number" ||
+    typeof innerRadius !== "number" ||
+    typeof outerRadius !== "number" ||
+    typeof percent !== "number"
+  ) {
+    return null;
+  }
+
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="currentColor"
+      textAnchor="middle"
+      dominantBaseline="central"
+      fontWeight="bold"
+      color="#000"
+      className={cn(
+        "stroke-none text-[8px] !outline-none md:text-xs",
+        percent === 0 ? "opacity-0" : ""
+      )}
+    >
+      {`0%`}
+    </text>
+  );
+};
 const renderCustomizedLabel = (props: PieLabelRenderProps) => {
   const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props;
 
@@ -72,6 +107,11 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
     totalData: data.reduce((acc, curr) => acc + curr.value, 0),
     color_key: entry.color_key,
   }));
+
+  const emptyData = [{ name: "No bug submitted", value: 1 }];
+
+  const isEmpty =
+    customData.every((entry) => entry.value === 0) || data.length === 0;
 
   return (
     <>
@@ -129,29 +169,55 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                   </linearGradient>
                 ))}
               </defs>
-              <Pie
-                data={customData}
-                cx="50%"
-                cy="50%"
-                innerRadius={80}
-                outerRadius={120}
-                paddingAngle={4}
-                dataKey="value"
-                cornerRadius={8}
-                labelLine={false}
-                label={renderCustomizedLabel}
-                className={cn(
-                  "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
-                )}
-                animationEasing="ease-in-out"
-              >
-                {customData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={`url(#myGradient${index})`}
-                  />
-                ))}
-              </Pie>
+              {isEmpty ? (
+                <Pie
+                  data={emptyData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={80}
+                  outerRadius={120}
+                  paddingAngle={4}
+                  dataKey="value"
+                  cornerRadius={8}
+                  labelLine={false}
+                  label={renderEmptyLabel}
+                  className={cn(
+                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                  )}
+                  animationEasing="ease-in-out"
+                >
+                  {emptyData.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={"#D9D9D9"}
+                    />
+                  ))}
+                </Pie>
+              ) : (
+                <Pie
+                  data={customData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={80}
+                  outerRadius={120}
+                  paddingAngle={4}
+                  dataKey="value"
+                  cornerRadius={8}
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  className={cn(
+                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                  )}
+                  animationEasing="ease-in-out"
+                >
+                  {customData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={`url(#myGradient${index})`}
+                    />
+                  ))}
+                </Pie>
+              )}
               <Tooltip
                 animationEasing="ease-in-out"
                 content={
@@ -204,37 +270,65 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                   </linearGradient>
                 ))}
               </defs>
-              <Pie
-                data={customData}
-                cx="50%"
-                cy="50%"
-                innerRadius={50}
-                outerRadius={80}
-                paddingAngle={4}
-                dataKey="value"
-                cornerRadius={8}
-                labelLine={false}
-                label={renderCustomizedLabel}
-                className={cn(
-                  "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
-                )}
-                animationEasing="ease-in-out"
-              >
-                {customData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={`url(#myGradient${index})`}
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                animationEasing="ease-in-out"
-                content={
-                  <CustomTooltip
-                    payload={data.reduce((acc, curr) => acc + curr.value, 0)}
-                  />
-                }
-              />
+              {isEmpty ? (
+                <Pie
+                  data={emptyData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={80}
+                  paddingAngle={4}
+                  dataKey="value"
+                  cornerRadius={8}
+                  labelLine={false}
+                  label={renderEmptyLabel}
+                  className={cn(
+                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                  )}
+                  animationEasing="ease-in-out"
+                >
+                  {emptyData.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={"#D9D9D9"}
+                    />
+                  ))}
+                </Pie>
+              ) : (
+                <Pie
+                  data={customData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={80}
+                  paddingAngle={4}
+                  dataKey="value"
+                  cornerRadius={8}
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  className={cn(
+                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                  )}
+                  animationEasing="ease-in-out"
+                >
+                  {customData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={`url(#myGradient${index})`}
+                    />
+                  ))}
+                </Pie>
+              )}
+              {!isEmpty && (
+                <Tooltip
+                  animationEasing="ease-in-out"
+                  content={
+                    <CustomTooltip
+                      payload={data.reduce((acc, curr) => acc + curr.value, 0)}
+                    />
+                  }
+                />
+              )}
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -295,37 +389,69 @@ export const PieChartCard = ({ data }: DoughnutCartPropsType) => {
                     </linearGradient>
                   ))}
                 </defs>
-                <Pie
-                  data={customData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={80}
-                  outerRadius={120}
-                  paddingAngle={4}
-                  dataKey="value"
-                  cornerRadius={8}
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  className={cn(
-                    "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
-                  )}
-                  animationEasing="ease-in-out"
-                >
-                  {customData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={`url(#myGradient${index})`}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  animationEasing="ease-in-out"
-                  content={
-                    <CustomTooltip
-                      payload={data.reduce((acc, curr) => acc + curr.value, 0)}
-                    />
-                  }
-                />
+                {isEmpty ? (
+                  <Pie
+                    data={emptyData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={80}
+                    outerRadius={120}
+                    paddingAngle={4}
+                    dataKey="value"
+                    cornerRadius={8}
+                    labelLine={false}
+                    label={renderEmptyLabel}
+                    className={cn(
+                      "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                    )}
+                    animationEasing="ease-in-out"
+                  >
+                    {emptyData.map((_, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={"#D9D9D9"}
+                      />
+                    ))}
+                  </Pie>
+                ) : (
+                  <Pie
+                    data={customData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={80}
+                    outerRadius={120}
+                    paddingAngle={4}
+                    dataKey="value"
+                    cornerRadius={8}
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    className={cn(
+                      "stroke-none !outline-none drop-shadow-pie-chart hover:cursor-pointer hover:stroke-white"
+                    )}
+                    animationEasing="ease-in-out"
+                  >
+                    {customData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={`url(#myGradient${index})`}
+                      />
+                    ))}
+                  </Pie>
+                )}
+
+                {!isEmpty && (
+                  <Tooltip
+                    animationEasing="ease-in-out"
+                    content={
+                      <CustomTooltip
+                        payload={data.reduce(
+                          (acc, curr) => acc + curr.value,
+                          0
+                        )}
+                      />
+                    }
+                  />
+                )}
               </PieChart>
             </ResponsiveContainer>
           </div>

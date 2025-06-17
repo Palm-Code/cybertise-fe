@@ -36,7 +36,6 @@ import { useTranslations } from "next-intl";
 import { useUserStore } from "@/core/zustands/globals/store";
 import ModalAddToContributor from "../_dialog/ModalAddToContributor";
 import { PaymentCard } from "../card/payment-card";
-import { ModalSetReward } from "../_dialog";
 import { useBoolean } from "usehooks-ts";
 
 const ReportDetails = ({ id }: { id: string }) => {
@@ -79,14 +78,9 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [isManualRisk, setIsManualRisk] = useState<boolean>(
     !ticketDetails?.cvss_string
   );
-  const { value: showModalSetReward, toggle: toggleModalSetReward } =
-    useBoolean();
 
   const handleStatusChange = (v: string) => {
-    if (
-      v.toLowerCase() === "closed" &&
-      ticketDetails?.ticket_type.toLowerCase() === "hacker"
-    ) {
+    if (v.toLowerCase() === "closed") {
       setOpenModalConfirmContributor(true);
       return;
     }
@@ -418,21 +412,19 @@ const ReportDetails = ({ id }: { id: string }) => {
                       })}
                     </Typography>
                     {ticketDetails.ticket_type === "Hacker" ? (
-                      !ticketDetails.related_ticket_id ? null : (
-                        <Link
-                          href={
-                            ticketDetails.related_ticket_id
-                              ? `/reports/${ticketDetails.related_ticket_id}`
-                              : `/reports/new?ticket_id=${ticketDetails.id}`
-                          }
-                          className="text-xs underline"
-                          replace
-                        >
-                          {ticketDetails.related_ticket_id
-                            ? t("go_to", { role: t("company") })
-                            : t("create_company_ticket")}
-                        </Link>
-                      )
+                      <Link
+                        href={
+                          ticketDetails.related_ticket_id
+                            ? `/reports/${ticketDetails.related_ticket_id}`
+                            : `/reports/new?ticket_id=${ticketDetails.id}`
+                        }
+                        className="text-xs underline"
+                        replace
+                      >
+                        {ticketDetails.related_ticket_id
+                          ? t("go_to", { role: t("company") })
+                          : t("create_company_ticket")}
+                      </Link>
                     ) : (
                       <Link
                         href={`/reports/${ticketDetails.related_ticket_id}`}

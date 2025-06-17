@@ -21,6 +21,7 @@ export const usePostPaymentRequested = () => {
     onSuccess: (data) => {
       toast.success("Payment requested successfully");
       queryClient.invalidateQueries({ queryKey: ["getChatList"] });
+      queryClient.invalidateQueries({ queryKey: ["getTicketDetails"] });
     },
     onError: (error) => {
       toast.error(error?.message || "Something went wrong");

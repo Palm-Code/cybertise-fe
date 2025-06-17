@@ -45,7 +45,11 @@ const icons = (variant: keyof typeof Role) => {
   }
 };
 
-const CardAbout = ({ isEditing = false, variant, data }: I_CardAboutProps) => {
+const CardAbout = ({
+  isEditing = false,
+  variant = "hacker",
+  data,
+}: I_CardAboutProps) => {
   const t = useTranslations("Settings.details");
   const {
     watch,

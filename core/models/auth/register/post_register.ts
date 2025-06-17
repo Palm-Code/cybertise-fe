@@ -1,3 +1,4 @@
+import { websiteRegex } from "@/utils/formatter/regex";
 import { z } from "zod";
 
 export const signupHackerFormSchema = z.object({
@@ -12,7 +13,10 @@ export const signupCompanyFormSchema = z.object({
   email: z.string().email({ message: "Email is required" }),
   password: z.string().min(1, { message: "Password is required" }),
   country_code: z.string().min(1, { message: "Country is required" }),
-  website: z.string().min(1, { message: "Corporate Website is required" }),
+  website: z
+    .string()
+    .min(1, { message: "Corporate Website is required" })
+    .regex(websiteRegex, { message: "Invalid website format" }),
   state: z.string().min(1, { message: "State is required" }),
   city: z.string().min(1, { message: "City is required" }),
   zip: z.string().min(1, { message: "Zip Code is required" }),

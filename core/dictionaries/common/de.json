@@ -39,7 +39,7 @@
     "days": "Letzte {days} Tage"
   },
   "Ticket": {
-    "last_reported": "Gemeldet {Datum} vor",
+    "last_reported": "Gemeldet {date} vor",
     "ticket": "Ticket",
     "risk_level": "Risikostufe",
     "vulnerability_type": "Schwachstellentyp (CWE)",
@@ -76,7 +76,12 @@
     "payment_failed": "Zahlung fehlgeschlagen",
     "rewards_payment": "Belohnungszahlung",
     "set_reward_and_make_payment": "Belohnung festlegen und Zahlung leisten",
-    "payment_dashboard": "Zahlungs Dashboard"
+    "payment_dashboard": "Zahlungs Dashboard",
+    "add_to_contributor": {
+      "title": "Hacker zur Liste der Mitarbeiter hinzufügen?",
+      "no": "Fügen Sie nicht zum Mitwirkenden hinzu",
+      "yes": "Hinzufügen zu Mitwirkenden"
+    }
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -115,6 +120,12 @@
       "description": "Dabei gehen alle Informationen verloren, die Sie für die entsprechenden Berichte eingegeben haben.",
       "button_keep_it": "Behalte es",
       "button_yes_cancel_report": "Ja, Bericht abbrechen"
+    },
+    "close_vrp": {
+      "description": "Sie verlieren alle Informationen, die Sie eingegeben haben.",
+      "title": "VRP -Bearbeitung abbrechen?",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_vrp": "Ja, abbrechen"
     }
   },
   "TextEditor": {
