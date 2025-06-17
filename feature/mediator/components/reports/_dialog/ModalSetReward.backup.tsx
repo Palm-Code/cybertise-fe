@@ -299,12 +299,24 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                     disabled={!changeBounty}
                     value={data.bounty ?? reward}
                     onValueChange={(v) => {
+                      if (
+                        Number(v.value) <
+                          (data?.program?.monetary_awards_low ?? 0) ||
+                        Number(v.value) >
+                          (data?.program?.monetary_awards_critical ?? 0)
+                      ) {
+                        setErrorTrue();
+                        return;
+                      }
+                      setErrorFalse();
                       setReward(Number(v.value));
                     }}
                     className="h-full w-full bg-transparent text-[56px] font-bold focus:outline-none"
                   />
                 </div>
-                {changeBounty && <Separator />}
+                {changeBounty && (
+                  <Separator className={cn(error && "!bg-red-error")} />
+                )}
                 <Typography
                   variant="p"
                   affects="small"
@@ -339,7 +351,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                 onClick={() => {
                   setConfirmTrue();
                 }}
-                disabled={changeBounty && !reason}
+                disabled={(changeBounty && !reason) || error}
               >
                 {t("Ticket.set_reward_and_request_payment")}
               </Button>

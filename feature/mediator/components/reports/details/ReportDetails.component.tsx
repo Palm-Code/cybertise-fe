@@ -80,10 +80,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   );
 
   const handleStatusChange = (v: string) => {
-    if (
-      v.toLowerCase() === "closed" &&
-      ticketDetails?.ticket_type.toLowerCase() === "hacker"
-    ) {
+    if (v.toLowerCase() === "closed") {
       setOpenModalConfirmContributor(true);
       return;
     }

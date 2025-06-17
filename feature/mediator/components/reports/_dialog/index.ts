@@ -1,2 +1,2 @@
 export * from "./ModalReportDetails";
-export * from "./ModalSetReward";
+export * from "./ModalSetReward.backup";

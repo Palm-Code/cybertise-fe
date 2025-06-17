@@ -87,7 +87,7 @@ const DetailsVrpLaunchpad = ({
     <>
       <div
         className={cn(
-          "_flexbox__col__start__start sticky top-0 z-30",
+          "_flexbox__col__start__start sticky top-0 z-40",
           "h-fit w-full gap-3 bg-background-page-light dark:bg-background-page-dark"
         )}
       >

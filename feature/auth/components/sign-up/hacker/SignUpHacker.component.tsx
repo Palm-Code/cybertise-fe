@@ -17,9 +17,12 @@ import {
 } from "@/core/models/auth/register";
 import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
 import { useTranslations } from "next-intl";
+import { useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 const SignUpHacker = () => {
   const t = useTranslations("SignUp.hacker");
+  const [email] = useQueryState("authenticate_email");
   const method = useForm<SignupHackerFormType>({
     resolver: zodResolver(signupHackerFormSchema),
     defaultValues: {
@@ -30,31 +33,45 @@ const SignUpHacker = () => {
     },
   });
   const { mutate: resendVerification } = usePostResendVerification();
-  const { step, next, back, isFirstStep, currentStepIndex, steps, isLastStep } =
-    useMultistepForm([
-      {
-        element: <HackerStepOne onClickNext={() => next()} />,
-        key: "hacker-step-one",
-      },
-      {
-        element: <HackerStepTwo onClickNext={() => next()} />,
-        key: "hacker-step-two",
-      },
-      {
-        element: (
-          <SuccessState
-            onClickResendVerification={() => {
-              resendVerification({
-                email: method.watch("email"),
-                action: "signup_verification",
-              });
-            }}
-            noPadding
-          />
-        ),
-        key: "hacker-step-three",
-      },
-    ]);
+  const {
+    step,
+    next,
+    back,
+    isFirstStep,
+    currentStepIndex,
+    steps,
+    isLastStep,
+    goTo,
+  } = useMultistepForm([
+    {
+      element: <HackerStepOne onClickNext={() => next()} />,
+      key: "hacker-step-one",
+    },
+    {
+      element: <HackerStepTwo onClickNext={() => next()} />,
+      key: "hacker-step-two",
+    },
+    {
+      element: (
+        <SuccessState
+          onClickResendVerification={() => {
+            resendVerification({
+              email: method.watch("email"),
+              action: "signup_verification",
+            });
+          }}
+          noPadding
+        />
+      ),
+      key: "hacker-step-three",
+    },
+  ]);
+
+  useEffect(() => {
+    if (email) {
+      goTo(2);
+    }
+  }, [email]);
 
   return (
     <FormProvider {...method}>

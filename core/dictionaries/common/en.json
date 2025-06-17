@@ -77,7 +77,12 @@
     "payment_failed": "Payment failed",
     "rewards_payment": "Rewards Payment",
     "set_reward_and_make_payment": "Set Reward and Make Payment",
-    "payment_dashboard": "Payment Dashboard"
+    "payment_dashboard": "Payment Dashboard",
+    "add_to_contributor": {
+      "title": "Add Hacker to contributor list ?",
+      "no": "Do not add to contributor",
+      "yes": "Add to contributor"
+    }
   },
   "Programs": {
     "program_name": "Program Name",
@@ -123,6 +128,12 @@
       "description": "You will loose all the information you have entered for the related reports.",
       "button_keep_it": "Keep It",
       "button_yes_cancel_report": "Yes, Cancel report"
+    },
+    "close_vrp": {
+      "title": "Cancel Vrp Edit ?",
+      "description": "You will loose all the information you have entered.",
+      "button_keep_it": "Keep It",
+      "button_yes_cancel_vrp": "Yes, Cancel"
     }
   },
   "TextEditor": {

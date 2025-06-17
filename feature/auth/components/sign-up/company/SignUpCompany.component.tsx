@@ -18,9 +18,12 @@ import {
 } from "@/core/models/auth/register";
 import { usePostResendVerification } from "@/feature/auth/query/resend-verification";
 import { useTranslations } from "next-intl";
+import { useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 const SignUpCompany = () => {
   const t = useTranslations("SignUp.company");
+  const [email] = useQueryState("authenticate_email");
   const method = useForm<SignupCompanyFormType>({
     resolver: zodResolver(signupCompanyFormSchema),
     defaultValues: {
@@ -36,35 +39,49 @@ const SignUpCompany = () => {
     },
   });
   const { mutate: resendVerification } = usePostResendVerification();
-  const { step, next, back, isFirstStep, currentStepIndex, steps, isLastStep } =
-    useMultistepForm([
-      {
-        element: <CompanyStepOne onClickNext={() => next()} />,
-        key: "company-step-one",
-      },
-      {
-        element: <CompanyStepTwo onClickNext={() => next()} />,
-        key: "company-step-two",
-      },
-      {
-        element: <CompanyStepThree onClickNext={() => next()} />,
-        key: "company-step-three",
-      },
-      {
-        element: (
-          <SuccessState
-            onClickResendVerification={() =>
-              resendVerification({
-                email: method.watch("email"),
-                action: "signup_verification",
-              })
-            }
-            noPadding
-          />
-        ),
-        key: "company-step-four",
-      },
-    ]);
+  const {
+    step,
+    next,
+    back,
+    isFirstStep,
+    currentStepIndex,
+    steps,
+    isLastStep,
+    goTo,
+  } = useMultistepForm([
+    {
+      element: <CompanyStepOne onClickNext={() => next()} />,
+      key: "company-step-one",
+    },
+    {
+      element: <CompanyStepTwo onClickNext={() => next()} />,
+      key: "company-step-two",
+    },
+    {
+      element: <CompanyStepThree onClickNext={() => next()} />,
+      key: "company-step-three",
+    },
+    {
+      element: (
+        <SuccessState
+          onClickResendVerification={() =>
+            resendVerification({
+              email: method.watch("email"),
+              action: "signup_verification",
+            })
+          }
+          noPadding
+        />
+      ),
+      key: "company-step-four",
+    },
+  ]);
+
+  useEffect(() => {
+    if (email) {
+      goTo(3);
+    }
+  }, [email]);
 
   return (
     <FormProvider {...method}>
