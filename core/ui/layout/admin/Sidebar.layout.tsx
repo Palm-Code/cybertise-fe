@@ -15,7 +15,7 @@ import Logo from "../../icons/logo/Logo.icon";
 import Link from "next/link";
 import { cn } from "@/core/lib/utils";
 import { Currency, Service, VrpManagement } from "../../icons";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { borderColor, useMenuItems } from "@/core/constants/common";
 import {
   Avatar,
@@ -35,6 +35,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useAssetTypeStore } from "@/core/zustands/globals/store";
+import { useTopLoader } from "nextjs-toploader";
 
 interface SidebarProps {
   type: keyof typeof Role;
@@ -58,6 +59,8 @@ const iconsObject: { [key: string]: React.ReactNode } = {
 const Sidebar = ({ type }: SidebarProps) => {
   const t = useTranslations("Sidebar");
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const loader = useTopLoader();
   const { theme } = useTheme();
   const pathname = usePathname();
   const menuItems = useMenuItems();
@@ -105,9 +108,9 @@ const Sidebar = ({ type }: SidebarProps) => {
               </div>
               <div className="_flexbox__col__center w-full gap-4 pr-5">
                 {menu.map((item, index) => (
-                  <Link
+                  <button
                     key={`navbar-item-${index}`}
-                    href={item.path}
+                    type="button"
                     className={cn(
                       "grid h-16 w-full grid-cols-[auto_1fr] items-center gap-4",
                       "rounded-r-3xl pl-6 hover:bg-background-page-light dark:hover:bg-background-page-dark",
@@ -118,6 +121,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                         : "border-transparent bg-transparent font-normal dark:border-transparent"
                     )}
                     onClick={(e) => {
+                      router.push(item.path);
                       if (item.path === pathname) {
                         e.preventDefault();
                         queryClient.invalidateQueries({
@@ -134,7 +138,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                     >
                       {item.title}
                     </Typography>
-                  </Link>
+                  </button>
                 ))}
                 <Link
                   href="/settings"
@@ -213,11 +217,9 @@ const Sidebar = ({ type }: SidebarProps) => {
             </Link>
             <div className="_flexbox__col__center w-full gap-4 pr-5">
               {menu.map((item, index) => (
-                <Link
+                <button
                   key={`navbar-item-${index}`}
-                  href={item.path}
-                  replace
-                  prefetch
+                  type="button"
                   className={cn(
                     "_flexbox__row__center__start h-16 w-full gap-4",
                     "rounded-r-3xl pl-12 hover:bg-background-page-light dark:hover:bg-background-page-dark",
@@ -228,6 +230,8 @@ const Sidebar = ({ type }: SidebarProps) => {
                       : "border-transparent bg-transparent font-normal dark:border-transparent"
                   )}
                   onClick={(e) => {
+                    loader.start();
+                    router.push(item.path);
                     if (item.path === pathname) {
                       e.preventDefault();
                       queryClient.invalidateQueries({
@@ -244,7 +248,7 @@ const Sidebar = ({ type }: SidebarProps) => {
                   >
                     {item.title}
                   </Typography>
-                </Link>
+                </button>
               ))}
             </div>
           </div>

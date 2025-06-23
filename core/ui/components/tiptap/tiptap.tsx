@@ -68,6 +68,7 @@ const Tiptap = ({
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
     editable: !showing,
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         codeBlock: false,

@@ -34,7 +34,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
     setTrue: setErrorTrue,
     setFalse: setErrorFalse,
   } = useBoolean(false);
-  const [reward, setReward] = useState<number | null>(null);
+  const [reward, setReward] = useState<number | null>(data.bounty ?? null);
   const [reason, setReason] = useState<string | undefined>();
   const {
     value: confirm,
@@ -62,8 +62,17 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
       props.onClose?.();
     });
   };
+
+  const handleCheckedChange = (checked: boolean) => {
+    toggleChangeBounty();
+    setReward(data.bounty ?? null);
+  };
+
   return (
-    <BaseModal {...props}>
+    <BaseModal
+      isOpen
+      {...props}
+    >
       <div
         className={cn(
           "mx-auto max-h-[795px] w-full max-w-2xl overflow-auto rounded-lg",
@@ -232,7 +241,7 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
             <Checkbox
               variant="mediator"
               checked={changeBounty}
-              onCheckedChange={toggleChangeBounty}
+              onCheckedChange={handleCheckedChange}
             />
             <Typography
               variant="p"
@@ -296,8 +305,9 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
                         currency: "EUR",
                       }).format(Number(numStr));
                     }}
+                    maxLength={3}
                     disabled={!changeBounty}
-                    value={data.bounty ?? reward}
+                    value={reward}
                     onValueChange={(v) => {
                       setReward(Number(v.value));
                     }}

@@ -27,7 +27,10 @@ interface ModalSetRewardProps extends I_ModalProps {
   data: I_GetChatListSuccessResponse["data"][0];
 }
 
-export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
+export const ModalSetRewardBackup = ({
+  data,
+  ...props
+}: ModalSetRewardProps) => {
   const t = useTranslations();
   const {
     value: error,
