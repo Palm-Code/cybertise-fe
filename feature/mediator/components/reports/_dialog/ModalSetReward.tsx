@@ -64,7 +64,6 @@ export const ModalSetReward = ({ data, ...props }: ModalSetRewardProps) => {
   };
 
   const handleCheckedChange = (checked: boolean) => {
-    console.log(data.bounty);
     toggleChangeBounty();
     setReward(data.bounty ?? null);
   };
