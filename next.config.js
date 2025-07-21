@@ -3,7 +3,8 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 
-const imageHostnames = process.env.NEXT_PUBLIC_IMAGE_HOSTNAMES.split(",");
+const imageHostnames =
+  process.env.NEXT_PUBLIC_IMAGE_HOSTNAMES?.split(",") || [];
 
 const nextConfig = {
   reactStrictMode: false,
