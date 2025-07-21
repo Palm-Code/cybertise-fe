@@ -2,6 +2,10 @@ const createNextIntlPlugin = require("next-intl/plugin");
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
+
+const imageHostnames =
+  process.env.NEXT_PUBLIC_IMAGE_HOSTNAMES?.split(",") || [];
+
 const nextConfig = {
   reactStrictMode: false,
   trailingSlash: true,
@@ -10,20 +14,12 @@ const nextConfig = {
     silenceDeprecations: ["legacy-js-api"],
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cybertise-backend-mmppce625q-de.a.run.app",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cybertise-storage.s3.us-east-005.backblazeb2.com",
-        port: "",
-        pathname: "/**",
-      },
-    ],
+    remotePatterns: imageHostnames.map((hostname) => ({
+      protocol: "https",
+      hostname: hostname,
+      port: "",
+      pathname: "/**",
+    })),
   },
   rewrites: async () => {
     return [
