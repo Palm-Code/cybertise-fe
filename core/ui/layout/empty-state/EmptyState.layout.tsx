@@ -14,13 +14,18 @@ interface I_EmptyStateProps {
     | "program"
     | "ticket"
     | "under-construction"
+    | "collaborators"
     | "update"
-    | "target-assets";
+    | "target-assets"
+    | "disallowed";
+
   buttonText?: string;
   titleText?: string;
   href?: string;
   onClickButton?: () => void;
   className?: string;
+  noMargin?: boolean;
+  isButton?: boolean;
 }
 
 const EmptyState = ({
@@ -31,6 +36,8 @@ const EmptyState = ({
   titleText = "You're not Allowed Here",
   onClickButton = () => {},
   className = "",
+  noMargin = false,
+  isButton = false,
 }: I_EmptyStateProps) => {
   const t = useTranslations("EmptyState");
   const iconsType = () => {
@@ -48,12 +55,14 @@ const EmptyState = ({
               {t("you_have_nothing_here")}
             </Typography>
             {!!buttonText && (
-              <Link
-                className={buttonVariants({ variant: `primary-${variant}` })}
+              <Button
+                asLink={!isButton}
                 href={href}
+                variant={`primary-${variant}`}
+                onClick={onClickButton}
               >
                 {buttonText}
-              </Link>
+              </Button>
             )}
           </>
         );
@@ -71,12 +80,14 @@ const EmptyState = ({
                 {titleText ?? "You have no any program yet"}
               </Typography>
               {!!buttonText && (
-                <Link
-                  className={buttonVariants({ variant: `primary-${variant}` })}
+                <Button
+                  asLink={!isButton}
                   href={href}
+                  variant={`primary-${variant}`}
+                  onClick={onClickButton}
                 >
                   {buttonText ?? "Add new program"}
-                </Link>
+                </Button>
               )}
             </>
           </>
@@ -102,7 +113,11 @@ const EmptyState = ({
           <>
             <>
               <HackerLeaf />
-              <Typography variant="p" affects="extralarge" weight="bold">
+              <Typography
+                variant="p"
+                affects="extralarge"
+                weight="bold"
+              >
                 {t("you_have_nothing_here")}
               </Typography>
               {!!buttonText && (
@@ -118,6 +133,7 @@ const EmptyState = ({
           </>
         );
       case "under-construction":
+      case "collaborators":
         return (
           <>
             <EmptyFolder className={iconColor[variant]} />
@@ -127,14 +143,40 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              {t("under_construction")}
+              {titleText}
             </Typography>
-            <Link
-              className={buttonVariants({ variant: `primary-${variant}` })}
-              href={href}
+            {!!buttonText && (
+              <Button
+                variant={`primary-${variant}`}
+                className="w-full"
+                onClick={() => onClickButton()}
+              >
+                {buttonText}
+              </Button>
+            )}
+          </>
+        );
+      case "disallowed":
+        return (
+          <>
+            <EmptyFolder className={iconColor[variant]} />
+            <Typography
+              variant="p"
+              affects="extralarge"
+              weight="bold"
+              align={"center"}
             >
-              {t("back_button")}
-            </Link>
+              {t("only_desktop")}
+            </Typography>
+            {!!buttonText && (
+              <Button
+                variant={`primary-${variant}`}
+                className="w-full"
+                onClick={() => onClickButton()}
+              >
+                {buttonText}
+              </Button>
+            )}
           </>
         );
       default:
@@ -147,14 +189,16 @@ const EmptyState = ({
               weight="bold"
               align={"center"}
             >
-              {titleText}
+              {t("you_have_nothing_here")}
             </Typography>
-            <Link
-              className={buttonVariants({ variant: `primary-${variant}` })}
-              href={href}
-            >
-              {t("back_button")}
-            </Link>
+            {!!buttonText && (
+              <Link
+                className={buttonVariants({ variant: `primary-${variant}` })}
+                href={href}
+              >
+                {t("back_button")}
+              </Link>
+            )}
           </>
         );
     }
@@ -163,7 +207,8 @@ const EmptyState = ({
   return (
     <div
       className={cn(
-        "_flexbox__col__center mt-32 h-full w-full gap-12",
+        "_flexbox__col__center h-full w-full gap-12",
+        !noMargin && "mt-32",
         className
       )}
     >

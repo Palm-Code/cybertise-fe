@@ -20,6 +20,8 @@ export const indicatorVariants = cva("", {
       "in review": "text-yellow-light rounded-full",
       paid: "text-sky-darker rounded-full",
       canceled: "text-red-normal rounded-full",
+      unpaid: "text-red-normal rounded-full",
+      failed: "text-red-normal rounded-full",
     },
   },
   defaultVariants: {
@@ -41,7 +43,10 @@ const Indicator = ({
     return (
       <div className="-ml-2.5 grid grid-cols-[auto_1fr] items-center">
         <Indicators className={indicatorVariants({ variant, className })} />
-        <Typography variant="p" affects="small">
+        <Typography
+          variant="p"
+          affects="small"
+        >
           {children}
         </Typography>
       </div>

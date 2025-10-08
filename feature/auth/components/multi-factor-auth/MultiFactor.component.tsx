@@ -42,10 +42,17 @@ const MultiFactorAuth = ({
       >
         <div className="_flexbox__col__center w-full gap-6">
           <Locker2 />
-          <Typography variant="h4" weight="bold">
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" className="text-center">
+          <Typography
+            variant="p"
+            affects="normal"
+            className="text-center"
+          >
             {t("description")}
           </Typography>
         </div>
@@ -69,7 +76,11 @@ const MultiFactorAuth = ({
               <>
                 <div className="_flexbox__row__center w-full gap-1.5">
                   {slots.map((slot, idx) => (
-                    <Slot isError={isError} key={`slot-${idx}`} {...slot} />
+                    <Slot
+                      isError={isError}
+                      key={`slot-${idx}`}
+                      {...slot}
+                    />
                   ))}
                 </div>
               </>

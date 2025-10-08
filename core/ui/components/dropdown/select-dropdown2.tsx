@@ -98,7 +98,10 @@ const SelectDropdown2 = ({
             </SelectItem>
           ))
         ) : (
-          <SelectItem value="no items" disabled>
+          <SelectItem
+            value="no items"
+            disabled
+          >
             No options
           </SelectItem>
         )}

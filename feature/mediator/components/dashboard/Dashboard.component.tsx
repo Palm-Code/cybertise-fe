@@ -82,7 +82,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 
@@ -106,7 +108,11 @@ const Dashboard = () => {
       <Mobile>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
             <SearchInput
@@ -124,7 +130,10 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex w-full items-center justify-between">
-            <DashboardFilter variant="mediator" store={store} />
+            <DashboardFilter
+              variant="mediator"
+              store={store}
+            />
             <div className="inline-flex gap-4">
               <FilterDropdown
                 variant="mediator"
@@ -135,7 +144,10 @@ const Dashboard = () => {
             </div>
           </div>
           {!!payload?.params?.search && (
-            <Typography variant="p" affects="small">
+            <Typography
+              variant="p"
+              affects="small"
+            >
               Show result for "{payload?.params?.search}"
             </Typography>
           )}
@@ -146,7 +158,10 @@ const Dashboard = () => {
                 data={mobileDashboardData}
                 isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full space-y-6">
+              <div
+                ref={ref}
+                className="w-full space-y-6"
+              >
                 {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
@@ -165,7 +180,11 @@ const Dashboard = () => {
       <Desktop>
         <div className="_flexbox__col__start__start min-h-full w-full gap-10">
           <div className="grid w-full grid-cols-2 place-items-center content-between">
-            <Typography variant="h4" weight="bold" className="mr-auto">
+            <Typography
+              variant="h4"
+              weight="bold"
+              className="mr-auto"
+            >
               {t("title")}
             </Typography>
             <div className="ml-auto w-full max-w-xl">
@@ -198,7 +217,10 @@ const Dashboard = () => {
                 options={filterItems}
                 onValueChange={(v) => useClickSort(v, store)}
               />
-              <FilterViewDropdown type="mediator" options={filterView} />
+              <FilterViewDropdown
+                type="mediator"
+                options={filterView}
+              />
             </div>
           </div>
           {dashboardData?.data.length! ? (

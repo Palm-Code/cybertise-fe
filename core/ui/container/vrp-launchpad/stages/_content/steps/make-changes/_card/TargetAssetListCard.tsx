@@ -69,10 +69,16 @@ const TargetAssetListCard = ({
 
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         {t("header_title")}
       </Typography>
-      <Typography variant="p" affects="small">
+      <Typography
+        variant="p"
+        affects="small"
+      >
         {t("description")}
       </Typography>
       <Card

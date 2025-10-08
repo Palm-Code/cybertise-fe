@@ -30,7 +30,10 @@ const MakeChanges = ({
 
   const element: Array<React.ReactNode> = [
     <VrpDescriptionCard />,
-    <MonetaryAwardCardList variant={variant} data={monetaryAwardData} />,
+    <MonetaryAwardCardList
+      variant={variant}
+      data={monetaryAwardData}
+    />,
     <TargetAssetListCard
       options={options}
       onClickPrev={() => {

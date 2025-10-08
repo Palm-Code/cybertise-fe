@@ -3,7 +3,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
@@ -11,21 +11,28 @@ import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
 } from "../../query/password";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import { usePasswordValidation } from "@/core/constants/common";
+import { useDebounceValue } from "usehooks-ts";
+import { usePasswordStrength } from "@/core/lib";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface I_SetPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
 }
 
 const SetPassword = (props: I_SetPassword) => {
+  const t = useTranslations("SetPassword");
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const searchParams = useSearchParams();
   const token = searchParams.get("code");
   const [newPassword, setNewPassword] = useState<string>("");
+  const [debounceValue] = useDebounceValue(newPassword, 1000);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
       type: null,
@@ -39,6 +46,22 @@ const SetPassword = (props: I_SetPassword) => {
     isSuccess: isSuccessForgot,
   } = usePostForgotPassword();
 
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
+
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const newPassword = e.target.value;
@@ -50,8 +73,8 @@ const SetPassword = (props: I_SetPassword) => {
 
     setPasswordValidationItems(updatedValidationItems);
     confirmPassworText.content && confirmPassworText.content === newPassword
-      ? setConfirmPassworText({ ...confirmPassworText, checked: false })
-      : setConfirmPassworText({ ...confirmPassworText, checked: true });
+      ? setConfirmPassworText({ ...confirmPassworText, checked: true })
+      : setConfirmPassworText({ ...confirmPassworText, checked: false });
 
     setNewPassword(newPassword);
   };
@@ -80,21 +103,29 @@ const SetPassword = (props: I_SetPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
-              Set Company Staff Password
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
+              {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
+                isBreached={isBreached}
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
-                label="New password"
+                label={t("new_password")}
                 options={passwordValidationItems}
               />
               <PasswordInput
+                disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
-                label="Confirm new password"
+                label={t("confirm_password")}
                 onChange={passwordConfirmationCheck}
                 isConfirmation={!!confirmPassworText.content}
                 check={confirmPassworText.checked}
@@ -112,23 +143,32 @@ const SetPassword = (props: I_SetPassword) => {
                 isPendingForgot ||
                 isSuccessForgot ||
                 !confirmPassworText.checked ||
-                passwordValidationItems.every((item) => !item.checked)
+                isBreached ||
+                !validatePasswordRegex
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token &&
-                mutateForgotPassword({
-                  code: token,
-                  new_password: newPassword,
-                  logout_all: 0,
-                })
-              }
+                  mutateForgotPassword({
+                    code: token,
+                    new_password: newPasswordEncrypt,
+                    logout_all: 0,
+                  });
+              }}
             >
-              Set Password
+              {t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
-              Already have an account?
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
+              {t("footer")}
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
+                {t("link")}
               </Link>
             </Typography>
           </div>
@@ -145,21 +185,29 @@ const SetPassword = (props: I_SetPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
-              Set Company Staff Password
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
+              {t("title")}
             </Typography>
             <div className="flex w-full flex-col items-center justify-center gap-7">
               <PasswordInput
+                isBreached={isBreached}
                 withRegex
                 value={newPassword}
                 onChange={checkPassword}
-                label="New password"
+                label={t("new_password")}
                 options={passwordValidationItems}
               />
               <PasswordInput
+                disabled={isBreached || !validatePasswordRegex}
                 value={confirmPassworText.content}
-                label="Confirm new password"
+                label={t("confirm_password")}
                 onChange={passwordConfirmationCheck}
                 isConfirmation={!!confirmPassworText.content}
                 check={confirmPassworText.checked}
@@ -177,23 +225,32 @@ const SetPassword = (props: I_SetPassword) => {
                 isPendingForgot ||
                 isSuccessForgot ||
                 !confirmPassworText.checked ||
-                passwordValidationItems.every((item) => !item.checked)
+                isBreached ||
+                !validatePasswordRegex
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token &&
-                mutateForgotPassword({
-                  code: token,
-                  new_password: newPassword,
-                  logout_all: 0,
-                })
-              }
+                  mutateForgotPassword({
+                    code: token,
+                    new_password: newPasswordEncrypt,
+                    logout_all: 0,
+                  });
+              }}
             >
-              Set Password
+              {t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
-              Already have an account?
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
-                Sign In
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
+              {t("footer")}
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
+                {t("link")}
               </Link>
             </Typography>
           </div>

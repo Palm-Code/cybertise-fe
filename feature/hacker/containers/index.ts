@@ -9,3 +9,4 @@ export { default as ReportsCardView } from "./reports/TicketView.container";
 export { default as ReportsTableView } from "./reports/TableView.container";
 export { default as ReportsGridView } from "./reports/GridView.container";
 export { default as ChatBubble } from "./reports/details/ChatBubble.container";
+export { default as StatisticTableView } from "./statistics/TableView.container";

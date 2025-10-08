@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@/core/ui/components";
-import { AnimationWrapper, Desktop, Mobile } from "@/core/ui/layout";
+import { Desktop, Mobile } from "@/core/ui/layout";
 import { ChevronDown, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -20,7 +20,6 @@ import { useGetChatListItem } from "@/feature/mediator/query/client/useGetChatLi
 import { useReportDetailsParamStore } from "@/feature/mediator/zustand/store/reports";
 import {
   useGetTicketDetails,
-  useGetUserData,
   usePostChatItem,
 } from "@/core/react-query/client";
 import { SendReportRequestType } from "@/core/models/common";
@@ -34,12 +33,16 @@ import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { ModalForbidden } from "@/core/ui/container";
 import { useTranslations } from "next-intl";
+import { useUserStore } from "@/core/zustands/globals/store";
+import ModalAddToContributor from "../_dialog/ModalAddToContributor";
+import { PaymentCard } from "../card/payment-card";
+import { useBoolean } from "usehooks-ts";
 
 const ReportDetails = ({ id }: { id: string }) => {
   const t = useTranslations("ChatReports");
   const { back } = useRouter();
   const store = useReportDetailsParamStore();
-  const { data: userData } = useGetUserData();
+  const { data: userData } = useUserStore.getState();
   const {
     data: ticketDetails,
     isError: isErrorTicket,
@@ -47,14 +50,25 @@ const ReportDetails = ({ id }: { id: string }) => {
   } = useGetTicketDetails(id);
   const { data, isError, isRefetching, fetchNextPage, isFetchingNextPage } =
     useGetChatListItem(store.payload, id);
-  const { ref, inView } = useInView({ threshold: 0.5 });
-  const { ref: endChatRef, inView: inViewEnd } = useInView({ threshold: 0.5 });
+  const { ref } = useInView({ threshold: 0.5 });
+  const { ref: endChatRef, inView: inViewEnd } = useInView({
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView) {
+        setTimeout(() => {
+          fetchNextPage();
+        }, 200);
+      }
+    },
+  });
   const chatData = data?.pages.map((page) => page.data).flat();
   const chatRef = useRef<HTMLDivElement>(null);
   const [openAttachment, setOpenAttachment] = useState<boolean>(false);
   const [openModalEditRiskLevel, setOpenModalSetRiskLevel] =
     useState<boolean>(false);
   const [openModalForbidden, setOpenModalForbidden] = useState<boolean>(false);
+  const [openModalConfirmContributor, setOpenModalConfirmContributor] =
+    useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [attachments, setAttachments] = useState<string[]>([]);
   const [files, setFiles] = useState<SendReportRequestType["files"]>();
@@ -64,6 +78,24 @@ const ReportDetails = ({ id }: { id: string }) => {
   const [isManualRisk, setIsManualRisk] = useState<boolean>(
     !ticketDetails?.cvss_string
   );
+
+  const handleStatusChange = (v: string) => {
+    if (v.toLowerCase() === "closed") {
+      setOpenModalConfirmContributor(true);
+      return;
+    }
+    if (v.toLowerCase() === "waiting for payment") {
+      if (ticketDetails?.ticket_type === "Company") {
+        toast.error(
+          t("Ticket.company_ticket_cannot_be_set_to_waiting_for_payment")
+        );
+        return;
+      }
+      mutateUpdateTicket(`status=${v}`);
+      return;
+    }
+    mutateUpdateTicket(`status=${v}&is_contributed=0`);
+  };
 
   const scrollView = () => {
     setTimeout(() => {
@@ -76,12 +108,6 @@ const ReportDetails = ({ id }: { id: string }) => {
       scrollView();
     }
   }, [data]);
-
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [inView]);
 
   const sendMessage = async () => {
     await mutateAsync({
@@ -99,7 +125,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         chatRef?.current?.scrollIntoView({ behavior: "smooth" });
       })
       .catch((err) => {
-        toast.error("Failed to send message");
+        toast.error(err.message);
       });
   };
 
@@ -112,7 +138,7 @@ const ReportDetails = ({ id }: { id: string }) => {
   if (isError || isErrorTicket || chatData?.length === 0) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
-        No Chat Found
+        {t("no_chat_found")}
       </div>
     );
   }
@@ -148,7 +174,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                   className="cursor-pointer"
                 />
                 <div className="_flexbox__col__start__start gap-4">
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                   <Badge
@@ -221,14 +250,22 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Link>
                   )}
                 </div>
-                <Typography variant="p" affects="small">
+                <Typography
+                  variant="p"
+                  affects="small"
+                >
                   {t("chat_alert")}
                 </Typography>
               </div>
             )}
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <div className="px-6 py-8">
             <ChatBubble
@@ -273,13 +310,13 @@ const ReportDetails = ({ id }: { id: string }) => {
           <div
             className={cn(
               "_flexbox__col__start__start sticky top-0 z-30",
-              "h-fit w-full gap-3 bg-background-page-light pt-12 dark:bg-background-page-dark"
+              "h-fit w-full bg-background-page-light pt-8 dark:bg-background-page-dark"
             )}
           >
             <Card
               className={cn(
                 "_flexbox__row__center__between sticky top-0",
-                "z-30 w-full rounded-b-none rounded-t-2xl !p-6"
+                "z-30 w-full rounded-b-none rounded-t-2xl !p-4"
               )}
             >
               <div className="_flexbox__row__center__start gap-5">
@@ -291,7 +328,10 @@ const ReportDetails = ({ id }: { id: string }) => {
                 />
                 {ticketDetails.title.length > 25 ? (
                   <Tooltip content={ticketDetails.title}>
-                    <Typography variant="h5" weight="bold">
+                    <Typography
+                      variant="h5"
+                      weight="bold"
+                    >
                       {`#${ticketDetails.code}: ${ticketDetails.title.substring(
                         0,
                         25
@@ -299,13 +339,16 @@ const ReportDetails = ({ id }: { id: string }) => {
                     </Typography>
                   </Tooltip>
                 ) : (
-                  <Typography variant="h5" weight="bold">
+                  <Typography
+                    variant="h5"
+                    weight="bold"
+                  >
                     {`#${ticketDetails.code}: ${ticketDetails.title}`}
                   </Typography>
                 )}
                 <button
                   type="button"
-                  className="_flexbox__row__center gap-2.5"
+                  className="_flexbox__row__center gap-2.5 disabled:cursor-not-allowed disabled:text-transparent"
                   disabled={isHiddenChatBox}
                   onClick={() => {
                     setOpenModalSetRiskLevel(true);
@@ -334,22 +377,24 @@ const ReportDetails = ({ id }: { id: string }) => {
                   />
                 ) : (
                   <StatusDropdown
+                    disabled={
+                      ticketDetails.status.toLowerCase() === "closed" ||
+                      ticketDetails.status.toLowerCase() === "canceled"
+                    }
                     value={ticketDetails.status}
                     options={filterItems.status}
-                    onValueChange={(v) => {
-                      mutateUpdateTicket(`status=${v}`);
-                    }}
+                    onValueChange={handleStatusChange}
                   />
                 )}
               </div>
             </Card>
-            <AnimationWrapper>
+            <div className="w-full">
               {isHiddenChatBox &&
               ticketDetails.ticket_type.toLowerCase() === "hacker" &&
               !ticketDetails.related_ticket_id ? null : (
                 <div
                   className={cn(
-                    "sticky top-[8.15rem] z-30 w-full rounded-[10px] p-4",
+                    "sticky top-[8.15rem] z-30 w-full rounded-b-[10px] px-4 py-2",
                     "mb-4 bg-neutral-light-80 dark:bg-neutral-dark-80"
                   )}
                 >
@@ -373,7 +418,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                             ? `/reports/${ticketDetails.related_ticket_id}`
                             : `/reports/new?ticket_id=${ticketDetails.id}`
                         }
-                        className="underline"
+                        className="text-xs underline"
                         replace
                       >
                         {ticketDetails.related_ticket_id
@@ -383,7 +428,7 @@ const ReportDetails = ({ id }: { id: string }) => {
                     ) : (
                       <Link
                         href={`/reports/${ticketDetails.related_ticket_id}`}
-                        className="underline"
+                        className="text-xs underline"
                         replace
                       >
                         {t("go_to", { role: t("hacker") })}
@@ -392,10 +437,23 @@ const ReportDetails = ({ id }: { id: string }) => {
                   </div>
                 </div>
               )}
-            </AnimationWrapper>
+            </div>
+            {ticketDetails.status.toLowerCase() === "waiting for payment" ||
+            ticketDetails.status.toLowerCase() === "paid" ||
+            ticketDetails.status.toLowerCase() === "closed" ||
+            ticketDetails.status.toLowerCase() === "canceled" ? (
+              <div className={cn("mb-4 w-full")}>
+                <PaymentCard data={ticketDetails} />
+              </div>
+            ) : null}
           </div>
           {isFetchingNextPage && (
-            <Loader variant="hacker" width={12} height={12} className="h-12" />
+            <Loader
+              variant="hacker"
+              width={12}
+              height={12}
+              className="h-12"
+            />
           )}
           <ChatBubble
             ticket_type={ticketDetails.ticket_type}
@@ -407,9 +465,9 @@ const ReportDetails = ({ id }: { id: string }) => {
           <Button
             variant="default"
             className={cn(
-              "absolute z-50 mx-auto w-fit",
+              "absolute z-30 mx-auto w-fit",
               "left-1/2 transform",
-              isHiddenChatBox ? "bottom-12" : "bottom-72"
+              isHiddenChatBox ? "bottom-12" : "bottom-56"
             )}
             prefixIcon={<ChevronDown className="!text-neutral-dark-100" />}
             onClick={() => {
@@ -428,7 +486,7 @@ const ReportDetails = ({ id }: { id: string }) => {
         {!isHiddenChatBox && (
           <div
             className={cn(
-              "sticky bottom-0 z-50 bg-background-page-light py-8 dark:bg-background-page-dark"
+              "sticky bottom-0 z-50 bg-background-page-light py-2 dark:bg-background-page-dark"
             )}
           >
             <Tiptap
@@ -442,6 +500,7 @@ const ReportDetails = ({ id }: { id: string }) => {
               isChat
               onClickSendAttachment={() => setOpenAttachment(true)}
               onClickSendMessage={sendMessage}
+              withImage
             />
           </div>
         )}
@@ -489,6 +548,16 @@ const ReportDetails = ({ id }: { id: string }) => {
           value={(chatData && chatData[0]?.chat_ticket?.risk_level) || 0}
           isOpen={openModalEditRiskLevel}
           onClose={() => setOpenModalSetRiskLevel(false)}
+        />
+        <ModalAddToContributor
+          isLoading={isPendingUpdate}
+          isOpen={openModalConfirmContributor}
+          onClose={() => setOpenModalConfirmContributor(false)}
+          onClickConfirm={(v) => {
+            mutateUpdateTicket(`status=Closed&is_contributed=${v}`).then(() => {
+              setOpenModalConfirmContributor(false);
+            });
+          }}
         />
       </Desktop>
       <div ref={chatRef}></div>

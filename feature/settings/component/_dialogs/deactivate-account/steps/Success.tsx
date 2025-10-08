@@ -23,7 +23,11 @@ const Success = ({
     >
       <div className="_flexbox__col__center w-full gap-6">
         <OctagonX className="mx-auto h-16 w-16" />
-        <Typography variant="h4" weight="semibold" align="center">
+        <Typography
+          variant="h4"
+          weight="semibold"
+          align="center"
+        >
           Deactivated
         </Typography>
         <Typography

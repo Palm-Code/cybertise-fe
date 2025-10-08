@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { cn } from "@/core/lib/utils";
-import { Eye, EyeOff, Info, X } from "lucide-react";
+import { Eye, EyeOff, Info, TriangleAlert, X } from "lucide-react";
 import Tooltip from "../tooltip/tooltip";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
@@ -29,6 +29,8 @@ export interface InputProps
   isSelect?: boolean;
   errorMsg?: string;
   wrapperClassName?: string;
+  onClickWarningIcon?: () => void;
+  isBreached?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -44,7 +46,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       withTooltip = false,
       isError = false,
       placeholderText,
-      defaultValue,
       value,
       iconValue,
       description,
@@ -55,6 +56,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isSelect = false,
       errorMsg,
       wrapperClassName,
+      onClickWarningIcon,
+      isBreached = false,
       ...props
     },
     ref
@@ -168,7 +171,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <label
                   htmlFor={`${props.id ?? label}`}
                   className={cn(
-                    "absolute transform text-sm text-neutral-light-30 duration-300 md:text-base dark:text-neutral-dark-30",
+                    "absolute transform text-sm text-neutral-light-30 duration-300 dark:text-neutral-dark-30 md:text-base",
                     "start-0 top-6 -z-10 origin-[0] scale-75 px-5 peer-focus:start-0 md:top-6",
                     "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
                     "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
@@ -185,6 +188,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
             </>
           </div>
+          {onClickWarningIcon && isBreached && (
+            <TriangleAlert
+              className="absolute right-12 top-1/2 h-6 w-6 -translate-y-1/2 cursor-pointer text-warning"
+              onClick={onClickWarningIcon}
+            />
+          )}
           {(onClickRevealPassword &&
             hasValue &&
             (props.type === "password" ? (
@@ -220,12 +229,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {!!description && (
-          <Typography variant="p" affects="tiny">
+          <Typography
+            variant="p"
+            affects="tiny"
+          >
             {description}
           </Typography>
         )}
         {!!errorMsg && (
-          <Typography variant="p" affects="tiny" className="!text-red-error">
+          <Typography
+            variant="p"
+            affects="tiny"
+            className="!text-red-error"
+          >
             {errorMsg}
           </Typography>
         )}

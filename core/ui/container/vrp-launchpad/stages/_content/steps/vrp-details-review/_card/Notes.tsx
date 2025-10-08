@@ -13,11 +13,17 @@ const Notes = ({ data }: { data?: string }) => {
         "xl:p-7.5"
       )}
     >
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("notes")}
       </Typography>
       <article className="*:break-all">
-        <Tiptap showing description={sanitize(data ?? "")} />
+        <Tiptap
+          showing
+          description={sanitize(data ?? "")}
+        />
       </article>
     </Card>
   );

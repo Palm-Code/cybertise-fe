@@ -15,11 +15,14 @@ const ReportDescriptionCard = ({
   return (
     <Card
       className={cn(
-        "rounded-[10px] bg-neutral-light-90 px-4 py-6 xl:px-7.5 xl:py-7.5 dark:bg-neutral-dark-90",
+        "rounded-[10px] bg-neutral-light-90 px-4 py-6 dark:bg-neutral-dark-90 xl:px-7.5 xl:py-7.5",
         "_flexbox__col__start__start w-full gap-6 break-all"
       )}
     >
-      <Typography variant="h6" weight="bold">
+      <Typography
+        variant="h6"
+        weight="bold"
+      >
         {t("report_description.header_title")}
       </Typography>
       <div className="_flexbox__col__start__start gap-2.5">
@@ -30,7 +33,10 @@ const ReportDescriptionCard = ({
         >
           {t("report_description.title")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {title}
         </Typography>
       </div>
@@ -42,7 +48,10 @@ const ReportDescriptionCard = ({
         >
           {t("report_description.description")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {description}
         </Typography>
       </div>

@@ -31,7 +31,7 @@ const MonetaryAwardsCard = ({
   const forms = watch();
 
   return (
-    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 xl:p-8 dark:bg-neutral-dark-100">
+    <Card className="_flexbox__col__start rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-8">
       <button
         type="button"
         title="Expand"
@@ -152,7 +152,10 @@ const MonetaryAwardCardList = ({
           "_flexbox__col__start__start gap-6"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("monetary_awards.header_title")}
         </Typography>
         <div className="_flexbox__col__start w-full gap-6">
@@ -182,7 +185,10 @@ const MonetaryAwardCardList = ({
       </div>
       {isCompany && (
         <div className="_flexbox__row__center gap-8">
-          <Button variant="secondary-company" onClick={onClickPrev}>
+          <Button
+            variant="secondary-company"
+            onClick={onClickPrev}
+          >
             {t("button_previous")}
           </Button>
           <Button

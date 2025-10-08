@@ -14,26 +14,12 @@ module.exports = {
       container: {
         center: true,
         padding: "2rem",
-        screens: {
-          "2xl": "1400px",
-        },
+        screens: { "2xl": "1400px" },
       },
-      fontSize: {
-        "6xl": "56px",
-        "4xl": "40px",
-        "3xl": "32px",
-      },
-      lineHeight: {
-        120: "120%",
-        140: "140%",
-        150: "150%",
-      },
-      minWidth: {
-        25: "6.25rem",
-      },
-      maxWidth: {
-        "2xl": "676px",
-      },
+      fontSize: { "6xl": "56px", "4xl": "40px", "3xl": "32px" },
+      lineHeight: { 120: "120%", 140: "140%", 150: "150%" },
+      minWidth: { 25: "6.25rem" },
+      maxWidth: { "2xl": "676px" },
       spacing: {
         2.5: "0.625rem",
         4.5: "1.125rem",
@@ -45,6 +31,7 @@ module.exports = {
         separator: "#E0E0E7",
         light: "#3572AF",
         dark: "#1B1E2A",
+        warning: "#FECA00",
         brand: {
           neutral: "#18181B",
           red: "#DD524C",
@@ -75,14 +62,8 @@ module.exports = {
           },
         },
         background: {
-          page: {
-            dark: "#1F1F1F",
-            light: "#F5F5F5",
-          },
-          main: {
-            light: "#FAFAFA",
-            dark: "#0D0D0D",
-          },
+          page: { dark: "#1F1F1F", light: "#F5F5F5" },
+          main: { light: "#FAFAFA", dark: "#0D0D0D" },
           progress: "#D9D9D9",
         },
         neutral: {
@@ -129,30 +110,12 @@ module.exports = {
           light: "#F2C789",
         },
         lime: {
-          dark: {
-            light: "#597902",
-            dark: "#C0D093",
-          },
-          darker: {
-            light: "#55700C",
-            dark: "#CFE593",
-          },
-          normal: {
-            light: "#94CA03",
-            dark: "#BAFF00",
-          },
-          lighter: {
-            light: "#A9D535",
-            dark: "#C8FF33",
-          },
-          light: {
-            light: "#C9E581",
-            dark: "#D6FF66",
-          },
-          "dark-green": {
-            light: "#4D6900",
-            dark: "#4D6900",
-          },
+          dark: { light: "#597902", dark: "#C0D093" },
+          darker: { light: "#55700C", dark: "#CFE593" },
+          normal: { light: "#94CA03", dark: "#BAFF00" },
+          lighter: { light: "#A9D535", dark: "#C8FF33" },
+          light: { light: "#C9E581", dark: "#D6FF66" },
+          "dark-green": { light: "#4D6900", dark: "#4D6900" },
           badge: "#A3DF02",
         },
         emerald: {
@@ -217,11 +180,21 @@ module.exports = {
         company: "0px 0px 15px 0px rgba(75, 162, 227, 0.20)",
         bubble: "0px -10px 25px 0px rgba(130, 130, 130, 0.10)",
         sidebar: "4px 0px 50px 0px rgba(255, 255, 255, 0.10)",
+        toggle: "0px 0px 4px 0px rgba(183, 183, 183, 0.40)",
       },
+      dropShadow: { "pie-chart": "0px 0px 1.5px rgba(255, 255, 255, 0.25)" },
       backgroundImage: {
         progress:
           "linear-gradient(270deg, #BAFF00 3.72%, #73E4B5 49.62%, #93C7EE 98.36%)",
         slider: "linear-gradient(90deg, #FFF 0%, #F0F00A 30.34%, #C00 99.48%)",
+        "statistic-logo-dark":
+          "radial-gradient(297.62% 80.21% at 50.44% 51.69%, rgba(221, 217, 217, 0.00) 0%, rgba(235, 235, 235, 0.43) 100%)",
+        "statistic-logo-light":
+          "radial-gradient(297.62% 80.21% at 50.44% 51.69%, rgba(50, 50, 50, 0.00) 0%, rgba(152, 151, 151, 0.43) 100%)",
+        "statistic-card-dark":
+          "radial-gradient(126.71% 60.93% at 50% 50%, rgba(110, 106, 106, 0.14) 0%, rgba(30, 30, 30, 0.35) 100%)",
+        "statistic-card-light":
+          "radial-gradient(581.84% 175.19% at 3.51% 7.46%, rgba(255, 251, 251, 0.14) 0%, rgba(221, 217, 217, 0.35) 100%)",
       },
     },
   },

@@ -2,7 +2,12 @@
   "DashboardMediator": {
     "title": "Offene Tickets",
     "placeholder_search": "Versuchen Sie es mit „#21231“ oder „Firmenname“",
-    "see_programs": "Siehe VRP Launchpad"
+    "see_programs": "Siehe VRP Launchpad",
+    "overview": "Überblick",
+    "published_vrp": "Veröffentlicht VRP",
+    "unpublished_vrp": "Unveröffentlichtes VRP",
+    "active_tickets": "Aktive Tickets",
+    "valid_tickets": "Gültige Tickets"
   },
   "ProgramsMediator": {
     "title": "VRP-Launchpad",
@@ -138,7 +143,46 @@
     "company_website": "Unternehmenswebsite",
     "tabs": {
       "vulnerability_program": "Schwachstellenprogramm",
-      "active_tickets": "Aktive Tickets"
+      "active_tickets": "Aktive Tickets",
+      "collaborators": "Mitarbeiter"
+    },
+    "collaborators": {
+      "table": {
+        "name": "Hackername",
+        "valid_reports": "Gültige Berichte",
+        "asset_type_reported": "Gemeldeter Asset-Typ",
+        "last_activity": "Letzte Aktivität",
+        "action": "Aktion"
+      },
+      "hacker_invited": "Hacker eingeladen",
+      "button_add_collaborator": "Mitarbeiter hinzufügen",
+      "search_placeholder": "Suchen Sie nach eingeladenen Mitarbeitern",
+      "close": "Schließen",
+      "no_collaborators": "Keine Mitarbeiter gefunden",
+      "title": "Neue Mitarbeiter hinzufügen",
+      "hacker_selected": "Hacker ausgewählt",
+      "button_invite": "hinzufügen",
+      "no_hacker": "Kein Hacker gefunden",
+      "search_add_collaborator": "Suche nach Hackern",
+      "button_delete": "Mitarbeiter löschen",
+      "showing_collaborator": "Zeigt {currentShowCollaborator} von {totalCollaborator} Mitarbeitern",
+      "showing_hacker": "Zeigt {currentShowHacker} von {totalHackers} Hacker",
+      "ago": "vor",
+      "titles": "Mitarbeiter",
+      "asset_type": "Asset-Typ",
+      "ticket": "ticket",
+      "sort_by": "Sortieren nach",
+      "description": "Sie sind dabei, einen neuen Mitarbeiter des unten aufgeführten Hackers hinzuzufügen",
+      "success_title": "Mitarbeiter hinzugefügt",
+      "success_button": "Zurück",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_report": "Ja, Abbrechen",
+      "alert_title": "Hinzufügen eines Mitarbeiters abbrechen?",
+      "alert_description": "Die von Ihnen vorgenommenen Änderungen werden nicht gespeichert",
+      "forbidden": {
+        "title": "Fügen Sie Mitarbeiter auf Mobilgeräten hinzu",
+        "subtitle": "„Mitarbeiter hinzufügen“ ist nur auf dem Desktop verfügbar"
+      }
     }
   },
   "CreateCompanyTicket": {
@@ -163,5 +207,9 @@
     },
     "hacker_ticket": "Hacker-Ticket: Chat",
     "button_create": "Firmenticket erstellen"
+  },
+  "Payment": {
+    "title": "Zahlung",
+    "more_info": "Weitere Informationen"
   }
 }

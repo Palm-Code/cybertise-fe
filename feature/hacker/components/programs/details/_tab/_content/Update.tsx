@@ -15,7 +15,11 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
         <Card className="px-6 py-12">
           <div className="_flexbox__col__start__start w-full gap-6">
             <div className="_flexbox__col__start__start w-full gap-2">
-              <Typography variant="p" affects="large" weight="bold">
+              <Typography
+                variant="p"
+                affects="large"
+                weight="bold"
+              >
                 {title}
               </Typography>
               <Typography
@@ -27,7 +31,10 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
               </Typography>
             </div>
             <article>
-              <Tiptap showing description={sanitize(content as string)} />
+              <Tiptap
+                showing
+                description={sanitize(content as string)}
+              />
             </article>
           </div>
         </Card>
@@ -36,7 +43,11 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
         <Card className="px-6 py-12">
           <div className="_flexbox__col__start__start w-full gap-6">
             <div className="_flexbox__col__start__start w-full gap-2">
-              <Typography variant="p" affects="extralarge" weight="bold">
+              <Typography
+                variant="p"
+                affects="extralarge"
+                weight="bold"
+              >
                 {title}
               </Typography>
               <Typography
@@ -48,7 +59,10 @@ const Update = ({ title, created_at, content }: I_LatestUpdates) => {
               </Typography>
             </div>
             <article>
-              <Tiptap showing description={sanitize(content as string)} />
+              <Tiptap
+                showing
+                description={sanitize(content as string)}
+              />
             </article>
           </div>
         </Card>
@@ -63,12 +77,20 @@ interface I_UpdateList {
 
 const UpdateList = ({ data }: I_UpdateList) => {
   if (!data || data?.length === 0)
-    return <EmptyState type="update" variant="hacker" />;
+    return (
+      <EmptyState
+        type="update"
+        variant="hacker"
+      />
+    );
 
   return (
     <div className="_flexbox__col__start__start mt-4 w-full gap-8">
       {data.map((item, idx) => (
-        <Update key={`update-${idx}`} {...item} />
+        <Update
+          key={`update-${idx}`}
+          {...item}
+        />
       ))}
     </div>
   );

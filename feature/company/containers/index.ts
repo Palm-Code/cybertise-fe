@@ -8,3 +8,5 @@ export { default as ChatBubble } from "./reports/details/ChatBubble.container";
 export { default as EditCompanyDetails } from "./manage-company/EditCompanyDetails.container";
 export { default as EditStaffs } from "./manage-company/EditStaffs.container";
 export { default as EditEmergencyContact } from "./manage-company/EditEmergencyContact.container";
+export { default as StatisticTableView } from "./statistics/TableView.container";
+export { default as PaymentCardView } from "./payment/TicketView.container";

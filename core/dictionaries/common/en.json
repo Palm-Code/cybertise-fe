@@ -3,7 +3,8 @@
     "search": "Search...",
     "search_not_found": "No results found",
     "submit_search": "Search",
-    "button_back": "Back"
+    "button_back": "Back",
+    "button_cancel": "Cancel"
   },
   "Sidebar": {
     "menu": "Menu",
@@ -16,7 +17,10 @@
     "manage_company": "Manage Company",
     "settings": "Settings",
     "logout": "Logout",
-    "mode": "Mode"
+    "mode": "Mode",
+    "services": "Services",
+    "payment": "Payment",
+    "earnings": "Earnings"
   },
   "Filter": {
     "title": "Filter",
@@ -25,11 +29,14 @@
     "risk_level": "Risk Level",
     "status": "Status",
     "asset_type": "Asset Type",
+    "ticket_reported": "Ticket Reported",
     "date_range": {
       "title": "Date Range",
       "button_apply": "Apply",
       "button_clear": "Clear"
-    }
+    },
+    "showing_data_for": "Showing data for",
+    "days": "Last {days} Days"
   },
   "Ticket": {
     "ticket": "Ticket",
@@ -39,8 +46,43 @@
     "rewards": "Rewards",
     "status": "Status",
     "last_update": "Last Update",
-    "last_reported": "Last Reported {date} ago",
-    "last_message": "Last Message"
+    "last_reported": "Reported {date} ago",
+    "last_message": "Last Message",
+    "create_company_ticket": "Create Company Ticket",
+    "hacker_ticket": "Hacker Ticket",
+    "company_ticket": "Company Ticket",
+    "view_chat": "View Chat",
+    "make_payment": "Make Payment",
+    "send_payment_request": "Send Payment Request",
+    "payment_request_sent": "Payment Request Sent",
+    "payment_complete": "Payment Complete",
+    "ticket_details": "Ticket Details",
+    "set_reward": "Set Rewards",
+    "reward_range": "Rewards range:",
+    "set_reward_and_request_payment": "Set and Send Payment Request",
+    "help": "Help",
+    "confirm_reward": "Confirm Reward",
+    "error_reward": "The reward must be between {minReward} and {maxReward}",
+    "note": "Note:",
+    "confirm_reward_description": "Please note, that rewards that had been set cannot be change after it sent to the company. ",
+    "edit_reward": "Edit Reward",
+    "download_receipt": "Download Receipt",
+    "show_more": "Show more",
+    "show_less": "Show less",
+    "change_bounty_rewards": "Change bounty rewards",
+    "reason": "Reason of bounty changes",
+    "payment_status": "Payment Status",
+    "retry_payment": "Retry payment",
+    "view_details": "View details",
+    "payment_failed": "Payment failed",
+    "rewards_payment": "Rewards Payment",
+    "set_reward_and_make_payment": "Set Reward and Make Payment",
+    "payment_dashboard": "Payment Dashboard",
+    "add_to_contributor": {
+      "title": "Add Hacker to contributor list ?",
+      "no": "Do not add to contributor",
+      "yes": "Add to contributor"
+    }
   },
   "Programs": {
     "program_name": "Program Name",
@@ -49,11 +91,19 @@
     "asset_type_available": "Asset Type Available",
     "rewards": "Rewards",
     "bounty": "Bounty",
+    "collaborators": "Collaborators",
     "forbidden": {
       "title": "Continue on Desktop",
       "title_vrp": "Not Published",
       "description_vrp": "Only can be accessed for Published VRP"
     }
+  },
+  "ProgramsVRPLaunchpad": {
+    "company_name": "Company Name",
+    "vrp_title": "VRP Title",
+    "vrp_type": "VRP Type",
+    "asset_type": "Asset Type",
+    "status": "Status"
   },
   "Pagination": {
     "page": "Page",
@@ -63,7 +113,8 @@
     "you_have_nothing_here": "You have nothing here",
     "under_construction": "Under Construction",
     "back_button": "Back",
-    "target_assets_not_found": "Target assets not found"
+    "target_assets_not_found": "Target assets not found",
+    "only_desktop": "This feature only available on desktop"
   },
   "SuccesState": {
     "send_report": {
@@ -77,6 +128,12 @@
       "description": "You will loose all the information you have entered for the related reports.",
       "button_keep_it": "Keep It",
       "button_yes_cancel_report": "Yes, Cancel report"
+    },
+    "close_vrp": {
+      "title": "Cancel Vrp Edit ?",
+      "description": "You will loose all the information you have entered.",
+      "button_keep_it": "Keep It",
+      "button_yes_cancel_vrp": "Yes, Cancel"
     }
   },
   "TextEditor": {
@@ -112,7 +169,11 @@
     "ticket_type": "{role} Ticket",
     "hacker": "Hacker",
     "create_company_ticket": "Create Company Ticket",
-    "chat_alert": "This chat is read only on this device. Please access using desktop to interact."
+    "chat_alert": "This chat is read only on this device. Please access using desktop to interact.",
+    "no_chat_found": "No Chat Found",
+    "Ticket": {
+      "company_ticket_cannot_be_set_to_waiting_for_payment": "Company ticket cannot be set to waiting for payment"
+    }
   },
   "Loading": {
     "loading_data": "Getting data..."
@@ -124,7 +185,8 @@
       "billings": "Billings",
       "notifications": "Notifications",
       "security": "Security",
-      "data_privacy": "Data & Privacy"
+      "data_privacy": "Data & Privacy",
+      "activity_logs": "Activity Logs"
     },
     "details": {
       "title": "{role} Details",
@@ -132,7 +194,7 @@
       "company": "Company",
       "about": "About {role}",
       "company_information": "Company Information",
-      "account_details": "{role} Account Details",
+      "account_details": "{role} Details",
       "button_edit_account": "Edit {role} Details",
       "about_you": "About You",
       "label_avatar": "{role} Avatar",

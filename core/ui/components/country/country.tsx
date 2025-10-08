@@ -20,9 +20,16 @@ const Country = ({
           className="h-4 w-6 object-contain"
         />
       ) : (
-        <Loader className="animate-spin" width={24} height={24} />
+        <Loader
+          className="animate-spin"
+          width={24}
+          height={24}
+        />
       )}
-      <Typography variant="p" affects="normal">
+      <Typography
+        variant="p"
+        affects="normal"
+      >
         {label}
       </Typography>
     </div>

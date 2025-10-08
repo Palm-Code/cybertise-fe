@@ -45,7 +45,10 @@ const VrpDetailsReview = ({
   return (
     <div className="_flexbox__col__start__start w-full gap-6">
       <div className="_flexbox__row__center__between w-full">
-        <Typography variant="h5" weight="bold">
+        <Typography
+          variant="h5"
+          weight="bold"
+        >
           {(currentStep === "Published" || currentStep === "Phase5") &&
           !isLastStep
             ? t("vrp_details.details")
@@ -72,7 +75,11 @@ const VrpDetailsReview = ({
               "_flexbox__row__center__between w-full rounded-[10px] !bg-emerald-normal p-4 !text-white"
             )}
           >
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {t("vrp_details.status", {
                 status:
                   currentStep === "Published"
@@ -93,7 +100,10 @@ const VrpDetailsReview = ({
           >
             <div className="grid grid-cols-[auto_1fr] items-center gap-4">
               <AlertCircle />
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {t("vrp_details.alert", {
                   v:
                     currentStep === "Published"

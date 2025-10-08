@@ -26,7 +26,10 @@ const DetailsVRP = ({
   return (
     <>
       <div className="wrapper__mobile">
-        <EmptyState variant={variant} type="default" />
+        <EmptyState
+          variant={variant}
+          type="default"
+        />
       </div>
       <div className="wrapper__desktop">
         <div className="_flexbox__col__start__start relative w-full pb-28">

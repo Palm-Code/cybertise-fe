@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import hljs from "highlight.js/lib/common";
 import javascript from "highlight.js/lib/languages/javascript";
 import css from "highlight.js/lib/languages/css";

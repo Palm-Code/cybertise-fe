@@ -24,12 +24,15 @@ const BugTargetCard = ({
   return (
     <Card
       className={cn(
-        "rounded-[10px] bg-neutral-light-90 px-4 py-6 xl:px-7.5 xl:py-7.5 dark:bg-neutral-dark-90",
+        "rounded-[10px] bg-neutral-light-90 px-4 py-6 dark:bg-neutral-dark-90 xl:px-7.5 xl:py-7.5",
         "_flexbox__col__start__start w-full gap-6"
       )}
     >
       {!isNewCompanyTicket && (
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("bug_target.title")}
         </Typography>
       )}
@@ -42,7 +45,10 @@ const BugTargetCard = ({
           {t("bug_target.target_assets")}
         </Typography>
         <div className="flex flex-wrap gap-4">
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {target_assets.content}
           </Typography>
           <Badge
@@ -64,7 +70,10 @@ const BugTargetCard = ({
         >
           {t("bug_target.vulnerability_type")}
         </Typography>
-        <Typography variant="p" affects="normal">
+        <Typography
+          variant="p"
+          affects="normal"
+        >
           {vulnerability_type}
         </Typography>
       </div>

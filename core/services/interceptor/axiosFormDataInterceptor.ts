@@ -1,7 +1,8 @@
 import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 const axiosFormDataInterceptorInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,7 +16,7 @@ const axiosFormDataInterceptorInstance = axios.create({
 axiosFormDataInterceptorInstance.interceptors.request.use(
   (config) => {
     // Modify the request config here (add headers, authentication tokens)
-    const cookie = new Cookies();
+    const cookie = Cookies;
     const accessToken = cookie.get("token");
 
     // If token is present, add it to request's Authorization Header
@@ -42,6 +43,7 @@ axiosFormDataInterceptorInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.data.code === 401) {
       logout();
+      return toast.error("Session expired, please login again");
     }
     // Handle response errors here
     return Promise.reject(error);

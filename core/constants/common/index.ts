@@ -1,3 +1,4 @@
+import { I_TableColumns } from "@/interfaces";
 import { MenuItemType, Role } from "@/types/admin/sidebar";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
 import { useTranslations } from "next-intl";
@@ -59,6 +60,12 @@ export const useMenuItems = () => {
         path: "/reports",
         key: "getChatList",
       },
+      {
+        id: "earnings",
+        title: t("earnings"),
+        path: "/earnings",
+        key: "getEarnings",
+      },
     ],
     company: [
       {
@@ -72,6 +79,18 @@ export const useMenuItems = () => {
         title: t("reports"),
         path: "/reports",
         key: "getChatList",
+      },
+      {
+        id: "services",
+        title: t("services"),
+        path: "/services",
+        key: "getServices",
+      },
+      {
+        id: "payment",
+        title: t("payment"),
+        path: "/payment",
+        key: "getPayment",
       },
       {
         id: "vrp_management",
@@ -130,6 +149,12 @@ export const useMenuItems = () => {
         title: t("reports"),
         path: "/reports",
         key: "getChatList",
+      },
+      {
+        id: "payment",
+        title: t("payment"),
+        path: "/payment",
+        key: "getPayment",
       },
     ],
   };
@@ -234,6 +259,14 @@ export const backgroundColor: { [key in Role]: string } = {
   mediator: "bg-violet-normal",
 };
 
+export const hoverColor: { [key in Role]: string } = {
+  hacker:
+    "hover:bg-lime-lighter-light dark:hover:bg-lime-lighter-dark hover:!text-brand-neutral",
+  company: "hover:bg-sky-lighter/20",
+  "company staff": "hover:bg-sky-lighter/20",
+  mediator: "hover:bg-violet-lighter/20",
+};
+
 export const iconColor: { [key in Role]: string } = {
   hacker: "text-lime-normal-light dark:text-lime-normal-dark",
   company: "text-sky-normal",
@@ -246,6 +279,12 @@ export const fillColor: { [key in Role]: string } = {
   company: "fill-sky-normal",
   "company staff": "fill-sky-normal",
   hacker: "fill-lime-normal",
+};
+export const textColor: { [key in Role]: string } = {
+  mediator: "text-violet-normal",
+  company: "text-sky-normal",
+  "company staff": "text-sky-normal",
+  hacker: "text-lime-normal",
 };
 
 export const useCurrentPhase = () => {
@@ -371,4 +410,30 @@ export const faqData = {
   title: "Frequently Asked Questions",
   date_published: new Date(),
   content: faqs,
+};
+
+export const useGetContibutorTableColumns = () => {
+  const t = useTranslations("CompanyDetailsMediator");
+  return [
+    {
+      title: t("collaborators.table.name"),
+      align: "left",
+      width: "w-5/12",
+    },
+    {
+      title: t("collaborators.table.valid_reports"),
+      align: "center",
+      width: "w-2/12",
+    },
+    {
+      title: t("collaborators.table.asset_type_reported"),
+      align: "center",
+      width: "w-3/12",
+    },
+    {
+      title: t("collaborators.table.last_activity"),
+      align: "center",
+      width: "w-2/12",
+    },
+  ] as I_TableColumns[];
 };

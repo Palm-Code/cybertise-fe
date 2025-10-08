@@ -18,8 +18,15 @@ import { format } from "date-fns";
 import { Skeleton } from "@/core/ui/components/skeleton/skeleton";
 import { formatTime } from "@/utils/formatter/date-formatter";
 import { useTranslations } from "next-intl";
+import { getDifferencesAsArray } from "@/utils/array-difference";
+import { Role } from "@/types/admin/sidebar";
+import { iconColor } from "@/core/constants/common";
 
-const ActivityLogs = ({}: {}) => {
+interface IActivityLogsProps {
+  variant?: keyof typeof Role;
+}
+
+const ActivityLogs = ({ variant = "company" }: IActivityLogsProps) => {
   const t = useTranslations("ManageCompany.ActivityLogs");
   const store = useActivityLogParamStore();
   const { data, isLoading, isFetching } = useGetActivityLog(store.payload);
@@ -29,7 +36,7 @@ const ActivityLogs = ({}: {}) => {
     <>
       <Mobile>
         <EmptyState
-          variant="company"
+          variant={variant}
           titleText={t("forbidden.title")}
           buttonText=""
         />
@@ -37,15 +44,21 @@ const ActivityLogs = ({}: {}) => {
       <Desktop>
         <div className="_flexbox__col__start__start gap-12">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
           </div>
           <div className="_flexbox__row__center__between w-full gap-4">
-            <FilterDateRange store={store} />
+            <FilterDateRange
+              variant={variant}
+              store={store}
+            />
             <FilterDropdown
               value={store.payload.params?.sort}
-              variant="company"
+              variant={variant}
               onValueChange={(value) => {
                 const { payload, setPayload } = store;
                 {
@@ -101,7 +114,10 @@ const ActivityLogs = ({}: {}) => {
                     className="_flexbox__col__start__start w-full gap-4"
                     key={`key-${key}`}
                   >
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       {date}
                     </Typography>
                     <Card
@@ -111,75 +127,142 @@ const ActivityLogs = ({}: {}) => {
                       )}
                     >
                       {data.data &&
-                        data.data[item].map((log, index: number) => (
-                          <div
-                            key={`log-${index}`}
-                            className="grid h-fit w-full grid-cols-[auto_1fr] gap-3"
-                          >
-                            <div className="grid h-full grid-rows-[auto_1fr] gap-3">
-                              <Circle
-                                width={20}
-                                height={20}
-                                className="h-5 w-5 stroke-[4px] text-neutral-light-30 dark:text-neutral-dark-30"
-                              />
-                              <div className="mx-auto min-h-4 border-l border-dashed border-neutral-light-50 dark:border-neutral-dark-50" />
-                            </div>
+                        data.data[item].map((log, index: number) => {
+                          const valuesChanged =
+                            log?.event?.toLowerCase() ===
+                            log?.description?.toLowerCase()
+                              ? getDifferencesAsArray(
+                                  log?.properties?.attributes || {},
+                                  log?.properties?.old || {}
+                                )
+                              : [];
+                          return (
                             <div
-                              className={cn(
-                                "_flexbox__col__start__start w-full gap-6"
-                              )}
+                              key={`log-${index}`}
+                              className="grid h-fit w-full grid-cols-[auto_1fr] gap-3"
                             >
-                              <Typography
-                                variant="p"
-                                affects="small"
-                                weight="semibold"
-                                transform="capitalize"
+                              <div className="grid h-full grid-rows-[auto_1fr] gap-3">
+                                <Circle
+                                  width={20}
+                                  height={20}
+                                  className="h-5 w-5 stroke-[4px] text-neutral-light-30 dark:text-neutral-dark-30"
+                                />
+                                <div className="mx-auto min-h-4 border-l border-dashed border-neutral-light-50 dark:border-neutral-dark-50" />
+                              </div>
+                              <div
+                                className={cn(
+                                  "_flexbox__col__start__start w-full gap-6"
+                                )}
                               >
-                                {log.subject?.name || log.subject?.title}{" "}
-                                <span className="capitalize text-sky-normal">
-                                  {log.event}
-                                </span>
-                              </Typography>
-                              {log.event !== log.description && (
-                                <Card
-                                  className={cn(
-                                    "w-full bg-neutral-light-90 xl:p-7.5 dark:bg-neutral-dark-90"
-                                  )}
-                                >
-                                  <article>
-                                    <Tiptap
-                                      showing
-                                      description={sanitize(log.description)}
-                                    />
-                                  </article>
-                                </Card>
-                              )}
-                              <div className="_flexbox__row__center__start w-full gap-2">
                                 <Typography
                                   variant="p"
-                                  affects="tiny"
-                                  weight="medium"
-                                  className="text-neutral-light-50 dark:text-neutral-dark-50"
+                                  affects="small"
+                                  weight="semibold"
+                                  transform="capitalize"
                                 >
-                                  {log.created_at
-                                    ? log.created_at.toString().split("T")[0]
-                                    : ""}
+                                  {log.subject?.name || log.subject?.title}{" "}
+                                  <span
+                                    className={cn(
+                                      "capitalize",
+                                      iconColor[variant]
+                                    )}
+                                  >
+                                    {log.event || "-"}
+                                  </span>
                                 </Typography>
-                                <Dot className="text-brand-neutral dark:text-white" />
-                                <Typography
-                                  variant="p"
-                                  affects="tiny"
-                                  weight="medium"
-                                  className="text-neutral-light-50 dark:text-neutral-dark-50"
-                                >
-                                  {log.created_at
-                                    ? formatTime(log.created_at.toString())
-                                    : ""}
-                                </Typography>
+                                {log.event !== log.description ? (
+                                  <Card
+                                    className={cn(
+                                      "w-full bg-neutral-light-90 dark:bg-neutral-dark-90 xl:p-7.5"
+                                    )}
+                                  >
+                                    <article>
+                                      <Tiptap
+                                        showing
+                                        description={sanitize(log.description)}
+                                      />
+                                    </article>
+                                  </Card>
+                                ) : (
+                                  valuesChanged && (
+                                    <Card
+                                      className={cn(
+                                        "w-full bg-neutral-light-90 dark:bg-neutral-dark-90 xl:p-7.5"
+                                      )}
+                                    >
+                                      <ul
+                                        className={cn(
+                                          "flex list-disc flex-col gap-2"
+                                        )}
+                                      >
+                                        {valuesChanged.map((value, index) => (
+                                          <li
+                                            key={index}
+                                            className="flex flex-row gap-2"
+                                          >
+                                            <Typography
+                                              variant="p"
+                                              affects="small"
+                                              weight="semibold"
+                                            >
+                                              <span
+                                                className={cn("capitalize")}
+                                              >
+                                                {value.property.replace(
+                                                  "_",
+                                                  ""
+                                                )}{" "}
+                                              </span>
+                                              changed from{" "}
+                                              <span
+                                                className={cn(
+                                                  iconColor[variant]
+                                                )}
+                                              >
+                                                {value.oldValue || "-"}
+                                              </span>{" "}
+                                              to{" "}
+                                              <span
+                                                className={cn(
+                                                  iconColor[variant]
+                                                )}
+                                              >
+                                                {value.newValue || "-"}
+                                              </span>
+                                            </Typography>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </Card>
+                                  )
+                                )}
+                                <div className="_flexbox__row__center__start w-full gap-2">
+                                  <Typography
+                                    variant="p"
+                                    affects="tiny"
+                                    weight="medium"
+                                    className="text-neutral-light-50 dark:text-neutral-dark-50"
+                                  >
+                                    {log.created_at
+                                      ? log.created_at.toString().split("T")[0]
+                                      : ""}
+                                  </Typography>
+                                  <Dot className="text-brand-neutral dark:text-white" />
+                                  <Typography
+                                    variant="p"
+                                    affects="tiny"
+                                    weight="medium"
+                                    className="text-neutral-light-50 dark:text-neutral-dark-50"
+                                  >
+                                    {log.created_at
+                                      ? formatTime(log.created_at.toString())
+                                      : ""}
+                                  </Typography>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                     </Card>
                   </div>
                 );

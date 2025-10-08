@@ -4,9 +4,9 @@ import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { Checkbox, Input, Typography } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Link from "next/link";
 import { SignupCompanyFormType } from "@/core/models/auth/register";
@@ -14,6 +14,9 @@ import { usePostSignupCompany } from "@/feature/auth/query/signup";
 import { getBrowserAndOS } from "@/utils/device-type";
 import { useTranslations } from "next-intl";
 import { usePasswordValidation } from "@/core/constants/common";
+import { usePasswordStrength } from "@/core/lib";
+import { useDebounceValue } from "usehooks-ts";
+import { toast } from "sonner";
 
 interface I_CompanyStepThreeProps {
   onClickNext: () => void;
@@ -23,6 +26,7 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
   const t = useTranslations("SignUp.company");
   const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [confirmPassworText, setConfirmPassworText] =
@@ -37,17 +41,39 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
     setValue,
   } = useFormContext<SignupCompanyFormType>();
   const forms = watch();
+  const [debounceValue] = useDebounceValue(forms.password, 1000);
 
   const { mutateAsync, isPending, isSuccess, error } = usePostSignupCompany();
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (Object.keys(errors).length > 0) return;
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    mutateAsync({ ...forms, device_type: deviceType }).then(() => {
+    const passwordEncrypt = await encryptPassword(forms.password);
+    mutateAsync({
+      ...forms,
+      password: passwordEncrypt,
+      device_type: deviceType,
+    }).then(() => {
       onClickNext();
     });
   };
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -85,10 +111,6 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
       : "",
   });
 
-  const validatePasswordRegex = passwordValidationItems.every(
-    (item) => item.checked
-  );
-
   return (
     <StepWrapper
       currentSteps={3}
@@ -115,9 +137,11 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             value={forms.password}
             onChange={checkPassword}
             options={passwordValidationItems}
+            isBreached={isBreached}
             withRegex
           />
           <PasswordInput
+            disabled={isBreached || !validatePasswordRegex}
             label={t("label_confirm_password")}
             placeholderText={t("placeholder_confirm_password")}
             value={confirmPassworText.content}
@@ -131,9 +155,16 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
               checked={isPolicyChecked}
               onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
             />
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {t("legal")}{" "}
-              <Link target="_blank" href={"/policy"} className="underline">
+              <Link
+                target="_blank"
+                href={"/policy"}
+                className="underline"
+              >
                 {t("link")}
               </Link>
             </Typography>
@@ -148,8 +179,10 @@ const CompanyStepThree = ({ onClickNext }: I_CompanyStepThreeProps) => {
             validateIsFormFilled ||
             !validatePasswordRegex ||
             !isPolicyChecked ||
+            isBreached ||
             isPending ||
-            isSuccess
+            isSuccess ||
+            !!errors.email
           }
         >
           {t("submit_button")}

@@ -40,7 +40,11 @@ const Confirmation = ({
           {t("button_cancel")}
         </Button>
         <OctagonX className="mx-auto h-16 w-16" />
-        <Typography variant="h4" weight="semibold" align="center">
+        <Typography
+          variant="h4"
+          weight="semibold"
+          align="center"
+        >
           {t("title")}
         </Typography>
         <Typography

@@ -12,6 +12,7 @@ export type Actions = {
 const initialState: State = {
   payload: {
     params: {
+      sort: "-updated_at",
       page: {
         size: 10,
         number: 1,

@@ -12,3 +12,5 @@ export { default as CompaniesCardView } from "./companies/TicketView.container";
 export { default as CompaniesTableView } from "./companies/TableView.container";
 export { default as CompaniesGridView } from "./companies/GridView.container";
 export { default as CollaboratorsTableView } from "./companies/collaborators/CollaboratorTableView.container";
+export { default as StatisticTableView } from "./statistics/TableView.container";
+export { default as PaymentCardView } from "./payment/TicketView.container";

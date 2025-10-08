@@ -99,7 +99,7 @@ const DashboardFilter = ({
       <Desktop className="w-fit">
         <div
           className={cn(
-            "_flexbox__row__center__start rounded-lg",
+            "_flexbox__row__center__start gap-2.5 rounded-lg",
             "bg-neutral-light-100 pl-3 dark:bg-neutral-dark-100"
           )}
         >

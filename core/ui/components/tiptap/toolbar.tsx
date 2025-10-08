@@ -19,12 +19,19 @@ import { useCallback, useState } from "react";
 import { Skeleton } from "../skeleton/skeleton";
 import { ModalEmbedImage } from "./modal-embed-image";
 import { FileWithUrl } from "@/interfaces";
+import { Role } from "@/types/admin/sidebar";
 
 interface I_ToolbarProps {
   editor: Editor | null;
+  variant?: keyof typeof Role;
+  withImage?: boolean;
 }
 
-const Toolbar = ({ editor }: I_ToolbarProps) => {
+const Toolbar = ({
+  editor,
+  variant = "hacker",
+  withImage = false,
+}: I_ToolbarProps) => {
   const [fileValues, setFileValues] = useState<FileWithUrl[]>();
   const [openModalEmbedImage, setOpenModalEmbedImage] = useState(false);
   const setLink = useCallback(() => {
@@ -142,18 +149,23 @@ const Toolbar = ({ editor }: I_ToolbarProps) => {
       >
         <Link />
       </Toggle>
-      <Separator
-        orientation="vertical"
-        className="space-x-1 !bg-neutral-dark-100 dark:!bg-white"
-      />
-      <Toggle
-        size="sm"
-        pressed={editor.isActive("image")}
-        onPressedChange={() => setOpenModalEmbedImage(true)}
-      >
-        <Image />
-      </Toggle>
+      {withImage && (
+        <>
+          <Separator
+            orientation="vertical"
+            className="space-x-1 !bg-neutral-dark-100 dark:!bg-white"
+          />
+          <Toggle
+            size="sm"
+            pressed={editor.isActive("image")}
+            onPressedChange={() => setOpenModalEmbedImage(true)}
+          >
+            <Image />
+          </Toggle>
+        </>
+      )}
       <ModalEmbedImage
+        variant={variant}
         fileValues={fileValues}
         onFileSelected={(_, file) => setFileValues(file)}
         isOpen={openModalEmbedImage}

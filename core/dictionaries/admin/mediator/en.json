@@ -1,178 +1,233 @@
 {
-    "DashboardMediator": {
-        "title": "Open Tickets",
-        "placeholder_search": "Try “#21231” or “Company name”",
-        "submit_search": "Search",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad"
+  "DashboardMediator": {
+    "title": "Open Tickets",
+    "placeholder_search": "Try “#21231” or “Company name”",
+    "submit_search": "Search",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad",
+    "overview": "Overview",
+    "published_vrp": "Published VRP",
+    "unpublished_vrp": "Unpublished VRP",
+    "active_tickets": "Active Tickets",
+    "valid_tickets": "Valid Tickets"
+  },
+  "ProgramsMediator": {
+    "title": "VRP Launchpad",
+    "placeholder_search": "Search for programs",
+    "search_title": "Search VRP Launchpad",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad",
+    "button_all": "All",
+    "button_phase_2": "Phase 2",
+    "button_phase_4": "Phase 4"
+  },
+  "CompaniesMediator": {
+    "title": "Companies",
+    "placeholder_search": "Try search company name",
+    "search_title": "Search Companies",
+    "search_result": "Show result for",
+    "not_found": "No companies found",
+    "see_programs": "See VRP Launchpad"
+  },
+  "ReportsMediator": {
+    "title": "Reports",
+    "placeholder_search": "Search for programs",
+    "submit_search": "Search",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad"
+  },
+  "VRPLaunchpad": {
+    "company": "Company",
+    "last_update": "Last Update",
+    "steps": {
+      "title": "Step",
+      "vrp_details": "VRP Details",
+      "setup": "Setup Phase",
+      "company_revision": "Company Revision",
+      "mediator_revision": "Mediator Revision",
+      "publish": "Publish"
     },
-    "ProgramsMediator": {
-        "title": "VRP Launchpad",
-        "placeholder_search": "Search for programs",
-        "search_title": "Search VRP Launchpad",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad",
-        "button_all": "All",
-        "button_phase_2": "Phase 2",
-        "button_phase_4": "Phase 4"
-    },
-    "CompaniesMediator": {
-        "title": "Companies",
-        "placeholder_search": "Try search company name",
-        "search_title": "Search Companies",
-        "search_result": "Show result for",
-        "not_found": "No companies found",
-        "see_programs": "See VRP Launchpad"
-    },
-    "ReportsMediator": {
-        "title": "Reports",
-        "placeholder_search": "Search for programs",
-        "submit_search": "Search",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad"
-    },
-    "VRPLaunchpad": {
-        "company": "Company",
-        "last_update": "Last Update",
-        "steps": {
-            "title": "Step",
-            "vrp_details": "VRP Details",
-            "setup": "Setup Phase",
-            "company_revision": "Company Revision",
-            "mediator_revision": "Mediator Revision",
-            "publish": "Publish"
+    "phase": {
+      "vrp_details": {
+        "title": "Create VRP",
+        "brief": "Brief",
+        "details": "VRP Details",
+        "setup": "Setup Monetary Awards",
+        "initial_scope": "Setup Initial Scope",
+        "notes": "Notes",
+        "review": "Review",
+        "button_edit": "Edit Program Details",
+        "status": "VRP {status}",
+        "published": "Published",
+        "approved": "Approved",
+        "alert": "Your VRP has been {v}. Sending to the Mediator will take the VRP back to Mediator Revision",
+        "button_discard": "Discard Changes",
+        "footer": "<p>By clicking 'Publish', you agree to our <a href='/terms-and-conditions' target='_blank' >Terms and Conditions</a> and acknowledge that you have read our <a href='/policy' target='_blank' >Privacy Policy</a> and <a href='/policy' target='_blank' >Disclosure Guidelines</a>.</p>",
+        "label_publish": "Publish",
+        "label_send_to_mediator": "Send to Mediator",
+        "label_send_to_company": "Send Revision to Company",
+        "button_next": "Next",
+        "button_approve": "Approve VRP",
+        "vrp_description": {
+          "header_title": "VRP Description",
+          "type": "VRP Type",
+          "title": "VRP Title",
+          "description": "Description",
+          "remaining_characters": "Remaining Characters"
         },
-        "phase": {
-            "vrp_details": {
-                "title": "Create VRP",
-                "brief": "Brief",
-                "details": "VRP Details",
-                "setup": "Setup Monetary Awards",
-                "initial_scope": "Setup Initial Scope",
-                "notes": "Notes",
-                "review": "Review",
-                "button_edit": "Edit Program Details",
-                "status": "VRP {status}",
-                "published": "Published",
-                "approved": "Approved",
-                "alert": "Your VRP has been {v}. Sending to the Mediator will take the VRP back to Mediator Revision",
-                "button_discard": "Discard Changes",
-                "footer": "<p>By clicking 'Publish', you agree to our <a href='/terms-and-conditions' target='_blank' >Terms and Conditions</a> and acknowledge that you have read our <a href='/policy' target='_blank' >Privacy Policy</a> and <a href='/policy' target='_blank' >Disclosure Guidelines</a>.</p>",
-                "label_publish": "Publish",
-                "label_send_to_mediator": "Send to Mediator",
-                "label_send_to_company": "Send Revision to Company",
-                "button_next": "Next",
-                "button_approve": "Approve VRP",
-                "vrp_description": {
-                    "header_title": "VRP Description",
-                    "type": "VRP Type",
-                    "title": "VRP Title",
-                    "description": "Description",
-                    "remaining_characters": "Remaining Characters"
-                },
-                "monetary_awards": {
-                    "header_title": "Monetary Awards",
-                    "category": "Category",
-                    "custom": "Custom"
-                },
-                "rules_and_policies": {
-                    "header_title": "Rules & Policies",
-                    "rules": "Rules",
-                    "policies": "Policies",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
-                    "button_previous": "Previous",
-                    "button_next": "Next"
-                },
-                "target_assets": {
-                    "header_title": "List of Target Assets",
-                    "header_title_2": "Scope",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
-                    "asset": "Asset",
-                    "asset_type": "Asset Type",
-                    "hostname": "Hostname or IP Address",
-                    "select_asset_type": "Select Asset Type",
-                    "vulnerability_type": "Vulnerability Type",
-                    "custom_type": "Custom Type",
-                    "custom_type_description": "Enter your vulnerability type",
-                    "label_manual_risk_level": "Manual Risk Level",
-                    "label_cvss_calculator": "CVSS Calculator",
-                    "delete_button": "Delete",
-                    "save_button": "Save",
-                    "button_add_new": "+ Add New Assets",
-                    "alert": "You have unsaved assets, please save these first before continuing.",
-                    "button_previous": "Previous",
-                    "button_next": "Next"
-                },
-                "button_previous": "Previous"
-            },
-            "setup": {
-                "review_vrp": "Review VRP Details",
-                "details": "VRP Details",
-                "make_changes": "Make Changes",
-                "notes": "Notes",
-                "change_notes": "Change Notes",
-                "notes_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
-                "review": "Review",
-                "button_previous": "Previous",
-                "button_next": "Next"
-            },
-            "company_revision": {
-                "details": "VRP Details",
-                "monetary_awards": "Monetary Awards",
-                "initial_scope": "Scope",
-                "rules_policies": "Rules & Policies",
-                "notes": "Notes",
-                "review": "Review"
-            },
-            "mediator_revision": {
-                "review_vrp": "Review VRP Details",
-                "setup_monetary_awards": "Setup Monetary Awards",
-                "setup_initial_scope": "Setup Initial Scope",
-                "notes": "Notes",
-                "review": "Review"
-            },
-            "publish": {
-                "publish": "Publish",
-                "details": "VRP Details",
-                "monetary_awards": "Monetary Awards",
-                "initial_scope": "Scope",
-                "rules_policies": "Rules & Policies",
-                "notes": "Notes",
-                "review": "Review"
-            }
-        }
-    },
-    "CompanyDetailsMediator": {
-        "title": "Company Details",
-        "reports_resolved": "Reports Resolved",
-        "bounty_program": "Bounty Program",
-        "company_website": "Company Website",
-        "tabs": {
-            "vulnerability_program": "Vulnerability Program",
-            "active_tickets": "Active Tickets"
-        }
-    },
-    "CreateCompanyTicket": {
-        "title": "Create Company Ticket",
-        "company_ticket": {
-            "title": "Company Ticket: Initial",
-            "alert": "All information here are prefilled based on initial ticket from Hacker report.",
-            "ticket_details": {
-                "title": "Ticket Details",
-                "ticket_title": "Title",
-                "short_description": "Short Description"
-            },
-            "problem_causes": {
-                "title": "Problem and Causes",
-                "impact": "Impact",
-                "proof_of_concept": "Proof of Concept",
-                "attachment": "Attachments"
-            },
-            "bug_target": {
-                "title": "Bug Target"
-            }
+        "monetary_awards": {
+          "header_title": "Monetary Awards",
+          "category": "Category",
+          "custom": "Custom"
         },
-        "hacker_ticket": "Hacker Ticket: Chat",
-        "button_create": "Create Company Ticket"
+        "rules_and_policies": {
+          "header_title": "Rules & Policies",
+          "rules": "Rules",
+          "policies": "Policies",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
+          "button_previous": "Previous",
+          "button_next": "Next"
+        },
+        "target_assets": {
+          "header_title": "List of Target Assets",
+          "header_title_2": "Scope",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
+          "asset": "Asset",
+          "asset_type": "Asset Type",
+          "hostname": "Hostname or IP Address",
+          "select_asset_type": "Select Asset Type",
+          "vulnerability_type": "Vulnerability Type",
+          "custom_type": "Custom Type",
+          "custom_type_description": "Enter your vulnerability type",
+          "label_manual_risk_level": "Manual Risk Level",
+          "label_cvss_calculator": "CVSS Calculator",
+          "delete_button": "Delete",
+          "save_button": "Save",
+          "button_add_new": "+ Add New Assets",
+          "alert": "You have unsaved assets, please save these first before continuing.",
+          "button_previous": "Previous",
+          "button_next": "Next"
+        },
+        "button_previous": "Previous"
+      },
+      "setup": {
+        "review_vrp": "Review VRP Details",
+        "details": "VRP Details",
+        "make_changes": "Make Changes",
+        "notes": "Notes",
+        "change_notes": "Change Notes",
+        "notes_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus. Morbi tristique senectus et netus et malesuada fames ac turpis.",
+        "review": "Review",
+        "button_previous": "Previous",
+        "button_next": "Next"
+      },
+      "company_revision": {
+        "details": "VRP Details",
+        "monetary_awards": "Monetary Awards",
+        "initial_scope": "Scope",
+        "rules_policies": "Rules & Policies",
+        "notes": "Notes",
+        "review": "Review"
+      },
+      "mediator_revision": {
+        "review_vrp": "Review VRP Details",
+        "setup_monetary_awards": "Setup Monetary Awards",
+        "setup_initial_scope": "Setup Initial Scope",
+        "notes": "Notes",
+        "review": "Review"
+      },
+      "publish": {
+        "publish": "Publish",
+        "details": "VRP Details",
+        "monetary_awards": "Monetary Awards",
+        "initial_scope": "Scope",
+        "rules_policies": "Rules & Policies",
+        "notes": "Notes",
+        "review": "Review"
+      }
     }
+  },
+  "CompanyDetailsMediator": {
+    "title": "Company Details",
+    "reports_resolved": "Reports Resolved",
+    "bounty_program": "Bounty Program",
+    "company_website": "Company Website",
+    "tabs": {
+      "vulnerability_program": "Vulnerability Program",
+      "active_tickets": "Active Tickets",
+      "collaborators": "Collaborators"
+    },
+    "collaborators": {
+      "titles": "Collaborators",
+      "title": "Add New Collaborators",
+      "hacker_invited": "Hacker Added to Collaborators",
+      "hacker_selected": "Hacker Selected",
+      "button_invite": "add",
+      "button_delete": "delete collaborators",
+      "button_add_collaborator": "Add Collaborator",
+      "search_placeholder": "Search for added collaborators",
+      "search_add_collaborator": "Search for hackers",
+      "showing_collaborator": "Showing {currentShowCollaborator} of {totalCollaborator} collaborator",
+      "showing_hacker": "Showing {currentShowHacker} of {totalHackers} hacker",
+      "filter_by": "Filter by",
+      "ticket": "ticket",
+      "asset_type": "Asset Type",
+      "sort_by": "Sort by",
+      "close": "Close",
+      "add_collaborator": "Add Collaborator",
+      "no_collaborators": "No collaborators found",
+      "no_hacker": "No hacker found",
+      "ago": "ago",
+      "empty_state": {
+        "title": "No collaborators found",
+        "description": "You can add collaborators to your VRP by adding them to the collaborators list."
+      },
+      "table": {
+        "name": "Hacker Name",
+        "valid_reports": "Valid Reports",
+        "asset_type_reported": "Asset Type Reported",
+        "last_activity": "Last Activity",
+        "action": "Action"
+      },
+      "description": "You’re about to add new collaborator from the hacker listed below",
+      "success_title": "Collaborators Added",
+      "success_description": "The collaborators added to the program! Keep an eye out for their response to start collaborating",
+      "success_button": "Back",
+      "button_keep_it": "Keep It",
+      "button_yes_cancel_report": "Yes, Cancel",
+      "alert_title": "Cancel Adding Collaborator ?",
+      "alert_description": "The changes you have made will not be saved",
+      "forbidden": {
+        "title": "Add Collaborators on Mobile",
+        "subtitle": "Add Collaborators only available on Desktop"
+      }
+    }
+  },
+  "CreateCompanyTicket": {
+    "title": "Create Company Ticket",
+    "company_ticket": {
+      "title": "Company Ticket: Initial",
+      "alert": "All information here are prefilled based on initial ticket from Hacker report.",
+      "ticket_details": {
+        "title": "Ticket Details",
+        "ticket_title": "Title",
+        "short_description": "Short Description"
+      },
+      "problem_causes": {
+        "title": "Problem and Causes",
+        "impact": "Impact",
+        "proof_of_concept": "Proof of Concept",
+        "attachment": "Attachments"
+      },
+      "bug_target": {
+        "title": "Bug Target"
+      }
+    },
+    "hacker_ticket": "Hacker Ticket: Chat",
+    "button_create": "Create Company Ticket"
+  },
+  "Payment": {
+    "title": "Payment",
+    "more_info": "More Info"
+  }
 }

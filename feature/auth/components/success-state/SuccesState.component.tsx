@@ -1,43 +1,48 @@
 "use client";
 import { cn } from "@/core/lib/utils";
+import { Loader } from "@/core/ui/components";
 import Typography from "@/core/ui/components/typography/typography";
 import { Locker } from "@/core/ui/icons";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import useTimer from "@/utils/timer";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useReadLocalStorage } from "usehooks-ts";
 
 interface I_SuccesStateProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
   onClickResendVerification?: () => void;
+  isLoading?: boolean;
 }
 
 const SuccessState = ({
   noPadding = false,
   onClickResendVerification = () => {},
+  isLoading: isPending = false,
   ...props
 }: I_SuccesStateProps) => {
+  const expiredTime = useReadLocalStorage("expiredTime") as string;
+  const [isLoading, setIsLoading] = useState(true);
   const t = useTranslations("AuthenticateEmail");
-  const [count, setCount] = React.useState(5);
-  const initialDuration = count * 60 * 1000;
-  const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
+  const { remainingTime, start, getFormattedTime } = useTimer(expiredTime);
   const searchparams = useSearchParams();
   const email = searchparams.get("authenticate_email");
 
   useEffect(() => {
-    start();
-  }, []);
+    if (expiredTime) {
+      start();
+    }
+  }, [expiredTime]);
 
   useEffect(() => {
-    if (remainingTime === 0) {
-      setCount(count + 5);
-    }
-  }, [remainingTime]);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   const onClickResend = () => {
     onClickResendVerification();
-    start();
   };
 
   return (
@@ -54,7 +59,11 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker className="h-12 w-12" />
-            <Typography variant="h4" weight="semibold" align="center">
+            <Typography
+              variant="h4"
+              weight="semibold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <Typography
@@ -65,7 +74,11 @@ const SuccessState = ({
             >
               {t("description_1")}
             </Typography>
-            <Typography variant="p" affects="small" weight="semibold">
+            <Typography
+              variant="p"
+              affects="small"
+              weight="semibold"
+            >
               {email}
             </Typography>
           </div>
@@ -79,12 +92,23 @@ const SuccessState = ({
             <button
               type="button"
               title="resend"
-              disabled={remainingTime > 0}
+              disabled={remainingTime > 0 || isLoading}
               className="cursor-pointer font-bold text-brand-emerald underline disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              {t("resend_button")}{" "}
-              {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+              {isLoading || isPending ? (
+                <Loader
+                  width={16}
+                  height={16}
+                  noText
+                  className={cn("h-fit")}
+                />
+              ) : (
+                <>
+                  {t("resend_button")}{" "}
+                  {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+                </>
+              )}
             </button>
           </Typography>
         </div>
@@ -101,7 +125,11 @@ const SuccessState = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker />
-            <Typography variant="h4" weight="bold" align="center">
+            <Typography
+              variant="h4"
+              weight="bold"
+              align="center"
+            >
               {t("title")}
             </Typography>
             <Typography
@@ -112,28 +140,45 @@ const SuccessState = ({
             >
               {t("description_1")}
             </Typography>
-            <Typography variant="p" affects="normal" weight="semibold">
+            <Typography
+              variant="p"
+              affects="normal"
+              weight="semibold"
+            >
               {email}
             </Typography>
           </div>
-          <Typography
-            variant="p"
-            affects="normal"
-            align="center"
-            className="auto__phrase"
-          >
-            {t("description_2")}{" "}
+          <div className={cn("flex flex-col items-center")}>
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+              className="auto__phrase"
+            >
+              {t("description_2")}{" "}
+            </Typography>
             <button
               type="button"
               title="resend"
-              disabled={remainingTime > 0}
+              disabled={remainingTime > 0 || isLoading}
               className="cursor-pointer font-bold text-brand-emerald underline disabled:cursor-not-allowed disabled:text-opacity-50"
               onClick={onClickResend}
             >
-              {t("resend_button")}{" "}
-              {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+              {isLoading || isPending ? (
+                <Loader
+                  width={16}
+                  height={16}
+                  noText
+                  className={cn("h-fit")}
+                />
+              ) : (
+                <>
+                  {t("resend_button")}{" "}
+                  {remainingTime > 0 ? `(${getFormattedTime()})` : ""}
+                </>
+              )}
             </button>
-          </Typography>
+          </div>
         </div>
       </Desktop>
     </>

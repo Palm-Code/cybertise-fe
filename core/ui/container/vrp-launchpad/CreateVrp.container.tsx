@@ -25,7 +25,12 @@ const CreateVrpLaunchpad = ({
       case "Phase3":
         return {
           currentSteps: 3,
-          element: <VRPDetails currentStep={currentStep} variant={variant} />,
+          element: (
+            <VRPDetails
+              currentStep={currentStep}
+              variant={variant}
+            />
+          ),
         };
       case "Phase4":
         return {
@@ -53,14 +58,17 @@ const CreateVrpLaunchpad = ({
     <>
       <div
         className={cn(
-          "_flexbox__col__start__start sticky top-0 z-30",
+          "_flexbox__col__start__start sticky top-0 z-40",
           "h-fit w-full gap-3 bg-background-page-light dark:bg-background-page-dark"
         )}
       >
         <AnimationWrapper>
           <div className={cn("sticky top-[8.15rem] z-30 h-12 w-full")}></div>
         </AnimationWrapper>
-        <VRPHeroCard phase={currentStep} variant={variant} />
+        <VRPHeroCard
+          phase={currentStep}
+          variant={variant}
+        />
         <IndicatorSteps
           currentSteps={currentSteps(currentStep).currentSteps}
           variant={variant}

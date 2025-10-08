@@ -12,19 +12,44 @@ const Moon = (props: I_Icons) => {
     >
       <g clipPath="url(#clip0_1167_92978)">
         <g filter="url(#filter0_ii_1167_92978)">
-          <circle cx="13.2445" cy="12.731" r="12.3636" fill="#F7C024" />
+          <circle
+            cx="13.2445"
+            cy="12.731"
+            r="12.3636"
+            fill="#F7C024"
+          />
         </g>
         <g filter="url(#filter1_ii_1167_92978)">
-          <circle cx="13.4868" cy="12.8505" r="12.4848" fill="#C2CAD1" />
+          <circle
+            cx="13.4868"
+            cy="12.8505"
+            r="12.4848"
+            fill="#C2CAD1"
+          />
         </g>
         <g filter="url(#filter2_i_1167_92978)">
-          <circle cx="12.4878" cy="6.35533" r="1.99758" fill="#959BA9" />
+          <circle
+            cx="12.4878"
+            cy="6.35533"
+            r="1.99758"
+            fill="#959BA9"
+          />
         </g>
         <g filter="url(#filter3_i_1167_92978)">
-          <circle cx="18.4816" cy="16.8499" r="2.24727" fill="#959BA9" />
+          <circle
+            cx="18.4816"
+            cy="16.8499"
+            r="2.24727"
+            fill="#959BA9"
+          />
         </g>
         <g filter="url(#filter4_i_1167_92978)">
-          <circle cx="8.37" cy="14.4701" r="4.12" fill="#959BA9" />
+          <circle
+            cx="8.37"
+            cy="14.4701"
+            r="4.12"
+            fill="#959BA9"
+          />
         </g>
       </g>
       <defs>
@@ -37,7 +62,10 @@ const Moon = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -50,9 +78,17 @@ const Moon = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="0.727273" dy="0.727273" />
+          <feOffset
+            dx="0.727273"
+            dy="0.727273"
+          />
           <feGaussianBlur stdDeviation="0.484848" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
@@ -68,9 +104,17 @@ const Moon = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="-0.727273" dy="-1.21212" />
+          <feOffset
+            dx="-0.727273"
+            dy="-1.21212"
+          />
           <feGaussianBlur stdDeviation="0.484848" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
@@ -90,7 +134,10 @@ const Moon = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -103,9 +150,17 @@ const Moon = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="0.749091" dy="0.749091" />
+          <feOffset
+            dx="0.749091"
+            dy="0.749091"
+          />
           <feGaussianBlur stdDeviation="0.499394" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
@@ -121,9 +176,17 @@ const Moon = (props: I_Icons) => {
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
             result="hardAlpha"
           />
-          <feOffset dx="-0.749091" dy="-1.24848" />
+          <feOffset
+            dx="-0.749091"
+            dy="-1.24848"
+          />
           <feGaussianBlur stdDeviation="0.499394" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
@@ -143,7 +206,10 @@ const Moon = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -158,7 +224,12 @@ const Moon = (props: I_Icons) => {
           />
           <feOffset dy="0.249697" />
           <feGaussianBlur stdDeviation="0.499394" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
@@ -178,7 +249,10 @@ const Moon = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -193,7 +267,12 @@ const Moon = (props: I_Icons) => {
           />
           <feOffset dy="0.249697" />
           <feGaussianBlur stdDeviation="0.499394" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
@@ -213,7 +292,10 @@ const Moon = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -228,7 +310,12 @@ const Moon = (props: I_Icons) => {
           />
           <feOffset dy="0.249697" />
           <feGaussianBlur stdDeviation="0.499394" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feComposite
+            in2="hardAlpha"
+            operator="arithmetic"
+            k2="-1"
+            k3="1"
+          />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"

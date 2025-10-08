@@ -6,6 +6,7 @@ import Confirmation from "./steps/Confirmation";
 import Information from "./steps/Information";
 import Success from "./steps/Success";
 import { usePostSelfDeactivatedAccount } from "@/core/react-query/client";
+import { encryptPassword } from "@/utils/password-validation";
 
 export interface I_ModalDeactivateAccountProps extends I_ModalProps {
   variant?: keyof typeof Role;
@@ -21,12 +22,12 @@ const ModalDeactivateAccount = ({
     mutateAsync: mutateDeactivatedAccount,
     isPending: isPendingConfirm,
     isSuccess: isSuccessConfirm,
-    variables,
   } = usePostSelfDeactivatedAccount();
   const [activeState, setActiveState] = useState<string>("information");
 
   const onClickVerifyDEactivatedAccount = async (password: string) => {
-    await mutateDeactivatedAccount(password).then((res) => {
+    const passwordEncrypt = await encryptPassword(password);
+    await mutateDeactivatedAccount(passwordEncrypt).then((res) => {
       if (res) {
         setActiveState("success");
       }
@@ -42,7 +43,10 @@ const ModalDeactivateAccount = ({
     [key: string]: JSX.Element;
   } = {
     information: (
-      <Information onClose={onCloseModal} onClickVerify={setActiveState} />
+      <Information
+        onClose={onCloseModal}
+        onClickVerify={setActiveState}
+      />
     ),
     confirmation: (
       <Confirmation

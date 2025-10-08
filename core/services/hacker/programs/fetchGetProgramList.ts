@@ -13,6 +13,7 @@ export const fetchGetProgramList = async (payload?: I_GetParamsPayload) => {
       return res.data;
     })
     .catch((err) => {
+      console.log("err", err);
       throw err?.response?.data || err?.response;
     });
 

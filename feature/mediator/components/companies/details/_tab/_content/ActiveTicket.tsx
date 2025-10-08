@@ -74,11 +74,19 @@ const ActiveTicket = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [inView]);
 
-  if (!ticketData) return <Loader variant="mediator" className="h-[50vh]" />;
+  if (!ticketData)
+    return (
+      <Loader
+        variant="mediator"
+        className="h-[50vh]"
+      />
+    );
 
   return (
     <>
@@ -99,14 +107,20 @@ const ActiveTicket = ({ id }: { id: string }) => {
                 data={mobileTicketData}
                 isLoading={mobileIsLoading || mobileIsFetching}
               />
-              <div ref={ref} className="w-full">
+              <div
+                ref={ref}
+                className="w-full"
+              >
                 {isFetchingNextPage ? (
                   <ChatListCardLoadingList isGridCard />
                 ) : null}
               </div>
             </>
           ) : (
-            <EmptyState variant="mediator" type="ticket" />
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+            />
           )}
         </div>
       </Mobile>
@@ -122,7 +136,10 @@ const ActiveTicket = ({ id }: { id: string }) => {
               />
             </div>
             <div className="ml-auto w-fit max-w-xl">
-              <FilterViewDropdown type="mediator" options={filterView} />
+              <FilterViewDropdown
+                type="mediator"
+                options={filterView}
+              />
             </div>
           </div>
           {ticketData?.data.length! ? (
@@ -152,7 +169,10 @@ const ActiveTicket = ({ id }: { id: string }) => {
               />
             </>
           ) : (
-            <EmptyState variant="mediator" type="ticket" />
+            <EmptyState
+              variant="mediator"
+              type="ticket"
+            />
           )}
         </div>
       </Desktop>

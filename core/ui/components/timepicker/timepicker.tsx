@@ -4,6 +4,7 @@ import { generateTimeOptions } from "@/utils/time-options";
 import { ChevronDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../popopver/popover";
 import { formatToUtcTimeString } from "@/utils/formatter/date-formatter";
+import { useState } from "react";
 
 interface I_SelectDropdownProps {
   onValueChange: (value: string) => void;
@@ -11,6 +12,7 @@ interface I_SelectDropdownProps {
 }
 
 const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
+  const [openDropdown, setOpenDropdown] = useState(false);
   const options = generateTimeOptions();
   const currentTime = new Date();
   const defaultCurrentTime = `${currentTime.getHours()}:${currentTime.getMinutes().toFixed(0).padStart(2, "0")}`;
@@ -23,7 +25,10 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
   };
 
   return (
-    <Popover>
+    <Popover
+      open={openDropdown}
+      onOpenChange={setOpenDropdown}
+    >
       <PopoverTrigger asChild>
         <button
           type="button"
@@ -67,6 +72,7 @@ const SelectDropdown = ({ onValueChange, value }: I_SelectDropdownProps) => {
               onClick={() => {
                 // if (isDisabled) return;
                 onValueChange(option.value);
+                setOpenDropdown(false);
               }}
               // disabled={isDisabled}
             >

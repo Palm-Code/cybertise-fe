@@ -126,7 +126,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
                   className={cn(
                     "absolute transform text-base text-neutral-light-30 duration-300 dark:text-neutral-dark-30",
                     "left-4 start-0 top-5 -z-10 origin-[0] scale-75 peer-focus:start-0",
-                    "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30 peer-focus:dark:text-neutral-dark-30",
+                    "peer-focus:text-neutral-light-30 dark:peer-focus:text-neutral-dark-30",
                     "peer-placeholder-shown:-translate-y-[3px] peer-placeholder-shown:scale-100",
                     "peer-focus:scale-75",
                     "rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4",
@@ -144,7 +144,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
           {(onClickRevealPassword &&
             hasValue &&
             (props.type === "password" ? (
-              <Eye className="h-6 w-6 cursor-pointer" onClick={onClickReveal} />
+              <Eye
+                className="h-6 w-6 cursor-pointer"
+                onClick={onClickReveal}
+              />
             ) : (
               <EyeOff
                 className="h-6 w-6 cursor-pointer"
@@ -169,7 +172,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, InputProps>(
           {suffixIcon}
         </div>
         {!!description && (
-          <Typography variant="p" affects="tiny">
+          <Typography
+            variant="p"
+            affects="tiny"
+          >
             {description}
           </Typography>
         )}

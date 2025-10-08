@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/core/lib/utils";
 import {
+  AssetTypeTooltip,
   Avatar,
   Badge,
   badgeVariants,
@@ -94,7 +95,7 @@ export default function Table({
                     >
                       <div className="_flexbox__row__center__start flex-wrap gap-3">
                         {item.asset_types &&
-                          item.asset_types.map((type, index) => (
+                          item.asset_types.slice(0, 3).map((type, index) => (
                             <Badge
                               key={`badge-${index}`}
                               variant={type.label as keyof typeof badgeVariants}
@@ -102,6 +103,15 @@ export default function Table({
                               {type.value}
                             </Badge>
                           ))}
+                        {item.asset_types && item.asset_types.length > 3 && (
+                          <AssetTypeTooltip
+                            assetTypes={item.asset_types.slice(3)}
+                          >
+                            <Badge variant="default">
+                              {`+${item.asset_types.length - 3}`} more
+                            </Badge>
+                          </AssetTypeTooltip>
+                        )}
                       </div>
                     </TableData>
                     <TableData

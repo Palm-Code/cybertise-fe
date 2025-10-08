@@ -12,9 +12,11 @@ export const fetchPostResendVerification = async (
   const url = getResendVerificationAPIURL();
   return await axiosInterceptorInstance
     .post(url, payload)
-    .then((res: AxiosResponse<I_GetResendVerificationSuccessResponse>) => {
-      return res.data;
-    })
+    .then(
+      (res: AxiosResponse<I_GetResendVerificationSuccessResponse["data"]>) => {
+        return res.data;
+      }
+    )
     .catch((err) => {
       throw err?.response?.data || err?.response;
     });

@@ -19,7 +19,10 @@ const Staffs = ({
     <>
       <Mobile>
         <div className="_flexbox__col__start__start gap-6">
-          <Typography variant="h5" weight="semibold">
+          <Typography
+            variant="h5"
+            weight="semibold"
+          >
             {t("title")}
           </Typography>
           <Card
@@ -29,7 +32,10 @@ const Staffs = ({
             )}
           >
             {data?.length === 0 && (
-              <EmptyState variant="company" titleText={t("not_found")} />
+              <EmptyState
+                variant="company"
+                titleText={t("not_found")}
+              />
             )}
             {data?.map((item, idx) => (
               <Card
@@ -81,7 +87,10 @@ const Staffs = ({
       <Desktop>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <Button
@@ -99,7 +108,10 @@ const Staffs = ({
               "_flexbox__col__start__start gap-6 xl:p-7.5"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("staff")}
             </Typography>
             {data?.length === 0 && (

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import {
+  AssetTypeTooltip,
   Avatar,
   Badge,
   badgeVariants,
@@ -16,7 +17,7 @@ import { Desktop, Mobile } from "../../layout";
 import { useState } from "react";
 import ModalForbiddden from "@/core/ui/container/modals/ModalForbidden";
 import { I_GetProgramListSuccessResponse } from "@/core/models/hacker/programs";
-import { indicatorVariants } from "../../components/indicator/indicator";
+import { useTranslations } from "next-intl";
 
 interface I_TicketCardProps {
   isGridCard?: boolean;
@@ -26,11 +27,15 @@ const TicketCard = ({
   isGridCard,
   ...props
 }: I_TicketCardProps & I_GetProgramListSuccessResponse["data"][0]) => {
+  const t = useTranslations("Programs");
   const [showModal, setShowModal] = useState(false);
   return (
     <>
       <Mobile>
-        <Card isButton onClick={() => setShowModal(true)}>
+        <Card
+          isButton
+          onClick={() => setShowModal(true)}
+        >
           <div className="_flexbox__row__start w-full gap-9">
             <div className={cn("_flexbox__col__start w-full gap-8")}>
               <div className="_flexbox__row__center__between w-full">
@@ -55,16 +60,26 @@ const TicketCard = ({
                   <div className="_flexbox__col__start w-full max-w-xl gap-1">
                     {props.title.length > 50 ? (
                       <Tooltip content={props.title}>
-                        <Typography variant="p" affects="normal">
+                        <Typography
+                          variant="p"
+                          affects="normal"
+                        >
                           {props.title.substring(0, 50) + "..."}
                         </Typography>
                       </Tooltip>
                     ) : (
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {props.title}
                       </Typography>
                     )}
-                    <Typography variant="p" affects="tiny" weight="light">
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                      weight="light"
+                    >
                       {props.company?.name}
                     </Typography>
                   </div>
@@ -77,7 +92,7 @@ const TicketCard = ({
                       affects="small"
                       className="text-neutral-light-30 dark:text-neutral-dark-30"
                     >
-                      Asset type available
+                      {t("asset_type_available")}
                     </Typography>
                     <div className={cn("flex flex-wrap items-center gap-4")}>
                       {props.asset_types
@@ -91,9 +106,13 @@ const TicketCard = ({
                         ))
                         .slice(0, 3)}
                       {props.asset_types && props.asset_types.length > 3 && (
-                        <Badge variant="default">
-                          +{props.asset_types.length - 3} more
-                        </Badge>
+                        <AssetTypeTooltip
+                          assetTypes={props.asset_types.slice(3)}
+                        >
+                          <Badge variant="default">
+                            +{props.asset_types.length - 3} more
+                          </Badge>
+                        </AssetTypeTooltip>
                       )}
                     </div>
                   </div>
@@ -130,29 +149,38 @@ const TicketCard = ({
                 isGridCard ? "gap-8" : "gap-12"
               )}
             >
-              <div className="_flexbox__row__center__between w-full">
+              <div className="grid w-full grid-cols-[auto_1fr_auto] gap-4">
                 {isGridCard && (
                   <Avatar
                     initials="C"
                     image={props.company?.logo as string}
-                    className="mr-4 h-12 w-12"
+                    className="h-12 w-12"
                   />
                 )}
                 <div className="_flexbox__col__start w-full max-w-xl gap-2">
                   {props.title.length > 50 ? (
                     <Tooltip content={props.title}>
-                      <Typography variant="p" affects="normal">
+                      <Typography
+                        variant="p"
+                        affects="normal"
+                      >
                         {props.title.substring(0, 50) + "..."}
                       </Typography>
                     </Tooltip>
                   ) : (
-                    <Typography variant="p" affects="normal">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                    >
                       {props.title}
                     </Typography>
                   )}
                   <div className="_flexbox__row__center gap-4">
                     <Badge variant="default">{props.type}</Badge>
-                    <Typography variant="p" affects="tiny">
+                    <Typography
+                      variant="p"
+                      affects="tiny"
+                    >
                       {props.company?.name}
                     </Typography>
                   </div>
@@ -176,7 +204,7 @@ const TicketCard = ({
                     affects="small"
                     className="text-neutral-light-30 dark:text-neutral-dark-30"
                   >
-                    Asset type available
+                    {t("asset_type_available")}
                   </Typography>
                   <div className={cn("flex flex-wrap items-center gap-4")}>
                     {props.asset_types
@@ -190,9 +218,11 @@ const TicketCard = ({
                       ))
                       .slice(0, 3)}
                     {props.asset_types && props.asset_types.length > 3 && (
-                      <Badge variant="default">
-                        +{props.asset_types.length - 3} more
-                      </Badge>
+                      <AssetTypeTooltip assetTypes={props.asset_types.slice(3)}>
+                        <Badge variant="default">
+                          +{props.asset_types.length - 3} more
+                        </Badge>
+                      </AssetTypeTooltip>
                     )}
                   </div>
                 </div>

@@ -42,14 +42,24 @@ const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
         >
           <div className="_flexbox__row__center w-full gap-6">
             <Loader className="h-12 w-12 animate-spin transition-all delay-1000 duration-1000" />
-            <Typography variant="p" affects="large">
+            <Typography
+              variant="p"
+              affects="large"
+            >
               {t("title")}
             </Typography>
           </div>
-          <Typography variant="p" affects="large" align="center">
+          <Typography
+            variant="p"
+            affects="large"
+            align="center"
+          >
             {t("description")}
           </Typography>
-          <Button variant="default" onClick={() => mutate({ code })}>
+          <Button
+            variant="default"
+            onClick={() => mutate({ code })}
+          >
             {t("redirect_button")}
           </Button>
         </div>
@@ -66,14 +76,25 @@ const AuthorizeContainer = (props: I_AuthorizeContainerProps) => {
         >
           <div className="_flexbox__row__center w-full gap-6">
             <Loader className="h-12 w-12 animate-spin transition-all delay-1000 duration-1000" />
-            <Typography variant="p" affects="large" align="center">
+            <Typography
+              variant="p"
+              affects="large"
+              align="center"
+            >
               {t("title")}
             </Typography>
           </div>
-          <Typography variant="p" affects="large" align="center">
+          <Typography
+            variant="p"
+            affects="large"
+            align="center"
+          >
             {t("description")}
           </Typography>
-          <Button variant="default" onClick={() => mutate({ code })}>
+          <Button
+            variant="default"
+            onClick={() => mutate({ code })}
+          >
             {t("redirect_button")}
           </Button>
         </div>

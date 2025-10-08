@@ -19,10 +19,14 @@ export async function encrypt(payload: any) {
 }
 
 export async function decrypt(input: string): Promise<any> {
-  const { payload } = await jwtVerify(input, key, {
-    algorithms: ["HS256"],
-  });
-  return payload;
+  try {
+    const { payload } = await jwtVerify(input, key, {
+      algorithms: ["HS256"],
+    });
+    return payload;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function authorize(
@@ -31,20 +35,21 @@ export async function authorize(
   const user = {
     role: formData.role && (formData.role.toLowerCase() as keyof typeof Role),
     token: formData["access-token"],
+    language: formData.language,
   };
 
   // Create the session
   // const expires = new Date(Date.now() + 2592000000);
   const session = await encrypt({ user });
-  cookies().set("session", session, { httpOnly: true });
+  (await cookies()).set("session", session, { httpOnly: true });
 
   return { user };
 }
 
 export async function logout() {
   try {
-    cookies().set("session", "", { expires: new Date(0) });
-    cookies().set("token", "", { expires: new Date(0) });
+    (await cookies()).set("session", "", { expires: new Date(0) });
+    (await cookies()).set("token", "", { expires: new Date(0) });
   } catch (error) {
     throw new Error("Failed to logout");
   } finally {
@@ -53,8 +58,8 @@ export async function logout() {
 }
 export async function logoutwithoutrevalidate() {
   try {
-    cookies().set("session", "", { expires: new Date(0) });
-    cookies().set("token", "", { expires: new Date(0) });
+    (await cookies()).set("session", "", { expires: new Date(0) });
+    (await cookies()).set("token", "", { expires: new Date(0) });
   } catch (error) {
     throw new Error("Failed to logout");
   }

@@ -37,7 +37,13 @@ const ManageCompany = () => {
   };
 
   if (isLoading || isFetching) return <VRPHeroLoading variant="company" />;
-  if (state) return <EditState state={state} data={companyData?.data} />;
+  if (state)
+    return (
+      <EditState
+        state={state}
+        data={companyData?.data}
+      />
+    );
   return (
     <div className="_flexbox__col__start__start w-full gap-6 pb-12 xl:gap-10 xl:pb-28 xl:pt-12">
       <CompaniesDetailHeroCard data={companyData?.data} />
@@ -48,7 +54,7 @@ const ManageCompany = () => {
           onValueChange={(v) => setActive(manageCompanyTabsItemEnums[v])}
         />
         <AnimationWrapper key={active}>
-          <Card className="w-full bg-transparent pt-2 xl:bg-background-main-light xl:p-8 dark:bg-transparent dark:xl:bg-background-main-dark">
+          <Card className="w-full bg-transparent pt-2 dark:bg-transparent xl:bg-background-main-light xl:p-8 dark:xl:bg-background-main-dark">
             {tabs[active]}
           </Card>
         </AnimationWrapper>

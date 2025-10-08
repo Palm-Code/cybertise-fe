@@ -18,7 +18,10 @@ const GridView = ({
           {isLoading ? (
             <ChatListCardLoadingList isGridCard />
           ) : (
-            <ReportsTicketCardList data={data} isGridCard />
+            <ReportsTicketCardList
+              data={data}
+              isGridCard
+            />
           )}
         </div>
       </AnimationWrapper>

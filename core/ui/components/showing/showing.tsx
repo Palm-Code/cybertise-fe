@@ -20,7 +20,10 @@ const Showing = ({
   const t = useTranslations("Pagination");
   return (
     <div className="_flexbox__col__start__start gap-2.5">
-      <Typography variant="p" affects="small">
+      <Typography
+        variant="p"
+        affects="small"
+      >
         {t("show")}
       </Typography>
       <div className="_flexbox__row__center gap-1.5">

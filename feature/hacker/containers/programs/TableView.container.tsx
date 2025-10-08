@@ -1,5 +1,6 @@
 import { cn } from "@/core/lib/utils";
 import {
+  AssetTypeTooltip,
   Badge,
   BaseTable,
   TableBody,
@@ -73,9 +74,14 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         >
                           {item.company?.name}
                         </Typography>
-                        <Badge variant="default" className="w-fit">
-                          {item.type}
-                        </Badge>
+                        {item.type.toLowerCase() === "private" && (
+                          <Badge
+                            variant="default"
+                            className="w-fit"
+                          >
+                            {item.type}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   </TableData>
@@ -84,7 +90,11 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                     align={columns[1].align}
                   >
                     <Tooltip content={item.title}>
-                      <Typography variant="p" affects="small" weight="semibold">
+                      <Typography
+                        variant="p"
+                        affects="small"
+                        weight="semibold"
+                      >
                         {item.title.length > 20
                           ? `${item.title.substring(0, 20)}...`
                           : item.title}
@@ -104,9 +114,13 @@ export default function Table({ data, columns, isLoading }: I_TableProps) {
                         </Badge>
                       ))}
                       {item.asset_types && item.asset_types?.length > 3 && (
-                        <Badge variant="default">
-                          +{item.asset_types?.length - 3} More
-                        </Badge>
+                        <AssetTypeTooltip
+                          assetTypes={item.asset_types.slice(3)}
+                        >
+                          <Badge variant="default">
+                            +{item.asset_types?.length - 3} More
+                          </Badge>
+                        </AssetTypeTooltip>
                       )}
                     </div>
                   </TableData>

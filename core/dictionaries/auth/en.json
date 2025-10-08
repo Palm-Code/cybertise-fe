@@ -1,130 +1,149 @@
 {
-    "SignIn": {
-        "title": "Sign In",
-        "email": "Email",
-        "email_placeholder": "Enter your email",
-        "password": "Password",
-        "password_placeholder": "Enter your password",
-        "forgot_password": "Forgot your password?",
-        "sign_in_button": "Sign In",
-        "not_have_account": "Don't have an account?",
-        "sign_up": "Sign Up",
-        "error": {
-            "missmatch": "Email and password do not match",
-            "not_found": "Email not found"
-        }
-    },
-    "AuthenticateEmail": {
-        "title": "Authenticate Your Account",
-        "description_1": "Protecting your account is our top priority. Please confirm your activity by clicking the magic sent to your email:",
-        "description_2": "We have sent an email to the given address, in case it was not yet registered. It may take a minute to receive your code.",
-        "resend_button": "Resend"
-    },
-    "AuthenticateOtp": {
-        "title": "Authenticate Your Account",
-        "description": "Protecting your account is our top priority. Please confirm your activity by entering code from your authenticator app",
-        "authenticator_error": "Authenticator code not works?"
-    },
-    "Authorize": {
-        "title": "You are being redirected, please wait....",
-        "description": "If you are not redirected in few seconds, please click this button",
-        "redirect_button": "Continue"
-    },
-    "ForgotPassword": {
-        "title": "Forgot Password",
-        "description": "Please enter your email address to request a password reset verification link.",
-        "label": "Email",
-        "placeholder": "Enter your email",
-        "verification_text": "We have just sent you a verification link to reset the password to <strong>email</strong> and continue to reset the password.",
-        "label_new_password": "New Password",
-        "placeholder_new_password": "Enter your new password",
-        "label_confirm_password": "Confirm Password",
-        "placeholder_confirm_password": "Confirm your new password",
-        "submit_button": "Reset Password",
-        "resend_button": "Resend Verification",
-        "footer": "Already remember your password?",
-        "footer_2": "Logout from all devices?",
-        "link": "Sign In"
-    },
-    "PasswordInput": {
-        "password_matched": "Password matched",
-        "password_not_matched": "Password not matched",
-        "reqex": {
-            "characters": "At least 8 characters",
-            "numerical": "At least 1 numerical",
-            "lowercase": "At least 1 lowercase",
-            "uppercase": "At least 1 uppercase",
-            "special_character": "At least 1 special character"
-        }
-    },
-    "SignUp": {
-        "title": "Please Choose What Type of Account That You Want to Create",
-        "footer": "Already have an account?",
-        "link": "Sign In",
-        "hacker_type": "Hacker",
-        "company_type": "Company",
-        "hacker": {
-            "cancel_button": "Cancel Sign Up",
-            "back_button": "Back",
-            "title": "Hacker Sign Up",
-            "subtitle": "Hacker Details",
-            "label_username": "Username",
-            "placeholder_username": "Enter your username",
-            "label_country": "Country",
-            "next_button": "Next",
-            "subtitle_2": "Account Setup",
-            "label_email": "Email",
-            "placeholder_email": "Enter your email",
-            "label_password": "Password",
-            "placeholder_password": "Enter your password",
-            "label_confirm_password": "Confirm Password",
-            "placeholder_confirm_password": "Confirm your password",
-            "legal": "I have read and accepted the all sites",
-            "link": "Policies",
-            "submit_button": "Register Account"
-        },
-        "company": {
-            "cancel_button": "Cancel Sign Up",
-            "back_button": "Back",
-            "title": "Company Sign Up",
-            "subtitle": "Company Details",
-            "label_company_name": "Company Name",
-            "placeholder_company_name": "Enter your company name",
-            "label_website": "Company Website",
-            "placeholder_website": "Enter your company website",
-            "next_button": "Next",
-            "subtitle_2": "Correspondency Details",
-            "label_address": "Address",
-            "placeholder_address": "Enter your address",
-            "label_address_2": "Address Line 2",
-            "placeholder_address_2": "Enter your address line 2",
-            "label_optional": "Optional",
-            "label_country": "Country",
-            "label_state": "State",
-            "placeholder_state": "Enter your state",
-            "label_city": "City",
-            "placeholder_city": "Enter your city",
-            "label_zip": "Zip Code",
-            "placeholder_zip": "Enter your zip code",
-            "subtitle_3": "Account Setup",
-            "label_email": "Email",
-            "placeholder_email": "Enter your email",
-            "label_password": "Password",
-            "placeholder_password": "Enter your password",
-            "label_confirm_password": "Confirm Password",
-            "placeholder_confirm_password": "Confirm your password",
-            "legal": "I have read and accepted the all sites",
-            "link": "Policies",
-            "submit_button": "Register Account"
-        }
-    },
-    "Reactivate": {
-        "title": "Reactivate Account",
-        "description": "You deactivated your account on",
-        "content_title": "What else you should know?",
-        "content_lists_1": "On {date}, your account will no longer possible to be restored if it was accidentally or wrongfully deactivated.",
-        "content_lists_2": "By clicking “Yes, reactivate”, you will halt the deactivation process and reactivate your account.",
-        "submit_button": "Yes, Reactivate",
-        "cancel_button": "Cancel"
+  "SignIn": {
+    "title": "Sign In",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "forgot_password": "Forgot your password?",
+    "sign_in_button": "Sign In",
+    "not_have_account": "Don't have an account?",
+    "sign_up": "Sign Up",
+    "error": {
+      "missmatch": "Email and password do not match",
+      "not_found": "Email not found"
     }
+  },
+  "AuthenticateEmail": {
+    "title": "Authenticate Your Account",
+    "description_1": "Protecting your account is our top priority. Please confirm your activity by clicking the magic sent to your email:",
+    "description_2": "We have sent an email to the given address, in case it was not yet registered. It may take a minute to receive your code.",
+    "resend_button": "Resend"
+  },
+  "AuthenticateOtp": {
+    "title": "Authenticate Your Account",
+    "description": "Protecting your account is our top priority. Please confirm your activity by entering code from your authenticator app",
+    "authenticator_error": "Authenticator code not works?"
+  },
+  "Authorize": {
+    "title": "You are being redirected, please wait....",
+    "description": "If you are not redirected in few seconds, please click this button",
+    "redirect_button": "Continue"
+  },
+  "ForgotPassword": {
+    "title": "Forgot Password",
+    "description": "Please enter your email address to request a password reset verification link.",
+    "label": "Email",
+    "placeholder": "Enter your email",
+    "verification_text": "We have just sent you a verification link to reset the password to <strong>email</strong> and continue to reset the password.",
+    "label_new_password": "New Password",
+    "placeholder_new_password": "Enter your new password",
+    "label_confirm_password": "Confirm Password",
+    "placeholder_confirm_password": "Confirm your new password",
+    "submit_button": "Reset Password",
+    "resend_button": "Resend Verification",
+    "footer": "Already remember your password?",
+    "footer_2": "Logout from all devices?",
+    "link": "Sign In"
+  },
+  "SetPassword": {
+    "title": "Set Company Staff Password",
+    "new_password": "New Password",
+    "placeholder_new_password": "Enter your new password",
+    "confirm_password": "Confirm Password",
+    "placeholder_confirm_password": "Confirm your new password",
+    "submit_button": "Set Password",
+    "footer": "Already have an account?",
+    "link": "Sign In"
+  },
+  "PasswordInput": {
+    "password_matched": "Password matched",
+    "password_not_matched": "Password not matched",
+    "reqex": {
+      "characters": "At least 8 characters",
+      "numerical": "At least 1 numerical",
+      "lowercase": "At least 1 lowercase",
+      "uppercase": "At least 1 uppercase",
+      "special_character": "At least 1 special character"
+    },
+    "password_alert": {
+      "title": "Password Exposed",
+      "description": "Your password was exposed by a data breach on the Internet. Continuing to use this password can lead to Unauthorized access to your account.",
+      "suggestion": "Suggestion",
+      "list_1": "Add more words that are less common",
+      "list_2": "If you use this password elsewhere, you should change it",
+      "button_close": "Close",
+      "read_more_explanation": "Our checks ensure your password is strong and unique. Rest assured, your password remains private and is never shared with external services."
+    }
+  },
+  "SignUp": {
+    "title": "Please Choose What Type of Account That You Want to Create",
+    "footer": "Already have an account?",
+    "link": "Sign In",
+    "hacker_type": "Hacker",
+    "company_type": "Company",
+    "hacker": {
+      "cancel_button": "Cancel Sign Up",
+      "back_button": "Back",
+      "title": "Hacker Sign Up",
+      "subtitle": "Hacker Details",
+      "label_username": "Username",
+      "placeholder_username": "Enter your username",
+      "label_country": "Country",
+      "next_button": "Next",
+      "subtitle_2": "Account Setup",
+      "label_email": "Email",
+      "placeholder_email": "Enter your email",
+      "label_password": "Password",
+      "placeholder_password": "Enter your password",
+      "label_confirm_password": "Confirm Password",
+      "placeholder_confirm_password": "Confirm your password",
+      "legal": "I have read and accepted the all sites",
+      "link": "Policies",
+      "submit_button": "Register Account"
+    },
+    "company": {
+      "cancel_button": "Cancel Sign Up",
+      "back_button": "Back",
+      "title": "Company Sign Up",
+      "subtitle": "Company Details",
+      "label_company_name": "Company Name",
+      "placeholder_company_name": "Enter your company name",
+      "label_website": "Company Website",
+      "placeholder_website": "Enter your company website",
+      "next_button": "Next",
+      "subtitle_2": "Correspondency Details",
+      "label_address": "Address",
+      "placeholder_address": "Enter your address",
+      "label_address_2": "Address Line 2",
+      "placeholder_address_2": "Enter your address line 2",
+      "label_optional": "Optional",
+      "label_country": "Country",
+      "label_state": "State",
+      "placeholder_state": "Enter your state",
+      "label_city": "City",
+      "placeholder_city": "Enter your city",
+      "label_zip": "Zip Code",
+      "placeholder_zip": "Enter your zip code",
+      "subtitle_3": "Account Setup",
+      "label_email": "Email",
+      "placeholder_email": "Enter your email",
+      "label_password": "Password",
+      "placeholder_password": "Enter your password",
+      "label_confirm_password": "Confirm Password",
+      "placeholder_confirm_password": "Confirm your password",
+      "legal": "I have read and accepted the all sites",
+      "link": "Policies",
+      "submit_button": "Register Account"
+    }
+  },
+  "Reactivate": {
+    "title": "Reactivate Account",
+    "description": "You deactivated your account on",
+    "content_title": "What else you should know?",
+    "content_lists_1": "On {date}, your account will no longer possible to be restored if it was accidentally or wrongfully deactivated.",
+    "content_lists_2": "By clicking “Yes, reactivate”, you will halt the deactivation process and reactivate your account.",
+    "submit_button": "Yes, Reactivate",
+    "cancel_button": "Cancel"
+  }
 }

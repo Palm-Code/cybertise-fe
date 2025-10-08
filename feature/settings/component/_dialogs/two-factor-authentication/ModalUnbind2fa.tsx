@@ -13,7 +13,7 @@ import Link from "next/link";
 import { typographyVariants } from "@/core/ui/components/typography/typography";
 import { cn } from "@/core/lib/utils";
 import { useTranslations } from "next-intl";
-
+import { encryptPassword } from "@/utils/password-validation";
 export interface I_ModalUnbind2faProps extends I_ModalProps {
   variant?: keyof typeof Role;
   isLoading?: boolean;
@@ -35,7 +35,8 @@ const ModalUnbind2fa = ({
   } = useGetDisableTwoFactor();
 
   const onClickVerifyDisableTwoFactor = async (password: string) => {
-    mutateDisableTwoFactor(password).then((res) => {
+    const passwordEncrypt = await encryptPassword(password);
+    mutateDisableTwoFactor(passwordEncrypt).then((res) => {
       if (res) {
         onClose();
       }
@@ -63,10 +64,17 @@ const ModalUnbind2fa = ({
             {t("button_cancel")}
           </Button>
           <KeyRound className="h-16 w-16" />
-          <Typography variant="h4" weight="semibold">
+          <Typography
+            variant="h4"
+            weight="semibold"
+          >
             {t("title")}
           </Typography>
-          <Typography variant="p" affects="normal" align="center">
+          <Typography
+            variant="p"
+            affects="normal"
+            align="center"
+          >
             {t("description")}
           </Typography>
         </div>

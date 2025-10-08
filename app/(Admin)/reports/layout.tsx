@@ -61,13 +61,12 @@ export default async function Dashboardlayout({
             <div
               className={cn(
                 "h-fit w-full overflow-auto xl:max-h-[calc(100vh-86px)]",
-                "pt-0 xl:pl-14 xl:pr-12",
+                "pt-0 xl:px-8",
                 "p-0"
               )}
             >
               {child[session?.user.role]}
             </div>
-            <div id="new-chat"></div>
           </div>
         </div>
       </Desktop>

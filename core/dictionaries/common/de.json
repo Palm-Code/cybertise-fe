@@ -3,7 +3,8 @@
     "search": "Suche...",
     "search_not_found": "Keine Ergebnisse gefunden",
     "submit_search": "Suchen",
-    "button_back": "Zurück"
+    "button_back": "Zurück",
+    "button_cancel": "Stornieren"
   },
   "Sidebar": {
     "dashboard": "Armaturenbrett",
@@ -16,7 +17,10 @@
     "settings": "Einstellungen",
     "mode": "Modus",
     "vrp_management": "VRP-Management",
-    "manage_company": "Unternehmen verwalten"
+    "manage_company": "Unternehmen verwalten",
+    "services": "Dienstleistungen",
+    "payment": "Zahlung",
+    "earnings": "Einkommen"
   },
   "Filter": {
     "type": "Typ",
@@ -29,10 +33,13 @@
       "title": "Datumsbereich",
       "button_clear": "Klar",
       "button_apply": "Anwenden"
-    }
+    },
+    "ticket_reported": "Ticket gemeldet",
+    "showing_data_for": "Daten werden angezeigt für",
+    "days": "Letzte {days} Tage"
   },
   "Ticket": {
-    "last_reported": "Zuletzt gemeldet vor {date}",
+    "last_reported": "Gemeldet {date} vor",
     "ticket": "Ticket",
     "risk_level": "Risikostufe",
     "vulnerability_type": "Schwachstellentyp (CWE)",
@@ -40,7 +47,41 @@
     "status": "Status",
     "last_update": "Letztes Update",
     "last_message": "Letzte Nachricht",
-    "ticket_type": "Tickettyp"
+    "ticket_type": "Tickettyp",
+    "hacker_ticket": "Hacker-Ticket",
+    "company_ticket": "Firmenticket",
+    "create_company_ticket": "Firmenticket erstellen",
+    "view_chat": "Chat anzeigen",
+    "make_payment": "Zahlung leisten",
+    "send_payment_request": "Zahlungsanfrage senden",
+    "payment_request_sent": "Zahlungsanfrage gesendet",
+    "payment_complete": "Zahlung abgeschlossen",
+    "ticket_details": "Ticketdetails",
+    "set_reward": "Belohnungen festlegen",
+    "reward_range": "Belohnungsbereich:",
+    "set_reward_and_request_payment": "Zahlungsanforderung einstellen und senden",
+    "help": "Helfen",
+    "confirm_reward": "Belohnung bestätigen",
+    "error_reward": "Die Belohnung muss zwischen {Minreward} und {maxreward} liegen",
+    "note": "Notiz:",
+    "confirm_reward_description": "Bitte beachten Sie, dass die festgelegten Belohnungen nicht geändert werden können, nachdem es an das Unternehmen gesendet wurde.",
+    "download_receipt": "Laden Sie die Quittung herunter",
+    "show_more": "Zeigen Sie mehr",
+    "show_less": "Weniger zeigen",
+    "change_bounty_rewards": "Kopfgeldbelohnungen ändern",
+    "reason": "Grund für Kopfgeldänderungen",
+    "payment_status": "Zahlungsstatus",
+    "retry_payment": "Zahlung wiederholen",
+    "view_details": "Details anzeigen",
+    "payment_failed": "Zahlung fehlgeschlagen",
+    "rewards_payment": "Belohnungszahlung",
+    "set_reward_and_make_payment": "Belohnung festlegen und Zahlung leisten",
+    "payment_dashboard": "Zahlungs Dashboard",
+    "add_to_contributor": {
+      "title": "Hacker zur Liste der Mitarbeiter hinzufügen?",
+      "no": "Fügen Sie nicht zum Mitwirkenden hinzu",
+      "yes": "Hinzufügen zu Mitwirkenden"
+    }
   },
   "Pagination": {
     "show": "Wird auf der Seite angezeigt",
@@ -57,13 +98,15 @@
       "description_vrp": "Der Zugriff ist nur für veröffentlichte VRP möglich",
       "title": "Fahren Sie auf dem Desktop fort",
       "title_vrp": "Nicht veröffentlicht"
-    }
+    },
+    "collaborators": "Mitarbeiter"
   },
   "EmptyState": {
     "you_have_nothing_here": "Du hast hier nichts",
     "under_construction": "Im Bau",
     "back_button": "Zurück",
-    "target_assets_not_found": "Ziel-Assets nicht gefunden"
+    "target_assets_not_found": "Ziel-Assets nicht gefunden",
+    "only_desktop": "Diese Funktion nur auf dem Desktop verfügbar"
   },
   "SuccesState": {
     "send_report": {
@@ -77,6 +120,12 @@
       "description": "Dabei gehen alle Informationen verloren, die Sie für die entsprechenden Berichte eingegeben haben.",
       "button_keep_it": "Behalte es",
       "button_yes_cancel_report": "Ja, Bericht abbrechen"
+    },
+    "close_vrp": {
+      "description": "Sie verlieren alle Informationen, die Sie eingegeben haben.",
+      "title": "VRP -Bearbeitung abbrechen?",
+      "button_keep_it": "Behalte es",
+      "button_yes_cancel_vrp": "Ja, abbrechen"
     }
   },
   "TextEditor": {
@@ -112,7 +161,11 @@
     "go_to": "Gehen Sie zu {role} Ticket",
     "hacker": "Hacker",
     "chat_alert": "Dieser Chat ist auf diesem Gerät schreibgeschützt. \nBitte greifen Sie über den Desktop zu, um zu interagieren.",
-    "ticket_type": "{role} Ticket"
+    "ticket_type": "{role} Ticket",
+    "no_chat_found": "Kein Chat gefunden",
+    "Ticket": {
+      "company_ticket_cannot_be_set_to_waiting_for_payment": "Das Unternehmens -Ticket kann nicht auf die Zahlung eingestellt werden"
+    }
   },
   "Loading": {
     "loading_data": "Daten abrufen..."
@@ -166,7 +219,8 @@
       "billings": "Abrechnungen",
       "notifications": "Benachrichtigungen",
       "security": "Sicherheit",
-      "data_privacy": "Datenschutz"
+      "data_privacy": "Datenschutz",
+      "activity_logs": "Aktivitätsprotokolle"
     },
     "notifications": {
       "title": "Benachrichtigungen",
@@ -272,5 +326,12 @@
         }
       }
     }
+  },
+  "ProgramsVRPLaunchpad": {
+    "company_name": "Name der Firma",
+    "vrp_title": "VRP-Titel",
+    "asset_type": "Asset-Typ",
+    "status": "Status",
+    "vrp_type": "VRP-Typ"
   }
 }

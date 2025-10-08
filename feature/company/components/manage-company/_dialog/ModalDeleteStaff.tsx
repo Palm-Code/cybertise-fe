@@ -23,7 +23,10 @@ const ModalDeleteStaff = ({
   const t = useTranslations("ManageCompany.CompanyStaff.delete_staff.modal");
   const [staffName, setStaffName] = useState<string>("");
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <div
         className={cn(
           "relative mx-auto w-fit max-w-[602px] rounded-lg p-20",
@@ -40,7 +43,10 @@ const ModalDeleteStaff = ({
               onClose();
             }}
           />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           <Typography

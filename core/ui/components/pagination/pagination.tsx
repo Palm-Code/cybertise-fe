@@ -43,9 +43,16 @@ const Pagination = ({
     : [1];
   return (
     <BasePagination className="_flexbox__row__center__between w-full gap-2">
-      <Showing active={active} variant={variant} onClickShow={onClickShow} />
+      <Showing
+        active={active}
+        variant={variant}
+        onClickShow={onClickShow}
+      />
       <div className="_flexbox__col__start__start gap-2.5">
-        <Typography variant="p" affects="small">
+        <Typography
+          variant="p"
+          affects="small"
+        >
           {t("page")}
         </Typography>
         <PaginationContent>

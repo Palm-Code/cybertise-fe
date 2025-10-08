@@ -5,6 +5,7 @@ export interface I_GetResendVerificationRequest {
 
 export interface I_GetResendVerificationResponse {
   message: string;
+  expired_at: string;
 }
 
 export interface I_GetResendVerificationSuccessResponse {

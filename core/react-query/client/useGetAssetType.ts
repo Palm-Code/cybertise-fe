@@ -1,28 +1,16 @@
 "use client";
-import {
-  I_GetAssetTypeSuccessResponse,
-  I_GetParamsPayload,
-} from "@/core/models/common";
-import { I_GetErrorResponse } from "@/core/models/hacker/programs";
-import { fetchGetAssetType } from "@/core/services/common/fetchGetAssetType";
+import { I_GetAssetTypeSuccessResponse } from "@/core/models/common";
+import { fetchGetAssetType } from "@/core/services/common";
 import { initialState } from "@/core/zustands/asset-type/store";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-
-export const useGetAssetType = (payload?: I_GetParamsPayload) => {
-  const query = useQuery<I_GetAssetTypeSuccessResponse, I_GetErrorResponse>({
-    queryKey: ["getAssetType", payload?.params?.page, payload?.params?.filter],
+import { useQuery } from "@tanstack/react-query";
+export const useGetAssetType = () => {
+  const { data } = useQuery({
+    queryKey: ["assetType"],
     queryFn: () => fetchGetAssetType(),
-    placeholderData: keepPreviousData,
-    refetchOnMount: false,
   });
 
-  if (query.error) {
-    throw new Error(JSON.stringify(query.error));
-  }
-
-  const data = query.data?.data || [];
-  const filteredAssetTypes = data
-    ? data.map((item) => {
+  const filteredAssetTypes: I_GetAssetTypeSuccessResponse["data"] = data
+    ? data.data.map((item) => {
         return {
           id: item.id,
           value: item.label,

@@ -294,8 +294,16 @@ export const useGetProgramDetailsTabItems = () => {
 
   return [
     {
+      label: t("summary"),
+      value: "summary",
+    },
+    {
       label: t("rules_and_policy"),
       value: "rules",
+    },
+    {
+      label: t("bounty"),
+      value: "bounty",
     },
     {
       label: t("scope"),
@@ -305,14 +313,10 @@ export const useGetProgramDetailsTabItems = () => {
       label: t("updates"),
       value: "updates",
     },
-    // {
-    //   label: "Thanks",
-    //   value: "thanks",
-    // },
-    // {
-    //   label: "Updates",
-    //   value: "updates",
-    // },
+    {
+      label: t("thanks"),
+      value: "thanks",
+    },
   ];
 };
 

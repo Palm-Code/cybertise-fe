@@ -4,19 +4,23 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectTriggerProps,
 } from "../select/select";
 import { SortFilterType } from "@/types/admin/dashboard";
 import Typography from "../typography/typography";
 import { Desktop, Mobile } from "../../layout";
 import Checkbox from "../checkbox/checkbox";
 import { Role } from "@/types/admin/sidebar";
+import { cn } from "@/core/lib/utils";
 
-interface I_BaseDropdownProps {
+export interface I_BaseDropdownProps extends SelectTriggerProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;
   label?: string;
   variant?: keyof typeof Role;
+  triggerClassName?: string;
+  contentClassName?: string;
 }
 
 const BaseDropdown = ({
@@ -25,6 +29,8 @@ const BaseDropdown = ({
   value,
   label = "Sort By",
   variant = "hacker",
+  triggerClassName,
+  contentClassName,
   ...props
 }: I_BaseDropdownProps) => {
   const inputValueLabel = options.find(
@@ -35,7 +41,10 @@ const BaseDropdown = ({
     <>
       <Mobile>
         <div className="_flexbox__col__start__start w-full gap-4.5">
-          <Typography variant="h6" weight="semibold">
+          <Typography
+            variant="h6"
+            weight="semibold"
+          >
             {label}
           </Typography>
           <div className="_flexbox__col__start__start w-full gap-4">
@@ -45,7 +54,10 @@ const BaseDropdown = ({
                   key={`option-${idx}`}
                   className="_flexbox__row__center__between w-full"
                 >
-                  <Typography variant="p" affects="small">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
                     {option.label}
                   </Typography>
                   <Checkbox
@@ -61,31 +73,56 @@ const BaseDropdown = ({
         </div>
       </Mobile>
       <Desktop className="w-fit">
-        <Select onValueChange={onValueChange} defaultValue={value}>
-          <SelectTrigger
-            withIcon
-            className="!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent"
-          >
-            <Typography
-              variant="p"
-              affects="small"
-              className="mr-1 text-neutral-light-30 dark:text-neutral-dark-30"
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
+          <div className={cn("flex items-center gap-1")}>
+            {label && (
+              <Typography
+                variant="p"
+                affects="small"
+                className="text-neutral-light-30 dark:text-neutral-dark-30"
+              >
+                {label}
+              </Typography>
+            )}
+            <SelectTrigger
+              withIcon
+              className={cn(
+                "!w-fit !justify-start gap-4 whitespace-nowrap text-nowrap !bg-transparent",
+                triggerClassName
+              )}
+              {...props}
             >
-              {label}
-            </Typography>
-            <Typography variant="p" affects="small">
-              {inputValueLabel || "All type"}
-            </Typography>
-          </SelectTrigger>
-          <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
+              <Typography
+                variant="p"
+                affects="small"
+              >
+                {inputValueLabel || "All type"}
+              </Typography>
+            </SelectTrigger>
+          </div>
+          <SelectContent
+            className={cn(
+              "!bg-white dark:!bg-neutral-dark-100",
+              contentClassName
+            )}
+          >
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

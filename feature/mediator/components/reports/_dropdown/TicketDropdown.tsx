@@ -8,6 +8,7 @@ import {
 import { Desktop } from "@/core/ui/layout";
 import { Button } from "@/core/ui/components";
 import { Hacker } from "@/core/ui/icons";
+import { useTranslations } from "next-intl";
 
 interface I_TicketDropDownProps {
   withIcon?: boolean;
@@ -27,13 +28,14 @@ const TicketDropDown = ({
   onOpenChange = () => {},
   ...props
 }: I_TicketDropDownProps) => {
-  console.log(
-    status.toLowerCase() === "canceled" || status.toLowerCase() === "closed"
-  );
+  const t = useTranslations("Ticket");
   return (
     <>
       <Desktop className="w-fit">
-        <Select open={open} onOpenChange={onOpenChange}>
+        <Select
+          open={open}
+          onOpenChange={onOpenChange}
+        >
           <SelectTrigger className="!bg-transparent !p-0">
             <ChevronRight />
           </SelectTrigger>
@@ -49,7 +51,7 @@ const TicketDropDown = ({
               variant={"tertiary-hacker"}
               prefixIcon={<Hacker className="h-4 w-4" />}
             >
-              Hacker Ticket
+              {t("hacker_ticket")}
             </Button>
             <br />
             {!!companyTicketId ? (
@@ -59,17 +61,18 @@ const TicketDropDown = ({
                 variant={"tertiary-company"}
                 prefixIcon={<Building2 className="h-4 w-4" />}
               >
-                Company Ticket
+                {t("company_ticket")}
               </Button>
-            ) : status.toLowerCase() === "canceled" ||
-              status.toLowerCase() === "closed" ? null : (
+            ) : status.toLowerCase() === "paid" ||
+              status.toLowerCase() === "closed" ||
+              status.toLowerCase() === "canceled" ? null : (
               <Button
                 asLink
                 href={`/reports/new?ticket_id=${hackerId}`}
                 variant={"tertiary-company"}
                 prefixIcon={<Building2 className="h-4 w-4" />}
               >
-                Create Company Ticket
+                {t("create_company_ticket")}
               </Button>
             )}
           </SelectContent>

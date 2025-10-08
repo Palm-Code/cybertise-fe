@@ -64,13 +64,20 @@ const Billing = ({
                   className="p-0"
                   onClick={() => handleClickEdit(false)}
                 />
-                <Typography variant="h5" weight="bold" className="capitalize">
+                <Typography
+                  variant="h5"
+                  weight="bold"
+                  className="capitalize"
+                >
                   {t("edit_billing_information")}
                 </Typography>
               </div>
             </Card>
             <Card className="_flexbox__col__start__start w-full gap-8 xl:px-6 xl:py-12">
-              <CardEditBilling data={data} variant={variant} />
+              <CardEditBilling
+                data={data}
+                variant={variant}
+              />
               <div className="_flexbox__row__center__start gap-6">
                 <Button
                   variant={`secondary-${variant}`}
@@ -97,7 +104,10 @@ const Billing = ({
     <>
       <Mobile className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           {!isEditing && (
@@ -119,7 +129,10 @@ const Billing = ({
       </Mobile>
       <Desktop className="space-y-6">
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           {!isEditing && (

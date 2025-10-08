@@ -14,7 +14,13 @@ const SunBackground = (props: I_SunBackground) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <rect y="0.0078125" width="75.3939" height="32" rx="16" {...props} />
+      <rect
+        y="0.0078125"
+        width="75.3939"
+        height="32"
+        rx="16"
+        {...props}
+      />
 
       <circle
         cx="17.5756"

@@ -48,7 +48,10 @@ export const ReactivateAccount = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker className="h-12 w-12" />
-            <Typography variant="h4" weight="semibold">
+            <Typography
+              variant="h4"
+              weight="semibold"
+            >
               {t("title")}
             </Typography>
             <Typography
@@ -114,7 +117,10 @@ export const ReactivateAccount = ({
         >
           <div className="_flexbox__col__center w-full gap-6">
             <Locker />
-            <Typography variant="h4" weight="bold">
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <Typography

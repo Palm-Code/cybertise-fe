@@ -35,9 +35,15 @@ const NewCompanyReport = () => {
   return (
     <>
       <div className="wrapper__mobile">
-        <EmptyState variant="mediator" type="default" />
+        <EmptyState
+          variant="mediator"
+          type="default"
+        />
       </div>
-      <CompanyTicketForm initialData={initialData || []} id={id as string} />
+      <CompanyTicketForm
+        initialData={initialData || []}
+        id={id as string}
+      />
     </>
   );
 };

@@ -19,7 +19,11 @@ const ScopeCard = ({
         >
           Asset Name
         </Typography>
-        <Typography variant="p" affects="small" weight="medium">
+        <Typography
+          variant="p"
+          affects="small"
+          weight="medium"
+        >
           {content}
         </Typography>
       </div>
@@ -31,7 +35,11 @@ const ScopeCard = ({
         >
           Last Update
         </Typography>
-        <Typography variant="p" affects="small" weight="medium">
+        <Typography
+          variant="p"
+          affects="small"
+          weight="medium"
+        >
           {updated_at && updated_at.toString().split("T")[0]}
         </Typography>
       </div>
@@ -46,7 +54,10 @@ const ScopeCardList = ({
 }) => {
   if (data)
     return data.map((item, idx) => (
-      <ScopeCard key={`scope-card-${idx}`} {...item} />
+      <ScopeCard
+        key={`scope-card-${idx}`}
+        {...item}
+      />
     ));
 };
 export default ScopeCardList;

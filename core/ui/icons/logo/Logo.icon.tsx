@@ -86,7 +86,11 @@ const Logo = (props: I_Icons) => {
       </g>
       <defs>
         <clipPath id="clip0_1332_53633">
-          <rect width="264" height="98.9834" fill="white" />
+          <rect
+            width="264"
+            height="98.9834"
+            fill="white"
+          />
         </clipPath>
       </defs>
     </svg>

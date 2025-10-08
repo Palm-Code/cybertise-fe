@@ -37,7 +37,7 @@ export const TableHeader = ({
   return (
     <div
       className={cn(
-        "w-full rounded-2xl bg-neutral-light-80 px-9 py-6 dark:bg-neutral-dark-80",
+        "w-full rounded-2xl bg-neutral-light-80 px-9 py-5 dark:bg-neutral-dark-80",
         className
       )}
       {...props}
@@ -125,13 +125,16 @@ export const TableBodyRow = ({
       <Link
         href={props.href as string}
         className={cn(
-          "relative w-full rounded-2xl bg-background-main-light px-9 py-6",
+          "relative w-full rounded-2xl bg-background-main-light px-9 py-5",
           "hover:bg-neutral-light-90 dark:bg-background-main-dark dark:hover:bg-neutral-dark-90",
           className
         )}
       >
         {hasNotification && (
-          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+          <Indicator
+            variant="warning"
+            className="absolute -right-4 -top-4"
+          />
         )}
         {children}
       </Link>
@@ -140,34 +143,39 @@ export const TableBodyRow = ({
 
   if (isButton)
     return (
-      <button
-        type="button"
+      <div
         className={cn(
-          "relative w-full rounded-2xl bg-background-main-light",
-          "px-9 py-6 dark:bg-background-main-dark",
+          "relative w-full cursor-pointer rounded-2xl bg-background-main-light",
+          "px-9 py-5 dark:bg-background-main-dark",
           "hover:bg-neutral-light-90 dark:hover:bg-neutral-dark-90",
           className
         )}
         {...props}
       >
         {hasNotification && (
-          <Indicator variant="warning" className="absolute -right-4 -top-4" />
+          <Indicator
+            variant="warning"
+            className="absolute -right-4 -top-4"
+          />
         )}
         {children}
-      </button>
+      </div>
     );
 
   return (
     <div
       className={cn(
         "relative w-full rounded-2xl bg-background-main-light",
-        "px-9 py-6 dark:bg-background-main-dark",
+        "px-9 py-5 dark:bg-background-main-dark",
         className
       )}
       {...props}
     >
       {hasNotification && (
-        <Indicator variant="warning" className="absolute -right-4 -top-4" />
+        <Indicator
+          variant="warning"
+          className="absolute -right-4 -top-4"
+        />
       )}
       {children}
     </div>

@@ -64,21 +64,30 @@ const ModalAddUpdates = ({ id, ...props }: I_ModalAddUpdatesProps) => {
             className="p-0"
             onClick={props.onClose}
           />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Add Updates
           </Typography>
         </div>
         <Card
           className={cn(
-            "bg-neutral-light-100 xl:p-7.5 dark:bg-neutral-dark-100",
+            "bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-7.5",
             "rounded-[10px]",
             "_flexbox__col__start__start gap-8"
           )}
         >
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Add Updates
           </Typography>
-          <Typography variant="p" affects="small">
+          <Typography
+            variant="p"
+            affects="small"
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit

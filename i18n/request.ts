@@ -1,10 +1,12 @@
 import { getRequestConfig } from "next-intl/server";
 import deepmerge from "deepmerge";
+import { cookies } from "next/headers";
 
 export default getRequestConfig(async () => {
   // Provide a static locale, fetch a user setting,
   // read from `cookies()`, `headers()`, etc.
-  const locale = "de";
+  const cookieStore = await cookies();
+  const locale = cookieStore.get("language")?.value || "en";
 
   const userMessages = {
     ...(await import(`../core/dictionaries/auth/${locale}.json`)).default,

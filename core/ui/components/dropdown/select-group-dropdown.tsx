@@ -54,7 +54,10 @@ export default function SelectGroupDropdown({
   const iconValue = options.find((option) => option.value === value)?.icon;
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <Popover
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <PopoverTrigger className={cn("_flexbox__row__center__between w-full")}>
         <Input
           label={inputValueLabel ? props.label : undefined}
@@ -73,7 +76,7 @@ export default function SelectGroupDropdown({
         />
       </PopoverTrigger>
       <PopoverContent
-        className="max-w-80 overflow-auto bg-neutral-light-90 !p-0 md:max-w-full dark:bg-neutral-dark-90"
+        className="max-w-80 overflow-auto bg-neutral-light-90 !p-0 dark:bg-neutral-dark-90 md:max-w-full"
         align="start"
       >
         <Command className="flex flex-col gap-2 !bg-transparent">
@@ -102,7 +105,7 @@ export default function SelectGroupDropdown({
                       {Object.keys(groupedData)[idx]}
                     </Typography>
                   </div>
-                  {groupedData[Object.keys(groupedData)[idx]].map((v) => (
+                  {groupedData[Object.keys(groupedData)[idx]].map((v, i) => (
                     <CommandItem
                       className={cn(
                         "relative flex w-full cursor-default select-none items-center gap-1",
@@ -111,7 +114,7 @@ export default function SelectGroupDropdown({
                         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                         "dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
                       )}
-                      key={v.value}
+                      key={`${v.value}-${i}`}
                       value={v.label as string}
                       onSelect={(currentValue) => {
                         const values = options.find(
@@ -133,7 +136,7 @@ export default function SelectGroupDropdown({
                           className="h-4 w-6 object-contain"
                         />
                       )}
-                      {v.label}
+                      {v.label ?? "No data found"}
                       <Check
                         className={cn(
                           "ml-auto h-4 w-4",

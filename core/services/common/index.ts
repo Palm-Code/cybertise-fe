@@ -14,3 +14,4 @@ export * from "./fetchGetCountryList";
 export * from "./fetchGetUserData";
 export * from "./fetchGetTicketDetails";
 export * from "./fetchGetDownloadFiles";
+export * from "./fetchPostUpdateLang";

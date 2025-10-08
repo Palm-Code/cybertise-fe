@@ -12,6 +12,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostResetPassword } from "@/feature/auth/query/password";
 import { useTranslations } from "next-intl";
+import { encryptPassword } from "@/utils/password-validation";
 
 interface I_CardLoginInfoProps extends I_SecurityProps {}
 
@@ -32,6 +33,23 @@ const CardLoginInfo = ({
 
   const { mutateAsync, isPending, isSuccess } = usePostResetPassword();
 
+  const handleSubmitNewPassword = async () => {
+    const oldPassword = await encryptPassword(methods.watch().old_password);
+    const newPassword = await encryptPassword(methods.watch().new_password);
+    mutateAsync({
+      ...methods.watch(),
+      old_password: oldPassword,
+      new_password: newPassword,
+      logout_all: methods.watch().logout_all,
+    })
+      .then()
+      .catch((err) => {
+        methods.setError("root", err?.message, {
+          shouldFocus: true,
+        });
+      });
+  };
+
   if (isEditing)
     return (
       <FormProvider {...methods}>
@@ -50,7 +68,11 @@ const CardLoginInfo = ({
                   className="p-0"
                   onClick={() => handleClickEdit(false)}
                 />
-                <Typography variant="h5" weight="bold" className="capitalize">
+                <Typography
+                  variant="h5"
+                  weight="bold"
+                  className="capitalize"
+                >
                   {t("change_login_password")}
                 </Typography>
               </div>
@@ -73,15 +95,7 @@ const CardLoginInfo = ({
                   }
                   isLoading={isPending}
                   variant={`primary-${variant}`}
-                  onClick={() =>
-                    mutateAsync(methods.watch())
-                      .then()
-                      .catch((err) => {
-                        methods.setError("root", err?.message, {
-                          shouldFocus: true,
-                        });
-                      })
-                  }
+                  onClick={handleSubmitNewPassword}
                 >
                   {t("button_save")}
                 </Button>
@@ -100,7 +114,11 @@ const CardLoginInfo = ({
       )}
     >
       <div className="_flexbox__row__start__between w-full">
-        <Typography variant="h6" weight="bold" className="xl:inline-flex">
+        <Typography
+          variant="h6"
+          weight="bold"
+          className="xl:inline-flex"
+        >
           <RectangleEllipsis className="mb-4 h-8 w-8 xl:mr-4" />
           {t("login_password")}
         </Typography>

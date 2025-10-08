@@ -50,14 +50,54 @@ const MoonBackground = (props: I_Icons) => {
         fill="white"
         fillOpacity="0.1"
       />
-      <circle cx="33.3382" cy="11.5121" r="0.363636" fill="white" />
-      <circle cx="40.1254" cy="20.4886" r="0.363636" fill="white" />
-      <circle cx="30.5491" cy="18.1838" r="0.242424" fill="white" />
-      <circle cx="17.9438" cy="16.4848" r="0.484848" fill="white" />
-      <circle cx="9.94383" cy="12.6098" r="0.484848" fill="white" />
-      <circle cx="17.9416" cy="27.883" r="0.242424" fill="white" />
-      <circle cx="12.6096" cy="23.7541" r="0.242424" fill="white" />
-      <circle cx="10.5492" cy="26.305" r="0.363636" fill="white" />
+      <circle
+        cx="33.3382"
+        cy="11.5121"
+        r="0.363636"
+        fill="white"
+      />
+      <circle
+        cx="40.1254"
+        cy="20.4886"
+        r="0.363636"
+        fill="white"
+      />
+      <circle
+        cx="30.5491"
+        cy="18.1838"
+        r="0.242424"
+        fill="white"
+      />
+      <circle
+        cx="17.9438"
+        cy="16.4848"
+        r="0.484848"
+        fill="white"
+      />
+      <circle
+        cx="9.94383"
+        cy="12.6098"
+        r="0.484848"
+        fill="white"
+      />
+      <circle
+        cx="17.9416"
+        cy="27.883"
+        r="0.242424"
+        fill="white"
+      />
+      <circle
+        cx="12.6096"
+        cy="23.7541"
+        r="0.242424"
+        fill="white"
+      />
+      <circle
+        cx="10.5492"
+        cy="26.305"
+        r="0.363636"
+        fill="white"
+      />
     </svg>
   );
 };

@@ -86,16 +86,16 @@ const ProgramsFilterDropdown = ({
         <div className="_flexbox__row__center__start w-full gap-4 rounded-lg">
           <BaseDropdown
             label={t("type")}
-            value={payload?.params?.filter?.type as string}
+            value={(payload?.params?.filter?.type as string) || "all"}
             options={filterItems.type}
             onValueChange={(v) => onValueChange(v, "type")}
           />
           <BaseDropdown
             label={t("asset_type")}
             value={
-              assetTypeOptions?.find(
+              (assetTypeOptions?.find(
                 (item) => item.id === payload?.params?.filter?.has_asset_type
-              )?.value as string
+              )?.value as string) || "all"
             }
             options={assetTypeOptions}
             onValueChange={(v) => {

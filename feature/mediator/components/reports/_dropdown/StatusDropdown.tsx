@@ -9,9 +9,10 @@ import {
 } from "@/core/ui/components/select/select";
 import { Desktop } from "@/core/ui/layout";
 import { SortFilterType } from "@/types/admin/dashboard";
+import { SelectProps } from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 
-interface I_StatusDropdownProps {
+interface I_StatusDropdownProps extends SelectProps {
   onValueChange: (value: string) => void;
   options: SortFilterType[];
   value?: string;
@@ -39,8 +40,13 @@ const StatusDropdown = ({
   return (
     <>
       <Desktop>
-        <Select onValueChange={onValueChange}>
-          <SelectTrigger className="gap-2.5 !bg-transparent !p-0">
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={inputValue}
+          value={inputValue}
+          {...props}
+        >
+          <SelectTrigger className="gap-2.5 !bg-transparent !p-0 disabled:text-transparent">
             <Indicator
               variant={
                 inputValue.toLowerCase() as keyof typeof indicatorVariants
@@ -57,7 +63,10 @@ const StatusDropdown = ({
           >
             {options && slicedOptions.length! ? (
               slicedOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   <Indicator
                     variant={
                       option.value
@@ -70,7 +79,10 @@ const StatusDropdown = ({
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

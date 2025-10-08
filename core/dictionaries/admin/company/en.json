@@ -1,127 +1,151 @@
 {
-    "DashboardCompany": {
-        "title": "Open Tickets",
-        "placeholder_search": "Try “#21231” or “Company name”",
-        "submit_search": "Search",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad"
-    },
-    "ProgramsCompany": {
-        "title": "VRP Launchpad",
-        "placeholder_search": "Search for programs",
-        "search_title": "Search VRP Launchpad",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad",
-        "button_all": "All",
-        "button_phase_2": "Phase 2",
-        "button_phase_4": "Phase 4"
-    },
-    "ReportsCompany": {
-        "title": "Reports",
-        "placeholder_search": "Search for programs",
-        "submit_search": "Search",
-        "search_result": "Show result for",
-        "see_programs": "See VRP Launchpad"
-    },
-    "VRPManagement": {
-        "title": "VRP Management",
-        "placeholder_search": "Search for programs",
-        "button_add_new": "Add new VRP",
-        "not_found": "You have no any program yet",
-        "forbidden_title": "Continue on Desktop",
-        "forbidden_description": "Adding VRP feature are currently only accessible on the desktop version of our website.",
-        "overview": {
-            "tabs": {
-                "rules": "Rule & Policy",
-                "scope": "Scope",
-                "updates": "Updates"
-            },
-            "scope": {
-                "placeholder_search": "Search for asset",
-                "asset_name": "Asset Name",
-                "update": "Last Update",
-                "type": "Type"
-            },
-            "button_edit": "Edit VRP",
-            "forbidden": {
-                "title": "Continue on Desktop",
-                "subtitle": "Adding VRP feature are currently only accessible on the desktop version of our website."
-            }
-        }
-    },
-    "ManageCompany": {
-        "reports_resolved": "Reports Resolved",
-        "bounty_program": "Bounty Program",
-        "company_website": "Company Website",
-        "tabs": {
-            "company_details": "Company Details",
-            "staffs": "Staffs",
-            "emergency_contact": "Emergency Contact",
-            "activity_logs": "Activity Logs"
-        },
-        "CompanyStaff": {
-            "title": "Company Staffs",
-            "button_add_new": "Add New Staff",
-            "staff": "Staff",
-            "not_found": "No staff found",
-            "forbidden": {
-                "add_new": "Add New Staff currently only available on desktop"
-            },
-            "add_new_staff": {
-                "header_title": {
-                    "add": "Add New Staff",
-                    "edit": "Edit Staff"
-                },
-                "title": "Staff Account Details",
-                "name": "Staff Name",
-                "email": "Work Email",
-                "phone": "Phone Number",
-                "button_save": "Save Changes",
-                "button_discard": "Discard"
-            },
-            "delete_staff": {
-                "title": "Delete Staff",
-                "description": {
-                    "delete": "Disables the employee's login credentials, preventing further access to company systems and data.",
-                    "deactivate": "Deactivated accounts can be reactivated if needed, allowing for a smoother off-boarding process.",
-                    "completely": "Completely removes the employee's profile and associated data from the system after 30 days."
-                },
-                "button_delete": "Delete Staff",
-                "modal": {
-                    "title": "Delete Staff",
-                    "description": "To Confirm, Type <strong></strong> to delete in the box below",
-                    "button_delete": "Delete this staff"
-                }
-            }
-        },
-        "EmergencyContact": {
-            "title": "Emergency Contact",
-            "contact_person": "Contact Person",
-            "email": "Email",
-            "phone": "Phone number",
-            "button_edit": "Edit Emergency Contact",
-            "edit": {
-                "header_title": "Edit Emergency Contact",
-                "title": "Emergency Contact Account Details",
-                "contact_person": "Contact Person",
-                "email": "Email",
-                "phone": "Phone number",
-                "button_save": "Save Changes",
-                "button_discard": "Discard"
-            },
-            "forbidden": {
-                "title": "Edit from Desktop",
-                "subtitle": "Emergency Contact are currently only editable on the desktop version of our website."
-            }
-        },
-        "ActivityLogs": {
-            "title": "Activity Logs",
-            "filter": {
-                "date_range": "Date Range"
-            },
-            "forbidden": {
-                "title": "Activity Logs only available in desktop"
-            }
-        }
+  "DashboardCompany": {
+    "title": "Open Tickets",
+    "placeholder_search": "Try “#21231” or “Company name”",
+    "submit_search": "Search",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad",
+    "overview": "Overview",
+    "bounties_paid": "Bounties Paid",
+    "active_tickets": "Active Tickets",
+    "active_programs": "Active Programs",
+    "pieChart": {
+      "title": "Overall Risk Reported"
     }
+  },
+  "ProgramsCompany": {
+    "title": "VRP Launchpad",
+    "placeholder_search": "Search for programs",
+    "search_title": "Search VRP Launchpad",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad",
+    "button_all": "All",
+    "button_phase_2": "Phase 2",
+    "button_phase_4": "Phase 4"
+  },
+  "ReportsCompany": {
+    "title": "Reports",
+    "placeholder_search": "Search for programs",
+    "submit_search": "Search",
+    "search_result": "Show result for",
+    "see_programs": "See VRP Launchpad"
+  },
+  "VRPManagement": {
+    "title": "VRP Management",
+    "placeholder_search": "Search for programs",
+    "button_add_new": "Add new VRP",
+    "not_found": "You have no any program yet",
+    "forbidden_title": "Continue on Desktop",
+    "forbidden_description": "Adding VRP feature are currently only accessible on the desktop version of our website.",
+    "overview": {
+      "tabs": {
+        "rules": "Rule & Policy",
+        "scope": "Scope",
+        "updates": "Updates",
+        "summary": "Summary",
+        "bounty": "Bounties",
+        "thanks": "Thanks"
+      },
+      "scope": {
+        "placeholder_search": "Search for asset",
+        "asset_name": "Asset Name",
+        "update": "Last Update",
+        "type": "Type"
+      },
+      "button_edit": "Edit VRP",
+      "forbidden": {
+        "title": "Continue on Desktop",
+        "subtitle": "Adding VRP feature are currently only accessible on the desktop version of our website."
+      }
+    }
+  },
+  "ManageCompany": {
+    "reports_resolved": "Reports Resolved",
+    "bounty_program": "Bounty Program",
+    "company_website": "Company Website",
+    "tabs": {
+      "company_details": "Company Details",
+      "staffs": "Staffs",
+      "emergency_contact": "Emergency Contact",
+      "activity_logs": "Activity Logs"
+    },
+    "CompanyStaff": {
+      "title": "Company Staffs",
+      "button_add_new": "Add New Staff",
+      "staff": "Staff",
+      "not_found": "No staff found",
+      "forbidden": {
+        "add_new": "Add New Staff currently only available on desktop"
+      },
+      "add_new_staff": {
+        "header_title": {
+          "add": "Add New Staff",
+          "edit": "Edit Staff"
+        },
+        "title": "Staff Account Details",
+        "name": "Staff Name",
+        "email": "Work Email",
+        "phone": "Phone Number",
+        "button_save": "Save Changes",
+        "button_discard": "Discard"
+      },
+      "delete_staff": {
+        "title": "Delete Staff",
+        "description": {
+          "delete": "Disables the employee's login credentials, preventing further access to company systems and data.",
+          "deactivate": "Deactivated accounts can be reactivated if needed, allowing for a smoother off-boarding process.",
+          "completely": "Completely removes the employee's profile and associated data from the system after 30 days."
+        },
+        "button_delete": "Delete Staff",
+        "modal": {
+          "title": "Delete Staff",
+          "description": "To Confirm, Type <strong></strong> to delete in the box below",
+          "button_delete": "Delete this staff"
+        }
+      }
+    },
+    "EmergencyContact": {
+      "title": "Emergency Contact",
+      "contact_person": "Contact Person",
+      "email": "Email",
+      "phone": "Phone number",
+      "button_edit": "Edit Emergency Contact",
+      "edit": {
+        "header_title": "Edit Emergency Contact",
+        "title": "Emergency Contact Account Details",
+        "contact_person": "Contact Person",
+        "email": "Email",
+        "phone": "Phone number",
+        "button_save": "Save Changes",
+        "button_discard": "Discard"
+      },
+      "forbidden": {
+        "title": "Edit from Desktop",
+        "subtitle": "Emergency Contact are currently only editable on the desktop version of our website."
+      }
+    },
+    "ActivityLogs": {
+      "title": "Activity Logs",
+      "filter": {
+        "date_range": "Date Range"
+      },
+      "forbidden": {
+        "title": "Activity Logs only available in desktop"
+      }
+    }
+  },
+  "Services": {
+    "title": "Services"
+  },
+  "Payments": {
+    "subscription": {
+      "title": "Subscribe to Sparta",
+      "description": "To create your first VRP, you’ll need to subscribe to Sparta. This subscription unlocks the payment system, allowing you to instantly pay bounties using your registered payment method.",
+      "subtitle": "What else you should know?",
+      "step_1": "Your subscription gives access to the VRP feature, automated payments, and advanced tracking tools.",
+      "step_2": "You can manage or cancel your subscription anytime from your account settings.",
+      "step_3": "All payments are securely processed and encrypted by our trusted provider.",
+      "button": "Subscribe to Sparta"
+    }
+  }
 }

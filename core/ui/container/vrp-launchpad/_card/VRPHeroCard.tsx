@@ -1,3 +1,4 @@
+"use client";
 import { useCurrentPhase } from "@/core/constants/common";
 import { cn } from "@/core/lib/utils";
 import { I_GetProgramDetailsSuccessResponse } from "@/core/models/hacker/programs/get_program_details";
@@ -14,6 +15,9 @@ import { formatDateToAgo2 } from "@/utils/formatter/date-formatter";
 import { MoveLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useToggle } from "usehooks-ts";
+import { ModalCloseVrp } from "../../modals";
 
 interface I_VRPHeroCard {
   variant: keyof typeof Role;
@@ -24,82 +28,98 @@ interface I_VRPHeroCard {
 const VRPHeroCard = ({ variant, phase, initialData }: I_VRPHeroCard) => {
   const t = useTranslations("VRPLaunchpad");
   const currentPhase = useCurrentPhase();
+  const [openModalCloseVrp, toggleModalCloseVrp] = useToggle(false);
+
+  const handleBack = () => {
+    toggleModalCloseVrp();
+  };
   return (
-    <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
-      <div className="_flexbox__col__start__start gap-3">
-        <div
-          className={cn(
-            typographyVariants({ variant: "h5", weight: "bold" }),
-            "inline-flex items-center gap-5"
-          )}
-        >
-          <Link href="/vrp-launchpad" className="mb-auto mt-1">
-            <MoveLeft className="cursor-pointer" />
-          </Link>
-          <div className="_flexbox__col__start__start gap-3">
-            <Tooltip
-              content={initialData?.title || t("phase.vrp_details.title")}
-            >
-              <Typography variant="h5" weight={"bold"}>
-                {initialData?.title
-                  ? initialData?.title?.length > 50
-                    ? initialData?.title?.substring(0, 50) + "..."
-                    : initialData?.title
-                  : t("phase.vrp_details.title")}
-              </Typography>
-            </Tooltip>
-            {variant === "mediator" && (
-              <div className="_flexbox__row__start__start gap-6">
-                <div className="_flexbox__row__start__start gap-2">
-                  <Typography
-                    variant="p"
-                    affects="normal"
-                    className="text-neutral-light-40 dark:text-neutral-dark-40"
-                  >
-                    {t("company")}:
-                  </Typography>
-                  <div
-                    className={cn(
-                      typographyVariants({ variant: "p", affects: "normal" }),
-                      "inline-flex gap-2"
-                    )}
-                  >
-                    <Avatar
-                      className="h-6 w-6"
-                      image={initialData?.company?.logo}
-                      initials="C"
-                    />
-                    {initialData?.company?.name}
-                  </div>
-                </div>
-                <div className="_flexbox__row__start__start gap-2">
-                  <Typography
-                    variant="p"
-                    affects="normal"
-                    className="text-neutral-light-40 dark:text-neutral-dark-40"
-                  >
-                    {t("last_update")}:
-                  </Typography>
-                  <div
-                    className={cn(
-                      typographyVariants({ variant: "p", affects: "normal" }),
-                      "inline-flex gap-2"
-                    )}
-                  >
-                    {formatDateToAgo2(initialData?.updated_at ?? "")}
-                  </div>
-                </div>
-              </div>
+    <>
+      <Card className="_flexbox__row__center__between rounded-2xl rounded-b-none xl:px-8 xl:py-6">
+        <div className="_flexbox__col__start__start gap-3">
+          <div
+            className={cn(
+              typographyVariants({ variant: "h5", weight: "bold" }),
+              "inline-flex items-center gap-5"
             )}
+          >
+            <MoveLeft
+              className="mb-auto mt-1 cursor-pointer"
+              onClick={handleBack}
+            />
+            <div className="_flexbox__col__start__start gap-3">
+              <Tooltip
+                content={initialData?.title || t("phase.vrp_details.title")}
+              >
+                <Typography
+                  variant="h5"
+                  weight={"bold"}
+                >
+                  {initialData?.title
+                    ? initialData?.title?.length > 50
+                      ? initialData?.title?.substring(0, 50) + "..."
+                      : initialData?.title
+                    : t("phase.vrp_details.title")}
+                </Typography>
+              </Tooltip>
+              {variant === "mediator" && (
+                <div className="_flexbox__row__start__start gap-6">
+                  <div className="_flexbox__row__start__start gap-2">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      className="text-neutral-light-40 dark:text-neutral-dark-40"
+                    >
+                      {t("company")}:
+                    </Typography>
+                    <div
+                      className={cn(
+                        typographyVariants({ variant: "p", affects: "normal" }),
+                        "inline-flex gap-2"
+                      )}
+                    >
+                      <Avatar
+                        className="h-6 w-6"
+                        image={initialData?.company?.logo}
+                        initials="C"
+                      />
+                      {initialData?.company?.name}
+                    </div>
+                  </div>
+                  <div className="_flexbox__row__start__start gap-2">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      className="text-neutral-light-40 dark:text-neutral-dark-40"
+                    >
+                      {t("last_update")}:
+                    </Typography>
+                    <div
+                      className={cn(
+                        typographyVariants({ variant: "p", affects: "normal" }),
+                        "inline-flex gap-2"
+                      )}
+                    >
+                      {formatDateToAgo2(initialData?.updated_at ?? "")}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <Indicator
-        variant={phase?.toLowerCase().includes("phase") ? "open" : "clear"}
-      >
-        {`${phase} ${phase?.toLowerCase().includes("phase") ? `: ${currentPhase[phase?.toLowerCase()]}` : ""}`}
-      </Indicator>
-    </Card>
+        <Indicator
+          variant={phase?.toLowerCase().includes("phase") ? "open" : "clear"}
+        >
+          {`${phase} ${phase?.toLowerCase().includes("phase") ? `: ${currentPhase[phase?.toLowerCase()]}` : ""}`}
+        </Indicator>
+      </Card>
+      <ModalCloseVrp
+        isOpen={openModalCloseVrp}
+        onClose={toggleModalCloseVrp}
+        variant={variant}
+      />
+    </>
   );
 };
 export default VRPHeroCard;

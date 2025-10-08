@@ -27,7 +27,10 @@ const Notes = ({
   if (currentSteps === "Phase3")
     return (
       <div className="_flexbox__col__start__start w-full gap-6">
-        <Typography variant="h5" weight="bold">
+        <Typography
+          variant="h5"
+          weight="bold"
+        >
           {t("notes")}
         </Typography>
         <Card
@@ -38,10 +41,16 @@ const Notes = ({
           )}
         >
           <article>
-            <Tiptap showing description={sanitize(forms.notes ?? "")} />
+            <Tiptap
+              showing
+              description={sanitize(forms.notes ?? "")}
+            />
           </article>
           {variant === "company" && (
-            <Button variant="primary-company" onClick={onClickNext}>
+            <Button
+              variant="primary-company"
+              onClick={onClickNext}
+            >
               {t("button_next")}
             </Button>
           )}
@@ -51,10 +60,16 @@ const Notes = ({
 
   return (
     <Card className={cn("_flexbox__col__start__start w-full gap-6 xl:p-0")}>
-      <Typography variant="h5" weight="bold">
+      <Typography
+        variant="h5"
+        weight="bold"
+      >
         {`${currentSteps === "Phase1" ? t("notes") : t("change_notes")}`}
       </Typography>
-      <Typography variant="p" affects="small">
+      <Typography
+        variant="p"
+        affects="small"
+      >
         {t("notes_description")}
       </Typography>
       <Tiptap
@@ -66,7 +81,10 @@ const Notes = ({
         withTooltip
       />
       <div className="_flexbox__row__center gap-8">
-        <Button variant={`secondary-${variant}`} onClick={onClickPrev}>
+        <Button
+          variant={`secondary-${variant}`}
+          onClick={onClickPrev}
+        >
           {t("button_previous")}
         </Button>
         <Button

@@ -11,7 +11,6 @@ import { ArrowUpDown } from "lucide-react";
 import { Desktop, Mobile } from "../../layout";
 import { iconColor } from "@/core/constants/common";
 import { Role } from "@/types/admin/sidebar";
-import { useTranslations } from "next-intl";
 
 interface I_FilterDropdownProps {
   onValueChange: (value: string) => void;
@@ -36,7 +35,10 @@ const FilterDropdown = ({
   return (
     <>
       <Mobile className="w-fit">
-        <Select onValueChange={onValueChange} defaultValue={value}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
           <SelectTrigger
             className="justify-start gap-2.5 !bg-white dark:!bg-neutral-dark-100"
             withIcon={withIcon}
@@ -58,12 +60,18 @@ const FilterDropdown = ({
           <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}
@@ -71,7 +79,10 @@ const FilterDropdown = ({
         </Select>
       </Mobile>
       <Desktop className="w-fit">
-        <Select onValueChange={onValueChange} defaultValue={value}>
+        <Select
+          onValueChange={onValueChange}
+          defaultValue={value}
+        >
           <SelectTrigger className="gap-2.5 !bg-white dark:!bg-neutral-dark-100">
             <ArrowUpDown className={iconColor[variant]} />
             <Typography
@@ -85,12 +96,18 @@ const FilterDropdown = ({
           <SelectContent className="!bg-white dark:!bg-neutral-dark-100">
             {options.length! ? (
               options.map((option) => (
-                <SelectItem key={option.value} value={option.value as string}>
+                <SelectItem
+                  key={option.value}
+                  value={option.value as string}
+                >
                   {option.label}
                 </SelectItem>
               ))
             ) : (
-              <SelectItem value="no items" disabled>
+              <SelectItem
+                value="no items"
+                disabled
+              >
                 No options
               </SelectItem>
             )}

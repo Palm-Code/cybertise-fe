@@ -1,5 +1,5 @@
 "use client";
-import { useEditor, EditorContent, PureEditorContent } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./toolbar";
 import Underline from "@tiptap/extension-underline";
@@ -45,6 +45,7 @@ interface I_TiptapProps extends React.HTMLAttributes<HTMLDivElement> {
   placeholder?: string;
   showing?: boolean;
   isError?: boolean;
+  withImage?: boolean;
 }
 
 const Tiptap = ({
@@ -62,12 +63,14 @@ const Tiptap = ({
   placeholder = "",
   showing = false,
   isError = false,
+  withImage = false,
   ...props
 }: I_TiptapProps) => {
   const t = useTranslations("TextEditor");
   const [isFocus, setIsFocused] = useState<boolean>(false);
   const editor = useEditor({
     editable: !showing,
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         codeBlock: false,
@@ -104,7 +107,6 @@ const Tiptap = ({
         ),
       },
     },
-    autofocus: true,
     onUpdate: ({ editor }) => {
       const value = editor.isEmpty ? "" : editor.getHTML();
       onChangeValue(value);
@@ -120,7 +122,7 @@ const Tiptap = ({
 
   if (showing) {
     return (
-      <PureEditorContent
+      <EditorContent
         editor={editor}
         defaultValue={description}
         value={description}
@@ -164,7 +166,7 @@ const Tiptap = ({
           }}
           autoFocus
           className={cn(
-            "peer flex max-h-[33vh] min-h-32 w-full max-w-full overflow-auto whitespace-pre-line",
+            "peer flex max-h-32 min-h-32  w-full max-w-full overflow-auto whitespace-pre-line",
             "bg-background-main-light dark:bg-background-main-dark",
             "cursor-text rounded-md rounded-b-none p-3 placeholder:text-neutral-light-40 dark:placeholder:text-neutral-dark-40",
             label ? "pt-6" : "pt-3"
@@ -178,13 +180,17 @@ const Tiptap = ({
         <div
           className={cn(
             "_flexbox__row__center__between w-full rounded-md p-3",
-            "mt-3",
+
             label
               ? "bg-background-page-light dark:bg-background-page-dark"
               : "bg-neutral-light-100 dark:bg-neutral-dark-100"
           )}
         >
-          <Toolbar editor={editor} />
+          <Toolbar
+            variant={variant}
+            editor={editor}
+            withImage={withImage}
+          />
           {!!onClickSendAttachment && !!onClickSendMessage && (
             <div className="_flexbox__row__center gap-4">
               <Button

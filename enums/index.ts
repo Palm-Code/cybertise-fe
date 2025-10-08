@@ -1,15 +1,17 @@
 export enum TabsItem {
+  summary = "summary",
   rules = "rules",
+  bounty = "bounty",
   scope = "scope",
   updates = "updates",
-  // thanks = "thanks",
+  thanks = "thanks",
 }
 
 export enum companyTabsItemEnums {
   vulnerability_program = "vulnerability_program",
   active_tickets = "active_tickets",
   // thanks = "thanks",
-  // collaborators = "collaborators",
+  collaborators = "collaborators",
   // activity_logs = "activity_logs",
 }
 
@@ -26,6 +28,7 @@ export enum SettingItems {
   notifications = "notifications",
   security = "security",
   data_privacy = "data_privacy",
+  activity_logs = "activity_logs",
 }
 
 export enum AttackVector {

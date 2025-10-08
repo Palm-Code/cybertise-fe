@@ -20,13 +20,16 @@ const TargetAssetListCard = ({ data }: { data: CreateVrpType }) => {
           "xl:p-7.5"
         )}
       >
-        <Typography variant="h6" weight="bold">
+        <Typography
+          variant="h6"
+          weight="bold"
+        >
           {t("header_title")}
         </Typography>
         {data.target_assets.map((item, index) => (
           <Card
             className={cn(
-              "rounded-md bg-neutral-light-100 xl:px-4.5 xl:py-0 dark:bg-neutral-dark-100",
+              "rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:px-4.5 xl:py-0",
               "_flexbox__row__center__between w-full gap-2"
             )}
             key={`asset-target-${index}`}

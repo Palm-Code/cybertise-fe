@@ -1,3 +1,4 @@
+import { iconColor } from "@/core/constants/common";
 import { Button, Calendar, Separator, Typography } from "@/core/ui/components";
 import {
   Select,
@@ -5,6 +6,7 @@ import {
   SelectTrigger,
 } from "@/core/ui/components/select/select";
 import { Actions, State } from "@/feature/company/zustand/store/manage-company";
+import { Role } from "@/types/admin/sidebar";
 import { addDays, format } from "date-fns";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -13,9 +15,13 @@ import { DateRange } from "react-day-picker";
 
 interface IFilterDateRangeProps {
   store: State & Actions;
+  variant?: keyof typeof Role;
 }
 
-const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
+const FilterDateRange = ({
+  store,
+  variant = "company",
+}: IFilterDateRangeProps) => {
   const t = useTranslations("Filter.date_range");
   const { payload, setPayload } = store;
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -28,12 +34,21 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
       : undefined,
   });
   return (
-    <Select open={openDropdown} onOpenChange={setOpenDropdown}>
+    <Select
+      open={openDropdown}
+      onOpenChange={setOpenDropdown}
+    >
       <SelectTrigger className="!w-fit min-w-64 !justify-start gap-4 whitespace-nowrap text-nowrap">
-        <CalendarDays className="text-sky-normal" />
-        <Separator orientation="vertical" className="h-4" />
+        <CalendarDays className={iconColor[variant]} />
+        <Separator
+          orientation="vertical"
+          className="h-4"
+        />
         <div className="_flexbox__row__center__between w-full">
-          <Typography variant="p" affects="small">
+          <Typography
+            variant="p"
+            affects="small"
+          >
             {date?.from ? (
               date.to ? (
                 <>
@@ -56,6 +71,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
       >
         <div className="_flexbox__col__start__start w-full">
           <Calendar
+            variant={variant}
             defaultMonth={date?.from}
             selected={date}
             className="!bg-transparent"
@@ -67,7 +83,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
             <Separator />
             <div className="_flexbox__row__center__end w-full gap-4">
               <Button
-                variant="secondary-company"
+                variant={`secondary-${variant}`}
                 onClick={() => {
                   setDate(undefined);
                   setPayload({
@@ -84,7 +100,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
                 {t("button_clear")}
               </Button>
               <Button
-                variant="primary-company"
+                variant={`primary-${variant}`}
                 onClick={() => {
                   setPayload({
                     ...payload,
@@ -96,6 +112,7 @@ const FilterDateRange = ({ store }: IFilterDateRangeProps) => {
                       date_finish: date?.to
                         ? format(date.to, "yyyy-MM-dd")
                         : undefined,
+                      page: 1,
                     },
                   });
                   setOpenDropdown(false);

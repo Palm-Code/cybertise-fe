@@ -15,6 +15,15 @@ export enum ChatFilter {
   "program.type" = "program.type",
 }
 
+const ticketStatus = {
+  open: "Open",
+  in_review: "In Review",
+  waiting_for_payment: "Waiting for Payment",
+  paid: "Paid",
+  canceled: "Canceled",
+  closed: "Closed",
+} as const;
+
 export interface I_GetChatListSuccessResponse {
   data: {
     id: string;
@@ -26,9 +35,12 @@ export interface I_GetChatListSuccessResponse {
     ticket_type: "Hacker" | "Company";
     related_ticket_id: string | null;
     vulnerability_type_id: string;
-    status: string;
+    status: keyof typeof ticketStatus;
+    payment_status: "unpaid" | "paid" | "failed";
+    payment_error_message: string | null;
     bounty: any;
     program_id: string;
+    override_reason: string | null;
     has_new: number;
     has_new_mediator: number;
     risk_level_category: string;
@@ -38,6 +50,7 @@ export interface I_GetChatListSuccessResponse {
     company?: I_Company;
     created_at: string;
     updated_at: string;
+    is_payment_requested: 0 | 1;
   }[];
   meta?: I_Meta;
 }

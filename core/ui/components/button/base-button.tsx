@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/core/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center whitespace-nowrap transition-colors gap-2.5 disabled:cursor-not-allowed disabled:text-neutral-light-50 disabled:dark:text-neutral-dark-50",
+  "inline-flex cursor-pointer items-center justify-center whitespace-nowrap transition-colors gap-2.5 disabled:cursor-not-allowed disabled:text-neutral-light-50 disabled:dark:text-neutral-dark-50 [&>svg]:!size-4",
   {
     variants: {
       variant: {
@@ -18,13 +18,13 @@ const buttonVariants = cva(
         "primary-company":
           "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
         "secondary-company":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:!bg-sky-lighter/20 focus:!bg-sky-lighter/20 active:!bg-sky-lighter/20 !border-sky-normal hover:!border-sky-normal active:!border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-company":
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:!text-sky-normal focus:!text-sky-normal active:!text-sky-dark",
         "primary-company staff":
-          "border bg-sky-normal text-white hover:bg-sky-lighter focus:bg-sky-lighter active:bg-sky-darker border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
+          "border !bg-sky-normal text-white hover:!bg-sky-lighter focus:!bg-sky-lighter active:!bg-sky-darker !border-sky-normal hover:border-sky-lighter active:border-sky-darker disabled:bg-sky-dark disabled:border-sky-dark/20 disabled:bg-opacity-20",
         "secondary-company staff":
-          "border bg-transparent text-brand-neutral dark:text-white hover:bg-sky-lighter/20 focus:bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
+          "border bg-transparent text-brand-neutral dark:text-white hover:!bg-sky-lighter/20 focus:!bg-sky-lighter/20 active:bg-sky-lighter/20 border-sky-normal hover:border-sky-normal active:border-sky-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-company staff":
           "border-none bg-transparent text-brand-neutral dark:text-white hover:text-sky-normal focus:text-sky-normal active:text-sky-dark",
         "primary-mediator":
@@ -32,7 +32,9 @@ const buttonVariants = cva(
         "secondary-mediator":
           "border bg-transparent text-brand-neutral dark:text-white hover:bg-violet-lighter/20 focus:bg-violet-lighter/20 active:bg-violet-lighter/20 border-violet-normal hover:border-violet-normal active:border-violet-lighter/20 disabled:bg-transparent disabled:border-brand-neutral disabled:dark:border-white",
         "tertiary-mediator":
-          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-violet-normal focus:text-violet-normal active:text-violet-dark",
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:!text-violet-normal focus:!text-violet-normal active:!text-violet-dark",
+        "tertirary-alert":
+          "border-none bg-transparent text-brand-neutral dark:text-white hover:text-semantic-light-critical focus:text-semantic-light-critical active:text-semantic-light-critical",
         default:
           "border-none bg-white text-brand-neutral dark:text-brand-neutral hover:text-brand-neutral/80 focus:text-brand-neutral active:text-brand-neutral",
         "outline-hacker":
@@ -52,13 +54,15 @@ const buttonVariants = cva(
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
         "ghost-company staff":
           "bg-transparent text-sky-normal hover:text-sky-dark focus:text-sky-dark active:text-sky-darker",
+        "ghost-alert":
+          "bg-transparent text-semantic-light-critical hover:text-semantic-dark-critical focus:text-semantic-dark-critical active:text-semantic-darker-critical",
         alert:
           "border bg-semantic-light-critical/10 dark:bg-semantic-dark-critical/10 text-semantic-light-critical dark:text-semantic-dark-critical border-semantic-light-critical dark:border-semantic-dark-critica hover:bg-semantic-light-critical/20 dark:hover:bg-semantic-dark-critical/20 focus:bg-semantic-light-critical/20 dark:focus:bg-semantic-dark-critical/20 active:bg-semantic-light-critical/20 dark:active:bg-semantic-dark-critical/20 disabled:bg-semantic-light-critical/20 disabled:dark:bg-semantic-dark-critical/20 disabled:border-semantic-light-critical/20 disabled:dark:border-semantic-dark-critical/20",
       },
       size: {
         default: "h-9 px-4 py-2 text-sm",
         ghost: "w-auto h-auto px-0 py-0",
-        lg: "py-3 px-6 md:text-base text-sm",
+        lg: "py-3 px-6 text-sm",
         icon: "h-9 w-9",
       },
       radius: {

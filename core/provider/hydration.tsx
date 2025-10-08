@@ -1,15 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import {
+  HydrationBoundary,
+  HydrationBoundaryProps,
+} from "@tanstack/react-query";
 
-const HydrationZustand = ({ children }: { children: React.ReactNode }) => {
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Wait till Next.js rehydration completes
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  return <>{isHydrated ? <div>{children}</div> : null}</>;
-};
-
-export default HydrationZustand;
+export function Hydrate(props: HydrationBoundaryProps) {
+  return <HydrationBoundary {...props} />;
+}

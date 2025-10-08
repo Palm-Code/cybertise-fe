@@ -28,7 +28,10 @@ const CompanyDetails = ({
       <Mobile>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title", { role: t("company") })}
             </Typography>
             <Button
@@ -44,7 +47,10 @@ const CompanyDetails = ({
               "_flexbox__col__start__start gap-6 px-4 py-7.5"
             )}
           >
-            <Typography variant="h6" weight="semibold">
+            <Typography
+              variant="h6"
+              weight="semibold"
+            >
               {t("company_information")}
             </Typography>
             <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
@@ -74,7 +80,10 @@ const CompanyDetails = ({
                 >
                   {t("label_name", { role: t("company") })}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.name}
                 </Typography>
               </div>
@@ -86,7 +95,10 @@ const CompanyDetails = ({
                 >
                   {t("country")}
                 </Typography>
-                <Country icon={dataCountry.icon} label={dataCountry.label} />
+                <Country
+                  icon={dataCountry.icon}
+                  label={dataCountry.label}
+                />
               </div>
               <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
@@ -96,7 +108,10 @@ const CompanyDetails = ({
                 >
                   {t("address")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.address}
                 </Typography>
               </div>
@@ -108,7 +123,10 @@ const CompanyDetails = ({
                 >
                   {t("state")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.state}
                 </Typography>
               </div>
@@ -120,7 +138,10 @@ const CompanyDetails = ({
                 >
                   {t("zip")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.zip}
                 </Typography>
               </div>
@@ -132,7 +153,10 @@ const CompanyDetails = ({
                 >
                   {t("address_2")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.address_2}
                 </Typography>
               </div>
@@ -145,7 +169,10 @@ const CompanyDetails = ({
               >
                 {t("about", { role: t("company") })}
               </Typography>
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {data?.about}
               </Typography>
             </div>
@@ -156,7 +183,10 @@ const CompanyDetails = ({
               "_flexbox__col__start__start gap-6 px-4 py-7.5"
             )}
           >
-            <Typography variant="h6" weight="semibold">
+            <Typography
+              variant="h6"
+              weight="semibold"
+            >
               {t("account_details", { role: t("company") })}
             </Typography>
             <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
@@ -168,7 +198,10 @@ const CompanyDetails = ({
                 >
                   {t("label_email")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.email}
                 </Typography>
               </div>
@@ -190,7 +223,10 @@ const CompanyDetails = ({
                       : "#"
                   }
                 >
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {data?.website}
                   </Typography>
                 </Link>
@@ -203,7 +239,10 @@ const CompanyDetails = ({
             >
               {t("label_phone")}
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {data?.phone}
             </Typography>
           </Card>
@@ -219,7 +258,10 @@ const CompanyDetails = ({
       <Desktop>
         <div className="_flexbox__col__start__start gap-6">
           <div className="_flexbox__row__center__between w-full">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               {t("title", { role: t("company") })}
             </Typography>
             <Button
@@ -237,7 +279,10 @@ const CompanyDetails = ({
               "_flexbox__col__start__start gap-6 p-7.5"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("company_information")}
             </Typography>
             <div className="grid w-full grid-cols-3 gap-6">
@@ -267,7 +312,10 @@ const CompanyDetails = ({
                 >
                   {t("label_name", { role: t("company") })}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.name}
                 </Typography>
               </div>
@@ -279,7 +327,10 @@ const CompanyDetails = ({
                 >
                   {t("country")}
                 </Typography>
-                <Country icon={dataCountry.icon} label={dataCountry.label} />
+                <Country
+                  icon={dataCountry.icon}
+                  label={dataCountry.label}
+                />
               </div>
               <div className="_flexbox__col__start__start gap-2.5">
                 <Typography
@@ -289,7 +340,10 @@ const CompanyDetails = ({
                 >
                   {t("address")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.address}
                 </Typography>
               </div>
@@ -301,7 +355,10 @@ const CompanyDetails = ({
                 >
                   {t("state")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.state}
                 </Typography>
               </div>
@@ -313,7 +370,10 @@ const CompanyDetails = ({
                 >
                   {t("zip")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.zip}
                 </Typography>
               </div>
@@ -325,7 +385,10 @@ const CompanyDetails = ({
                 >
                   {t("address_2")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.address_2}
                 </Typography>
               </div>
@@ -338,7 +401,10 @@ const CompanyDetails = ({
               >
                 {t("about", { role: t("company") })}
               </Typography>
-              <Typography variant="p" affects="normal">
+              <Typography
+                variant="p"
+                affects="normal"
+              >
                 {data?.about}
               </Typography>
             </div>
@@ -349,7 +415,10 @@ const CompanyDetails = ({
               "_flexbox__col__start__start gap-6 xl:p-7.5"
             )}
           >
-            <Typography variant="h6" weight="bold">
+            <Typography
+              variant="h6"
+              weight="bold"
+            >
               {t("account_details", { role: t("company") })}
             </Typography>
             <div className="grid w-full grid-cols-2 gap-6">
@@ -361,7 +430,10 @@ const CompanyDetails = ({
                 >
                   {t("label_email")}
                 </Typography>
-                <Typography variant="p" affects="normal">
+                <Typography
+                  variant="p"
+                  affects="normal"
+                >
                   {data?.email}
                 </Typography>
               </div>
@@ -383,7 +455,10 @@ const CompanyDetails = ({
                       : "#"
                   }
                 >
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {data?.website}
                   </Typography>
                 </Link>
@@ -396,7 +471,10 @@ const CompanyDetails = ({
             >
               {t("label_phone")}
             </Typography>
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {data?.phone}
             </Typography>
           </Card>

@@ -29,7 +29,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             "_flexbox__col__start__start w-full gap-8 rounded-xl px-4 py-7"
           )}
         >
-          <Typography variant="h5" weight="bold" className="inline-flex">
+          <Typography
+            variant="h5"
+            weight="bold"
+            className="inline-flex"
+          >
             <Banknote className="mr-4 h-8 w-8" />
             {t("payment_information")}
           </Typography>
@@ -42,7 +46,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
               {t("bank_name")}
             </Typography>
 
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.bank_name || "-"}
             </Typography>
             <Typography
@@ -52,7 +60,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             >
               {t("account_number")}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.account_number || "-"}
             </Typography>
             <Typography
@@ -62,7 +74,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             >
               {t("holder_name")}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.holder_name || "-"}
             </Typography>
           </div>
@@ -74,7 +90,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             >
               {t("vat")}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.vat || "-"}
             </Typography>
             <Typography
@@ -84,7 +104,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             >
               {t("iban")}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.iban || "-"}
             </Typography>
             <Typography
@@ -94,7 +118,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             >
               {t("bic")}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.bic || "-"}
             </Typography>
           </div>
@@ -107,7 +135,11 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
             "bg-neutral-light-100 dark:bg-neutral-dark-100"
           )}
         >
-          <Typography variant="h6" weight="bold" className="inline-flex">
+          <Typography
+            variant="h6"
+            weight="bold"
+            className="inline-flex"
+          >
             <Banknote className="mr-4 h-8 w-8" />
             {t("payment_information")}
           </Typography>
@@ -122,13 +154,25 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
                 {menu}
               </Typography>
             ))}
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.bank_name || "-"}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.account_number || "-"}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.holder_name || "-"}
             </Typography>
           </div>
@@ -143,13 +187,25 @@ const CardBilling = ({ data }: I_CardBillingProps) => {
                 {menu}
               </Typography>
             ))}
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.vat || "-"}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.iban || "-"}
             </Typography>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.bic || "-"}
             </Typography>
           </div>

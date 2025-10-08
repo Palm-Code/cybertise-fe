@@ -22,7 +22,10 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
         <Card
           className={cn("rounded-none", inView ? "opacity-100" : "opacity-0")}
         >
-          <div className="_flexbox__col__start__start w-full gap-4" ref={ref}>
+          <div
+            className="_flexbox__col__start__start w-full gap-4"
+            ref={ref}
+          >
             <div className="grid w-full grid-cols-[1fr_auto] items-start gap-4">
               <div className="_flexbox__col__start__start gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full">
@@ -71,7 +74,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                 >
                   {t("reports_resolved")}
                 </Typography>
-                <Typography variant="p" affects="small" weight="semibold">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="semibold"
+                >
                   {data?.company_reports_resolved}
                 </Typography>
               </div>
@@ -83,7 +90,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                 >
                   {t("bounty_program")}
                 </Typography>
-                <Typography variant="p" affects="small" weight="semibold">
+                <Typography
+                  variant="p"
+                  affects="small"
+                  weight="semibold"
+                >
                   {data?.company_program_count}
                 </Typography>
               </div>
@@ -133,7 +144,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   className="object-cover"
                 />
               </div>
-              <Typography variant="p" affects="small" weight="semibold">
+              <Typography
+                variant="p"
+                affects="small"
+                weight="semibold"
+              >
                 {data?.name}
               </Typography>
             </div>
@@ -200,7 +215,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   >
                     {t("reports_resolved")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {data?.company_reports_resolved}
                   </Typography>
                 </div>
@@ -213,7 +232,11 @@ const CompaniesDetailHeroCard = ({ data }: I_CompaniesDetailHeroCard) => {
                   >
                     {t("bounty_program")}
                   </Typography>
-                  <Typography variant="p" affects="small" weight="semibold">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                    weight="semibold"
+                  >
                     {data?.company_program_count}
                   </Typography>
                 </div>

@@ -50,9 +50,12 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
 
   return (
     <>
-      <Card className="rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90">
+      <Card className="rounded-md bg-neutral-light-90 dark:bg-neutral-dark-90 xl:px-4 xl:py-4.5">
         <div className="_flexbox__col__start__start w-full gap-4">
-          <Typography variant="p" affects="normal">
+          <Typography
+            variant="p"
+            affects="normal"
+          >
             {t("target_assets")}
           </Typography>
           <div className="_flexbox__col__start__start max-h-80 w-full gap-4 overflow-y-auto">
@@ -84,7 +87,10 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                     });
                   }}
                 >
-                  <Typography variant="p" affects="normal">
+                  <Typography
+                    variant="p"
+                    affects="normal"
+                  >
                     {item.content}
                   </Typography>
                   <Badge variant={item.asset_type.label as any}>
@@ -158,7 +164,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                 transition={{ duration: 0.2 }}
                 className={cn(
                   "_flexbox__row__center__between w-full gap-2 rounded-md",
-                  "bg-neutral-light-80 xl:px-5 xl:py-4.5 dark:bg-neutral-dark-80"
+                  "bg-neutral-light-80 dark:bg-neutral-dark-80 xl:px-5 xl:py-4.5"
                 )}
               >
                 <div className="grid grid-cols-[auto_1fr] items-center gap-2">
@@ -167,7 +173,10 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                   ) : (
                     <XCircle className="text-semantic-light-critical dark:text-semantic-dark-critical" />
                   )}
-                  <Typography variant="p" affects="small">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
                     {t("hostname")}
                   </Typography>
                 </div>
@@ -177,7 +186,10 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
                   ) : (
                     <XCircle className="text-semantic-light-critical dark:text-semantic-dark-critical" />
                   )}
-                  <Typography variant="p" affects="small">
+                  <Typography
+                    variant="p"
+                    affects="small"
+                  >
                     {t("select_asset_type")}
                   </Typography>
                 </div>
@@ -188,7 +200,7 @@ const BugTarget = ({ defaultData }: I_BugTargetProps) => {
       </Card>
       <Card
         className={cn(
-          "rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90",
+          "rounded-md bg-neutral-light-90 dark:bg-neutral-dark-90 xl:px-4 xl:py-4.5",
           "_flexbox__col__start__start gap-4"
         )}
       >

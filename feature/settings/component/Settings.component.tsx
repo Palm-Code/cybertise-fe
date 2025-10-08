@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/core/lib/utils";
-import { Card, Loader, Typography } from "@/core/ui/components";
+import { Card, Typography } from "@/core/ui/components";
 import Tab from "./_tabs/SettingTab";
 import { useState } from "react";
 import { SettingItems } from "@/enums";
@@ -29,8 +29,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { I_GetUserProfileSuccessResponse } from "@/core/models/common/get_profile";
 import { Role } from "@/types/admin/sidebar";
-import { SortFilterType } from "@/types/admin/dashboard";
 import { useTranslations } from "next-intl";
+import ActivityLogs from "@/feature/company/components/manage-company/_tab/_content/ActivityLogs";
 
 const Setting = ({
   role,
@@ -39,7 +39,7 @@ const Setting = ({
   initialData?: I_GetUserProfileSuccessResponse["data"];
 }) => {
   const t = useTranslations("Settings");
-  const settingTabItems: { [key in Role]: SortFilterType[] } = {
+  const settingTabItems = {
     [Role.hacker]: useHackerSettingTabItems(),
     [Role.mediator]: useMediatorSettingTabItems(),
     [Role.company]: useCompanySettingTabItems(),
@@ -71,7 +71,7 @@ const Setting = ({
     },
   });
 
-  const tabs: { [key in SettingItems]: JSX.Element } = {
+  const tabs = {
     [SettingItems.details]: (
       <Details
         data={initialData}
@@ -89,7 +89,10 @@ const Setting = ({
       />
     ),
     [SettingItems.notifications]: (
-      <Notifications data={initialData} variant={role} />
+      <Notifications
+        data={initialData}
+        variant={role}
+      />
     ),
     [SettingItems.security]: (
       <Security
@@ -100,6 +103,7 @@ const Setting = ({
       />
     ),
     [SettingItems.data_privacy]: <DataPrivacy variant={role} />,
+    [SettingItems.activity_logs]: <ActivityLogs variant={role} />,
   };
 
   return (
@@ -107,7 +111,10 @@ const Setting = ({
       <Mobile>
         {activeState === null ? (
           <div className="_flexbox__col__start__start w-full gap-8 px-6 py-8">
-            <Typography variant="h4" weight="bold">
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             <div className="_flexbox__col__start__start w-full gap-4">
@@ -118,7 +125,10 @@ const Setting = ({
                   className="_flexbox__row__center__between w-full rounded-[10px] px-7.5 py-6"
                   onClick={() => setActiveState(item.value as SettingItems)}
                 >
-                  <Typography variant="h4" weight="semibold">
+                  <Typography
+                    variant="h4"
+                    weight="semibold"
+                  >
                     {item.label}
                   </Typography>
                   <ChevronRight />
@@ -140,7 +150,10 @@ const Setting = ({
                 "_flexbox__col__start__start gap-2.5"
               )}
             >
-              <Typography variant="p" affects="small">
+              <Typography
+                variant="p"
+                affects="small"
+              >
                 {t("title")}
               </Typography>
               <Typography
@@ -160,7 +173,10 @@ const Setting = ({
       </Mobile>
       <Desktop>
         <div className="_flexbox__col__start__start gap-10 pt-12">
-          <Typography variant="h4" weight="bold">
+          <Typography
+            variant="h4"
+            weight="bold"
+          >
             {t("title")}
           </Typography>
           {!editing && (

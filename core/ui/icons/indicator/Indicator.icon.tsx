@@ -3,17 +3,27 @@ import { I_Icons } from "@/interfaces";
 const Indicator = (props: I_Icons) => {
   return (
     <svg
-      width="40"
-      height="41"
+      width="32"
+      height="32"
       viewBox="0 0 40 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <g filter="url(#filter0_f_1390_58061)">
-        <circle cx="20" cy="20.5" r="10" fill="currentColor" />
+        <circle
+          cx="20"
+          cy="20.5"
+          r="10"
+          fill="currentColor"
+        />
       </g>
-      <circle cx="20" cy="20.5" r="10" fill="currentColor" />
+      <circle
+        cx="20"
+        cy="20.5"
+        r="10"
+        fill="currentColor"
+      />
       <defs>
         <filter
           id="filter0_f_1390_58061"
@@ -24,7 +34,10 @@ const Indicator = (props: I_Icons) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood
+            floodOpacity="0"
+            result="BackgroundImageFix"
+          />
           <feBlend
             mode="normal"
             in="SourceGraphic"

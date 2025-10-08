@@ -3,7 +3,7 @@ import { cn } from "@/core/lib/utils";
 import Typography from "@/core/ui/components/typography/typography";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { RectangleEllipsis } from "lucide-react";
 import { Button, Checkbox, Input, PasswordInput } from "@/core/ui/components";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
@@ -11,12 +11,15 @@ import {
   useGetRequestForgotPassword,
   usePostForgotPassword,
 } from "../../query/password";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { Desktop, Mobile } from "@/core/ui/layout";
 import useTimer from "@/utils/timer";
 import { usePostResendVerification } from "../../query/resend-verification";
 import { useTranslations } from "next-intl";
 import { usePasswordValidation } from "@/core/constants/common";
+import { useDebounceValue, useReadLocalStorage } from "usehooks-ts";
+import { usePasswordStrength } from "@/core/lib";
+import { toast } from "sonner";
 
 interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
@@ -25,16 +28,18 @@ interface I_ForgotPassword extends React.HTMLAttributes<HTMLDivElement> {
 const ForgotPassword = (props: I_ForgotPassword) => {
   const t = useTranslations("ForgotPassword");
   const passwordValidation = usePasswordValidation();
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
   const [count, setCount] = React.useState(5);
   const [validated, setValidated] = useState(false);
-  const initialDuration = count * 60 * 1000;
-  const { remainingTime, start, getFormattedTime } = useTimer(initialDuration);
+  const expiredTime = useReadLocalStorage("expiredTime") as string;
+  const { remainingTime, start, getFormattedTime } = useTimer(expiredTime);
   const searchParams = useSearchParams();
   const token = searchParams.get("code");
   const [email, setEmail] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
+  const [debounceValue] = useDebounceValue(newPassword, 1000);
   const [logoutAll, setLogoutAll] = useState<0 | 1>(0);
   const [confirmPassworText, setConfirmPassworText] =
     useState<PasswordValidationItemsType>({
@@ -51,6 +56,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
   } = usePostForgotPassword();
 
   const { mutate: resendVerification } = usePostResendVerification();
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   useEffect(() => {
     if (isSuccess) start();
@@ -112,12 +133,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             {!isSuccess && (
-              <Typography variant="p" affects="normal" className="text-center">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-center"
+              >
                 {t("description")}
               </Typography>
             )}
@@ -125,6 +156,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               {!!token ? (
                 <>
                   <PasswordInput
+                    isBreached={isBreached}
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
@@ -133,6 +165,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     options={passwordValidationItems}
                   />
                   <PasswordInput
+                    disabled={isBreached || !validatePasswordRegex}
                     value={confirmPassworText.content}
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
@@ -148,7 +181,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
                       }
                     />
-                    <Typography variant="p" affects="normal" weight="bold">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                    >
                       {t("footer_2")}
                     </Typography>
                   </div>
@@ -186,25 +223,38 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
-                (token ? !newPassword || !confirmPassworText.checked : !email)
+                (token
+                  ? !newPassword ||
+                    isBreached ||
+                    !validatePasswordRegex ||
+                    !confirmPassworText.checked
+                  : !email)
               }
-              onClick={() =>
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 token
                   ? mutateForgotPassword({
                       code: token,
-                      new_password: newPassword,
+                      new_password: newPasswordEncrypt,
                       logout_all: 1,
                     })
-                  : mutate(email)
-              }
+                  : mutate(email);
+              }}
             >
               {isSuccess
                 ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
                 : t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>
@@ -222,12 +272,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
           {...props}
         >
           <div className="_flexbox__col__center w-full gap-6">
-            <RectangleEllipsis width={72} height={72} />
-            <Typography variant="h4" weight="bold">
+            <RectangleEllipsis
+              width={72}
+              height={72}
+            />
+            <Typography
+              variant="h4"
+              weight="bold"
+            >
               {t("title")}
             </Typography>
             {!isSuccess && (
-              <Typography variant="p" affects="normal" className="text-center">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="text-center"
+              >
                 {t("description")}
               </Typography>
             )}
@@ -235,6 +295,7 @@ const ForgotPassword = (props: I_ForgotPassword) => {
               {!!token ? (
                 <>
                   <PasswordInput
+                    isBreached={isBreached}
                     withRegex
                     value={newPassword}
                     onChange={checkPassword}
@@ -243,19 +304,22 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                     options={passwordValidationItems}
                   />
                   <PasswordInput
+                    disabled={isBreached || !validatePasswordRegex}
                     value={confirmPassworText.content}
                     label={t("label_confirm_password")}
                     placeholderText={t("placeholder_confirm_password")}
                     onChange={passwordConfirmationCheck}
-                    onKeyDown={(e) =>
+                    onKeyDown={async (e) => {
+                      const newPasswordEncrypt =
+                        await encryptPassword(newPassword);
                       e.key === "Enter" &&
-                      token &&
-                      mutateForgotPassword({
-                        code: token,
-                        new_password: newPassword,
-                        logout_all: logoutAll,
-                      })
-                    }
+                        token &&
+                        mutateForgotPassword({
+                          code: token,
+                          new_password: newPasswordEncrypt,
+                          logout_all: logoutAll,
+                        });
+                    }}
                     isConfirmation={!!confirmPassworText.content}
                     check={confirmPassworText.checked}
                   />
@@ -267,7 +331,11 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                         setLogoutAll(logoutAll === 1 ? 0 : 1)
                       }
                     />
-                    <Typography variant="p" affects="normal" weight="bold">
+                    <Typography
+                      variant="p"
+                      affects="normal"
+                      weight="bold"
+                    >
                       {t("footer_2")}
                     </Typography>
                   </div>
@@ -311,15 +379,21 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 (isSuccess && remainingTime > 0) ||
                 isPendingForgot ||
                 isSuccessForgot ||
-                (token ? !confirmPassworText.checked || !validated : !email)
+                (token
+                  ? !confirmPassworText.checked ||
+                    !validated ||
+                    isBreached ||
+                    !validatePasswordRegex
+                  : !email)
               }
-              onClick={() => {
+              onClick={async () => {
+                const newPasswordEncrypt = await encryptPassword(newPassword);
                 isSuccess
                   ? onClickResend()
                   : token
                     ? mutateForgotPassword({
                         code: token,
-                        new_password: newPassword,
+                        new_password: newPasswordEncrypt,
                         logout_all: 1,
                       })
                     : mutate(email);
@@ -329,9 +403,16 @@ const ForgotPassword = (props: I_ForgotPassword) => {
                 ? `${t("resend_button")} ${remainingTime > 0 ? `(${getFormattedTime()})` : ""}`
                 : t("submit_button")}
             </Button>
-            <Typography variant="p" affects="normal" align="center">
+            <Typography
+              variant="p"
+              affects="normal"
+              align="center"
+            >
               {t("footer")}
-              <Link href={"/auth/signin"} className="ml-2 font-semibold">
+              <Link
+                href={"/auth/signin"}
+                className="ml-2 font-semibold"
+              >
                 {t("link")}
               </Link>
             </Typography>

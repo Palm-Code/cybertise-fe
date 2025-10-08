@@ -13,11 +13,14 @@ const BaseCheckbox = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
-    className={cn("peer h-6 w-6 shrink-0 rounded", className)}
+    className={cn(
+      "peer size-5 shrink-0 rounded disabled:cursor-not-allowed disabled:border-none",
+      className
+    )}
     {...props}
   >
     <CheckboxPrimitive.Indicator
-      className={cn("flex items-center justify-center text-current")}
+      className={cn("flex items-center justify-center rounded text-current")}
     >
       {children}
     </CheckboxPrimitive.Indicator>

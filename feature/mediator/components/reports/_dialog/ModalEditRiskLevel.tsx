@@ -55,7 +55,10 @@ const ModalEditRiskLevel = ({
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onCloseModal}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onCloseModal}
+    >
       <div
         className={cn(
           "mx-auto max-h-[80vh] w-full max-w-4xl overflow-auto rounded-xl px-8 py-12",
@@ -70,21 +73,30 @@ const ModalEditRiskLevel = ({
             prefixIcon={<X />}
             onClick={onCloseModal}
           />
-          <Typography variant="h5" weight="bold">
+          <Typography
+            variant="h5"
+            weight="bold"
+          >
             Update Risk Level
           </Typography>
         </div>
         <Card
           className={cn(
-            "rounded-md bg-neutral-light-100 xl:p-4.5 dark:bg-neutral-dark-100",
+            "rounded-md bg-neutral-light-100 dark:bg-neutral-dark-100 xl:p-4.5",
             "_flexbox__col__start__start gap-8 transition-all duration-100"
           )}
         >
           <div className="_flexbox__col__start__start w-full gap-6">
-            <Typography variant="h5" weight="bold">
+            <Typography
+              variant="h5"
+              weight="bold"
+            >
               Risk Level
             </Typography>
-            <Typography variant="p" affects="small">
+            <Typography
+              variant="p"
+              affects="small"
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Fringilla ut morbi tincidunt augue interdum velit. Aliquet eget
@@ -105,7 +117,7 @@ const ModalEditRiskLevel = ({
           />
           <Card
             className={cn(
-              "rounded-md bg-neutral-light-90 xl:px-4 xl:py-4.5 dark:bg-neutral-dark-90",
+              "rounded-md bg-neutral-light-90 dark:bg-neutral-dark-90 xl:px-4 xl:py-4.5",
               "_flexbox__col__start__start gap-4 transition-all duration-100"
             )}
           >

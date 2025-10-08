@@ -1,13 +1,14 @@
-import { logout } from "@/service/server/auth";
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 const axiosInterceptorInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     "ngrok-skip-browser-warning": true,
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
   },
 });
 
@@ -15,8 +16,7 @@ const axiosInterceptorInstance = axios.create({
 axiosInterceptorInstance.interceptors.request.use(
   (config) => {
     // Modify the request config here (add headers, authentication tokens)
-    const cookie = new Cookies();
-    const accessToken = cookie.get("token");
+    const accessToken = Cookies.get("token");
 
     // If token is present, add it to request's Authorization Header
     if (accessToken) {
@@ -37,9 +37,16 @@ axiosInterceptorInstance.interceptors.response.use(
     // Modify the response data here
     return response;
   },
-  (error) => {
+  async (error) => {
+    const accessToken = Cookies.get("token");
     if (error?.response?.data.code === 401) {
-      logout();
+      await axios.post("/api/logout", {
+        token: accessToken,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return (window.location.href = "/auth/signin");
     }
     // Handle response errors here
     return Promise.reject(error);

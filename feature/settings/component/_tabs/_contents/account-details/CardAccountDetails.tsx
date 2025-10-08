@@ -37,7 +37,11 @@ const CardAccountDetails = ({
               "bg-background-page-light dark:bg-background-page-dark"
             )}
           >
-            <Typography variant="h6" weight="bold" className="inline-flex">
+            <Typography
+              variant="h6"
+              weight="bold"
+              className="inline-flex"
+            >
               {t("account_details", {
                 role: variant === "company" ? t("company") : t("account"),
               })}
@@ -108,7 +112,11 @@ const CardAccountDetails = ({
             "_flexbox__col__start__start w-full gap-8 rounded-xl p-7.5"
           )}
         >
-          <Typography variant="h6" weight="bold" className="inline-flex">
+          <Typography
+            variant="h6"
+            weight="bold"
+            className="inline-flex"
+          >
             <UserRound className="mr-4 h-8 w-8" />
             {t("account_details", {
               role: variant === "company" ? t("company") : t("account"),
@@ -124,7 +132,11 @@ const CardAccountDetails = ({
                 {t("label_email")}
               </Typography>
             </div>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.email}
             </Typography>
             {variant === "company" && (
@@ -163,7 +175,11 @@ const CardAccountDetails = ({
                 {t("label_phone")}
               </Typography>
             </div>
-            <Typography variant="p" affects="normal" className="col-span-1">
+            <Typography
+              variant="p"
+              affects="normal"
+              className="col-span-1"
+            >
               {data?.phone}
             </Typography>
           </div>
@@ -176,7 +192,11 @@ const CardAccountDetails = ({
             "bg-neutral-light-100 dark:bg-neutral-dark-100"
           )}
         >
-          <Typography variant="h6" weight="bold" className="inline-flex">
+          <Typography
+            variant="h6"
+            weight="bold"
+            className="inline-flex"
+          >
             <UserRound className="mr-4 h-8 w-8" />
             {t("account_details", {
               role: variant === "company" ? t("company") : t("account"),
@@ -191,7 +211,11 @@ const CardAccountDetails = ({
               >
                 {t("label_email")}
               </Typography>
-              <Typography variant="p" affects="normal" className="col-span-1">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="col-span-1"
+              >
                 {data?.email}
               </Typography>
             </div>
@@ -228,7 +252,11 @@ const CardAccountDetails = ({
               >
                 {t("label_phone")}
               </Typography>
-              <Typography variant="p" affects="normal" className="col-span-1">
+              <Typography
+                variant="p"
+                affects="normal"
+                className="col-span-1"
+              >
                 {data?.phone}
               </Typography>
             </div>

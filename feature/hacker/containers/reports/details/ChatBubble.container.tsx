@@ -19,10 +19,26 @@ const ChatBubble = ({
       {data &&
         data.map((item, idx) => {
           if (item.sender === "Summary")
-            return <Summary data={item} key={`summary-${idx}`} />;
+            return (
+              <Summary
+                data={item}
+                key={`summary-${idx}`}
+              />
+            );
           else if (item.sender === "Systems")
-            return <System data={item} key={`User-${idx}`} />;
-          else return <Sender data={item} key={`sender-${idx}`} />;
+            return (
+              <System
+                data={item}
+                key={`User-${idx}`}
+              />
+            );
+          else
+            return (
+              <Sender
+                data={item}
+                key={`sender-${idx}`}
+              />
+            );
         })}
     </div>
   );

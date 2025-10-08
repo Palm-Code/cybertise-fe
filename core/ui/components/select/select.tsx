@@ -12,9 +12,10 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
-interface SelectTriggerProps
+export interface SelectTriggerProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
   withIcon?: boolean;
+  prefixIcon?: React.ReactNode;
 }
 
 interface SelectContentProps
@@ -26,7 +27,7 @@ interface SelectContentProps
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerProps
->(({ className, withIcon, children, ...props }, ref) => (
+>(({ className, withIcon, prefixIcon, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     id={`${props.id}-select-trigger`}
@@ -34,11 +35,19 @@ const SelectTrigger = React.forwardRef<
       "text-neutral-30 relative z-10 flex w-full items-center justify-between",
       "px-3 py-2 xl:p-3",
       "rounded-lg bg-neutral-light-90 outline-none dark:bg-neutral-dark-90",
+      "disabled:cursor-not-allowed",
       className
     )}
     {...props}
   >
-    {children}
+    {prefixIcon ? (
+      <div className="grid grid-cols-[auto_1fr] items-center gap-2">
+        <SelectPrimitive.Icon asChild>{prefixIcon}</SelectPrimitive.Icon>
+        {children}
+      </div>
+    ) : (
+      children
+    )}
     {withIcon && (
       <SelectPrimitive.Icon asChild>
         <ChevronDownIcon className="h-6 w-6 transition-all duration-200" />
@@ -149,7 +158,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-base outline-none hover:cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+      "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm py-1.5 pl-2 pr-8 text-xs outline-none hover:cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 md:text-base",
       className
     )}
     {...props}

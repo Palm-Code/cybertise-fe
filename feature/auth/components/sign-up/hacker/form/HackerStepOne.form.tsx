@@ -3,13 +3,9 @@ import Button from "@/core/ui/components/button/button";
 import { Input, SelectDropdown } from "@/core/ui/components";
 import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
-import { countryOptions } from "@/feature/auth/constants/sign-up/hacker";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import { useGetCountry } from "@/core/hooks";
-import {
-  SignupCompanyFormType,
-  SignupHackerFormType,
-} from "@/core/models/auth/register";
+import { SignupHackerFormType } from "@/core/models/auth/register";
 import { useTranslations } from "next-intl";
 
 interface I_HackerStepOneProps {

@@ -4,10 +4,10 @@ import { StepWrapper } from "@/core/ui/layout";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/core/ui/components";
 import PasswordInput from "@/core/ui/components/input/password-input";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePasswordValidation } from "@/core/constants/common";
 import { PasswordValidationItemsType } from "@/types/auth/sign-up";
-import { validatePassword } from "@/utils/password-validation";
+import { encryptPassword, validatePassword } from "@/utils/password-validation";
 import { isObjectEmpty } from "@/utils/form-fill-validation";
 import Checkbox from "@/core/ui/components/checkbox/checkbox";
 import Typography from "@/core/ui/components/typography/typography";
@@ -16,6 +16,9 @@ import { SignupHackerFormType } from "@/core/models/auth/register";
 import { usePostSignupHacker } from "@/feature/auth/query/signup";
 import { getBrowserAndOS } from "@/utils/device-type";
 import { useTranslations } from "next-intl";
+import { usePasswordStrength } from "@/core/lib";
+import { toast } from "sonner";
+import { useDebounceValue } from "usehooks-ts";
 
 interface I_HackerStepTwoProps {
   onClickNext: () => void;
@@ -24,6 +27,7 @@ interface I_HackerStepTwoProps {
 const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
   const t = useTranslations("SignUp.hacker");
   const [isPolicyChecked, setIsPolicyChecked] = useState<boolean>(false);
+  const [isBreached, setIsBreached] = useState<boolean>(false);
   const passwordValidation = usePasswordValidation();
   const [passwordValidationItems, setPasswordValidationItems] =
     useState<PasswordValidationItemsType[]>(passwordValidation);
@@ -39,17 +43,39 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
     watch,
   } = useFormContext<SignupHackerFormType>();
   const forms = watch();
+  const [debounceValue] = useDebounceValue(forms.password, 1000);
 
   const { mutateAsync, isPending, isSuccess, error } = usePostSignupHacker();
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (Object.keys(errors).length > 0) return;
     const userAgent = navigator.userAgent;
     const deviceType = getBrowserAndOS(userAgent);
-    mutateAsync({ ...forms, device_type: deviceType }).then(() => {
+    const passwordEncrypt = await encryptPassword(forms.password);
+    mutateAsync({
+      ...forms,
+      password: passwordEncrypt,
+      device_type: deviceType,
+    }).then(() => {
       onClickNext();
     });
   };
+
+  const validatePasswordRegex = passwordValidationItems.every(
+    (item) => item.checked
+  );
+
+  useMemo(async () => {
+    if (validatePasswordRegex) {
+      const result = await usePasswordStrength(debounceValue);
+      setIsBreached(!!result.feedback.warning);
+      if (result.feedback.warning) {
+        toast.error(result.feedback.warning, {
+          position: "bottom-right",
+        });
+      }
+    }
+  }, [debounceValue]);
 
   const checkPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -87,10 +113,6 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
       : "",
   });
 
-  const validatePasswordRegex = passwordValidationItems.every(
-    (item) => item.checked
-  );
-
   return (
     <StepWrapper
       currentSteps={2}
@@ -116,9 +138,11 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             value={forms.password}
             onChange={checkPassword}
             options={passwordValidationItems}
+            isBreached={isBreached}
             withRegex
           />
           <PasswordInput
+            disabled={isBreached || !validatePasswordRegex}
             label={t("label_confirm_password")}
             placeholderText={t("placeholder_confirm_password")}
             value={confirmPassworText.content}
@@ -131,9 +155,16 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
               checked={isPolicyChecked}
               onCheckedChange={() => setIsPolicyChecked(!isPolicyChecked)}
             />
-            <Typography variant="p" affects="normal">
+            <Typography
+              variant="p"
+              affects="normal"
+            >
               {t("legal")}{" "}
-              <Link target="_blank" href={"/policy"} className="underline">
+              <Link
+                target="_blank"
+                href={"/policy"}
+                className="underline"
+              >
                 {t("link")}
               </Link>
             </Typography>
@@ -147,8 +178,10 @@ const HackerStepTwo = ({ onClickNext }: I_HackerStepTwoProps) => {
             validateIsFormFilled ||
             isPending ||
             isSuccess ||
+            isBreached ||
             !isPolicyChecked ||
-            !validatePasswordRegex
+            !validatePasswordRegex ||
+            !!errors.email
           }
           isLoading={isPending}
         >

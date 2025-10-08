@@ -1,13 +1,6 @@
-import dynamic from "next/dynamic";
-
-const Dashboard = dynamic(
-  () => import("@/feature/hacker/components/dashboard/Dashboard.component"),
-  {
-    ssr: false,
-  }
-);
+import { Statistics } from "../../components";
 
 const DashboardFragment = () => {
-  return <Dashboard />;
+  return <Statistics />;
 };
 export default DashboardFragment;
