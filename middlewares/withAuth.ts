@@ -17,9 +17,19 @@ export default function withAuthMiddleware(
     const session = req.cookies.get("session")?.value;
     const decryptedSession = session ? await decrypt(session as string) : null;
     const redirects = () => {
-      const url = new URL("/auth/signin", req.url);
-      url.searchParams.set("callbackUrl", encodeURI(req.url));
-      return NextResponse.redirect(url);
+      const { nextUrl } = req;
+      const host = req.headers.get("host");
+      const protocol = req.headers.get("x-forwarded-proto") || "https";
+
+      // Build the current full URL using the actual host
+      const currentUrl = `${protocol}://${host}${nextUrl.pathname}${nextUrl.search}`;
+
+      // Build /auth/signin based on the real host, not req.url
+      const signinUrl = new URL("/auth/signin", `${protocol}://${host}`);
+
+      signinUrl.searchParams.set("callbackUrl", encodeURI(currentUrl));
+
+      return NextResponse.redirect(signinUrl);
     };
 
     if (requireAuth.some((path) => pathname.startsWith(path))) {
